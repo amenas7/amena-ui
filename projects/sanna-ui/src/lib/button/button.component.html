@@ -1,26 +1,20 @@
 <button
-  [class]="buttonClasses"
+  [class]="buttonClasses + ' d-flex justify-content-center align-items-center'"
   [type]="type"
   [disabled]="disabled || loading"
   (click)="onClick()"
-  class="sanna-button">
-  
+  class="btn"
+  style="min-width: 2.5rem; min-height: 2.5rem;"
+>
   <!-- Loading spinner -->
-  <div *ngIf="loading" class="sanna-button__spinner">
-    <svg class="sanna-button__spinner-icon" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
-        <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
-        <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
-      </circle>
-    </svg>
-  </div>
-
-  <!-- Icon left -->
-  <i *ngIf="icon && iconPosition === 'left' && !loading" class="sanna-button__icon sanna-button__icon--left" [class]="icon"></i>
-  
-  <!-- Label -->
-  <span *ngIf="!loading" class="sanna-button__label">{{ label }}</span>
-  
-  <!-- Icon right -->
-  <i *ngIf="icon && iconPosition === 'right' && !loading" class="sanna-button__icon sanna-button__icon--right" [class]="icon"></i>
+  <ng-container *ngIf="loading; else normalContent">
+    <div class="spinner-border spinner-border-sm" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </ng-container>
+  <ng-template #normalContent>
+    <fa-icon *ngIf="icon && iconPosition === 'left'" [icon]="icon" class="me-2"></fa-icon>
+    <span>{{ label }}</span>
+    <fa-icon *ngIf="icon && iconPosition === 'right'" [icon]="icon" class="ms-2"></fa-icon>
+  </ng-template>
 </button>

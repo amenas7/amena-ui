@@ -46,7 +46,10 @@
               "-d",
               "projects/sanna-ui"
             ],
-            "port": 6006
+            "port": 6006,
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ]
           }
         },
         "build-storybook": {
@@ -61,7 +64,10 @@
               "-d",
               "projects/sanna-ui"
             ],
-            "outputDir": "storybook-static"
+            "outputDir": "storybook-static",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ]
           }
         }
       }
