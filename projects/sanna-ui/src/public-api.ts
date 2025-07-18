@@ -6,3 +6,4 @@ export * from './lib/sanna-ui.service';
 export * from './lib/sanna-ui.component';
 export * from './lib/sanna-ui.module';
 export * from './lib/button/button.component';
+export * from './lib/icon/icon.component';

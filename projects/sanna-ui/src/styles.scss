@@ -1,0 +1,21 @@
+/* Google Fonts - Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* Variables CSS para la fuente */
+:root {
+  --font-family-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
+  /* Sobrescribir las variables de Bootstrap para usar Plus Jakarta Sans */
+  --bs-body-font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bs-font-sans-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Aplicar la fuente por defecto a todos los elementos de la librería */
+* {
+  font-family: var(--font-family-primary) !important;
+}
+
+/* Asegurar que los elementos de Bootstrap usen Plus Jakarta Sans */
+body, .btn, .form-control, .form-select, .navbar, .nav, .dropdown-menu {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+} 

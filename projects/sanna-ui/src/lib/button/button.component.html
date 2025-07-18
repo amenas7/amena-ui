@@ -1,20 +1,24 @@
 <button
-  [class]="buttonClasses + ' d-flex justify-content-center align-items-center'"
+  #buttonElement
+  [class]="buttonClasses"
   [type]="type"
-  [disabled]="disabled || loading"
+  [disabled]="!isInteractive"
   (click)="onClick()"
   class="btn"
-  style="min-width: 2.5rem; min-height: 2.5rem;"
 >
-  <!-- Loading spinner -->
-  <ng-container *ngIf="loading; else normalContent">
-    <div class="spinner-border spinner-border-sm" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </ng-container>
-  <ng-template #normalContent>
-    <fa-icon *ngIf="icon && iconPosition === 'left'" [icon]="icon" class="me-2"></fa-icon>
-    <span>{{ label }}</span>
-    <fa-icon *ngIf="icon && iconPosition === 'right'" [icon]="icon" class="ms-2"></fa-icon>
-  </ng-template>
+  <!-- Contenido del botón -->
+  <div class="button-content" [class.loading-hidden]="showSpinner">
+    <fa-icon *ngIf="iconDefinition && position === 'left'" [icon]="iconDefinition" class="me-1"></fa-icon>
+    <span #buttonText>{{ label }}</span>
+    <fa-icon *ngIf="iconDefinition && position === 'right'" [icon]="iconDefinition" class="ms-1"></fa-icon>
+  </div>
+  
+  <!-- Spinner que se superpone cuando está loading -->
+  <div *ngIf="showSpinner" class="spinner-overlay">
+    <fa-icon 
+      [icon]="spinnerIcon" 
+      class="spinner-icon"
+      [class.spinning]="loading">
+    </fa-icon>
+  </div>
 </button>
