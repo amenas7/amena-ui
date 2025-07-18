@@ -31,6 +31,26 @@
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Colores</h4>\r\n        <p class=\"text-muted mb-3\">Ejemplos con colores hexadecimales:</p>\r\n        \r\n        <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n          <lib-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"star\" color=\"#ffd700\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"check\" color=\"#28a745\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"info\" color=\"#17a2b8\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"exclamation-triangle\" color=\"#ffc107\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"times\" color=\"#dc3545\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"user\" color=\"#6c757d\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"home\" color=\"#007bff\" size=\"md\"></lib-icon>\r\n          <lib-icon name=\"pencil\" color=\"#17a2b8\" size=\"md\"></lib-icon>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<lib-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"star\" color=\"#ffd700\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"check\" color=\"#28a745\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"info\" color=\"#17a2b8\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"exclamation-triangle\" color=\"#ffc107\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"times\" color=\"#dc3545\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"user\" color=\"#6c757d\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"home\" color=\"#007bff\" size=\"md\"></lib-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
+                "name": "Date",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    type: 'date'\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Escribe algo aquí...',\r\n    label: 'Input básico'\r\n  }\r\n}"
+            },
+            {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -49,6 +69,26 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'primary',\r\n    disabled: true\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón en estado deshabilitado. Se muestra en gris y no es interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo deshabilitado',\r\n    placeholder: 'No puedes escribir aquí',\r\n    disabled: true\r\n  }\r\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input con error',\r\n    placeholder: 'Campo con error',\r\n    variant: 'error',\r\n    errorText: 'Este campo tiene un error'\r\n  }\r\n}"
             },
             {
                 "name": "Error",
@@ -101,6 +141,16 @@
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje informativo con información útil para el usuario.',\r\n    isFullWidth: false,\r\n    type: 'info'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje informativo con colores azul. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input grande',\r\n    placeholder: 'Tamaño grande',\r\n    size: 'large'\r\n  }\r\n}"
+            },
+            {
                 "name": "LongMessage",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -109,6 +159,56 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<MessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje muy largo que debería envolverse en múltiples líneas para demostrar cómo se comporta el componente cuando el texto es extenso y necesita ser dividido en varias líneas para mantener la legibilidad.',\r\n    isFullWidth: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje largo que demuestra el comportamiento de wrapping del texto. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Medium",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input mediano',\r\n    placeholder: 'Tamaño mediano',\r\n    size: 'medium'\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<InputComponent>",
+                "defaultValue": "{\r\n  title: 'COMPONENTES/Forms/Input',\r\n  component: InputComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\r\n      description: 'Tipo de input HTML'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['small', 'medium', 'large'],\r\n      description: 'Tamaño del input'\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['default', 'success', 'warning', 'error'],\r\n      description: 'Variante visual del input'\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: 'boolean',\r\n      description: 'Estado de solo lectura'\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo requerido'\r\n    },\r\n    showPasswordToggle: {\r\n      control: 'boolean',\r\n      description: 'Mostrar toggle de contraseña'\r\n    },\r\n    leftIcon: {\r\n      control: 'text',\r\n      description: 'Icono izquierdo (clase CSS)'\r\n    },\r\n    rightIcon: {\r\n      control: 'text',\r\n      description: 'Icono derecho (clase CSS)'\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del input'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Number",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Edad',\r\n    placeholder: 'Ingresa tu edad',\r\n    type: 'number',\r\n    minlength: 1,\r\n    maxlength: 3\r\n  }\r\n}"
+            },
+            {
+                "name": "PasswordWithToggle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Contraseña',\r\n    placeholder: 'Ingresa tu contraseña',\r\n    type: 'password',\r\n    showPasswordToggle: true,\r\n    required: true\r\n  }\r\n}"
+            },
+            {
+                "name": "Phone",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Teléfono',\r\n    placeholder: '+1 (555) 123-4567',\r\n    type: 'tel',\r\n    leftIcon: 'fas fa-phone'\r\n  }\r\n}"
             },
             {
                 "name": "preview",
@@ -129,6 +229,26 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'primary'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón principal interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Readonly",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo de solo lectura',\r\n    placeholder: 'Valor fijo',\r\n    readonly: true,\r\n    value: 'Este valor no se puede modificar'\r\n  }\r\n}"
+            },
+            {
+                "name": "Search",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar en el sitio...',\r\n    type: 'search',\r\n    leftIcon: 'fas fa-search',\r\n    rightIcon: 'fas fa-times'\r\n  }\r\n}"
             },
             {
                 "name": "Secondary",
@@ -171,6 +291,26 @@
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<lib-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></lib-icon>\r\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></lib-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input pequeño',\r\n    placeholder: 'Tamaño pequeño',\r\n    size: 'small'\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input exitoso',\r\n    placeholder: 'Campo válido',\r\n    variant: 'success',\r\n    helperText: 'Este campo es válido'\r\n  }\r\n}"
+            },
+            {
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -204,11 +344,41 @@
                 "name": "Warning",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Input con advertencia',\r\n    placeholder: 'Campo con advertencia',\r\n    variant: 'warning',\r\n    helperText: 'Este campo tiene una advertencia'\r\n  }\r\n}"
+            },
+            {
+                "name": "Warning",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<MessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de advertencia que requiere tu atención.',\r\n    isFullWidth: false,\r\n    type: 'warning'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de advertencia con colores naranja/amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithError",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    errorText: 'Por favor ingresa un email válido',\r\n    variant: 'error'\r\n  }\r\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuario',\r\n    placeholder: 'Ingresa tu nombre de usuario',\r\n    helperText: 'El nombre de usuario debe tener al menos 3 caracteres'\r\n  }\r\n}"
             },
             {
                 "name": "WithIcons",
@@ -219,10 +389,52 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \r\n        <!-- === ACCIONES BÁSICAS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\r\n            <lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\r\n            <lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\r\n            <lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\r\n            <lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\r\n            <lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\r\n            <lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === NAVEGACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Navegación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\r\n            <lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\r\n            <lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\r\n            <lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\r\n            <lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\r\n            <lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === CHEVRONS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Chevrons</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\r\n            <lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\r\n            <lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\r\n            <lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === COMUNICACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\r\n            <lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\r\n            <lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\r\n            <lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\r\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INTERACCIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\r\n            <lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\r\n            <lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === SEGURIDAD === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\r\n            <lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === UBICACIÓN Y TIEMPO === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\r\n            <lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INFORMACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Información</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\r\n            <lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\r\n            <lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<!-- Acciones Básicas -->\r\n<lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\r\n<lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\r\n<lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\r\n<lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\r\n<lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\r\n<lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\r\n\r\n<!-- Navegación -->\r\n<lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\r\n<lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\r\n<lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\r\n<lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\r\n\r\n<!-- Chevrons -->\r\n<lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\r\n<lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\r\n<lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\r\n<lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\r\n\r\n<!-- Comunicación -->\r\n<lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\r\n<lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\r\n<lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\r\n\r\n<!-- Archivos y Documentos -->\r\n<lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\r\n<lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\r\n\r\n<!-- Interacción -->\r\n<lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\r\n<lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\r\n<lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\r\n\r\n<!-- Seguridad -->\r\n<lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\r\n<lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\r\n\r\n<!-- Ubicación y Tiempo -->\r\n<lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\r\n\r\n<!-- Información -->\r\n<lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\r\n<lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\r\n<lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\r\n\r\n<!-- Estados -->\r\n<lib-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></lib-button>\r\n<lib-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></lib-button>`\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithLabel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Nombre completo',\r\n    placeholder: 'Ingresa tu nombre completo',\r\n    required: true\r\n  }\r\n}"
+            },
+            {
+                "name": "WithLeftIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar productos...',\r\n    leftIcon: 'fas fa-search'\r\n  }\r\n}"
+            },
+            {
+                "name": "WithRightIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    rightIcon: 'fas fa-envelope'\r\n  }\r\n}"
             }
         ],
         "functions": [],
-        "typealiases": [],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<InputComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            }
+        ],
         "enumerations": [],
         "groupedVariables": {
             "projects/sanna-ui/src/lib/icon/icon.stories.ts": [
@@ -265,6 +477,208 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<IconComponent>",
                     "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></lib-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<lib-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></lib-icon>\r\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></lib-icon>\r\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></lib-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/input.stories.ts": [
+                {
+                    "name": "Date",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    type: 'date'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Escribe algo aquí...',\r\n    label: 'Input básico'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Campo deshabilitado',\r\n    placeholder: 'No puedes escribir aquí',\r\n    disabled: true\r\n  }\r\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input con error',\r\n    placeholder: 'Campo con error',\r\n    variant: 'error',\r\n    errorText: 'Este campo tiene un error'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input grande',\r\n    placeholder: 'Tamaño grande',\r\n    size: 'large'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Medium",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input mediano',\r\n    placeholder: 'Tamaño mediano',\r\n    size: 'medium'\r\n  }\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<InputComponent>",
+                    "defaultValue": "{\r\n  title: 'COMPONENTES/Forms/Input',\r\n  component: InputComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\r\n      description: 'Tipo de input HTML'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['small', 'medium', 'large'],\r\n      description: 'Tamaño del input'\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['default', 'success', 'warning', 'error'],\r\n      description: 'Variante visual del input'\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: 'boolean',\r\n      description: 'Estado de solo lectura'\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo requerido'\r\n    },\r\n    showPasswordToggle: {\r\n      control: 'boolean',\r\n      description: 'Mostrar toggle de contraseña'\r\n    },\r\n    leftIcon: {\r\n      control: 'text',\r\n      description: 'Icono izquierdo (clase CSS)'\r\n    },\r\n    rightIcon: {\r\n      control: 'text',\r\n      description: 'Icono derecho (clase CSS)'\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del input'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error'\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Number",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Edad',\r\n    placeholder: 'Ingresa tu edad',\r\n    type: 'number',\r\n    minlength: 1,\r\n    maxlength: 3\r\n  }\r\n}"
+                },
+                {
+                    "name": "PasswordWithToggle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Contraseña',\r\n    placeholder: 'Ingresa tu contraseña',\r\n    type: 'password',\r\n    showPasswordToggle: true,\r\n    required: true\r\n  }\r\n}"
+                },
+                {
+                    "name": "Phone",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Teléfono',\r\n    placeholder: '+1 (555) 123-4567',\r\n    type: 'tel',\r\n    leftIcon: 'fas fa-phone'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Readonly",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Campo de solo lectura',\r\n    placeholder: 'Valor fijo',\r\n    readonly: true,\r\n    value: 'Este valor no se puede modificar'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Search",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar en el sitio...',\r\n    type: 'search',\r\n    leftIcon: 'fas fa-search',\r\n    rightIcon: 'fas fa-times'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input pequeño',\r\n    placeholder: 'Tamaño pequeño',\r\n    size: 'small'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input exitoso',\r\n    placeholder: 'Campo válido',\r\n    variant: 'success',\r\n    helperText: 'Este campo es válido'\r\n  }\r\n}"
+                },
+                {
+                    "name": "Warning",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input con advertencia',\r\n    placeholder: 'Campo con advertencia',\r\n    variant: 'warning',\r\n    helperText: 'Este campo tiene una advertencia'\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithError",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    errorText: 'Por favor ingresa un email válido',\r\n    variant: 'error'\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithHelperText",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Usuario',\r\n    placeholder: 'Ingresa tu nombre de usuario',\r\n    helperText: 'El nombre de usuario debe tener al menos 3 caracteres'\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithLabel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Nombre completo',\r\n    placeholder: 'Ingresa tu nombre completo',\r\n    required: true\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithLeftIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar productos...',\r\n    leftIcon: 'fas fa-search'\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithRightIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    rightIcon: 'fas fa-envelope'\r\n  }\r\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts": [
@@ -446,7 +860,21 @@
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            "projects/sanna-ui/src/lib/forms/input.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<InputComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ]
+        }
     },
     "routes": [],
     "coverage": {
@@ -529,6 +957,216 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "WithIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Date",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Medium",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Number",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PasswordWithToggle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Phone",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Readonly",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Search",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Success",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Warning",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithError",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithHelperText",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLeftIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithRightIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/forms/input.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
