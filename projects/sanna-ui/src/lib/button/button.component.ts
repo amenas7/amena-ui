@@ -45,7 +45,7 @@ import {
 export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
-export type FontWeight = 'light' | 'regular' | 'medium' | 'semibold' | 'bold';
+
 
 @Component({
   selector: 'lib-button',
@@ -62,7 +62,7 @@ export class ButtonComponent {
   @Input() type: ButtonType = 'button';
   @Input() icon?: string;
   @Input() position: 'left' | 'right' = 'left';
-  @Input() fontWeight: FontWeight = 'medium';
+
 
   @ViewChild('buttonText', { static: false }) buttonText!: ElementRef;
 
@@ -195,7 +195,6 @@ export class ButtonComponent {
       'btn',
       `btn-${this.variant}`,
       this.getSizeClass(),
-      `plus-jakarta-sans-${this.fontWeight}`,
       this.fullWidth ? 'w-100' : '',
       this.disabled ? 'disabled' : '',
       this.loading ? 'loading' : ''

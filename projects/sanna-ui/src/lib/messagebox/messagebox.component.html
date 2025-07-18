@@ -1,0 +1,8 @@
+<div class="messagebox" 
+     [class.full-width]="isFullWidth"
+     [class.success]="type === 'success'"
+     [class.warning]="type === 'warning'"
+     [class.error]="type === 'error'"
+     [class.info]="type === 'info'">
+  <p class="message-text">{{ message }}</p>
+</div>

@@ -7,6 +7,7 @@ import { ButtonComponent } from './button/button.component';
 // Importar configuración de FontAwesome
 import './fontawesome.config';
 import { IconComponent } from './icon/icon.component';
+import { MessageboxComponent } from './messagebox/messagebox.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { IconComponent } from './icon/icon.component';
     SannaUiComponent,
     ButtonComponent,
     IconComponent,
+    MessageboxComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { IconComponent } from './icon/icon.component';
   exports: [
     SannaUiComponent,
     ButtonComponent,
-    IconComponent
+    IconComponent,
+    MessageboxComponent
   ]
 })
 export class SannaUiModule { }
