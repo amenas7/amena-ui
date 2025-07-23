@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IconComponent } from './icon.component';
+import { SaMessageboxComponent } from './sa-messagebox.component';
 
-describe('IconComponent', () => {
-  let component: IconComponent;
-  let fixture: ComponentFixture<IconComponent>;
+describe('SaMessageboxComponent', () => {
+  let component: SaMessageboxComponent;
+  let fixture: ComponentFixture<SaMessageboxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IconComponent]
+      declarations: [SaMessageboxComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IconComponent);
+    fixture = TestBed.createComponent(SaMessageboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

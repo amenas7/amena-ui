@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SannaUiComponent } from './sanna-ui.component';
-import { ButtonComponent } from './sa-button/sa-button.component';
-
-// Importar configuración de FontAwesome
 import './fontawesome.config';
-import { IconComponent } from './icon/icon.component';
-import { MessageboxComponent } from './messagebox/messagebox.component';
+
+// Componentes
+import { SaButtonComponent } from './sa-button/sa-button.component';
+import { SaIconComponent } from './sa-icon/sa-icon.component';
+import { SaMessageboxComponent } from './sa-messagebox/sa-messagebox.component';
 import { InputComponent } from './input/input.component';
 
 
 @NgModule({
   declarations: [
     SannaUiComponent,
-    ButtonComponent,
-    IconComponent,
-    MessageboxComponent,
+    SaButtonComponent,
+    SaIconComponent,
+    SaMessageboxComponent,
     InputComponent,
   ],
   imports: [
@@ -25,9 +25,9 @@ import { InputComponent } from './input/input.component';
   ],
   exports: [
     SannaUiComponent,
-    ButtonComponent,
-    IconComponent,
-    MessageboxComponent,
+    SaButtonComponent,
+    SaIconComponent,
+    SaMessageboxComponent,
     InputComponent
   ]
 })

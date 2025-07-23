@@ -5,12 +5,12 @@
      [class.error]="type === 'error'"
      [class.info]="type === 'info'">
   <div class="messagebox-content">
-    <lib-icon *ngIf="hasIcon" 
+    <sa-icon *ngIf="hasIcon" 
               [name]="iconName!" 
               [size]="iconSize || 'md'"
               [color]="iconColor || '#000000'"
               class="messagebox-icon">
-    </lib-icon>
+    </sa-icon>
     <p class="message-text" [innerHTML]="sanitizedMessage"></p>
   </div>
 </div>

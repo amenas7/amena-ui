@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageboxComponent } from './messagebox.component';
+import { SaIconComponent } from './sa-icon.component';
 
-describe('MessageboxComponent', () => {
-  let component: MessageboxComponent;
-  let fixture: ComponentFixture<MessageboxComponent>;
+describe('SaIconComponent', () => {
+  let component: SaIconComponent;
+  let fixture: ComponentFixture<SaIconComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MessageboxComponent]
+      declarations: [SaIconComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MessageboxComponent);
+    fixture = TestBed.createComponent(SaIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

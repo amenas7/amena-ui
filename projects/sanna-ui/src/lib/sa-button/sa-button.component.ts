@@ -52,7 +52,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss'
 })
-export class ButtonComponent {
+export class SaButtonComponent {
   @Input() label: string = 'Button';
   @Input() variant: ButtonVariant = 'primary';
   @Input() size: ButtonSize = 'medium';

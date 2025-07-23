@@ -1,12 +1,12 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from './sa-button.component';
+import { SaButtonComponent } from './sa-button.component';
 import { CommonModule } from '@angular/common';
 import { SannaUiModule } from '../sanna-ui.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export default {
   title: 'Componentes/Button',
-  component: ButtonComponent,
+  component: SaButtonComponent,
   decorators: [
     moduleMetadata({
       imports: [CommonModule, SannaUiModule, FontAwesomeModule],
@@ -57,10 +57,10 @@ export default {
     },
 
   }
-} as Meta<ButtonComponent>;
+} as Meta<SaButtonComponent>;
 
 // Historia básica
-export const Primary: StoryObj<ButtonComponent> = {
+export const Primary: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
     variant: 'primary'
@@ -78,7 +78,7 @@ export const Primary: StoryObj<ButtonComponent> = {
 };
 
 // Historia Secondary
-export const Secondary: StoryObj<ButtonComponent> = {
+export const Secondary: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
     variant: 'secondary'
@@ -96,7 +96,7 @@ export const Secondary: StoryObj<ButtonComponent> = {
 };
 
 // Historia Terciary
-export const Terciary: StoryObj<ButtonComponent> = {
+export const Terciary: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
     variant: 'terciary'
@@ -114,7 +114,7 @@ export const Terciary: StoryObj<ButtonComponent> = {
 };
 
 // Historia Disabled
-export const Disabled: StoryObj<ButtonComponent> = {
+export const Disabled: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
     variant: 'primary',
@@ -135,7 +135,7 @@ export const Disabled: StoryObj<ButtonComponent> = {
 
 
 // Historia con diferentes variantes
-export const Variants: StoryObj<ButtonComponent> = {
+export const Variants: StoryObj<SaButtonComponent> = {
   render: () => ({
     template: `
       <div class="d-flex gap-3 flex-wrap align-items-center">
@@ -158,7 +158,7 @@ export const Variants: StoryObj<ButtonComponent> = {
 };
 
 // Historia con diferentes tamaños
-export const Sizes: StoryObj<ButtonComponent> = {
+export const Sizes: StoryObj<SaButtonComponent> = {
   render: () => ({
     template: `
       <div class="d-flex gap-3 align-items-center">
@@ -184,7 +184,7 @@ export const Sizes: StoryObj<ButtonComponent> = {
 
 
 // Historia con iconos
-export const WithIcons: StoryObj<ButtonComponent> = {
+export const WithIcons: StoryObj<SaButtonComponent> = {
   render: () => ({
     template: `
       <div class="p-4">

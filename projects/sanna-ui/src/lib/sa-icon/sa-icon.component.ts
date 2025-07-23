@@ -189,11 +189,11 @@ import {
 export type IconSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'lib-icon',
-  templateUrl: './icon.component.html',
-  styleUrl: './icon.component.scss'
+  selector: 'sa-icon',
+  templateUrl: './sa-icon.component.html',
+  styleUrl: './sa-icon.component.scss'
 })
-export class IconComponent {
+export class SaIconComponent {
   @Input() name: string = '';
   @Input() color: string = '#000000';
   @Input() size: IconSize = 'md';
