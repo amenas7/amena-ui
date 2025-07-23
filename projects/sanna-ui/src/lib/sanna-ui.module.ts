@@ -8,7 +8,7 @@ import './fontawesome.config';
 import { SaButtonComponent } from './sa-button/sa-button.component';
 import { SaIconComponent } from './sa-icon/sa-icon.component';
 import { SaMessageboxComponent } from './sa-messagebox/sa-messagebox.component';
-import { InputComponent } from './input/input.component';
+import { SaInputComponent } from './forms/sa-input/sa-input.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { InputComponent } from './input/input.component';
     SaButtonComponent,
     SaIconComponent,
     SaMessageboxComponent,
-    InputComponent,
+    SaInputComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import { InputComponent } from './input/input.component';
     SaButtonComponent,
     SaIconComponent,
     SaMessageboxComponent,
-    InputComponent
+    SaInputComponent
   ]
 })
 export class SannaUiModule { }

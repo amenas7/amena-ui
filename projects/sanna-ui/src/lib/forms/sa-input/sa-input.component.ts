@@ -6,18 +6,18 @@ export type InputSize = 'small' | 'medium' | 'large';
 export type InputVariant = 'default' | 'success' | 'warning' | 'error';
 
 @Component({
-  selector: 'lib-input',
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  selector: 'sa-input',
+  templateUrl: './sa-input.component.html',
+  styleUrl: './sa-input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => SaInputComponent),
       multi: true
     }
   ]
 })
-export class InputComponent implements ControlValueAccessor {
+export class SaInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() type: InputType = 'text';
   @Input() size: InputSize = 'medium';

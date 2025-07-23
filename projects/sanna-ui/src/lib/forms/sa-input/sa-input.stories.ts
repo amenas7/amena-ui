@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { InputComponent } from '../input/input.component';
+import { SaInputComponent } from './sa-input.component';
 
-const meta: Meta<InputComponent> = {
+const meta: Meta<SaInputComponent> = {
   title: 'COMPONENTES/Forms/Input',
-  component: InputComponent,
+  component: SaInputComponent,
   parameters: {
     layout: 'centered',
   },
@@ -68,7 +68,7 @@ const meta: Meta<InputComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<InputComponent>;
+type Story = StoryObj<SaInputComponent>;
 
 // Historia básica
 export const Default: Story = {
