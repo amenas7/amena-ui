@@ -48,9 +48,9 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 
 
 @Component({
-  selector: 'lib-button',
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+  selector: 'sa-button',
+  templateUrl: './sa-button.component.html',
+  styleUrl: './sa-button.component.scss'
 })
 export class ButtonComponent {
   @Input() label: string = 'Button';

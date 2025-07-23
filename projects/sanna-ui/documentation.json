@@ -44,16 +44,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<MessageboxComponent>",
-                "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con el texto Lorem ipsum. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -61,14 +51,14 @@
                 "defaultValue": "{\n  args: {\n    placeholder: 'Escribe algo aquí...',\n    label: 'Input básico'\n  }\n}"
             },
             {
-                "name": "Disabled",
+                "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "StoryObj<ButtonComponent>",
-                "defaultValue": "{\n  args: {\n    label: 'Click me',\n    variant: 'primary',\n    disabled: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Botón en estado deshabilitado. Se muestra en gris y no es interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Disabled",
@@ -79,6 +69,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Campo deshabilitado',\n    placeholder: 'No puedes escribir aquí',\n    disabled: true\n  }\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ButtonComponent>",
+                "defaultValue": "{\n  args: {\n    label: 'Click me',\n    variant: 'primary',\n    disabled: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Botón en estado deshabilitado. Se muestra en gris y no es interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Docs",
@@ -94,21 +94,21 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<MessageboxComponent>",
-                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de error que indica que algo salió mal.',\n    isFullWidth: false,\n    type: 'error'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de error con colores rojo/rosa. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Input con error',\n    placeholder: 'Campo con error',\n    variant: 'error',\n    errorText: 'Este campo tiene un error'\n  }\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de error que indica que algo salió mal.',\n    isFullWidth: false,\n    type: 'error'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de error con colores rojo/rosa. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Examples",
@@ -118,7 +118,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<MessageboxComponent>",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Ejemplos de Messagebox</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje por defecto (success)</h5>\n          <lib-messagebox message=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de advertencia</h5>\n          <lib-messagebox message=\"Este es un mensaje de advertencia.\" type=\"warning\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de error</h5>\n          <lib-messagebox message=\"Este es un mensaje de error.\" type=\"error\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje informativo</h5>\n          <lib-messagebox message=\"Este es un mensaje informativo.\" type=\"info\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con ancho completo</h5>\n          <lib-messagebox message=\"Este mensaje ocupa todo el ancho disponible.\" [isFullWidth]=\"true\"></lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-messagebox message=\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje de advertencia.\\\" type=\\\"warning\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje de error.\\\" type=\\\"error\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje informativo.\\\" type=\\\"info\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este mensaje ocupa todo el ancho disponible.\\\" [isFullWidth]=\\\"true\\\"></lib-messagebox>`\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Ejemplos de Messagebox</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con icono</h5>\n          <lib-messagebox \n            message=\"Este es un mensaje con un icono a la izquierda.\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#5BAB5F'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de advertencia con HTML</h5>\n          <lib-messagebox message=\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\" type=\"warning\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de error con icono y HTML</h5>\n          <lib-messagebox \n            message=\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\" \n            type=\"error\"\n            [iconName]=\"'exclamation-triangle'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#dc3545'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje informativo con HTML</h5>\n          <lib-messagebox message=\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\" type=\"info\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con ancho completo y HTML</h5>\n          <lib-messagebox message=\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\" [isFullWidth]=\"true\"></lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-messagebox message=\\\"👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje con un icono a la izquierda.\\\" [iconName]=\\\"'paperclip'\\\" [iconSize]=\\\"'md'\\\" [iconColor]=\\\"'#5BAB5F'\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\\\" type=\\\"warning\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\\\" type=\\\"error\\\" [iconName]=\\\"'exclamation-triangle'\\\" [iconSize]=\\\"'md'\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\\\" type=\\\"info\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\\\" [isFullWidth]=\\\"true\\\"></lib-messagebox>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "FullWidth",
@@ -129,6 +129,26 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<MessageboxComponent>",
                 "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje que ocupa todo el ancho disponible del contenedor.',\n    isFullWidth: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que ocupa todo el ancho disponible. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "HtmlContent",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: '🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i> que incluye <u>texto subrayado</u> y emojis 🎉',\n    isFullWidth: false,\n    type: 'warning'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que demuestra el soporte para HTML incluyendo etiquetas <b>, <i>, <u> y emojis. Esta story muestra específicamente las capacidades de formato HTML del componente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "IconColors",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Iconos con diferentes colores</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono verde</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono verde\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#5BAB5F'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono azul</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono azul\"\n            type=\"info\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#007bff'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono rojo</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono rojo\"\n            type=\"error\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#dc3545'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono naranja</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono naranja\"\n            type=\"warning\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#fd7e14'\">\n          </lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Ejemplos de iconos con diferentes colores personalizados. El color del icono se puede modificar independientemente del tipo de mensaje.'\n      },\n      source: {\n        code: `<lib-messagebox \n  message=\"Mensaje con icono verde\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#5BAB5F'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono azul\"\n  type=\"info\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#007bff'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono rojo\"\n  type=\"error\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#dc3545'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono naranja\"\n  type=\"warning\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#fd7e14'\">\n</lib-messagebox>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "IconGallery",
@@ -234,7 +254,7 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
@@ -264,7 +284,7 @@
                 "name": "Secondary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
@@ -284,21 +304,21 @@
                 "name": "Sizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<ButtonComponent>",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <lib-button label=\"Small\" size=\"small\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Medium\" size=\"medium\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Large\" size=\"large\" variant=\"primary\"></lib-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></lib-button>`\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Sizes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/icon/icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<IconComponent>",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\n        \n        <div class=\"d-flex gap-4 align-items-center\">\n          <div class=\"text-center\">\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></lib-icon>\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\n          </div>\n          <div class=\"text-center\">\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></lib-icon>\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\n          </div>\n          <div class=\"text-center\">\n            <lib-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></lib-icon>\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></lib-icon>\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></lib-icon>\n<lib-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></lib-icon>`\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "Sizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ButtonComponent>",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></sa-button>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Small",
@@ -314,16 +334,6 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<MessageboxComponent>",
-                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\n    isFullWidth: false,\n    type: 'success'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -331,10 +341,20 @@
                 "defaultValue": "{\n  args: {\n    label: 'Input exitoso',\n    placeholder: 'Campo válido',\n    variant: 'success',\n    helperText: 'Este campo es válido'\n  }\n}"
             },
             {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\n    isFullWidth: false,\n    type: 'success'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
                 "name": "Terciary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
@@ -344,21 +364,11 @@
                 "name": "Variants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n        <lib-button label=\"Primary\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Secondary\" variant=\"secondary\"></lib-button>\n        <lib-button label=\"Terciary\" variant=\"terciary\"></lib-button>\n        <lib-button label=\"Danger\" variant=\"danger\"></lib-button>\n        <lib-button label=\"Warning\" variant=\"warning\"></lib-button>\n        <lib-button label=\"Info\" variant=\"info\"></lib-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-button label=\\\"Primary\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></lib-button>\\n<lib-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></lib-button>\\n<lib-button label=\\\"Danger\\\" variant=\\\"danger\\\"></lib-button>\\n<lib-button label=\\\"Warning\\\" variant=\\\"warning\\\"></lib-button>\\n<lib-button label=\\\"Info\\\" variant=\\\"info\\\"></lib-button>`\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Warning",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<MessageboxComponent>",
-                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de advertencia que requiere tu atención.',\n    isFullWidth: false,\n    type: 'warning'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de advertencia con colores naranja/amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Warning",
@@ -369,6 +379,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Input con advertencia',\n    placeholder: 'Campo con advertencia',\n    variant: 'warning',\n    helperText: 'Este campo tiene una advertencia'\n  }\n}"
+            },
+            {
+                "name": "Warning",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de advertencia que requiere tu atención.',\n    isFullWidth: false,\n    type: 'warning'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de advertencia con colores naranja/amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "WithError",
@@ -391,14 +411,24 @@
                 "defaultValue": "{\n  args: {\n    label: 'Usuario',\n    placeholder: 'Ingresa tu nombre de usuario',\n    helperText: 'El nombre de usuario debe tener al menos 3 caracteres'\n  }\n}"
             },
             {
+                "name": "WithIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<MessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje con un icono a la izquierda.',\n    isFullWidth: false,\n    type: 'success',\n    iconName: 'paperclip',\n    iconSize: 'md',\n    iconColor: '#5BAB5F'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que incluye un icono a la izquierda. El icono se alinea correctamente con el texto y mantiene el estilo del componente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
                 "name": "WithIcons",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<ButtonComponent>",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \n        <!-- === ACCIONES BÁSICAS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\n            <lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\n            <lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === NAVEGACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Navegación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\n            <lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === CHEVRONS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Chevrons</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === COMUNICACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\n            <lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\n            <lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === INTERACCIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === SEGURIDAD === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === UBICACIÓN Y TIEMPO === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === INFORMACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Información</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<!-- Acciones Básicas -->\n<lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\n<lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\n<lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\n<lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\n<lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\n\n<!-- Navegación -->\n<lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\n<lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\n<lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\n\n<!-- Chevrons -->\n<lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\n\n<!-- Comunicación -->\n<lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\n<lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\n<lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\n\n<!-- Archivos y Documentos -->\n<lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\n<lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\n<lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\n\n<!-- Interacción -->\n<lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\n<lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\n\n<!-- Seguridad -->\n<lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\n<lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\n\n<!-- Ubicación y Tiempo -->\n<lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\n<lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\n\n<!-- Información -->\n<lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\n\n<!-- Estados -->\n<lib-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></lib-button>`\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \n        <!-- === ACCIONES BÁSICAS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\n            <sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\n            <sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === NAVEGACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Navegación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\n            <sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === CHEVRONS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Chevrons</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === COMUNICACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\n            <sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\n            <sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === INTERACCIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === SEGURIDAD === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === UBICACIÓN Y TIEMPO === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === INFORMACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Información</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<!-- Acciones Básicas -->\n<sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\n<sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\n<sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\n<sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\n<sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\n\n<!-- Navegación -->\n<sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\n<sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\n\n<!-- Chevrons -->\n<sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\n\n<!-- Comunicación -->\n<sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\n<sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\n<sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\n\n<!-- Archivos y Documentos -->\n<sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\n<sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\n<sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\n\n<!-- Interacción -->\n<sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\n<sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\n\n<!-- Seguridad -->\n<sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\n<sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\n\n<!-- Ubicación y Tiempo -->\n<sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\n<sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\n\n<!-- Información -->\n<sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\n\n<!-- Estados -->\n<sa-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></sa-button>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "WithLabel",
@@ -700,7 +730,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<MessageboxComponent>",
-                    "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con el texto Lorem ipsum. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Error",
@@ -720,7 +750,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<MessageboxComponent>",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Ejemplos de Messagebox</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje por defecto (success)</h5>\n          <lib-messagebox message=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de advertencia</h5>\n          <lib-messagebox message=\"Este es un mensaje de advertencia.\" type=\"warning\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de error</h5>\n          <lib-messagebox message=\"Este es un mensaje de error.\" type=\"error\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje informativo</h5>\n          <lib-messagebox message=\"Este es un mensaje informativo.\" type=\"info\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con ancho completo</h5>\n          <lib-messagebox message=\"Este mensaje ocupa todo el ancho disponible.\" [isFullWidth]=\"true\"></lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-messagebox message=\\\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje de advertencia.\\\" type=\\\"warning\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje de error.\\\" type=\\\"error\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje informativo.\\\" type=\\\"info\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este mensaje ocupa todo el ancho disponible.\\\" [isFullWidth]=\\\"true\\\"></lib-messagebox>`\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Ejemplos de Messagebox</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con icono</h5>\n          <lib-messagebox \n            message=\"Este es un mensaje con un icono a la izquierda.\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#5BAB5F'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de advertencia con HTML</h5>\n          <lib-messagebox message=\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\" type=\"warning\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje de error con icono y HTML</h5>\n          <lib-messagebox \n            message=\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\" \n            type=\"error\"\n            [iconName]=\"'exclamation-triangle'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#dc3545'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje informativo con HTML</h5>\n          <lib-messagebox message=\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\" type=\"info\"></lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Mensaje con ancho completo y HTML</h5>\n          <lib-messagebox message=\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\" [isFullWidth]=\"true\"></lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-messagebox message=\\\"👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"Este es un mensaje con un icono a la izquierda.\\\" [iconName]=\\\"'paperclip'\\\" [iconSize]=\\\"'md'\\\" [iconColor]=\\\"'#5BAB5F'\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\\\" type=\\\"warning\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\\\" type=\\\"error\\\" [iconName]=\\\"'exclamation-triangle'\\\" [iconSize]=\\\"'md'\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\\\" type=\\\"info\\\"></lib-messagebox>\\n\\n<lib-messagebox message=\\\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\\\" [isFullWidth]=\\\"true\\\"></lib-messagebox>`\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "FullWidth",
@@ -731,6 +761,26 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<MessageboxComponent>",
                     "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje que ocupa todo el ancho disponible del contenedor.',\n    isFullWidth: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que ocupa todo el ancho disponible. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "HtmlContent",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<MessageboxComponent>",
+                    "defaultValue": "{\n  args: {\n    message: '🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i> que incluye <u>texto subrayado</u> y emojis 🎉',\n    isFullWidth: false,\n    type: 'warning'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que demuestra el soporte para HTML incluyendo etiquetas <b>, <i>, <u> y emojis. Esta story muestra específicamente las capacidades de formato HTML del componente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "IconColors",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<MessageboxComponent>",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Iconos con diferentes colores</h4>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono verde</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono verde\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#5BAB5F'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono azul</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono azul\"\n            type=\"info\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#007bff'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono rojo</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono rojo\"\n            type=\"error\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#dc3545'\">\n          </lib-messagebox>\n        </div>\n        \n        <div class=\"mb-4\">\n          <h5 class=\"mb-2\">Icono naranja</h5>\n          <lib-messagebox \n            message=\"Mensaje con icono naranja\"\n            type=\"warning\"\n            [iconName]=\"'paperclip'\"\n            [iconSize]=\"'md'\"\n            [iconColor]=\"'#fd7e14'\">\n          </lib-messagebox>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Ejemplos de iconos con diferentes colores personalizados. El color del icono se puede modificar independientemente del tipo de mensaje.'\n      },\n      source: {\n        code: `<lib-messagebox \n  message=\"Mensaje con icono verde\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#5BAB5F'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono azul\"\n  type=\"info\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#007bff'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono rojo\"\n  type=\"error\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#dc3545'\">\n</lib-messagebox>\n\n<lib-messagebox \n  message=\"Mensaje con icono naranja\"\n  type=\"warning\"\n  [iconName]=\"'paperclip'\"\n  [iconSize]=\"'md'\"\n  [iconColor]=\"'#fd7e14'\">\n</lib-messagebox>`\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Info",
@@ -781,14 +831,24 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<MessageboxComponent>",
                     "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje de advertencia que requiere tu atención.',\n    isFullWidth: false,\n    type: 'warning'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje de advertencia con colores naranja/amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "WithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<MessageboxComponent>",
+                    "defaultValue": "{\n  args: {\n    message: 'Este es un mensaje con un icono a la izquierda.',\n    isFullWidth: false,\n    type: 'success',\n    iconName: 'paperclip',\n    iconSize: 'md',\n    iconColor: '#5BAB5F'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje que incluye un icono a la izquierda. El icono se alinea correctamente con el texto y mantiene el estilo del componente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 }
             ],
-            "projects/sanna-ui/src/lib/button/button.stories.ts": [
+            "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts": [
                 {
                     "name": "Disabled",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
@@ -798,7 +858,7 @@
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
@@ -808,7 +868,7 @@
                     "name": "Secondary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
@@ -818,17 +878,17 @@
                     "name": "Sizes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <lib-button label=\"Small\" size=\"small\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Medium\" size=\"medium\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Large\" size=\"large\" variant=\"primary\"></lib-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></lib-button>`\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></sa-button>`\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Terciary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
@@ -838,21 +898,21 @@
                     "name": "Variants",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n        <lib-button label=\"Primary\" variant=\"primary\"></lib-button>\n        <lib-button label=\"Secondary\" variant=\"secondary\"></lib-button>\n        <lib-button label=\"Terciary\" variant=\"terciary\"></lib-button>\n        <lib-button label=\"Danger\" variant=\"danger\"></lib-button>\n        <lib-button label=\"Warning\" variant=\"warning\"></lib-button>\n        <lib-button label=\"Info\" variant=\"info\"></lib-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<lib-button label=\\\"Primary\\\" variant=\\\"primary\\\"></lib-button>\\n<lib-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></lib-button>\\n<lib-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></lib-button>\\n<lib-button label=\\\"Danger\\\" variant=\\\"danger\\\"></lib-button>\\n<lib-button label=\\\"Warning\\\" variant=\\\"warning\\\"></lib-button>\\n<lib-button label=\\\"Info\\\" variant=\\\"info\\\"></lib-button>`\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "WithIcons",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/button/button.stories.ts",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<ButtonComponent>",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \n        <!-- === ACCIONES BÁSICAS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\n            <lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\n            <lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === NAVEGACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Navegación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\n            <lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === CHEVRONS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Chevrons</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\n            <lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === COMUNICACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\n            <lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\n            <lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\n            <lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === INTERACCIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === SEGURIDAD === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\n            <lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === UBICACIÓN Y TIEMPO === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\n            <lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\n          </div>\n        </div>\n\n        <!-- === INFORMACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Información</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\n            <lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\n            <lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<!-- Acciones Básicas -->\n<lib-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></lib-button>\n<lib-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></lib-button>\n<lib-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></lib-button>\n<lib-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></lib-button>\n<lib-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></lib-button>\n\n<!-- Navegación -->\n<lib-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></lib-button>\n<lib-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></lib-button>\n<lib-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></lib-button>\n\n<!-- Chevrons -->\n<lib-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></lib-button>\n<lib-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></lib-button>\n\n<!-- Comunicación -->\n<lib-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></lib-button>\n<lib-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></lib-button>\n<lib-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></lib-button>\n\n<!-- Archivos y Documentos -->\n<lib-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></lib-button>\n<lib-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></lib-button>\n<lib-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></lib-button>\n\n<!-- Interacción -->\n<lib-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></lib-button>\n<lib-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></lib-button>\n\n<!-- Seguridad -->\n<lib-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></lib-button>\n<lib-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></lib-button>\n\n<!-- Ubicación y Tiempo -->\n<lib-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></lib-button>\n<lib-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></lib-button>\n\n<!-- Información -->\n<lib-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></lib-button>\n<lib-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></lib-button>\n<lib-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></lib-button>\n\n<!-- Estados -->\n<lib-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></lib-button>\n<lib-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></lib-button>`\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \n        <!-- === ACCIONES BÁSICAS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\n            <sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\n            <sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === NAVEGACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Navegación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\n            <sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === CHEVRONS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Chevrons</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\n            <sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === COMUNICACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\n            <sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\n            <sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === INTERACCIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === SEGURIDAD === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\n            <sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === UBICACIÓN Y TIEMPO === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\n            <sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\n          </div>\n        </div>\n\n        <!-- === INFORMACIÓN === -->\n        <div class=\"mb-4\">\n          <h5 class=\"text-warning mb-2\">Información</h5>\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n            <sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\n            <sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\n            <sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<!-- Acciones Básicas -->\n<sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\n<sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\n<sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\n<sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\n<sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\n\n<!-- Navegación -->\n<sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\n<sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\n\n<!-- Chevrons -->\n<sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\n\n<!-- Comunicación -->\n<sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\n<sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\n<sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\n\n<!-- Archivos y Documentos -->\n<sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\n<sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\n<sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\n\n<!-- Interacción -->\n<sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\n<sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\n\n<!-- Seguridad -->\n<sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\n<sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\n\n<!-- Ubicación y Tiempo -->\n<sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\n<sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\n\n<!-- Información -->\n<sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\n<sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\n<sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\n\n<!-- Estados -->\n<sa-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></sa-button>\n<sa-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></sa-button>`\n      }\n    }\n  }\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/docs/use-css.stories.ts": [
@@ -909,76 +969,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Sizes",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Terciary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Variants",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithIcons",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1288,6 +1278,26 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "HtmlContent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "IconColors",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Info",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -1329,6 +1339,86 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Warning",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/messagebox/messagebox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Sizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Terciary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Variants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcons",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

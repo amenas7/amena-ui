@@ -21,7 +21,7 @@ export default {
   argTypes: {
     message: {
       control: 'text',
-      description: 'El texto del mensaje que se mostrará en el componente'
+      description: 'El texto del mensaje que se mostrará en el componente. Soporta HTML como <b>, <i>, <u>, emojis, etc.'
     },
     isFullWidth: {
       control: 'boolean',
@@ -31,6 +31,19 @@ export default {
       control: { type: 'select' },
       options: ['success', 'warning', 'error', 'info'],
       description: 'Tipo de mensaje que determina el color y estilo (success = verde por defecto)'
+    },
+    iconName: {
+      control: 'text',
+      description: 'Nombre del icono a mostrar a la izquierda (ej: "paperclip", "heart", "star")'
+    },
+    iconSize: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del icono'
+    },
+    iconColor: {
+      control: 'color',
+      description: 'Color hexadecimal del icono (ej: "#5BAB5F")'
     }
   }
 } as Meta<MessageboxComponent>;
@@ -43,7 +56,7 @@ export const Default: StoryObj<MessageboxComponent> = {
   parameters: {
     docs: {
       description: {
-        story: 'Mensaje por defecto (success) con el texto Lorem ipsum. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -175,6 +188,137 @@ export const LongMessage: StoryObj<MessageboxComponent> = {
   }
 };
 
+export const WithIcon: StoryObj<MessageboxComponent> = {
+  args: {
+    message: 'Este es un mensaje con un icono a la izquierda.',
+    isFullWidth: false,
+    type: 'success',
+    iconName: 'paperclip',
+    iconSize: 'md',
+    iconColor: '#5BAB5F'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Mensaje que incluye un icono a la izquierda. El icono se alinea correctamente con el texto y mantiene el estilo del componente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
+export const IconColors: StoryObj<MessageboxComponent> = {
+  render: () => ({
+    template: `
+      <div class="p-4">
+        <h4 class="mb-3">Iconos con diferentes colores</h4>
+        
+        <div class="mb-4">
+          <h5 class="mb-2">Icono verde</h5>
+          <lib-messagebox 
+            message="Mensaje con icono verde"
+            [iconName]="'paperclip'"
+            [iconSize]="'md'"
+            [iconColor]="'#5BAB5F'">
+          </lib-messagebox>
+        </div>
+        
+        <div class="mb-4">
+          <h5 class="mb-2">Icono azul</h5>
+          <lib-messagebox 
+            message="Mensaje con icono azul"
+            type="info"
+            [iconName]="'paperclip'"
+            [iconSize]="'md'"
+            [iconColor]="'#007bff'">
+          </lib-messagebox>
+        </div>
+        
+        <div class="mb-4">
+          <h5 class="mb-2">Icono rojo</h5>
+          <lib-messagebox 
+            message="Mensaje con icono rojo"
+            type="error"
+            [iconName]="'paperclip'"
+            [iconSize]="'md'"
+            [iconColor]="'#dc3545'">
+          </lib-messagebox>
+        </div>
+        
+        <div class="mb-4">
+          <h5 class="mb-2">Icono naranja</h5>
+          <lib-messagebox 
+            message="Mensaje con icono naranja"
+            type="warning"
+            [iconName]="'paperclip'"
+            [iconSize]="'md'"
+            [iconColor]="'#fd7e14'">
+          </lib-messagebox>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplos de iconos con diferentes colores personalizados. El color del icono se puede modificar independientemente del tipo de mensaje.'
+      },
+      source: {
+        code: `<lib-messagebox 
+  message="Mensaje con icono verde"
+  [iconName]="'paperclip'"
+  [iconSize]="'md'"
+  [iconColor]="'#5BAB5F'">
+</lib-messagebox>
+
+<lib-messagebox 
+  message="Mensaje con icono azul"
+  type="info"
+  [iconName]="'paperclip'"
+  [iconSize]="'md'"
+  [iconColor]="'#007bff'">
+</lib-messagebox>
+
+<lib-messagebox 
+  message="Mensaje con icono rojo"
+  type="error"
+  [iconName]="'paperclip'"
+  [iconSize]="'md'"
+  [iconColor]="'#dc3545'">
+</lib-messagebox>
+
+<lib-messagebox 
+  message="Mensaje con icono naranja"
+  type="warning"
+  [iconName]="'paperclip'"
+  [iconSize]="'md'"
+  [iconColor]="'#fd7e14'">
+</lib-messagebox>`
+      }
+    }
+  }
+};
+
+export const HtmlContent: StoryObj<MessageboxComponent> = {
+  args: {
+    message: '🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i> que incluye <u>texto subrayado</u> y emojis 🎉',
+    isFullWidth: false,
+    type: 'warning'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Mensaje que demuestra el soporte para HTML incluyendo etiquetas <b>, <i>, <u> y emojis. Esta story muestra específicamente las capacidades de formato HTML del componente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
 export const Examples: StoryObj<MessageboxComponent> = {
   render: () => ({
     template: `
@@ -182,28 +326,39 @@ export const Examples: StoryObj<MessageboxComponent> = {
         <h4 class="mb-3">Ejemplos de Messagebox</h4>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje por defecto (success)</h5>
-          <lib-messagebox message="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></lib-messagebox>
+          <h5 class="mb-2">Mensaje con icono</h5>
+          <lib-messagebox 
+            message="Este es un mensaje con un icono a la izquierda."
+            [iconName]="'paperclip'"
+            [iconSize]="'md'"
+            [iconColor]="'#5BAB5F'">
+          </lib-messagebox>
         </div>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje de advertencia</h5>
-          <lib-messagebox message="Este es un mensaje de advertencia." type="warning"></lib-messagebox>
+          <h5 class="mb-2">Mensaje de advertencia con HTML</h5>
+          <lib-messagebox message="🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>." type="warning"></lib-messagebox>
         </div>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje de error</h5>
-          <lib-messagebox message="Este es un mensaje de error." type="error"></lib-messagebox>
+          <h5 class="mb-2">Mensaje de error con icono y HTML</h5>
+          <lib-messagebox 
+            message="❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso." 
+            type="error"
+            [iconName]="'exclamation-triangle'"
+            [iconSize]="'md'"
+            [iconColor]="'#dc3545'">
+          </lib-messagebox>
         </div>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje informativo</h5>
-          <lib-messagebox message="Este es un mensaje informativo." type="info"></lib-messagebox>
+          <h5 class="mb-2">Mensaje informativo con HTML</h5>
+          <lib-messagebox message="ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato." type="info"></lib-messagebox>
         </div>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje con ancho completo</h5>
-          <lib-messagebox message="Este mensaje ocupa todo el ancho disponible." [isFullWidth]="true"></lib-messagebox>
+          <h5 class="mb-2">Mensaje con ancho completo y HTML</h5>
+          <lib-messagebox message="📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>." [isFullWidth]="true"></lib-messagebox>
         </div>
       </div>
     `
@@ -211,7 +366,7 @@ export const Examples: StoryObj<MessageboxComponent> = {
   parameters: {
     docs: {
       source: {
-        code: `<lib-messagebox message=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"></lib-messagebox>\n\n<lib-messagebox message=\"Este es un mensaje de advertencia.\" type=\"warning\"></lib-messagebox>\n\n<lib-messagebox message=\"Este es un mensaje de error.\" type=\"error\"></lib-messagebox>\n\n<lib-messagebox message=\"Este es un mensaje informativo.\" type=\"info\"></lib-messagebox>\n\n<lib-messagebox message=\"Este mensaje ocupa todo el ancho disponible.\" [isFullWidth]=\"true\"></lib-messagebox>`
+        code: `<lib-messagebox message=\"👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.\"></lib-messagebox>\n\n<lib-messagebox message=\"Este es un mensaje con un icono a la izquierda.\" [iconName]=\"'paperclip'\" [iconSize]=\"'md'\" [iconColor]=\"'#5BAB5F'\"></lib-messagebox>\n\n<lib-messagebox message=\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\" type=\"warning\"></lib-messagebox>\n\n<lib-messagebox message=\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\" type=\"error\" [iconName]=\"'exclamation-triangle'\" [iconSize]=\"'md'\"></lib-messagebox>\n\n<lib-messagebox message=\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\" type=\"info\"></lib-messagebox>\n\n<lib-messagebox message=\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\" [isFullWidth]=\"true\"></lib-messagebox>`
       }
     }
   }

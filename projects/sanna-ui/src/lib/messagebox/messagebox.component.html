@@ -4,5 +4,13 @@
      [class.warning]="type === 'warning'"
      [class.error]="type === 'error'"
      [class.info]="type === 'info'">
-  <p class="message-text">{{ message }}</p>
+  <div class="messagebox-content">
+    <lib-icon *ngIf="hasIcon" 
+              [name]="iconName!" 
+              [size]="iconSize || 'md'"
+              [color]="iconColor || '#000000'"
+              class="messagebox-icon">
+    </lib-icon>
+    <p class="message-text" [innerHTML]="sanitizedMessage"></p>
+  </div>
 </div>
