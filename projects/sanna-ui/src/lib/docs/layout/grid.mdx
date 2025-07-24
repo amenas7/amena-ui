@@ -1,0 +1,324 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="LAYOUT/Grid" />
+
+# Sistema de Grid
+
+Usa nuestro poderoso sistema de grid mobile-first basado en flexbox para construir layouts de todas las formas y tamaños gracias a un sistema de doce columnas, seis niveles responsivos por defecto, variables Sass y mixins, y docenas de clases predefinidas.
+
+## Ejemplo
+
+El sistema de grid de Bootstrap usa una serie de contenedores, filas y columnas para layout y alineación de contenido. Está construido con flexbox y es completamente responsivo. Abajo hay un ejemplo y una explicación detallada de cómo funciona el sistema de grid.
+
+**¿Nuevo o no familiarizado con flexbox?** Lee esta guía de flexbox de CSS Tricks para antecedentes, terminología, guías y fragmentos de código.
+
+ Columna
+
+ Columna
+
+ Columna
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      Columna
+    </div>
+    <div class="col">
+      Columna
+    </div>
+    <div class="col">
+      Columna
+    </div>
+  </div>
+</div>
+```
+
+El ejemplo anterior crea tres columnas de ancho igual a través de todos los dispositivos y viewports usando nuestras clases de grid predefinidas. Esas columnas están centradas en la página con el contenedor padre `.container`.
+
+## Cómo funciona
+
+Desglosándolo, así es como funciona el sistema de grid:
+
+- **Nuestro grid soporta seis breakpoints responsivos.** Los breakpoints están basados en media queries de `min-width`, lo que significa que afectan ese breakpoint y todos los que están por encima (ej., `.col-sm-4` se aplica a `sm`, `md`, `lg`, `xl`, y `xxl`). Esto significa que puedes controlar el tamaño y comportamiento de contenedores y columnas por cada breakpoint.
+- **Los contenedores centran y rellenan horizontalmente tu contenido.** Usa `.container` para un ancho responsivo en píxeles, `.container-fluid` para `width: 100%` a través de todos los viewports y dispositivos, o un contenedor responsivo (ej., `.container-md`) para una combinación de anchos fluidos y en píxeles.
+- **Las filas son wrappers para columnas.** Cada columna tiene `padding` horizontal (llamado gutter) para controlar el espacio entre ellas. Este `padding` es luego contrarrestado en las filas con márgenes negativos para asegurar que el contenido en tus columnas esté visualmente alineado por el lado izquierdo. Las filas también soportan clases modificadoras para aplicar uniformemente el tamaño de columnas y clases de gutter para cambiar el espaciado de tu contenido.
+- **Las columnas son increíblemente flexibles.** Hay 12 columnas de plantilla disponibles por fila, permitiéndote crear diferentes combinaciones de elementos que abarcan cualquier número de columnas. Las clases de columna indican el número de columnas de plantilla a abarcar (ej., `col-4` abarca cuatro). Los `width`s se establecen en porcentajes para que siempre tengas el mismo tamaño relativo.
+- **Los gutters también son responsivos y personalizables.** Las clases de gutter están disponibles a través de todos los breakpoints, con todos los mismos tamaños que nuestro espaciado de margin y padding. Cambia gutters horizontales con clases `.gx-*`, gutters verticales con `.gy-*`, o todos los gutters con clases `.g-*`. `.g-0` también está disponible para remover gutters.
+- **Variables Sass, maps y mixins potencian el grid.** Si no quieres usar las clases de grid predefinidas en Bootstrap, puedes usar el Sass fuente de nuestro grid para crear el tuyo propio con markup más semántico. También incluimos algunas propiedades CSS personalizadas para consumir estas variables Sass para mayor flexibilidad.
+
+Ten en cuenta las limitaciones y bugs alrededor de flexbox, como la incapacidad de usar algunos elementos HTML como contenedores flex.
+
+## Opciones de Grid
+
+El sistema de grid de Bootstrap puede adaptarse a través de todos los seis breakpoints por defecto, y cualquier breakpoint que personalices. Los seis niveles de grid por defecto son los siguientes:
+
+- Extra small (xs)
+- Small (sm)
+- Medium (md)
+- Large (lg)
+- Extra large (xl)
+- Extra extra large (xxl)
+
+Como se notó arriba, cada uno de estos breakpoints tiene su propio contenedor, prefijo de clase único y modificadores. Aquí está cómo cambia el grid a través de estos breakpoints:
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Extra small &lt;576px</th>
+      <th>Small ≥576px</th>
+      <th>Medium ≥768px</th>
+      <th>Large ≥992px</th>
+      <th>X-Large ≥1200px</th>
+      <th>XX-Large ≥1400px</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ancho máximo del contenedor</td>
+      <td>Ninguno (auto)</td>
+      <td>540px</td>
+      <td>720px</td>
+      <td>960px</td>
+      <td>1140px</td>
+      <td>1320px</td>
+    </tr>
+    <tr>
+      <td>Prefijo de clase</td>
+      <td><code>.col-</code></td>
+      <td><code>.col-sm-</code></td>
+      <td><code>.col-md-</code></td>
+      <td><code>.col-lg-</code></td>
+      <td><code>.col-xl-</code></td>
+      <td><code>.col-xxl-</code></td>
+    </tr>
+    <tr>
+      <td>Número de columnas</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Ancho del gutter</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+      <td>1.5rem (.75rem en cada lado)</td>
+    </tr>
+    <tr>
+      <td>Anidable</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <td>Ordenamiento de columnas</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+      <td>Sí</td>
+    </tr>
+  </tbody>
+</table>
+
+## Columnas de auto-layout
+
+### Equal-width
+
+Por ejemplo, aquí hay dos layouts de grid que se aplican a cada dispositivo y viewport, desde `xs` hasta `xxl`. Agrega cualquier número de clases `.col` de ancho unitario para cada elemento, y cada columna será igual de ancha.
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+</div>
+```
+
+### Establecer el ancho de una columna
+
+Auto-layout para flexbox grid columns también significa que puedes establecer el ancho de una columna y hacer que las columnas hermanas se ajusten automáticamente alrededor de ella. Puedes usar clases de grid predefinidas (como se muestra abajo), técnicas de grid de ancho mixto, o anchos inline.
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col">1 of 3</div>
+    <div class="col-6">2 of 3 (wider)</div>
+    <div class="col">3 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col">1 of 3</div>
+    <div class="col-5">2 of 3 (wider)</div>
+    <div class="col">3 of 3</div>
+  </div>
+</div>
+```
+
+### Contenido de ancho variable
+
+Usa `col-{breakpoint}-auto` para que las columnas se dimensionen basándose en el ancho natural de su contenido.
+
+```html
+<div class="container text-center">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">1 of 3</div>
+    <div class="col-md-auto">Variable width content</div>
+    <div class="col col-lg-2">3 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col">1 of 3</div>
+    <div class="col-md-auto">Variable width content</div>
+    <div class="col col-lg-2">3 of 3</div>
+  </div>
+</div>
+```
+
+## Responsive classes
+
+Los breakpoints de Bootstrap se basan en media queries de `min-width` y escalan hacia arriba, lo que significa que una clase aplicada a un breakpoint más pequeño afectará también a los breakpoints más grandes (a menos que se sobrescriba por una clase específica de breakpoint más grande).
+
+### All breakpoints
+
+Para grids que son los mismos desde el breakpoint más pequeño hasta el más grande, usa las clases `.col` y `.col-*`. Especifica un número cuando necesites una columna de ancho particularmente dimensionada; de lo contrario, siente la libertad de usar `.col`.
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+  <div class="row">
+    <div class="col-8">col-8</div>
+    <div class="col-4">col-4</div>
+  </div>
+</div>
+```
+
+### Stacked to horizontal
+
+Usa una combinación de clases de grid y breakpoints para crear layouts responsivos dinámicos.
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-8">.col-md-8</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  </div>
+  <div class="row">
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  </div>
+  <div class="row">
+    <div class="col-6">.col-6</div>
+    <div class="col-6">.col-6</div>
+  </div>
+</div>
+```
+
+### Mix and match
+
+No quieres que tus columnas simplemente se apilen en algunos breakpoints? Usa una combinación de diferentes clases para cada breakpoint según sea necesario.
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  </div>
+  <div class="row">
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+  </div>
+  <div class="row">
+    <div class="col-6">.col-6</div>
+    <div class="col-6">.col-6</div>
+  </div>
+</div>
+```
+
+### Columnas de fila
+
+Usa la clase `.row-cols-*` para crear layouts responsivos donde cada fila tiene un número específico de columnas.
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-2">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-3">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-auto">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-4">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-4">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col-6">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```
+
+```html
+<div class="container text-center">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+    <div class="col">Columna</div>
+  </div>
+</div>
+```

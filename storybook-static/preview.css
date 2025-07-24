@@ -1,0 +1,21 @@
+/* Sobrescribir Bootstrap para usar Plus Jakarta Sans */
+:root {
+  --bs-body-font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  --bs-font-sans-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Aplicar Plus Jakarta Sans a todos los elementos */
+* {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Elementos específicos de Bootstrap */
+body, .btn, .form-control, .form-select, .navbar, .nav, .dropdown-menu, 
+.card, .modal, .alert, .badge, .breadcrumb, .pagination {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.sbdocs pre, .sbdocs code {
+  font-size: 0.9rem !important;
+  line-height: 1.6;
+} 
