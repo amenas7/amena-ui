@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { SaInputComponent } from './sa-input.component';
 
 const meta: Meta<SaInputComponent> = {
-  title: 'COMPONENTES/Forms/Input',
+  title: 'Componentes/Forms/Input',
   component: SaInputComponent,
   parameters: {
     layout: 'centered',

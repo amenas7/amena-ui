@@ -11,6 +11,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "AllSizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex flex-column gap-2\">\n        <sa-heading size=\"xs\" weight=\"bold\" children=\"Tamaño XS\"></sa-heading>\n        <sa-heading size=\"sm\" weight=\"bold\" children=\"Tamaño SM\"></sa-heading>\n        <sa-heading size=\"md\" weight=\"bold\" children=\"Tamaño MD\"></sa-heading>\n        <sa-heading size=\"lg\" weight=\"bold\" children=\"Tamaño LG\"></sa-heading>\n        <sa-heading size=\"xl\" weight=\"bold\" children=\"Tamaño XL\"></sa-heading>\n        <sa-heading size=\"2xl\" weight=\"bold\" children=\"Tamaño 2XL\"></sa-heading>\n        <sa-heading size=\"3xl\" weight=\"bold\" children=\"Tamaño 3XL\"></sa-heading>\n        <sa-heading size=\"4xl\" weight=\"bold\" children=\"Tamaño 4XL\"></sa-heading>\n        <sa-heading size=\"5xl\" weight=\"bold\" children=\"Tamaño 5XL\"></sa-heading>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
                 "name": "Basic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -39,6 +49,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Fecha de nacimiento',\n    type: 'date'\n  }\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    children: 'Encabezado por defecto',\n    size: 'md',\n    weight: 'bold'\n  },\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Default",
@@ -194,11 +214,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaHeadingComponent>",
+                "defaultValue": "{\n  title: 'Componentes/Typografia/Heading',\n  component: SaHeadingComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    children: {\n      control: 'text',\n      description: 'El texto del encabezado'\n    },\n    size: {\n      control: 'select',\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\n      description: 'El tamaño del encabezado'\n    },\n    weight: {\n      control: 'select',\n      options: ['bold', 'regular', 'light', 'semibold'],\n      description: 'El peso de la fuente (grosor)'\n    },\n    mt: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-top del encabezado (usando clases Bootstrap mt-0 a mt-5 y mt-auto)'\n    },\n    mb: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-bottom del encabezado (usando clases Bootstrap mb-0 a mb-5 y mb-auto)'\n    },\n    mr: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-right del encabezado (usando clases Bootstrap me-0 a me-5 y me-auto)'\n    },\n    ml: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-left del encabezado (usando clases Bootstrap ms-0 a ms-5 y ms-auto)'\n    }\n  }\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaInputComponent>",
-                "defaultValue": "{\n  title: 'COMPONENTES/Forms/Input',\n  component: SaInputComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\n      description: 'Tipo de input HTML'\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Tamaño del input'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'warning', 'error'],\n      description: 'Variante visual del input'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Estado deshabilitado'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Estado de solo lectura'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Mostrar toggle de contraseña'\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Icono izquierdo (clase CSS)'\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Icono derecho (clase CSS)'\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda'\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error'\n    }\n  }\n}"
+                "defaultValue": "{\n  title: 'Componentes/Forms/Input',\n  component: SaInputComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\n      description: 'Tipo de input HTML'\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Tamaño del input'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'warning', 'error'],\n      description: 'Variante visual del input'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Estado deshabilitado'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Estado de solo lectura'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Mostrar toggle de contraseña'\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Icono izquierdo (clase CSS)'\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Icono derecho (clase CSS)'\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda'\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error'\n    }\n  }\n}"
             },
             {
                 "name": "Number",
@@ -457,6 +487,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<SaHeadingComponent>",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<SaInputComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
@@ -467,6 +508,38 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts": [
+                {
+                    "name": "AllSizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex flex-column gap-2\">\n        <sa-heading size=\"xs\" weight=\"bold\" children=\"Tamaño XS\"></sa-heading>\n        <sa-heading size=\"sm\" weight=\"bold\" children=\"Tamaño SM\"></sa-heading>\n        <sa-heading size=\"md\" weight=\"bold\" children=\"Tamaño MD\"></sa-heading>\n        <sa-heading size=\"lg\" weight=\"bold\" children=\"Tamaño LG\"></sa-heading>\n        <sa-heading size=\"xl\" weight=\"bold\" children=\"Tamaño XL\"></sa-heading>\n        <sa-heading size=\"2xl\" weight=\"bold\" children=\"Tamaño 2XL\"></sa-heading>\n        <sa-heading size=\"3xl\" weight=\"bold\" children=\"Tamaño 3XL\"></sa-heading>\n        <sa-heading size=\"4xl\" weight=\"bold\" children=\"Tamaño 4XL\"></sa-heading>\n        <sa-heading size=\"5xl\" weight=\"bold\" children=\"Tamaño 5XL\"></sa-heading>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    children: 'Encabezado por defecto',\n    size: 'md',\n    weight: 'bold'\n  },\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SaHeadingComponent>",
+                    "defaultValue": "{\n  title: 'Componentes/Typografia/Heading',\n  component: SaHeadingComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    children: {\n      control: 'text',\n      description: 'El texto del encabezado'\n    },\n    size: {\n      control: 'select',\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\n      description: 'El tamaño del encabezado'\n    },\n    weight: {\n      control: 'select',\n      options: ['bold', 'regular', 'light', 'semibold'],\n      description: 'El peso de la fuente (grosor)'\n    },\n    mt: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-top del encabezado (usando clases Bootstrap mt-0 a mt-5 y mt-auto)'\n    },\n    mb: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-bottom del encabezado (usando clases Bootstrap mb-0 a mb-5 y mb-auto)'\n    },\n    mr: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-right del encabezado (usando clases Bootstrap me-0 a me-5 y me-auto)'\n    },\n    ml: {\n      control: 'select',\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\n      description: 'Margin-left del encabezado (usando clases Bootstrap ms-0 a ms-5 y ms-auto)'\n    }\n  }\n}"
+                }
+            ],
             "projects/sanna-ui/src/lib/sa-icon/sa-icon.stories.ts": [
                 {
                     "name": "Basic",
@@ -578,7 +651,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SaInputComponent>",
-                    "defaultValue": "{\n  title: 'COMPONENTES/Forms/Input',\n  component: SaInputComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\n      description: 'Tipo de input HTML'\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Tamaño del input'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'warning', 'error'],\n      description: 'Variante visual del input'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Estado deshabilitado'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Estado de solo lectura'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Mostrar toggle de contraseña'\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Icono izquierdo (clase CSS)'\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Icono derecho (clase CSS)'\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda'\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error'\n    }\n  }\n}"
+                    "defaultValue": "{\n  title: 'Componentes/Forms/Input',\n  component: SaInputComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\n      description: 'Tipo de input HTML'\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Tamaño del input'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'warning', 'error'],\n      description: 'Variante visual del input'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Estado deshabilitado'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Estado de solo lectura'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Mostrar toggle de contraseña'\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Icono izquierdo (clase CSS)'\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Icono derecho (clase CSS)'\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda'\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error'\n    }\n  }\n}"
                 },
                 {
                     "name": "Number",
@@ -921,6 +994,19 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaHeadingComponent>",
+                    "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
                 {
                     "name": "Story",
@@ -1227,6 +1313,46 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "WithIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllSizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -10,3 +10,4 @@ export * from './lib/sa-button/sa-button.component';
 export * from './lib/sa-icon/sa-icon.component';
 export * from './lib/sa-messagebox/sa-messagebox.component';
 export * from './lib/forms/sa-input/sa-input.component';
+export * from './lib/sa-heading/sa-heading.component';

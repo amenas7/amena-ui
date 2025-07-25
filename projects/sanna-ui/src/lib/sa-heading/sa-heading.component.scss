@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+// Estilos adicionales para mejorar la apariencia
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Estilos específicos para diferentes tamaños
+.fs-6 {
+  font-size: 0.875rem !important;
+}
+
+.fs-5 {
+  font-size: 1rem !important;
+}
+
+.fs-4 {
+  font-size: 1.125rem !important;
+}
+
+.fs-3 {
+  font-size: 1.25rem !important;
+}
+
+.fs-2 {
+  font-size: 1.5rem !important;
+}
+
+.fs-1 {
+  font-size: 1.75rem !important;
+}
+
+.display-6 {
+  font-size: 2rem !important;
+}
+
+.display-5 {
+  font-size: 2.5rem !important;
+}
+
+.display-4 {
+  font-size: 3rem !important;
+}
