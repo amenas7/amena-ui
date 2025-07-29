@@ -324,21 +324,21 @@
                 "name": "Sizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaButtonComponent>",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></sa-button>`\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Sizes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-icon/sa-icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaIconComponent>",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\n        \n        <div class=\"d-flex gap-4 align-items-center\">\n          <div class=\"text-center\">\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></sa-icon>\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\n          </div>\n          <div class=\"text-center\">\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></sa-icon>\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\n          </div>\n          <div class=\"text-center\">\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></sa-icon>\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></sa-icon>\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></sa-icon>`\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "Sizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaButtonComponent>",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 align-items-center\">\n        <sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></sa-button>`\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Small",

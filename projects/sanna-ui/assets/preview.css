@@ -18,4 +18,212 @@ body, .btn, .form-control, .form-select, .navbar, .nav, .dropdown-menu,
 .sbdocs pre, .sbdocs code {
   font-size: 0.9rem !important;
   line-height: 1.6;
+}
+
+/* Estilos para código inline en color magenta */
+.sbdocs code {
+  color: #e91e63 !important;
+  background-color: #f8f9fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* Estilos para ejemplos de Bootstrap - Colores oficiales exactos */
+.bd-example {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem -0.75rem;
+  border: solid #f8f9fa;
+  border-width: 0.2rem 0 0;
+}
+
+.bd-example::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.bd-example-row {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: none;
+}
+
+.bg-purpl_ {
+  background-color: #E9E0FD !important;
+}
+
+.bd-example-row-flex-cols-simple .row {
+  background-color: #E9E0FD !important;
+}
+
+/* Fondo de fila con color oficial de Bootstrap */
+.bd-example-row-flex-cols .row {
+  min-height: 10rem;
+  background-color: #E9E0FD !important;
+}
+
+.bd-example-row-flex-cols .row .purpl_ {
+  background-color: #D6C6FB !important;
+}
+
+/* Sobrescribir cualquier clase border que pueda interferir */
+.bd-example-row .border {
+  border: 1px solid rgba(86, 61, 124, 0.2) !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+/* Estilos para contenedores y filas */
+.container {
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+
+.col {
+  flex: 1 0 0%;
+  padding: 0.75rem;
+}
+
+/* Clases de alineación */
+.align-items-start {
+  align-items: flex-start !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.align-items-end {
+  align-items: flex-end !important;
+}
+
+.align-self-start {
+  align-self: flex-start !important;
+}
+
+.align-self-center {
+  align-self: center !important;
+}
+
+.align-self-end {
+  align-self: flex-end !important;
+}
+
+/* Clases de justificación */
+.justify-content-start {
+  justify-content: flex-start !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+
+.justify-content-around {
+  justify-content: space-around !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly !important;
+}
+
+/* Clases de columnas específicas */
+.col-4 {
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+/* Clases de offset */
+.offset-md-4 {
+  margin-left: 33.33333333%;
+}
+
+.offset-md-3 {
+  margin-left: 25%;
+}
+
+.offset-md-0 {
+  margin-left: 0;
+}
+
+.offset-sm-2 {
+  margin-left: 16.66666667%;
+}
+
+.offset-lg-0 {
+  margin-left: 0;
+}
+
+/* Clases de margen */
+.ms-auto {
+  margin-left: auto !important;
+}
+
+.me-auto {
+  margin-right: auto !important;
+}
+
+.ms-md-auto {
+  margin-left: auto !important;
+}
+
+/* Clases de padding */
+.p-3 {
+  padding: 1rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.ms-md-3 {
+  margin-left: 1rem !important;
+}
+
+/* Clases de utilidades */
+.w-100 {
+  width: 100% !important;
+}
+
+.float-md-end {
+  float: right !important;
+}
+
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
 } 
