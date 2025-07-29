@@ -1,0 +1,129 @@
+.sa-table-container {
+  .table {
+    margin-bottom: 0;
+    
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      
+      .bi {
+        font-size: 0.875rem;
+        margin-left: 0.5rem;
+        opacity: 0.5;
+      }
+      
+      &:hover .bi {
+        opacity: 1;
+      }
+    }
+    
+    th.sortable.active .bi {
+      opacity: 1;
+      color: var(--bs-primary);
+    }
+  }
+  
+  .pagination {
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    
+    .page-link {
+      border-radius: 0.375rem;
+      border: 1px solid var(--bs-border-color);
+      min-width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      
+      &:hover {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        color: white;
+      }
+    }
+    
+    .page-item.active .page-link {
+      background-color: var(--bs-primary);
+      border-color: var(--bs-primary);
+    }
+    
+    .page-item.disabled .page-link {
+      color: var(--bs-secondary);
+      pointer-events: none;
+      background-color: transparent;
+      border-color: var(--bs-border-color);
+    }
+    
+    // Asegurar que los botones de navegación no se corten
+    .page-item:first-child .page-link,
+    .page-item:last-child .page-link {
+      min-width: 2.5rem;
+    }
+  }
+  
+  .form-select {
+    border-radius: 0.375rem;
+    border: 1px solid var(--bs-border-color);
+    
+    &:focus {
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+    }
+  }
+  
+  .table-responsive {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .table-bordered {
+    border: 1px solid var(--bs-border-color);
+  }
+  
+  .table-striped > tbody > tr:nth-of-type(odd) > td {
+    background-color: rgba(var(--bs-light-rgb), 0.5);
+  }
+  
+  .table-hover > tbody > tr:hover > td {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .sa-table-container {
+    .d-flex.justify-content-between {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .pagination {
+      .page-link {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+        min-width: 2.25rem;
+        height: 2.25rem;
+      }
+    }
+  }
+}
+
+// Asegurar que el contenedor de paginación tenga suficiente espacio
+nav[aria-label="Navegación de páginas"] {
+  overflow: visible;
+  padding: 0.5rem 0;
+  
+  .pagination {
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -11,6 +11,7 @@ import { SaMessageboxComponent } from './sa-messagebox/sa-messagebox.component';
 import { SaInputComponent } from './forms/sa-input/sa-input.component';
 import { SaHeadingComponent } from './sa-heading/sa-heading.component';
 import { SaTextComponent } from './sa-text/sa-text.component';
+import { SaTableComponent } from './sa-table/sa-table.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SaTextComponent } from './sa-text/sa-text.component';
     SaInputComponent,
     SaHeadingComponent,
     SaTextComponent,
+    SaTableComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,9 @@ import { SaTextComponent } from './sa-text/sa-text.component';
     SaIconComponent,
     SaMessageboxComponent,
     SaInputComponent,
-    SaHeadingComponent
+    SaHeadingComponent,
+    SaTextComponent,
+    SaTableComponent
   ]
 })
 export class SannaUiModule { }
