@@ -117,3 +117,214 @@ Cambia la alineación vertical con cualquiera de las clases responsive `align-it
   </div>
 </div>
 ```
+
+O cambia la alineación de cada columna individualmente con cualquiera de las clases responsive `.align-self-*`.
+
+<div class="bd-example m-0 border-0 bd-example-row bd-example-row-flex-cols">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col align-self-start border purpl_">
+        <span>Una de tres columnas</span>
+      </div>
+      <div class="col align-self-center border purpl_">
+        <span>Una de tres columnas</span>
+      </div>
+      <div class="col align-self-end border purpl_">
+        <span>Una de tres columnas</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col align-self-start">
+      <span>Una de tres columnas</span>
+    </div>
+    <div class="col align-self-center">
+      <span>Una de tres columnas</span>
+    </div>
+    <div class="col align-self-end">
+      <span>Una de tres columnas</span>
+    </div>
+  </div>
+</div>
+```
+
+### Alineación horizontal
+
+Cambia la alineación horizontal con cualquiera de las clases responsive `justify-content-*`.
+
+<div class="bd-example m-0 border-0 bd-example-row">
+  <div class="container text-center">
+    <div class="row justify-content-start mb-3">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+    <div class="row justify-content-center mb-3">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+    <div class="row justify-content-end mb-3">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+    <div class="row justify-content-around mb-3">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+    <div class="row justify-content-between mb-3">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+    <div class="row justify-content-evenly">
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+      <div class="col-4 border bg-purpl_">
+        Una de dos columnas
+      </div>
+    </div>
+  </div>
+</div>
+
+```html
+<div class="container text-center">
+  <div class="row justify-content-start">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-evenly">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+</div>
+```
+
+### Envoltura de columnas
+
+Ahora puedes crear filas con columnas que se envuelven automáticamente a la siguiente línea. Simplemente especifica el ancho de las columnas que deseas que se envuelvan.
+
+<div class="bd-example m-0 border-0 bd-example-row bd-example-row-flex-cols">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-9 border purpl_">
+        <span>col-9</span>
+      </div>
+      <div class="col-4 border purpl_">
+        <span>col-4<br />Como 9 + 4 = 13 &gt; 12, esta columna de 4 unidades se envuelve como una unidad completa en la siguiente línea.</span>
+      </div>
+      <div class="col-6 border purpl_">
+        <span>col-6<br />Las columnas siguientes continúan a lo largo de la nueva línea.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col-9">col-9</div>
+    <div class="col-4">col-4<br />Como 9 + 4 = 13 &gt; 12, esta columna de 4 unidades se envuelve como una unidad completa en la siguiente línea.</div>
+    <div class="col-6">col-6<br />Las columnas siguientes continúan a lo largo de la nueva línea.</div>
+  </div>
+</div>
+```
+
+### Saltos de columna
+
+Rompe las columnas a una nueva línea con `.w-100`. donde quieras ajustar tus columnas a una nueva línea. Normalmente esto se logra con múltiples `.row` , pero no todos los métodos de implementación pueden tener en cuenta esto.
+
+<div class="bd-example m-0 border-0 bd-example-row">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-6 col-sm-3 border bg-purpl_ pt-2 mb-2 d-flex align-items-center justify-content-center pb-2">
+        <div>.col-6 .col-sm-3</div>
+      </div>
+      <div class="col-6 col-sm-3 border bg-purpl_ pt-2 mb-2 d-flex align-items-center justify-content-center pb-2">
+        <div>.col-6 .col-sm-3</div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-6 col-sm-3 border bg-purpl_ pt-2 mb-2 d-flex align-items-center justify-content-center pb-2">.col-6 .col-sm-3</div>
+      <div class="col-6 col-sm-3 border bg-purpl_ pt-2 mb-2 d-flex align-items-center justify-content-center pb-2">.col-6 .col-sm-3</div>
+    </div>
+  </div>
+</div>
+
+```html
+<div class="container text-center">
+  <div class="row">
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+    <!-- Force next columns to break to new line -->
+    <div class="w-100"></div>
+
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+  </div>
+</div>
+```
