@@ -42,7 +42,7 @@ import {
   faPencil
 } from '@fortawesome/free-solid-svg-icons';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -95,6 +95,8 @@ export class SaButtonComponent {
       'minus': faMinus,
       'check': faCheck,
       'times': faTimes,
+      'x': faTimes,
+      'close': faTimes,
       'eye': faEye,
       'eye-slash': faEyeSlash,
       'lock': faLock,
@@ -136,6 +138,8 @@ export class SaButtonComponent {
       'fas fa-minus': faMinus,
       'fas fa-check': faCheck,
       'fas fa-times': faTimes,
+      'fas fa-x': faTimes,
+      'fas fa-close': faTimes,
       'fas fa-eye': faEye,
       'fas fa-eye-slash': faEyeSlash,
       'fas fa-lock': faLock,

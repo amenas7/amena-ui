@@ -64,21 +64,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaMessageboxComponent>",
-                "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    children: 'Encabezado por defecto',\n    size: 'md',\n    weight: 'bold'\n  },\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaMessageboxComponent>",
+                "defaultValue": "{\n  args: {\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Default",
