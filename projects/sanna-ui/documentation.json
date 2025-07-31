@@ -31,16 +31,6 @@
                 "defaultValue": "{\n  args: {\n    name: 'pencil',\n    color: '#5BAB5F',\n    size: 'md',\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Icono básico con todas las propiedades personalizables. Modifica los controles para ver cómo cambia dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
-                "name": "Bordered",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    bordered: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con bordes visibles para mejor separación visual.'\n      }\n    }\n  }\n}"
-            },
-            {
                 "name": "Colors",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -51,14 +41,14 @@
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"p-4\">\n        <h4 class=\"mb-3\">Diferentes Colores</h4>\n        <p class=\"text-muted mb-3\">Ejemplos con colores hexadecimales:</p>\n        \n        <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n          <sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\n          <sa-icon name=\"star\" color=\"#ffd700\" size=\"md\"></sa-icon>\n          <sa-icon name=\"check\" color=\"#28a745\" size=\"md\"></sa-icon>\n          <sa-icon name=\"info\" color=\"#17a2b8\" size=\"md\"></sa-icon>\n          <sa-icon name=\"exclamation-triangle\" color=\"#ffc107\" size=\"md\"></sa-icon>\n          <sa-icon name=\"times\" color=\"#dc3545\" size=\"md\"></sa-icon>\n          <sa-icon name=\"user\" color=\"#6c757d\" size=\"md\"></sa-icon>\n          <sa-icon name=\"home\" color=\"#007bff\" size=\"md\"></sa-icon>\n          <sa-icon name=\"pencil\" color=\"#17a2b8\" size=\"md\"></sa-icon>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\n<sa-icon name=\"star\" color=\"#ffd700\" size=\"md\"></sa-icon>\n<sa-icon name=\"check\" color=\"#28a745\" size=\"md\"></sa-icon>\n<sa-icon name=\"info\" color=\"#17a2b8\" size=\"md\"></sa-icon>\n<sa-icon name=\"exclamation-triangle\" color=\"#ffc107\" size=\"md\"></sa-icon>\n<sa-icon name=\"times\" color=\"#dc3545\" size=\"md\"></sa-icon>\n<sa-icon name=\"user\" color=\"#6c757d\" size=\"md\"></sa-icon>\n<sa-icon name=\"home\" color=\"#007bff\" size=\"md\"></sa-icon>`\n      }\n    }\n  }\n}"
             },
             {
-                "name": "CustomEmptyMessage",
+                "name": "ConHover",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: [],\n    emptyMessage: 'No se encontraron registros que coincidan con los criterios de búsqueda'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con mensaje personalizado cuando no hay datos.'\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    hover: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con efecto hover en las filas. Las cabeceras mantienen su estilo sin hover.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Date",
@@ -74,16 +64,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    children: 'Encabezado por defecto',\n    size: 'md',\n    weight: 'bold'\n  },\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -94,11 +74,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    children: 'Encabezado por defecto',\n    size: 'md',\n    weight: 'bold'\n  },\n  parameters: {\n    docs: {\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    columns: sampleColumns,\n    data: sampleData,\n    itemsPerPage: 10,\n    showPagination: true,\n    showItemsPerPage: true,\n    showTotal: true,\n    striped: true,\n    hover: true,\n    bordered: false,\n    responsive: true,\n    sortable: true,\n    loading: false,\n    emptyMessage: 'No hay datos disponibles'\n  }\n}"
+                "defaultValue": "{\n  args: {\n    columns: sampleColumns,\n    data: sampleData\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con el diseño moderno por defecto: sin hover y border-radius.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Default",
@@ -138,7 +128,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: []\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin datos, mostrando el mensaje de estado vacío.'\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: []\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin datos, mostrando el mensaje de estado vacío con el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Error",
@@ -231,16 +221,6 @@
                 "defaultValue": "{\n  args: {\n    label: 'Input grande',\n    placeholder: 'Tamaño grande',\n    size: 'large'\n  }\n}"
             },
             {
-                "name": "LargeDataset",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `Usuario ${i + 1}`,\n      email: `usuario${i + 1}@email.com`,\n      age: 20 + (i % 40),\n      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas'][i % 4],\n      salary: 35000 + (i * 1000)\n    })),\n    itemsPerPage: 25\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con un conjunto grande de datos para demostrar la paginación.'\n      }\n    }\n  }\n}"
-            },
-            {
                 "name": "Loading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -248,7 +228,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    loading: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla en estado de carga con spinner.'\n      }\n    }\n  }\n}"
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    loading: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla en estado de carga con spinner, manteniendo el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "LongMessage",
@@ -271,6 +251,16 @@
                 "defaultValue": "{\n  args: {\n    label: 'Input mediano',\n    placeholder: 'Tamaño mediano',\n    size: 'medium'\n  }\n}"
             },
             {
+                "name": "MensajePersonalizado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: [],\n    emptyMessage: 'No se encontraron registros que coincidan con los criterios de búsqueda'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con mensaje personalizado cuando no hay datos, manteniendo el diseño moderno.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -288,7 +278,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaTableComponent>",
-                "defaultValue": "{\n  title: 'Components/SaTable',\n  component: SaTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n# SaTable Component\n\nUn componente de tabla responsive con paginación, ordenamiento y múltiples opciones de configuración.\n\n## Características\n\n- **Responsive**: Se adapta automáticamente a diferentes tamaños de pantalla\n- **Paginación**: Navegación entre páginas con información de totales\n- **Ordenamiento**: Capacidad de ordenar columnas (configurable por columna)\n- **Personalizable**: Múltiples opciones de configuración para adaptarse a diferentes necesidades\n- **Bootstrap 5**: Utiliza las clases de Bootstrap 5 para un diseño consistente\n\n## Props\n\n| Prop | Tipo | Default | Descripción |\n|------|------|---------|-------------|\n| columns | TableColumn[] | [] | Configuración de las columnas |\n| data | TableData[] | [] | Datos a mostrar en la tabla |\n| itemsPerPage | number | 10 | Elementos por página |\n| showPagination | boolean | true | Mostrar controles de paginación |\n| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |\n| showTotal | boolean | true | Mostrar información de totales |\n| striped | boolean | true | Filas alternadas |\n| hover | boolean | true | Efecto hover en las filas |\n| bordered | boolean | false | Bordes en la tabla |\n| responsive | boolean | true | Tabla responsive |\n| sortable | boolean | true | Habilitar ordenamiento |\n| loading | boolean | false | Estado de carga |\n| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |\n\n## Events\n\n| Event | Tipo | Descripción |\n|-------|------|-------------|\n| pageChange | number | Emitido cuando cambia la página |\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\n| sortChange | {column: string, direction: 'asc' \\| 'desc'} | Emitido cuando se ordena una columna |\n\n## Interfaces\n\n### TableColumn\n\\`\\`\\`typescript\ninterface TableColumn {\n  key: string;           // Clave única de la columna\n  label: string;         // Etiqueta visible\n  sortable?: boolean;    // Si la columna es ordenable\n  width?: string;        // Ancho de la columna (opcional)\n}\n\\`\\`\\`\n\n### TableData\n\\`\\`\\`typescript\ninterface TableData {\n  [key: string]: any;    // Objeto con los datos de la fila\n}\n\\`\\`\\`\n        `\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    columns: {\n      control: 'object',\n      description: 'Configuración de las columnas de la tabla'\n    },\n    data: {\n      control: 'object',\n      description: 'Datos a mostrar en la tabla'\n    },\n    itemsPerPage: {\n      control: { type: 'number', min: 1, max: 100 },\n      description: 'Número de elementos por página'\n    },\n    showPagination: {\n      control: 'boolean',\n      description: 'Mostrar controles de paginación'\n    },\n    showItemsPerPage: {\n      control: 'boolean',\n      description: 'Mostrar selector de elementos por página'\n    },\n    showTotal: {\n      control: 'boolean',\n      description: 'Mostrar información de totales'\n    },\n    striped: {\n      control: 'boolean',\n      description: 'Aplicar filas alternadas'\n    },\n    hover: {\n      control: 'boolean',\n      description: 'Aplicar efecto hover'\n    },\n    bordered: {\n      control: 'boolean',\n      description: 'Mostrar bordes en la tabla'\n    },\n    responsive: {\n      control: 'boolean',\n      description: 'Hacer la tabla responsive'\n    },\n    sortable: {\n      control: 'boolean',\n      description: 'Habilitar ordenamiento'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Mostrar estado de carga'\n    },\n    emptyMessage: {\n      control: 'text',\n      description: 'Mensaje cuando no hay datos'\n    }\n  }\n}"
+                "defaultValue": "{\n  title: 'Componentes/SaTable',\n  component: SaTableComponent,\n  parameters: {\n    layout: 'padded',\n    controls: {\n      expanded: true,\n      sort: 'requiredFirst'\n    },\n    docs: {\n      description: {\n        component: `\nUn componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.\n\n## Estilos Personalizados\n\n### Tabla\n- **Border-radius**: Esquinas redondeadas (0.375rem)\n- **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores\n- **Filas**: Fondo blanco puro, sin efectos hover por defecto\n- **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true\n\n### Paginación\n- **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)\n- **Colores activos**: Fondo verde (#5BAB5F) con texto blanco\n\n## Props\n\n| Prop | Tipo | Default | Descripción |\n|------|------|---------|-------------|\n| columns | TableColumn[] | [] | Configuración de las columnas |\n| data | TableData[] | [] | Datos a mostrar en la tabla |\n| itemsPerPage | number | 10 | Elementos por página |\n| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |\n| showPagination | boolean | true | Mostrar controles de paginación |\n| showTotal | boolean | true | Mostrar información de totales |\n\n| hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |\n\n| responsive | boolean | true | Tabla responsive |\n\n| loading | boolean | false | Estado de carga |\n| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |\n\n## Events\n\n| Event | Tipo | Descripción |\n|-------|------|-------------|\n| pageChange | number | Emitido cuando cambia la página |\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\n\n## Interfaces\n\n### TableColumn\n\\`\\`\\`typescript\ninterface TableColumn {\n  key: string;           // Clave única de la columna\n  label: string;         // Etiqueta visible\n  width?: string;        // Ancho de la columna (opcional)\n}\n\\`\\`\\`\n\n### TableData\n\\`\\`\\`typescript\ninterface TableData {\n  [key: string]: any;    // Objeto con los datos de la fila\n}\n\\`\\`\\`\n\n## Uso\n\n\\`\\`\\`typescript\nimport { SaTableComponent } from '@sanna-ui/sa-table';\n\n// Configuración básica\nconst columns: TableColumn[] = [\n  { key: 'id', label: 'ID', sortable: true },\n  { key: 'name', label: 'Nombre', sortable: true },\n  { key: 'email', label: 'Email' }\n];\n\nconst data: TableData[] = [\n  { id: 1, name: 'Juan Pérez', email: 'juan@email.com' },\n  { id: 2, name: 'María García', email: 'maria@email.com' }\n];\n\n// En el template\n<sa-table \n  [columns]=\"columns\" \n  [data]=\"data\"\n  [itemsPerPage]=\"10\"\n  [showPagination]=\"true\"\n  [bordered]=\"true\"\n  (pageChange)=\"onPageChange($event)\">\n</sa-table>\n\\`\\`\\`\n        `\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    columns: {\n      control: { type: 'object' },\n      description: 'Configuración de las columnas de la tabla'\n    },\n    data: {\n      control: { type: 'object' },\n      description: 'Datos a mostrar en la tabla'\n    },\n    itemsPerPage: {\n      control: { type: 'number', min: 1, max: 100 },\n      description: 'Número de elementos por página'\n    },\n    showItemsPerPage: {\n      control: { type: 'boolean' },\n      description: 'Mostrar selector de elementos por página'\n    },\n    showPagination: {\n      control: { type: 'boolean' },\n      description: 'Mostrar controles de paginación'\n    },\n    showTotal: {\n      control: { type: 'boolean' },\n      description: 'Mostrar información de totales'\n    },\n\n    hover: {\n      control: { type: 'boolean' },\n      description: 'Aplicar efecto hover (deshabilitado por defecto)'\n    },\n\n    responsive: {\n      control: { type: 'boolean' },\n      description: 'Hacer la tabla responsive'\n    },\n\n    loading: {\n      control: { type: 'boolean' },\n      description: 'Mostrar estado de carga'\n    },\n    emptyMessage: {\n      control: { type: 'text' },\n      description: 'Mensaje cuando no hay datos'\n    }\n  },\n  args: {\n    // Valores por defecto para todos los stories\n    hover: false,\n    responsive: true,\n    loading: false,\n    showItemsPerPage: true,\n    showPagination: true,\n    showTotal: true,\n    itemsPerPage: 10,\n    emptyMessage: 'No hay datos disponibles'\n  }\n}"
             },
             {
                 "name": "meta",
@@ -301,56 +291,6 @@
                 "defaultValue": "{\n  title: 'Componentes/Forms/Input',\n  component: SaInputComponent,\n  parameters: {\n    layout: 'centered',\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\n      description: 'Tipo de input HTML'\n    },\n    size: {\n      control: 'select',\n      options: ['small', 'medium', 'large'],\n      description: 'Tamaño del input'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'warning', 'error'],\n      description: 'Variante visual del input'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Estado deshabilitado'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Estado de solo lectura'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Mostrar toggle de contraseña'\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Icono izquierdo (clase CSS)'\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Icono derecho (clase CSS)'\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda'\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error'\n    }\n  }\n}"
             },
             {
-                "name": "MobileOptimized",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5\n  },\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página.'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "NoHover",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    hover: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin efecto hover en las filas.'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "NoPagination",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    showPagination: false,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin paginación, mostrando todos los datos.'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "NoSorting",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    sortable: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con ordenamiento deshabilitado.'\n      }\n    }\n  }\n}"
-            },
-            {
-                "name": "NoStripes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Default.args,\n    striped: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin filas alternadas para un diseño más limpio.'\n      }\n    }\n  }\n}"
-            },
-            {
                 "name": "Number",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -359,6 +299,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Edad',\n    placeholder: 'Ingresa tu edad',\n    type: 'number',\n    minlength: 1,\n    maxlength: 3\n  }\n}"
+            },
+            {
+                "name": "OptimizadaMovil",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5\n  },\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página, manteniendo el diseño responsive.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "PasswordWithToggle",
@@ -411,6 +361,16 @@
                 "defaultValue": "{\n  args: {\n    label: 'Campo de solo lectura',\n    placeholder: 'Valor fijo',\n    readonly: true,\n    value: 'Este valor no se puede modificar'\n  }\n}"
             },
             {
+                "name": "RegistrosGrandes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `Usuario ${i + 1}`,\n      email: `usuario${i + 1}@email.com`,\n      age: 20 + (i % 40),\n      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas'][i % 4],\n      salary: 35000 + (i * 1000)\n    })),\n    itemsPerPage: 25\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con un conjunto grande de datos para demostrar la paginación'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
                 "name": "sampleColumns",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -459,6 +419,16 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\n  args: {\n    message: 'Mensaje corto',\n    isFullWidth: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Mensaje corto que mantiene su tamaño natural. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "SinPaginacion",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    showPagination: false,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin paginación, mostrando todos los datos con el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Sizes",
@@ -529,6 +499,16 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaButtonComponent>",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "VistaCompacta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Vista compacta de la tabla con paginación simplificada, ideal para espacios reducidos. Sin selector de elementos por página y sin información de totales.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
                 "name": "Warning",
@@ -735,24 +715,14 @@
             ],
             "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts": [
                 {
-                    "name": "Bordered",
+                    "name": "ConHover",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    bordered: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con bordes visibles para mejor separación visual.'\n      }\n    }\n  }\n}"
-                },
-                {
-                    "name": "CustomEmptyMessage",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: [],\n    emptyMessage: 'No se encontraron registros que coincidan con los criterios de búsqueda'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con mensaje personalizado cuando no hay datos.'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    hover: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con efecto hover en las filas. Las cabeceras mantienen su estilo sin hover.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Default",
@@ -762,7 +732,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    columns: sampleColumns,\n    data: sampleData,\n    itemsPerPage: 10,\n    showPagination: true,\n    showItemsPerPage: true,\n    showTotal: true,\n    striped: true,\n    hover: true,\n    bordered: false,\n    responsive: true,\n    sortable: true,\n    loading: false,\n    emptyMessage: 'No hay datos disponibles'\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    columns: sampleColumns,\n    data: sampleData\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con el diseño moderno por defecto: sin hover y border-radius.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Empty",
@@ -772,17 +742,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: []\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin datos, mostrando el mensaje de estado vacío.'\n      }\n    }\n  }\n}"
-                },
-                {
-                    "name": "LargeDataset",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `Usuario ${i + 1}`,\n      email: `usuario${i + 1}@email.com`,\n      age: 20 + (i % 40),\n      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas'][i % 4],\n      salary: 35000 + (i * 1000)\n    })),\n    itemsPerPage: 25\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con un conjunto grande de datos para demostrar la paginación.'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: []\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin datos, mostrando el mensaje de estado vacío con el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "Loading",
@@ -792,7 +752,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    loading: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla en estado de carga con spinner.'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    loading: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla en estado de carga con spinner, manteniendo el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "MensajePersonalizado",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: [],\n    emptyMessage: 'No se encontraron registros que coincidan con los criterios de búsqueda'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con mensaje personalizado cuando no hay datos, manteniendo el diseño moderno.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "meta",
@@ -802,57 +772,27 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SaTableComponent>",
-                    "defaultValue": "{\n  title: 'Components/SaTable',\n  component: SaTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n# SaTable Component\n\nUn componente de tabla responsive con paginación, ordenamiento y múltiples opciones de configuración.\n\n## Características\n\n- **Responsive**: Se adapta automáticamente a diferentes tamaños de pantalla\n- **Paginación**: Navegación entre páginas con información de totales\n- **Ordenamiento**: Capacidad de ordenar columnas (configurable por columna)\n- **Personalizable**: Múltiples opciones de configuración para adaptarse a diferentes necesidades\n- **Bootstrap 5**: Utiliza las clases de Bootstrap 5 para un diseño consistente\n\n## Props\n\n| Prop | Tipo | Default | Descripción |\n|------|------|---------|-------------|\n| columns | TableColumn[] | [] | Configuración de las columnas |\n| data | TableData[] | [] | Datos a mostrar en la tabla |\n| itemsPerPage | number | 10 | Elementos por página |\n| showPagination | boolean | true | Mostrar controles de paginación |\n| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |\n| showTotal | boolean | true | Mostrar información de totales |\n| striped | boolean | true | Filas alternadas |\n| hover | boolean | true | Efecto hover en las filas |\n| bordered | boolean | false | Bordes en la tabla |\n| responsive | boolean | true | Tabla responsive |\n| sortable | boolean | true | Habilitar ordenamiento |\n| loading | boolean | false | Estado de carga |\n| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |\n\n## Events\n\n| Event | Tipo | Descripción |\n|-------|------|-------------|\n| pageChange | number | Emitido cuando cambia la página |\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\n| sortChange | {column: string, direction: 'asc' \\| 'desc'} | Emitido cuando se ordena una columna |\n\n## Interfaces\n\n### TableColumn\n\\`\\`\\`typescript\ninterface TableColumn {\n  key: string;           // Clave única de la columna\n  label: string;         // Etiqueta visible\n  sortable?: boolean;    // Si la columna es ordenable\n  width?: string;        // Ancho de la columna (opcional)\n}\n\\`\\`\\`\n\n### TableData\n\\`\\`\\`typescript\ninterface TableData {\n  [key: string]: any;    // Objeto con los datos de la fila\n}\n\\`\\`\\`\n        `\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    columns: {\n      control: 'object',\n      description: 'Configuración de las columnas de la tabla'\n    },\n    data: {\n      control: 'object',\n      description: 'Datos a mostrar en la tabla'\n    },\n    itemsPerPage: {\n      control: { type: 'number', min: 1, max: 100 },\n      description: 'Número de elementos por página'\n    },\n    showPagination: {\n      control: 'boolean',\n      description: 'Mostrar controles de paginación'\n    },\n    showItemsPerPage: {\n      control: 'boolean',\n      description: 'Mostrar selector de elementos por página'\n    },\n    showTotal: {\n      control: 'boolean',\n      description: 'Mostrar información de totales'\n    },\n    striped: {\n      control: 'boolean',\n      description: 'Aplicar filas alternadas'\n    },\n    hover: {\n      control: 'boolean',\n      description: 'Aplicar efecto hover'\n    },\n    bordered: {\n      control: 'boolean',\n      description: 'Mostrar bordes en la tabla'\n    },\n    responsive: {\n      control: 'boolean',\n      description: 'Hacer la tabla responsive'\n    },\n    sortable: {\n      control: 'boolean',\n      description: 'Habilitar ordenamiento'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Mostrar estado de carga'\n    },\n    emptyMessage: {\n      control: 'text',\n      description: 'Mensaje cuando no hay datos'\n    }\n  }\n}"
+                    "defaultValue": "{\n  title: 'Componentes/SaTable',\n  component: SaTableComponent,\n  parameters: {\n    layout: 'padded',\n    controls: {\n      expanded: true,\n      sort: 'requiredFirst'\n    },\n    docs: {\n      description: {\n        component: `\nUn componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.\n\n## Estilos Personalizados\n\n### Tabla\n- **Border-radius**: Esquinas redondeadas (0.375rem)\n- **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores\n- **Filas**: Fondo blanco puro, sin efectos hover por defecto\n- **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true\n\n### Paginación\n- **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)\n- **Colores activos**: Fondo verde (#5BAB5F) con texto blanco\n\n## Props\n\n| Prop | Tipo | Default | Descripción |\n|------|------|---------|-------------|\n| columns | TableColumn[] | [] | Configuración de las columnas |\n| data | TableData[] | [] | Datos a mostrar en la tabla |\n| itemsPerPage | number | 10 | Elementos por página |\n| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |\n| showPagination | boolean | true | Mostrar controles de paginación |\n| showTotal | boolean | true | Mostrar información de totales |\n\n| hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |\n\n| responsive | boolean | true | Tabla responsive |\n\n| loading | boolean | false | Estado de carga |\n| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |\n\n## Events\n\n| Event | Tipo | Descripción |\n|-------|------|-------------|\n| pageChange | number | Emitido cuando cambia la página |\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\n\n## Interfaces\n\n### TableColumn\n\\`\\`\\`typescript\ninterface TableColumn {\n  key: string;           // Clave única de la columna\n  label: string;         // Etiqueta visible\n  width?: string;        // Ancho de la columna (opcional)\n}\n\\`\\`\\`\n\n### TableData\n\\`\\`\\`typescript\ninterface TableData {\n  [key: string]: any;    // Objeto con los datos de la fila\n}\n\\`\\`\\`\n\n## Uso\n\n\\`\\`\\`typescript\nimport { SaTableComponent } from '@sanna-ui/sa-table';\n\n// Configuración básica\nconst columns: TableColumn[] = [\n  { key: 'id', label: 'ID', sortable: true },\n  { key: 'name', label: 'Nombre', sortable: true },\n  { key: 'email', label: 'Email' }\n];\n\nconst data: TableData[] = [\n  { id: 1, name: 'Juan Pérez', email: 'juan@email.com' },\n  { id: 2, name: 'María García', email: 'maria@email.com' }\n];\n\n// En el template\n<sa-table \n  [columns]=\"columns\" \n  [data]=\"data\"\n  [itemsPerPage]=\"10\"\n  [showPagination]=\"true\"\n  [bordered]=\"true\"\n  (pageChange)=\"onPageChange($event)\">\n</sa-table>\n\\`\\`\\`\n        `\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    columns: {\n      control: { type: 'object' },\n      description: 'Configuración de las columnas de la tabla'\n    },\n    data: {\n      control: { type: 'object' },\n      description: 'Datos a mostrar en la tabla'\n    },\n    itemsPerPage: {\n      control: { type: 'number', min: 1, max: 100 },\n      description: 'Número de elementos por página'\n    },\n    showItemsPerPage: {\n      control: { type: 'boolean' },\n      description: 'Mostrar selector de elementos por página'\n    },\n    showPagination: {\n      control: { type: 'boolean' },\n      description: 'Mostrar controles de paginación'\n    },\n    showTotal: {\n      control: { type: 'boolean' },\n      description: 'Mostrar información de totales'\n    },\n\n    hover: {\n      control: { type: 'boolean' },\n      description: 'Aplicar efecto hover (deshabilitado por defecto)'\n    },\n\n    responsive: {\n      control: { type: 'boolean' },\n      description: 'Hacer la tabla responsive'\n    },\n\n    loading: {\n      control: { type: 'boolean' },\n      description: 'Mostrar estado de carga'\n    },\n    emptyMessage: {\n      control: { type: 'text' },\n      description: 'Mensaje cuando no hay datos'\n    }\n  },\n  args: {\n    // Valores por defecto para todos los stories\n    hover: false,\n    responsive: true,\n    loading: false,\n    showItemsPerPage: true,\n    showPagination: true,\n    showTotal: true,\n    itemsPerPage: 10,\n    emptyMessage: 'No hay datos disponibles'\n  }\n}"
                 },
                 {
-                    "name": "MobileOptimized",
+                    "name": "OptimizadaMovil",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5\n  },\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página.'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5\n  },\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página, manteniendo el diseño responsive.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
-                    "name": "NoHover",
+                    "name": "RegistrosGrandes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    hover: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin efecto hover en las filas.'\n      }\n    }\n  }\n}"
-                },
-                {
-                    "name": "NoPagination",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    showPagination: false,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin paginación, mostrando todos los datos.'\n      }\n    }\n  }\n}"
-                },
-                {
-                    "name": "NoSorting",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    sortable: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con ordenamiento deshabilitado.'\n      }\n    }\n  }\n}"
-                },
-                {
-                    "name": "NoStripes",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    striped: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin filas alternadas para un diseño más limpio.'\n      }\n    }\n  }\n}"
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `Usuario ${i + 1}`,\n      email: `usuario${i + 1}@email.com`,\n      age: 20 + (i % 40),\n      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas'][i % 4],\n      salary: 35000 + (i * 1000)\n    })),\n    itemsPerPage: 25\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con un conjunto grande de datos para demostrar la paginación'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 },
                 {
                     "name": "sampleColumns",
@@ -873,6 +813,26 @@
                     "deprecationMessage": "",
                     "type": "TableData[]",
                     "defaultValue": "[\n  { id: 1, name: 'Juan Pérez', email: 'juan.perez@email.com', age: 28, department: 'Desarrollo', salary: 45000 },\n  { id: 2, name: 'María García', email: 'maria.garcia@email.com', age: 32, department: 'Diseño', salary: 52000 },\n  { id: 3, name: 'Carlos López', email: 'carlos.lopez@email.com', age: 25, department: 'Marketing', salary: 38000 },\n  { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@email.com', age: 29, department: 'Ventas', salary: 41000 },\n  { id: 5, name: 'Luis Martínez', email: 'luis.martinez@email.com', age: 35, department: 'Desarrollo', salary: 48000 },\n  { id: 6, name: 'Sofia Herrera', email: 'sofia.herrera@email.com', age: 27, department: 'Diseño', salary: 44000 },\n  { id: 7, name: 'Diego Silva', email: 'diego.silva@email.com', age: 31, department: 'Marketing', salary: 39000 },\n  { id: 8, name: 'Carmen Vega', email: 'carmen.vega@email.com', age: 33, department: 'Ventas', salary: 43000 },\n  { id: 9, name: 'Roberto Torres', email: 'roberto.torres@email.com', age: 26, department: 'Desarrollo', salary: 42000 },\n  { id: 10, name: 'Patricia Ruiz', email: 'patricia.ruiz@email.com', age: 30, department: 'Diseño', salary: 46000 },\n  { id: 11, name: 'Fernando Morales', email: 'fernando.morales@email.com', age: 34, department: 'Marketing', salary: 40000 },\n  { id: 12, name: 'Isabel Castro', email: 'isabel.castro@email.com', age: 28, department: 'Ventas', salary: 42000 }\n]"
+                },
+                {
+                    "name": "SinPaginacion",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    showPagination: false,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla sin paginación, mostrando todos los datos con el diseño personalizado.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
+                },
+                {
+                    "name": "VistaCompacta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    ...Default.args,\n    itemsPerPage: 5,\n    showItemsPerPage: false,\n    showTotal: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Vista compacta de la tabla con paginación simplificada, ideal para espacios reducidos. Sin selector de elementos por página y sin información de totales.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
@@ -1828,17 +1788,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Bordered",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "CustomEmptyMessage",
+                "name": "ConHover",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1868,7 +1818,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LargeDataset",
+                "name": "Loading",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1878,7 +1828,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Loading",
+                "name": "MensajePersonalizado",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1898,7 +1848,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "MobileOptimized",
+                "name": "OptimizadaMovil",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1908,37 +1858,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "NoHover",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "NoPagination",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "NoSorting",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "NoStripes",
+                "name": "RegistrosGrandes",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1959,6 +1879,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "sampleData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SinPaginacion",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "VistaCompacta",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

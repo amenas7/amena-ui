@@ -6,18 +6,26 @@ const meta: Meta<SaTableComponent> = {
   component: SaTableComponent,
   parameters: {
     layout: 'padded',
+    controls: {
+      expanded: true,
+      sort: 'requiredFirst'
+    },
     docs: {
       description: {
         component: `
-Un componente de tabla responsive con paginación, ordenamiento y múltiples opciones de configuración.
+Un componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.
 
-## Características
+## Estilos Personalizados
 
-- **Responsive**: Se adapta automáticamente a diferentes tamaños de pantalla
-- **Paginación**: Navegación entre páginas con información de totales
-- **Ordenamiento**: Capacidad de ordenar columnas (configurable por columna)
-- **Personalizable**: Múltiples opciones de configuración para adaptarse a diferentes necesidades
-- **Bootstrap 5**: Utiliza las clases de Bootstrap 5 para un diseño consistente
+### Tabla
+- **Border-radius**: Esquinas redondeadas (0.375rem)
+- **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores
+- **Filas**: Fondo blanco puro, sin efectos hover por defecto
+- **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true
+
+### Paginación
+- **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)
+- **Colores activos**: Fondo verde (#5BAB5F) con texto blanco
 
 ## Props
 
@@ -26,14 +34,14 @@ Un componente de tabla responsive con paginación, ordenamiento y múltiples opc
 | columns | TableColumn[] | [] | Configuración de las columnas |
 | data | TableData[] | [] | Datos a mostrar en la tabla |
 | itemsPerPage | number | 10 | Elementos por página |
-| showPagination | boolean | true | Mostrar controles de paginación |
 | showItemsPerPage | boolean | true | Mostrar selector de elementos por página |
+| showPagination | boolean | true | Mostrar controles de paginación |
 | showTotal | boolean | true | Mostrar información de totales |
-| striped | boolean | true | Filas alternadas |
-| hover | boolean | true | Efecto hover en las filas |
-| bordered | boolean | false | Bordes en la tabla |
+
+| hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |
+
 | responsive | boolean | true | Tabla responsive |
-| sortable | boolean | true | Habilitar ordenamiento |
+
 | loading | boolean | false | Estado de carga |
 | emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
 
@@ -43,7 +51,6 @@ Un componente de tabla responsive con paginación, ordenamiento y múltiples opc
 |-------|------|-------------|
 | pageChange | number | Emitido cuando cambia la página |
 | itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |
-| sortChange | {column: string, direction: 'asc' \| 'desc'} | Emitido cuando se ordena una columna |
 
 ## Interfaces
 
@@ -52,7 +59,6 @@ Un componente de tabla responsive con paginación, ordenamiento y múltiples opc
 interface TableColumn {
   key: string;           // Clave única de la columna
   label: string;         // Etiqueta visible
-  sortable?: boolean;    // Si la columna es ordenable
   width?: string;        // Ancho de la columna (opcional)
 }
 \`\`\`
@@ -63,6 +69,34 @@ interface TableData {
   [key: string]: any;    // Objeto con los datos de la fila
 }
 \`\`\`
+
+## Uso
+
+\`\`\`typescript
+import { SaTableComponent } from '@sanna-ui/sa-table';
+
+// Configuración básica
+const columns: TableColumn[] = [
+  { key: 'id', label: 'ID', sortable: true },
+  { key: 'name', label: 'Nombre', sortable: true },
+  { key: 'email', label: 'Email' }
+];
+
+const data: TableData[] = [
+  { id: 1, name: 'Juan Pérez', email: 'juan@email.com' },
+  { id: 2, name: 'María García', email: 'maria@email.com' }
+];
+
+// En el template
+<sa-table 
+  [columns]="columns" 
+  [data]="data"
+  [itemsPerPage]="10"
+  [showPagination]="true"
+  [bordered]="true"
+  (pageChange)="onPageChange($event)">
+</sa-table>
+\`\`\`
         `
       }
     }
@@ -70,57 +104,59 @@ interface TableData {
   tags: ['autodocs'],
   argTypes: {
     columns: {
-      control: 'object',
+      control: { type: 'object' },
       description: 'Configuración de las columnas de la tabla'
     },
     data: {
-      control: 'object',
+      control: { type: 'object' },
       description: 'Datos a mostrar en la tabla'
     },
     itemsPerPage: {
       control: { type: 'number', min: 1, max: 100 },
       description: 'Número de elementos por página'
     },
-    showPagination: {
-      control: 'boolean',
-      description: 'Mostrar controles de paginación'
-    },
     showItemsPerPage: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Mostrar selector de elementos por página'
     },
+    showPagination: {
+      control: { type: 'boolean' },
+      description: 'Mostrar controles de paginación'
+    },
     showTotal: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Mostrar información de totales'
     },
-    striped: {
-      control: 'boolean',
-      description: 'Aplicar filas alternadas'
-    },
+
     hover: {
-      control: 'boolean',
-      description: 'Aplicar efecto hover'
+      control: { type: 'boolean' },
+      description: 'Aplicar efecto hover (deshabilitado por defecto)'
     },
-    bordered: {
-      control: 'boolean',
-      description: 'Mostrar bordes en la tabla'
-    },
+
     responsive: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Hacer la tabla responsive'
     },
-    sortable: {
-      control: 'boolean',
-      description: 'Habilitar ordenamiento'
-    },
+
     loading: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Mostrar estado de carga'
     },
     emptyMessage: {
-      control: 'text',
+      control: { type: 'text' },
       description: 'Mensaje cuando no hay datos'
     }
+  },
+  args: {
+    // Valores por defecto para todos los stories
+    hover: false,
+    responsive: true,
+    loading: false,
+    showItemsPerPage: true,
+    showPagination: true,
+    showTotal: true,
+    itemsPerPage: 10,
+    emptyMessage: 'No hay datos disponibles'
   }
 };
 
@@ -155,78 +191,40 @@ const sampleColumns: TableColumn[] = [
 export const Default: Story = {
   args: {
     columns: sampleColumns,
-    data: sampleData,
-    itemsPerPage: 10,
-    showPagination: true,
-    showItemsPerPage: true,
-    showTotal: true,
-    striped: true,
-    hover: true,
-    bordered: false,
-    responsive: true,
-    sortable: true,
-    loading: false,
-    emptyMessage: 'No hay datos disponibles'
-  }
-};
-
-export const Bordered: Story = {
-  args: {
-    ...Default.args,
-    bordered: true
+    data: sampleData
   },
   parameters: {
     docs: {
       description: {
-        story: 'Tabla con bordes visibles para mejor separación visual.'
+        story: 'Tabla con el diseño moderno por defecto: sin hover y border-radius.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
 };
 
-export const NoStripes: Story = {
+export const ConHover: Story = {
   args: {
     ...Default.args,
-    striped: false
+    hover: true
   },
   parameters: {
     docs: {
       description: {
-        story: 'Tabla sin filas alternadas para un diseño más limpio.'
+        story: 'Tabla con efecto hover en las filas. Las cabeceras mantienen su estilo sin hover.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
 };
 
-export const NoHover: Story = {
-  args: {
-    ...Default.args,
-    hover: false
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Tabla sin efecto hover en las filas.'
-      }
-    }
-  }
-};
 
-export const NoSorting: Story = {
-  args: {
-    ...Default.args,
-    sortable: false
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Tabla con ordenamiento deshabilitado.'
-      }
-    }
-  }
-};
 
-export const NoPagination: Story = {
+export const SinPaginacion: Story = {
   args: {
     ...Default.args,
     showPagination: false,
@@ -236,7 +234,10 @@ export const NoPagination: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla sin paginación, mostrando todos los datos.'
+        story: 'Tabla sin paginación, mostrando todos los datos con el diseño personalizado.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
@@ -250,7 +251,10 @@ export const Loading: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla en estado de carga con spinner.'
+        story: 'Tabla en estado de carga con spinner, manteniendo el diseño personalizado.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
@@ -264,13 +268,16 @@ export const Empty: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla sin datos, mostrando el mensaje de estado vacío.'
+        story: 'Tabla sin datos, mostrando el mensaje de estado vacío con el diseño personalizado.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
 };
 
-export const CustomEmptyMessage: Story = {
+export const MensajePersonalizado: Story = {
   args: {
     ...Default.args,
     data: [],
@@ -279,13 +286,16 @@ export const CustomEmptyMessage: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla con mensaje personalizado cuando no hay datos.'
+        story: 'Tabla con mensaje personalizado cuando no hay datos, manteniendo el diseño moderno.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
 };
 
-export const LargeDataset: Story = {
+export const RegistrosGrandes: Story = {
   args: {
     ...Default.args,
     data: Array.from({ length: 100 }, (_, i) => ({
@@ -301,13 +311,16 @@ export const LargeDataset: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla con un conjunto grande de datos para demostrar la paginación.'
+        story: 'Tabla con un conjunto grande de datos para demostrar la paginación'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
 };
 
-export const MobileOptimized: Story = {
+export const OptimizadaMovil: Story = {
   args: {
     ...Default.args,
     itemsPerPage: 5
@@ -318,8 +331,30 @@ export const MobileOptimized: Story = {
     },
     docs: {
       description: {
-        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página.'
+        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página, manteniendo el diseño responsive.'
+      },
+      source: {
+        type: 'dynamic'
       }
     }
   }
-}; 
+};
+
+export const VistaCompacta: Story = {
+  args: {
+    ...Default.args,
+    itemsPerPage: 5,
+    showItemsPerPage: false,
+    showTotal: false
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Vista compacta de la tabla con paginación simplificada, ideal para espacios reducidos. Sin selector de elementos por página y sin información de totales.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};

@@ -32,11 +32,8 @@ export class SaTableComponent implements OnInit, OnChanges {
   @Input() showPagination: boolean = true;
   @Input() showItemsPerPage: boolean = true;
   @Input() showTotal: boolean = true;
-  @Input() striped: boolean = true;
-  @Input() hover: boolean = true;
-  @Input() bordered: boolean = false;
+  @Input() hover: boolean = false;
   @Input() responsive: boolean = true;
-  @Input() sortable: boolean = true;
   @Input() loading: boolean = false;
   @Input() emptyMessage: string = 'No hay datos disponibles';
 
@@ -57,6 +54,12 @@ export class SaTableComponent implements OnInit, OnChanges {
 
   paginatedData: TableData[] = [];
   itemsPerPageOptions: number[] = [5, 10, 25, 50, 100];
+
+
+
+
+
+
 
   ngOnInit(): void {
     this.updatePagination();
@@ -115,7 +118,7 @@ export class SaTableComponent implements OnInit, OnChanges {
   }
 
   onSort(column: string): void {
-    if (!this.sortable || !this.columns.find(col => col.key === column)?.sortable) {
+    if (!this.columns.find(col => col.key === column)?.sortable) {
       return;
     }
 

@@ -122,7 +122,13 @@ import {
   faBolt,
   faTicketAlt,
   faSitemap,
-  faBath
+  faBath,
+  faAngleDoubleLeft,
+  faAngleLeft,
+  faAngleRight,
+  faAngleDoubleRight,
+  faChevronLeft,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
 // Agregar todos los iconos a la librería
@@ -249,5 +255,11 @@ library.add(
   faBolt,
   faTicketAlt,
   faSitemap,
-  faBath
+  faBath,
+  faAngleDoubleLeft,
+  faAngleLeft,
+  faAngleRight,
+  faAngleDoubleRight,
+  faChevronLeft,
+  faChevronRight
 ); 
