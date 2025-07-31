@@ -1,0 +1,42 @@
+import { Component, Input } from '@angular/core';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/platform-browser";
+import * as i2 from "@angular/common";
+import * as i3 from "../sa-icon/sa-icon.component";
+export class SaMessageboxComponent {
+    sanitizer;
+    message = '';
+    isFullWidth = false;
+    type = 'success';
+    iconName;
+    iconSize;
+    iconColor;
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    get sanitizedMessage() {
+        return this.sanitizer.bypassSecurityTrustHtml(this.message);
+    }
+    get hasIcon() {
+        return !!this.iconName;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaMessageboxComponent, deps: [{ token: i1.DomSanitizer }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaMessageboxComponent, selector: "sa-messagebox", inputs: { message: "message", isFullWidth: "isFullWidth", type: "type", iconName: "iconName", iconSize: "iconSize", iconColor: "iconColor" }, ngImport: i0, template: "<div class=\"messagebox\" \n     [class.full-width]=\"isFullWidth\"\n     [class.success]=\"type === 'success'\"\n     [class.warning]=\"type === 'warning'\"\n     [class.error]=\"type === 'error'\"\n     [class.info]=\"type === 'info'\">\n  <div class=\"messagebox-content\">\n    <sa-icon *ngIf=\"hasIcon\" \n              [name]=\"iconName!\" \n              [size]=\"iconSize || 'md'\"\n              [color]=\"iconColor || '#000000'\"\n              class=\"messagebox-icon\">\n    </sa-icon>\n    <p class=\"message-text\" [innerHTML]=\"sanitizedMessage\"></p>\n  </div>\n</div>\n", styles: [".messagebox{position:relative;font-size:14px;display:flex;flex-direction:row;border:.0625rem solid rgb(14,144,105);border-radius:8px;width:22.9375rem;line-height:1.28;min-height:auto;padding:1rem;background-color:#f2fdf9;color:#006e4a;margin:8px 0;transition:all .3s ease}.messagebox.full-width{width:100%;min-height:auto}.messagebox.success{background-color:#f2fdf9;color:#006e4a;border:.0625rem solid rgb(14,144,105)}.messagebox.warning{background-color:#fff9f2;color:#9f5200;border:.0625rem solid rgb(217,125,8)}.messagebox.error{background-color:#fff2f7;color:#9f003c;border:.0625rem solid rgb(226,8,103)}.messagebox.info{background-color:#f2f7ff;color:#003d9f;border:.0625rem solid rgb(0,100,209)}.messagebox .messagebox-content{display:flex;align-items:center;gap:.75rem;width:100%}.messagebox .messagebox-icon{flex-shrink:0}.messagebox .message-text{margin:0!important;padding:0;text-align:left;word-wrap:break-word;flex:1;line-height:1.28}\n"], dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: i3.SaIconComponent, selector: "sa-icon", inputs: ["name", "color", "size"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaMessageboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-messagebox', template: "<div class=\"messagebox\" \n     [class.full-width]=\"isFullWidth\"\n     [class.success]=\"type === 'success'\"\n     [class.warning]=\"type === 'warning'\"\n     [class.error]=\"type === 'error'\"\n     [class.info]=\"type === 'info'\">\n  <div class=\"messagebox-content\">\n    <sa-icon *ngIf=\"hasIcon\" \n              [name]=\"iconName!\" \n              [size]=\"iconSize || 'md'\"\n              [color]=\"iconColor || '#000000'\"\n              class=\"messagebox-icon\">\n    </sa-icon>\n    <p class=\"message-text\" [innerHTML]=\"sanitizedMessage\"></p>\n  </div>\n</div>\n", styles: [".messagebox{position:relative;font-size:14px;display:flex;flex-direction:row;border:.0625rem solid rgb(14,144,105);border-radius:8px;width:22.9375rem;line-height:1.28;min-height:auto;padding:1rem;background-color:#f2fdf9;color:#006e4a;margin:8px 0;transition:all .3s ease}.messagebox.full-width{width:100%;min-height:auto}.messagebox.success{background-color:#f2fdf9;color:#006e4a;border:.0625rem solid rgb(14,144,105)}.messagebox.warning{background-color:#fff9f2;color:#9f5200;border:.0625rem solid rgb(217,125,8)}.messagebox.error{background-color:#fff2f7;color:#9f003c;border:.0625rem solid rgb(226,8,103)}.messagebox.info{background-color:#f2f7ff;color:#003d9f;border:.0625rem solid rgb(0,100,209)}.messagebox .messagebox-content{display:flex;align-items:center;gap:.75rem;width:100%}.messagebox .messagebox-icon{flex-shrink:0}.messagebox .message-text{margin:0!important;padding:0;text-align:left;word-wrap:break-word;flex:1;line-height:1.28}\n"] }]
+        }], ctorParameters: () => [{ type: i1.DomSanitizer }], propDecorators: { message: [{
+                type: Input
+            }], isFullWidth: [{
+                type: Input
+            }], type: [{
+                type: Input
+            }], iconName: [{
+                type: Input
+            }], iconSize: [{
+                type: Input
+            }], iconColor: [{
+                type: Input
+            }] } });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2EtbWVzc2FnZWJveC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9zYW5uYS11aS9zcmMvbGliL3NhLW1lc3NhZ2Vib3gvc2EtbWVzc2FnZWJveC5jb21wb25lbnQudHMiLCIuLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9zYW5uYS11aS9zcmMvbGliL3NhLW1lc3NhZ2Vib3gvc2EtbWVzc2FnZWJveC5jb21wb25lbnQuaHRtbCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSxNQUFNLGVBQWUsQ0FBQzs7Ozs7QUFRakQsTUFBTSxPQUFPLHFCQUFxQjtJQVFaO0lBUFgsT0FBTyxHQUFXLEVBQUUsQ0FBQztJQUNyQixXQUFXLEdBQVksS0FBSyxDQUFDO0lBQzdCLElBQUksR0FBNkMsU0FBUyxDQUFDO0lBQzNELFFBQVEsQ0FBVTtJQUNsQixRQUFRLENBQXNCO0lBQzlCLFNBQVMsQ0FBVTtJQUU1QixZQUFvQixTQUF1QjtRQUF2QixjQUFTLEdBQVQsU0FBUyxDQUFjO0lBQUcsQ0FBQztJQUUvQyxJQUFJLGdCQUFnQjtRQUNsQixPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsdUJBQXVCLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQzlELENBQUM7SUFFRCxJQUFJLE9BQU87UUFDVCxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDO0lBQ3pCLENBQUM7d0dBaEJVLHFCQUFxQjs0RkFBckIscUJBQXFCLG1NQ1JsQyw0a0JBZ0JBOzs0RkRSYSxxQkFBcUI7a0JBTGpDLFNBQVM7K0JBQ0UsZUFBZTtpRkFLaEIsT0FBTztzQkFBZixLQUFLO2dCQUNHLFdBQVc7c0JBQW5CLEtBQUs7Z0JBQ0csSUFBSTtzQkFBWixLQUFLO2dCQUNHLFFBQVE7c0JBQWhCLEtBQUs7Z0JBQ0csUUFBUTtzQkFBaEIsS0FBSztnQkFDRyxTQUFTO3NCQUFqQixLQUFLIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBJbnB1dCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgRG9tU2FuaXRpemVyLCBTYWZlSHRtbCB9IGZyb20gJ0Bhbmd1bGFyL3BsYXRmb3JtLWJyb3dzZXInO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdzYS1tZXNzYWdlYm94JyxcbiAgdGVtcGxhdGVVcmw6ICcuL3NhLW1lc3NhZ2Vib3guY29tcG9uZW50Lmh0bWwnLFxuICBzdHlsZVVybDogJy4vc2EtbWVzc2FnZWJveC5jb21wb25lbnQuc2Nzcydcbn0pXG5leHBvcnQgY2xhc3MgU2FNZXNzYWdlYm94Q29tcG9uZW50IHtcbiAgQElucHV0KCkgbWVzc2FnZTogc3RyaW5nID0gJyc7XG4gIEBJbnB1dCgpIGlzRnVsbFdpZHRoOiBib29sZWFuID0gZmFsc2U7XG4gIEBJbnB1dCgpIHR5cGU6ICdzdWNjZXNzJyB8ICd3YXJuaW5nJyB8ICdlcnJvcicgfCAnaW5mbycgPSAnc3VjY2Vzcyc7XG4gIEBJbnB1dCgpIGljb25OYW1lPzogc3RyaW5nO1xuICBASW5wdXQoKSBpY29uU2l6ZT86ICdzbScgfCAnbWQnIHwgJ2xnJztcbiAgQElucHV0KCkgaWNvbkNvbG9yPzogc3RyaW5nO1xuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgc2FuaXRpemVyOiBEb21TYW5pdGl6ZXIpIHt9XG5cbiAgZ2V0IHNhbml0aXplZE1lc3NhZ2UoKTogU2FmZUh0bWwge1xuICAgIHJldHVybiB0aGlzLnNhbml0aXplci5ieXBhc3NTZWN1cml0eVRydXN0SHRtbCh0aGlzLm1lc3NhZ2UpO1xuICB9XG5cbiAgZ2V0IGhhc0ljb24oKTogYm9vbGVhbiB7XG4gICAgcmV0dXJuICEhdGhpcy5pY29uTmFtZTtcbiAgfVxufVxuIiwiPGRpdiBjbGFzcz1cIm1lc3NhZ2Vib3hcIiBcbiAgICAgW2NsYXNzLmZ1bGwtd2lkdGhdPVwiaXNGdWxsV2lkdGhcIlxuICAgICBbY2xhc3Muc3VjY2Vzc109XCJ0eXBlID09PSAnc3VjY2VzcydcIlxuICAgICBbY2xhc3Mud2FybmluZ109XCJ0eXBlID09PSAnd2FybmluZydcIlxuICAgICBbY2xhc3MuZXJyb3JdPVwidHlwZSA9PT0gJ2Vycm9yJ1wiXG4gICAgIFtjbGFzcy5pbmZvXT1cInR5cGUgPT09ICdpbmZvJ1wiPlxuICA8ZGl2IGNsYXNzPVwibWVzc2FnZWJveC1jb250ZW50XCI+XG4gICAgPHNhLWljb24gKm5nSWY9XCJoYXNJY29uXCIgXG4gICAgICAgICAgICAgIFtuYW1lXT1cImljb25OYW1lIVwiIFxuICAgICAgICAgICAgICBbc2l6ZV09XCJpY29uU2l6ZSB8fCAnbWQnXCJcbiAgICAgICAgICAgICAgW2NvbG9yXT1cImljb25Db2xvciB8fCAnIzAwMDAwMCdcIlxuICAgICAgICAgICAgICBjbGFzcz1cIm1lc3NhZ2Vib3gtaWNvblwiPlxuICAgIDwvc2EtaWNvbj5cbiAgICA8cCBjbGFzcz1cIm1lc3NhZ2UtdGV4dFwiIFtpbm5lckhUTUxdPVwic2FuaXRpemVkTWVzc2FnZVwiPjwvcD5cbiAgPC9kaXY+XG48L2Rpdj5cbiJdfQ==

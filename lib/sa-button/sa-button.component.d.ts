@@ -1,0 +1,30 @@
+import { EventEmitter, ElementRef } from '@angular/core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import * as i0 from "@angular/core";
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray';
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonType = 'button' | 'submit' | 'reset';
+export declare class SaButtonComponent {
+    label: string;
+    variant: ButtonVariant;
+    size: ButtonSize;
+    disabled: boolean;
+    loading: boolean;
+    fullWidth: boolean;
+    type: ButtonType;
+    icon?: string;
+    position: 'left' | 'right';
+    iconOnly: boolean;
+    buttonText: ElementRef;
+    clicked: EventEmitter<void>;
+    readonly spinnerIcon: IconDefinition;
+    get iconDefinition(): IconDefinition | undefined;
+    onClick(): void;
+    get buttonClasses(): string;
+    get isInteractive(): boolean;
+    get showSpinner(): boolean;
+    get showContent(): boolean;
+    private getSizeClass;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SaButtonComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaButtonComponent, "sa-button", never, { "label": { "alias": "label"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "size": { "alias": "size"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "fullWidth": { "alias": "fullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "position": { "alias": "position"; "required": false; }; "iconOnly": { "alias": "iconOnly"; "required": false; }; }, { "clicked": "clicked"; }, never, never, false, never>;
+}
