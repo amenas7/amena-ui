@@ -8,9 +8,9 @@
 >
   <!-- Contenido del botón -->
   <div class="button-content" [class.loading-hidden]="showSpinner">
-    <fa-icon *ngIf="iconDefinition && position === 'left'" [icon]="iconDefinition" class="me-1"></fa-icon>
-    <span #buttonText>{{ label }}</span>
-    <fa-icon *ngIf="iconDefinition && position === 'right'" [icon]="iconDefinition" class="ms-1"></fa-icon>
+    <fa-icon *ngIf="iconDefinition && (position === 'left' || iconOnly)" [icon]="iconDefinition" [class.me-1]="!iconOnly"></fa-icon>
+    <span #buttonText *ngIf="!iconOnly">{{ label }}</span>
+    <fa-icon *ngIf="iconDefinition && position === 'right' && !iconOnly" [icon]="iconDefinition" class="ms-1"></fa-icon>
   </div>
   
   <!-- Spinner que se superpone cuando está loading -->

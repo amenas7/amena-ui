@@ -62,6 +62,7 @@ export class SaButtonComponent {
   @Input() type: ButtonType = 'button';
   @Input() icon?: string;
   @Input() position: 'left' | 'right' = 'left';
+  @Input() iconOnly: boolean = false;
 
 
   @ViewChild('buttonText', { static: false }) buttonText!: ElementRef;
