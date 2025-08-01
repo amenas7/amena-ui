@@ -805,12 +805,37 @@ class SaMessageboxComponent {
     sanitizer;
     // Property que DEBE usar property binding: [message]="'texto'"
     message = '';
-    // Propiedades que DEBEN usar attribute binding: type="success"
+    // Propiedades híbridas: soportan tanto attribute como property binding
     isFullWidth = false;
-    type = 'success';
-    iconName;
-    iconSize;
-    iconColor;
+    // Propiedades con setters/getters para flexibilidad máxima
+    _type = 'success';
+    _iconName;
+    _iconSize;
+    _iconColor;
+    set type(value) {
+        this._type = value || 'success';
+    }
+    get type() {
+        return this._type;
+    }
+    set iconName(value) {
+        this._iconName = value;
+    }
+    get iconName() {
+        return this._iconName;
+    }
+    set iconSize(value) {
+        this._iconSize = value;
+    }
+    get iconSize() {
+        return this._iconSize;
+    }
+    set iconColor(value) {
+        this._iconColor = value;
+    }
+    get iconColor() {
+        return this._iconColor;
+    }
     constructor(sanitizer) {
         this.sanitizer = sanitizer;
     }
