@@ -1,7 +1,11 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../_styles/sanna-fonts';
+
 .sa-table-container {
   position: relative;
   border-radius: 0.375rem;
   overflow: hidden;
+  @include sanna-font-regular;
   
   // Contenido de la tabla con opacidad cuando está loading
   .table-content {
@@ -38,7 +42,7 @@
       .loading-text {
         color: #6c757d;
         font-size: 0.875rem;
-        font-weight: 500;
+        @include sanna-font-medium;
       }
     }
   }
@@ -51,6 +55,7 @@
   .table {
     margin-bottom: 0;
     border-radius: 0.375rem !important;
+    @include sanna-font-regular;
     
     th {
       cursor: default !important;

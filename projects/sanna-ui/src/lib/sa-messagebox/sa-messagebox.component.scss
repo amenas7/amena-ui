@@ -1,6 +1,10 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../_styles/sanna-fonts';
+
 .messagebox {
   position: relative;
   font-size: 14px;
+  @include sanna-font-regular;
   display: flex;
   flex-direction: row;
   border: 0.0625rem solid rgb(14, 144, 105);
@@ -61,5 +65,6 @@
     word-wrap: break-word;
     flex: 1;
     line-height: 1.28;
+    @include sanna-font-regular;
   }
 }
