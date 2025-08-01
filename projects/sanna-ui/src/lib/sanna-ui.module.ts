@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SannaUiComponent } from './sanna-ui.component';
-import './fontawesome.config';
+import { SannaUiFontAwesomeModule } from './fontawesome.module';
 
 // Componentes
 import { SaButtonComponent } from './sa-button/sa-button.component';
@@ -27,7 +26,7 @@ import { SaTableComponent } from './sa-table/sa-table.component';
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    SannaUiFontAwesomeModule
   ],
   exports: [
     SannaUiComponent,
@@ -37,7 +36,8 @@ import { SaTableComponent } from './sa-table/sa-table.component';
     SaInputComponent,
     SaHeadingComponent,
     SaTextComponent,
-    SaTableComponent
+    SaTableComponent,
+    SannaUiFontAwesomeModule
   ]
 })
 export class SannaUiModule { }
