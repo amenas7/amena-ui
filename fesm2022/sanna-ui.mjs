@@ -64,16 +64,72 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
         }], ctorParameters: () => [] });
 
 class SaButtonComponent {
-    label = 'Button';
-    variant = 'primary';
-    size = 'medium';
-    disabled = false;
-    loading = false;
-    fullWidth = false;
-    type = 'button';
-    icon;
-    position = 'left';
-    iconOnly = false;
+    // Propiedades con flexibilidad máxima: soportan attribute y property binding
+    label = 'Button'; // Mantener como @Input simple para strings
+    // Propiedades con setters/getters para flexibilidad máxima
+    _variant = 'primary';
+    _size = 'medium';
+    _disabled = false;
+    _loading = false;
+    _fullWidth = false;
+    _type = 'button';
+    _icon;
+    _position = 'left';
+    _iconOnly = false;
+    set variant(value) {
+        this._variant = value || 'primary';
+    }
+    get variant() {
+        return this._variant;
+    }
+    set size(value) {
+        this._size = value || 'medium';
+    }
+    get size() {
+        return this._size;
+    }
+    set disabled(value) {
+        this._disabled = value === true || value === 'true';
+    }
+    get disabled() {
+        return this._disabled;
+    }
+    set loading(value) {
+        this._loading = value === true || value === 'true';
+    }
+    get loading() {
+        return this._loading;
+    }
+    set fullWidth(value) {
+        this._fullWidth = value === true || value === 'true';
+    }
+    get fullWidth() {
+        return this._fullWidth;
+    }
+    set type(value) {
+        this._type = value || 'button';
+    }
+    get type() {
+        return this._type;
+    }
+    set icon(value) {
+        this._icon = value;
+    }
+    get icon() {
+        return this._icon;
+    }
+    set position(value) {
+        this._position = value || 'left';
+    }
+    get position() {
+        return this._position;
+    }
+    set iconOnly(value) {
+        this._iconOnly = value === true || value === 'true';
+    }
+    get iconOnly() {
+        return this._iconOnly;
+    }
     buttonText;
     clicked = new EventEmitter();
     // Icono de spinner para el estado loading
@@ -263,9 +319,28 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
             }] } });
 
 class SaIconComponent {
-    name = '';
-    color = '#000000';
-    size = 'md';
+    // Propiedades con setters/getters para flexibilidad máxima
+    _name = '';
+    _color = '#000000';
+    _size = 'md';
+    set name(value) {
+        this._name = value || '';
+    }
+    get name() {
+        return this._name;
+    }
+    set color(value) {
+        this._color = value || '#000000';
+    }
+    get color() {
+        return this._color;
+    }
+    set size(value) {
+        this._size = value || 'md';
+    }
+    get size() {
+        return this._size;
+    }
     // Método para obtener el icono basado en el string
     get iconDefinition() {
         if (!this.name)
@@ -1023,13 +1098,51 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
             }] } });
 
 class SaHeadingComponent {
+    // Propiedad que DEBE usar property binding: [children]="'texto'"
     children = '';
-    size = 'md';
-    weight = 'bold';
-    mt;
-    mb;
-    mr;
-    ml;
+    // Propiedades con setters/getters para flexibilidad máxima
+    _size = 'md';
+    _weight = 'bold';
+    _mt;
+    _mb;
+    _mr;
+    _ml;
+    set size(value) {
+        this._size = value || 'md';
+    }
+    get size() {
+        return this._size;
+    }
+    set weight(value) {
+        this._weight = value || 'bold';
+    }
+    get weight() {
+        return this._weight;
+    }
+    set mt(value) {
+        this._mt = value;
+    }
+    get mt() {
+        return this._mt;
+    }
+    set mb(value) {
+        this._mb = value;
+    }
+    get mb() {
+        return this._mb;
+    }
+    set mr(value) {
+        this._mr = value;
+    }
+    get mr() {
+        return this._mr;
+    }
+    set ml(value) {
+        this._ml = value;
+    }
+    get ml() {
+        return this._ml;
+    }
     get headingClasses() {
         const sizeClasses = {
             'xs': 'fs-6',
@@ -1086,16 +1199,61 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
         }] });
 
 class SaTableComponent {
+    // Arrays/objetos que siempre usan property binding
     columns = [];
     data = [];
-    itemsPerPage = 10;
-    showPagination = true;
-    showItemsPerPage = true;
-    showTotal = true;
-    hover = false;
-    responsive = true;
-    loading = false;
+    // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
     emptyMessage = 'No hay datos disponibles';
+    // Propiedades con setters/getters para flexibilidad máxima
+    _itemsPerPage = 10;
+    _showPagination = true;
+    _showItemsPerPage = true;
+    _showTotal = true;
+    _hover = false;
+    _responsive = true;
+    _loading = false;
+    set itemsPerPage(value) {
+        this._itemsPerPage = value != null ? +value : 10;
+    }
+    get itemsPerPage() {
+        return this._itemsPerPage;
+    }
+    set showPagination(value) {
+        this._showPagination = value === true || value === 'true';
+    }
+    get showPagination() {
+        return this._showPagination;
+    }
+    set showItemsPerPage(value) {
+        this._showItemsPerPage = value === true || value === 'true';
+    }
+    get showItemsPerPage() {
+        return this._showItemsPerPage;
+    }
+    set showTotal(value) {
+        this._showTotal = value === true || value === 'true';
+    }
+    get showTotal() {
+        return this._showTotal;
+    }
+    set hover(value) {
+        this._hover = value === true || value === 'true';
+    }
+    get hover() {
+        return this._hover;
+    }
+    set responsive(value) {
+        this._responsive = value === true || value === 'true';
+    }
+    get responsive() {
+        return this._responsive;
+    }
+    set loading(value) {
+        this._loading = value === true || value === 'true';
+    }
+    get loading() {
+        return this._loading;
+    }
     pageChange = new EventEmitter();
     itemsPerPageChange = new EventEmitter();
     sortChange = new EventEmitter();
@@ -1223,7 +1381,7 @@ class SaTableComponent {
         }
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTableComponent, selector: "sa-table", inputs: { columns: "columns", data: "data", itemsPerPage: "itemsPerPage", showPagination: "showPagination", showItemsPerPage: "showItemsPerPage", showTotal: "showTotal", hover: "hover", responsive: "responsive", loading: "loading", emptyMessage: "emptyMessage" }, outputs: { pageChange: "pageChange", itemsPerPageChange: "itemsPerPageChange", sortChange: "sortChange" }, usesOnChanges: true, ngImport: i0, template: "<!-- Table Container -->\n<div class=\"sa-table-container\">\n  <!-- Table Content (siempre visible) -->\n  <div class=\"table-content\" [class.loading]=\"loading\">\n  <!-- Items Per Page Selector -->\n  <div *ngIf=\"showItemsPerPage && showPagination\" class=\"d-flex justify-content-between align-items-center mb-3\">\n    <div class=\"d-flex align-items-center\">\n      <span class=\"text-muted me-2\">Registros por p\u00E1gina</span>\n      <select \n        id=\"itemsPerPage\"\n        class=\"form-select form-select-sm\" \n        style=\"width: auto;\"\n        [value]=\"itemsPerPage\"\n        (change)=\"onSelectChange($event)\">\n        <option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option\">\n          {{ option }}\n        </option>\n      </select>\n    </div>\n  </div>\n\n  <!-- Table -->\n  <div [class.table-responsive]=\"responsive\" class=\"table-container\">\n    <table class=\"table\" \n           [class.table-hover]=\"hover\">\n      <thead class=\"table-light\">\n        <tr>\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <div class=\"d-flex align-items-center justify-content-between\">\n              <span>{{ column.label }}</span>\n            </div>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let row of paginatedData; trackBy: trackByFn\">\n          <td *ngFor=\"let column of columns\" [style.width]=\"column.width\">\n            {{ row[column.key] }}\n          </td>\n        </tr>\n        <tr *ngIf=\"paginatedData.length === 0\">\n          <td [attr.colspan]=\"columns.length\" class=\"text-center py-4 text-muted\">\n            {{ emptyMessage }}\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    \n    <!-- Loading Overlay solo sobre la tabla -->\n    <div *ngIf=\"loading\" class=\"loading-overlay\">\n      <div class=\"loading-content\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n        </div>\n        <div class=\"loading-text\">Cargando...</div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Pagination Info and Controls -->\n  <div *ngIf=\"showPagination\" class=\"d-flex justify-content-between align-items-center mt-3\">\n    <div *ngIf=\"showTotal\" class=\"text-muted\">\n      {{ paginationInfo.startItem }} - {{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros\n    </div>\n    <div *ngIf=\"!showTotal\"></div>\n    \n    <nav *ngIf=\"paginationInfo.totalPages > 1\" aria-label=\"Navegaci\u00F3n de p\u00E1ginas\">\n      <ul class=\"pagination mb-0\">\n              <!-- First Page Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === 1\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(1)\"\n                [disabled]=\"currentPage === 1\"\n                aria-label=\"Primera p\u00E1gina\">\n          <span class=\"pagination-icon\">\u00AB</span>\n        </button>\n      </li>\n\n      <!-- Previous Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === 1\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(currentPage - 1)\"\n                [disabled]=\"currentPage === 1\"\n                aria-label=\"P\u00E1gina anterior\">\n          <span class=\"pagination-icon\">\u2039</span>\n        </button>\n      </li>\n\n      <!-- Page Numbers -->\n      <li *ngFor=\"let page of getPageNumbers()\" \n          class=\"page-item\"\n          [class.active]=\"page === currentPage\"\n          [class.disabled]=\"page === -1\">\n        <button *ngIf=\"page !== -1\" \n                class=\"page-link\" \n                (click)=\"onPageChange(page)\">\n          {{ page }}\n        </button>\n        <span *ngIf=\"page === -1\" class=\"page-link\">...</span>\n      </li>\n\n      <!-- Next Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === paginationInfo.totalPages\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(currentPage + 1)\"\n                [disabled]=\"currentPage === paginationInfo.totalPages\"\n                aria-label=\"P\u00E1gina siguiente\">\n          <span class=\"pagination-icon\">\u203A</span>\n        </button>\n      </li>\n\n      <!-- Last Page Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === paginationInfo.totalPages\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(paginationInfo.totalPages)\"\n                [disabled]=\"currentPage === paginationInfo.totalPages\"\n                aria-label=\"\u00DAltima p\u00E1gina\">\n          <span class=\"pagination-icon\">\u00BB</span>\n        </button>\n      </li>\n      </ul>\n    </nav>\n  </div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:600!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container{position:relative;border-radius:.375rem;overflow:hidden;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table-content{transition:opacity .3s ease}.sa-table-container .table-content.loading{opacity:.5;pointer-events:none}.sa-table-container .loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-color:#fffc;border-radius:.375rem;z-index:10;margin-top:0;margin-bottom:0}.sa-table-container .loading-overlay .loading-content{display:flex;flex-direction:column;align-items:center;gap:1rem}.sa-table-container .loading-overlay .loading-content .loading-text{color:#6c757d;font-size:.875rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sa-table-container .table-responsive{border-radius:.375rem;overflow:hidden}.sa-table-container .table{margin-bottom:0;border-radius:.375rem!important;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table th{cursor:default!important;-webkit-user-select:text!important;user-select:text!important;border-radius:0!important}.sa-table-container .table th:first-child{border-top-left-radius:.375rem!important}.sa-table-container .table th:last-child{border-top-right-radius:.375rem!important}.sa-table-container .table th:hover{background-color:transparent!important}.sa-table-container .table thead th{cursor:default!important;border-bottom:none!important;background-color:#eef8f0!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important}.sa-table-container .table thead th:hover{background-color:#eef8f0!important}.sa-table-container .table thead tr th{background-color:#eef8f0!important;border-bottom:none!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important}.sa-table-container .table thead tr th:hover{background-color:#eef8f0!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important}.sa-table-container .table>tbody>tr:last-child>td:first-child{border-bottom-left-radius:.375rem!important}.sa-table-container .table>tbody>tr:last-child>td:last-child{border-bottom-right-radius:.375rem!important}.sa-table-container .table>tbody>tr>td:first-child,.sa-table-container .table>thead>tr>th:first-child{padding-left:1rem!important}.sa-table-container .table.table-hover>tbody>tr:hover>td{background-color:#f8f9fa!important}.sa-table-container .d-flex.justify-content-between.align-items-center.mt-3{margin-top:.75rem!important}.sa-table-container .pagination{margin-bottom:0;flex-wrap:wrap;justify-content:flex-end;gap:.5rem}.sa-table-container .pagination .page-link{border-radius:.25rem;border:1px solid #dddfe0;min-width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;padding:0;background-color:transparent;color:#5bab5f;font-size:1.125rem;text-align:center;line-height:1;width:2rem;box-sizing:border-box;letter-spacing:0;word-spacing:0;outline:none!important;font-size:.9rem;font-weight:500}.sa-table-container .pagination .page-link .pagination-icon{font-size:1.5rem;font-weight:500;line-height:0;display:flex;align-items:center;justify-content:center;margin:0;margin-top:-5px!important;padding:0;height:100%;width:100%}.sa-table-container .pagination .page-link:hover{background-color:#fff;border-color:#5bab5f;color:#5bab5f}.sa-table-container .pagination .page-link:focus{outline:none!important;box-shadow:none!important}.sa-table-container .pagination .page-item.active .page-link{background-color:#5bab5f;color:#fff;font-weight:500;border:none!important}.sa-table-container .pagination .page-item.active .page-link:hover{background-color:#5bab5f!important;color:#fff!important;border:none!important}.sa-table-container .pagination .page-item.disabled .page-link{color:#dee2e6;pointer-events:none;background-color:#fafafa;border-color:#dee2e6}.sa-table-container .pagination .page-item:first-child .page-link,.sa-table-container .pagination .page-item:last-child .page-link{min-width:2rem;width:2rem}.sa-table-container .pagination .page-link *{display:inline-block;vertical-align:middle}.sa-table-container .form-select{border-radius:.375rem;border:1px solid var(--bs-border-color)}.sa-table-container .form-select:focus{border-color:var(--bs-primary);box-shadow:0 0 0 .2rem rgba(var(--bs-primary-rgb),.25)}.sa-table-container .table-responsive{border-radius:.375rem!important;overflow:hidden;border:1px solid #e1e2e4}.sa-table-container .table-container{position:relative}.sa-table-container .table-bordered{border:1px solid var(--bs-border-color)}.sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}@media (max-width: 768px){.sa-table-container .d-flex.justify-content-between{flex-direction:column;gap:1rem}.sa-table-container .pagination .page-link{padding:.375rem .5rem;font-size:.875rem;min-width:2.25rem;height:2.25rem}}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"]{overflow:visible;padding:.5rem 0}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"] .pagination{margin:0;padding:0}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTableComponent, selector: "sa-table", inputs: { columns: "columns", data: "data", emptyMessage: "emptyMessage", itemsPerPage: "itemsPerPage", showPagination: "showPagination", showItemsPerPage: "showItemsPerPage", showTotal: "showTotal", hover: "hover", responsive: "responsive", loading: "loading" }, outputs: { pageChange: "pageChange", itemsPerPageChange: "itemsPerPageChange", sortChange: "sortChange" }, usesOnChanges: true, ngImport: i0, template: "<!-- Table Container -->\n<div class=\"sa-table-container\">\n  <!-- Table Content (siempre visible) -->\n  <div class=\"table-content\" [class.loading]=\"loading\">\n  <!-- Items Per Page Selector -->\n  <div *ngIf=\"showItemsPerPage && showPagination\" class=\"d-flex justify-content-between align-items-center mb-3\">\n    <div class=\"d-flex align-items-center\">\n      <span class=\"text-muted me-2\">Registros por p\u00E1gina</span>\n      <select \n        id=\"itemsPerPage\"\n        class=\"form-select form-select-sm\" \n        style=\"width: auto;\"\n        [value]=\"itemsPerPage\"\n        (change)=\"onSelectChange($event)\">\n        <option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option\">\n          {{ option }}\n        </option>\n      </select>\n    </div>\n  </div>\n\n  <!-- Table -->\n  <div [class.table-responsive]=\"responsive\" class=\"table-container\">\n    <table class=\"table\" \n           [class.table-hover]=\"hover\">\n      <thead class=\"table-light\">\n        <tr>\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <div class=\"d-flex align-items-center justify-content-between\">\n              <span>{{ column.label }}</span>\n            </div>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let row of paginatedData; trackBy: trackByFn\">\n          <td *ngFor=\"let column of columns\" [style.width]=\"column.width\">\n            {{ row[column.key] }}\n          </td>\n        </tr>\n        <tr *ngIf=\"paginatedData.length === 0\">\n          <td [attr.colspan]=\"columns.length\" class=\"text-center py-4 text-muted\">\n            {{ emptyMessage }}\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    \n    <!-- Loading Overlay solo sobre la tabla -->\n    <div *ngIf=\"loading\" class=\"loading-overlay\">\n      <div class=\"loading-content\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n        </div>\n        <div class=\"loading-text\">Cargando...</div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Pagination Info and Controls -->\n  <div *ngIf=\"showPagination\" class=\"d-flex justify-content-between align-items-center mt-3\">\n    <div *ngIf=\"showTotal\" class=\"text-muted\">\n      {{ paginationInfo.startItem }} - {{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros\n    </div>\n    <div *ngIf=\"!showTotal\"></div>\n    \n    <nav *ngIf=\"paginationInfo.totalPages > 1\" aria-label=\"Navegaci\u00F3n de p\u00E1ginas\">\n      <ul class=\"pagination mb-0\">\n              <!-- First Page Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === 1\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(1)\"\n                [disabled]=\"currentPage === 1\"\n                aria-label=\"Primera p\u00E1gina\">\n          <span class=\"pagination-icon\">\u00AB</span>\n        </button>\n      </li>\n\n      <!-- Previous Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === 1\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(currentPage - 1)\"\n                [disabled]=\"currentPage === 1\"\n                aria-label=\"P\u00E1gina anterior\">\n          <span class=\"pagination-icon\">\u2039</span>\n        </button>\n      </li>\n\n      <!-- Page Numbers -->\n      <li *ngFor=\"let page of getPageNumbers()\" \n          class=\"page-item\"\n          [class.active]=\"page === currentPage\"\n          [class.disabled]=\"page === -1\">\n        <button *ngIf=\"page !== -1\" \n                class=\"page-link\" \n                (click)=\"onPageChange(page)\">\n          {{ page }}\n        </button>\n        <span *ngIf=\"page === -1\" class=\"page-link\">...</span>\n      </li>\n\n      <!-- Next Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === paginationInfo.totalPages\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(currentPage + 1)\"\n                [disabled]=\"currentPage === paginationInfo.totalPages\"\n                aria-label=\"P\u00E1gina siguiente\">\n          <span class=\"pagination-icon\">\u203A</span>\n        </button>\n      </li>\n\n      <!-- Last Page Button -->\n      <li class=\"page-item\" [class.disabled]=\"currentPage === paginationInfo.totalPages\">\n        <button class=\"page-link\" \n                (click)=\"onPageChange(paginationInfo.totalPages)\"\n                [disabled]=\"currentPage === paginationInfo.totalPages\"\n                aria-label=\"\u00DAltima p\u00E1gina\">\n          <span class=\"pagination-icon\">\u00BB</span>\n        </button>\n      </li>\n      </ul>\n    </nav>\n  </div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:600!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container{position:relative;border-radius:.375rem;overflow:hidden;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table-content{transition:opacity .3s ease}.sa-table-container .table-content.loading{opacity:.5;pointer-events:none}.sa-table-container .loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-color:#fffc;border-radius:.375rem;z-index:10;margin-top:0;margin-bottom:0}.sa-table-container .loading-overlay .loading-content{display:flex;flex-direction:column;align-items:center;gap:1rem}.sa-table-container .loading-overlay .loading-content .loading-text{color:#6c757d;font-size:.875rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sa-table-container .table-responsive{border-radius:.375rem;overflow:hidden}.sa-table-container .table{margin-bottom:0;border-radius:.375rem!important;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table th{cursor:default!important;-webkit-user-select:text!important;user-select:text!important;border-radius:0!important}.sa-table-container .table th:first-child{border-top-left-radius:.375rem!important}.sa-table-container .table th:last-child{border-top-right-radius:.375rem!important}.sa-table-container .table th:hover{background-color:transparent!important}.sa-table-container .table thead th{cursor:default!important;border-bottom:none!important;background-color:#eef8f0!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important}.sa-table-container .table thead th:hover{background-color:#eef8f0!important}.sa-table-container .table thead tr th{background-color:#eef8f0!important;border-bottom:none!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important}.sa-table-container .table thead tr th:hover{background-color:#eef8f0!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important}.sa-table-container .table>tbody>tr:last-child>td:first-child{border-bottom-left-radius:.375rem!important}.sa-table-container .table>tbody>tr:last-child>td:last-child{border-bottom-right-radius:.375rem!important}.sa-table-container .table>tbody>tr>td:first-child,.sa-table-container .table>thead>tr>th:first-child{padding-left:1rem!important}.sa-table-container .table.table-hover>tbody>tr:hover>td{background-color:#f8f9fa!important}.sa-table-container .d-flex.justify-content-between.align-items-center.mt-3{margin-top:.75rem!important}.sa-table-container .pagination{margin-bottom:0;flex-wrap:wrap;justify-content:flex-end;gap:.5rem}.sa-table-container .pagination .page-link{border-radius:.25rem;border:1px solid #dddfe0;min-width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;padding:0;background-color:transparent;color:#5bab5f;font-size:1.125rem;text-align:center;line-height:1;width:2rem;box-sizing:border-box;letter-spacing:0;word-spacing:0;outline:none!important;font-size:.9rem;font-weight:500}.sa-table-container .pagination .page-link .pagination-icon{font-size:1.5rem;font-weight:500;line-height:0;display:flex;align-items:center;justify-content:center;margin:0;margin-top:-5px!important;padding:0;height:100%;width:100%}.sa-table-container .pagination .page-link:hover{background-color:#fff;border-color:#5bab5f;color:#5bab5f}.sa-table-container .pagination .page-link:focus{outline:none!important;box-shadow:none!important}.sa-table-container .pagination .page-item.active .page-link{background-color:#5bab5f;color:#fff;font-weight:500;border:none!important}.sa-table-container .pagination .page-item.active .page-link:hover{background-color:#5bab5f!important;color:#fff!important;border:none!important}.sa-table-container .pagination .page-item.disabled .page-link{color:#dee2e6;pointer-events:none;background-color:#fafafa;border-color:#dee2e6}.sa-table-container .pagination .page-item:first-child .page-link,.sa-table-container .pagination .page-item:last-child .page-link{min-width:2rem;width:2rem}.sa-table-container .pagination .page-link *{display:inline-block;vertical-align:middle}.sa-table-container .form-select{border-radius:.375rem;border:1px solid var(--bs-border-color)}.sa-table-container .form-select:focus{border-color:var(--bs-primary);box-shadow:0 0 0 .2rem rgba(var(--bs-primary-rgb),.25)}.sa-table-container .table-responsive{border-radius:.375rem!important;overflow:hidden;border:1px solid #e1e2e4}.sa-table-container .table-container{position:relative}.sa-table-container .table-bordered{border:1px solid var(--bs-border-color)}.sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}@media (max-width: 768px){.sa-table-container .d-flex.justify-content-between{flex-direction:column;gap:1rem}.sa-table-container .pagination .page-link{padding:.375rem .5rem;font-size:.875rem;min-width:2.25rem;height:2.25rem}}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"]{overflow:visible;padding:.5rem 0}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"] .pagination{margin:0;padding:0}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTableComponent, decorators: [{
             type: Component,
@@ -1231,6 +1389,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
         }], propDecorators: { columns: [{
                 type: Input
             }], data: [{
+                type: Input
+            }], emptyMessage: [{
                 type: Input
             }], itemsPerPage: [{
                 type: Input
@@ -1245,8 +1405,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
             }], responsive: [{
                 type: Input
             }], loading: [{
-                type: Input
-            }], emptyMessage: [{
                 type: Input
             }], pageChange: [{
                 type: Output

@@ -20,14 +20,28 @@ export interface PaginationInfo {
 export declare class SaTableComponent implements OnInit, OnChanges {
     columns: TableColumn[];
     data: TableData[];
-    itemsPerPage: number;
-    showPagination: boolean;
-    showItemsPerPage: boolean;
-    showTotal: boolean;
-    hover: boolean;
-    responsive: boolean;
-    loading: boolean;
     emptyMessage: string;
+    private _itemsPerPage;
+    private _showPagination;
+    private _showItemsPerPage;
+    private _showTotal;
+    private _hover;
+    private _responsive;
+    private _loading;
+    set itemsPerPage(value: number | any);
+    get itemsPerPage(): number;
+    set showPagination(value: boolean | any);
+    get showPagination(): boolean;
+    set showItemsPerPage(value: boolean | any);
+    get showItemsPerPage(): boolean;
+    set showTotal(value: boolean | any);
+    get showTotal(): boolean;
+    set hover(value: boolean | any);
+    get hover(): boolean;
+    set responsive(value: boolean | any);
+    get responsive(): boolean;
+    set loading(value: boolean | any);
+    get loading(): boolean;
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
     sortChange: EventEmitter<{
@@ -53,5 +67,5 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     trackByFn(index: number, item: any): any;
     onSelectChange(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "responsive": { "alias": "responsive"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "responsive": { "alias": "responsive"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
 }
