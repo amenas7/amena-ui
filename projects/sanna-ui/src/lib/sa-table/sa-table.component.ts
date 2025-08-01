@@ -26,16 +26,77 @@ export interface PaginationInfo {
   styleUrl: './sa-table.component.scss'
 })
 export class SaTableComponent implements OnInit, OnChanges {
+  // Arrays/objetos que siempre usan property binding
   @Input() columns: TableColumn[] = [];
   @Input() data: TableData[] = [];
-  @Input() itemsPerPage: number = 10;
-  @Input() showPagination: boolean = true;
-  @Input() showItemsPerPage: boolean = true;
-  @Input() showTotal: boolean = true;
-  @Input() hover: boolean = false;
-  @Input() responsive: boolean = true;
-  @Input() loading: boolean = false;
+  
+  // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
   @Input() emptyMessage: string = 'No hay datos disponibles';
+
+  // Propiedades con setters/getters para flexibilidad máxima
+  private _itemsPerPage: number = 10;
+  private _showPagination: boolean = true;
+  private _showItemsPerPage: boolean = true;
+  private _showTotal: boolean = true;
+  private _hover: boolean = false;
+  private _responsive: boolean = true;
+  private _loading: boolean = false;
+
+  @Input()
+  set itemsPerPage(value: number | any) {
+    this._itemsPerPage = value != null ? +value : 10;
+  }
+  get itemsPerPage(): number {
+    return this._itemsPerPage;
+  }
+
+  @Input()
+  set showPagination(value: boolean | any) {
+    this._showPagination = value === true || value === 'true';
+  }
+  get showPagination(): boolean {
+    return this._showPagination;
+  }
+
+  @Input()
+  set showItemsPerPage(value: boolean | any) {
+    this._showItemsPerPage = value === true || value === 'true';
+  }
+  get showItemsPerPage(): boolean {
+    return this._showItemsPerPage;
+  }
+
+  @Input()
+  set showTotal(value: boolean | any) {
+    this._showTotal = value === true || value === 'true';
+  }
+  get showTotal(): boolean {
+    return this._showTotal;
+  }
+
+  @Input()
+  set hover(value: boolean | any) {
+    this._hover = value === true || value === 'true';
+  }
+  get hover(): boolean {
+    return this._hover;
+  }
+
+  @Input()
+  set responsive(value: boolean | any) {
+    this._responsive = value === true || value === 'true';
+  }
+  get responsive(): boolean {
+    return this._responsive;
+  }
+
+  @Input()
+  set loading(value: boolean | any) {
+    this._loading = value === true || value === 'true';
+  }
+  get loading(): boolean {
+    return this._loading;
+  }
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();

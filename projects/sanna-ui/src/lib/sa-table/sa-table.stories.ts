@@ -11,6 +11,34 @@ const meta: Meta<SaTableComponent> = {
       sort: 'requiredFirst'
     },
     docs: {
+      source: {
+        type: 'dynamic',
+        language: 'html',
+        transform: (code: string, storyContext: any) => {
+          // Transformación simple que preserva el resaltado de sintaxis
+          let result = code;
+          
+          // Solo emptyMessage mantiene comillas simples, las demás propiedades NO
+          result = result.replace(/\[itemsPerPage\]="'([^']+)'"/g, 'itemsPerPage="$1"');
+          result = result.replace(/\[showPagination\]="true"/g, 'showPagination="true"');
+          result = result.replace(/\[showPagination\]="false"/g, 'showPagination="false"');
+          result = result.replace(/\[showItemsPerPage\]="true"/g, 'showItemsPerPage="true"');
+          result = result.replace(/\[showItemsPerPage\]="false"/g, 'showItemsPerPage="false"');
+          result = result.replace(/\[showTotal\]="true"/g, 'showTotal="true"');
+          result = result.replace(/\[showTotal\]="false"/g, 'showTotal="false"');
+          result = result.replace(/\[hover\]="true"/g, 'hover="true"');
+          result = result.replace(/\[hover\]="false"/g, 'hover="false"');
+          result = result.replace(/\[responsive\]="true"/g, 'responsive="true"');
+          result = result.replace(/\[responsive\]="false"/g, 'responsive="false"');
+          result = result.replace(/\[loading\]="true"/g, 'loading="true"');
+          result = result.replace(/\[loading\]="false"/g, 'loading="false"');
+          
+          // Limpiar espacios extra
+          result = result.replace(/\n\s*\n/g, '\n');
+          
+          return result;
+        }
+      },
       description: {
         component: `
 Un componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.
@@ -113,38 +141,38 @@ const data: TableData[] = [
     },
     itemsPerPage: {
       control: { type: 'number', min: 1, max: 100 },
-      description: 'Número de elementos por página'
+      description: 'Número de elementos por página. Usa attribute binding: itemsPerPage="10"'
     },
     showItemsPerPage: {
       control: { type: 'boolean' },
-      description: 'Mostrar selector de elementos por página'
+      description: 'Mostrar selector de elementos por página. Usa attribute binding: showItemsPerPage="true"'
     },
     showPagination: {
       control: { type: 'boolean' },
-      description: 'Mostrar controles de paginación'
+      description: 'Mostrar controles de paginación. Usa attribute binding: showPagination="true"'
     },
     showTotal: {
       control: { type: 'boolean' },
-      description: 'Mostrar información de totales'
+      description: 'Mostrar información de totales. Usa attribute binding: showTotal="true"'
     },
 
     hover: {
       control: { type: 'boolean' },
-      description: 'Aplicar efecto hover (deshabilitado por defecto)'
+      description: 'Aplicar efecto hover (deshabilitado por defecto). Usa attribute binding: hover="true"'
     },
 
     responsive: {
       control: { type: 'boolean' },
-      description: 'Hacer la tabla responsive'
+      description: 'Hacer la tabla responsive. Usa attribute binding: responsive="true"'
     },
 
     loading: {
       control: { type: 'boolean' },
-      description: 'Mostrar estado de carga'
+      description: 'Mostrar estado de carga. Usa attribute binding: loading="true"'
     },
     emptyMessage: {
       control: { type: 'text' },
-      description: 'Mensaje cuando no hay datos'
+      description: 'Mensaje cuando no hay datos. NOTA: Esta es la ÚNICA propiedad que usa property binding con comillas simples: [emptyMessage]="\'texto\'"'
     }
   },
   args: {

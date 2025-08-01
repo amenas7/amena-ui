@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introducción" />
+
+# 🎨 Sanna UI - Librería de Componentes 🚀
+
+
+Explora nuestros componentes navegando por las categorías en el panel lateral:
+
+### 📋 **Componentes Disponibles**
+
+- **🔘 Button** - Botones interactivos con múltiples variantes y estilos
+- **📝 Text** - Componentes de texto con tipografía personalizada  
+- **📊 Table** - Tablas responsive con paginación y ordenamiento
+- **💬 MessageBox** - Cajas de mensajes para notificaciones y alertas
+- **🏷️ Heading** - Títulos y encabezados con diferentes tamaños
+- **🎯 Icon** - Iconos de FontAwesome integrados (150+ disponibles)
+- **📄 Input** - Campos de entrada con validación
+
+### ✨ **Características Principales**
+
+- **🎨 Diseño Moderno**: Colores personalizados con verde principal `#5BAB5F`
+- **📱 Totalmente Responsive**: Adaptable a todos los dispositivos
+- **🔧 Altamente Configurable**: Múltiples props y opciones de personalización
+- **⚡ Fácil de Usar**: Sintaxis clara y documentación completa
+- **🔤 Tipografía Premium**: Plus Jakarta Sans integrada automáticamente
+- **🎯 FontAwesome Incluido**: Más de 150 iconos listos para usar
+
+### 🛠️ **Sintaxis Recomendada**
+
+Nuestros componentes soportan sintaxis flexible:
+
+```html
+<!-- ✅ Valores estáticos (recomendado) -->
+<sa-button label="Guardar" variant="primary" size="medium"></sa-button>
+<sa-icon name="heart" color="#ff0000" size="lg"></sa-icon>
+
+<!-- ✅ Valores dinámicos -->
+<sa-button [label]="buttonText" [variant]="buttonType"></sa-button>
+<sa-icon [name]="iconName" [color]="iconColor"></sa-icon>
+
+<!-- ✅ Sintaxis mixta -->
+<sa-messagebox [message]="notification" type="success" iconName="check"></sa-messagebox>
+```
+
+### 🎯 **Próximos Pasos**
+
+1. **Explora los Componentes**: Navega por cada categoría para ver ejemplos interactivos
+2. **Experimenta con las Props**: Usa los controles para probar diferentes configuraciones
+3. **Copia el Código**: Utiliza el botón "Show code" para obtener el código de cada ejemplo
+4. **Implementa en tu Proyecto**: Instala la librería y comienza a crear interfaces increíbles
+
+---
+
+<div style={{
+  textAlign: 'center',
+  padding: '1.5rem',
+  background: '#f8f9fa',
+  borderRadius: '0.375rem',
+  marginTop: '2rem'
+}}>
+  <h3 style={{ color: '#5BAB5F', margin: '0 0 0.5rem' }}>
+    ¿Listo para comenzar?
+  </h3>
+  <p style={{ margin: 0, color: '#6c757d' }}>
+    Selecciona un componente del panel lateral para ver ejemplos interactivos y documentación detallada.
+  </p>
+</div>

@@ -53,16 +53,91 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   styleUrl: './sa-button.component.scss'
 })
 export class SaButtonComponent {
-  @Input() label: string = 'Button';
-  @Input() variant: ButtonVariant = 'primary';
-  @Input() size: ButtonSize = 'medium';
-  @Input() disabled: boolean = false;
-  @Input() loading: boolean = false;
-  @Input() fullWidth: boolean = false;
-  @Input() type: ButtonType = 'button';
-  @Input() icon?: string;
-  @Input() position: 'left' | 'right' = 'left';
-  @Input() iconOnly: boolean = false;
+  // Propiedades con flexibilidad máxima: soportan attribute y property binding
+  @Input() label: string = 'Button'; // Mantener como @Input simple para strings
+  
+  // Propiedades con setters/getters para flexibilidad máxima
+  private _variant: ButtonVariant = 'primary';
+  private _size: ButtonSize = 'medium';
+  private _disabled: boolean = false;
+  private _loading: boolean = false;
+  private _fullWidth: boolean = false;
+  private _type: ButtonType = 'button';
+  private _icon?: string;
+  private _position: 'left' | 'right' = 'left';
+  private _iconOnly: boolean = false;
+
+  @Input()
+  set variant(value: ButtonVariant | any) {
+    this._variant = value || 'primary';
+  }
+  get variant(): ButtonVariant {
+    return this._variant;
+  }
+
+  @Input()
+  set size(value: ButtonSize | any) {
+    this._size = value || 'medium';
+  }
+  get size(): ButtonSize {
+    return this._size;
+  }
+
+  @Input()
+  set disabled(value: boolean | any) {
+    this._disabled = value === true || value === 'true';
+  }
+  get disabled(): boolean {
+    return this._disabled;
+  }
+
+  @Input()
+  set loading(value: boolean | any) {
+    this._loading = value === true || value === 'true';
+  }
+  get loading(): boolean {
+    return this._loading;
+  }
+
+  @Input()
+  set fullWidth(value: boolean | any) {
+    this._fullWidth = value === true || value === 'true';
+  }
+  get fullWidth(): boolean {
+    return this._fullWidth;
+  }
+
+  @Input()
+  set type(value: ButtonType | any) {
+    this._type = value || 'button';
+  }
+  get type(): ButtonType {
+    return this._type;
+  }
+
+  @Input()
+  set icon(value: string | any) {
+    this._icon = value;
+  }
+  get icon(): string | undefined {
+    return this._icon;
+  }
+
+  @Input()
+  set position(value: 'left' | 'right' | any) {
+    this._position = value || 'left';
+  }
+  get position(): 'left' | 'right' {
+    return this._position;
+  }
+
+  @Input()
+  set iconOnly(value: boolean | any) {
+    this._iconOnly = value === true || value === 'true';
+  }
+  get iconOnly(): boolean {
+    return this._iconOnly;
+  }
 
 
   @ViewChild('buttonText', { static: false }) buttonText!: ElementRef;

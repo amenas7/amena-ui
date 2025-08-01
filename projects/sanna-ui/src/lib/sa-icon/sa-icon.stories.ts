@@ -19,23 +19,38 @@ export default {
         `
       },
       source: {
-        type: 'code'
+        type: 'dynamic',
+        language: 'html',
+        transform: (code: string, storyContext: any) => {
+          // Transformación simple que preserva el resaltado de sintaxis
+          let result = code;
+          
+          // Todas las propiedades usan attribute binding sin comillas simples
+          result = result.replace(/\[name\]="'([^']+)'"/g, 'name="$1"');
+          result = result.replace(/\[color\]="'([^']+)'"/g, 'color="$1"');
+          result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
+          
+          // Limpiar espacios extra
+          result = result.replace(/\n\s*\n/g, '\n');
+          
+          return result;
+        }
       }
     }
   },
   argTypes: {
     name: {
       control: { type: 'text' },
-      description: 'Nombre del icono (ej: "heart", "fas fa-heart")'
+      description: 'Nombre del icono (ej: "heart", "save", "trash"). Soporta más de 150 iconos de FontAwesome.'
     },
     color: {
       control: { type: 'color' },
-      description: 'Color hexadecimal del icono'
+      description: 'Color hexadecimal del icono (ej: "#ff0000", "#28a745")'
     },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del icono'
+      description: 'Tamaño del icono (sm=14px, md=16px, lg=20px)'
     }
   }
 } as Meta<SaIconComponent>;

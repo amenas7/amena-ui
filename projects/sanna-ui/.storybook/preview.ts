@@ -19,6 +19,11 @@ const preview: Preview = {
       source: {
         type: 'code'
       }
+    },
+    options: {
+      storySort: {
+        order: ['Introducción', 'Componentes', '*']
+      }
     }
   },
 };

@@ -10,13 +10,64 @@ type HeadingMargin = '0' | '1' | '2' | '3' | '4' | '5' | 'auto';
   styleUrl: './sa-heading.component.scss'
 })
 export class SaHeadingComponent {
+  // Propiedad que DEBE usar property binding: [children]="'texto'"
   @Input() children: string = '';
-  @Input() size: HeadingSize = 'md';
-  @Input() weight: HeadingWeight = 'bold';
-  @Input() mt?: HeadingMargin;
-  @Input() mb?: HeadingMargin;
-  @Input() mr?: HeadingMargin;
-  @Input() ml?: HeadingMargin;
+  
+  // Propiedades con setters/getters para flexibilidad máxima
+  private _size: HeadingSize = 'md';
+  private _weight: HeadingWeight = 'bold';
+  private _mt?: HeadingMargin;
+  private _mb?: HeadingMargin;
+  private _mr?: HeadingMargin;
+  private _ml?: HeadingMargin;
+
+  @Input()
+  set size(value: HeadingSize | any) {
+    this._size = value || 'md';
+  }
+  get size(): HeadingSize {
+    return this._size;
+  }
+
+  @Input()
+  set weight(value: HeadingWeight | any) {
+    this._weight = value || 'bold';
+  }
+  get weight(): HeadingWeight {
+    return this._weight;
+  }
+
+  @Input()
+  set mt(value: HeadingMargin | any) {
+    this._mt = value;
+  }
+  get mt(): HeadingMargin | undefined {
+    return this._mt;
+  }
+
+  @Input()
+  set mb(value: HeadingMargin | any) {
+    this._mb = value;
+  }
+  get mb(): HeadingMargin | undefined {
+    return this._mb;
+  }
+
+  @Input()
+  set mr(value: HeadingMargin | any) {
+    this._mr = value;
+  }
+  get mr(): HeadingMargin | undefined {
+    return this._mr;
+  }
+
+  @Input()
+  set ml(value: HeadingMargin | any) {
+    this._ml = value;
+  }
+  get ml(): HeadingMargin | undefined {
+    return this._ml;
+  }
 
   get headingClasses(): string {
     const sizeClasses = {

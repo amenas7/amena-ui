@@ -198,9 +198,34 @@ export type IconSize = 'sm' | 'md' | 'lg';
   styleUrl: './sa-icon.component.scss'
 })
 export class SaIconComponent {
-  @Input() name: string = '';
-  @Input() color: string = '#000000';
-  @Input() size: IconSize = 'md';
+  // Propiedades con setters/getters para flexibilidad máxima
+  private _name: string = '';
+  private _color: string = '#000000';
+  private _size: IconSize = 'md';
+
+  @Input()
+  set name(value: string | any) {
+    this._name = value || '';
+  }
+  get name(): string {
+    return this._name;
+  }
+
+  @Input()
+  set color(value: string | any) {
+    this._color = value || '#000000';
+  }
+  get color(): string {
+    return this._color;
+  }
+
+  @Input()
+  set size(value: IconSize | any) {
+    this._size = value || 'md';
+  }
+  get size(): IconSize {
+    return this._size;
+  }
 
   // Método para obtener el icono basado en el string
   get iconDefinition(): IconDefinition | undefined {

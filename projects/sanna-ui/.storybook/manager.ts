@@ -8,4 +8,8 @@ addons.setConfig({
     brandUrl: 'https://sanna.com',
     brandImage: 'dark-logo-story.svg',
   },
+  initialActive: 'docs',
+  sidebar: {
+    showRoots: false,
+  },
 }); 

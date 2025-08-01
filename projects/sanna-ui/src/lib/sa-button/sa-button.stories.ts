@@ -19,11 +19,43 @@ export default {
         `
       },
       source: {
-        type: 'code'
+        type: 'dynamic',
+        language: 'html',
+        transform: (code: string, storyContext: any) => {
+          // Transformación simple que preserva el resaltado de sintaxis
+          let result = code;
+          
+          // Transformar property bindings innecesarios a attribute binding
+          result = result.replace(/\[label\]="'([^']+)'"/g, 'label="$1"');
+          result = result.replace(/\[variant\]="'([^']+)'"/g, 'variant="$1"');
+          result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
+          result = result.replace(/\[icon\]="'([^']+)'"/g, 'icon="$1"');
+          result = result.replace(/\[position\]="'([^']+)'"/g, 'position="$1"');
+          result = result.replace(/\[type\]="'([^']+)'"/g, 'type="$1"');
+          
+          // Transformar boolean properties
+          result = result.replace(/\[disabled\]="true"/g, 'disabled="true"');
+          result = result.replace(/\[disabled\]="false"/g, 'disabled="false"');
+          result = result.replace(/\[loading\]="true"/g, 'loading="true"');
+          result = result.replace(/\[loading\]="false"/g, 'loading="false"');
+          result = result.replace(/\[fullWidth\]="true"/g, 'fullWidth="true"');
+          result = result.replace(/\[fullWidth\]="false"/g, 'fullWidth="false"');
+          result = result.replace(/\[iconOnly\]="true"/g, 'iconOnly="true"');
+          result = result.replace(/\[iconOnly\]="false"/g, 'iconOnly="false"');
+          
+          // Limpiar espacios extra
+          result = result.replace(/\n\s*\n/g, '\n');
+          
+          return result;
+        }
       }
     }
   },
   argTypes: {
+    label: {
+      control: 'text',
+      description: 'Texto del botón'
+    },
     variant: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray'],
@@ -48,7 +80,7 @@ export default {
     },
     icon: {
       control: { type: 'text' },
-      description: 'Icono de FontAwesome (ej: "heart", "fas fa-heart")'
+      description: 'Icono de FontAwesome (ej: "heart", "save", "trash")'
     },
     position: {
       control: { type: 'select' },
@@ -59,6 +91,11 @@ export default {
       control: { type: 'boolean' },
       description: 'Mostrar solo el icono sin texto'
     },
+    type: {
+      control: { type: 'select' },
+      options: ['button', 'submit', 'reset'],
+      description: 'Tipo de botón HTML'
+    }
   }
 } as Meta<SaButtonComponent>;
 
