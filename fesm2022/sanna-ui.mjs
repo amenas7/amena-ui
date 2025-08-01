@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, EventEmitter, Input, ViewChild, Output, forwardRef, NgModule } from '@angular/core';
+import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, forwardRef } from '@angular/core';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i2 from '@fortawesome/angular-fontawesome';
@@ -40,6 +40,31 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
 
 // Agregar todos los iconos a la librería
 library.add(faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight);
+
+/**
+ * Módulo que configura automáticamente Font Awesome con todos los iconos
+ * necesarios para los componentes de Sanna UI.
+ *
+ * Este módulo se auto-configura al importarse, por lo que no es necesario
+ * que los proyectos que usen sanna-ui instalen o configuren Font Awesome manualmente.
+ */
+class SannaUiFontAwesomeModule {
+    constructor() {
+        // La configuración de iconos se ejecuta al importar './fontawesome.config'
+        // Esto asegura que todos los iconos estén disponibles automáticamente
+        console.log('🎯 Sanna UI Font Awesome Module: Iconos configurados automáticamente');
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, imports: [FontAwesomeModule], exports: [FontAwesomeModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, imports: [FontAwesomeModule, FontAwesomeModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [FontAwesomeModule],
+                    exports: [FontAwesomeModule]
+                }]
+        }], ctorParameters: () => [] });
 
 class SaButtonComponent {
     label = 'Button';
@@ -1217,16 +1242,17 @@ class SannaUiModule {
             SaHeadingComponent,
             SaTextComponent,
             SaTableComponent], imports: [CommonModule,
-            FontAwesomeModule], exports: [SannaUiComponent,
+            SannaUiFontAwesomeModule], exports: [SannaUiComponent,
             SaButtonComponent,
             SaIconComponent,
             SaMessageboxComponent,
             SaInputComponent,
             SaHeadingComponent,
             SaTextComponent,
-            SaTableComponent] });
+            SaTableComponent,
+            SannaUiFontAwesomeModule] });
     static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, imports: [CommonModule,
-            FontAwesomeModule] });
+            SannaUiFontAwesomeModule, SannaUiFontAwesomeModule] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, decorators: [{
             type: NgModule,
@@ -1243,7 +1269,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                     ],
                     imports: [
                         CommonModule,
-                        FontAwesomeModule
+                        SannaUiFontAwesomeModule
                     ],
                     exports: [
                         SannaUiComponent,
@@ -1253,7 +1279,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaInputComponent,
                         SaHeadingComponent,
                         SaTextComponent,
-                        SaTableComponent
+                        SaTableComponent,
+                        SannaUiFontAwesomeModule
                     ]
                 }]
         }] });
@@ -1266,5 +1293,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { SaButtonComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaTableComponent, SaTextComponent, SannaUiComponent, SannaUiModule, SannaUiService };
+export { SaButtonComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaTableComponent, SaTextComponent, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map
