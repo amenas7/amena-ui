@@ -803,7 +803,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
 
 class SaMessageboxComponent {
     sanitizer;
+    // Property que DEBE usar property binding: [message]="'texto'"
     message = '';
+    // Propiedades que DEBEN usar attribute binding: type="success"
     isFullWidth = false;
     type = 'success';
     iconName;
