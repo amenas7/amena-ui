@@ -17,10 +17,13 @@
   color: rgb(0, 110, 74);
   margin: 8px 0;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 
   &.full-width {
     width: 100%;
+    max-width: 100%;
     min-height: auto;
+    overflow-wrap: break-word;
   }
 
   &.success {

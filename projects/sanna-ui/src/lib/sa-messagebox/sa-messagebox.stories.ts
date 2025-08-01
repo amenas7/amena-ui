@@ -10,11 +10,32 @@ export default {
     moduleMetadata({
       imports: [CommonModule, SannaUiModule],
     }),
+    // Decorador para mejorar la presentación de código
+    (story: any, context: any) => {
+      return story();
+    }
   ],
   parameters: {
     docs: {
       source: {
-        type: 'code'
+        type: 'dynamic',
+        language: 'html',
+        transform: (code: string, storyContext: any) => {
+          // Transformación simple que preserva el resaltado de sintaxis
+          let result = code;
+          
+          // Solo transformar property bindings innecesarios, manteniendo message como está
+          result = result.replace(/\[type\]="'([^']+)'"/g, 'type="$1"');
+          result = result.replace(/\[iconName\]="'([^']+)'"/g, 'iconName="$1"');
+          result = result.replace(/\[iconSize\]="'([^']+)'"/g, 'iconSize="$1"');
+          result = result.replace(/\[iconColor\]="'([^']+)'"/g, 'iconColor="$1"');
+          
+          // Transformar isFullWidth boolean a string
+          result = result.replace(/\[isFullWidth\]="true"/g, 'isFullWidth="true"');
+          result = result.replace(/\[isFullWidth\]="false"/g, 'isFullWidth="false"');
+          
+          return result;
+        }
       }
     }
   },
@@ -25,25 +46,45 @@ export default {
     },
     isFullWidth: {
       control: 'boolean',
-      description: 'Determina si el componente debe ocupar todo el ancho disponible'
+      description: 'Determina si el componente debe ocupar todo el ancho disponible',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'false' }
+      }
     },
     type: {
       control: { type: 'select' },
       options: ['success', 'warning', 'error', 'info'],
-      description: 'Tipo de mensaje que determina el color y estilo (success = verde por defecto)'
+      description: 'Tipo de mensaje que determina el color y estilo (success = verde por defecto)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'success' }
+      }
     },
     iconName: {
       control: 'text',
-      description: 'Nombre del icono a mostrar a la izquierda (ej: "paperclip", "heart", "star")'
+      description: 'Nombre del icono a mostrar a la izquierda (ej: "paperclip", "heart", "star")',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' }
+      }
     },
     iconSize: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del icono'
+      description: 'Tamaño del icono',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' }
+      }
     },
     iconColor: {
       control: 'color',
-      description: 'Color hexadecimal del icono (ej: "#5BAB5F")'
+      description: 'Color hexadecimal del icono (ej: "#5BAB5F")',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' }
+      }
     }
   }
 } as Meta<SaMessageboxComponent>;
@@ -218,43 +259,43 @@ export const IconColors: StoryObj<SaMessageboxComponent> = {
         <div class="mb-4">
           <h5 class="mb-2">Icono verde</h5>
           <sa-messagebox 
-            message="Mensaje con icono verde"
-            [iconName]="'paperclip'"
-            [iconSize]="'md'"
-            [iconColor]="'#5BAB5F'">
+            [message]="'Mensaje con icono verde'"
+            iconName="paperclip"
+            iconSize="md"
+            iconColor="#5BAB5F">
           </sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Icono azul</h5>
           <sa-messagebox 
-            message="Mensaje con icono azul"
+            [message]="'Mensaje con icono azul'"
             type="info"
-            [iconName]="'paperclip'"
-            [iconSize]="'md'"
-            [iconColor]="'#007bff'">
+            iconName="paperclip"
+            iconSize="md"
+            iconColor="#007bff">
           </sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Icono rojo</h5>
           <sa-messagebox 
-            message="Mensaje con icono rojo"
+            [message]="'Mensaje con icono rojo'"
             type="error"
-            [iconName]="'paperclip'"
-            [iconSize]="'md'"
-            [iconColor]="'#dc3545'">
+            iconName="paperclip"
+            iconSize="md"
+            iconColor="#dc3545">
           </sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Icono naranja</h5>
           <sa-messagebox 
-            message="Mensaje con icono naranja"
+            [message]="'Mensaje con icono naranja'"
             type="warning"
-            [iconName]="'paperclip'"
-            [iconSize]="'md'"
-            [iconColor]="'#fd7e14'">
+            iconName="paperclip"
+            iconSize="md"
+            iconColor="#fd7e14">
           </sa-messagebox>
         </div>
       </div>
@@ -267,34 +308,34 @@ export const IconColors: StoryObj<SaMessageboxComponent> = {
       },
       source: {
         code: `<sa-messagebox 
-  message="Mensaje con icono verde"
-  [iconName]="'paperclip'"
-  [iconSize]="'md'"
-  [iconColor]="'#5BAB5F'">
+  [message]="'Mensaje con icono verde'"
+  iconName="paperclip"
+  iconSize="md"
+  iconColor="#5BAB5F">
 </sa-messagebox>
 
 <sa-messagebox 
-  message="Mensaje con icono azul"
+  [message]="'Mensaje con icono azul'"
   type="info"
-  [iconName]="'paperclip'"
-  [iconSize]="'md'"
-  [iconColor]="'#007bff'">
+  iconName="paperclip"
+  iconSize="md"
+  iconColor="#007bff">
 </sa-messagebox>
 
 <sa-messagebox 
-  message="Mensaje con icono rojo"
+  [message]="'Mensaje con icono rojo'"
   type="error"
-  [iconName]="'paperclip'"
-  [iconSize]="'md'"
-  [iconColor]="'#dc3545'">
+  iconName="paperclip"
+  iconSize="md"
+  iconColor="#dc3545">
 </sa-messagebox>
 
 <sa-messagebox 
-  message="Mensaje con icono naranja"
+  [message]="'Mensaje con icono naranja'"
   type="warning"
-  [iconName]="'paperclip'"
-  [iconSize]="'md'"
-  [iconColor]="'#fd7e14'">
+  iconName="paperclip"
+  iconSize="md"
+  iconColor="#fd7e14">
 </sa-messagebox>`
       }
     }
@@ -328,37 +369,37 @@ export const Examples: StoryObj<SaMessageboxComponent> = {
         <div class="mb-4">
           <h5 class="mb-2">Mensaje con icono</h5>
           <sa-messagebox 
-            message="Este es un mensaje con un icono a la izquierda."
-            [iconName]="'paperclip'"
-            [iconSize]="'md'"
-            [iconColor]="'#5BAB5F'">
+            [message]="'Este es un mensaje con un icono a la izquierda.'"
+            iconName="paperclip"
+            iconSize="md"
+            iconColor="#5BAB5F">
           </sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Mensaje de advertencia con HTML</h5>
-          <sa-messagebox message="🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>." type="warning"></sa-messagebox>
+          <sa-messagebox [message]="'🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.'" type="warning"></sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Mensaje de error con icono y HTML</h5>
           <sa-messagebox 
-            message="❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso." 
+            [message]="'❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.'" 
             type="error"
-            [iconName]="'exclamation-triangle'"
-            [iconSize]="'md'"
-            [iconColor]="'#dc3545'">
+            iconName="exclamation-triangle"
+            iconSize="md"
+            iconColor="#dc3545">
           </sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Mensaje informativo con HTML</h5>
-          <sa-messagebox message="ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato." type="info"></sa-messagebox>
+          <sa-messagebox [message]="'ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.'" type="info"></sa-messagebox>
         </div>
         
         <div class="mb-4">
           <h5 class="mb-2">Mensaje con ancho completo y HTML</h5>
-          <sa-messagebox message="📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>." [isFullWidth]="true"></sa-messagebox>
+          <sa-messagebox [message]="'📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.'" isFullWidth="true"></sa-messagebox>
         </div>
       </div>
     `
@@ -366,7 +407,37 @@ export const Examples: StoryObj<SaMessageboxComponent> = {
   parameters: {
     docs: {
       source: {
-        code: `<sa-messagebox message=\"👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.\"></sa-messagebox>\n\n<sa-messagebox message=\"Este es un mensaje con un icono a la izquierda.\" [iconName]=\"'paperclip'\" [iconSize]=\"'md'\" [iconColor]=\"'#5BAB5F'\"></sa-messagebox>\n\n<sa-messagebox message=\"🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.\" type=\"warning\"></sa-messagebox>\n\n<sa-messagebox message=\"❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.\" type=\"error\" [iconName]=\"'exclamation-triangle'\" [iconSize]=\"'md'\"></sa-messagebox>\n\n<sa-messagebox message=\"ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.\" type=\"info\"></sa-messagebox>\n\n<sa-messagebox message=\"📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.\" [isFullWidth]=\"true\"></sa-messagebox>`
+        code: `<sa-messagebox [message]="'👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.'"></sa-messagebox>
+
+<sa-messagebox 
+  [message]="'Este es un mensaje con un icono a la izquierda.'" 
+  iconName="paperclip" 
+  iconSize="md" 
+  iconColor="#5BAB5F">
+</sa-messagebox>
+
+<sa-messagebox 
+  [message]="'🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.'" 
+  type="warning">
+</sa-messagebox>
+
+<sa-messagebox 
+  [message]="'❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.'" 
+  type="error" 
+  iconName="exclamation-triangle" 
+  iconSize="md"
+  iconColor="#dc3545">
+</sa-messagebox>
+
+<sa-messagebox 
+  [message]="'ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.'" 
+  type="info">
+</sa-messagebox>
+
+<sa-messagebox 
+  [message]="'📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.'" 
+  isFullWidth="true">
+</sa-messagebox>`
       }
     }
   }

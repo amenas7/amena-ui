@@ -15,8 +15,5 @@ import './fontawesome.config';
 })
 export class SannaUiFontAwesomeModule { 
   constructor() {
-    // La configuración de iconos se ejecuta al importar './fontawesome.config'
-    // Esto asegura que todos los iconos estén disponibles automáticamente
-    console.log('🎯 Sanna UI Font Awesome Module: Iconos configurados automáticamente');
   }
 }
