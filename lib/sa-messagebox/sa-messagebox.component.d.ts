@@ -3,7 +3,6 @@ import * as i0 from "@angular/core";
 export declare class SaMessageboxComponent {
     private sanitizer;
     message: string;
-    isFullWidth: boolean;
     private _type;
     private _iconName?;
     private _iconSize?;
@@ -20,5 +19,5 @@ export declare class SaMessageboxComponent {
     get sanitizedMessage(): SafeHtml;
     get hasIcon(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaMessageboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaMessageboxComponent, "sa-messagebox", never, { "message": { "alias": "message"; "required": false; }; "isFullWidth": { "alias": "isFullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "iconName": { "alias": "iconName"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconColor": { "alias": "iconColor"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaMessageboxComponent, "sa-messagebox", never, { "message": { "alias": "message"; "required": false; }; "type": { "alias": "type"; "required": false; }; "iconName": { "alias": "iconName"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconColor": { "alias": "iconColor"; "required": false; }; }, {}, never, never, false, never>;
 }

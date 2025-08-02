@@ -1,0 +1,163 @@
+// ===================================================================
+// SANNA UI - CONFIGURACIÓN GLOBAL DE FUENTES
+// ===================================================================
+// Este archivo permite personalizar las fuentes de toda la librería
+// desde un punto central. Modifica las variables para cambiar la tipografía.
+
+// ===================================================================
+// 1. CONFIGURACIÓN DE FUENTES
+// ===================================================================
+
+// Fuente principal de la librería (puedes cambiarla aquí)
+$sanna-font-primary: 'Plus Jakarta Sans' !default;
+
+// URL de Google Fonts (actualizar si cambias la fuente)
+$sanna-google-fonts-url: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap' !default;
+
+// Fuentes de fallback del sistema
+$sanna-font-fallbacks: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+
+// Stack completo de fuentes
+$sanna-font-stack: #{$sanna-font-primary}, #{$sanna-font-fallbacks} !default;
+
+// ===================================================================
+// 2. IMPORTACIÓN DE GOOGLE FONTS
+// ===================================================================
+
+@import url(#{$sanna-google-fonts-url});
+
+// ===================================================================
+// 3. VARIABLES CSS GLOBALES
+// ===================================================================
+
+:root {
+  // Variable CSS para uso en JavaScript si es necesario
+  --sanna-font-family: #{$sanna-font-stack};
+  
+  // Variables específicas por peso
+  --sanna-font-light: #{$sanna-font-stack};
+  --sanna-font-regular: #{$sanna-font-stack};
+  --sanna-font-medium: #{$sanna-font-stack};
+  --sanna-font-semibold: #{$sanna-font-stack};
+  --sanna-font-bold: #{$sanna-font-stack};
+}
+
+// ===================================================================
+// 4. MIXINS PARA APLICAR FUENTES
+// ===================================================================
+
+// Mixin base para aplicar la fuente principal
+@mixin sanna-font-base {
+  font-family: $sanna-font-stack !important;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+// Mixins para diferentes pesos
+@mixin sanna-font-light {
+  @include sanna-font-base;
+  font-weight: 300 !important;
+}
+
+@mixin sanna-font-regular {
+  @include sanna-font-base;
+  font-weight: 400 !important;
+}
+
+@mixin sanna-font-medium {
+  @include sanna-font-base;
+  font-weight: 500 !important;
+}
+
+@mixin sanna-font-semibold {
+  @include sanna-font-base;
+  font-weight: 600 !important;
+}
+
+@mixin sanna-font-bold {
+  @include sanna-font-base;
+  font-weight: 700 !important;
+}
+
+// ===================================================================
+// 5. CLASES UTILITARIAS
+// ===================================================================
+
+// Clase base para componentes
+.sanna-component {
+  @include sanna-font-regular;
+}
+
+// Clases por peso de fuente
+.sanna-font-light {
+  @include sanna-font-light;
+}
+
+.sanna-font-regular {
+  @include sanna-font-regular;
+}
+
+.sanna-font-medium {
+  @include sanna-font-medium;
+}
+
+.sanna-font-semibold {
+  @include sanna-font-semibold;
+}
+
+.sanna-font-bold {
+  @include sanna-font-bold;
+}
+
+// ===================================================================
+// 6. APLICACIÓN AUTOMÁTICA A COMPONENTES SANNA
+// ===================================================================
+
+// Aplicar fuente automáticamente a todos los componentes Sanna UI
+[class*="sa-"],
+[class^="sanna-"] {
+  @include sanna-font-regular;
+}
+
+// ===================================================================
+// 7. PERSONALIZACIÓN AVANZADA
+// ===================================================================
+
+// Para personalizar las fuentes, simplemente sobrescribe las variables:
+//
+// Ejemplo de personalización:
+// $sanna-font-primary: 'Inter';
+// $sanna-google-fonts-url: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+//
+// O usar fuentes del sistema:
+// $sanna-font-primary: 'system-ui';
+// $sanna-google-fonts-url: ''; // Vacío para no importar Google Fonts
+
+// ===================================================================
+// 8. COMENTARIOS DE USO
+// ===================================================================
+
+/*
+USO EN COMPONENTES:
+
+1. Importar este archivo:
+   @import '../_styles/sanna-fonts';
+
+2. Usar mixins:
+   .mi-componente {
+     @include sanna-font-medium;
+   }
+
+3. Usar variables:
+   .mi-texto {
+     font-family: $sanna-font-stack;
+   }
+
+4. Usar clases CSS:
+   <div class="sanna-font-semibold">Texto en semibold</div>
+
+PERSONALIZACIÓN:
+
+Para cambiar la fuente de toda la librería, modifica las variables
+$sanna-font-primary y $sanna-google-fonts-url al inicio de este archivo.
+*/
