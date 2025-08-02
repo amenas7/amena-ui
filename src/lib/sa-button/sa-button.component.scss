@@ -1,6 +1,27 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../_styles/sanna-fonts';
 
+/* SOLUCIÓN DEFINITIVA: El host element debe ser inline por defecto */
+:host {
+  display: inline-block !important;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  
+  /* Último botón hermano no debe tener margen derecho */
+  &:last-child {
+    margin-right: 0;
+  }
+  
+  /* Override específico para Bootstrap */
+  .container &,
+  .row &,
+  .col &,
+  [class*="col-"] & {
+    display: inline-block !important;
+    vertical-align: middle;
+  }
+}
+
 /* Aplicar la fuente usando mixins globales */
 .btn {
   border: none;
@@ -20,36 +41,10 @@
   white-space: nowrap;
   line-height: 1;
   min-width: fit-content; /* Asegura que el botón mantenga su ancho mínimo */
-  
-  /* Forzar comportamiento inline-block para compatibilidad con Bootstrap */
-  float: none !important;
-  clear: none !important;
-  
-  /* Asegurar que los botones se comporten como elementos inline por defecto */
-  margin-right: 0.5rem;
-  
-  /* Último botón no debe tener margen derecho */
-  &:last-child {
-    margin-right: 0;
-  }
-  
-  /* Override para Bootstrap row */
-  .row & {
-    display: inline-block !important;
-    vertical-align: top;
-  }
-  
-  /* Asegurar que los botones se comporten como elementos inline por defecto */
-  margin-right: 0.5rem;
-  
-  /* Último botón no debe tener margen derecho */
-  &:last-child {
-    margin-right: 0;
-  }
 
-  &:focus {
-    //box-shadow: 0 0 0 3px rgba(0, 170, 0, 0.25);
-  }
+  // &:focus {
+  //   outline: none;
+  // }
   
   &:active {
     transform: translateY(1px);
@@ -241,11 +236,9 @@
   color: #2e3b60;
   font-weight: 600;
   
-  &:hover {
-    // background-color: #E9ECEF;
-    // border-color: #5A6268;
-    // color: #5A6268;
-  }
+  // &:hover {
+  //   background-color: #f8f9fa;
+  // }
   
   /* Estado loading específico para terciary */
   &.loading {
@@ -438,27 +431,7 @@
   width: 100%;
 }
 
-/* Clase específica para botones en contexto Bootstrap */
-.btn-inline {
-  display: inline-block !important;
-  vertical-align: top;
-  margin-right: 0.5rem;
-  
-  &:last-child {
-    margin-right: 0;
-  }
-}
 
-/* Override específico para Bootstrap row */
-.row .btn {
-  display: inline-block !important;
-  vertical-align: top;
-  margin-right: 0.5rem;
-  
-  &:last-child {
-    margin-right: 0;
-  }
-}
 
 
 
