@@ -26,8 +26,8 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     private _showItemsPerPage;
     private _showTotal;
     private _hover;
-    private _responsive;
     private _loading;
+    private _showFirstLastButtons;
     set itemsPerPage(value: number | any);
     get itemsPerPage(): number;
     set showPagination(value: boolean | any);
@@ -38,10 +38,10 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     get showTotal(): boolean;
     set hover(value: boolean | any);
     get hover(): boolean;
-    set responsive(value: boolean | any);
-    get responsive(): boolean;
     set loading(value: boolean | any);
     get loading(): boolean;
+    set showFirstLastButtons(value: boolean | any);
+    get showFirstLastButtons(): boolean;
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
     sortChange: EventEmitter<{
@@ -67,5 +67,5 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     trackByFn(index: number, item: any): any;
     onSelectChange(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "responsive": { "alias": "responsive"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
 }
