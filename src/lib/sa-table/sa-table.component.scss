@@ -254,16 +254,15 @@
       }
     }
     
-    /* Asegurar que la tabla tenga un ancho mínimo */
-    .table {
-      min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
-      width: 100%;
-      
-      /* En pantallas muy pequeñas, permitir que se comprima un poco más */
-      @media (max-width: 480px) {
-        min-width: 400px;
-      }
-    }
+         /* Asegurar que la tabla tenga un ancho mínimo */
+     .table {
+       width: 100%;
+       
+       /* En pantallas muy pequeñas, permitir que se comprima un poco más */
+       @media (max-width: 480px) {
+         min-width: 400px !important;
+       }
+     }
   }
   
   .table {
@@ -677,16 +676,15 @@ nav[aria-label="Navegación de páginas"] {
     }
   }
   
-  /* Asegurar que la tabla tenga un ancho mínimo */
-  .table {
-    min-width: 600px !important;
-    width: 100%;
-    
-    /* En pantallas muy pequeñas, permitir que se comprima un poco más */
-    @media (max-width: 480px) {
-      min-width: 400px !important;
-    }
-  }
+     /* Asegurar que la tabla tenga un ancho mínimo */
+   .table {
+     width: 100%;
+     
+     /* En pantallas muy pequeñas, permitir que se comprima un poco más */
+     @media (max-width: 480px) {
+       min-width: 400px !important;
+     }
+   }
 }
 
 .sa-table-container .table-container {

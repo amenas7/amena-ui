@@ -42,6 +42,9 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     get loading(): boolean;
     set showFirstLastButtons(value: boolean | any);
     get showFirstLastButtons(): boolean;
+    private _minWidth;
+    set minWidth(value: string | any);
+    get minWidth(): string;
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
     sortChange: EventEmitter<{
@@ -67,5 +70,5 @@ export declare class SaTableComponent implements OnInit, OnChanges {
     trackByFn(index: number, item: any): any;
     onSelectChange(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
 }
