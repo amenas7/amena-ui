@@ -513,3 +513,35 @@ nav[aria-label="Navegación de páginas"] {
     padding: 0;
   }
 }
+
+/* Estilos específicos para sobrescribir Bootstrap con máxima especificidad */
+.sa-table-container .table.table-bordered {
+  border: 1px solid #e1e2e4 !important;
+}
+
+.sa-table-container .table.table-bordered > :not(caption) > * {
+  border-width: 0 !important;
+}
+
+.sa-table-container .table.table-bordered > :not(caption) > * > * {
+  border-width: 0 !important;
+}
+
+.sa-table-container .table > :not(caption) > * > * {
+  border: none !important;
+}
+
+.sa-table-container .table > tbody > tr > td {
+  border-bottom: 1px solid #e1e2e4 !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-left: none !important;
+}
+
+.sa-table-container .table > thead > tr > th {
+  border: none !important;
+}
+
+.sa-table-container .table > tbody > tr:last-child > td {
+  border-bottom: 1px solid #e1e2e4 !important;
+}
