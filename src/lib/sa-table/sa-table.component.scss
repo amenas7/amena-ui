@@ -287,7 +287,8 @@
   
   // Sobrescribir cualquier estilo de Bootstrap para las cabeceras
   .table thead tr th {
-    background-color: #EEF8F0 !important;
+    //background-color: #EEF8F0 !important;
+    background-color: red !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
