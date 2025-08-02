@@ -30,10 +30,6 @@ export default {
           result = result.replace(/\[iconSize\]="'([^']+)'"/g, 'iconSize="$1"');
           result = result.replace(/\[iconColor\]="'([^']+)'"/g, 'iconColor="$1"');
           
-          // Transformar isFullWidth boolean a string
-          result = result.replace(/\[isFullWidth\]="true"/g, 'isFullWidth="true"');
-          result = result.replace(/\[isFullWidth\]="false"/g, 'isFullWidth="false"');
-          
           return result;
         }
       }
@@ -43,14 +39,6 @@ export default {
     message: {
       control: 'text',
       description: 'El texto del mensaje que se mostrará en el componente. Soporta HTML como <b>, <i>, <u>, emojis, etc.'
-    },
-    isFullWidth: {
-      control: 'boolean',
-      description: 'Determina si el componente debe ocupar todo el ancho disponible',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'false' }
-      }
     },
     type: {
       control: { type: 'select' },
@@ -91,8 +79,7 @@ export default {
 
 export const Default: StoryObj<SaMessageboxComponent> = {
   args: {
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    isFullWidth: false
+    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
   },
   parameters: {
     docs: {
@@ -109,7 +96,6 @@ export const Default: StoryObj<SaMessageboxComponent> = {
 export const Success: StoryObj<SaMessageboxComponent> = {
   args: {
     message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',
-    isFullWidth: false,
     type: 'success'
   },
   parameters: {
@@ -127,7 +113,6 @@ export const Success: StoryObj<SaMessageboxComponent> = {
 export const Warning: StoryObj<SaMessageboxComponent> = {
   args: {
     message: 'Este es un mensaje de advertencia que requiere tu atención.',
-    isFullWidth: false,
     type: 'warning'
   },
   parameters: {
@@ -145,7 +130,6 @@ export const Warning: StoryObj<SaMessageboxComponent> = {
 export const Error: StoryObj<SaMessageboxComponent> = {
   args: {
     message: 'Este es un mensaje de error que indica que algo salió mal.',
-    isFullWidth: false,
     type: 'error'
   },
   parameters: {
@@ -163,7 +147,6 @@ export const Error: StoryObj<SaMessageboxComponent> = {
 export const Info: StoryObj<SaMessageboxComponent> = {
   args: {
     message: 'Este es un mensaje informativo con información útil para el usuario.',
-    isFullWidth: false,
     type: 'info'
   },
   parameters: {
@@ -178,27 +161,9 @@ export const Info: StoryObj<SaMessageboxComponent> = {
   }
 };
 
-export const FullWidth: StoryObj<SaMessageboxComponent> = {
-  args: {
-    message: 'Este es un mensaje que ocupa todo el ancho disponible del contenedor.',
-    isFullWidth: true
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Mensaje que ocupa todo el ancho disponible. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
-      },
-      source: {
-        type: 'dynamic'
-      }
-    }
-  }
-};
-
 export const ShortMessage: StoryObj<SaMessageboxComponent> = {
   args: {
-    message: 'Mensaje corto',
-    isFullWidth: false
+    message: 'Mensaje corto'
   },
   parameters: {
     docs: {
@@ -214,8 +179,7 @@ export const ShortMessage: StoryObj<SaMessageboxComponent> = {
 
 export const LongMessage: StoryObj<SaMessageboxComponent> = {
   args: {
-    message: 'Este es un mensaje muy largo que debería envolverse en múltiples líneas para demostrar cómo se comporta el componente cuando el texto es extenso y necesita ser dividido en varias líneas para mantener la legibilidad.',
-    isFullWidth: false
+    message: 'Este es un mensaje muy largo que debería envolverse en múltiples líneas para demostrar cómo se comporta el componente cuando el texto es extenso y necesita ser dividido en varias líneas para mantener la legibilidad.'
   },
   parameters: {
     docs: {
@@ -232,7 +196,6 @@ export const LongMessage: StoryObj<SaMessageboxComponent> = {
 export const WithIcon: StoryObj<SaMessageboxComponent> = {
   args: {
     message: 'Este es un mensaje con un icono a la izquierda.',
-    isFullWidth: false,
     type: 'success',
     iconName: 'paperclip',
     iconSize: 'md',
@@ -345,7 +308,6 @@ export const IconColors: StoryObj<SaMessageboxComponent> = {
 export const HtmlContent: StoryObj<SaMessageboxComponent> = {
   args: {
     message: '🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i> que incluye <u>texto subrayado</u> y emojis 🎉',
-    isFullWidth: false,
     type: 'warning'
   },
   parameters: {
@@ -398,8 +360,8 @@ export const Examples: StoryObj<SaMessageboxComponent> = {
         </div>
         
         <div class="mb-4">
-          <h5 class="mb-2">Mensaje con ancho completo y HTML</h5>
-          <sa-messagebox [message]="'📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.'" isFullWidth="true"></sa-messagebox>
+          <h5 class="mb-2">Mensaje con HTML</h5>
+          <sa-messagebox [message]="'📢 <b>Anuncio:</b> Este mensaje tiene <i>formato HTML</i>.'"></sa-messagebox>
         </div>
       </div>
     `
@@ -435,8 +397,7 @@ export const Examples: StoryObj<SaMessageboxComponent> = {
 </sa-messagebox>
 
 <sa-messagebox 
-  [message]="'📢 <b>Anuncio:</b> Este mensaje ocupa todo el ancho y tiene <i>formato HTML</i>.'" 
-  isFullWidth="true">
+  [message]="'📢 <b>Anuncio:</b> Este mensaje tiene <i>formato HTML</i>.'">
 </sa-messagebox>`
       }
     }

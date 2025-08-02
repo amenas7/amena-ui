@@ -10,9 +10,6 @@ export class SaMessageboxComponent {
   // Property que DEBE usar property binding: [message]="'texto'"
   @Input() message: string = '';
   
-  // Propiedades híbridas: soportan tanto attribute como property binding
-  @Input() isFullWidth: boolean = false;
-  
   // Propiedades con setters/getters para flexibilidad máxima
   private _type: 'success' | 'warning' | 'error' | 'info' = 'success';
   private _iconName?: string;

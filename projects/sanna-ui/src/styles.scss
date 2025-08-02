@@ -6,4 +6,7 @@
  */
 
 /* Importar sistema centralizado de fuentes */
-@import 'lib/_styles/sanna-fonts'; 
+@import 'lib/_styles/sanna-fonts';
+
+/* Importar estilos de componentes específicos */
+@import 'lib/sa-table/sa-table.component.scss'; 

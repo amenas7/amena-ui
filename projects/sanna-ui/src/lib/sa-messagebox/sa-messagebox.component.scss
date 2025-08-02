@@ -9,8 +9,8 @@
   flex-direction: row;
   border: 0.0625rem solid rgb(14, 144, 105);
   border-radius: 8px;
-  width: 22.9375rem;
-  line-height: 1.28;
+  width: 100%;
+  max-width: 100%;
   min-height: auto;
   padding: 1rem;
   background-color: rgb(242, 253, 249);
@@ -18,13 +18,7 @@
   margin: 8px 0;
   transition: all 0.3s ease;
   box-sizing: border-box;
-
-  &.full-width {
-    width: 100%;
-    max-width: 100%;
-    min-height: auto;
-    overflow-wrap: break-word;
-  }
+  overflow-wrap: break-word;
 
   &.success {
     background-color: rgb(242, 253, 249);

@@ -4,6 +4,11 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
+  "assets": [
+    "./src/lib/_styles/**/*.scss",
+    "./src/styles.scss",
+    "./src/lib/**/*.scss"
+  ],
   "allowedNonPeerDependencies": [
     "@fortawesome/angular-fontawesome",
     "@fortawesome/fontawesome-svg-core",

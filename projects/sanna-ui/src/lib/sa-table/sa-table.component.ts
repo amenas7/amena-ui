@@ -23,7 +23,7 @@ export interface PaginationInfo {
 @Component({
   selector: 'sa-table',
   templateUrl: './sa-table.component.html',
-  styleUrl: './sa-table.component.scss'
+  styleUrls: ['./sa-table.component.scss']
 })
 export class SaTableComponent implements OnInit, OnChanges {
   // Arrays/objetos que siempre usan property binding
@@ -39,8 +39,8 @@ export class SaTableComponent implements OnInit, OnChanges {
   private _showItemsPerPage: boolean = true;
   private _showTotal: boolean = true;
   private _hover: boolean = false;
-  private _responsive: boolean = true;
   private _loading: boolean = false;
+  private _showFirstLastButtons: boolean = true;
 
   @Input()
   set itemsPerPage(value: number | any) {
@@ -83,19 +83,19 @@ export class SaTableComponent implements OnInit, OnChanges {
   }
 
   @Input()
-  set responsive(value: boolean | any) {
-    this._responsive = value === true || value === 'true';
-  }
-  get responsive(): boolean {
-    return this._responsive;
-  }
-
-  @Input()
   set loading(value: boolean | any) {
     this._loading = value === true || value === 'true';
   }
   get loading(): boolean {
     return this._loading;
+  }
+
+  @Input()
+  set showFirstLastButtons(value: boolean | any) {
+    this._showFirstLastButtons = value === true || value === 'true';
+  }
+  get showFirstLastButtons(): boolean {
+    return this._showFirstLastButtons;
   }
 
   @Output() pageChange = new EventEmitter<number>();

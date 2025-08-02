@@ -28,10 +28,10 @@ const meta: Meta<SaTableComponent> = {
           result = result.replace(/\[showTotal\]="false"/g, 'showTotal="false"');
           result = result.replace(/\[hover\]="true"/g, 'hover="true"');
           result = result.replace(/\[hover\]="false"/g, 'hover="false"');
-          result = result.replace(/\[responsive\]="true"/g, 'responsive="true"');
-          result = result.replace(/\[responsive\]="false"/g, 'responsive="false"');
           result = result.replace(/\[loading\]="true"/g, 'loading="true"');
           result = result.replace(/\[loading\]="false"/g, 'loading="false"');
+          result = result.replace(/\[showFirstLastButtons\]="true"/g, 'showFirstLastButtons="true"');
+          result = result.replace(/\[showFirstLastButtons\]="false"/g, 'showFirstLastButtons="false"');
           
           // Limpiar espacios extra
           result = result.replace(/\n\s*\n/g, '\n');
@@ -54,6 +54,7 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 ### Paginación
 - **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)
 - **Colores activos**: Fondo verde (#5BAB5F) con texto blanco
+- **Botones primera/última página**: Opcionales, se pueden ocultar
 
 ## Props
 
@@ -65,11 +66,8 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 | showItemsPerPage | boolean | true | Mostrar selector de elementos por página |
 | showPagination | boolean | true | Mostrar controles de paginación |
 | showTotal | boolean | true | Mostrar información de totales |
-
+| showFirstLastButtons | boolean | true | Mostrar botones de primera y última página |
 | hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |
-
-| responsive | boolean | true | Tabla responsive |
-
 | loading | boolean | false | Estado de carga |
 | emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
 
@@ -121,6 +119,7 @@ const data: TableData[] = [
   [data]="data"
   [itemsPerPage]="10"
   [showPagination]="true"
+  [showFirstLastButtons]="true"
   [bordered]="true"
   (pageChange)="onPageChange($event)">
 </sa-table>
@@ -155,17 +154,14 @@ const data: TableData[] = [
       control: { type: 'boolean' },
       description: 'Mostrar información de totales. Usa attribute binding: showTotal="true"'
     },
-
+    showFirstLastButtons: {
+      control: { type: 'boolean' },
+      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons="true"'
+    },
     hover: {
       control: { type: 'boolean' },
       description: 'Aplicar efecto hover (deshabilitado por defecto). Usa attribute binding: hover="true"'
     },
-
-    responsive: {
-      control: { type: 'boolean' },
-      description: 'Hacer la tabla responsive. Usa attribute binding: responsive="true"'
-    },
-
     loading: {
       control: { type: 'boolean' },
       description: 'Mostrar estado de carga. Usa attribute binding: loading="true"'
@@ -177,12 +173,12 @@ const data: TableData[] = [
   },
   args: {
     // Valores por defecto para todos los stories
-    hover: false,
-    responsive: true,
+    hover: true,
     loading: false,
     showItemsPerPage: true,
     showPagination: true,
     showTotal: true,
+    showFirstLastButtons: false,
     itemsPerPage: 10,
     emptyMessage: 'No hay datos disponibles'
   }
@@ -379,6 +375,23 @@ export const VistaCompacta: Story = {
     docs: {
       description: {
         story: 'Vista compacta de la tabla con paginación simplificada, ideal para espacios reducidos. Sin selector de elementos por página y sin información de totales.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
+export const SinBotonesPrimeraUltima: Story = {
+  args: {
+    ...Default.args,
+    showFirstLastButtons: false
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabla con paginación sin los botones de primera y última página. Útil para interfaces más limpias o cuando se prefiere navegación secuencial.'
       },
       source: {
         type: 'dynamic'

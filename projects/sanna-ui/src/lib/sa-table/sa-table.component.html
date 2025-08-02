@@ -20,7 +20,7 @@
   </div>
 
   <!-- Table -->
-  <div [class.table-responsive]="responsive" class="table-container">
+  <div class="table-responsive table-container">
     <table class="table" 
            [class.table-hover]="hover">
       <thead class="table-light">
@@ -67,7 +67,7 @@
     <nav *ngIf="paginationInfo.totalPages > 1" aria-label="Navegación de páginas">
       <ul class="pagination mb-0">
               <!-- First Page Button -->
-      <li class="page-item" [class.disabled]="currentPage === 1">
+      <li *ngIf="showFirstLastButtons" class="page-item" [class.disabled]="currentPage === 1">
         <button class="page-link" 
                 (click)="onPageChange(1)"
                 [disabled]="currentPage === 1"
@@ -110,7 +110,7 @@
       </li>
 
       <!-- Last Page Button -->
-      <li class="page-item" [class.disabled]="currentPage === paginationInfo.totalPages">
+      <li *ngIf="showFirstLastButtons" class="page-item" [class.disabled]="currentPage === paginationInfo.totalPages">
         <button class="page-link" 
                 (click)="onPageChange(paginationInfo.totalPages)"
                 [disabled]="currentPage === paginationInfo.totalPages"
