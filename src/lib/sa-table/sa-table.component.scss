@@ -230,8 +230,40 @@
   
   .table-responsive {
     border-radius: 0.375rem;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid #e1e2e4 !important;
+    
+    /* Scrollbar personalizado para mejor UX */
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+      
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+    
+    /* Asegurar que la tabla tenga un ancho mínimo */
+    .table {
+      min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
+      width: 100%;
+      
+      /* En pantallas muy pequeñas, permitir que se comprima un poco más */
+      @media (max-width: 480px) {
+        min-width: 400px;
+      }
+    }
   }
   
   .table {
@@ -470,12 +502,7 @@
     font-size: 0.875rem !important;
   }
   
-  .table-responsive {
-    border-radius: 0.375rem !important;
-    overflow: hidden;
-    border: 1px solid #e1e2e4 !important;
-    border-bottom: none !important;
-  }
+
   
   // Contenedor de la tabla con posición relativa para el overlay
   .table-container {
@@ -538,8 +565,17 @@
         height: 2.25rem;
       }
     }
+    
+    /* Mejorar la experiencia en móviles */
+    .table-responsive {
+      margin: 0 -0.5rem; /* Extender ligeramente los bordes */
+    }
   }
 }
+
+
+
+
 
 // Asegurar que el contenedor de paginación tenga suficiente espacio
 nav[aria-label="Navegación de páginas"] {
@@ -618,10 +654,65 @@ nav[aria-label="Navegación de páginas"] {
 /* Borde específico para el contenedor de la tabla */
 .sa-table-container .table-responsive {
   border: 1px solid #e1e2e4 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Scrollbar personalizado para mejor UX */
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+  
+  /* Asegurar que la tabla tenga un ancho mínimo */
+  .table {
+    min-width: 600px !important;
+    width: 100%;
+    
+    /* En pantallas muy pequeñas, permitir que se comprima un poco más */
+    @media (max-width: 480px) {
+      min-width: 400px !important;
+    }
+  }
 }
 
 .sa-table-container .table-container {
   border: 1px solid #e1e2e4 !important;
   border-radius: 0.375rem !important;
   overflow: hidden;
+}
+
+/* Clase adicional para tablas con scroll horizontal */
+.table-scrollable {
+  overflow-x: auto;
+  overflow-y: hidden;
+  
+  /* Mejorar la experiencia de scroll */
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+  
+  /* Asegurar que las columnas mantengan su ancho */
+  .table {
+    table-layout: fixed;
+    width: 100%;
+    
+    th, td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
