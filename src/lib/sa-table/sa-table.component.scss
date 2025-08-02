@@ -287,8 +287,8 @@
   
   // Sobrescribir cualquier estilo de Bootstrap para las cabeceras
   .table thead tr th {
-    //background-color: #EEF8F0 !important;
-    background-color: red !important;
+    background-color: #EEF8F0 !important;
+    //background-color: red !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
@@ -302,7 +302,7 @@
   
   // Eliminar borde inferior de la última fila y agregar border-radius
   .table > tbody > tr:last-child > td {
-    border-bottom: 1px solid #e1e2e4 !important;
+    border-bottom: none !important;
     border-right: none !important;
     
     &:first-child {
@@ -544,7 +544,7 @@ nav[aria-label="Navegación de páginas"] {
 }
 
 .sa-table-container .table > tbody > tr:last-child > td {
-  border-bottom: 1px solid #e1e2e4 !important;
+  border-bottom: none !important;
 }
 
 /* Borde específico para el contenedor de la tabla */
