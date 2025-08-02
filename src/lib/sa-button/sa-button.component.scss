@@ -5,12 +5,12 @@
 :host {
   display: inline-block !important;
   vertical-align: middle;
-  margin-right: 0.5rem;
+  //margin-right: 0.5rem;
   
   /* Último botón hermano no debe tener margen derecho */
-  &:last-child {
-    margin-right: 0;
-  }
+  // &:last-child {
+  //   margin-right: 0;
+  // }
   
   /* Override específico para Bootstrap */
   .container &,
