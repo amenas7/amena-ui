@@ -3,7 +3,7 @@
   <!-- Table Content (siempre visible) -->
   <div class="table-content" [class.loading]="loading">
   <!-- Items Per Page Selector -->
-  <div *ngIf="showItemsPerPage && showPagination" class="d-flex justify-content-between align-items-center mb-3">
+  <div *ngIf="showItemsPerPage && showPagination && data.length > 0" class="d-flex justify-content-between align-items-center mb-2">
     <div class="d-flex align-items-center">
       <span class="text-muted me-2">Registros por página</span>
       <select 
@@ -59,7 +59,7 @@
   </div>
 
   <!-- Pagination Info and Controls -->
-  <div *ngIf="showPagination" class="d-flex justify-content-between align-items-center mt-3">
+  <div *ngIf="showPagination && data.length > 0" class="d-flex justify-content-between align-items-center mt-1">
     <div *ngIf="showTotal" class="text-muted">
       {{ paginationInfo.startItem }} - {{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
     </div>
@@ -73,7 +73,7 @@
                 (click)="onPageChange(1)"
                 [disabled]="currentPage === 1"
                 aria-label="Primera página">
-          <span class="pagination-icon">«</span>
+          <span class="pagination-icon pagination-first">«</span>
         </button>
       </li>
 
@@ -116,7 +116,7 @@
                 (click)="onPageChange(paginationInfo.totalPages)"
                 [disabled]="currentPage === paginationInfo.totalPages"
                 aria-label="Última página">
-          <span class="pagination-icon">»</span>
+          <span class="pagination-icon pagination-last">»</span>
         </button>
       </li>
       </ul>

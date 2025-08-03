@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 
 export interface TableColumn {
   key: string;
@@ -25,7 +25,8 @@ export interface PaginationInfo {
   templateUrl: './sa-table.component.html',
   styleUrls: ['./sa-table.component.scss']
 })
-export class SaTableComponent implements OnInit, OnChanges {
+export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
+  private resizeListener: (() => void) | null = null;
   // Arrays/objetos que siempre usan property binding
   @Input() columns: TableColumn[] = [];
   @Input() data: TableData[] = [];
@@ -135,6 +136,7 @@ export class SaTableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.updatePagination();
+    this.setupResizeListener();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -214,12 +216,43 @@ export class SaTableComponent implements OnInit, OnChanges {
     const pages: number[] = [];
     const totalPages = this.paginationInfo.totalPages;
     const currentPage = this.currentPage;
+    
+    // Detectar si estamos en un dispositivo pequeño (menos de 768px)
+    const isSmallScreen = window.innerWidth < 768;
 
     if (totalPages <= 7) {
+      // Para pocas páginas, mostrar todas
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
+    } else if (isSmallScreen) {
+      // En dispositivos pequeños, mostrar solo 2 páginas máximo
+      if (currentPage <= 2) {
+        // Al inicio: mostrar páginas 1, 2 + separador + última
+        for (let i = 1; i <= Math.min(2, totalPages); i++) {
+          pages.push(i);
+        }
+        if (totalPages > 2) {
+          pages.push(-1); // Separator
+          pages.push(totalPages);
+        }
+      } else if (currentPage >= totalPages - 1) {
+        // Al final: mostrar primera + separador + últimas 2 páginas
+        pages.push(1);
+        pages.push(-1); // Separator
+        for (let i = Math.max(totalPages - 1, 1); i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        // En medio: mostrar primera + separador + actual + separador + última
+        pages.push(1);
+        pages.push(-1); // Separator
+        pages.push(currentPage);
+        pages.push(-1); // Separator
+        pages.push(totalPages);
+      }
     } else {
+      // En pantallas grandes, comportamiento original
       if (currentPage <= 4) {
         for (let i = 1; i <= 5; i++) {
           pages.push(i);
@@ -254,6 +287,20 @@ export class SaTableComponent implements OnInit, OnChanges {
     const target = event.target as HTMLSelectElement;
     if (target) {
       this.onItemsPerPageChange(+target.value);
+    }
+  }
+
+  private setupResizeListener(): void {
+    this.resizeListener = () => {
+      // Actualizar paginación cuando cambie el tamaño de la ventana
+      this.updatePagination();
+    };
+    window.addEventListener('resize', this.resizeListener);
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeListener) {
+      window.removeEventListener('resize', this.resizeListener);
     }
   }
 }

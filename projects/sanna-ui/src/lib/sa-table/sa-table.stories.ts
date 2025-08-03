@@ -73,6 +73,17 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 | emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
 | minWidth | string | 600px | Ancho mínimo de la tabla para scroll horizontal |
 
+## Comportamiento con Datos Vacíos
+
+Cuando \`data.length === 0\` (tabla sin datos), el componente automáticamente:
+
+- ✅ **Oculta el selector "Registros por página"** - No hay elementos que paginar
+- ✅ **Oculta la información de paginación** - No hay registros que contar
+- ✅ **Oculta los controles de paginación** - No hay páginas que navegar
+- ✅ **Muestra el mensaje de estado vacío** - Centrado y con estilo apropiado
+
+Este comportamiento mejora la experiencia de usuario al eliminar controles innecesarios cuando no hay datos para mostrar.
+
 ## Events
 
 | Event | Tipo | Descripción |
@@ -297,7 +308,7 @@ export const Empty: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla sin datos, mostrando el mensaje de estado vacío con el diseño personalizado.'
+        story: 'Tabla sin datos. Automáticamente oculta los controles de paginación y muestra el mensaje de estado vacío centrado. Los selectores de elementos por página y la información de totales se ocultan cuando no hay datos.'
       },
       source: {
         type: 'dynamic'
@@ -315,7 +326,7 @@ export const MensajePersonalizado: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabla con mensaje personalizado cuando no hay datos, manteniendo el diseño moderno.'
+        story: 'Tabla con mensaje personalizado cuando no hay datos. Los controles de paginación se ocultan automáticamente, mostrando solo el mensaje centrado. Ideal para estados de búsqueda sin resultados.'
       },
       source: {
         type: 'dynamic'
@@ -560,3 +571,70 @@ Este story demuestra cómo usar la propiedad minWidth para configurar el ancho m
     }
   }
 };
+
+export const PaginacionResponsive: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'email', label: 'Email', width: '300px' },
+      { key: 'department', label: 'Departamento', width: '180px' },
+      { key: 'status', label: 'Estado', width: '100px' }
+    ],
+    data: Array.from({ length: 150 }, (_, i) => ({
+      id: i + 1,
+      name: `Usuario ${i + 1}`,
+      email: `usuario${i + 1}@empresa.com`,
+      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas', 'RRHH'][i % 5],
+      status: i % 3 === 0 ? 'Activo' : 'Inactivo'
+    })),
+    hover: true,
+    showPagination: true,
+    showItemsPerPage: true,
+    showTotal: true,
+    showFirstLastButtons: true,
+    itemsPerPage: 10
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 📱 Paginación Responsive
+
+Este story demuestra cómo la paginación se adapta automáticamente a diferentes tamaños de pantalla.
+
+### Comportamiento Responsive:
+
+**Pantallas grandes (> 768px):**
+- Muestra hasta 7 números de página
+- Incluye botones de primera/última página
+- Separadores (...) para páginas intermedias
+
+**Pantallas medianas (480px - 768px):**
+- Muestra máximo 3 números de página
+- Oculta botones de primera/última página
+- Botones más pequeños y compactos
+
+**Pantallas pequeñas (< 480px):**
+- Botones aún más compactos
+- Espaciado reducido
+- Centrado automático
+
+### Características:
+
+- **Detección automática**: Se adapta según el ancho de la ventana
+- **Actualización dinámica**: Se reajusta al cambiar el tamaño de la ventana
+- **Navegación optimizada**: Mantiene la funcionalidad en todos los tamaños
+- **UX mejorada**: Evita desbordamiento en dispositivos móviles
+
+### Cómo Probar:
+
+1. **En Storybook**: Redimensiona la ventana del navegador
+2. **En móviles**: Usa las herramientas de desarrollo (F12 → Device Mode)
+3. **Observa**: Cómo cambia el número de botones mostrados
+        `
+      }
+    }
+  }
+};
+
