@@ -32,6 +32,7 @@ const meta: Meta<SaTableComponent> = {
           result = result.replace(/\[loading\]="false"/g, 'loading="false"');
           result = result.replace(/\[showFirstLastButtons\]="true"/g, 'showFirstLastButtons="true"');
           result = result.replace(/\[showFirstLastButtons\]="false"/g, 'showFirstLastButtons="false"');
+          result = result.replace(/\[minWidth\]="'([^']+)'"/g, 'minWidth="$1"');
           
           // Limpiar espacios extra
           result = result.replace(/\n\s*\n/g, '\n');
@@ -70,6 +71,7 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 | hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |
 | loading | boolean | false | Estado de carga |
 | emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
+| minWidth | string | 600px | Ancho mínimo de la tabla para scroll horizontal |
 
 ## Events
 
@@ -169,6 +171,10 @@ const data: TableData[] = [
     emptyMessage: {
       control: { type: 'text' },
       description: 'Mensaje cuando no hay datos. NOTA: Esta es la ÚNICA propiedad que usa property binding con comillas simples: [emptyMessage]="\'texto\'"'
+    },
+    minWidth: {
+      control: { type: 'text' },
+      description: 'Ancho mínimo de la tabla para scroll horizontal. Ejemplos: 600px, 800px, 1000px'
     }
   },
   args: {
@@ -180,7 +186,8 @@ const data: TableData[] = [
     showTotal: true,
     showFirstLastButtons: false,
     itemsPerPage: 10,
-    emptyMessage: 'No hay datos disponibles'
+    emptyMessage: 'No hay datos disponibles',
+    minWidth: '600px'
   }
 };
 
@@ -245,8 +252,6 @@ export const ConHover: Story = {
     }
   }
 };
-
-
 
 export const SinPaginacion: Story = {
   args: {
@@ -344,45 +349,6 @@ export const RegistrosGrandes: Story = {
   }
 };
 
-export const OptimizadaMovil: Story = {
-  args: {
-    ...Default.args,
-    itemsPerPage: 5
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile1'
-    },
-    docs: {
-      description: {
-        story: 'Tabla optimizada para dispositivos móviles con menos elementos por página, manteniendo el diseño responsive.'
-      },
-      source: {
-        type: 'dynamic'
-      }
-    }
-  }
-};
-
-export const VistaCompacta: Story = {
-  args: {
-    ...Default.args,
-    itemsPerPage: 5,
-    showItemsPerPage: false,
-    showTotal: false
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Vista compacta de la tabla con paginación simplificada, ideal para espacios reducidos. Sin selector de elementos por página y sin información de totales.'
-      },
-      source: {
-        type: 'dynamic'
-      }
-    }
-  }
-};
-
 export const SinBotonesPrimeraUltima: Story = {
   args: {
     ...Default.args,
@@ -395,6 +361,201 @@ export const SinBotonesPrimeraUltima: Story = {
       },
       source: {
         type: 'dynamic'
+      }
+    }
+  }
+};
+
+export const ScrollTest: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '60px' },
+      { key: 'name', label: 'Nombre Completo del Empleado', width: '250px' },
+      { key: 'email', label: 'Dirección de Correo Electrónico Corporativo', width: '350px' },
+      { key: 'phone', label: 'Número de Teléfono Móvil', width: '180px' },
+      { key: 'department', label: 'Departamento de Trabajo', width: '220px' },
+      { key: 'position', label: 'Cargo o Posición Laboral', width: '280px' },
+      { key: 'salary', label: 'Salario Anual', width: '150px' },
+      { key: 'startDate', label: 'Fecha de Inicio de Contrato', width: '200px' },
+      { key: 'status', label: 'Estado de Empleado', width: '120px' },
+      { key: 'location', label: 'Ubicación de la Oficina', width: '180px' },
+      { key: 'manager', label: 'Supervisor Directo', width: '200px' },
+      { key: 'projects', label: 'Proyectos Asignados', width: '300px' }
+    ],
+    data: [
+      { 
+        id: 1, 
+        name: 'Juan Carlos Pérez González', 
+        email: 'juan.carlos.perez.gonzalez@empresa.com', 
+        phone: '+34 612 345 678',
+        department: 'Desarrollo de Software',
+        position: 'Desarrollador Senior Full Stack',
+        salary: '€45,000',
+        startDate: '15/03/2020',
+        status: 'Activo',
+        location: 'Madrid, España',
+        manager: 'Ana García López',
+        projects: 'Portal Web, App Móvil, API REST'
+      },
+      { 
+        id: 2, 
+        name: 'María Isabel García Rodríguez', 
+        email: 'maria.isabel.garcia.rodriguez@empresa.com', 
+        phone: '+34 623 456 789',
+        department: 'Recursos Humanos',
+        position: 'Directora de RRHH',
+        salary: '€52,000',
+        startDate: '01/01/2019',
+        status: 'Activo',
+        location: 'Barcelona, España',
+        manager: 'Carlos Ruiz Martín',
+        projects: 'Reclutamiento, Formación, Bienestar'
+      },
+      { 
+        id: 3, 
+        name: 'Carlos Alberto López Martínez', 
+        email: 'carlos.alberto.lopez.martinez@empresa.com', 
+        phone: '+34 634 567 890',
+        department: 'Marketing Digital',
+        position: 'Especialista en SEO',
+        salary: '€38,000',
+        startDate: '10/06/2021',
+        status: 'Activo',
+        location: 'Valencia, España',
+        manager: 'Laura Fernández Castro',
+        projects: 'SEO, SEM, Redes Sociales'
+      }
+    ],
+    hover: true,
+    showPagination: false,
+    showItemsPerPage: false,
+    showTotal: false,
+    minWidth: '800px'
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1'
+    },
+    docs: {
+      description: {
+        story: `
+## 🧪 Story para Probar Scroll Horizontal
+
+Este story está diseñado específicamente para probar la funcionalidad de scroll horizontal. Incluye:
+
+### Características de Prueba:
+
+- **12 columnas muy anchas**: Para forzar el scroll horizontal
+- **Nombres de columnas largos**: Para verificar que no se compriman
+- **Datos extensos**: Emails corporativos largos y descripciones detalladas
+- **Vista móvil por defecto**: Para simular pantallas pequeñas
+- **Ancho mínimo configurable**: 800px para demostrar la propiedad minWidth
+
+### Cómo Probar:
+
+1. **En Storybook**: 
+   - Ve a este story
+   - Redimensiona la ventana del navegador
+   - Deberías ver scroll horizontal cuando el ancho sea < 800px
+
+2. **En Herramientas de Desarrollo**:
+   - F12 → Device Mode
+   - Selecciona iPhone o Android
+   - Verifica que aparece scroll horizontal
+
+3. **Indicadores Visuales**:
+   - Scrollbar personalizado (gris claro)
+   - Scroll suave al arrastrar
+   - Hover en scrollbar oscurece el color
+
+### Breakpoints de Prueba:
+
+- **> 800px**: Sin scroll (tabla normal)
+- **400px - 800px**: Scroll con ancho mínimo 800px
+- **< 400px**: Scroll con ancho mínimo 400px (móvil)
+        `
+      }
+    }
+  }
+};
+
+export const CustomMinWidth: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'email', label: 'Email', width: '300px' },
+      { key: 'phone', label: 'Teléfono', width: '150px' },
+      { key: 'department', label: 'Departamento', width: '180px' },
+      { key: 'position', label: 'Cargo', width: '200px' },
+      { key: 'salary', label: 'Salario', width: '120px' },
+      { key: 'startDate', label: 'Fecha Inicio', width: '150px' },
+      { key: 'status', label: 'Estado', width: '100px' }
+    ],
+    data: [
+      { 
+        id: 1, 
+        name: 'Juan Pérez', 
+        email: 'juan.perez@empresa.com', 
+        phone: '+34 612 345 678',
+        department: 'Desarrollo',
+        position: 'Desarrollador Senior',
+        salary: '€45,000',
+        startDate: '15/03/2020',
+        status: 'Activo'
+      },
+      { 
+        id: 2, 
+        name: 'María García', 
+        email: 'maria.garcia@empresa.com', 
+        phone: '+34 623 456 789',
+        department: 'RRHH',
+        position: 'Directora RRHH',
+        salary: '€52,000',
+        startDate: '01/01/2019',
+        status: 'Activo'
+      }
+    ],
+    hover: true,
+    showPagination: true,
+    showItemsPerPage: true,
+    showTotal: true,
+    minWidth: '1000px'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 📏 Tabla con Ancho Mínimo Personalizado
+
+Este story demuestra cómo usar la propiedad minWidth para configurar el ancho mínimo de la tabla.
+
+### Características:
+
+- **minWidth: 1000px**: Ancho mínimo configurado a 1000px
+- **Scroll horizontal**: Se activa cuando el ancho de pantalla < 1000px
+- **Configuración dinámica**: El ancho mínimo se puede cambiar desde los controles
+
+### Cómo Usar:
+
+\`\`\`html
+<!-- Ancho mínimo por defecto (600px) -->
+<sa-table [columns]="columns" [data]="data"></sa-table>
+
+<!-- Ancho mínimo personalizado -->
+<sa-table [columns]="columns" [data]="data" minWidth="800px"></sa-table>
+
+<!-- Ancho mínimo muy amplio -->
+<sa-table [columns]="columns" [data]="data" minWidth="1200px"></sa-table>
+\`\`\`
+
+### Valores Recomendados:
+
+- **600px**: Para tablas con pocas columnas
+- **800px**: Para tablas con columnas moderadas
+- **1000px**: Para tablas con muchas columnas
+- **1200px**: Para tablas muy amplias
+        `
       }
     }
   }

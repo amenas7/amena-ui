@@ -22,7 +22,8 @@
   <!-- Table -->
   <div class="table-responsive table-container">
     <table class="table" 
-           [class.table-hover]="hover">
+           [class.table-hover]="hover"
+           [style.min-width]="minWidth">
       <thead class="table-light">
         <tr>
           <th *ngFor="let column of columns" 

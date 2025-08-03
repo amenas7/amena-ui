@@ -98,6 +98,17 @@ export class SaTableComponent implements OnInit, OnChanges {
     return this._showFirstLastButtons;
   }
 
+  // Propiedad para el ancho mínimo de la tabla
+  private _minWidth: string = '600px';
+  
+  @Input()
+  set minWidth(value: string | any) {
+    this._minWidth = value || '600px';
+  }
+  get minWidth(): string {
+    return this._minWidth;
+  }
+
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<{column: string, direction: 'asc' | 'desc'}>();

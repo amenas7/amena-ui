@@ -1,8 +1,19 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../_styles/sanna-fonts';
 
+/* SOLUCIÓN: El host element debe ser inline por defecto para compatibilidad con Bootstrap */
 :host {
-  display: block;
+  display: inline-block !important;
+  vertical-align: middle;
+  
+  /* Override específico para Bootstrap */
+  .container &,
+  .row &,
+  .col &,
+  [class*="col-"] & {
+    display: inline-block !important;
+    vertical-align: middle;
+  }
 }
 
 // Estilos adicionales para mejorar la apariencia
