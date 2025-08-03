@@ -299,6 +299,23 @@
       text-align: left !important;
       vertical-align: middle !important;
     }
+    
+    // Animación para el tbody al cambiar de página
+    tbody.animate-fade-in {
+      animation: fadeIn 0.5s ease-out;
+      animation-fill-mode: both;
+      
+      // Ocultar el contenido al inicio de la animación
+      td {
+        color: transparent !important;
+        transition: color 0.5s ease-out;
+      }
+      
+      // Mostrar el contenido al final de la animación
+      &.animation-complete td {
+        color: inherit !important;
+      }
+    }
   }
   
   // Forzar que no haya hover en las cabeceras
@@ -807,5 +824,15 @@ nav[aria-label="Navegación de páginas"] {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+}
+
+/* Animaciones para la tabla */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

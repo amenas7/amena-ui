@@ -127,6 +127,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
 
   paginatedData: TableData[] = [];
   itemsPerPageOptions: number[] = [5, 10, 25, 50, 100];
+  
+  // Propiedad para controlar la animación
+  animationKey: number = 0;
 
 
 
@@ -179,16 +182,44 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.paginationInfo.totalPages) {
       this.currentPage = page;
+      this.animationKey = 0; // Reiniciar la animación
       this.updatePagination();
       this.pageChange.emit(page);
+      
+      // Activar la animación después de un breve delay
+      setTimeout(() => {
+        this.animationKey = Date.now();
+        
+        // Marcar como completa después de la duración de la animación
+        setTimeout(() => {
+          const tbody = document.querySelector('tbody[data-animation-key]') as HTMLElement;
+          if (tbody) {
+            tbody.classList.add('animation-complete');
+          }
+        }, 300); // Duración de la animación
+      }, 10);
     }
   }
 
   onItemsPerPageChange(itemsPerPage: number): void {
     this.itemsPerPage = itemsPerPage;
     this.currentPage = 1;
+    this.animationKey = 0; // Reiniciar la animación
     this.updatePagination();
     this.itemsPerPageChange.emit(itemsPerPage);
+    
+    // Activar la animación después de un breve delay
+    setTimeout(() => {
+      this.animationKey = Date.now();
+      
+      // Marcar como completa después de la duración de la animación
+      setTimeout(() => {
+        const tbody = document.querySelector('tbody[data-animation-key]') as HTMLElement;
+        if (tbody) {
+          tbody.classList.add('animation-complete');
+        }
+      }, 300); // Duración de la animación
+    }, 10);
   }
 
   onSort(column: string): void {
