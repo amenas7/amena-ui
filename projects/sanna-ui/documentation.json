@@ -514,6 +514,16 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaButtonComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -558,7 +568,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaButtonComponent>",
-                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\r\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\r\n        <sa-button label=\"Gray\" variant=\"gray\"></sa-button>\r\n        <sa-button label=\"Red\" variant=\"red\"></sa-button>\r\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\r\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\r\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Gray\\\" variant=\\\"gray\\\"></sa-button>\\n<sa-button label=\\\"Red\\\" variant=\\\"red\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\r\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\r\n        <sa-button label=\"Gray\" variant=\"gray\"></sa-button>\r\n        <sa-button label=\"Red\" variant=\"red\"></sa-button>\r\n        <sa-button label=\"Success\" variant=\"success\"></sa-button>\r\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\r\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\r\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Gray\\\" variant=\\\"gray\\\"></sa-button>\\n<sa-button label=\\\"Red\\\" variant=\\\"red\\\"></sa-button>\\n<sa-button label=\\\"Success\\\" variant=\\\"success\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Warning",
@@ -1291,6 +1301,16 @@
                     "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 align-items-center\">\r\n        <sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Small\\\" size=\\\"small\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"medium\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"large\\\" variant=\\\"primary\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
                 },
                 {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SaButtonComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
                     "name": "Terciary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -1318,7 +1338,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<SaButtonComponent>",
-                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\r\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\r\n        <sa-button label=\"Gray\" variant=\"gray\"></sa-button>\r\n        <sa-button label=\"Red\" variant=\"red\"></sa-button>\r\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\r\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\r\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Gray\\\" variant=\\\"gray\\\"></sa-button>\\n<sa-button label=\\\"Red\\\" variant=\\\"red\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n        <sa-button label=\"Primary\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\r\n        <sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\r\n        <sa-button label=\"Gray\" variant=\"gray\"></sa-button>\r\n        <sa-button label=\"Red\" variant=\"red\"></sa-button>\r\n        <sa-button label=\"Success\" variant=\"success\"></sa-button>\r\n        <sa-button label=\"Danger\" variant=\"danger\"></sa-button>\r\n        <sa-button label=\"Warning\" variant=\"warning\"></sa-button>\r\n        <sa-button label=\"Info\" variant=\"info\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Primary\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Secondary\\\" variant=\\\"secondary\\\"></sa-button>\\n<sa-button label=\\\"Terciary\\\" variant=\\\"terciary\\\"></sa-button>\\n<sa-button label=\\\"Gray\\\" variant=\\\"gray\\\"></sa-button>\\n<sa-button label=\\\"Red\\\" variant=\\\"red\\\"></sa-button>\\n<sa-button label=\\\"Success\\\" variant=\\\"success\\\"></sa-button>\\n<sa-button label=\\\"Danger\\\" variant=\\\"danger\\\"></sa-button>\\n<sa-button label=\\\"Warning\\\" variant=\\\"warning\\\"></sa-button>\\n<sa-button label=\\\"Info\\\" variant=\\\"info\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
                 },
                 {
                     "name": "WithIcons",
@@ -1679,6 +1699,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Sizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Success",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

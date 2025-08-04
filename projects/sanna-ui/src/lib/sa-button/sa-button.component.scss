@@ -271,19 +271,19 @@
 }
 
 .btn-success {
-  background-color: #DAF6E4;
+  background-color: #D3F7E3;
   border: 1px solid #00ab4a;
   color: #00ab4a;
     
     &:hover {
-        background-color: #D0FFD0;
+        background-color: #C0F0D0;
         border-color: #009900;
         color: #009900;
     }
     
     /* Estado loading específico para success */
     &.loading {
-      background-color: #DAF6E4 !important;
+      background-color: #D3F7E3 !important;
       color: #00ab4a !important;
       opacity: 1 !important;
     }
@@ -295,7 +295,7 @@
     }
     
     .spinner-overlay {
-      background-color: #DAF6E4 !important;
+      background-color: #D3F7E3 !important;
       opacity: 1 !important;
     }
 }

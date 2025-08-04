@@ -58,7 +58,7 @@ export default {
     },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray', 'red'],
+      options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray', 'red', 'success'],
       description: 'Variante de color del botón'
     },
     size: {
@@ -189,6 +189,24 @@ export const Red: StoryObj<SaButtonComponent> = {
   }
 };
 
+// Historia Success
+export const Success: StoryObj<SaButtonComponent> = {
+  args: {
+    label: 'Click me',
+    variant: 'success'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
 // Historia Disabled
 export const Disabled: StoryObj<SaButtonComponent> = {
   args: {
@@ -220,6 +238,7 @@ export const Variants: StoryObj<SaButtonComponent> = {
         <sa-button label="Terciary" variant="terciary"></sa-button>
         <sa-button label="Gray" variant="gray"></sa-button>
         <sa-button label="Red" variant="red"></sa-button>
+        <sa-button label="Success" variant="success"></sa-button>
         <sa-button label="Danger" variant="danger"></sa-button>
         <sa-button label="Warning" variant="warning"></sa-button>
         <sa-button label="Info" variant="info"></sa-button>
@@ -229,7 +248,7 @@ export const Variants: StoryObj<SaButtonComponent> = {
   parameters: {
     docs: {
       source: {
-        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Red\" variant=\"red\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>`
+        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Red\" variant=\"red\"></sa-button>\n<sa-button label=\"Success\" variant=\"success\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>`
       }
     }
   }

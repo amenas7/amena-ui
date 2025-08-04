@@ -42,7 +42,7 @@ import {
   faPencil
 } from '@fortawesome/free-solid-svg-icons';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray' | 'red';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray' | 'red' | 'success';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
