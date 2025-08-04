@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SannaUiComponent } from './sanna-ui.component';
 import { SannaUiFontAwesomeModule } from './fontawesome.module';
 
@@ -26,6 +27,8 @@ import { SaTableComponent } from './sa-table/sa-table.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     SannaUiFontAwesomeModule
   ],
   exports: [

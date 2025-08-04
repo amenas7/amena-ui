@@ -61,14 +61,14 @@
                 "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'id', label: 'ID', width: '80px' },\r\n      { key: 'name', label: 'Nombre', width: '200px' },\r\n      { key: 'email', label: 'Email', width: '300px' },\r\n      { key: 'phone', label: 'Teléfono', width: '150px' },\r\n      { key: 'department', label: 'Departamento', width: '180px' },\r\n      { key: 'position', label: 'Cargo', width: '200px' },\r\n      { key: 'salary', label: 'Salario', width: '120px' },\r\n      { key: 'startDate', label: 'Fecha Inicio', width: '150px' },\r\n      { key: 'status', label: 'Estado', width: '100px' }\r\n    ],\r\n    data: [\r\n      { \r\n        id: 1, \r\n        name: 'Juan Pérez', \r\n        email: 'juan.perez@empresa.com', \r\n        phone: '+34 612 345 678',\r\n        department: 'Desarrollo',\r\n        position: 'Desarrollador Senior',\r\n        salary: '€45,000',\r\n        startDate: '15/03/2020',\r\n        status: 'Activo'\r\n      },\r\n      { \r\n        id: 2, \r\n        name: 'María García', \r\n        email: 'maria.garcia@empresa.com', \r\n        phone: '+34 623 456 789',\r\n        department: 'RRHH',\r\n        position: 'Directora RRHH',\r\n        salary: '€52,000',\r\n        startDate: '01/01/2019',\r\n        status: 'Activo'\r\n      }\r\n    ],\r\n    hover: true,\r\n    showPagination: true,\r\n    showItemsPerPage: true,\r\n    showTotal: true,\r\n    minWidth: '1000px'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📏 Tabla con Ancho Mínimo Personalizado\r\n\r\nEste story demuestra cómo usar la propiedad minWidth para configurar el ancho mínimo de la tabla.\r\n\r\n### Características:\r\n\r\n- **minWidth: 1000px**: Ancho mínimo configurado a 1000px\r\n- **Scroll horizontal**: Se activa cuando el ancho de pantalla < 1000px\r\n- **Configuración dinámica**: El ancho mínimo se puede cambiar desde los controles\r\n\r\n### Cómo Usar:\r\n\r\n\\`\\`\\`html\r\n<!-- Ancho mínimo por defecto (600px) -->\r\n<sa-table [columns]=\"columns\" [data]=\"data\"></sa-table>\r\n\r\n<!-- Ancho mínimo personalizado -->\r\n<sa-table [columns]=\"columns\" [data]=\"data\" minWidth=\"800px\"></sa-table>\r\n\r\n<!-- Ancho mínimo muy amplio -->\r\n<sa-table [columns]=\"columns\" [data]=\"data\" minWidth=\"1200px\"></sa-table>\r\n\\`\\`\\`\r\n\r\n### Valores Recomendados:\r\n\r\n- **600px**: Para tablas con pocas columnas\r\n- **800px**: Para tablas con columnas moderadas\r\n- **1000px**: Para tablas con muchas columnas\r\n- **1200px**: Para tablas muy amplias\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
-                "name": "Date",
+                "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    type: 'date'\r\n  }\r\n}"
+                "type": "StoryObj<SaMessageboxComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -84,31 +84,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaMessageboxComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    columns: sampleColumns,\r\n    data: sampleData\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Tabla con el diseño moderno por defecto: sin hover y border-radius.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Escribe algo aquí...',\r\n    label: 'Input básico'\r\n  }\r\n}"
             },
             {
                 "name": "Disabled",
@@ -119,16 +99,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaButtonComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'primary',\r\n    disabled: true\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón en estado deshabilitado. Se muestra en gris y no es interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo deshabilitado',\r\n    placeholder: 'No puedes escribir aquí',\r\n    disabled: true\r\n  }\r\n}"
             },
             {
                 "name": "Empty",
@@ -149,16 +119,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de error que indica que algo salió mal.',\r\n    type: 'error'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de error con colores rojo/rosa. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input con error',\r\n    placeholder: 'Campo con error',\r\n    variant: 'error',\r\n    errorText: 'Este campo tiene un error'\r\n  }\r\n}"
             },
             {
                 "name": "Examples",
@@ -231,16 +191,6 @@
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje informativo con información útil para el usuario.',\r\n    type: 'info'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje informativo con colores azul. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input grande',\r\n    placeholder: 'Tamaño grande',\r\n    size: 'large'\r\n  }\r\n}"
-            },
-            {
                 "name": "Loading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -259,16 +209,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje muy largo que debería envolverse en múltiples líneas para demostrar cómo se comporta el componente cuando el texto es extenso y necesita ser dividido en varias líneas para mantener la legibilidad.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje largo que demuestra el comportamiento de wrapping del texto. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Medium",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input mediano',\r\n    placeholder: 'Tamaño mediano',\r\n    size: 'medium'\r\n  }\r\n}"
             },
             {
                 "name": "MensajePersonalizado",
@@ -301,24 +241,14 @@
                 "defaultValue": "{\r\n  title: 'Componentes/SaTable',\r\n  component: SaTableComponent,\r\n  parameters: {\r\n    layout: 'padded',\r\n    controls: {\r\n      expanded: true,\r\n      sort: 'requiredFirst'\r\n    },\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Solo emptyMessage mantiene comillas simples, las demás propiedades NO\r\n          result = result.replace(/\\[itemsPerPage\\]=\"'([^']+)'\"/g, 'itemsPerPage=\"$1\"');\r\n          result = result.replace(/\\[showPagination\\]=\"true\"/g, 'showPagination=\"true\"');\r\n          result = result.replace(/\\[showPagination\\]=\"false\"/g, 'showPagination=\"false\"');\r\n          result = result.replace(/\\[showItemsPerPage\\]=\"true\"/g, 'showItemsPerPage=\"true\"');\r\n          result = result.replace(/\\[showItemsPerPage\\]=\"false\"/g, 'showItemsPerPage=\"false\"');\r\n          result = result.replace(/\\[showTotal\\]=\"true\"/g, 'showTotal=\"true\"');\r\n          result = result.replace(/\\[showTotal\\]=\"false\"/g, 'showTotal=\"false\"');\r\n          result = result.replace(/\\[hover\\]=\"true\"/g, 'hover=\"true\"');\r\n          result = result.replace(/\\[hover\\]=\"false\"/g, 'hover=\"false\"');\r\n          result = result.replace(/\\[loading\\]=\"true\"/g, 'loading=\"true\"');\r\n          result = result.replace(/\\[loading\\]=\"false\"/g, 'loading=\"false\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"true\"/g, 'showFirstLastButtons=\"true\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"false\"/g, 'showFirstLastButtons=\"false\"');\r\n          result = result.replace(/\\[minWidth\\]=\"'([^']+)'\"/g, 'minWidth=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      },\r\n      description: {\r\n        component: `\r\nUn componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.\r\n\r\n## Estilos Personalizados\r\n\r\n### Tabla\r\n- **Border-radius**: Esquinas redondeadas (0.375rem)\r\n- **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores\r\n- **Filas**: Fondo blanco puro, sin efectos hover por defecto\r\n- **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true\r\n\r\n### Paginación\r\n- **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)\r\n- **Colores activos**: Fondo verde (#5BAB5F) con texto blanco\r\n- **Botones primera/última página**: Opcionales, se pueden ocultar\r\n\r\n## Props\r\n\r\n| Prop | Tipo | Default | Descripción |\r\n|------|------|---------|-------------|\r\n| columns | TableColumn[] | [] | Configuración de las columnas |\r\n| data | TableData[] | [] | Datos a mostrar en la tabla |\r\n| itemsPerPage | number | 10 | Elementos por página |\r\n| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |\r\n| showPagination | boolean | true | Mostrar controles de paginación |\r\n| showTotal | boolean | true | Mostrar información de totales |\r\n| showFirstLastButtons | boolean | true | Mostrar botones de primera y última página |\r\n| hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |\r\n| loading | boolean | false | Estado de carga |\r\n| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |\r\n| minWidth | string | 600px | Ancho mínimo de la tabla para scroll horizontal |\r\n\r\n## Comportamiento con Datos Vacíos\r\n\r\nCuando \\`data.length === 0\\` (tabla sin datos), el componente automáticamente:\r\n\r\n- ✅ **Oculta el selector \"Registros por página\"** - No hay elementos que paginar\r\n- ✅ **Oculta la información de paginación** - No hay registros que contar\r\n- ✅ **Oculta los controles de paginación** - No hay páginas que navegar\r\n- ✅ **Muestra el mensaje de estado vacío** - Centrado y con estilo apropiado\r\n\r\nEste comportamiento mejora la experiencia de usuario al eliminar controles innecesarios cuando no hay datos para mostrar.\r\n\r\n## Events\r\n\r\n| Event | Tipo | Descripción |\r\n|-------|------|-------------|\r\n| pageChange | number | Emitido cuando cambia la página |\r\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\r\n\r\n## Interfaces\r\n\r\n### TableColumn\r\n\\`\\`\\`typescript\r\ninterface TableColumn {\r\n  key: string;           // Clave única de la columna\r\n  label: string;         // Etiqueta visible\r\n  width?: string;        // Ancho de la columna (opcional)\r\n}\r\n\\`\\`\\`\r\n\r\n### TableData\r\n\\`\\`\\`typescript\r\ninterface TableData {\r\n  [key: string]: any;    // Objeto con los datos de la fila\r\n}\r\n\\`\\`\\`\r\n\r\n## Uso\r\n\r\n\\`\\`\\`typescript\r\nimport { SaTableComponent } from '@sanna-ui/sa-table';\r\n\r\n// Configuración básica\r\nconst columns: TableColumn[] = [\r\n  { key: 'id', label: 'ID', sortable: true },\r\n  { key: 'name', label: 'Nombre', sortable: true },\r\n  { key: 'email', label: 'Email' }\r\n];\r\n\r\nconst data: TableData[] = [\r\n  { id: 1, name: 'Juan Pérez', email: 'juan@email.com' },\r\n  { id: 2, name: 'María García', email: 'maria@email.com' }\r\n];\r\n\r\n// En el template\r\n<sa-table \r\n  [columns]=\"columns\" \r\n  [data]=\"data\"\r\n  [itemsPerPage]=\"10\"\r\n  [showPagination]=\"true\"\r\n  [showFirstLastButtons]=\"true\"\r\n  [bordered]=\"true\"\r\n  (pageChange)=\"onPageChange($event)\">\r\n</sa-table>\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    columns: {\r\n      control: { type: 'object' },\r\n      description: 'Configuración de las columnas de la tabla'\r\n    },\r\n    data: {\r\n      control: { type: 'object' },\r\n      description: 'Datos a mostrar en la tabla'\r\n    },\r\n    itemsPerPage: {\r\n      control: { type: 'number', min: 1, max: 100 },\r\n      description: 'Número de elementos por página. Usa attribute binding: itemsPerPage=\"10\"'\r\n    },\r\n    showItemsPerPage: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar selector de elementos por página. Usa attribute binding: showItemsPerPage=\"true\"'\r\n    },\r\n    showPagination: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar controles de paginación. Usa attribute binding: showPagination=\"true\"'\r\n    },\r\n    showTotal: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar información de totales. Usa attribute binding: showTotal=\"true\"'\r\n    },\r\n    showFirstLastButtons: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons=\"true\"'\r\n    },\r\n    hover: {\r\n      control: { type: 'boolean' },\r\n      description: 'Aplicar efecto hover (deshabilitado por defecto). Usa attribute binding: hover=\"true\"'\r\n    },\r\n    loading: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar estado de carga. Usa attribute binding: loading=\"true\"'\r\n    },\r\n    emptyMessage: {\r\n      control: { type: 'text' },\r\n      description: 'Mensaje cuando no hay datos. NOTA: Esta es la ÚNICA propiedad que usa property binding con comillas simples: [emptyMessage]=\"\\'texto\\'\"'\r\n    },\r\n    minWidth: {\r\n      control: { type: 'text' },\r\n      description: 'Ancho mínimo de la tabla para scroll horizontal. Ejemplos: 600px, 800px, 1000px'\r\n    }\r\n  },\r\n  args: {\r\n    // Valores por defecto para todos los stories\r\n    hover: true,\r\n    loading: false,\r\n    showItemsPerPage: true,\r\n    showPagination: true,\r\n    showTotal: true,\r\n    showFirstLastButtons: false,\r\n    itemsPerPage: 10,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px'\r\n  }\r\n}"
             },
             {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaInputComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Input',\r\n  component: SaInputComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\r\n      description: 'Tipo de input HTML'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['small', 'medium', 'large'],\r\n      description: 'Tamaño del input'\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['default', 'success', 'warning', 'error'],\r\n      description: 'Variante visual del input'\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: 'boolean',\r\n      description: 'Estado de solo lectura'\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo requerido'\r\n    },\r\n    showPasswordToggle: {\r\n      control: 'boolean',\r\n      description: 'Mostrar toggle de contraseña'\r\n    },\r\n    leftIcon: {\r\n      control: 'text',\r\n      description: 'Icono izquierdo (clase CSS)'\r\n    },\r\n    rightIcon: {\r\n      control: 'text',\r\n      description: 'Icono derecho (clase CSS)'\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del input'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Number",
+                "name": "NgModelExample",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Edad',\r\n    placeholder: 'Ingresa tu edad',\r\n    type: 'number',\r\n    minlength: 1,\r\n    maxlength: 3\r\n  }\r\n}"
+                "defaultValue": "{\r\n  render: () => ({\r\n    props: {\r\n      miVariable: ''\r\n    },\r\n    template: `\r\n      <div style=\"padding: 20px; max-width: 400px;\">\r\n        <h3>Ejemplo con ngModel</h3>\r\n        <sa-input [(ngModel)]=\"miVariable\" label=\"ngModel\" placeholder=\"Puedes escribir aquí!\"></sa-input>\r\n        <p>Valor actual: <b>{{ miVariable }}</b></p>\r\n      </div>\r\n    `\r\n  }),\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, SannaUiModule, FontAwesomeModule]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Puedes escribir en el input y ver el valor actualizado en tiempo real usando ngModel.'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "PaginacionResponsive",
@@ -329,26 +259,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'id', label: 'ID', width: '80px' },\r\n      { key: 'name', label: 'Nombre', width: '200px' },\r\n      { key: 'email', label: 'Email', width: '300px' },\r\n      { key: 'department', label: 'Departamento', width: '180px' },\r\n      { key: 'status', label: 'Estado', width: '100px' }\r\n    ],\r\n    data: Array.from({ length: 150 }, (_, i) => ({\r\n      id: i + 1,\r\n      name: `Usuario ${i + 1}`,\r\n      email: `usuario${i + 1}@empresa.com`,\r\n      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas', 'RRHH'][i % 5],\r\n      status: i % 3 === 0 ? 'Activo' : 'Inactivo'\r\n    })),\r\n    hover: true,\r\n    showPagination: true,\r\n    showItemsPerPage: true,\r\n    showTotal: true,\r\n    showFirstLastButtons: true,\r\n    itemsPerPage: 10\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📱 Paginación Responsive\r\n\r\nEste story demuestra cómo la paginación se adapta automáticamente a diferentes tamaños de pantalla.\r\n\r\n### Comportamiento Responsive:\r\n\r\n**Pantallas grandes (> 768px):**\r\n- Muestra hasta 7 números de página\r\n- Incluye botones de primera/última página\r\n- Separadores (...) para páginas intermedias\r\n\r\n**Pantallas medianas (480px - 768px):**\r\n- Muestra máximo 3 números de página\r\n- Oculta botones de primera/última página\r\n- Botones más pequeños y compactos\r\n\r\n**Pantallas pequeñas (< 480px):**\r\n- Botones aún más compactos\r\n- Espaciado reducido\r\n- Centrado automático\r\n\r\n### Características:\r\n\r\n- **Detección automática**: Se adapta según el ancho de la ventana\r\n- **Actualización dinámica**: Se reajusta al cambiar el tamaño de la ventana\r\n- **Navegación optimizada**: Mantiene la funcionalidad en todos los tamaños\r\n- **UX mejorada**: Evita desbordamiento en dispositivos móviles\r\n\r\n### Cómo Probar:\r\n\r\n1. **En Storybook**: Redimensiona la ventana del navegador\r\n2. **En móviles**: Usa las herramientas de desarrollo (F12 → Device Mode)\r\n3. **Observa**: Cómo cambia el número de botones mostrados\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "PasswordWithToggle",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Contraseña',\r\n    placeholder: 'Ingresa tu contraseña',\r\n    type: 'password',\r\n    showPasswordToggle: true,\r\n    required: true\r\n  }\r\n}"
-            },
-            {
-                "name": "Phone",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Teléfono',\r\n    placeholder: '+1 (555) 123-4567',\r\n    type: 'tel',\r\n    leftIcon: 'fas fa-phone'\r\n  }\r\n}"
             },
             {
                 "name": "preview",
@@ -371,14 +281,14 @@
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'primary'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón principal interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
-                "name": "Readonly",
+                "name": "ReactiveFormExample",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo de solo lectura',\r\n    placeholder: 'Valor fijo',\r\n    readonly: true,\r\n    value: 'Este valor no se puede modificar'\r\n  }\r\n}"
+                "defaultValue": "{\r\n  render: () => {\r\n    const fb = new FormBuilder();\r\n    const form: FormGroup = fb.group({ campo: [''] });\r\n    return {\r\n      props: { form },\r\n      template: `\r\n        <div style=\"padding: 20px; max-width: 400px;\">\r\n          <h3>Ejemplo con Formulario Reactivo</h3>\r\n          <form [formGroup]=\"form\">\r\n            <sa-input formControlName=\"campo\" label=\"Reactivo\" placeholder=\"Puedes escribir aquí!\"></sa-input>\r\n          </form>\r\n          <p>Valor actual: <b>{{ form.get('campo')?.value }}</b></p>\r\n        </div>\r\n      `\r\n    };\r\n  },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule, FontAwesomeModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Puedes escribir en el input y ver el valor actualizado en tiempo real usando formularios reactivos.'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Red",
@@ -429,16 +339,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'id', label: 'ID', width: '60px' },\r\n      { key: 'name', label: 'Nombre Completo del Empleado', width: '250px' },\r\n      { key: 'email', label: 'Dirección de Correo Electrónico Corporativo', width: '350px' },\r\n      { key: 'phone', label: 'Número de Teléfono Móvil', width: '180px' },\r\n      { key: 'department', label: 'Departamento de Trabajo', width: '220px' },\r\n      { key: 'position', label: 'Cargo o Posición Laboral', width: '280px' },\r\n      { key: 'salary', label: 'Salario Anual', width: '150px' },\r\n      { key: 'startDate', label: 'Fecha de Inicio de Contrato', width: '200px' },\r\n      { key: 'status', label: 'Estado de Empleado', width: '120px' },\r\n      { key: 'location', label: 'Ubicación de la Oficina', width: '180px' },\r\n      { key: 'manager', label: 'Supervisor Directo', width: '200px' },\r\n      { key: 'projects', label: 'Proyectos Asignados', width: '300px' }\r\n    ],\r\n    data: [\r\n      { \r\n        id: 1, \r\n        name: 'Juan Carlos Pérez González', \r\n        email: 'juan.carlos.perez.gonzalez@empresa.com', \r\n        phone: '+34 612 345 678',\r\n        department: 'Desarrollo de Software',\r\n        position: 'Desarrollador Senior Full Stack',\r\n        salary: '€45,000',\r\n        startDate: '15/03/2020',\r\n        status: 'Activo',\r\n        location: 'Madrid, España',\r\n        manager: 'Ana García López',\r\n        projects: 'Portal Web, App Móvil, API REST'\r\n      },\r\n      { \r\n        id: 2, \r\n        name: 'María Isabel García Rodríguez', \r\n        email: 'maria.isabel.garcia.rodriguez@empresa.com', \r\n        phone: '+34 623 456 789',\r\n        department: 'Recursos Humanos',\r\n        position: 'Directora de RRHH',\r\n        salary: '€52,000',\r\n        startDate: '01/01/2019',\r\n        status: 'Activo',\r\n        location: 'Barcelona, España',\r\n        manager: 'Carlos Ruiz Martín',\r\n        projects: 'Reclutamiento, Formación, Bienestar'\r\n      },\r\n      { \r\n        id: 3, \r\n        name: 'Carlos Alberto López Martínez', \r\n        email: 'carlos.alberto.lopez.martinez@empresa.com', \r\n        phone: '+34 634 567 890',\r\n        department: 'Marketing Digital',\r\n        position: 'Especialista en SEO',\r\n        salary: '€38,000',\r\n        startDate: '10/06/2021',\r\n        status: 'Activo',\r\n        location: 'Valencia, España',\r\n        manager: 'Laura Fernández Castro',\r\n        projects: 'SEO, SEM, Redes Sociales'\r\n      }\r\n    ],\r\n    hover: true,\r\n    showPagination: false,\r\n    showItemsPerPage: false,\r\n    showTotal: false,\r\n    minWidth: '800px'\r\n  },\r\n  parameters: {\r\n    viewport: {\r\n      defaultViewport: 'mobile1'\r\n    },\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🧪 Story para Probar Scroll Horizontal\r\n\r\nEste story está diseñado específicamente para probar la funcionalidad de scroll horizontal. Incluye:\r\n\r\n### Características de Prueba:\r\n\r\n- **12 columnas muy anchas**: Para forzar el scroll horizontal\r\n- **Nombres de columnas largos**: Para verificar que no se compriman\r\n- **Datos extensos**: Emails corporativos largos y descripciones detalladas\r\n- **Vista móvil por defecto**: Para simular pantallas pequeñas\r\n- **Ancho mínimo configurable**: 800px para demostrar la propiedad minWidth\r\n\r\n### Cómo Probar:\r\n\r\n1. **En Storybook**: \r\n   - Ve a este story\r\n   - Redimensiona la ventana del navegador\r\n   - Deberías ver scroll horizontal cuando el ancho sea < 800px\r\n\r\n2. **En Herramientas de Desarrollo**:\r\n   - F12 → Device Mode\r\n   - Selecciona iPhone o Android\r\n   - Verifica que aparece scroll horizontal\r\n\r\n3. **Indicadores Visuales**:\r\n   - Scrollbar personalizado (gris claro)\r\n   - Scroll suave al arrastrar\r\n   - Hover en scrollbar oscurece el color\r\n\r\n### Breakpoints de Prueba:\r\n\r\n- **> 800px**: Sin scroll (tabla normal)\r\n- **400px - 800px**: Scroll con ancho mínimo 800px\r\n- **< 400px**: Scroll con ancho mínimo 400px (móvil)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Search",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar en el sitio...',\r\n    type: 'search',\r\n    leftIcon: 'fas fa-search',\r\n    rightIcon: 'fas fa-times'\r\n  }\r\n}"
             },
             {
                 "name": "Secondary",
@@ -501,16 +401,6 @@
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></sa-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input pequeño',\r\n    placeholder: 'Tamaño pequeño',\r\n    size: 'small'\r\n  }\r\n}"
-            },
-            {
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -529,16 +419,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\r\n    type: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input exitoso',\r\n    placeholder: 'Campo válido',\r\n    variant: 'success',\r\n    helperText: 'Este campo es válido'\r\n  }\r\n}"
             },
             {
                 "name": "Terciary",
@@ -581,36 +461,6 @@
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de advertencia que requiere tu atención.',\r\n    type: 'warning'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de advertencia con colores naranja/amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
-                "name": "Warning",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Input con advertencia',\r\n    placeholder: 'Campo con advertencia',\r\n    variant: 'warning',\r\n    helperText: 'Este campo tiene una advertencia'\r\n  }\r\n}"
-            },
-            {
-                "name": "WithError",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    errorText: 'Por favor ingresa un email válido',\r\n    variant: 'error'\r\n  }\r\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuario',\r\n    placeholder: 'Ingresa tu nombre de usuario',\r\n    helperText: 'El nombre de usuario debe tener al menos 3 caracteres'\r\n  }\r\n}"
-            },
-            {
                 "name": "WithIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -629,36 +479,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaButtonComponent>",
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \r\n        <!-- === ACCIONES BÁSICAS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Cancel\" icon=\"close\" position=\"right\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Settings\" icon=\"cog\" position=\"left\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"red\"></sa-button>\r\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"red\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === NAVEGACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Navegación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\r\n            <sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Back\" icon=\"chevron-left\" position=\"left\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"Next\" icon=\"chevron-right\" position=\"right\" variant=\"gray\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === CHEVRONS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Posiciones</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === COMUNICACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INTERACCIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === SEGURIDAD === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === UBICACIÓN Y TIEMPO === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INFORMACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Información</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<!-- Acciones Básicas -->\r\n<sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Settings\" icon=\"cog\" position=\"left\" variant=\"gray\"></sa-button>\r\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"gray\"></sa-button>\r\n\r\n<!-- Navegación -->\r\n<sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\r\n<sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Back\" icon=\"chevron-left\" position=\"left\" variant=\"gray\"></sa-button>\r\n<sa-button label=\"Next\" icon=\"chevron-right\" position=\"right\" variant=\"gray\"></sa-button>\r\n\r\n<!-- Chevrons -->\r\n<sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Comunicación -->\r\n<sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\r\n\r\n<!-- Archivos y Documentos -->\r\n<sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\r\n\r\n<!-- Interacción -->\r\n<sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Seguridad -->\r\n<sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\r\n\r\n<!-- Ubicación y Tiempo -->\r\n<sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Información -->\r\n<sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\r\n\r\n<!-- Estados -->\r\n<sa-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "WithLabel",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Nombre completo',\r\n    placeholder: 'Ingresa tu nombre completo',\r\n    required: true\r\n  }\r\n}"
-            },
-            {
-                "name": "WithLeftIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar productos...',\r\n    leftIcon: 'fas fa-search'\r\n  }\r\n}"
-            },
-            {
-                "name": "WithRightIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    rightIcon: 'fas fa-envelope'\r\n  }\r\n}"
             }
         ],
         "functions": [],
@@ -915,208 +735,6 @@
                     "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    showPagination: false,\r\n    showItemsPerPage: false,\r\n    showTotal: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Tabla sin paginación, mostrando todos los datos con el diseño personalizado.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
-                {
-                    "name": "Date",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    type: 'date'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Escribe algo aquí...',\r\n    label: 'Input básico'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Campo deshabilitado',\r\n    placeholder: 'No puedes escribir aquí',\r\n    disabled: true\r\n  }\r\n}"
-                },
-                {
-                    "name": "Error",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input con error',\r\n    placeholder: 'Campo con error',\r\n    variant: 'error',\r\n    errorText: 'Este campo tiene un error'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input grande',\r\n    placeholder: 'Tamaño grande',\r\n    size: 'large'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Medium",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input mediano',\r\n    placeholder: 'Tamaño mediano',\r\n    size: 'medium'\r\n  }\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<SaInputComponent>",
-                    "defaultValue": "{\r\n  title: 'Componentes/Forms/Input',\r\n  component: SaInputComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'time', 'datetime-local'],\r\n      description: 'Tipo de input HTML'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['small', 'medium', 'large'],\r\n      description: 'Tamaño del input'\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['default', 'success', 'warning', 'error'],\r\n      description: 'Variante visual del input'\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: 'boolean',\r\n      description: 'Estado de solo lectura'\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo requerido'\r\n    },\r\n    showPasswordToggle: {\r\n      control: 'boolean',\r\n      description: 'Mostrar toggle de contraseña'\r\n    },\r\n    leftIcon: {\r\n      control: 'text',\r\n      description: 'Icono izquierdo (clase CSS)'\r\n    },\r\n    rightIcon: {\r\n      control: 'text',\r\n      description: 'Icono derecho (clase CSS)'\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del input'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error'\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Number",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Edad',\r\n    placeholder: 'Ingresa tu edad',\r\n    type: 'number',\r\n    minlength: 1,\r\n    maxlength: 3\r\n  }\r\n}"
-                },
-                {
-                    "name": "PasswordWithToggle",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Contraseña',\r\n    placeholder: 'Ingresa tu contraseña',\r\n    type: 'password',\r\n    showPasswordToggle: true,\r\n    required: true\r\n  }\r\n}"
-                },
-                {
-                    "name": "Phone",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Teléfono',\r\n    placeholder: '+1 (555) 123-4567',\r\n    type: 'tel',\r\n    leftIcon: 'fas fa-phone'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Readonly",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Campo de solo lectura',\r\n    placeholder: 'Valor fijo',\r\n    readonly: true,\r\n    value: 'Este valor no se puede modificar'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Search",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar en el sitio...',\r\n    type: 'search',\r\n    leftIcon: 'fas fa-search',\r\n    rightIcon: 'fas fa-times'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input pequeño',\r\n    placeholder: 'Tamaño pequeño',\r\n    size: 'small'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Success",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input exitoso',\r\n    placeholder: 'Campo válido',\r\n    variant: 'success',\r\n    helperText: 'Este campo es válido'\r\n  }\r\n}"
-                },
-                {
-                    "name": "Warning",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Input con advertencia',\r\n    placeholder: 'Campo con advertencia',\r\n    variant: 'warning',\r\n    helperText: 'Este campo tiene una advertencia'\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithError",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    errorText: 'Por favor ingresa un email válido',\r\n    variant: 'error'\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithHelperText",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Usuario',\r\n    placeholder: 'Ingresa tu nombre de usuario',\r\n    helperText: 'El nombre de usuario debe tener al menos 3 caracteres'\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithLabel",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Nombre completo',\r\n    placeholder: 'Ingresa tu nombre completo',\r\n    required: true\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithLeftIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Buscar',\r\n    placeholder: 'Buscar productos...',\r\n    leftIcon: 'fas fa-search'\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithRightIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Email',\r\n    placeholder: 'tu@email.com',\r\n    type: 'email',\r\n    rightIcon: 'fas fa-envelope'\r\n  }\r\n}"
-                }
-            ],
             "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts": [
                 {
                     "name": "Default",
@@ -1351,6 +969,28 @@
                     "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Todos los Iconos Disponibles</h4>        \r\n        <!-- === ACCIONES BÁSICAS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Acciones Básicas</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Cancel\" icon=\"close\" position=\"right\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Settings\" icon=\"cog\" position=\"left\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"red\"></sa-button>\r\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"red\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === NAVEGACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Navegación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\r\n            <sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Back\" icon=\"chevron-left\" position=\"left\" variant=\"gray\"></sa-button>\r\n            <sa-button label=\"Next\" icon=\"chevron-right\" position=\"right\" variant=\"gray\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === CHEVRONS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Posiciones</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\r\n            <sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === COMUNICACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Comunicación</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === ARCHIVOS Y DOCUMENTOS === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-danger mb-2\">Archivos y Documentos</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\r\n            <sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INTERACCIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-primary mb-2\">Interacción</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === SEGURIDAD === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-success mb-2\">Seguridad</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\r\n            <sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === UBICACIÓN Y TIEMPO === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-info mb-2\">Ubicación y Tiempo</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\r\n            <sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- === INFORMACIÓN === -->\r\n        <div class=\"mb-4\">\r\n          <h5 class=\"text-warning mb-2\">Información</h5>\r\n          <div class=\"d-flex gap-3 flex-wrap align-items-center\">\r\n            <sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\r\n            <sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\r\n            <sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<!-- Acciones Básicas -->\r\n<sa-button label=\"Edit\" icon=\"edit\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Save\" icon=\"save\" position=\"right\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Plus\" icon=\"plus\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Minus\" icon=\"minus\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Check\" icon=\"check\" position=\"left\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Times\" icon=\"times\" position=\"right\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Pencil\" icon=\"pencil\" position=\"left\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Trash\" icon=\"trash\" position=\"right\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Settings\" icon=\"cog\" position=\"left\" variant=\"gray\"></sa-button>\r\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"gray\"></sa-button>\r\n\r\n<!-- Navegación -->\r\n<sa-button label=\"Home\" icon=\"home\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"User\" icon=\"user\" position=\"right\" variant=\"terciary\"></sa-button>\r\n<sa-button label=\"Search\" icon=\"search\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Cog\" icon=\"cog\" position=\"right\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Arrow Left\" icon=\"arrow-left\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Arrow Right\" icon=\"arrow-right\" position=\"right\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Arrow Up\" icon=\"arrow-up\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Arrow Down\" icon=\"arrow-down\" position=\"right\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Back\" icon=\"chevron-left\" position=\"left\" variant=\"gray\"></sa-button>\r\n<sa-button label=\"Next\" icon=\"chevron-right\" position=\"right\" variant=\"gray\"></sa-button>\r\n\r\n<!-- Chevrons -->\r\n<sa-button label=\"Chevron Down\" icon=\"chevron-down\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Up\" icon=\"chevron-up\" position=\"right\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Left\" icon=\"chevron-left\" position=\"left\" variant=\"secondary\"></sa-button>\r\n<sa-button label=\"Chevron Right\" icon=\"chevron-right\" position=\"right\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Comunicación -->\r\n<sa-button label=\"Envelope\" icon=\"envelope\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Phone\" icon=\"phone\" position=\"right\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Bell\" icon=\"bell\" position=\"left\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Share\" icon=\"share\" position=\"right\" variant=\"primary\"></sa-button>\r\n\r\n<!-- Archivos y Documentos -->\r\n<sa-button label=\"Print\" icon=\"print\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Download\" icon=\"download\" position=\"right\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Save\" icon=\"save\" position=\"left\" variant=\"success\"></sa-button>\r\n<sa-button label=\"Edit\" icon=\"edit\" position=\"right\" variant=\"warning\"></sa-button>\r\n\r\n<!-- Interacción -->\r\n<sa-button label=\"Heart\" icon=\"heart\" position=\"left\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Star\" icon=\"star\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Eye\" icon=\"eye\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Eye Slash\" icon=\"eye-slash\" position=\"right\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Seguridad -->\r\n<sa-button label=\"Lock\" icon=\"lock\" position=\"left\" variant=\"danger\"></sa-button>\r\n<sa-button label=\"Unlock\" icon=\"unlock\" position=\"right\" variant=\"success\"></sa-button>\r\n\r\n<!-- Ubicación y Tiempo -->\r\n<sa-button label=\"Map Marker\" icon=\"map-marker-alt\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Calendar\" icon=\"calendar\" position=\"right\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Clock\" icon=\"clock\" position=\"left\" variant=\"secondary\"></sa-button>\r\n\r\n<!-- Información -->\r\n<sa-button label=\"Info\" icon=\"info\" position=\"left\" variant=\"info\"></sa-button>\r\n<sa-button label=\"Question\" icon=\"question\" position=\"right\" variant=\"warning\"></sa-button>\r\n<sa-button label=\"Exclamation\" icon=\"exclamation-triangle\" position=\"left\" variant=\"danger\"></sa-button>\r\n\r\n<!-- Estados -->\r\n<sa-button label=\"Spinner\" icon=\"spinner\" position=\"left\" variant=\"primary\"></sa-button>\r\n<sa-button label=\"Loading...\" icon=\"spinner\" position=\"right\" variant=\"info\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
+            "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
+                {
+                    "name": "NgModelExample",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  render: () => ({\r\n    props: {\r\n      miVariable: ''\r\n    },\r\n    template: `\r\n      <div style=\"padding: 20px; max-width: 400px;\">\r\n        <h3>Ejemplo con ngModel</h3>\r\n        <sa-input [(ngModel)]=\"miVariable\" label=\"ngModel\" placeholder=\"Puedes escribir aquí!\"></sa-input>\r\n        <p>Valor actual: <b>{{ miVariable }}</b></p>\r\n      </div>\r\n    `\r\n  }),\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, SannaUiModule, FontAwesomeModule]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Puedes escribir en el input y ver el valor actualizado en tiempo real usando ngModel.'\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "ReactiveFormExample",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  render: () => {\r\n    const fb = new FormBuilder();\r\n    const form: FormGroup = fb.group({ campo: [''] });\r\n    return {\r\n      props: { form },\r\n      template: `\r\n        <div style=\"padding: 20px; max-width: 400px;\">\r\n          <h3>Ejemplo con Formulario Reactivo</h3>\r\n          <form [formGroup]=\"form\">\r\n            <sa-input formControlName=\"campo\" label=\"Reactivo\" placeholder=\"Puedes escribir aquí!\"></sa-input>\r\n          </form>\r\n          <p>Valor actual: <b>{{ form.get('campo')?.value }}</b></p>\r\n        </div>\r\n      `\r\n    };\r\n  },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule, FontAwesomeModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Puedes escribir en el input y ver el valor actualizado en tiempo real usando formularios reactivos.'\r\n      }\r\n    }\r\n  }\r\n}"
+                }
+            ],
             "projects/sanna-ui/.storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -1428,7 +1068,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Date",
+                "name": "NgModelExample",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1438,187 +1078,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Default",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Error",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Medium",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Number",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "PasswordWithToggle",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Phone",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Readonly",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Search",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Success",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Warning",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithError",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithHelperText",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithLabel",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithLeftIcon",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "WithRightIcon",
+                "name": "ReactiveFormExample",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
