@@ -19,9 +19,8 @@
 // Estilos adicionales para mejorar la apariencia
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
-  font-weight: 500;
   line-height: 1.2;
-  @include sanna-font-medium;
+  color: #2A3547;
   
   &:last-child {
     margin-bottom: 0;

@@ -58,7 +58,7 @@ export default {
     },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray'],
+      options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray', 'red'],
       description: 'Variante de color del botón'
     },
     size: {
@@ -171,6 +171,24 @@ export const Gray: StoryObj<SaButtonComponent> = {
   }
 };
 
+// Historia Red
+export const Red: StoryObj<SaButtonComponent> = {
+  args: {
+    label: 'Click me',
+    variant: 'red'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Botón rojo con fondo #DC3545 y texto blanco. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
 // Historia Disabled
 export const Disabled: StoryObj<SaButtonComponent> = {
   args: {
@@ -201,6 +219,7 @@ export const Variants: StoryObj<SaButtonComponent> = {
         <sa-button label="Secondary" variant="secondary"></sa-button>
         <sa-button label="Terciary" variant="terciary"></sa-button>
         <sa-button label="Gray" variant="gray"></sa-button>
+        <sa-button label="Red" variant="red"></sa-button>
         <sa-button label="Danger" variant="danger"></sa-button>
         <sa-button label="Warning" variant="warning"></sa-button>
         <sa-button label="Info" variant="info"></sa-button>
@@ -210,7 +229,7 @@ export const Variants: StoryObj<SaButtonComponent> = {
   parameters: {
     docs: {
       source: {
-        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>`
+        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Red\" variant=\"red\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>`
       }
     }
   }
@@ -262,6 +281,8 @@ export const WithIcons: StoryObj<SaButtonComponent> = {
             <sa-button label="Trash" icon="trash" position="right" variant="danger"></sa-button>
             <sa-button label="Settings" icon="cog" position="left" variant="gray"></sa-button>
             <sa-button label="User" icon="user" position="right" variant="gray"></sa-button>
+            <sa-button label="Heart" icon="heart" position="left" variant="red"></sa-button>
+            <sa-button label="Star" icon="star" position="right" variant="red"></sa-button>
           </div>
         </div>
 
@@ -452,6 +473,8 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
             <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
             <sa-button icon="cog" iconOnly="true" variant="gray" size="small"></sa-button>
             <sa-button icon="user" iconOnly="true" variant="gray" size="small"></sa-button>
+            <sa-button icon="heart" iconOnly="true" variant="red" size="small"></sa-button>
+            <sa-button icon="star" iconOnly="true" variant="red" size="small"></sa-button>
           </div>
         </div>
 

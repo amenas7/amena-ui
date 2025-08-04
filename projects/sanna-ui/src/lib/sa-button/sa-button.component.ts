@@ -42,7 +42,7 @@ import {
   faPencil
 } from '@fortawesome/free-solid-svg-icons';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray' | 'red';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -50,7 +50,10 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 @Component({
   selector: 'sa-button',
   templateUrl: './sa-button.component.html',
-  styleUrl: './sa-button.component.scss'
+  styleUrl: './sa-button.component.scss',
+  host: {
+    '[class.full-width]': 'fullWidth'
+  }
 })
 export class SaButtonComponent {
   // Propiedades con flexibilidad máxima: soportan attribute y property binding

@@ -3,22 +3,27 @@
 
 /* SOLUCIÓN DEFINITIVA: El host element debe ser inline por defecto */
 :host {
-  display: inline-block !important;
+  display: inline-block;
   vertical-align: middle;
-  //margin-right: 0.5rem;
+  width: auto;
   
-  /* Último botón hermano no debe tener margen derecho */
-  // &:last-child {
-  //   margin-right: 0;
-  // }
+  &.full-width {
+    display: block;
+    width: 100%;
+  }
   
   /* Override específico para Bootstrap */
   .container &,
   .row &,
   .col &,
   [class*="col-"] & {
-    display: inline-block !important;
+    display: inline-block;
     vertical-align: middle;
+    
+    &.full-width {
+      display: block;
+      width: 100%;
+    }
   }
 }
 
@@ -39,8 +44,15 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  width: auto;
+  
+  &.w-100 {
+    width: 100% !important;
+    display: flex !important;
+  }
   line-height: 1;
   min-width: fit-content; /* Asegura que el botón mantenga su ancho mínimo */
+  font-weight: 400 !important;
 
   // &:focus {
   //   outline: none;
@@ -103,26 +115,26 @@
 
 /* Estilos específicos para botones que solo tienen icono */
 .btn:has(.button-content:not(:has(span))) {
-  min-width: 2.5rem;
-  min-height: 2.5rem;
-  padding: 0.5rem;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px;
   
   &.btn-sm {
-    min-width: 2rem;
-    min-height: 2rem;
-    padding: 0.375rem;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 6px;
   }
   
   &.btn-md {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
-    padding: 0.5rem;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
   }
   
   &.btn-lg {
-    min-width: 3rem;
-    min-height: 3rem;
-    padding: 0.75rem;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px;
   }
 }
 
@@ -177,8 +189,8 @@
   color: #ffffff;
   
   &:hover {
-    background-color: #36AD55;
-    border: 1px solid #36AD55;
+    background-color: #239A5C;
+    border: 1px solid #239A5C;
   }
   
   /* Estado loading específico para primary */
@@ -206,7 +218,7 @@
     color: #00ab4a;
     
     &:hover {
-      background-color: #ffff;
+      background-color: #effcf5;
       border: 1px solid #00ab4a;
       color: #00ab4a;
     }
@@ -232,13 +244,12 @@
 
 .btn-terciary {
   background-color: #fff;
-  border: 1px solid #c0c6cd;
+  border: 1px solid #c7cace;
   color: #2e3b60;
-  font-weight: 600;
   
-  // &:hover {
-  //   background-color: #f8f9fa;
-  // }
+  &:hover {
+    background-color: #f4f6f8;
+  }
   
   /* Estado loading específico para terciary */
   &.loading {
@@ -290,12 +301,12 @@
 }
 
 .btn-danger {
-  background-color: #FFE7E7;
+  background-color: #faeded;
   border: 1px solid #DC3545;
   color: #DC3545;
   
   &:hover {
-    background-color: #F5C6CB;
+    background-color: #fcdcdc;
     border-color: #C82333;
     color: #C82333;
   }
@@ -350,12 +361,12 @@
 }
 
 .btn-info {
-  background-color: #b9d5f54a;
+  background-color: #dae9fc4a;
   border: 1px solid #007bff;
   color: #007bff;
   
   &:hover {
-    background-color: #418be04a;
+    background-color: #98c8ff4a;
     border-color: #007bff;
     color: #007bff;
   }
@@ -380,19 +391,19 @@
 }
 
 .btn-gray {
-  background-color: #777676;
-  border: 1px solid #777676;
+  background-color: #777777;
+  border: 1px solid #777777;
   color: #ffffff;
   
   &:hover {
-    background-color: #6b6b6b;
-    border-color: #6b6b6b;
+    background-color: #5C5C5C;
+    border-color: #5C5C5C;
     color: #ffffff;
   }
   
   /* Estado loading específico para gray */
   &.loading {
-    background-color: #777676 !important;
+    background-color: #777777 !important;
     color: #ffffff !important;
     opacity: 1 !important;
   }
@@ -404,27 +415,57 @@
   }
   
   .spinner-overlay {
-    background-color: #777676 !important;
+    background-color: #777777 !important;
     opacity: 1 !important;
   }
 }
 
-.btn-sm {
-  padding: 0.5rem 0.5rem;
-  font-size: 0.875rem;
-  border-radius: 0.375rem;
+.btn-red {
+  background-color: #DC3545;
+  border: 1px solid #DC3545;
+  color: #ffffff;
+  
+  &:hover {
+    background-color: #C82333;
+    border-color: #C82333;
+    color: #ffffff;
+  }
+  
+  /* Estado loading específico para red */
+  &.loading {
+    background-color: #DC3545 !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+  
+  /* Estilos específicos para el spinner */
+  .spinner-icon {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+  
+  .spinner-overlay {
+    background-color: #DC3545 !important;
+    opacity: 1 !important;
+  }
 }
 
-.btn-md {
-  padding: 0.7rem 1rem;
-  font-size: 0.875rem;
-  border-radius: 0.375rem;
+.btn.btn-sm {
+  padding: 6px 8px !important;
+  font-size: 12px;
+  border-radius: 6px;
 }
 
-.btn-lg {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  border-radius: 0.375rem;
+.btn.btn-md {
+  padding: 8px 12px !important; 
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.btn.btn-lg {
+  padding: 12px 24px !important;
+  font-size: 16px;
+  border-radius: 6px;
 }
 
 .w-100 {
