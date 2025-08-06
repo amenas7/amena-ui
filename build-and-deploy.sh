@@ -199,11 +199,20 @@ git commit -m "build: sanna-ui v$NEW_VERSION"
 print_message "Actualizando rama build..."
 git push origin HEAD:build --force
 
+# Crear tag desde la rama build
+print_message "Creando tag v$NEW_VERSION desde la rama build..."
+BUILD_COMMIT=$(git rev-parse HEAD)
+
 # Volver al directorio original de forma segura
 cd "$ORIGINAL_DIR" || {
     print_error "No se pudo volver al directorio original"
     exit 1
 }
+
+# Crear tag apuntando al commit de build
+print_message "Creando tag v$NEW_VERSION desde el commit de build..."
+git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION" "$BUILD_COMMIT"
+git push origin "v$NEW_VERSION"
 
 # Limpiar de forma segura
 print_message "Limpiando recursos temporales..."
@@ -227,23 +236,12 @@ if [ "$FINAL_BRANCH" != "$CURRENT_BRANCH" ]; then
     git checkout "$CURRENT_BRANCH"
 fi
 
-# Crear tag desde la rama build
-print_message "Creando tag v$NEW_VERSION desde la rama build..."
-BUILD_COMMIT=$(git rev-parse HEAD)
-
 # Volver a master y crear commit con los cambios
 git checkout master
 print_message "Creando commit con los cambios..."
 git add .
 git commit -m "feat: build sanna-ui v$NEW_VERSION"
 git push origin master
-
-# Crear tag apuntando al commit de build
-print_message "Creando tag v$NEW_VERSION desde el commit de build..."
-git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION" "$BUILD_COMMIT"
-
-# Push del tag
-git push origin "v$NEW_VERSION"
 
 print_message "✅ Proceso completado exitosamente!"
 print_message "📦 Nueva versión: $NEW_VERSION"
