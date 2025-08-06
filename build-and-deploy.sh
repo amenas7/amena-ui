@@ -173,7 +173,14 @@ cd "$BUILD_WORKTREE" || {
 find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 
 # Copiar el contenido del build desde el directorio temporal
-cp -r "$TEMP_DIR"/* ./
+print_message "Copiando archivos del build..."
+shopt -s dotglob  # Incluir archivos ocultos
+for file in "$TEMP_DIR"/*; do
+    if [ -e "$file" ]; then
+        cp -r "$file" .
+    fi
+done
+shopt -u dotglob  # Restaurar configuración
 
 # Agregar y commitear los cambios
 git add .
