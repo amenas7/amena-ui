@@ -137,7 +137,11 @@ mv "$BUILD_DIR"/* .
 rmdir "$BUILD_DIR"
 
 # Limpiar archivos innecesarios del build
-rm -rf src/
+print_message "Limpiando archivos innecesarios..."
+if [ -d "src" ]; then
+    print_message "Eliminando carpeta src..."
+    rm -rf src/
+fi
 rm -rf dist/
 
 # Agregar todos los archivos del build
