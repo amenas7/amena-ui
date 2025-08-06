@@ -184,8 +184,8 @@
 }
 
 .btn-primary {
-  background-color: #36AD55;
-  border: 1px solid #36AD55;
+  background-color: #3E28D1;
+  border: 1px solid #3E28D1;
   color: #ffffff;
   
   &:hover {
@@ -195,7 +195,7 @@
   
   /* Estado loading específico para primary */
   &.loading {
-    background-color: #36AD55 !important;
+    background-color: #3E28D1 !important;
     color: #ffffff !important;
     opacity: 1 !important;
   }
@@ -207,7 +207,7 @@
   }
   
   .spinner-overlay {
-    background-color: #36AD55 !important;
+    background-color: #3E28D1 !important;
     opacity: 1 !important;
   }
 }
