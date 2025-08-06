@@ -193,6 +193,17 @@ cp -f "$TEMP_DIR"/.npmignore . 2>/dev/null || true
 # Limpiar archivos y carpetas no deseados
 rm -rf .angular node_modules dist temp-branch-name .git/worktrees build-branch 2>/dev/null || true
 
+# Asegurarse de que solo existan los archivos necesarios
+find . -mindepth 1 -maxdepth 1 ! -name 'esm2022' \
+                               ! -name 'fesm2022' \
+                               ! -name 'lib' \
+                               ! -name 'package.json' \
+                               ! -name 'index.d.ts' \
+                               ! -name 'public-api.d.ts' \
+                               ! -name '.npmignore' \
+                               ! -name '.git' \
+                               -exec rm -rf {} +
+
 # Agregar y commitear los cambios
 git add .
 git commit -m "build: sanna-ui v$NEW_VERSION"
