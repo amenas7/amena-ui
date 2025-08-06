@@ -136,7 +136,8 @@ cp -r dist/sanna-ui/* "$BUILD_DIR/"
 mv "$BUILD_DIR"/* .
 rmdir "$BUILD_DIR"
 
-# Limpiar la carpeta dist que ya no necesitamos
+# Limpiar archivos innecesarios del build
+rm -rf src/
 rm -rf dist/
 
 # Agregar todos los archivos del build
