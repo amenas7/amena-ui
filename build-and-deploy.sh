@@ -183,7 +183,7 @@ find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 print_message "Copiando archivos del build..."
 shopt -s dotglob  # Incluir archivos ocultos
 for file in "$TEMP_DIR"/*; do
-    if [ -e "$file" ]; then
+    if [ -e "$file" ] && [ "$(basename "$file")" != "build-branch" ]; then
         cp -r "$file" .
     fi
 done
