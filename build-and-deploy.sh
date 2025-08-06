@@ -128,9 +128,6 @@ print_message "Directorio temporal creado en: $TEMP_DIR"
 # Copiar el contenido del build al directorio temporal
 print_message "Copiando contenido del build al directorio temporal..."
 
-# Asegurarnos que el directorio temporal esté limpio
-rm -rf "$TEMP_DIR"/*
-
 # Copiar solo los archivos necesarios del build
 print_message "Copiando archivos del build..."
 cp -r dist/sanna-ui/esm2022 "$TEMP_DIR/"
@@ -256,4 +253,4 @@ echo ""
 echo "   Opción 3 (commit específico):"
 echo "   \"sanna-ui\": \"git+https://github.com/amenas7/amena-ui.git#$(git rev-parse HEAD)\""
 echo ""
-print_message "💡 Para forzar actualización, usa la Opción 2 con el tag específico" 
+print_message "💡 Para forzar actualización, usa la Opción 2 con el tag específico"
