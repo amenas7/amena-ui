@@ -229,10 +229,7 @@ fi
 
 # Crear tag desde la rama build
 print_message "Creando tag v$NEW_VERSION desde la rama build..."
-git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION" HEAD
-
-# Push del tag
-git push origin "v$NEW_VERSION"
+BUILD_COMMIT=$(git rev-parse HEAD)
 
 # Volver a master y crear commit con los cambios
 git checkout master
@@ -240,6 +237,13 @@ print_message "Creando commit con los cambios..."
 git add .
 git commit -m "feat: build sanna-ui v$NEW_VERSION"
 git push origin master
+
+# Crear tag apuntando al commit de build
+print_message "Creando tag v$NEW_VERSION desde el commit de build..."
+git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION" "$BUILD_COMMIT"
+
+# Push del tag
+git push origin "v$NEW_VERSION"
 
 print_message "✅ Proceso completado exitosamente!"
 print_message "📦 Nueva versión: $NEW_VERSION"
