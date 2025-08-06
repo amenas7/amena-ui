@@ -125,8 +125,18 @@ git checkout -b "$BUILD_BRANCH"
 git rm -rf . --ignore-unmatch
 git reset --hard
 
-# Copiar solo el contenido del build
-cp -r dist/sanna-ui/* .
+# Crear carpeta temporal para el build (como sanna-ui-build)
+BUILD_DIR="sanna-ui-build-$(date +%s)"
+mkdir -p "$BUILD_DIR"
+
+# Copiar solo el contenido del build a la carpeta temporal
+cp -r dist/sanna-ui/* "$BUILD_DIR/"
+
+# Mover todo el contenido de la carpeta temporal a la raíz
+mv "$BUILD_DIR"/* .
+rmdir "$BUILD_DIR"
+
+# Limpiar la carpeta dist que ya no necesitamos
 rm -rf dist/
 
 # Agregar todos los archivos del build
