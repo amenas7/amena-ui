@@ -116,7 +116,24 @@ git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION"
 
 # 8. Push a la rama build
 print_message "Haciendo push a la rama build..."
-git push origin HEAD:build
+
+# Verificar si la rama build existe remotamente
+if git ls-remote --heads origin build | grep -q build; then
+    print_message "La rama build existe remotamente. Actualizando..."
+    # Crear o cambiar a la rama build local
+    git checkout -B build
+    # Forzar push (esto sobrescribirá los cambios remotos)
+    git push origin build --force
+else
+    print_message "Creando nueva rama build..."
+    git checkout -b build
+    git push origin build
+fi
+
+# Volver a la rama principal
+git checkout master
+
+# Push del tag
 git push origin "v$NEW_VERSION"
 
 print_message "✅ Proceso completado exitosamente!"
