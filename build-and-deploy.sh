@@ -180,23 +180,18 @@ cd "$BUILD_WORKTREE" || {
 # Limpiar el contenido actual del worktree de forma segura
 find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 
-# Copiar el contenido del build desde el directorio temporal
+# Copiar solo los archivos necesarios del build
 print_message "Copiando archivos del build..."
-cp -r "$TEMP_DIR"/* .
+cp -r "$TEMP_DIR"/esm2022 .
+cp -r "$TEMP_DIR"/fesm2022 .
+cp -r "$TEMP_DIR"/lib .
+cp -f "$TEMP_DIR"/package.json .
+cp -f "$TEMP_DIR"/index.d.ts .
+cp -f "$TEMP_DIR"/public-api.d.ts .
+cp -f "$TEMP_DIR"/.npmignore . 2>/dev/null || true
 
 # Limpiar archivos y carpetas no deseados
-rm -rf .angular node_modules dist temp-branch-name .git/worktrees 2>/dev/null || true
-
-# Asegurarse de que solo existan los archivos necesarios
-find . -mindepth 1 -maxdepth 1 ! -name 'esm2022' \
-                               ! -name 'fesm2022' \
-                               ! -name 'lib' \
-                               ! -name 'package.json' \
-                               ! -name 'index.d.ts' \
-                               ! -name 'public-api.d.ts' \
-                               ! -name '.npmignore' \
-                               ! -name '.git' \
-                               -exec rm -rf {} +
+rm -rf .angular node_modules dist temp-branch-name .git/worktrees build-branch 2>/dev/null || true
 
 # Agregar y commitear los cambios
 git add .
