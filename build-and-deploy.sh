@@ -182,13 +182,21 @@ find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 
 # Copiar el contenido del build desde el directorio temporal
 print_message "Copiando archivos del build..."
-shopt -s dotglob  # Incluir archivos ocultos
-for file in "$TEMP_DIR"/*; do
-    if [ -e "$file" ] && [ "$(basename "$file")" != "build-branch" ]; then
-        cp -r "$file" .
-    fi
-done
-shopt -u dotglob  # Restaurar configuración
+cp -r "$TEMP_DIR"/* .
+
+# Limpiar archivos y carpetas no deseados
+rm -rf .angular node_modules dist temp-branch-name .git/worktrees 2>/dev/null || true
+
+# Asegurarse de que solo existan los archivos necesarios
+find . -mindepth 1 -maxdepth 1 ! -name 'esm2022' \
+                               ! -name 'fesm2022' \
+                               ! -name 'lib' \
+                               ! -name 'package.json' \
+                               ! -name 'index.d.ts' \
+                               ! -name 'public-api.d.ts' \
+                               ! -name '.npmignore' \
+                               ! -name '.git' \
+                               -exec rm -rf {} +
 
 # Agregar y commitear los cambios
 git add .
