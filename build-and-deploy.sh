@@ -114,54 +114,92 @@ git commit -m "feat: build sanna-ui v$NEW_VERSION"
 print_message "Creando tag v$NEW_VERSION..."
 git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION"
 
-# 8. Push a la rama build
-print_message "Haciendo push a la rama build..."
+# 8. Preparar y actualizar la rama build usando un directorio temporal
+print_message "Preparando actualización de la rama build..."
 
-# Crear una rama temporal para el build
-BUILD_BRANCH="build-temp-$(date +%s)"
-git checkout -b "$BUILD_BRANCH"
+# Guardar la rama actual
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+print_message "Guardando referencia a la rama actual: $CURRENT_BRANCH"
 
-# Limpiar todo excepto el build (como rm -rf * en sanna-ui-build)
-git rm -rf . --ignore-unmatch
-git reset --hard
+# Crear directorio temporal
+TEMP_DIR=$(mktemp -d)
+print_message "Directorio temporal creado en: $TEMP_DIR"
 
-# Copiar solo el contenido del build (como cp -r dist/sanna-ui/* ../sanna-ui-build/)
-print_message "Copiando contenido del build..."
-cp -r dist/sanna-ui/* .
+# Copiar el contenido del build al directorio temporal
+print_message "Copiando contenido del build al directorio temporal..."
+cp -r dist/sanna-ui/* "$TEMP_DIR/"
 
-# Limpiar archivos innecesarios del build
+# Limpiar archivos innecesarios del build en el directorio temporal
 print_message "Limpiando archivos innecesarios..."
-if [ -d "src" ]; then
+if [ -d "$TEMP_DIR/src" ]; then
     print_message "Eliminando carpeta src..."
-    rm -rf src/
+    rm -rf "$TEMP_DIR/src"
 fi
-if [ -f "README.md" ]; then
+if [ -f "$TEMP_DIR/README.md" ]; then
     print_message "Eliminando README.md..."
-    rm -f README.md
+    rm -f "$TEMP_DIR/README.md"
 fi
-rm -rf dist/
 
-# Agregar todos los archivos del build
+# Crear un nuevo worktree temporal para la rama build
+BUILD_WORKTREE="$TEMP_DIR/build-branch"
+print_message "Creando worktree temporal para la rama build..."
+
+# Guardar el directorio actual
+ORIGINAL_DIR=$(pwd)
+
+# Manejar la rama build de forma segura
+if git ls-remote --heads origin build | grep -q build; then
+    print_message "Rama build encontrada, creando worktree..."
+    # Crear worktree sin cambiar la rama actual
+    git worktree add --track -b temp-build "$BUILD_WORKTREE" origin/build
+else
+    print_message "Rama build no encontrada, inicializando..."
+    # Crear un worktree vacío sin cambiar la rama actual
+    git worktree add --detach "$BUILD_WORKTREE"
+    (
+        cd "$BUILD_WORKTREE"
+        git switch --orphan build
+        git rm -rf . || true
+    )
+fi
+
+# Cambiar al directorio del worktree de forma segura
+cd "$BUILD_WORKTREE" || {
+    print_error "No se pudo acceder al worktree"
+    exit 1
+}
+
+# Limpiar el contenido actual del worktree de forma segura
+find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
+
+# Copiar el contenido del build desde el directorio temporal
+cp -r "$TEMP_DIR"/* ./
+
+# Agregar y commitear los cambios
 git add .
-
-# Commit del build
 git commit -m "build: sanna-ui v$NEW_VERSION"
 
-# Verificar si la rama build existe remotamente
-if git ls-remote --heads origin build | grep -q build; then
-    print_message "La rama build existe remotamente. Actualizando..."
-    # Forzar push a la rama build
-    git push origin "$BUILD_BRANCH:build" --force
-else
-    print_message "Creando nueva rama build..."
-    git push origin "$BUILD_BRANCH:build"
+# Push a la rama build
+print_message "Actualizando rama build..."
+git push origin HEAD:build --force
+
+# Volver al directorio original de forma segura
+cd "$ORIGINAL_DIR" || {
+    print_error "No se pudo volver al directorio original"
+    exit 1
+}
+
+# Limpiar de forma segura
+print_message "Limpiando recursos temporales..."
+git worktree remove -f "$BUILD_WORKTREE" || true
+rm -rf "$TEMP_DIR"
+
+# Verificar que estamos en la rama correcta
+FINAL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$FINAL_BRANCH" != "$CURRENT_BRANCH" ]; then
+    print_warning "Detectado cambio no deseado de rama. Volviendo a la rama original..."
+    git checkout "$CURRENT_BRANCH"
 fi
-
-# Volver a la rama principal
-git checkout master
-
-# Eliminar rama temporal
-git branch -D "$BUILD_BRANCH"
 
 # Push del tag
 git push origin "v$NEW_VERSION"
