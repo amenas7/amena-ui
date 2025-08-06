@@ -1,4 +1,50 @@
-<input
-  [(ngModel)]="value"
-  (ngModelChange)="onModelChange($event)"
-/>
+<div class="input-container">
+  <label *ngIf="label" [for]="id" class="input-label">
+    {{ label }}
+    <span *ngIf="required" class="required-indicator">*</span>
+  </label>
+
+  <div class="input-wrapper">
+    <div *ngIf="leftIcon" class="input-icon left-icon">
+      <i [class]="leftIcon"></i>
+    </div>
+
+    <input
+      [id]="id"
+      [name]="name"
+      [type]="inputType"
+      [class]="inputClasses"
+      [(ngModel)]="value"
+      (ngModelChange)="onModelChange($event)"
+      [placeholder]="placeholder"
+      [required]="required"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [autocomplete]="autocomplete"
+      [min]="min"
+      [max]="max"
+      [minlength]="minlength"
+      [maxlength]="maxlength"
+      [pattern]="pattern"
+      (focus)="onInputFocus($event)"
+      (blur)="onInputBlur($event)"
+    />
+
+    <div *ngIf="rightIcon && type !== 'password'" class="input-icon right-icon">
+      <i [class]="rightIcon"></i>
+    </div>
+
+    <button
+      *ngIf="type === 'password'"
+      type="button"
+      class="password-toggle-btn"
+      (click)="togglePasswordVisibility()"
+      [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+    >
+      <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+
+  <small *ngIf="helperText && !errorText" class="helper-text">{{ helperText }}</small>
+  <small *ngIf="errorText" class="error-text">{{ errorText }}</small>
+</div>
