@@ -127,18 +127,19 @@ print_message "Directorio temporal creado en: $TEMP_DIR"
 
 # Copiar el contenido del build al directorio temporal
 print_message "Copiando contenido del build al directorio temporal..."
-cp -r dist/sanna-ui/* "$TEMP_DIR/"
 
-# Limpiar archivos innecesarios del build en el directorio temporal
-print_message "Limpiando archivos innecesarios..."
-if [ -d "$TEMP_DIR/src" ]; then
-    print_message "Eliminando carpeta src..."
-    rm -rf "$TEMP_DIR/src"
-fi
-if [ -f "$TEMP_DIR/README.md" ]; then
-    print_message "Eliminando README.md..."
-    rm -f "$TEMP_DIR/README.md"
-fi
+# Asegurarnos que el directorio temporal esté limpio
+rm -rf "$TEMP_DIR"/*
+
+# Copiar solo los archivos necesarios del build
+print_message "Copiando archivos del build..."
+cp -r dist/sanna-ui/esm2022 "$TEMP_DIR/"
+cp -r dist/sanna-ui/fesm2022 "$TEMP_DIR/"
+cp -r dist/sanna-ui/lib "$TEMP_DIR/"
+cp -f dist/sanna-ui/package.json "$TEMP_DIR/"
+cp -f dist/sanna-ui/index.d.ts "$TEMP_DIR/"
+cp -f dist/sanna-ui/public-api.d.ts "$TEMP_DIR/"
+cp -f dist/sanna-ui/.npmignore "$TEMP_DIR/" 2>/dev/null || true
 
 # Crear un nuevo worktree temporal para la rama build
 BUILD_WORKTREE="$TEMP_DIR/build-branch"
