@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, TemplateRef, QueryList } from '@angular/core';
+import { EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, TemplateRef, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { SaColumnDefDirective } from './sa-column-def.directive';
 import * as i0 from "@angular/core";
 export interface TableColumn {
@@ -18,8 +18,10 @@ export interface PaginationInfo {
     startItem: number;
     endItem: number;
 }
-export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy {
+export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+    private cdr;
     private resizeListener;
+    constructor(cdr: ChangeDetectorRef);
     columns: TableColumn[];
     data: TableData[];
     emptyMessage: string;
@@ -66,6 +68,7 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy {
     animationKey: number;
     Array: ArrayConstructor;
     ngOnInit(): void;
+    ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     updatePagination(): void;
     onPageChange(page: number): void;
