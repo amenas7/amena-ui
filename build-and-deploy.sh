@@ -117,21 +117,39 @@ git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION"
 # 8. Push a la rama build
 print_message "Haciendo push a la rama build..."
 
+# Crear una rama temporal para el build
+BUILD_BRANCH="build-temp-$(date +%s)"
+git checkout -b "$BUILD_BRANCH"
+
+# Limpiar todo excepto el build
+git rm -rf . --ignore-unmatch
+git reset --hard
+
+# Copiar solo el contenido del build
+cp -r dist/sanna-ui/* .
+rm -rf dist/
+
+# Agregar todos los archivos del build
+git add .
+
+# Commit del build
+git commit -m "build: sanna-ui v$NEW_VERSION"
+
 # Verificar si la rama build existe remotamente
 if git ls-remote --heads origin build | grep -q build; then
     print_message "La rama build existe remotamente. Actualizando..."
-    # Crear o cambiar a la rama build local
-    git checkout -B build
-    # Forzar push (esto sobrescribirá los cambios remotos)
-    git push origin build --force
+    # Forzar push a la rama build
+    git push origin "$BUILD_BRANCH:build" --force
 else
     print_message "Creando nueva rama build..."
-    git checkout -b build
-    git push origin build
+    git push origin "$BUILD_BRANCH:build"
 fi
 
 # Volver a la rama principal
 git checkout master
+
+# Eliminar rama temporal
+git branch -D "$BUILD_BRANCH"
 
 # Push del tag
 git push origin "v$NEW_VERSION"
