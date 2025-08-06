@@ -128,6 +128,8 @@
 </div>
 
 <!-- Template por defecto para celdas -->
-<ng-template #defaultCellTemplate let-element="element" let-column="column">
-  {{ element[column.key] }}
+<ng-template #defaultCellTemplate let-row="row" let-column="column">
+  <ng-container *ngIf="row[column.key] !== undefined && row[column.key] !== null">
+    {{ row[column.key] }}
+  </ng-container>
 </ng-template>

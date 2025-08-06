@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { SaColumnDefDirective } from './sa-column-def.directive';
 
 export interface TableColumn {
@@ -26,8 +26,10 @@ export interface PaginationInfo {
   templateUrl: './sa-table.component.html',
   styleUrls: ['./sa-table.component.scss']
 })
-export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
+export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   private resizeListener: (() => void) | null = null;
+  
+  constructor(private cdr: ChangeDetectorRef) {}
   
   // Arrays/objetos que siempre usan property binding
   @Input() columns: TableColumn[] = [];
@@ -151,8 +153,15 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
     this.setupResizeListener();
   }
 
+  ngAfterViewInit(): void {
+    // Forzar la detección de cambios para asegurar que los templates se detecten
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] || changes['itemsPerPage'] || changes['currentPage']) {
+    if (changes['data'] || changes['itemsPerPage']) {
       this.updatePagination();
     }
   }
@@ -336,11 +345,12 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
   // Método para obtener el contexto del template
   getTemplateContext(row: TableData, column: TableColumn): any {
     return {
-      $implicit: row[column.key],
+      $implicit: row,
       row: row,
       column: column,
-      element: row, // Para compatibilidad con Angular Material
-      value: row[column.key]
+      element: row,
+      value: row[column.key],
+      data: row[column.key]
     };
   }
 
