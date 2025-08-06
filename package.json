@@ -8,7 +8,13 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "storybook": "ng run sanna-ui:storybook",
-    "build-storybook": "ng run sanna-ui:build-storybook"
+    "build-storybook": "ng run sanna-ui:build-storybook",
+    "build:lib": "ng build sanna-ui",
+    "build:lib:prod": "ng build sanna-ui --configuration production",
+    "version:patch": "cd projects/sanna-ui && node -e \"const pkg=JSON.parse(require('fs').readFileSync('package.json')); const v=pkg.version.split('.'); v[2]=parseInt(v[2])+1; pkg.version=v.join('.'); require('fs').writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\\n'); console.log('Version updated to:',pkg.version);\"",
+    "version:minor": "cd projects/sanna-ui && node -e \"const pkg=JSON.parse(require('fs').readFileSync('package.json')); const v=pkg.version.split('.'); v[1]=parseInt(v[1])+1; v[2]=0; pkg.version=v.join('.'); require('fs').writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\\n'); console.log('Version updated to:',pkg.version);\"",
+    "version:major": "cd projects/sanna-ui && node -e \"const pkg=JSON.parse(require('fs').readFileSync('package.json')); const v=pkg.version.split('.'); v[0]=parseInt(v[0])+1; v[1]=0; v[2]=0; pkg.version=v.join('.'); require('fs').writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\\n'); console.log('Version updated to:',pkg.version);\"",
+    "build:lib:versioned": "npm run version:patch && npm run build:lib:prod"
   },
   "private": true,
   "dependencies": {
