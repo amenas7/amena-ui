@@ -150,8 +150,13 @@ ORIGINAL_DIR=$(pwd)
 # Manejar la rama build de forma segura
 if git ls-remote --heads origin build | grep -q build; then
     print_message "Rama build encontrada, creando worktree..."
-    # Limpiar rama temporal si existe
+    
+    # Limpiar rama temporal y worktree si existen
+    if git worktree list | grep -q temp-build; then
+        git worktree remove -f temp-build 2>/dev/null || true
+    fi
     git branch -D temp-build 2>/dev/null || true
+    
     # Crear worktree sin cambiar la rama actual
     git worktree add --track -b temp-build "$BUILD_WORKTREE" origin/build
 else
