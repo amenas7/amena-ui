@@ -105,16 +105,7 @@ fi
 
 print_message "Build completado exitosamente en dist/sanna-ui/"
 
-# 6. Crear commit con los cambios
-print_message "Creando commit con los cambios..."
-git add .
-git commit -m "feat: build sanna-ui v$NEW_VERSION"
-
-# 7. Crear tag
-print_message "Creando tag v$NEW_VERSION..."
-git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION"
-
-# 8. Preparar y actualizar la rama build usando un directorio temporal
+# 6. Preparar y actualizar la rama build usando un directorio temporal
 print_message "Preparando actualización de la rama build..."
 
 # Guardar la rama actual
@@ -235,6 +226,16 @@ if [ "$FINAL_BRANCH" != "$CURRENT_BRANCH" ]; then
     print_warning "Detectado cambio no deseado de rama. Volviendo a la rama original..."
     git checkout "$CURRENT_BRANCH"
 fi
+
+# Volver a master y crear commit con los cambios
+git checkout master
+print_message "Creando commit con los cambios..."
+git add .
+git commit -m "feat: build sanna-ui v$NEW_VERSION"
+
+# Crear tag
+print_message "Creando tag v$NEW_VERSION..."
+git tag -a "v$NEW_VERSION" -m "Release version $NEW_VERSION"
 
 # Push del tag
 git push origin "v$NEW_VERSION"
