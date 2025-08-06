@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren } from '@angular/core';
+import { SaColumnDefDirective } from './sa-column-def.directive';
 
 export interface TableColumn {
   key: string;
@@ -27,6 +28,7 @@ export interface PaginationInfo {
 })
 export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
   private resizeListener: (() => void) | null = null;
+  
   // Arrays/objetos que siempre usan property binding
   @Input() columns: TableColumn[] = [];
   @Input() data: TableData[] = [];
@@ -34,6 +36,10 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
   // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
   @Input() emptyMessage: string = 'No hay datos disponibles';
 
+  // Templates dinámicos por columna usando ContentChildren
+  @ContentChildren(SaColumnDefDirective) columnDefs?: QueryList<SaColumnDefDirective>;
+  @ViewChild('defaultCellTemplate', { static: true }) defaultCellTemplate?: TemplateRef<any>;
+  
   // Propiedades con setters/getters para flexibilidad máxima
   private _itemsPerPage: number = 10;
   private _showPagination: boolean = true;
@@ -130,6 +136,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
   
   // Propiedad para controlar la animación
   animationKey: number = 0;
+
+  // Propiedad para acceder a Array desde el template
+  Array = Array;
 
 
 
@@ -312,6 +321,27 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy {
 
   trackByFn(index: number, item: any): any {
     return index;
+  }
+
+  // Método para obtener el template de una columna específica
+  getColumnTemplate(columnKey: string): TemplateRef<any> | null {
+    if (!this.columnDefs) {
+      return null;
+    }
+    
+    const columnDef = this.columnDefs.find(def => def.columnKey === columnKey);
+    return columnDef ? columnDef.templateRef : null;
+  }
+
+  // Método para obtener el contexto del template
+  getTemplateContext(row: TableData, column: TableColumn): any {
+    return {
+      $implicit: row[column.key],
+      row: row,
+      column: column,
+      element: row, // Para compatibilidad con Angular Material
+      value: row[column.key]
+    };
   }
 
   onSelectChange(event: Event): void {

@@ -12,6 +12,7 @@ import { SaInputComponent } from './forms/sa-input/sa-input.component';
 import { SaHeadingComponent } from './sa-heading/sa-heading.component';
 import { SaTextComponent } from './sa-text/sa-text.component';
 import { SaTableComponent } from './sa-table/sa-table.component';
+import { SaColumnDefDirective } from './sa-table/sa-column-def.directive';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SaTableComponent } from './sa-table/sa-table.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SannaUiFontAwesomeModule
+    SannaUiFontAwesomeModule,
+    SaColumnDefDirective
   ],
   exports: [
     SannaUiComponent,
@@ -40,6 +42,7 @@ import { SaTableComponent } from './sa-table/sa-table.component';
     SaHeadingComponent,
     SaTextComponent,
     SaTableComponent,
+    SaColumnDefDirective,
     SannaUiFontAwesomeModule
   ]
 })

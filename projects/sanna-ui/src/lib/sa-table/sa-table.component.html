@@ -21,7 +21,9 @@
       <tbody [class.animate-fade-in]="animationKey > 0" [class.animation-complete]="animationKey > 0" [attr.data-animation-key]="animationKey">
         <tr *ngFor="let row of paginatedData; trackBy: trackByFn">
           <td *ngFor="let column of columns" [style.width]="column.width">
-            {{ row[column.key] }}
+            <!-- Usar template específico de la columna si existe, sino usar el default -->
+            <ng-container *ngTemplateOutlet="getColumnTemplate(column.key) || defaultCellTemplate!; context: getTemplateContext(row, column)">
+            </ng-container>
           </td>
         </tr>
         <tr *ngIf="paginatedData.length === 0">
@@ -124,3 +126,8 @@
     </div>
   </div>
 </div>
+
+<!-- Template por defecto para celdas -->
+<ng-template #defaultCellTemplate let-element="element" let-column="column">
+  {{ element[column.key] }}
+</ng-template>

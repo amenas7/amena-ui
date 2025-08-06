@@ -638,3 +638,335 @@ Este story demuestra cómo la paginación se adapta automáticamente a diferente
   }
 };
 
+export const AngularMaterialStyle: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'email', label: 'Email', width: '300px' },
+      { key: 'actions', label: 'Acciones', width: '200px' }
+    ],
+    data: [
+      { id: 1, name: 'Juan Pérez', email: 'juan.perez@email.com' },
+      { id: 2, name: 'María García', email: 'maria.garcia@email.com' },
+      { id: 3, name: 'Carlos López', email: 'carlos.lopez@email.com' }
+    ]
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      onEdit: (element: any) => {
+        console.log('Editando:', element);
+        alert(`Editando: ${element.name}`);
+      },
+      onDelete: (element: any) => {
+        console.log('Eliminando:', element);
+        if (confirm(`¿Estás seguro de eliminar a ${element.name}?`)) {
+          alert(`Eliminado: ${element.name}`);
+        }
+      }
+    },
+    template: `
+      <sa-table 
+        [columns]="columns" 
+        [data]="data"
+        [hover]="true"
+        [showPagination]="false">
+        
+        <!-- Template para la columna ID -->
+        <ng-template saColumnDef="id" let-element="element">
+          <span class="badge bg-primary">{{ element.id }}</span>
+        </ng-template>
+        
+        <!-- Template para la columna Nombre -->
+        <ng-template saColumnDef="name" let-element="element">
+          <strong>{{ element.name }}</strong>
+        </ng-template>
+        
+        <!-- Template para la columna Email -->
+        <ng-template saColumnDef="email" let-element="element">
+          <a href="mailto:{{ element.email }}" class="text-decoration-none">
+            {{ element.email }}
+          </a>
+        </ng-template>
+        
+        <!-- Template para la columna Acciones -->
+        <ng-template saColumnDef="actions" let-element="element">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" (click)="onEdit(element)">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(element)">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </ng-template>
+        
+      </sa-table>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 🎯 Sistema de Templates Similar a Angular Material
+
+Este story demuestra cómo usar el componente con un sistema de templates similar a Angular Material.
+
+### Características:
+
+- **Templates por columna**: Cada columna puede tener su propio template usando \`saColumnDef\`
+- **Contexto flexible**: Acceso completo a los datos de la fila
+- **Compatibilidad**: Similar a Angular Material pero con Bootstrap
+- **Flexibilidad total**: Cualquier HTML/Angular válido
+
+### Cómo Usar:
+
+\`\`\`html
+<sa-table [columns]="columns" [data]="data">
+  
+  <!-- Template para la columna ID -->
+  <ng-template saColumnDef="id" let-element="element">
+    <span class="badge bg-primary">{{ element.id }}</span>
+  </ng-template>
+  
+  <!-- Template para la columna Nombre -->
+  <ng-template saColumnDef="name" let-element="element">
+    <strong>{{ element.name }}</strong>
+  </ng-template>
+  
+  <!-- Template para la columna Email -->
+  <ng-template saColumnDef="email" let-element="element">
+    <a href="mailto:{{ element.email }}" class="text-decoration-none">
+      {{ element.email }}
+    </a>
+  </ng-template>
+  
+  <!-- Template para la columna Acciones -->
+  <ng-template saColumnDef="actions" let-element="element">
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm btn-outline-primary" (click)="onEdit(element)">
+        <i class="bi bi-pencil"></i> Editar
+      </button>
+      <button class="btn btn-sm btn-outline-danger" (click)="onDelete(element)">
+        <i class="bi bi-trash"></i> Eliminar
+      </button>
+    </div>
+  </ng-template>
+  
+</sa-table>
+\`\`\`
+
+### Configuración de Columnas:
+
+\`\`\`typescript
+const columns: TableColumn[] = [
+  { key: 'id', label: 'ID', width: '80px' },
+  { key: 'name', label: 'Nombre', width: '200px' },
+  { key: 'email', label: 'Email', width: '300px' },
+  { key: 'actions', label: 'Acciones', width: '200px' }
+];
+\`\`\`
+
+### Contexto del Template:
+
+- **\`element\`**: Datos completos de la fila actual (compatible con Angular Material)
+- **\`row\`**: Datos completos de la fila actual
+- **\`column\`**: Información de la columna actual
+- **\`value\`**: Valor de la celda actual
+
+### Ventajas:
+
+- ✅ **Familiar**: Similar a Angular Material
+- ✅ **Flexible**: Templates específicos por columna
+- ✅ **Potente**: Acceso completo a datos y contexto
+- ✅ **Limpio**: Código organizado y mantenible
+- ✅ **Extensible**: Fácil de agregar nuevas columnas
+- ✅ **Eventos**: Soporte completo para eventos de Angular
+- ✅ **Condicionales**: Soporte para \`*ngIf\`, \`*ngFor\`, etc.
+        `
+      }
+    }
+  }
+};
+
+export const TemplatesAvanzados: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'status', label: 'Estado', width: '120px' },
+      { key: 'progress', label: 'Progreso', width: '150px' },
+      { key: 'actions', label: 'Acciones', width: '250px' }
+    ],
+    data: [
+      { id: 1, name: 'Juan Pérez', status: 'activo', progress: 75, email: 'juan@email.com' },
+      { id: 2, name: 'María García', status: 'inactivo', progress: 30, email: 'maria@email.com' },
+      { id: 3, name: 'Carlos López', status: 'pendiente', progress: 90, email: 'carlos@email.com' }
+    ]
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      onEdit: (element: any) => {
+        console.log('Editando:', element);
+        alert(`Editando: ${element.name}`);
+      },
+      onDelete: (element: any) => {
+        console.log('Eliminando:', element);
+        if (confirm(`¿Estás seguro de eliminar a ${element.name}?`)) {
+          alert(`Eliminado: ${element.name}`);
+        }
+      },
+      onView: (element: any) => {
+        console.log('Viendo:', element);
+        alert(`Viendo detalles de: ${element.name}`);
+      }
+    },
+    template: `
+      <sa-table 
+        [columns]="columns" 
+        [data]="data"
+        [hover]="true"
+        [showPagination]="false">
+        
+        <!-- Template para la columna ID con badge -->
+        <ng-template saColumnDef="id" let-element="element">
+          <span class="badge bg-secondary">#{{ element.id }}</span>
+        </ng-template>
+        
+        <!-- Template para la columna Nombre con avatar -->
+        <ng-template saColumnDef="name" let-element="element">
+          <div class="d-flex align-items-center gap-2">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" 
+                 style="width: 32px; height: 32px; font-size: 12px;">
+              {{ element.name.charAt(0) }}
+            </div>
+            <div>
+              <div class="fw-bold">{{ element.name }}</div>
+              <small class="text-muted">{{ element.email }}</small>
+            </div>
+          </div>
+        </ng-template>
+        
+        <!-- Template para la columna Estado con badges de colores -->
+        <ng-template saColumnDef="status" let-element="element">
+          <span class="badge" 
+                [class]="element.status === 'activo' ? 'bg-success' : 
+                        element.status === 'inactivo' ? 'bg-danger' : 'bg-warning'">
+            {{ element.status | titlecase }}
+          </span>
+        </ng-template>
+        
+        <!-- Template para la columna Progreso con barra de progreso -->
+        <ng-template saColumnDef="progress" let-element="element">
+          <div class="d-flex align-items-center gap-2">
+            <div class="progress flex-grow-1" style="height: 8px;">
+              <div class="progress-bar" 
+                   [style.width.%]="element.progress"
+                   [class]="element.progress >= 80 ? 'bg-success' : 
+                           element.progress >= 50 ? 'bg-warning' : 'bg-danger'">
+              </div>
+            </div>
+            <small class="text-muted">{{ element.progress }}%</small>
+          </div>
+        </ng-template>
+        
+        <!-- Template para la columna Acciones con múltiples botones -->
+        <ng-template saColumnDef="actions" let-element="element">
+          <div class="d-flex gap-1">
+            <button class="btn btn-sm btn-outline-info" 
+                    (click)="onView(element)"
+                    title="Ver detalles">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-primary" 
+                    (click)="onEdit(element)"
+                    title="Editar">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" 
+                    (click)="onDelete(element)"
+                    title="Eliminar">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+        
+      </sa-table>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 🚀 Templates Avanzados
+
+Este story demuestra funcionalidades avanzadas del sistema de templates.
+
+### Características Mostradas:
+
+- **Badges y estados**: Diferentes colores según el estado
+- **Avatares**: Iniciales del nombre con círculo de color
+- **Barras de progreso**: Visualización de porcentajes
+- **Múltiples acciones**: Botones con iconos y tooltips
+- **Información adicional**: Email mostrado debajo del nombre
+
+### Ejemplos de Templates:
+
+#### Badge con Color Dinámico:
+\`\`\`html
+<ng-template saColumnDef="status" let-element="element">
+  <span class="badge" 
+        [class]="element.status === 'activo' ? 'bg-success' : 
+                element.status === 'inactivo' ? 'bg-danger' : 'bg-warning'">
+    {{ element.status | titlecase }}
+  </span>
+</ng-template>
+\`\`\`
+
+#### Barra de Progreso:
+\`\`\`html
+<ng-template saColumnDef="progress" let-element="element">
+  <div class="d-flex align-items-center gap-2">
+    <div class="progress flex-grow-1" style="height: 8px;">
+      <div class="progress-bar" 
+           [style.width.%]="element.progress"
+           [class]="element.progress >= 80 ? 'bg-success' : 
+                   element.progress >= 50 ? 'bg-warning' : 'bg-danger'">
+      </div>
+    </div>
+    <small class="text-muted">{{ element.progress }}%</small>
+  </div>
+</ng-template>
+\`\`\`
+
+#### Avatar con Información:
+\`\`\`html
+<ng-template saColumnDef="name" let-element="element">
+  <div class="d-flex align-items-center gap-2">
+    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" 
+         style="width: 32px; height: 32px; font-size: 12px;">
+      {{ element.name.charAt(0) }}
+    </div>
+    <div>
+      <div class="fw-bold">{{ element.name }}</div>
+      <small class="text-muted">{{ element.email }}</small>
+    </div>
+  </div>
+</ng-template>
+\`\`\`
+
+### Ventajas del Sistema:
+
+- ✅ **Flexibilidad total**: Cualquier HTML/Angular válido
+- ✅ **Reutilización**: Templates pueden ser reutilizados
+- ✅ **Mantenibilidad**: Código organizado y claro
+- ✅ **Escalabilidad**: Fácil agregar nuevas columnas
+- ✅ **Consistencia**: Mismo patrón para todas las columnas
+        `
+      }
+    }
+  }
+};
+
