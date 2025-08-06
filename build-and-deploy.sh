@@ -151,14 +151,14 @@ ORIGINAL_DIR=$(pwd)
 if git ls-remote --heads origin build | grep -q build; then
     print_message "Rama build encontrada, creando worktree..."
     
-    # Limpiar rama temporal y worktree si existen
-    if git worktree list | grep -q temp-build; then
-        git worktree remove -f temp-build 2>/dev/null || true
-    fi
-    git branch -D temp-build 2>/dev/null || true
+    # Generar un nombre único para la rama temporal
+    TEMP_BRANCH="temp-build-$(date +%s)"
     
     # Crear worktree sin cambiar la rama actual
-    git worktree add --track -b temp-build "$BUILD_WORKTREE" origin/build
+    git worktree add --track -b "$TEMP_BRANCH" "$BUILD_WORKTREE" origin/build
+    
+    # Registrar la rama temporal para limpieza posterior
+    echo "$TEMP_BRANCH" > "$TEMP_DIR/temp-branch-name"
 else
     print_message "Rama build no encontrada, inicializando..."
     # Crear un worktree vacío sin cambiar la rama actual
@@ -205,7 +205,17 @@ cd "$ORIGINAL_DIR" || {
 
 # Limpiar de forma segura
 print_message "Limpiando recursos temporales..."
+
+# Eliminar el worktree
 git worktree remove -f "$BUILD_WORKTREE" || true
+
+# Eliminar la rama temporal si existe
+if [ -f "$TEMP_DIR/temp-branch-name" ]; then
+    TEMP_BRANCH=$(cat "$TEMP_DIR/temp-branch-name")
+    git branch -D "$TEMP_BRANCH" 2>/dev/null || true
+fi
+
+# Eliminar directorio temporal
 rm -rf "$TEMP_DIR"
 
 # Verificar que estamos en la rama correcta
