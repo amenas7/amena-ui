@@ -121,26 +121,23 @@ print_message "Haciendo push a la rama build..."
 BUILD_BRANCH="build-temp-$(date +%s)"
 git checkout -b "$BUILD_BRANCH"
 
-# Limpiar todo excepto el build
+# Limpiar todo excepto el build (como rm -rf * en sanna-ui-build)
 git rm -rf . --ignore-unmatch
 git reset --hard
 
-# Crear carpeta temporal para el build (como sanna-ui-build)
-BUILD_DIR="sanna-ui-build-$(date +%s)"
-mkdir -p "$BUILD_DIR"
-
-# Copiar solo el contenido del build a la carpeta temporal
-cp -r dist/sanna-ui/* "$BUILD_DIR/"
-
-# Mover todo el contenido de la carpeta temporal a la raíz
-mv "$BUILD_DIR"/* .
-rmdir "$BUILD_DIR"
+# Copiar solo el contenido del build (como cp -r dist/sanna-ui/* ../sanna-ui-build/)
+print_message "Copiando contenido del build..."
+cp -r dist/sanna-ui/* .
 
 # Limpiar archivos innecesarios del build
 print_message "Limpiando archivos innecesarios..."
 if [ -d "src" ]; then
     print_message "Eliminando carpeta src..."
     rm -rf src/
+fi
+if [ -f "README.md" ]; then
+    print_message "Eliminando README.md..."
+    rm -f README.md
 fi
 rm -rf dist/
 
