@@ -1,4 +1,5 @@
-import { EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, TemplateRef, QueryList } from '@angular/core';
+import { SaColumnDefDirective } from './sa-column-def.directive';
 import * as i0 from "@angular/core";
 export interface TableColumn {
     key: string;
@@ -22,6 +23,8 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy {
     columns: TableColumn[];
     data: TableData[];
     emptyMessage: string;
+    columnDefs?: QueryList<SaColumnDefDirective>;
+    defaultCellTemplate?: TemplateRef<any>;
     private _itemsPerPage;
     private _showPagination;
     private _showItemsPerPage;
@@ -61,6 +64,7 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy {
     paginatedData: TableData[];
     itemsPerPageOptions: number[];
     animationKey: number;
+    Array: ArrayConstructor;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     updatePagination(): void;
@@ -70,9 +74,11 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy {
     getSortIcon(column: string): string;
     getPageNumbers(): number[];
     trackByFn(index: number, item: any): any;
+    getColumnTemplate(columnKey: string): TemplateRef<any> | null;
+    getTemplateContext(row: TableData, column: TableColumn): any;
     onSelectChange(event: Event): void;
     private setupResizeListener;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; }, ["columnDefs"], never, false, never>;
 }
