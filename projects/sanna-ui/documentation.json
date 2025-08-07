@@ -74,21 +74,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",

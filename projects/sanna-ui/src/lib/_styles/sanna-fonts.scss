@@ -71,7 +71,7 @@ $sanna-font-stack: #{$sanna-font-primary}, #{$sanna-font-fallbacks} !default;
 
 @mixin sanna-font-semibold {
   @include sanna-font-base;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 @mixin sanna-font-bold {
