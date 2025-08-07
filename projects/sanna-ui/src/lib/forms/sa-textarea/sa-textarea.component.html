@@ -1,0 +1,28 @@
+<div class="mb-3">
+  <label *ngIf="label" [for]="id" [class]="labelClasses">
+    {{ label }}
+    <span *ngIf="required" class="text-danger">*</span>
+  </label>
+
+  <textarea
+    [id]="id"
+    [name]="name"
+    [class]="textareaClasses"
+    [style]="textareaStyles"
+    [(ngModel)]="value"
+    (ngModelChange)="onModelChange($event)"
+    [placeholder]="placeholder"
+    [required]="required"
+    [readonly]="readonly"
+    [disabled]="disabled"
+    [rows]="rows"
+    [cols]="cols"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    (focus)="onTextareaFocus($event)"
+    (blur)="onTextareaBlur($event)"
+  ></textarea>
+
+  <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
+  <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
+</div>

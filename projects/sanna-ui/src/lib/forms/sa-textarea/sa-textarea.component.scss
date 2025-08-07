@@ -47,33 +47,7 @@
   }
 }
 
-// Personalizar input groups para iconos
-:host .input-group-text {
-  font-family: $sanna-font-stack;
-  background-color: #f8f9fa;
-  border-color: #dee2e6;
-  color: #6c757d;
-}
-
-// Personalizar el botón de password toggle
-:host .btn-outline-secondary {
-  border-color: #dee2e6;
-  color: #6c757d;
-  
-  &:hover {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-    color: #495057;
-  }
-  
-  &:focus {
-    outline: none !important;
-    box-shadow: none !important;
-    border-color: #dee2e6 !important;
-  }
-}
-
-// Personalizar el label para que sea consistente con sa-select
+// Personalizar el label para que sea consistente con otros componentes de formulario
 :host .form-label {
   font-family: $sanna-font-stack;
   color: #2E3438;

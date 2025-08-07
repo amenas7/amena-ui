@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { SaTableComponent, TableColumn, TableData } from './sa-table.component';
 
 const meta: Meta<SaTableComponent> = {
-  title: 'Componentes/SaTable',
+  title: 'Componentes/Table',
   component: SaTableComponent,
   parameters: {
     layout: 'padded',

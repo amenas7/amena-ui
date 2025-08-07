@@ -1,13 +1,21 @@
-<div class="input-container">
-  <label *ngIf="label" [for]="id" class="input-label">
+<div class="mb-3">
+  <label *ngIf="label" [for]="id" [class]="labelClasses">
     {{ label }}
-    <span *ngIf="required" class="required-indicator">*</span>
+    <span *ngIf="required" class="text-danger">*</span>
   </label>
 
-  <div class="input-wrapper">
-    <div *ngIf="leftIcon" class="input-icon left-icon">
-      <i [class]="leftIcon"></i>
-    </div>
+  <div [class]="inputGroupClasses">
+    <span *ngIf="leftIcon" class="input-group-text">
+      <sa-icon 
+        *ngIf="!leftIcon.includes('fa-')" 
+        [name]="leftIcon" 
+        size="sm">
+      </sa-icon>
+      <i 
+        *ngIf="leftIcon.includes('fa-')" 
+        [class]="leftIcon">
+      </i>
+    </span>
 
     <input
       [id]="id"
@@ -30,21 +38,32 @@
       (blur)="onInputBlur($event)"
     />
 
-    <div *ngIf="rightIcon && type !== 'password'" class="input-icon right-icon">
-      <i [class]="rightIcon"></i>
-    </div>
+    <span *ngIf="rightIcon && type !== 'password'" class="input-group-text">
+      <sa-icon 
+        *ngIf="!rightIcon.includes('fa-')" 
+        [name]="rightIcon" 
+        size="sm">
+      </sa-icon>
+      <i 
+        *ngIf="rightIcon.includes('fa-')" 
+        [class]="rightIcon">
+      </i>
+    </span>
 
     <button
       *ngIf="type === 'password'"
       type="button"
-      class="password-toggle-btn"
+      class="btn btn-outline-secondary"
       (click)="togglePasswordVisibility()"
       [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
     >
-      <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+      <sa-icon 
+        [name]="showPassword ? 'eye-slash' : 'eye'" 
+        size="sm">
+      </sa-icon>
     </button>
   </div>
 
-  <small *ngIf="helperText && !errorText" class="helper-text">{{ helperText }}</small>
-  <small *ngIf="errorText" class="error-text">{{ errorText }}</small>
+  <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
+  <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
 </div>

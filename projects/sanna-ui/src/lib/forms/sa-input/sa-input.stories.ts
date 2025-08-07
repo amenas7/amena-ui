@@ -53,7 +53,7 @@ const meta: Meta<SaInputComponent> = {
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],
+      options: ['text', 'password', 'email', 'number', 'tel'],
       description: 'Tipo de input',
       table: {
         type: { summary: 'string' },
@@ -71,7 +71,7 @@ const meta: Meta<SaInputComponent> = {
     },
     status: {
       control: 'select',
-      options: ['default', 'success', 'warning', 'error'],
+      options: ['default', 'success', 'error'],
       description: 'Estado del input',
       table: {
         type: { summary: 'string' },
@@ -115,14 +115,14 @@ const meta: Meta<SaInputComponent> = {
     },
     leftIcon: {
       control: 'text',
-      description: 'Clase del ícono izquierdo (ej: "fas fa-user")',
+      description: 'Ícono izquierdo. Usa nombres de sa-icon (ej: "user", "email") o clases FontAwesome (ej: "fas fa-user")',
       table: {
         type: { summary: 'string' },
       },
     },
     rightIcon: {
       control: 'text',
-      description: 'Clase del ícono derecho (ej: "fas fa-search")',
+      description: 'Ícono derecho. Usa nombres de sa-icon (ej: "search", "calendar") o clases FontAwesome (ej: "fas fa-search")',
       table: {
         type: { summary: 'string' },
       },
@@ -205,14 +205,7 @@ export const Success: Story = {
   }
 };
 
-export const Warning: Story = {
-  args: {
-    ...Basic.args,
-    status: 'warning',
-    label: 'Input con advertencia',
-    helperText: 'Verifique el valor ingresado',
-  }
-};
+
 
 export const Error: Story = {
   args: {
@@ -228,7 +221,16 @@ export const WithLeftIcon: Story = {
   args: {
     ...Basic.args,
     label: 'Usuario',
-    leftIcon: 'fas fa-user',
+    leftIcon: 'user', // Usando sa-icon (recomendado)
+    placeholder: 'Ingrese su usuario',
+  }
+};
+
+export const WithLeftIconFontAwesome: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Usuario (FontAwesome)',
+    leftIcon: 'fas fa-user', // Usando clases CSS de FontAwesome
     placeholder: 'Ingrese su usuario',
   }
 };
@@ -237,7 +239,7 @@ export const WithRightIcon: Story = {
   args: {
     ...Basic.args,
     label: 'Búsqueda',
-    rightIcon: 'fas fa-search',
+    rightIcon: 'search', // Usando sa-icon (recomendado)
     placeholder: 'Buscar...',
   }
 };

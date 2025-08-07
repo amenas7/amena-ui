@@ -1,35 +1,105 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { SaSelectComponent } from './sa-select.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SannaUiModule } from '../../sanna-ui.module';
 
 const meta: Meta<SaSelectComponent> = {
-  title: 'Componentes/Forms/SaSelect',
+  title: 'Componentes/Forms/Select',
   component: SaSelectComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],
+      providers: [FormBuilder]
+    })
+  ],
   parameters: {
-    layout: 'centered',
+    docs: {
+      description: {
+        component: 'Componente de select que soporta diferentes tamaños, estados y opciones. Compatible con ngModel y ReactiveForm. Basado en Bootstrap 5.'
+      },
+      source: {
+        type: 'dynamic',
+        language: 'html',
+        transform: (code: string, storyContext: any) => {
+          let result = code;
+          
+          // Transformar property bindings innecesarios a attribute binding
+          result = result.replace(/\[label\]="'([^']+)'"/g, 'label="$1"');
+          result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
+          result = result.replace(/\[status\]="'([^']+)'"/g, 'status="$1"');
+          result = result.replace(/\[placeholder\]="'([^']+)'"/g, 'placeholder="$1"');
+          result = result.replace(/\[value\]="'([^']+)'"/g, 'value="$1"');
+          result = result.replace(/\[helperText\]="'([^']+)'"/g, 'helperText="$1"');
+          result = result.replace(/\[errorText\]="'([^']+)'"/g, 'errorText="$1"');
+          result = result.replace(/\[id\]="'([^']+)'"/g, 'id="$1"');
+          result = result.replace(/\[name\]="'([^']+)'"/g, 'name="$1"');
+          
+          // Transformar boolean properties
+          result = result.replace(/\[required\]="true"/g, 'required="true"');
+          result = result.replace(/\[required\]="false"/g, 'required="false"');
+          result = result.replace(/\[readonly\]="true"/g, 'readonly="true"');
+          result = result.replace(/\[readonly\]="false"/g, 'readonly="false"');
+          result = result.replace(/\[disabled\]="true"/g, 'disabled="true"');
+          result = result.replace(/\[disabled\]="false"/g, 'disabled="false"');
+          result = result.replace(/\[showPlaceholder\]="true"/g, 'showPlaceholder="true"');
+          result = result.replace(/\[showPlaceholder\]="false"/g, 'showPlaceholder="false"');
+          
+          return result;
+        }
+      }
+    },
+    actions: { argTypesRegex: '^on.*' },
+    controls: { expanded: true }
   },
-  tags: ['autodocs'],
   argTypes: {
+    label: {
+      control: 'text',
+      description: 'Etiqueta del select'
+    },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del select'
     },
     status: {
       control: { type: 'select' },
-      options: ['default', 'success', 'warning', 'error'],
+      options: ['default', 'success', 'error'],
+      description: 'Estado visual del select'
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Texto del placeholder/opción por defecto'
+    },
+    helperText: {
+      control: 'text',
+      description: 'Texto de ayuda debajo del select'
+    },
+    errorText: {
+      control: 'text',
+      description: 'Texto de error (solo se muestra si hay error)'
     },
     required: {
       control: { type: 'boolean' },
+      description: 'Campo requerido (muestra asterisco rojo)'
     },
     disabled: {
       control: { type: 'boolean' },
+      description: 'Estado deshabilitado'
     },
     readonly: {
       control: { type: 'boolean' },
+      description: 'Solo lectura'
     },
     showPlaceholder: {
       control: { type: 'boolean' },
+      description: 'Mostrar opción placeholder'
     },
-  },
+    value: {
+      control: 'text',
+      description: 'Valor seleccionado'
+    }
+  }
 };
 
 export default meta;
@@ -49,7 +119,19 @@ export const Default: Story = {
     options: defaultOptions,
     placeholder: '--Seleccione--',
     showPlaceholder: true,
+    size: 'md',
+    status: 'default'
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
 };
 
 export const WithValue: Story = {
@@ -60,6 +142,14 @@ export const WithValue: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con valor preseleccionado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Required: Story = {
@@ -70,6 +160,14 @@ export const Required: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Disabled: Story = {
@@ -80,6 +178,14 @@ export const Disabled: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Readonly: Story = {
@@ -91,6 +197,14 @@ export const Readonly: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Small: Story = {
@@ -101,6 +215,14 @@ export const Small: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Large: Story = {
@@ -111,6 +233,14 @@ export const Large: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const Success: Story = {
@@ -122,18 +252,17 @@ export const Success: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
-export const Warning: Story = {
-  args: {
-    label: 'Selecciona una opción',
-    options: defaultOptions,
-    status: 'warning',
-    value: '2',
-    placeholder: '--Seleccione--',
-    showPlaceholder: true,
-  },
-};
+
 
 export const Error: Story = {
   args: {
@@ -144,6 +273,14 @@ export const Error: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const CompleteForm: Story = {
@@ -192,6 +329,14 @@ export const WithHelperText: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const WithoutPlaceholder: Story = {
@@ -200,6 +345,14 @@ export const WithoutPlaceholder: Story = {
     options: defaultOptions,
     showPlaceholder: false,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select sin opción placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };
 
 export const WithDisabledOptions: Story = {
@@ -215,4 +368,12 @@ export const WithDisabledOptions: Story = {
     placeholder: '--Seleccione--',
     showPlaceholder: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con algunas opciones deshabilitadas. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
 };

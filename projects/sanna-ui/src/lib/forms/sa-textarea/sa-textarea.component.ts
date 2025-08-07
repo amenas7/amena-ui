@@ -1,33 +1,27 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type SelectSize = 'sm' | 'md' | 'lg';
-export type SelectStatus = 'default' | 'success' | 'error';
-
-export interface SelectOption {
-  value: string | number;
-  label: string;
-  disabled?: boolean;
-}
+export type TextareaSize = 'sm' | 'md' | 'lg';
+export type TextareaStatus = 'default' | 'success' | 'error';
 
 @Component({
-  selector: 'sa-select',
-  templateUrl: './sa-select.component.html',
-  styleUrls: ['./sa-select.component.scss'],
+  selector: 'sa-textarea',
+  templateUrl: './sa-textarea.component.html',
+  styleUrls: ['./sa-textarea.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SaSelectComponent),
+      useExisting: forwardRef(() => SaTextareaComponent),
       multi: true
     }
   ]
 })
-export class SaSelectComponent implements ControlValueAccessor {
-  @Input() value: string | number = '';
-  @Input() options: SelectOption[] = [];
-  @Input() size: SelectSize = 'md';
-  @Input() status: SelectStatus = 'default';
+export class SaTextareaComponent implements ControlValueAccessor {
+  @Input() value: string = '';
+  @Input() size: TextareaSize = 'md';
+  @Input() status: TextareaStatus = 'default';
   @Input() label: string = '';
+  @Input() placeholder: string = '';
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -35,10 +29,13 @@ export class SaSelectComponent implements ControlValueAccessor {
   @Input() disabled: boolean = false;
   @Input() id: string = '';
   @Input() name: string = '';
-  @Input() placeholder: string = '--Seleccione--';
-  @Input() showPlaceholder: boolean = true;
+  @Input() rows: number = 3;
+  @Input() cols: number = 50;
+  @Input() minlength: number | null = null;
+  @Input() maxlength: number | null = null;
+  @Input() resize: 'none' | 'both' | 'horizontal' | 'vertical' = 'vertical';
 
-  @Output() valueChange = new EventEmitter<string | number>();
+  @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
 
@@ -47,14 +44,14 @@ export class SaSelectComponent implements ControlValueAccessor {
   private onChange = (_: any) => {};
   private onTouched = () => {};
 
-  get selectClasses(): string {
+  get textareaClasses(): string {
     const sizeMap = {
-      'sm': 'form-select-sm',
+      'sm': 'form-control-sm',
       'md': '', // Bootstrap default
-      'lg': 'form-select-lg'
+      'lg': 'form-control-lg'
     };
 
-    const baseClasses = ['form-select'];
+    const baseClasses = ['form-control'];
     
     if (sizeMap[this.size] && sizeMap[this.size] !== '') {
       baseClasses.push(sizeMap[this.size]);
@@ -73,13 +70,14 @@ export class SaSelectComponent implements ControlValueAccessor {
     return 'form-label';
   }
 
-  get hasValidSelection(): boolean {
-    if (!this.showPlaceholder) return true;
-    return this.value !== '' && this.value !== null && this.value !== undefined;
+  get textareaStyles(): any {
+    return {
+      resize: this.resize
+    };
   }
 
   writeValue(value: any): void {
-    this.value = value ?? '';
+    this.value = value || '';
   }
 
   registerOnChange(fn: any): void {
@@ -94,18 +92,18 @@ export class SaSelectComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  onModelChange(value: string | number) {
+  onModelChange(value: string) {
     this.value = value;
     this.onChange(value);
     this.valueChange.emit(value);
   }
 
-  onSelectFocus(event: FocusEvent) {
+  onTextareaFocus(event: FocusEvent) {
     this.isFocused = true;
     this.focus.emit(event);
   }
 
-  onSelectBlur(event: FocusEvent) {
+  onTextareaBlur(event: FocusEvent) {
     this.isFocused = false;
     this.onTouched();
     this.blur.emit(event);

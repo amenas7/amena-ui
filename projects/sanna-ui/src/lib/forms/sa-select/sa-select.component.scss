@@ -6,47 +6,83 @@
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
+  
+  // Forzar que el contenedor mantenga su ancho
+  .mb-3 {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
-// Personalizaciones mínimas sobre Bootstrap
-.form-select {
+// Personalizaciones mínimas sobre Bootstrap - Selectores más específicos
+:host .form-select {
   font-family: $sanna-font-stack;
+  width: 100% !important; // Mantener ancho consistente independiente del status
+  box-sizing: border-box !important; // Asegurar cálculo consistente del ancho
+  min-width: 0 !important; // Prevenir que el contenido afecte el ancho
+  max-width: 100% !important; // Prevenir que se expanda más allá del contenedor
   
-  // Remover el outline/foco al hacer clic
+  // Remover completamente el outline/foco al hacer clic
   &:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: inherit;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #dee2e6 !important; // Color de borde original de Bootstrap
+  }
+  
+  // Remover focus en todos los estados
+  &:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
   
   // Personalizar estados de validación sin foco
   &.is-valid {
     border-color: #10b981;
     
-    &:focus {
-      border-color: #10b981;
-      outline: none;
-      box-shadow: none;
+    &:focus,
+    &:focus-visible {
+      border-color: #10b981 !important;
+      outline: none !important;
+      box-shadow: none !important;
     }
   }
   
   &.is-invalid {
     border-color: #ef4444;
     
-    &:focus {
-      border-color: #ef4444;
-      outline: none;
-      box-shadow: none;
+    &:focus,
+    &:focus-visible {
+      border-color: #ef4444 !important;
+      outline: none !important;
+      box-shadow: none !important;
     }
   }
+  
+
+}
+
+// Estilos para tamaños que faltan en Bootstrap 5
+.form-select-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+  min-height: calc(1.5em + 1rem + 2px);
+}
+
+.form-select-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  min-height: calc(1.5em + 0.5rem + 2px);
 }
 
 // Personalizar el label para que sea consistente con sa-input
 .form-label {
   font-family: $sanna-font-stack;
   color: #2E3438;
+  font-size: 14px;
   font-weight: 400;
-  margin-bottom: 0.25rem;
+  margin-bottom: -1px; // Reducir espacio entre label y select
   
   .text-danger {
     margin-left: 2px;
@@ -71,3 +107,8 @@
 .mb-3:last-child {
   margin-bottom: 0 !important;
 }
+
+
+
+
+

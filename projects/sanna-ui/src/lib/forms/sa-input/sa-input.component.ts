@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/cor
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
-export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
-export type InputStatus = 'default' | 'success' | 'warning' | 'error';
+export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel';
+export type InputStatus = 'default' | 'success' | 'error';
 
 @Component({
   selector: 'sa-input',
@@ -52,21 +52,48 @@ export class SaInputComponent implements ControlValueAccessor {
 
   get inputClasses(): string {
     const sizeMap = {
-      'sm': 'input-small',
-      'md': 'input-medium',
-      'lg': 'input-large'
+      'sm': 'form-control-sm',
+      'md': '', // Bootstrap default
+      'lg': 'form-control-lg'
     };
 
-    return [
-      'input',
-      sizeMap[this.size],
-      `input-${this.status}`,
-      this.leftIcon ? 'has-left-icon' : '',
-      this.rightIcon || this.type === 'password' ? 'has-right-icon' : '',
-      this.disabled ? 'disabled' : '',
-      this.readonly ? 'readonly' : '',
-      this.isFocused ? 'focused' : ''
-    ].filter(Boolean).join(' ');
+    const baseClasses = ['form-control'];
+    
+    if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+      baseClasses.push(sizeMap[this.size]);
+    }
+    
+    if (this.status === 'error' || this.errorText) {
+      baseClasses.push('is-invalid');
+    } else if (this.status === 'success') {
+      baseClasses.push('is-valid');
+    }
+
+    return baseClasses.join(' ');
+  }
+
+  get labelClasses(): string {
+    return 'form-label';
+  }
+
+  get inputGroupClasses(): string {
+    const hasIcons = this.leftIcon || this.rightIcon || this.type === 'password';
+    
+    if (hasIcons) {
+      const sizeMap = {
+        'sm': 'input-group-sm',
+        'md': '', // Bootstrap default
+        'lg': 'input-group-lg'
+      };
+      
+      const classes = ['input-group'];
+      if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+        classes.push(sizeMap[this.size]);
+      }
+      return classes.join(' ');
+    }
+    
+    return '';
   }
 
   get inputType(): string {
