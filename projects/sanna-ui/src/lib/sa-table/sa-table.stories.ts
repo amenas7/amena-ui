@@ -64,7 +64,7 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 |------|------|---------|-------------|
 | columns | TableColumn[] | [] | Configuración de las columnas |
 | data | TableData[] | [] | Datos a mostrar en la tabla |
-| itemsPerPage | number | 10 | Elementos por página |
+| itemsPerPage | number | 5 | Elementos por página |
 | showItemsPerPage | boolean | true | Mostrar selector de elementos por página |
 | showPagination | boolean | true | Mostrar controles de paginación |
 | showTotal | boolean | true | Mostrar información de totales |
@@ -153,7 +153,7 @@ const data: TableData[] = [
 <sa-table 
   [columns]="columns" 
   [data]="data"
-  [itemsPerPage]="10"
+  [itemsPerPage]="5"
   [showPagination]="true"
   [showFirstLastButtons]="true"
   [hover]="true"
@@ -189,7 +189,7 @@ onRowDoubleClick(row: TableData) {
     },
     itemsPerPage: {
       control: { type: 'number', min: 1, max: 100 },
-      description: 'Número de elementos por página. Usa attribute binding: itemsPerPage="10"'
+      description: 'Número de elementos por página. Usa attribute binding: itemsPerPage="5"'
     },
     showItemsPerPage: {
       control: { type: 'boolean' },
@@ -232,7 +232,7 @@ onRowDoubleClick(row: TableData) {
     showPagination: true,
     showTotal: true,
     showFirstLastButtons: false,
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     emptyMessage: 'No hay datos disponibles',
     minWidth: '600px'
   }
@@ -382,7 +382,7 @@ export const RegistrosGrandes: Story = {
       department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas'][i % 4],
       salary: 35000 + (i * 1000)
     })),
-    itemsPerPage: 25
+    itemsPerPage: 5
   },
   parameters: {
     docs: {
@@ -629,7 +629,7 @@ export const PaginacionResponsive: Story = {
     showItemsPerPage: true,
     showTotal: true,
     showFirstLastButtons: true,
-    itemsPerPage: 10
+    itemsPerPage: 5
   },
   parameters: {
     docs: {

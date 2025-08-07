@@ -43,7 +43,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   @ViewChild('defaultCellTemplate', { static: true }) defaultCellTemplate?: TemplateRef<any>;
   
   // Propiedades con setters/getters para flexibilidad máxima
-  private _itemsPerPage: number = 10;
+  private _itemsPerPage: number = 5;
   private _showPagination: boolean = true;
   private _showItemsPerPage: boolean = true;
   private _showTotal: boolean = true;
@@ -53,7 +53,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   @Input()
   set itemsPerPage(value: number | any) {
-    this._itemsPerPage = value != null ? +value : 10;
+    this._itemsPerPage = value != null ? +value : 5;
   }
   get itemsPerPage(): number {
     return this._itemsPerPage;
@@ -130,7 +130,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     currentPage: 1,
     totalPages: 0,
     totalItems: 0,
-    itemsPerPage: 10,
+    itemsPerPage: this._itemsPerPage,
     startItem: 0,
     endItem: 0
   };
@@ -154,6 +154,8 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
 
   ngOnInit(): void {
+    // Asegurar que el itemsPerPage esté sincronizado con paginationInfo
+    this.paginationInfo.itemsPerPage = this.itemsPerPage;
     this.updatePagination();
     this.setupResizeListener();
   }
@@ -178,7 +180,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
         currentPage: 1,
         totalPages: 0,
         totalItems: 0,
-        itemsPerPage: this.itemsPerPage,
+        itemsPerPage: this._itemsPerPage,
         startItem: 0,
         endItem: 0
       };
@@ -186,15 +188,15 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     const totalItems = this.data.length;
-    const totalPages = Math.ceil(totalItems / this.itemsPerPage);
-    const startItem = (this.currentPage - 1) * this.itemsPerPage;
-    const endItem = Math.min(startItem + this.itemsPerPage, totalItems);
+    const totalPages = Math.ceil(totalItems / this._itemsPerPage);
+    const startItem = (this.currentPage - 1) * this._itemsPerPage;
+    const endItem = Math.min(startItem + this._itemsPerPage, totalItems);
 
     this.paginationInfo = {
       currentPage: this.currentPage,
       totalPages,
       totalItems,
-      itemsPerPage: this.itemsPerPage,
+      itemsPerPage: this._itemsPerPage,
       startItem: startItem + 1,
       endItem
     };
@@ -225,7 +227,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   }
 
   onItemsPerPageChange(itemsPerPage: number): void {
-    this.itemsPerPage = itemsPerPage;
+    this._itemsPerPage = itemsPerPage;
     this.currentPage = 1;
     this.animationKey = 0; // Reiniciar la animación
     this.updatePagination();
@@ -266,72 +268,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this.currentSort.direction === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down';
   }
 
-  getPageNumbers(): number[] {
-    const pages: number[] = [];
-    const totalPages = this.paginationInfo.totalPages;
-    const currentPage = this.currentPage;
-    
-    // Detectar si estamos en un dispositivo pequeño (menos de 768px)
-    const isSmallScreen = window.innerWidth < 768;
 
-    if (totalPages <= 7) {
-      // Para pocas páginas, mostrar todas
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else if (isSmallScreen) {
-      // En dispositivos pequeños, mostrar solo 2 páginas máximo
-      if (currentPage <= 2) {
-        // Al inicio: mostrar páginas 1, 2 + separador + última
-        for (let i = 1; i <= Math.min(2, totalPages); i++) {
-          pages.push(i);
-        }
-        if (totalPages > 2) {
-          pages.push(-1); // Separator
-          pages.push(totalPages);
-        }
-      } else if (currentPage >= totalPages - 1) {
-        // Al final: mostrar primera + separador + últimas 2 páginas
-        pages.push(1);
-        pages.push(-1); // Separator
-        for (let i = Math.max(totalPages - 1, 1); i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        // En medio: mostrar primera + separador + actual + separador + última
-        pages.push(1);
-        pages.push(-1); // Separator
-        pages.push(currentPage);
-        pages.push(-1); // Separator
-        pages.push(totalPages);
-      }
-    } else {
-      // En pantallas grandes, comportamiento original
-      if (currentPage <= 4) {
-        for (let i = 1; i <= 5; i++) {
-          pages.push(i);
-        }
-        pages.push(-1); // Separator
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 3) {
-        pages.push(1);
-        pages.push(-1); // Separator
-        for (let i = totalPages - 4; i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        pages.push(1);
-        pages.push(-1); // Separator
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          pages.push(i);
-        }
-        pages.push(-1); // Separator
-        pages.push(totalPages);
-      }
-    }
-
-    return pages;
-  }
 
   trackByFn(index: number, item: any): any {
     return index;

@@ -54,8 +54,7 @@
       <span class="text-muted me-2">Registros por página:</span>
       <select 
         id="itemsPerPage"
-        class="form-select form-select-sm" 
-        style="width: auto;"
+        class="form-select form-select-sm sa-table-items-per-page" 
         [value]="itemsPerPage"
         (change)="onSelectChange($event)">
         <option *ngFor="let option of itemsPerPageOptions" [value]="option">
@@ -71,60 +70,50 @@
       </div>
       
       <nav *ngIf="paginationInfo.totalPages > 1" aria-label="Navegación de páginas">
-        <ul class="pagination mb-0 justify-content-center justify-content-md-start">
-                <!-- First Page Button -->
-        <li *ngIf="showFirstLastButtons" class="page-item" [class.disabled]="currentPage === 1">
-          <button class="page-link" 
+        <div class="pagination-controls d-flex align-items-center">
+          <!-- First Page Button -->
+          <button *ngIf="showFirstLastButtons" 
+                  class="btn btn-outline-secondary btn-sm me-1" 
                   (click)="onPageChange(1)"
                   [disabled]="currentPage === 1"
-                  aria-label="Primera página">
+                  aria-label="Primera página"
+                  title="Primera página">
             <span class="pagination-icon pagination-first">«</span>
           </button>
-        </li>
 
-        <!-- Previous Button -->
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <button class="page-link" 
+          <!-- Previous Button -->
+          <button class="btn btn-outline-secondary btn-sm me-2" 
                   (click)="onPageChange(currentPage - 1)"
                   [disabled]="currentPage === 1"
-                  aria-label="Página anterior">
+                  aria-label="Página anterior"
+                  title="Página anterior">
             <span class="pagination-icon">‹</span>
           </button>
-        </li>
 
-        <!-- Page Numbers -->
-        <li *ngFor="let page of getPageNumbers()" 
-            class="page-item"
-            [class.active]="page === currentPage"
-            [class.disabled]="page === -1">
-          <button *ngIf="page !== -1" 
-                  class="page-link" 
-                  (click)="onPageChange(page)">
-            {{ page }}
-          </button>
-          <span *ngIf="page === -1" class="page-link">...</span>
-        </li>
+          <!-- Page Indicator -->
+          <span class="page-indicator mx-2 text-muted">
+            {{ currentPage }} de {{ paginationInfo.totalPages }}
+          </span>
 
-        <!-- Next Button -->
-        <li class="page-item" [class.disabled]="currentPage === paginationInfo.totalPages">
-          <button class="page-link" 
+          <!-- Next Button -->
+          <button class="btn btn-outline-secondary btn-sm ms-2" 
                   (click)="onPageChange(currentPage + 1)"
                   [disabled]="currentPage === paginationInfo.totalPages"
-                  aria-label="Página siguiente">
+                  aria-label="Página siguiente"
+                  title="Página siguiente">
             <span class="pagination-icon">›</span>
           </button>
-        </li>
 
-        <!-- Last Page Button -->
-        <li *ngIf="showFirstLastButtons" class="page-item" [class.disabled]="currentPage === paginationInfo.totalPages">
-          <button class="page-link" 
+          <!-- Last Page Button -->
+          <button *ngIf="showFirstLastButtons" 
+                  class="btn btn-outline-secondary btn-sm ms-1" 
                   (click)="onPageChange(paginationInfo.totalPages)"
                   [disabled]="currentPage === paginationInfo.totalPages"
-                  aria-label="Última página">
+                  aria-label="Última página"
+                  title="Última página">
             <span class="pagination-icon pagination-last">»</span>
           </button>
-        </li>
-        </ul>
+        </div>
       </nav>
     </div>
   </div>
