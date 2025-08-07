@@ -2,7 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type SelectSize = 'sm' | 'md' | 'lg';
-export type SelectStatus = 'default' | 'success' | 'warning' | 'error';
+export type SelectStatus = 'default' | 'success' | 'error';
 export interface SelectOption {
     value: string | number;
     label: string;

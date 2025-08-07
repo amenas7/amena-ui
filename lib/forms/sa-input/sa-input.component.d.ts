@@ -2,8 +2,8 @@ import { EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type InputSize = 'sm' | 'md' | 'lg';
-export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
-export type InputStatus = 'default' | 'success' | 'warning' | 'error';
+export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel';
+export type InputStatus = 'default' | 'success' | 'error';
 export declare class SaInputComponent implements ControlValueAccessor {
     value: string;
     type: InputType;
@@ -34,6 +34,8 @@ export declare class SaInputComponent implements ControlValueAccessor {
     private onChange;
     private onTouched;
     get inputClasses(): string;
+    get labelClasses(): string;
+    get inputGroupClasses(): string;
     get inputType(): string;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
