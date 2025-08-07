@@ -78,7 +78,6 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     onItemsPerPageChange(itemsPerPage: number): void;
     onSort(column: string): void;
     getSortIcon(column: string): string;
-    getPageNumbers(): number[];
     trackByFn(index: number, item: any): any;
     getColumnTemplate(columnKey: string): TemplateRef<any> | null;
     getTemplateContext(row: TableData, column: TableColumn): any;
