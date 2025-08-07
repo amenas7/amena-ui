@@ -361,9 +361,9 @@
 }
 
 .btn-info {
-  background-color: #dae9fc4a;
-  border: 1px solid #007bff;
-  color: #007bff;
+  background-color: #dae9fc4a !important;
+  border: 1px solid #007bff !important;
+  color: #007bff !important;
   
   &:hover {
     background-color: #98c8ff4a;
