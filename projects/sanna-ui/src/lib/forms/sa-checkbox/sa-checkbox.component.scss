@@ -6,12 +6,37 @@
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
+}
+
+// Wrapper principal del componente
+:host .sa-checkbox-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem; // Equivalente a mb-3
   
-  // Forzar que el contenedor mantenga su ancho
-  .mb-3 {
-    width: 100%;
-    box-sizing: border-box;
+  // Cuando se usa como último elemento, no necesita margin bottom
+  &:last-child {
+    margin-bottom: 0;
   }
+}
+
+// Estilos específicos para uso dentro de Bootstrap grid/row/col
+:host-context(.row) .sa-checkbox-wrapper,
+:host-context(.col) .sa-checkbox-wrapper,
+:host-context(.col-*) .sa-checkbox-wrapper {
+  // Asegurar que el padding del parent no afecte solo el label
+  position: relative;
+  z-index: 1;
+}
+
+// Override para evitar desplazamientos cuando se usa dentro de containers con padding
+:host-context(.p-1) .form-check,
+:host-context(.p-2) .form-check,
+:host-context(.p-3) .form-check,
+:host-context(.p-4) .form-check,
+:host-context(.p-5) .form-check {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 // Personalizaciones mínimas sobre Bootstrap con mayor especificidad
@@ -72,20 +97,25 @@
 
 // Asegurar alineación horizontal correcta del contenedor
 :host .form-check {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   min-height: auto;
-  padding-left: 0;
+  padding-left: 0 !important;
+  margin-bottom: 0;
+  position: relative;
   
   .form-check-input {
-    margin-top: 0;
+    margin-top: 0 !important;
     margin-right: 0.5rem;
+    margin-left: 0 !important;
     flex-shrink: 0;
+    position: static !important; // Evitar problemas de posicionamiento
   }
   
   .form-check-label {
     margin-bottom: 0;
     line-height: 1;
+    flex: 1; // Permitir que el label tome el espacio restante
   }
 }
 
