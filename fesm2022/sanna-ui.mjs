@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, forwardRef, Directive, ContentChildren } from '@angular/core';
+import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, Directive, ContentChildren, forwardRef } from '@angular/core';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i2$1 from '@angular/forms';
@@ -7,7 +7,7 @@ import { NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/fo
 import * as i2 from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight, faBell, faQuestion, faChevronDown, faChevronUp, faArrowLeft, faArrowRight, faArrowUp, faArrowDown, faPencil, faLink, faCopy, faChartBar, faGift, faBatteryHalf, faBicycle, faCalculator, faCamera, faCaretDown, faCaretLeft, faCaretRight, faCaretUp, faComments, faMicroscope, faCoffee, faCreditCard, faCropAlt, faCrop, faTruck, faEquals, faEraser, faFileDownload, faMedal, faFilter, faFingerprint, faFire, faTrophy, faFish, faFlag, faForward, faGlobe, faIceCream, faLaptop, faMapPin, faMotorcycle, faPaperclip, faPause, faPercent, faPiggyBank, faPlay, faReceipt, faShoppingCart, faStarHalf, faStop, faThumbsDown, faThumbsUp, faUndo, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faChevronDown, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight, faBell, faQuestion, faChevronUp, faArrowLeft, faArrowRight, faArrowUp, faArrowDown, faPencil, faLink, faCopy, faChartBar, faGift, faBatteryHalf, faBicycle, faCalculator, faCamera, faCaretDown, faCaretLeft, faCaretRight, faCaretUp, faComments, faMicroscope, faCoffee, faCreditCard, faCropAlt, faCrop, faTruck, faEquals, faEraser, faFileDownload, faMedal, faFilter, faFingerprint, faFire, faTrophy, faFish, faFlag, faForward, faGlobe, faIceCream, faLaptop, faMapPin, faMotorcycle, faPaperclip, faPause, faPercent, faPiggyBank, faPlay, faReceipt, faShoppingCart, faStarHalf, faStop, faThumbsDown, faThumbsUp, faUndo, faUpload } from '@fortawesome/free-solid-svg-icons';
 import * as i1$1 from '@angular/platform-browser';
 
 class SannaUiService {
@@ -40,7 +40,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
         }] });
 
 // Agregar todos los iconos a la librería
-library.add(faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight);
+library.add(faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faChevronDown, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight);
 
 /**
  * Módulo que configura automáticamente Font Awesome con todos los iconos
@@ -939,155 +939,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Input
             }] } });
 
-class SaInputComponent {
-    value = '';
-    type = 'text';
-    placeholder = '';
-    size = 'md';
-    status = 'default';
-    label = '';
-    helperText = '';
-    errorText = '';
-    leftIcon = '';
-    rightIcon = '';
-    required = false;
-    readonly = false;
-    disabled = false;
-    id = '';
-    name = '';
-    autocomplete = 'off';
-    min = null;
-    max = null;
-    minlength = null;
-    maxlength = null;
-    pattern = '';
-    valueChange = new EventEmitter();
-    focus = new EventEmitter();
-    blur = new EventEmitter();
-    showPassword = false;
-    isFocused = false;
-    onChange = (_) => { };
-    onTouched = () => { };
-    get inputClasses() {
-        const sizeMap = {
-            'sm': 'input-small',
-            'md': 'input-medium',
-            'lg': 'input-large'
-        };
-        return [
-            'input',
-            sizeMap[this.size],
-            `input-${this.status}`,
-            this.leftIcon ? 'has-left-icon' : '',
-            this.rightIcon || this.type === 'password' ? 'has-right-icon' : '',
-            this.disabled ? 'disabled' : '',
-            this.readonly ? 'readonly' : '',
-            this.isFocused ? 'focused' : ''
-        ].filter(Boolean).join(' ');
-    }
-    get inputType() {
-        if (this.type === 'password') {
-            return this.showPassword ? 'text' : 'password';
-        }
-        return this.type;
-    }
-    writeValue(value) {
-        this.value = value ?? '';
-    }
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-    setDisabledState(isDisabled) {
-        this.disabled = isDisabled;
-    }
-    onModelChange(value) {
-        this.value = value;
-        this.onChange(value);
-        this.valueChange.emit(value);
-    }
-    onInputFocus(event) {
-        this.isFocused = true;
-        this.focus.emit(event);
-    }
-    onInputBlur(event) {
-        this.isFocused = false;
-        this.onTouched();
-        this.blur.emit(event);
-    }
-    togglePasswordVisibility() {
-        this.showPassword = !this.showPassword;
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaInputComponent, selector: "sa-input", inputs: { value: "value", type: "type", placeholder: "placeholder", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", leftIcon: "leftIcon", rightIcon: "rightIcon", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", autocomplete: "autocomplete", min: "min", max: "max", minlength: "minlength", maxlength: "maxlength", pattern: "pattern" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
-            {
-                provide: NG_VALUE_ACCESSOR,
-                useExisting: forwardRef(() => SaInputComponent),
-                multi: true
-            }
-        ], ngImport: i0, template: "<div class=\"input-container\">\n  <label *ngIf=\"label\" [for]=\"id\" class=\"input-label\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"required-indicator\">*</span>\n  </label>\n\n  <div class=\"input-wrapper\">\n    <div *ngIf=\"leftIcon\" class=\"input-icon left-icon\">\n      <i [class]=\"leftIcon\"></i>\n    </div>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <div *ngIf=\"rightIcon && type !== 'password'\" class=\"input-icon right-icon\">\n      <i [class]=\"rightIcon\"></i>\n    </div>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"password-toggle-btn\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <i [class]=\"showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'\"></i>\n    </button>\n  </div>\n\n  <small *ngIf=\"helperText && !errorText\" class=\"helper-text\">{{ helperText }}</small>\n  <small *ngIf=\"errorText\" class=\"error-text\">{{ errorText }}</small>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.input-container{display:flex;flex-direction:column;gap:2px;width:100%;margin:0;padding:0;box-sizing:border-box}.input-label{font-size:14px;font-weight:400!important;color:#2e3438;margin-bottom:-1px!important}.input-label .required-indicator{color:#ef4444;margin-left:2px}.input-wrapper{position:relative;display:flex;align-items:center;width:100%;margin:0;padding:0;box-sizing:border-box}.input{width:100%;border:1px solid #cdd7e4;border-radius:6px;background-color:#fff;color:#374151;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;outline:none;margin:0!important;box-sizing:border-box;display:block}.input::placeholder{color:#9ca3af}.input:focus:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input:disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input:read-only{background-color:#f9fafb}.input.input-small{padding:4.5px 9px;font-size:12px}.input.input-medium{padding:12px 16px;font-size:16px}.input.input-large{padding:16px 20px;font-size:18px}.input.input-default{border-color:#cdd7e4}.input.input-success{border-color:#10b981}.input.input-warning{border-color:#f59e0b}.input.input-error{border-color:#ef4444}.input.has-left-icon{padding-left:40px}.input.has-right-icon,.input.has-password-toggle{padding-right:40px}.input-icon{position:absolute;display:flex;align-items:center;justify-content:center;color:#9ca3af;z-index:1}.input-icon.left-icon{left:12px}.input-icon.right-icon{right:12px}.input-icon i{font-size:16px}.password-toggle-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px;border-radius:4px;transition:all .2s ease-in-out}.password-toggle-btn:hover{color:#374151;background-color:#0000000d}.password-toggle-btn:focus{outline:none}.password-toggle-btn i{font-size:16px}.helper-text{font-size:12px;color:#6b7280;margin-top:2px}.error-text{font-size:12px;color:#ef4444;margin-top:2px}.input.focused:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input.disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input.readonly{background-color:#f9fafb}.input.error{border-color:#ef4444}.input.error:focus{border-color:#ef4444;box-shadow:0 0 0 3px #ef44441a}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.MinLengthValidator, selector: "[minlength][formControlName],[minlength][formControl],[minlength][ngModel]", inputs: ["minlength"] }, { kind: "directive", type: i2$1.MaxLengthValidator, selector: "[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]", inputs: ["maxlength"] }, { kind: "directive", type: i2$1.PatternValidator, selector: "[pattern][formControlName],[pattern][formControl],[pattern][ngModel]", inputs: ["pattern"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'sa-input', providers: [
-                        {
-                            provide: NG_VALUE_ACCESSOR,
-                            useExisting: forwardRef(() => SaInputComponent),
-                            multi: true
-                        }
-                    ], template: "<div class=\"input-container\">\n  <label *ngIf=\"label\" [for]=\"id\" class=\"input-label\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"required-indicator\">*</span>\n  </label>\n\n  <div class=\"input-wrapper\">\n    <div *ngIf=\"leftIcon\" class=\"input-icon left-icon\">\n      <i [class]=\"leftIcon\"></i>\n    </div>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <div *ngIf=\"rightIcon && type !== 'password'\" class=\"input-icon right-icon\">\n      <i [class]=\"rightIcon\"></i>\n    </div>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"password-toggle-btn\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <i [class]=\"showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'\"></i>\n    </button>\n  </div>\n\n  <small *ngIf=\"helperText && !errorText\" class=\"helper-text\">{{ helperText }}</small>\n  <small *ngIf=\"errorText\" class=\"error-text\">{{ errorText }}</small>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.input-container{display:flex;flex-direction:column;gap:2px;width:100%;margin:0;padding:0;box-sizing:border-box}.input-label{font-size:14px;font-weight:400!important;color:#2e3438;margin-bottom:-1px!important}.input-label .required-indicator{color:#ef4444;margin-left:2px}.input-wrapper{position:relative;display:flex;align-items:center;width:100%;margin:0;padding:0;box-sizing:border-box}.input{width:100%;border:1px solid #cdd7e4;border-radius:6px;background-color:#fff;color:#374151;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;outline:none;margin:0!important;box-sizing:border-box;display:block}.input::placeholder{color:#9ca3af}.input:focus:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input:disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input:read-only{background-color:#f9fafb}.input.input-small{padding:4.5px 9px;font-size:12px}.input.input-medium{padding:12px 16px;font-size:16px}.input.input-large{padding:16px 20px;font-size:18px}.input.input-default{border-color:#cdd7e4}.input.input-success{border-color:#10b981}.input.input-warning{border-color:#f59e0b}.input.input-error{border-color:#ef4444}.input.has-left-icon{padding-left:40px}.input.has-right-icon,.input.has-password-toggle{padding-right:40px}.input-icon{position:absolute;display:flex;align-items:center;justify-content:center;color:#9ca3af;z-index:1}.input-icon.left-icon{left:12px}.input-icon.right-icon{right:12px}.input-icon i{font-size:16px}.password-toggle-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px;border-radius:4px;transition:all .2s ease-in-out}.password-toggle-btn:hover{color:#374151;background-color:#0000000d}.password-toggle-btn:focus{outline:none}.password-toggle-btn i{font-size:16px}.helper-text{font-size:12px;color:#6b7280;margin-top:2px}.error-text{font-size:12px;color:#ef4444;margin-top:2px}.input.focused:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input.disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input.readonly{background-color:#f9fafb}.input.error{border-color:#ef4444}.input.error:focus{border-color:#ef4444;box-shadow:0 0 0 3px #ef44441a}\n"] }]
-        }], propDecorators: { value: [{
-                type: Input
-            }], type: [{
-                type: Input
-            }], placeholder: [{
-                type: Input
-            }], size: [{
-                type: Input
-            }], status: [{
-                type: Input
-            }], label: [{
-                type: Input
-            }], helperText: [{
-                type: Input
-            }], errorText: [{
-                type: Input
-            }], leftIcon: [{
-                type: Input
-            }], rightIcon: [{
-                type: Input
-            }], required: [{
-                type: Input
-            }], readonly: [{
-                type: Input
-            }], disabled: [{
-                type: Input
-            }], id: [{
-                type: Input
-            }], name: [{
-                type: Input
-            }], autocomplete: [{
-                type: Input
-            }], min: [{
-                type: Input
-            }], max: [{
-                type: Input
-            }], minlength: [{
-                type: Input
-            }], maxlength: [{
-                type: Input
-            }], pattern: [{
-                type: Input
-            }], valueChange: [{
-                type: Output
-            }], focus: [{
-                type: Output
-            }], blur: [{
-                type: Output
-            }] } });
-
 class SaHeadingComponent {
     // Propiedad que DEBE usar property binding: [children]="'texto'"
     children = '';
@@ -1569,33 +1420,366 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Output
             }] } });
 
+class SaInputComponent {
+    value = '';
+    type = 'text';
+    placeholder = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    leftIcon = '';
+    rightIcon = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    autocomplete = 'off';
+    min = null;
+    max = null;
+    minlength = null;
+    maxlength = null;
+    pattern = '';
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    showPassword = false;
+    isFocused = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    get inputClasses() {
+        const sizeMap = {
+            'sm': 'input-small',
+            'md': 'input-medium',
+            'lg': 'input-large'
+        };
+        return [
+            'input',
+            sizeMap[this.size],
+            `input-${this.status}`,
+            this.leftIcon ? 'has-left-icon' : '',
+            this.rightIcon || this.type === 'password' ? 'has-right-icon' : '',
+            this.disabled ? 'disabled' : '',
+            this.readonly ? 'readonly' : '',
+            this.isFocused ? 'focused' : ''
+        ].filter(Boolean).join(' ');
+    }
+    get inputType() {
+        if (this.type === 'password') {
+            return this.showPassword ? 'text' : 'password';
+        }
+        return this.type;
+    }
+    writeValue(value) {
+        this.value = value ?? '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onInputFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onInputBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaInputComponent, selector: "sa-input", inputs: { value: "value", type: "type", placeholder: "placeholder", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", leftIcon: "leftIcon", rightIcon: "rightIcon", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", autocomplete: "autocomplete", min: "min", max: "max", minlength: "minlength", maxlength: "maxlength", pattern: "pattern" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaInputComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"input-container\">\n  <label *ngIf=\"label\" [for]=\"id\" class=\"input-label\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"required-indicator\">*</span>\n  </label>\n\n  <div class=\"input-wrapper\">\n    <div *ngIf=\"leftIcon\" class=\"input-icon left-icon\">\n      <i [class]=\"leftIcon\"></i>\n    </div>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <div *ngIf=\"rightIcon && type !== 'password'\" class=\"input-icon right-icon\">\n      <i [class]=\"rightIcon\"></i>\n    </div>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"password-toggle-btn\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <i [class]=\"showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'\"></i>\n    </button>\n  </div>\n\n  <small *ngIf=\"helperText && !errorText\" class=\"helper-text\">{{ helperText }}</small>\n  <small *ngIf=\"errorText\" class=\"error-text\">{{ errorText }}</small>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.input-container{display:flex;flex-direction:column;gap:2px;width:100%;margin:0;padding:0;box-sizing:border-box}.input-label{font-size:14px;font-weight:400!important;color:#2e3438;margin-bottom:-1px!important}.input-label .required-indicator{color:#ef4444;margin-left:2px}.input-wrapper{position:relative;display:flex;align-items:center;width:100%;margin:0;padding:0;box-sizing:border-box}.input{width:100%;border:1px solid #cdd7e4;border-radius:6px;background-color:#fff;color:#374151;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;outline:none;margin:0!important;box-sizing:border-box;display:block}.input::placeholder{color:#9ca3af}.input:focus:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input:disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input:read-only{background-color:#f9fafb}.input.input-small{padding:4.5px 9px;font-size:12px}.input.input-medium{padding:12px 16px;font-size:16px}.input.input-large{padding:16px 20px;font-size:18px}.input.input-default{border-color:#cdd7e4}.input.input-success{border-color:#10b981}.input.input-warning{border-color:#f59e0b}.input.input-error{border-color:#ef4444}.input.has-left-icon{padding-left:40px}.input.has-right-icon,.input.has-password-toggle{padding-right:40px}.input-icon{position:absolute;display:flex;align-items:center;justify-content:center;color:#9ca3af;z-index:1}.input-icon.left-icon{left:12px}.input-icon.right-icon{right:12px}.input-icon i{font-size:16px}.password-toggle-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px;border-radius:4px;transition:all .2s ease-in-out}.password-toggle-btn:hover{color:#374151;background-color:#0000000d}.password-toggle-btn:focus{outline:none}.password-toggle-btn i{font-size:16px}.helper-text{font-size:12px;color:#6b7280;margin-top:2px}.error-text{font-size:12px;color:#ef4444;margin-top:2px}.input.focused:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input.disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input.readonly{background-color:#f9fafb}.input.error{border-color:#ef4444}.input.error:focus{border-color:#ef4444;box-shadow:0 0 0 3px #ef44441a}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.MinLengthValidator, selector: "[minlength][formControlName],[minlength][formControl],[minlength][ngModel]", inputs: ["minlength"] }, { kind: "directive", type: i2$1.MaxLengthValidator, selector: "[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]", inputs: ["maxlength"] }, { kind: "directive", type: i2$1.PatternValidator, selector: "[pattern][formControlName],[pattern][formControl],[pattern][ngModel]", inputs: ["pattern"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-input', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaInputComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"input-container\">\n  <label *ngIf=\"label\" [for]=\"id\" class=\"input-label\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"required-indicator\">*</span>\n  </label>\n\n  <div class=\"input-wrapper\">\n    <div *ngIf=\"leftIcon\" class=\"input-icon left-icon\">\n      <i [class]=\"leftIcon\"></i>\n    </div>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <div *ngIf=\"rightIcon && type !== 'password'\" class=\"input-icon right-icon\">\n      <i [class]=\"rightIcon\"></i>\n    </div>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"password-toggle-btn\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <i [class]=\"showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'\"></i>\n    </button>\n  </div>\n\n  <small *ngIf=\"helperText && !errorText\" class=\"helper-text\">{{ helperText }}</small>\n  <small *ngIf=\"errorText\" class=\"error-text\">{{ errorText }}</small>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.input-container{display:flex;flex-direction:column;gap:2px;width:100%;margin:0;padding:0;box-sizing:border-box}.input-label{font-size:14px;font-weight:400!important;color:#2e3438;margin-bottom:-1px!important}.input-label .required-indicator{color:#ef4444;margin-left:2px}.input-wrapper{position:relative;display:flex;align-items:center;width:100%;margin:0;padding:0;box-sizing:border-box}.input{width:100%;border:1px solid #cdd7e4;border-radius:6px;background-color:#fff;color:#374151;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;outline:none;margin:0!important;box-sizing:border-box;display:block}.input::placeholder{color:#9ca3af}.input:focus:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input:disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input:read-only{background-color:#f9fafb}.input.input-small{padding:4.5px 9px;font-size:12px}.input.input-medium{padding:12px 16px;font-size:16px}.input.input-large{padding:16px 20px;font-size:18px}.input.input-default{border-color:#cdd7e4}.input.input-success{border-color:#10b981}.input.input-warning{border-color:#f59e0b}.input.input-error{border-color:#ef4444}.input.has-left-icon{padding-left:40px}.input.has-right-icon,.input.has-password-toggle{padding-right:40px}.input-icon{position:absolute;display:flex;align-items:center;justify-content:center;color:#9ca3af;z-index:1}.input-icon.left-icon{left:12px}.input-icon.right-icon{right:12px}.input-icon i{font-size:16px}.password-toggle-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px;border-radius:4px;transition:all .2s ease-in-out}.password-toggle-btn:hover{color:#374151;background-color:#0000000d}.password-toggle-btn:focus{outline:none}.password-toggle-btn i{font-size:16px}.helper-text{font-size:12px;color:#6b7280;margin-top:2px}.error-text{font-size:12px;color:#ef4444;margin-top:2px}.input.focused:not(.input-error):not(.input-warning):not(.input-success){border-color:#36ad55;outline:2px solid #36AD55;outline-offset:-2px}.input.disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}.input.readonly{background-color:#f9fafb}.input.error{border-color:#ef4444}.input.error:focus{border-color:#ef4444;box-shadow:0 0 0 3px #ef44441a}\n"] }]
+        }], propDecorators: { value: [{
+                type: Input
+            }], type: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], leftIcon: [{
+                type: Input
+            }], rightIcon: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], autocomplete: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], minlength: [{
+                type: Input
+            }], maxlength: [{
+                type: Input
+            }], pattern: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaSelectComponent {
+    value = '';
+    options = [];
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    placeholder = '--Seleccione--';
+    showPlaceholder = true;
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    get selectClasses() {
+        const sizeMap = {
+            'sm': 'form-select-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-select-lg'
+        };
+        const baseClasses = ['form-select'];
+        if (sizeMap[this.size]) {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    get hasValidSelection() {
+        if (!this.showPlaceholder)
+            return true;
+        return this.value !== '' && this.value !== null && this.value !== undefined;
+    }
+    writeValue(value) {
+        this.value = value ?? '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onSelectFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onSelectBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaSelectComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaSelectComponent, selector: "sa-select", inputs: { value: "value", options: "options", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", placeholder: "placeholder", showPlaceholder: "showPlaceholder" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaSelectComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\r\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\r\n    {{ label }}\r\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\r\n  </label>\r\n  \r\n  <select\r\n    [id]=\"id\"\r\n    [name]=\"name\"\r\n    [class]=\"selectClasses\"\r\n    [(ngModel)]=\"value\"\r\n    (ngModelChange)=\"onModelChange($event)\"\r\n    [required]=\"required\"\r\n    [disabled]=\"disabled || readonly\"\r\n    (focus)=\"onSelectFocus($event)\"\r\n    (blur)=\"onSelectBlur($event)\"\r\n  >\r\n    <option *ngIf=\"showPlaceholder\" value=\"\" [disabled]=\"required\">\r\n      {{ placeholder }}\r\n    </option>\r\n    <option\r\n      *ngFor=\"let option of options\"\r\n      [value]=\"option.value\"\r\n      [disabled]=\"option.disabled\"\r\n    >\r\n      {{ option.label }}\r\n    </option>\r\n  </select>\r\n  \r\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\r\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\r\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.form-select{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.form-select:focus{outline:none;box-shadow:none;border-color:inherit}.form-select.is-valid{border-color:#10b981}.form-select.is-valid:focus{border-color:#10b981;outline:none;box-shadow:none}.form-select.is-invalid{border-color:#ef4444}.form-select.is-invalid:focus{border-color:#ef4444;outline:none;box-shadow:none}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-weight:400;margin-bottom:.25rem}.form-label .text-danger{margin-left:2px}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}.mb-3:last-child{margin-bottom:0!important}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i2$1.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i2$1.SelectControlValueAccessor, selector: "select:not([multiple])[formControlName],select:not([multiple])[formControl],select:not([multiple])[ngModel]", inputs: ["compareWith"] }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaSelectComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-select', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaSelectComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\r\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\r\n    {{ label }}\r\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\r\n  </label>\r\n  \r\n  <select\r\n    [id]=\"id\"\r\n    [name]=\"name\"\r\n    [class]=\"selectClasses\"\r\n    [(ngModel)]=\"value\"\r\n    (ngModelChange)=\"onModelChange($event)\"\r\n    [required]=\"required\"\r\n    [disabled]=\"disabled || readonly\"\r\n    (focus)=\"onSelectFocus($event)\"\r\n    (blur)=\"onSelectBlur($event)\"\r\n  >\r\n    <option *ngIf=\"showPlaceholder\" value=\"\" [disabled]=\"required\">\r\n      {{ placeholder }}\r\n    </option>\r\n    <option\r\n      *ngFor=\"let option of options\"\r\n      [value]=\"option.value\"\r\n      [disabled]=\"option.disabled\"\r\n    >\r\n      {{ option.label }}\r\n    </option>\r\n  </select>\r\n  \r\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\r\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\r\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.form-select{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}.form-select:focus{outline:none;box-shadow:none;border-color:inherit}.form-select.is-valid{border-color:#10b981}.form-select.is-valid:focus{border-color:#10b981;outline:none;box-shadow:none}.form-select.is-invalid{border-color:#ef4444}.form-select.is-invalid:focus{border-color:#ef4444;outline:none;box-shadow:none}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-weight:400;margin-bottom:.25rem}.form-label .text-danger{margin-left:2px}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}.mb-3:last-child{margin-bottom:0!important}\n"] }]
+        }], propDecorators: { value: [{
+                type: Input
+            }], options: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], showPlaceholder: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SannaFormsModule {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, declarations: [SaInputComponent,
+            SaSelectComponent], imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule], exports: [SaInputComponent,
+            SaSelectComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    declarations: [
+                        SaInputComponent,
+                        SaSelectComponent,
+                    ],
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                    ],
+                    exports: [
+                        SaInputComponent,
+                        SaSelectComponent,
+                    ]
+                }]
+        }] });
+
+class SannaIconModule {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, declarations: [SaIconComponent], imports: [CommonModule,
+            SannaUiFontAwesomeModule], exports: [SaIconComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, imports: [CommonModule,
+            SannaUiFontAwesomeModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    declarations: [
+                        SaIconComponent,
+                    ],
+                    imports: [
+                        CommonModule,
+                        SannaUiFontAwesomeModule,
+                    ],
+                    exports: [
+                        SaIconComponent,
+                    ]
+                }]
+        }] });
+
 class SannaUiModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
     static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, declarations: [SannaUiComponent,
             SaButtonComponent,
-            SaIconComponent,
             SaMessageboxComponent,
-            SaInputComponent,
             SaHeadingComponent,
             SaTextComponent,
             SaTableComponent], imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
             SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule,
             SaColumnDefDirective], exports: [SannaUiComponent,
             SaButtonComponent,
-            SaIconComponent,
             SaMessageboxComponent,
-            SaInputComponent,
             SaHeadingComponent,
             SaTextComponent,
             SaTableComponent,
             SaColumnDefDirective,
-            SannaUiFontAwesomeModule] });
+            SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule] });
     static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
-            SannaUiFontAwesomeModule, SannaUiFontAwesomeModule] });
+            SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule, SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, decorators: [{
             type: NgModule,
@@ -1603,9 +1787,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                     declarations: [
                         SannaUiComponent,
                         SaButtonComponent,
-                        SaIconComponent,
                         SaMessageboxComponent,
-                        SaInputComponent,
                         SaHeadingComponent,
                         SaTextComponent,
                         SaTableComponent,
@@ -1615,19 +1797,21 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         FormsModule,
                         ReactiveFormsModule,
                         SannaUiFontAwesomeModule,
+                        SannaFormsModule,
+                        SannaIconModule,
                         SaColumnDefDirective
                     ],
                     exports: [
                         SannaUiComponent,
                         SaButtonComponent,
-                        SaIconComponent,
                         SaMessageboxComponent,
-                        SaInputComponent,
                         SaHeadingComponent,
                         SaTextComponent,
                         SaTableComponent,
                         SaColumnDefDirective,
-                        SannaUiFontAwesomeModule
+                        SannaUiFontAwesomeModule,
+                        SannaFormsModule,
+                        SannaIconModule
                     ]
                 }]
         }] });
@@ -1642,5 +1826,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { SaButtonComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaTableComponent, SaTextComponent, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
+export { SaButtonComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaSelectComponent, SaTableComponent, SaTextComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map
