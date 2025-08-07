@@ -1,0 +1,32 @@
+<div class="mb-3">
+  <label *ngIf="label" [for]="id" [class]="labelClasses">
+    {{ label }}
+    <span *ngIf="required" class="text-danger">*</span>
+  </label>
+  
+  <select
+    [id]="id"
+    [name]="name"
+    [class]="selectClasses"
+    [(ngModel)]="value"
+    (ngModelChange)="onModelChange($event)"
+    [required]="required"
+    [disabled]="disabled || readonly"
+    (focus)="onSelectFocus($event)"
+    (blur)="onSelectBlur($event)"
+  >
+    <option *ngIf="showPlaceholder" value="" [disabled]="required">
+      {{ placeholder }}
+    </option>
+    <option
+      *ngFor="let option of options"
+      [value]="option.value"
+      [disabled]="option.disabled"
+    >
+      {{ option.label }}
+    </option>
+  </select>
+  
+  <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
+  <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
+</div>

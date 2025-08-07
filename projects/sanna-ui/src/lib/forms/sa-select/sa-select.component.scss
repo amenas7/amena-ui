@@ -1,0 +1,73 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../../_styles/sanna-fonts';
+
+// Variables para personalización de Bootstrap
+:host {
+  display: block;
+  width: 100%;
+  font-family: $sanna-font-stack;
+}
+
+// Personalizaciones mínimas sobre Bootstrap
+.form-select {
+  font-family: $sanna-font-stack;
+  
+  // Remover el outline/foco al hacer clic
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: inherit;
+  }
+  
+  // Personalizar estados de validación sin foco
+  &.is-valid {
+    border-color: #10b981;
+    
+    &:focus {
+      border-color: #10b981;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  
+  &.is-invalid {
+    border-color: #ef4444;
+    
+    &:focus {
+      border-color: #ef4444;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// Personalizar el label para que sea consistente con sa-input
+.form-label {
+  font-family: $sanna-font-stack;
+  color: #2E3438;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  
+  .text-danger {
+    margin-left: 2px;
+  }
+}
+
+// Personalizar textos de ayuda y error
+.form-text {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.invalid-feedback {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+// Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
+.mb-3:last-child {
+  margin-bottom: 0 !important;
+}
