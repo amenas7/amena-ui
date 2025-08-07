@@ -1,0 +1,30 @@
+<div class="mb-3">
+  <label *ngIf="label" [for]="dateId" [class]="labelClasses">
+    {{ label }}
+    <span *ngIf="required" class="text-danger">*</span>
+  </label>
+
+  <div class="position-relative">
+    <!-- Input date nativo -->
+    <input
+      [id]="dateId"
+      [name]="name"
+      [class]="inputClasses"
+      type="date"
+      [(ngModel)]="value"
+      (ngModelChange)="onModelChange($event)"
+      [placeholder]="placeholder"
+      [required]="required"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [min]="min"
+      [max]="max"
+      (focus)="onInputFocus($event)"
+      (blur)="onInputBlur($event)"
+      (click)="openCalendar($event)"
+    />
+  </div>
+
+  <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
+  <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
+</div>

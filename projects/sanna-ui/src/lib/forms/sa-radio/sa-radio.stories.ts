@@ -16,7 +16,7 @@ const meta: Meta<SaRadioComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de radio button que soporta diferentes tamaños y estados de validación. Compatible con ngModel y ReactiveForm. Basado en Bootstrap 5.'
+        component: 'Componente de radio button que soporta diferentes tamaños y estados de validación. Compatible con ngModel y ReactiveForm.'
       },
       source: {
         type: 'dynamic',

@@ -16,7 +16,7 @@ const meta: Meta<SaSelectComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de select que soporta diferentes tamaños, estados y opciones. Compatible con ngModel y ReactiveForm. Basado en Bootstrap 5.'
+        component: 'Componente de select que soporta diferentes tamaños, estados y opciones. Compatible con ngModel y ReactiveForm.'
       },
       source: {
         type: 'dynamic',

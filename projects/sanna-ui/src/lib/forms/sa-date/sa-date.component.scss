@@ -1,0 +1,109 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../../_styles/sanna-fonts';
+
+// Variables para personalización de Bootstrap
+:host {
+  display: block;
+  width: 100%;
+  font-family: $sanna-font-stack;
+  
+  // Forzar que el contenedor mantenga su ancho
+  .mb-3 {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+// Personalizaciones mínimas sobre Bootstrap
+:host .form-control {
+  font-family: $sanna-font-stack;
+  
+  // Borde interno verde al hacer focus sin empujar elementos
+  &:focus {
+    outline: none !important;
+    box-shadow: inset 0 0 0 2px #36AD55 !important;
+    border-color: transparent !important;
+  }
+  
+  // Personalizar estados de validación
+  &.is-valid {
+    border-color: #32A047;
+    
+    &:focus {
+      outline: none !important;
+      box-shadow: inset 0 0 0 2px #32A047 !important;
+      border-color: transparent !important;
+    }
+  }
+  
+  &.is-invalid {
+    border-color: #ef4444;
+    
+    &:focus {
+      outline: none !important;
+      box-shadow: inset 0 0 0 2px #ef4444 !important;
+      border-color: transparent !important;
+    }
+  }
+}
+
+// Contenedor posicional
+:host .position-relative {
+  position: relative;
+}
+
+// Personalizar el label para que sea consistente con otros componentes
+:host .form-label {
+  font-family: $sanna-font-stack;
+  color: #2E3438;
+  font-size: 14px;
+  font-weight: 400 !important;
+  margin-bottom: 2px; // Ajuste para consistencia
+}
+
+// Personalizar textos de ayuda y error
+:host .form-text {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+:host .invalid-feedback {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+// Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
+:host .mb-3:last-child {
+  margin-bottom: 0 !important;
+}
+
+// Personalizar el icono del calendario en navegadores compatibles
+:host .form-control[type="date"] {
+  cursor: pointer; // Hacer todo el input clickeable visualmente
+  
+  &::-webkit-calendar-picker-indicator {
+    color: #6c757d;
+    cursor: pointer;
+    filter: invert(0.5);
+    
+    &:hover {
+      filter: invert(0.3);
+    }
+  }
+  
+  // Firefox
+  &::-moz-calendar-picker-indicator {
+    cursor: pointer;
+  }
+  
+  // Estados disabled y readonly no deben parecer clickeables
+  &:disabled,
+  &[readonly] {
+    cursor: default;
+  }
+}
+
+

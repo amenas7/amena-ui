@@ -9,6 +9,7 @@ import { SaSelectComponent } from './sa-select/sa-select.component';
 import { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 import { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 import { SaRadioComponent } from './sa-radio/sa-radio.component';
+import { SaDateComponent } from './sa-date/sa-date.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SaRadioComponent } from './sa-radio/sa-radio.component';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
+    SaDateComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { SaRadioComponent } from './sa-radio/sa-radio.component';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
+    SaDateComponent,
   ]
 })
 export class SannaFormsModule { }
@@ -40,3 +43,4 @@ export { SaSelectComponent } from './sa-select/sa-select.component';
 export { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 export { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 export { SaRadioComponent } from './sa-radio/sa-radio.component';
+export { SaDateComponent } from './sa-date/sa-date.component';
