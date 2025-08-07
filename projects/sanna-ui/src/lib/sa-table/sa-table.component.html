@@ -19,7 +19,10 @@
         </tr>
       </thead>
       <tbody [class.animate-fade-in]="animationKey > 0" [class.animation-complete]="animationKey > 0" [attr.data-animation-key]="animationKey">
-        <tr *ngFor="let row of paginatedData; trackBy: trackByFn">
+        <tr *ngFor="let row of paginatedData; trackBy: trackByFn"
+            [class.selected-row]="isRowSelected(row)"
+            (click)="onRowClick(row)"
+            (dblclick)="onRowDoubleClick(row)">
           <td *ngFor="let column of columns" [style.width]="column.width">
             <!-- Usar template específico de la columna si existe, sino usar el default -->
             <ng-container *ngTemplateOutlet="getColumnTemplate(column.key) || defaultCellTemplate!; context: getTemplateContext(row, column)">

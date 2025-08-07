@@ -404,6 +404,46 @@
   .table.table-hover > tbody > tr > td.text-center:hover {
     background-color: white !important;
   }
+
+  // Estilos para filas seleccionables
+  .table > tbody > tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: #f8f9fa !important;
+    }
+    
+    &.selected-row {
+      background-color: #1F8BE1 !important;
+      
+      td {
+        background-color: #1F8BE1 !important;
+        color: white !important;
+      }
+      
+      &:hover {
+        background-color: #1F8BE1 !important;
+        
+        td {
+          background-color: #1F8BE1 !important;
+        }
+      }
+    }
+  }
+  
+  // Deshabilitar cursor pointer y selección en la fila del mensaje vacío
+  .table > tbody > tr:has(td.text-center) {
+    cursor: default;
+    
+    &:hover {
+      background-color: white !important;
+      
+      td {
+        background-color: white !important;
+      }
+    }
+  }
   
   // Reducir espacio entre tabla y paginación
   .d-flex.justify-content-between.align-items-center.mt-3 {
@@ -834,5 +874,60 @@ nav[aria-label="Navegación de páginas"] {
   }
   100% {
     opacity: 1;
+  }
+}
+
+/* Estilos específicos para filas seleccionables */
+.sa-table-container .table > tbody > tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: #f8f9fa !important;
+    
+    td {
+      background-color: #f8f9fa !important;
+    }
+  }
+  
+  &.selected-row {
+    background-color: #1F8BE1 !important;
+    
+    td {
+      background-color: #1F8BE1 !important;
+      color: white !important;
+    }
+    
+    &:hover {
+      background-color: #1F8BE1 !important;
+      
+      td {
+        background-color: #1F8BE1 !important;
+        color: white !important;
+      }
+    }
+  }
+}
+
+/* Deshabilitar cursor pointer y selección en la fila del mensaje vacío */
+.sa-table-container .table > tbody > tr:has(td.text-center) {
+  cursor: default;
+  
+  &:hover {
+    background-color: white !important;
+    
+    td {
+      background-color: white !important;
+      color: #6c757d !important;
+    }
+  }
+  
+  &.selected-row {
+    background-color: white !important;
+    
+    td {
+      background-color: white !important;
+      color: #6c757d !important;
+    }
   }
 }

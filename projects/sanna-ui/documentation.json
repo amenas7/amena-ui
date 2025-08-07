@@ -74,21 +74,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaMessageboxComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaMessageboxComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -159,6 +159,16 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Ejemplos de Messagebox</h4>\r\n        \r\n        <div class=\"mb-4\">\r\n          <h5 class=\"mb-2\">Mensaje con icono</h5>\r\n          <sa-messagebox \r\n            [message]=\"'Este es un mensaje con un icono a la izquierda.'\"\r\n            iconName=\"paperclip\"\r\n            iconSize=\"md\"\r\n            iconColor=\"#5BAB5F\">\r\n          </sa-messagebox>\r\n        </div>\r\n        \r\n        <div class=\"mb-4\">\r\n          <h5 class=\"mb-2\">Mensaje de advertencia con HTML</h5>\r\n          <sa-messagebox [message]=\"'🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.'\" type=\"warning\"></sa-messagebox>\r\n        </div>\r\n        \r\n        <div class=\"mb-4\">\r\n          <h5 class=\"mb-2\">Mensaje de error con icono y HTML</h5>\r\n          <sa-messagebox \r\n            [message]=\"'❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.'\" \r\n            type=\"error\"\r\n            iconName=\"exclamation-triangle\"\r\n            iconSize=\"md\"\r\n            iconColor=\"#dc3545\">\r\n          </sa-messagebox>\r\n        </div>\r\n        \r\n        <div class=\"mb-4\">\r\n          <h5 class=\"mb-2\">Mensaje informativo con HTML</h5>\r\n          <sa-messagebox [message]=\"'ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.'\" type=\"info\"></sa-messagebox>\r\n        </div>\r\n        \r\n        <div class=\"mb-4\">\r\n          <h5 class=\"mb-2\">Mensaje con HTML</h5>\r\n          <sa-messagebox [message]=\"'📢 <b>Anuncio:</b> Este mensaje tiene <i>formato HTML</i>.'\"></sa-messagebox>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-messagebox [message]=\"'👆 Lorem <b>ipsum</b> dolor sit amet, <u>consectetur</u> adipiscing elit.'\"></sa-messagebox>\r\n\r\n<sa-messagebox \r\n  [message]=\"'Este es un mensaje con un icono a la izquierda.'\" \r\n  iconName=\"paperclip\" \r\n  iconSize=\"md\" \r\n  iconColor=\"#5BAB5F\">\r\n</sa-messagebox>\r\n\r\n<sa-messagebox \r\n  [message]=\"'🚨 <b>¡Atención!</b> Este es un mensaje con <i>formato HTML</i>.'\" \r\n  type=\"warning\">\r\n</sa-messagebox>\r\n\r\n<sa-messagebox \r\n  [message]=\"'❌ <b>Error:</b> Algo salió <i>mal</i> en el proceso.'\" \r\n  type=\"error\" \r\n  iconName=\"exclamation-triangle\" \r\n  iconSize=\"md\"\r\n  iconColor=\"#dc3545\">\r\n</sa-messagebox>\r\n\r\n<sa-messagebox \r\n  [message]=\"'ℹ️ <b>Información:</b> Este es un mensaje <u>informativo</u> con formato.'\" \r\n  type=\"info\">\r\n</sa-messagebox>\r\n\r\n<sa-messagebox \r\n  [message]=\"'📢 <b>Anuncio:</b> Este mensaje tiene <i>formato HTML</i>.'\">\r\n</sa-messagebox>`\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "FilasSeleccionables",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'id', label: 'ID', width: '80px' },\r\n      { key: 'name', label: 'Nombre', width: '200px' },\r\n      { key: 'email', label: 'Email', width: '300px' },\r\n      { key: 'department', label: 'Departamento', width: '180px' },\r\n      { key: 'status', label: 'Estado', width: '100px' }\r\n    ],\r\n    data: [\r\n      { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', department: 'Desarrollo', status: 'Activo' },\r\n      { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', department: 'Diseño', status: 'Activo' },\r\n      { id: 3, name: 'Carlos López', email: 'carlos.lopez@empresa.com', department: 'Marketing', status: 'Inactivo' },\r\n      { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },\r\n      { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' }\r\n    ],\r\n    hover: true,\r\n    showPagination: false,\r\n    showItemsPerPage: false,\r\n    showTotal: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🎯 Filas Seleccionables\r\n\r\nEste story demuestra la nueva funcionalidad de selección de filas con click y doble click.\r\n\r\n### Características:\r\n\r\n**Click Simple:**\r\n- Selecciona la fila y cambia su color de fondo a #1F8BE1\r\n- Emite el evento \\`rowClick\\` con los datos de la fila\r\n- Solo se puede seleccionar una fila a la vez\r\n\r\n**Doble Click:**\r\n- Emite el evento \\`rowDoubleClick\\` con los datos de la fila\r\n- Mantiene la selección visual de la fila\r\n\r\n**Estilos Visuales:**\r\n- **Fila seleccionada**: Fondo azul (#1F8BE1) con texto blanco\r\n- **Cursor**: Pointer al pasar sobre las filas\r\n- **Transición**: Suave al cambiar de color (0.2s)\r\n- **Hover**: Mantiene el color de selección\r\n\r\n### Uso en el Componente:\r\n\r\n\\`\\`\\`html\r\n<sa-table \r\n  [columns]=\"columns\" \r\n  [data]=\"data\"\r\n  (rowClick)=\"onRowClick($event)\"\r\n  (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n</sa-table>\r\n\\`\\`\\`\r\n\r\n\\`\\`\\`typescript\r\n// En el componente\r\nonRowClick(row: TableData) {\r\n  console.log('Fila seleccionada:', row);\r\n  // Lógica para manejar la selección\r\n}\r\n\r\nonRowDoubleClick(row: TableData) {\r\n  console.log('Doble click en fila:', row);\r\n  // Lógica para abrir detalles, editar, etc.\r\n}\r\n\\`\\`\\`\r\n\r\n### Eventos Disponibles:\r\n\r\n| Evento | Tipo | Descripción |\r\n|--------|------|-------------|\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n\r\n### Comportamiento:\r\n\r\n- **Selección única**: Solo una fila puede estar seleccionada a la vez\r\n- **Persistencia**: La selección se mantiene al cambiar de página\r\n- **Deselección**: Click en otra fila deselecciona la anterior\r\n- **Accesibilidad**: Cursor pointer indica que las filas son interactivas\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Gray",
@@ -514,21 +524,21 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaButtonComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\r\n    type: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaButtonComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -975,6 +985,16 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    data: []\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Tabla sin datos. Automáticamente oculta los controles de paginación y muestra el mensaje de estado vacío centrado. Los selectores de elementos por página y la información de totales se ocultan cuando no hay datos.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "FilasSeleccionables",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'id', label: 'ID', width: '80px' },\r\n      { key: 'name', label: 'Nombre', width: '200px' },\r\n      { key: 'email', label: 'Email', width: '300px' },\r\n      { key: 'department', label: 'Departamento', width: '180px' },\r\n      { key: 'status', label: 'Estado', width: '100px' }\r\n    ],\r\n    data: [\r\n      { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', department: 'Desarrollo', status: 'Activo' },\r\n      { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', department: 'Diseño', status: 'Activo' },\r\n      { id: 3, name: 'Carlos López', email: 'carlos.lopez@empresa.com', department: 'Marketing', status: 'Inactivo' },\r\n      { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },\r\n      { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' }\r\n    ],\r\n    hover: true,\r\n    showPagination: false,\r\n    showItemsPerPage: false,\r\n    showTotal: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🎯 Filas Seleccionables\r\n\r\nEste story demuestra la nueva funcionalidad de selección de filas con click y doble click.\r\n\r\n### Características:\r\n\r\n**Click Simple:**\r\n- Selecciona la fila y cambia su color de fondo a #1F8BE1\r\n- Emite el evento \\`rowClick\\` con los datos de la fila\r\n- Solo se puede seleccionar una fila a la vez\r\n\r\n**Doble Click:**\r\n- Emite el evento \\`rowDoubleClick\\` con los datos de la fila\r\n- Mantiene la selección visual de la fila\r\n\r\n**Estilos Visuales:**\r\n- **Fila seleccionada**: Fondo azul (#1F8BE1) con texto blanco\r\n- **Cursor**: Pointer al pasar sobre las filas\r\n- **Transición**: Suave al cambiar de color (0.2s)\r\n- **Hover**: Mantiene el color de selección\r\n\r\n### Uso en el Componente:\r\n\r\n\\`\\`\\`html\r\n<sa-table \r\n  [columns]=\"columns\" \r\n  [data]=\"data\"\r\n  (rowClick)=\"onRowClick($event)\"\r\n  (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n</sa-table>\r\n\\`\\`\\`\r\n\r\n\\`\\`\\`typescript\r\n// En el componente\r\nonRowClick(row: TableData) {\r\n  console.log('Fila seleccionada:', row);\r\n  // Lógica para manejar la selección\r\n}\r\n\r\nonRowDoubleClick(row: TableData) {\r\n  console.log('Doble click en fila:', row);\r\n  // Lógica para abrir detalles, editar, etc.\r\n}\r\n\\`\\`\\`\r\n\r\n### Eventos Disponibles:\r\n\r\n| Evento | Tipo | Descripción |\r\n|--------|------|-------------|\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n\r\n### Comportamiento:\r\n\r\n- **Selección única**: Solo una fila puede estar seleccionada a la vez\r\n- **Persistencia**: La selección se mantiene al cambiar de página\r\n- **Deselección**: Click en otra fila deselecciona la anterior\r\n- **Accesibilidad**: Cursor pointer indica que las filas son interactivas\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
                 },
                 {
                     "name": "Loading",
@@ -1919,6 +1939,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Empty",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table/sa-table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FilasSeleccionables",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

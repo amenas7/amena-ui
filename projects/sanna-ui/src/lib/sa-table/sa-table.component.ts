@@ -121,6 +121,8 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<{column: string, direction: 'asc' | 'desc'}>();
+  @Output() rowClick = new EventEmitter<TableData>();
+  @Output() rowDoubleClick = new EventEmitter<TableData>();
 
   currentPage: number = 1;
   currentSort: {column: string, direction: 'asc' | 'desc'} | null = null;
@@ -141,6 +143,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   // Propiedad para acceder a Array desde el template
   Array = Array;
+
+  // Propiedad para la fila seleccionada
+  selectedRow: TableData | null = null;
 
 
 
@@ -367,6 +372,22 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
       this.updatePagination();
     };
     window.addEventListener('resize', this.resizeListener);
+  }
+
+  // Método para manejar el click en una fila
+  onRowClick(row: TableData): void {
+    this.selectedRow = row;
+    this.rowClick.emit(row);
+  }
+
+  // Método para manejar el doble click en una fila
+  onRowDoubleClick(row: TableData): void {
+    this.rowDoubleClick.emit(row);
+  }
+
+  // Método para verificar si una fila está seleccionada
+  isRowSelected(row: TableData): boolean {
+    return this.selectedRow === row;
   }
 
   ngOnDestroy(): void {

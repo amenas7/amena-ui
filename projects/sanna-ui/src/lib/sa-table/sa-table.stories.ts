@@ -51,6 +51,7 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 - **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores
 - **Filas**: Fondo blanco puro, sin efectos hover por defecto
 - **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true
+- **Filas seleccionables**: Fondo azul (#1F8BE1) con texto blanco
 
 ### Paginación
 - **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)
@@ -90,6 +91,27 @@ Este comportamiento mejora la experiencia de usuario al eliminar controles innec
 |-------|------|-------------|
 | pageChange | number | Emitido cuando cambia la página |
 | itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |
+| sortChange | {column: string, direction: 'asc' \| 'desc'} | Emitido cuando cambia el ordenamiento |
+| rowClick | TableData | Emitido al hacer click en una fila (selección) |
+| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |
+
+## Funcionalidades de Selección
+
+### Click Simple
+- **Selección visual**: La fila seleccionada cambia su color de fondo a #1F8BE1
+- **Evento**: Emite \`rowClick\` con los datos de la fila
+- **Selección única**: Solo una fila puede estar seleccionada a la vez
+- **Persistencia**: La selección se mantiene al cambiar de página
+
+### Doble Click
+- **Evento**: Emite \`rowDoubleClick\` con los datos de la fila
+- **Uso común**: Abrir detalles, editar, navegar a otra vista
+
+### Estilos Visuales
+- **Cursor**: Pointer al pasar sobre las filas
+- **Transición**: Suave al cambiar de color (0.2s)
+- **Hover**: Mantiene el color de selección
+- **Accesibilidad**: Indicadores visuales claros
 
 ## Interfaces
 
@@ -98,6 +120,7 @@ Este comportamiento mejora la experiencia de usuario al eliminar controles innec
 interface TableColumn {
   key: string;           // Clave única de la columna
   label: string;         // Etiqueta visible
+  sortable?: boolean;    // Si la columna es ordenable
   width?: string;        // Ancho de la columna (opcional)
 }
 \`\`\`
@@ -133,9 +156,22 @@ const data: TableData[] = [
   [itemsPerPage]="10"
   [showPagination]="true"
   [showFirstLastButtons]="true"
-  [bordered]="true"
-  (pageChange)="onPageChange($event)">
+  [hover]="true"
+  (pageChange)="onPageChange($event)"
+  (rowClick)="onRowClick($event)"
+  (rowDoubleClick)="onRowDoubleClick($event)">
 </sa-table>
+
+// En el componente
+onRowClick(row: TableData) {
+  console.log('Fila seleccionada:', row);
+  // Lógica para manejar la selección
+}
+
+onRowDoubleClick(row: TableData) {
+  console.log('Doble click en fila:', row);
+  // Lógica para abrir detalles, editar, etc.
+}
 \`\`\`
         `
       }
@@ -632,6 +668,95 @@ Este story demuestra cómo la paginación se adapta automáticamente a diferente
 1. **En Storybook**: Redimensiona la ventana del navegador
 2. **En móviles**: Usa las herramientas de desarrollo (F12 → Device Mode)
 3. **Observa**: Cómo cambia el número de botones mostrados
+        `
+      }
+    }
+  }
+};
+
+export const FilasSeleccionables: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'email', label: 'Email', width: '300px' },
+      { key: 'department', label: 'Departamento', width: '180px' },
+      { key: 'status', label: 'Estado', width: '100px' }
+    ],
+    data: [
+      { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', department: 'Desarrollo', status: 'Activo' },
+      { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', department: 'Diseño', status: 'Activo' },
+      { id: 3, name: 'Carlos López', email: 'carlos.lopez@empresa.com', department: 'Marketing', status: 'Inactivo' },
+      { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },
+      { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' }
+    ],
+    hover: true,
+    showPagination: false,
+    showItemsPerPage: false,
+    showTotal: false
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 🎯 Filas Seleccionables
+
+Este story demuestra la nueva funcionalidad de selección de filas con click y doble click.
+
+### Características:
+
+**Click Simple:**
+- Selecciona la fila y cambia su color de fondo a #1F8BE1
+- Emite el evento \`rowClick\` con los datos de la fila
+- Solo se puede seleccionar una fila a la vez
+
+**Doble Click:**
+- Emite el evento \`rowDoubleClick\` con los datos de la fila
+- Mantiene la selección visual de la fila
+
+**Estilos Visuales:**
+- **Fila seleccionada**: Fondo azul (#1F8BE1) con texto blanco
+- **Cursor**: Pointer al pasar sobre las filas
+- **Transición**: Suave al cambiar de color (0.2s)
+- **Hover**: Mantiene el color de selección
+
+### Uso en el Componente:
+
+\`\`\`html
+<sa-table 
+  [columns]="columns" 
+  [data]="data"
+  (rowClick)="onRowClick($event)"
+  (rowDoubleClick)="onRowDoubleClick($event)">
+</sa-table>
+\`\`\`
+
+\`\`\`typescript
+// En el componente
+onRowClick(row: TableData) {
+  console.log('Fila seleccionada:', row);
+  // Lógica para manejar la selección
+}
+
+onRowDoubleClick(row: TableData) {
+  console.log('Doble click en fila:', row);
+  // Lógica para abrir detalles, editar, etc.
+}
+\`\`\`
+
+### Eventos Disponibles:
+
+| Evento | Tipo | Descripción |
+|--------|------|-------------|
+| rowClick | TableData | Emitido al hacer click en una fila |
+| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |
+
+### Comportamiento:
+
+- **Selección única**: Solo una fila puede estar seleccionada a la vez
+- **Persistencia**: La selección se mantiene al cambiar de página
+- **Deselección**: Click en otra fila deselecciona la anterior
+- **Accesibilidad**: Cursor pointer indica que las filas son interactivas
         `
       }
     }
