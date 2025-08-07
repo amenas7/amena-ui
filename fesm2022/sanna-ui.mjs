@@ -2163,20 +2163,191 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Output
             }] } });
 
+class SaDateComponent {
+    value = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    placeholder = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    min = '';
+    max = '';
+    blockFutureDates = false;
+    showCurrentDate = false;
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    _generatedId;
+    onChange = (_) => { };
+    onTouched = () => { };
+    constructor() {
+        this._generatedId = `sa-date-${Math.random().toString(36).substr(2, 9)}`;
+        // Si showCurrentDate está habilitado, establecer fecha actual
+        if (this.showCurrentDate && !this.value) {
+            this.value = this.getCurrentDateISO();
+        }
+    }
+    ngOnInit() {
+        // Configurar límites de fecha
+        if (this.blockFutureDates && !this.max) {
+            this.max = this.getCurrentDateISO();
+        }
+        // Si showCurrentDate está habilitado y no hay valor, establecer fecha actual
+        if (this.showCurrentDate && !this.value) {
+            this.value = this.getCurrentDateISO();
+            this.onChange(this.value);
+        }
+    }
+    get dateId() {
+        return this.id || this._generatedId;
+    }
+    get inputClasses() {
+        const sizeMap = {
+            'sm': 'form-control-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-control-lg'
+        };
+        const baseClasses = ['form-control'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    getCurrentDateISO() {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    }
+    writeValue(value) {
+        this.value = value || '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onInputFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onInputBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    openCalendar(event) {
+        // Si el input no está deshabilitado ni en solo lectura
+        if (!this.disabled && !this.readonly) {
+            const inputElement = event.target;
+            // Intentar abrir el calendario programáticamente
+            try {
+                inputElement.showPicker();
+            }
+            catch (error) {
+                // Fallback para navegadores que no soportan showPicker()
+                // En estos casos, el click normal en el input debería funcionar
+                console.debug('showPicker() no soportado, usando comportamiento por defecto');
+            }
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaDateComponent, selector: "sa-date", inputs: { value: "value", size: "size", status: "status", label: "label", placeholder: "placeholder", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", min: "min", max: "max", blockFutureDates: "blockFutureDates", showCurrentDate: "showCurrentDate" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaDateComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <!-- Input date nativo -->\n    <input\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .position-relative{position:relative}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-control[type=date]{cursor:pointer}:host .form-control[type=date]::-webkit-calendar-picker-indicator{color:#6c757d;cursor:pointer;filter:invert(.5)}:host .form-control[type=date]::-webkit-calendar-picker-indicator:hover{filter:invert(.3)}:host .form-control[type=date]::-moz-calendar-picker-indicator{cursor:pointer}:host .form-control[type=date]:disabled,:host .form-control[type=date][readonly]{cursor:default}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-date', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaDateComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <!-- Input date nativo -->\n    <input\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .position-relative{position:relative}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-control[type=date]{cursor:pointer}:host .form-control[type=date]::-webkit-calendar-picker-indicator{color:#6c757d;cursor:pointer;filter:invert(.5)}:host .form-control[type=date]::-webkit-calendar-picker-indicator:hover{filter:invert(.3)}:host .form-control[type=date]::-moz-calendar-picker-indicator{cursor:pointer}:host .form-control[type=date]:disabled,:host .form-control[type=date][readonly]{cursor:default}\n"] }]
+        }], ctorParameters: () => [], propDecorators: { value: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], blockFutureDates: [{
+                type: Input
+            }], showCurrentDate: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
 class SannaFormsModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
     static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, declarations: [SaInputComponent,
             SaSelectComponent,
             SaTextareaComponent,
             SaCheckboxComponent,
-            SaRadioComponent], imports: [CommonModule,
+            SaRadioComponent,
+            SaDateComponent], imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
             SannaIconModule], exports: [SaInputComponent,
             SaSelectComponent,
             SaTextareaComponent,
             SaCheckboxComponent,
-            SaRadioComponent] });
+            SaRadioComponent,
+            SaDateComponent] });
     static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
@@ -2191,6 +2362,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
+                        SaDateComponent,
                     ],
                     imports: [
                         CommonModule,
@@ -2204,6 +2376,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
+                        SaDateComponent,
                     ]
                 }]
         }] });
@@ -2285,5 +2458,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaTableComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
+export { SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaDateComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaTableComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map
