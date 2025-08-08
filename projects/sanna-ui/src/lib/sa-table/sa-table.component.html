@@ -17,6 +17,19 @@
             </div>
           </th>
         </tr>
+        <!-- Fila de filtros -->
+        <tr *ngIf="showFilters" class="filter-row">
+          <th *ngFor="let column of columns" 
+              [style.width]="column.width">
+            <input 
+              type="text" 
+              class="form-control form-control-sm filter-input"
+              [placeholder]=""
+              [value]="columnFilters[column.key] || ''"
+              (input)="onFilterInputChange($event, column.key)"
+              />
+          </th>
+        </tr>
       </thead>
       <tbody [class.animate-fade-in]="animationKey > 0" [class.animation-complete]="animationKey > 0" [attr.data-animation-key]="animationKey">
         <tr *ngFor="let row of paginatedData; trackBy: trackByFn"

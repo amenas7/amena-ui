@@ -1037,3 +1037,52 @@ nav[aria-label="Navegación de páginas"] {
     }
   }
 }
+
+/* Estilos para la fila de filtros */
+.sa-table-container {
+  .filter-row {
+    th {
+      background-color: #f8f9fa !important;
+      border-bottom: 1px solid #e1e2e4 !important;
+      border-top: 1px solid #e1e2e4 !important;
+      padding: 0.5rem !important;
+      
+      &:hover {
+        background-color: #f8f9fa !important;
+      }
+    }
+    
+    .filter-input {
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      background-color: white;
+      color: #495057;
+      width: 100%;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      
+      &:focus {
+        border-color: #32A047 !important;
+        outline: none !important;
+        box-shadow: inset 0 0 0 1px #32A047 !important;
+      }
+      
+      &:focus-visible {
+        border-color: #32A047 !important;
+        outline: none !important;
+        box-shadow: inset 0 0 0 1px #32A047 !important;
+      }
+      
+      &::placeholder {
+        color: #6c757d;
+        font-style: italic;
+        font-size: 0.8rem;
+      }
+      
+      &:hover {
+        border-color: #adb5bd;
+      }
+    }
+  }
+}

@@ -50,6 +50,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   private _hover: boolean = false;
   private _loading: boolean = false;
   private _showFirstLastButtons: boolean = true;
+  private _showFilters: boolean = false;
 
   @Input()
   set itemsPerPage(value: number | any) {
@@ -107,6 +108,14 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this._showFirstLastButtons;
   }
 
+  @Input()
+  set showFilters(value: boolean | any) {
+    this._showFilters = value === true || value === 'true';
+  }
+  get showFilters(): boolean {
+    return this._showFilters;
+  }
+
   // Propiedad para el ancho mínimo de la tabla
   private _minWidth: string = '600px';
   
@@ -123,6 +132,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   @Output() sortChange = new EventEmitter<{column: string, direction: 'asc' | 'desc'}>();
   @Output() rowClick = new EventEmitter<TableData>();
   @Output() rowDoubleClick = new EventEmitter<TableData>();
+  @Output() filterChange = new EventEmitter<{[column: string]: string}>();
 
   currentPage: number = 1;
   currentSort: {column: string, direction: 'asc' | 'desc'} | null = null;
@@ -146,6 +156,10 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   // Propiedad para la fila seleccionada
   selectedRow: TableData | null = null;
+  
+  // Propiedades para filtros
+  columnFilters: {[key: string]: string} = {};
+  filteredData: TableData[] = [];
 
 
 
@@ -156,6 +170,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   ngOnInit(): void {
     // Asegurar que el itemsPerPage esté sincronizado con paginationInfo
     this.paginationInfo.itemsPerPage = this.itemsPerPage;
+    this.applyFilters();
     this.updatePagination();
     this.setupResizeListener();
   }
@@ -169,12 +184,16 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] || changes['itemsPerPage']) {
+      this.applyFilters();
       this.updatePagination();
     }
   }
 
   updatePagination(): void {
-    if (!this.data) {
+    // Usar datos filtrados en lugar de datos originales
+    const dataToUse = this.filteredData.length > 0 || Object.keys(this.columnFilters).length > 0 ? this.filteredData : this.data;
+    
+    if (!dataToUse || dataToUse.length === 0) {
       this.paginatedData = [];
       this.paginationInfo = {
         currentPage: 1,
@@ -187,7 +206,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
       return;
     }
 
-    const totalItems = this.data.length;
+    const totalItems = dataToUse.length;
     const totalPages = Math.ceil(totalItems / this._itemsPerPage);
     const startItem = (this.currentPage - 1) * this._itemsPerPage;
     const endItem = Math.min(startItem + this._itemsPerPage, totalItems);
@@ -201,7 +220,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
       endItem
     };
 
-    this.paginatedData = this.data.slice(startItem, endItem);
+    this.paginatedData = dataToUse.slice(startItem, endItem);
   }
 
   onPageChange(page: number): void {
@@ -325,6 +344,57 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   // Método para verificar si una fila está seleccionada
   isRowSelected(row: TableData): boolean {
     return this.selectedRow === row;
+  }
+
+  // Métodos para manejar filtros
+  applyFilters(): void {
+    if (!this.data) {
+      this.filteredData = [];
+      return;
+    }
+
+    // Si no hay filtros activos, usar todos los datos
+    const activeFilters = Object.keys(this.columnFilters).filter(key => 
+      this.columnFilters[key] && this.columnFilters[key].trim() !== ''
+    );
+
+    if (activeFilters.length === 0) {
+      this.filteredData = [...this.data];
+      return;
+    }
+
+    // Aplicar filtros
+    this.filteredData = this.data.filter(row => {
+      return activeFilters.every(columnKey => {
+        const filterValue = this.columnFilters[columnKey].toLowerCase().trim();
+        const cellValue = row[columnKey]?.toString().toLowerCase() || '';
+        return cellValue.includes(filterValue);
+      });
+    });
+  }
+
+  onFilterInputChange(event: Event, columnKey: string): void {
+    const target = event.target as HTMLInputElement;
+    const value = target?.value || '';
+    this.onFilterChange(columnKey, value);
+  }
+
+  onFilterChange(columnKey: string, value: string): void {
+    this.columnFilters[columnKey] = value;
+    this.currentPage = 1; // Resetear a la primera página
+    this.applyFilters();
+    this.updatePagination();
+    
+    // Emitir evento de filtro
+    this.filterChange.emit({ ...this.columnFilters });
+  }
+
+  clearFilters(): void {
+    this.columnFilters = {};
+    this.currentPage = 1;
+    this.applyFilters();
+    this.updatePagination();
+    this.filterChange.emit({});
   }
 
   ngOnDestroy(): void {

@@ -69,6 +69,7 @@ Un componente de tabla responsive con paginación y múltiples opciones de confi
 | showPagination | boolean | true | Mostrar controles de paginación |
 | showTotal | boolean | true | Mostrar información de totales |
 | showFirstLastButtons | boolean | true | Mostrar botones de primera y última página |
+| showFilters | boolean | false | Mostrar inputs de filtrado debajo de cada columna |
 | hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |
 | loading | boolean | false | Estado de carga |
 | emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
@@ -94,6 +95,7 @@ Este comportamiento mejora la experiencia de usuario al eliminar controles innec
 | sortChange | {column: string, direction: 'asc' \| 'desc'} | Emitido cuando cambia el ordenamiento |
 | rowClick | TableData | Emitido al hacer click en una fila (selección) |
 | rowDoubleClick | TableData | Emitido al hacer doble click en una fila |
+| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros de columnas |
 
 ## Funcionalidades de Selección
 
@@ -222,6 +224,10 @@ onRowDoubleClick(row: TableData) {
     minWidth: {
       control: { type: 'text' },
       description: 'Ancho mínimo de la tabla para scroll horizontal. Ejemplos: 600px, 800px, 1000px'
+    },
+    showFilters: {
+      control: { type: 'boolean' },
+      description: 'Mostrar inputs de filtrado debajo de cada columna. Usa attribute binding: showFilters="true"'
     }
   },
   args: {
@@ -232,6 +238,7 @@ onRowDoubleClick(row: TableData) {
     showPagination: true,
     showTotal: true,
     showFirstLastButtons: false,
+    showFilters: false,
     itemsPerPage: 5,
     emptyMessage: 'No hay datos disponibles',
     minWidth: '600px'
@@ -757,6 +764,113 @@ onRowDoubleClick(row: TableData) {
 - **Persistencia**: La selección se mantiene al cambiar de página
 - **Deselección**: Click en otra fila deselecciona la anterior
 - **Accesibilidad**: Cursor pointer indica que las filas son interactivas
+        `
+      }
+    }
+  }
+};
+
+export const ConFiltros: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', width: '80px' },
+      { key: 'name', label: 'Nombre', width: '200px' },
+      { key: 'email', label: 'Email', width: '300px' },
+      { key: 'department', label: 'Departamento', width: '180px' },
+      { key: 'status', label: 'Estado', width: '100px' }
+    ],
+    data: [
+      { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', department: 'Desarrollo', status: 'Activo' },
+      { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', department: 'Diseño', status: 'Activo' },
+      { id: 3, name: 'Carlos López', email: 'carlos.lopez@empresa.com', department: 'Marketing', status: 'Inactivo' },
+      { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },
+      { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' },
+      { id: 6, name: 'Sofia Herrera', email: 'sofia.herrera@empresa.com', department: 'Diseño', status: 'Activo' },
+      { id: 7, name: 'Diego Silva', email: 'diego.silva@empresa.com', department: 'Marketing', status: 'Inactivo' },
+      { id: 8, name: 'Carmen Vega', email: 'carmen.vega@empresa.com', department: 'Ventas', status: 'Activo' },
+      { id: 9, name: 'Roberto Torres', email: 'roberto.torres@empresa.com', department: 'Desarrollo', status: 'Activo' },
+      { id: 10, name: 'Patricia Ruiz', email: 'patricia.ruiz@empresa.com', department: 'Diseño', status: 'Inactivo' },
+      { id: 11, name: 'Fernando Morales', email: 'fernando.morales@empresa.com', department: 'Marketing', status: 'Activo' },
+      { id: 12, name: 'Isabel Castro', email: 'isabel.castro@empresa.com', department: 'Ventas', status: 'Activo' }
+    ],
+    hover: true,
+    showFilters: true,
+    showPagination: true,
+    showItemsPerPage: true,
+    showTotal: true,
+    itemsPerPage: 5
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+## 🔍 Tabla con Filtros
+
+Este story demuestra la nueva funcionalidad de filtrado por columnas.
+
+### Características:
+
+**Filtros por Columna:**
+- Input de texto debajo de cada encabezado de columna
+- Filtrado en tiempo real mientras escribes
+- Búsqueda case-insensitive (no distingue mayúsculas/minúsculas)
+- Filtros combinables (múltiples columnas a la vez)
+
+**Funcionalidad:**
+- **Filtrado dinámico**: Los resultados se actualizan automáticamente
+- **Paginación inteligente**: Se resetea a la página 1 al filtrar
+- **Contadores actualizados**: Los totales reflejan los datos filtrados
+- **Placeholder descriptivo**: "Filtrar [Nombre de Columna]"
+
+**Estilos Visuales:**
+- **Fila de filtros**: Fondo gris claro (#f8f9fa) para distinguirla
+- **Inputs**: Bordes redondeados con focus en verde (#32A047)
+- **Placeholder**: Texto en cursiva y color tenue
+- **Hover**: Bordes más oscuros al pasar el mouse
+
+### Uso en el Componente:
+
+\`\`\`html
+<sa-table 
+  [columns]="columns" 
+  [data]="data"
+  showFilters="true"
+  (filterChange)="onFilterChange($event)">
+</sa-table>
+\`\`\`
+
+\`\`\`typescript
+// En el componente
+onFilterChange(filters: {[column: string]: string}) {
+  console.log('Filtros activos:', filters);
+  // Ejemplo: { name: 'juan', department: 'desarrollo' }
+}
+\`\`\`
+
+### Eventos Disponibles:
+
+| Evento | Tipo | Descripción |
+|--------|------|-------------|
+| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |
+
+### Comportamiento del Filtrado:
+
+- **Búsqueda parcial**: Encuentra coincidencias parciales en cualquier parte del texto
+- **Múltiples filtros**: Combina filtros de diferentes columnas (AND logic)
+- **Filtros vacíos**: Se ignoran automáticamente
+- **Reset automático**: La página vuelve a 1 cuando se aplica un filtro
+
+### Pruebas Sugeridas:
+
+1. **Filtro simple**: Escribe "Juan" en la columna Nombre
+2. **Filtro combinado**: Filtra por "Desarrollo" en Departamento y "Activo" en Estado
+3. **Filtro parcial**: Escribe "gmail" en la columna Email
+4. **Limpiar filtros**: Borra el contenido de los inputs para ver todos los datos
+
+### Métodos Disponibles:
+
+- **clearFilters()**: Limpia todos los filtros programáticamente
+- **applyFilters()**: Reaplica los filtros manualmente (llamado automáticamente)
         `
       }
     }
