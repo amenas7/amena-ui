@@ -1,7 +1,14 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, EventEmitter, Input, Output, NgModule } from '@angular/core';
+import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, Directive, ContentChildren, forwardRef } from '@angular/core';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
+import * as i2$1 from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as i2 from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faChevronDown, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight, faBell, faQuestion, faChevronUp, faArrowLeft, faArrowRight, faArrowUp, faArrowDown, faPencil, faLink, faCopy, faChartBar, faGift, faBatteryHalf, faBicycle, faCalculator, faCamera, faCaretDown, faCaretLeft, faCaretRight, faCaretUp, faComments, faMicroscope, faCoffee, faCreditCard, faCropAlt, faCrop, faTruck, faEquals, faEraser, faFileDownload, faMedal, faFilter, faFingerprint, faFire, faTrophy, faFish, faFlag, faForward, faGlobe, faIceCream, faLaptop, faMapPin, faMotorcycle, faPaperclip, faPause, faPercent, faPiggyBank, faPlay, faReceipt, faShoppingCart, faStarHalf, faStop, faThumbsDown, faThumbsUp, faUndo, faUpload } from '@fortawesome/free-solid-svg-icons';
+import * as i1$1 from '@angular/platform-browser';
 
 class SannaUiService {
     constructor() { }
@@ -32,39 +39,261 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
   ` }]
         }] });
 
-class ButtonComponent {
-    label = 'Button';
-    variant = 'primary';
-    size = 'medium';
-    disabled = false;
-    loading = false;
-    fullWidth = false;
-    type = 'button';
-    icon;
-    iconPosition = 'left';
+// Agregar todos los iconos a la librería
+library.add(faSpinner, faDownload, faTrash, faShare, faPrint, faHeart, faHome, faUser, faCog, faSearch, faStar, faSave, faEdit, faPlus, faMinus, faCheck, faTimes, faInfo, faExclamationTriangle, faExclamationCircle, faEnvelope, faPhone, faMapMarkerAlt, faCalendar, faClock, faEye, faEyeSlash, faLock, faUnlock, faKey, faShieldAlt, faUserPlus, faUserMinus, faVideo, faWifi, faTable, faThLarge, faUsers, faUniversalAccess, faRunning, faImage, faCalendarAlt, faChartLine, faAppleAlt, faRobot, faShoppingBag, faBalanceScale, faBatteryThreeQuarters, faBatteryQuarter, faBatteryEmpty, faBellSlash, faBookmark, faBowlFood, faBox, faBus, faBirthdayCake, faCalendarDay, faFile, faFlask, faCookieBite, faSprayCan, faSoap, faExpand, faCloud, faComment, faFileUpload, faEllipsisH, faPlane, faGraduationCap, faFileExcel, faSignOutAlt, faSmile, faFrown, faMask, faBoxOpen, faSeedling, faVolumeUp, faExpandArrowsAlt, faVolumeMute, faBars, faBriefcase, faMicrochip, faHeartbeat, faHistory, faMicrophone, faLightbulb, faLayerGroup, faListUl, faVolumeDown, faPills, faMobile, faMobileAlt, faMoneyBill, faStickyNote, faEllipsisV, faLungs, faCashRegister, faPaperPlane, faChevronDown, faDesktop, faChartPie, faMousePointer, faSwimmingPool, faBan, faTag, faShield, faQrcode, faRedo, faRuler, faUtensils, faTshirt, faSlidersH, faGlassWhiskey, faSort, faTachometerAlt, faSpoon, faStore, faTablet, faTabletAlt, faThermometerHalf, faBolt, faTicketAlt, faSitemap, faBath, faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight, faChevronLeft, faChevronRight);
+
+/**
+ * Módulo que configura automáticamente Font Awesome con todos los iconos
+ * necesarios para los componentes de Sanna UI.
+ *
+ * Este módulo se auto-configura al importarse, por lo que no es necesario
+ * que los proyectos que usen sanna-ui instalen o configuren Font Awesome manualmente.
+ */
+class SannaUiFontAwesomeModule {
+    constructor() {
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, imports: [FontAwesomeModule], exports: [FontAwesomeModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, imports: [FontAwesomeModule, FontAwesomeModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiFontAwesomeModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [FontAwesomeModule],
+                    exports: [FontAwesomeModule]
+                }]
+        }], ctorParameters: () => [] });
+
+class SaButtonComponent {
+    // Propiedades con flexibilidad máxima: soportan attribute y property binding
+    label = 'Button'; // Mantener como @Input simple para strings
+    // Propiedades con setters/getters para flexibilidad máxima
+    _variant = 'primary';
+    _size = 'medium';
+    _disabled = false;
+    _loading = false;
+    _fullWidth = false;
+    _type = 'button';
+    _icon;
+    _position = 'left';
+    _iconOnly = false;
+    set variant(value) {
+        this._variant = value || 'primary';
+    }
+    get variant() {
+        return this._variant;
+    }
+    set size(value) {
+        this._size = value || 'medium';
+    }
+    get size() {
+        return this._size;
+    }
+    set disabled(value) {
+        this._disabled = value === true || value === 'true';
+    }
+    get disabled() {
+        return this._disabled;
+    }
+    set loading(value) {
+        this._loading = value === true || value === 'true';
+    }
+    get loading() {
+        return this._loading;
+    }
+    set fullWidth(value) {
+        this._fullWidth = value === true || value === 'true';
+    }
+    get fullWidth() {
+        return this._fullWidth;
+    }
+    set type(value) {
+        this._type = value || 'button';
+    }
+    get type() {
+        return this._type;
+    }
+    set icon(value) {
+        this._icon = value;
+    }
+    get icon() {
+        return this._icon;
+    }
+    set position(value) {
+        this._position = value || 'left';
+    }
+    get position() {
+        return this._position;
+    }
+    set iconOnly(value) {
+        this._iconOnly = value === true || value === 'true';
+    }
+    get iconOnly() {
+        return this._iconOnly;
+    }
+    buttonText;
     clicked = new EventEmitter();
+    // Icono de spinner para el estado loading
+    spinnerIcon = faSpinner;
+    // Método para obtener el icono basado en el string
+    get iconDefinition() {
+        if (!this.icon)
+            return undefined;
+        // Primero intenta con el mapeo local (más rápido)
+        const localIconMap = {
+            // Iconos básicos
+            'spinner': faSpinner,
+            'download': faDownload,
+            'trash': faTrash,
+            'share': faShare,
+            'print': faPrint,
+            'heart': faHeart,
+            'home': faHome,
+            'user': faUser,
+            'cog': faCog,
+            'search': faSearch,
+            'star': faStar,
+            'edit': faEdit,
+            'save': faSave,
+            'plus': faPlus,
+            'minus': faMinus,
+            'check': faCheck,
+            'times': faTimes,
+            'x': faTimes,
+            'close': faTimes,
+            'eye': faEye,
+            'eye-slash': faEyeSlash,
+            'lock': faLock,
+            'unlock': faUnlock,
+            'bell': faBell,
+            'envelope': faEnvelope,
+            'phone': faPhone,
+            'map-marker-alt': faMapMarkerAlt,
+            'calendar': faCalendar,
+            'clock': faClock,
+            'info': faInfo,
+            'exclamation-triangle': faExclamationTriangle,
+            'question': faQuestion,
+            'chevron-down': faChevronDown,
+            'chevron-up': faChevronUp,
+            'chevron-left': faChevronLeft,
+            'chevron-right': faChevronRight,
+            'arrow-left': faArrowLeft,
+            'arrow-right': faArrowRight,
+            'arrow-up': faArrowUp,
+            'arrow-down': faArrowDown,
+            'pencil': faPencil,
+            // También soporta formato fas fa-
+            'fas fa-spinner': faSpinner,
+            'fas fa-download': faDownload,
+            'fas fa-trash': faTrash,
+            'fas fa-share': faShare,
+            'fas fa-print': faPrint,
+            'fas fa-heart': faHeart,
+            'fas fa-home': faHome,
+            'fas fa-user': faUser,
+            'fas fa-cog': faCog,
+            'fas fa-search': faSearch,
+            'fas fa-star': faStar,
+            'fas fa-edit': faEdit,
+            'fas fa-save': faSave,
+            'fas fa-plus': faPlus,
+            'fas fa-minus': faMinus,
+            'fas fa-check': faCheck,
+            'fas fa-times': faTimes,
+            'fas fa-x': faTimes,
+            'fas fa-close': faTimes,
+            'fas fa-eye': faEye,
+            'fas fa-eye-slash': faEyeSlash,
+            'fas fa-lock': faLock,
+            'fas fa-unlock': faUnlock,
+            'fas fa-bell': faBell,
+            'fas fa-envelope': faEnvelope,
+            'fas fa-phone': faPhone,
+            'fas fa-map-marker-alt': faMapMarkerAlt,
+            'fas fa-calendar': faCalendar,
+            'fas fa-clock': faClock,
+            'fas fa-info': faInfo,
+            'fas fa-exclamation-triangle': faExclamationTriangle,
+            'fas fa-question': faQuestion,
+            'fas fa-chevron-down': faChevronDown,
+            'fas fa-chevron-up': faChevronUp,
+            'fas fa-chevron-left': faChevronLeft,
+            'fas fa-chevron-right': faChevronRight,
+            'fas fa-arrow-left': faArrowLeft,
+            'fas fa-arrow-right': faArrowRight,
+            'fas fa-arrow-up': faArrowUp,
+            'fas fa-arrow-down': faArrowDown,
+            'fas fa-pencil': faPencil
+        };
+        // Si está en el mapeo local, úsalo
+        if (localIconMap[this.icon]) {
+            return localIconMap[this.icon];
+        }
+        // Si no está en el mapeo local, intenta con findIconDefinition
+        // Formato: 'fas fa-spinner' o 'spinner' (asume 'fas' por defecto)
+        let iconName = this.icon;
+        if (this.icon.includes('fas fa-')) {
+            iconName = this.icon.replace('fas fa-', '');
+        }
+        else if (this.icon.includes('fa-')) {
+            iconName = this.icon.replace('fa-', '');
+        }
+        const foundIcon = findIconDefinition({ prefix: 'fas', iconName: iconName });
+        if (foundIcon) {
+            return foundIcon;
+        }
+        // Si no se encuentra, retorna undefined
+        return undefined;
+    }
     onClick() {
+        // No permitir clic si está disabled o loading
         if (!this.disabled && !this.loading) {
             this.clicked.emit();
         }
     }
     get buttonClasses() {
         const classes = [
-            'sanna-button',
-            `sanna-button--${this.variant}`,
-            `sanna-button--${this.size}`,
-            this.fullWidth ? 'sanna-button--full-width' : '',
-            this.disabled ? 'sanna-button--disabled' : '',
-            this.loading ? 'sanna-button--loading' : ''
+            'btn',
+            `btn-${this.variant}`,
+            this.getSizeClass(),
+            this.fullWidth ? 'w-100' : '',
+            this.disabled ? 'disabled' : '',
+            this.loading ? 'loading' : ''
         ];
         return classes.filter(Boolean).join(' ');
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: ButtonComponent, selector: "lib-button", inputs: { label: "label", variant: "variant", size: "size", disabled: "disabled", loading: "loading", fullWidth: "fullWidth", type: "type", icon: "icon", iconPosition: "iconPosition" }, outputs: { clicked: "clicked" }, ngImport: i0, template: "<button\n  [class]=\"buttonClasses\"\n  [type]=\"type\"\n  [disabled]=\"disabled || loading\"\n  (click)=\"onClick()\"\n  class=\"sanna-button\">\n  \n  <!-- Loading spinner -->\n  <div *ngIf=\"loading\" class=\"sanna-button__spinner\">\n    <svg class=\"sanna-button__spinner-icon\" viewBox=\"0 0 24 24\">\n      <circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\" stroke-dasharray=\"31.416\" stroke-dashoffset=\"31.416\">\n        <animate attributeName=\"stroke-dasharray\" dur=\"2s\" values=\"0 31.416;15.708 15.708;0 31.416\" repeatCount=\"indefinite\"/>\n        <animate attributeName=\"stroke-dashoffset\" dur=\"2s\" values=\"0;-15.708;-31.416\" repeatCount=\"indefinite\"/>\n      </circle>\n    </svg>\n  </div>\n\n  <!-- Icon left -->\n  <i *ngIf=\"icon && iconPosition === 'left' && !loading\" class=\"sanna-button__icon sanna-button__icon--left\" [class]=\"icon\"></i>\n  \n  <!-- Label -->\n  <span *ngIf=\"!loading\" class=\"sanna-button__label\">{{ label }}</span>\n  \n  <!-- Icon right -->\n  <i *ngIf=\"icon && iconPosition === 'right' && !loading\" class=\"sanna-button__icon sanna-button__icon--right\" [class]=\"icon\"></i>\n</button>\n", styles: [".sanna-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;font-weight:500;text-decoration:none;cursor:pointer;transition:all .2s ease-in-out;box-shadow:0 2px 4px #0000001a;outline:none;-webkit-user-select:none;user-select:none}.sanna-button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 8px #00000026}.sanna-button:active:not(:disabled){transform:translateY(0);box-shadow:0 2px 4px #0000001a}.sanna-button:focus-visible{outline:2px solid #3b82f6;outline-offset:2px}.sanna-button:disabled{cursor:not-allowed;opacity:.6}.sanna-button--small{padding:8px 16px;font-size:14px;min-height:32px}.sanna-button--medium{padding:12px 24px;font-size:16px;min-height:40px}.sanna-button--large{padding:16px 32px;font-size:18px;min-height:48px}.sanna-button--primary{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}.sanna-button--primary:hover:not(:disabled){background:linear-gradient(135deg,#5a6fd8,#6a4190)}.sanna-button--secondary{background:#f8fafc;color:#374151;border:1px solid #d1d5db}.sanna-button--secondary:hover:not(:disabled){background:#f1f5f9;border-color:#9ca3af}.sanna-button--success{background:linear-gradient(135deg,#10b981,#059669);color:#fff}.sanna-button--success:hover:not(:disabled){background:linear-gradient(135deg,#059669,#047857)}.sanna-button--danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}.sanna-button--danger:hover:not(:disabled){background:linear-gradient(135deg,#dc2626,#b91c1c)}.sanna-button--warning{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}.sanna-button--warning:hover:not(:disabled){background:linear-gradient(135deg,#d97706,#b45309)}.sanna-button--info{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff}.sanna-button--info:hover:not(:disabled){background:linear-gradient(135deg,#2563eb,#1d4ed8)}.sanna-button--full-width{width:100%}.sanna-button--loading{pointer-events:none}.sanna-button__spinner{display:flex;align-items:center;justify-content:center}.sanna-button__spinner-icon{width:20px;height:20px;animation:spin 1s linear infinite}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.sanna-button__icon{font-size:1em;line-height:1}.sanna-button__icon--left{margin-right:4px}.sanna-button__icon--right{margin-left:4px}.sanna-button__label{line-height:1}@media (max-width: 768px){.sanna-button--large{padding:14px 28px;font-size:16px;min-height:44px}.sanna-button--medium{padding:10px 20px;font-size:15px;min-height:36px}}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+    get isInteractive() {
+        // El botón es interactivo solo si no está disabled ni loading
+        return !this.disabled && !this.loading;
+    }
+    get showSpinner() {
+        return this.loading;
+    }
+    get showContent() {
+        // Mostrar contenido (texto + icono) solo si no está loading
+        return !this.loading;
+    }
+    getSizeClass() {
+        switch (this.size) {
+            case 'small':
+                return 'btn-sm';
+            case 'medium':
+                return 'btn-md';
+            case 'large':
+                return 'btn-lg';
+            default:
+                return 'btn-md'; // Por defecto usa el tamaño mediano
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaButtonComponent, selector: "sa-button", inputs: { label: "label", variant: "variant", size: "size", disabled: "disabled", loading: "loading", fullWidth: "fullWidth", type: "type", icon: "icon", position: "position", iconOnly: "iconOnly" }, outputs: { clicked: "clicked" }, host: { properties: { "class.full-width": "fullWidth" } }, viewQueries: [{ propertyName: "buttonText", first: true, predicate: ["buttonText"], descendants: true }], ngImport: i0, template: "<button\n  #buttonElement\n  [class]=\"buttonClasses\"\n  [type]=\"type\"\n  [disabled]=\"!isInteractive\"\n  (click)=\"onClick()\"\n>\n  <!-- Contenido del bot\u00F3n -->\n  <div class=\"button-content\" [class.loading-hidden]=\"showSpinner\">\n    <fa-icon *ngIf=\"iconDefinition && (position === 'left' || iconOnly)\" [icon]=\"iconDefinition\" [class.me-1]=\"!iconOnly\"></fa-icon>\n    <span #buttonText *ngIf=\"!iconOnly\">{{ label }}</span>\n    <fa-icon *ngIf=\"iconDefinition && position === 'right' && !iconOnly\" [icon]=\"iconDefinition\" class=\"ms-1\"></fa-icon>\n  </div>\n  \n  <!-- Spinner que se superpone cuando est\u00E1 loading -->\n  <div *ngIf=\"showSpinner\" class=\"spinner-overlay\">\n    <fa-icon \n      [icon]=\"spinnerIcon\" \n      class=\"spinner-icon\"\n      [class.spinning]=\"loading\">\n    </fa-icon>\n  </div>\n</button>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block;vertical-align:middle;width:auto}:host.full-width{display:block;width:100%}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block;vertical-align:middle}.container :host.full-width,.row :host.full-width,.col :host.full-width,[class*=col-] :host.full-width{display:block;width:100%}.btn{border:none;border-radius:.375rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important;transition:all .2s ease-in-out;cursor:pointer;outline:none;position:relative;overflow:visible;display:inline-flex;align-items:center;justify-content:center;text-align:center;-webkit-user-select:none;user-select:none;vertical-align:middle;white-space:nowrap;width:auto;line-height:1;min-width:fit-content;font-weight:400!important}.btn.w-100{width:100%!important;display:flex!important}.btn:active{transform:translateY(1px)}.btn.loading{cursor:not-allowed;pointer-events:none}.btn.disabled{background-color:#f8f9fa!important;border-color:#858585!important;color:#858585!important;cursor:not-allowed;pointer-events:none;box-shadow:none!important}.btn.disabled:hover{background-color:#f8f9fa!important;border-color:#858585!important;color:#858585!important;transform:none!important}.btn.disabled:active{transform:none!important}.btn.disabled.loading .spinner-overlay{background-color:#f8f9fa!important}.btn.disabled.loading .spinner-icon{color:#858585!important}.button-content{display:flex;align-items:center;justify-content:center;gap:.25rem}.button-content.loading-hidden{visibility:hidden}.btn:has(.button-content:not(:has(span))){min-width:40px;min-height:40px;padding:8px}.btn:has(.button-content:not(:has(span))).btn-sm{min-width:32px;min-height:32px;padding:6px}.btn:has(.button-content:not(:has(span))).btn-md{min-width:40px;min-height:40px;padding:8px}.btn:has(.button-content:not(:has(span))).btn-lg{min-width:48px;min-height:48px;padding:12px}.spinner-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:inherit;z-index:10;width:100%;height:100%;opacity:1!important}.spinner-icon,.spinner-icon.spinning{animation:spin 1s linear infinite;opacity:1!important}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.spinner-overlay fa-icon,.spinner-overlay .fa-icon,.spinner-overlay [class*=fa-]{opacity:1!important}.btn-primary{background-color:#36ad55;border:1px solid #36AD55;color:#fff}.btn-primary:hover{background-color:#239a5c;border:1px solid #239A5C}.btn-primary.loading{background-color:#36ad55!important;color:#fff!important;opacity:1!important}.btn-primary .spinner-icon{color:#fff!important;opacity:1!important}.btn-primary .spinner-overlay{background-color:#36ad55!important;opacity:1!important}.btn-secondary{background-color:#fff;border:1px solid #00ab4a;color:#00ab4a}.btn-secondary:hover{background-color:#effcf5;border:1px solid #00ab4a;color:#00ab4a}.btn-secondary.loading{background-color:#fff!important;color:#00ab4a!important;opacity:1!important}.btn-secondary .spinner-icon{color:#00ab4a!important;opacity:1!important}.btn-secondary .spinner-overlay{background-color:#fff!important;opacity:1!important}.btn-terciary{background-color:#fff;border:1px solid #c7cace;color:#2e3b60}.btn-terciary:hover{background-color:#f4f6f8}.btn-terciary.loading{background-color:#fff!important;color:#222!important;opacity:1!important}.btn-terciary .spinner-icon{color:#222!important;opacity:1!important}.btn-terciary .spinner-overlay{background-color:#fff!important;opacity:1!important}.btn-success{background-color:#d3f7e3;border:1px solid #00ab4a;color:#00ab4a}.btn-success:hover{background-color:#c0f0d0;border-color:#090;color:#090}.btn-success.loading{background-color:#d3f7e3!important;color:#00ab4a!important;opacity:1!important}.btn-success .spinner-icon{color:#00ab4a!important;opacity:1!important}.btn-success .spinner-overlay{background-color:#d3f7e3!important;opacity:1!important}.btn-danger{background-color:#faeded;border:1px solid #DC3545;color:#dc3545}.btn-danger:hover{background-color:#fcdcdc;border-color:#c82333;color:#c82333}.btn-danger.loading{background-color:#ffe7e7!important;color:#dc3545!important;opacity:1!important}.btn-danger .spinner-icon{color:#dc3545!important;opacity:1!important}.btn-danger .spinner-overlay{background-color:#ffe7e7!important;opacity:1!important}.btn-warning{background-color:#fff3cd;border:1px solid #FFC107;color:#856404}.btn-warning:hover{background-color:#ffeaa7;border-color:#e0a800;color:#6c5c00}.btn-warning.loading{background-color:#fff3cd!important;color:#856404!important;opacity:1!important}.btn-warning .spinner-icon{color:#856404!important;opacity:1!important}.btn-warning .spinner-overlay{background-color:#fff3cd!important;opacity:1!important}.btn-info{background-color:#dae9fc4a!important;border:1px solid #007bff!important;color:#007bff!important}.btn-info:hover{background-color:#98c8ff4a!important;border-color:#007bff!important;color:#007bff!important}.btn-info.loading{background-color:#b9d5f54a!important;color:#007bff!important;opacity:1!important}.btn-info .spinner-icon{color:#007bff!important;opacity:1!important}.btn-info .spinner-overlay{background-color:#b9d5f54a!important;opacity:1!important}.btn-gray{background-color:#777;border:1px solid #777777;color:#fff}.btn-gray:hover{background-color:#5c5c5c;border-color:#5c5c5c;color:#fff}.btn-gray.loading{background-color:#777!important;color:#fff!important;opacity:1!important}.btn-gray .spinner-icon{color:#fff!important;opacity:1!important}.btn-gray .spinner-overlay{background-color:#777!important;opacity:1!important}.btn-red{background-color:#dc3545;border:1px solid #DC3545;color:#fff}.btn-red:hover{background-color:#c82333;border-color:#c82333;color:#fff}.btn-red.loading{background-color:#dc3545!important;color:#fff!important;opacity:1!important}.btn-red .spinner-icon{color:#fff!important;opacity:1!important}.btn-red .spinner-overlay{background-color:#dc3545!important;opacity:1!important}.btn.btn-sm{padding:6px 8px!important;font-size:12px;border-radius:6px}.btn.btn-md{padding:8px 12px!important;font-size:14px;border-radius:6px}.btn.btn-lg{padding:12px 24px!important;font-size:16px;border-radius:6px}.w-100{width:100%}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: i2.FaIconComponent, selector: "fa-icon", inputs: ["icon", "title", "animation", "mask", "flip", "size", "pull", "border", "inverse", "symbol", "rotate", "fixedWidth", "transform", "a11yRole"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: ButtonComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaButtonComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'lib-button', template: "<button\n  [class]=\"buttonClasses\"\n  [type]=\"type\"\n  [disabled]=\"disabled || loading\"\n  (click)=\"onClick()\"\n  class=\"sanna-button\">\n  \n  <!-- Loading spinner -->\n  <div *ngIf=\"loading\" class=\"sanna-button__spinner\">\n    <svg class=\"sanna-button__spinner-icon\" viewBox=\"0 0 24 24\">\n      <circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\" stroke-dasharray=\"31.416\" stroke-dashoffset=\"31.416\">\n        <animate attributeName=\"stroke-dasharray\" dur=\"2s\" values=\"0 31.416;15.708 15.708;0 31.416\" repeatCount=\"indefinite\"/>\n        <animate attributeName=\"stroke-dashoffset\" dur=\"2s\" values=\"0;-15.708;-31.416\" repeatCount=\"indefinite\"/>\n      </circle>\n    </svg>\n  </div>\n\n  <!-- Icon left -->\n  <i *ngIf=\"icon && iconPosition === 'left' && !loading\" class=\"sanna-button__icon sanna-button__icon--left\" [class]=\"icon\"></i>\n  \n  <!-- Label -->\n  <span *ngIf=\"!loading\" class=\"sanna-button__label\">{{ label }}</span>\n  \n  <!-- Icon right -->\n  <i *ngIf=\"icon && iconPosition === 'right' && !loading\" class=\"sanna-button__icon sanna-button__icon--right\" [class]=\"icon\"></i>\n</button>\n", styles: [".sanna-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;font-weight:500;text-decoration:none;cursor:pointer;transition:all .2s ease-in-out;box-shadow:0 2px 4px #0000001a;outline:none;-webkit-user-select:none;user-select:none}.sanna-button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 8px #00000026}.sanna-button:active:not(:disabled){transform:translateY(0);box-shadow:0 2px 4px #0000001a}.sanna-button:focus-visible{outline:2px solid #3b82f6;outline-offset:2px}.sanna-button:disabled{cursor:not-allowed;opacity:.6}.sanna-button--small{padding:8px 16px;font-size:14px;min-height:32px}.sanna-button--medium{padding:12px 24px;font-size:16px;min-height:40px}.sanna-button--large{padding:16px 32px;font-size:18px;min-height:48px}.sanna-button--primary{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}.sanna-button--primary:hover:not(:disabled){background:linear-gradient(135deg,#5a6fd8,#6a4190)}.sanna-button--secondary{background:#f8fafc;color:#374151;border:1px solid #d1d5db}.sanna-button--secondary:hover:not(:disabled){background:#f1f5f9;border-color:#9ca3af}.sanna-button--success{background:linear-gradient(135deg,#10b981,#059669);color:#fff}.sanna-button--success:hover:not(:disabled){background:linear-gradient(135deg,#059669,#047857)}.sanna-button--danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}.sanna-button--danger:hover:not(:disabled){background:linear-gradient(135deg,#dc2626,#b91c1c)}.sanna-button--warning{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}.sanna-button--warning:hover:not(:disabled){background:linear-gradient(135deg,#d97706,#b45309)}.sanna-button--info{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff}.sanna-button--info:hover:not(:disabled){background:linear-gradient(135deg,#2563eb,#1d4ed8)}.sanna-button--full-width{width:100%}.sanna-button--loading{pointer-events:none}.sanna-button__spinner{display:flex;align-items:center;justify-content:center}.sanna-button__spinner-icon{width:20px;height:20px;animation:spin 1s linear infinite}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.sanna-button__icon{font-size:1em;line-height:1}.sanna-button__icon--left{margin-right:4px}.sanna-button__icon--right{margin-left:4px}.sanna-button__label{line-height:1}@media (max-width: 768px){.sanna-button--large{padding:14px 28px;font-size:16px;min-height:44px}.sanna-button--medium{padding:10px 20px;font-size:15px;min-height:36px}}\n"] }]
+            args: [{ selector: 'sa-button', host: {
+                        '[class.full-width]': 'fullWidth'
+                    }, template: "<button\n  #buttonElement\n  [class]=\"buttonClasses\"\n  [type]=\"type\"\n  [disabled]=\"!isInteractive\"\n  (click)=\"onClick()\"\n>\n  <!-- Contenido del bot\u00F3n -->\n  <div class=\"button-content\" [class.loading-hidden]=\"showSpinner\">\n    <fa-icon *ngIf=\"iconDefinition && (position === 'left' || iconOnly)\" [icon]=\"iconDefinition\" [class.me-1]=\"!iconOnly\"></fa-icon>\n    <span #buttonText *ngIf=\"!iconOnly\">{{ label }}</span>\n    <fa-icon *ngIf=\"iconDefinition && position === 'right' && !iconOnly\" [icon]=\"iconDefinition\" class=\"ms-1\"></fa-icon>\n  </div>\n  \n  <!-- Spinner que se superpone cuando est\u00E1 loading -->\n  <div *ngIf=\"showSpinner\" class=\"spinner-overlay\">\n    <fa-icon \n      [icon]=\"spinnerIcon\" \n      class=\"spinner-icon\"\n      [class.spinning]=\"loading\">\n    </fa-icon>\n  </div>\n</button>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block;vertical-align:middle;width:auto}:host.full-width{display:block;width:100%}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block;vertical-align:middle}.container :host.full-width,.row :host.full-width,.col :host.full-width,[class*=col-] :host.full-width{display:block;width:100%}.btn{border:none;border-radius:.375rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important;transition:all .2s ease-in-out;cursor:pointer;outline:none;position:relative;overflow:visible;display:inline-flex;align-items:center;justify-content:center;text-align:center;-webkit-user-select:none;user-select:none;vertical-align:middle;white-space:nowrap;width:auto;line-height:1;min-width:fit-content;font-weight:400!important}.btn.w-100{width:100%!important;display:flex!important}.btn:active{transform:translateY(1px)}.btn.loading{cursor:not-allowed;pointer-events:none}.btn.disabled{background-color:#f8f9fa!important;border-color:#858585!important;color:#858585!important;cursor:not-allowed;pointer-events:none;box-shadow:none!important}.btn.disabled:hover{background-color:#f8f9fa!important;border-color:#858585!important;color:#858585!important;transform:none!important}.btn.disabled:active{transform:none!important}.btn.disabled.loading .spinner-overlay{background-color:#f8f9fa!important}.btn.disabled.loading .spinner-icon{color:#858585!important}.button-content{display:flex;align-items:center;justify-content:center;gap:.25rem}.button-content.loading-hidden{visibility:hidden}.btn:has(.button-content:not(:has(span))){min-width:40px;min-height:40px;padding:8px}.btn:has(.button-content:not(:has(span))).btn-sm{min-width:32px;min-height:32px;padding:6px}.btn:has(.button-content:not(:has(span))).btn-md{min-width:40px;min-height:40px;padding:8px}.btn:has(.button-content:not(:has(span))).btn-lg{min-width:48px;min-height:48px;padding:12px}.spinner-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:inherit;z-index:10;width:100%;height:100%;opacity:1!important}.spinner-icon,.spinner-icon.spinning{animation:spin 1s linear infinite;opacity:1!important}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.spinner-overlay fa-icon,.spinner-overlay .fa-icon,.spinner-overlay [class*=fa-]{opacity:1!important}.btn-primary{background-color:#36ad55;border:1px solid #36AD55;color:#fff}.btn-primary:hover{background-color:#239a5c;border:1px solid #239A5C}.btn-primary.loading{background-color:#36ad55!important;color:#fff!important;opacity:1!important}.btn-primary .spinner-icon{color:#fff!important;opacity:1!important}.btn-primary .spinner-overlay{background-color:#36ad55!important;opacity:1!important}.btn-secondary{background-color:#fff;border:1px solid #00ab4a;color:#00ab4a}.btn-secondary:hover{background-color:#effcf5;border:1px solid #00ab4a;color:#00ab4a}.btn-secondary.loading{background-color:#fff!important;color:#00ab4a!important;opacity:1!important}.btn-secondary .spinner-icon{color:#00ab4a!important;opacity:1!important}.btn-secondary .spinner-overlay{background-color:#fff!important;opacity:1!important}.btn-terciary{background-color:#fff;border:1px solid #c7cace;color:#2e3b60}.btn-terciary:hover{background-color:#f4f6f8}.btn-terciary.loading{background-color:#fff!important;color:#222!important;opacity:1!important}.btn-terciary .spinner-icon{color:#222!important;opacity:1!important}.btn-terciary .spinner-overlay{background-color:#fff!important;opacity:1!important}.btn-success{background-color:#d3f7e3;border:1px solid #00ab4a;color:#00ab4a}.btn-success:hover{background-color:#c0f0d0;border-color:#090;color:#090}.btn-success.loading{background-color:#d3f7e3!important;color:#00ab4a!important;opacity:1!important}.btn-success .spinner-icon{color:#00ab4a!important;opacity:1!important}.btn-success .spinner-overlay{background-color:#d3f7e3!important;opacity:1!important}.btn-danger{background-color:#faeded;border:1px solid #DC3545;color:#dc3545}.btn-danger:hover{background-color:#fcdcdc;border-color:#c82333;color:#c82333}.btn-danger.loading{background-color:#ffe7e7!important;color:#dc3545!important;opacity:1!important}.btn-danger .spinner-icon{color:#dc3545!important;opacity:1!important}.btn-danger .spinner-overlay{background-color:#ffe7e7!important;opacity:1!important}.btn-warning{background-color:#fff3cd;border:1px solid #FFC107;color:#856404}.btn-warning:hover{background-color:#ffeaa7;border-color:#e0a800;color:#6c5c00}.btn-warning.loading{background-color:#fff3cd!important;color:#856404!important;opacity:1!important}.btn-warning .spinner-icon{color:#856404!important;opacity:1!important}.btn-warning .spinner-overlay{background-color:#fff3cd!important;opacity:1!important}.btn-info{background-color:#dae9fc4a!important;border:1px solid #007bff!important;color:#007bff!important}.btn-info:hover{background-color:#98c8ff4a!important;border-color:#007bff!important;color:#007bff!important}.btn-info.loading{background-color:#b9d5f54a!important;color:#007bff!important;opacity:1!important}.btn-info .spinner-icon{color:#007bff!important;opacity:1!important}.btn-info .spinner-overlay{background-color:#b9d5f54a!important;opacity:1!important}.btn-gray{background-color:#777;border:1px solid #777777;color:#fff}.btn-gray:hover{background-color:#5c5c5c;border-color:#5c5c5c;color:#fff}.btn-gray.loading{background-color:#777!important;color:#fff!important;opacity:1!important}.btn-gray .spinner-icon{color:#fff!important;opacity:1!important}.btn-gray .spinner-overlay{background-color:#777!important;opacity:1!important}.btn-red{background-color:#dc3545;border:1px solid #DC3545;color:#fff}.btn-red:hover{background-color:#c82333;border-color:#c82333;color:#fff}.btn-red.loading{background-color:#dc3545!important;color:#fff!important;opacity:1!important}.btn-red .spinner-icon{color:#fff!important;opacity:1!important}.btn-red .spinner-overlay{background-color:#dc3545!important;opacity:1!important}.btn.btn-sm{padding:6px 8px!important;font-size:12px;border-radius:6px}.btn.btn-md{padding:8px 12px!important;font-size:14px;border-radius:6px}.btn.btn-lg{padding:12px 24px!important;font-size:16px;border-radius:6px}.w-100{width:100%}\n"] }]
         }], propDecorators: { label: [{
                 type: Input
             }], variant: [{
@@ -81,32 +310,2196 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Input
             }], icon: [{
                 type: Input
-            }], iconPosition: [{
+            }], position: [{
                 type: Input
+            }], iconOnly: [{
+                type: Input
+            }], buttonText: [{
+                type: ViewChild,
+                args: ['buttonText', { static: false }]
             }], clicked: [{
                 type: Output
             }] } });
 
+class SaIconComponent {
+    // Propiedades con setters/getters para flexibilidad máxima
+    _name = '';
+    _color = '#000000';
+    _size = 'md';
+    set name(value) {
+        this._name = value || '';
+    }
+    get name() {
+        return this._name;
+    }
+    set color(value) {
+        this._color = value || '#000000';
+    }
+    get color() {
+        return this._color;
+    }
+    set size(value) {
+        this._size = value || 'md';
+    }
+    get size() {
+        return this._size;
+    }
+    // Método para obtener el icono basado en el string
+    get iconDefinition() {
+        if (!this.name)
+            return undefined;
+        // Mapeo local de iconos (más rápido)
+        const localIconMap = {
+            // Iconos básicos (solid por defecto)
+            'spinner': faSpinner,
+            'download': faDownload,
+            'trash': faTrash,
+            'share': faShare,
+            'print': faPrint,
+            'heart': faHeart,
+            'home': faHome,
+            'user': faUser,
+            'cog': faCog,
+            'search': faSearch,
+            'star': faStar,
+            'edit': faEdit,
+            'save': faSave,
+            'plus': faPlus,
+            'minus': faMinus,
+            'check': faCheck,
+            'times': faTimes,
+            'eye': faEye,
+            'eye-slash': faEyeSlash,
+            'lock': faLock,
+            'unlock': faUnlock,
+            'bell': faBell,
+            'envelope': faEnvelope,
+            'phone': faPhone,
+            'map-marker-alt': faMapMarkerAlt,
+            'calendar': faCalendar,
+            'clock': faClock,
+            'info': faInfo,
+            'exclamation-triangle': faExclamationTriangle,
+            'question': faQuestion,
+            'chevron-down': faChevronDown,
+            'chevron-up': faChevronUp,
+            'chevron-left': faChevronLeft,
+            'chevron-right': faChevronRight,
+            'arrow-left': faArrowLeft,
+            'arrow-right': faArrowRight,
+            'arrow-up': faArrowUp,
+            'arrow-down': faArrowDown,
+            'pencil': faPencil,
+            'angle-double-left': faAngleDoubleLeft,
+            'angle-left': faAngleLeft,
+            'angle-right': faAngleRight,
+            'angle-double-right': faAngleDoubleRight,
+            'table': faTable,
+            'th-large': faThLarge,
+            'users': faUsers,
+            'universal-access': faUniversalAccess,
+            'running': faRunning,
+            'image': faImage,
+            'calendar-alt': faCalendarAlt,
+            'chart-line': faChartLine,
+            'apple-alt': faAppleAlt,
+            'robot': faRobot,
+            'shopping-bag': faShoppingBag,
+            'balance-scale': faBalanceScale,
+            'battery-three-quarters': faBatteryThreeQuarters,
+            'battery-quarter': faBatteryQuarter,
+            'battery-empty': faBatteryEmpty,
+            'bell-slash': faBellSlash,
+            'bookmark': faBookmark,
+            'bowl-food': faBowlFood,
+            'box': faBox,
+            'bus': faBus,
+            'birthday-cake': faBirthdayCake,
+            'calendar-day': faCalendarDay,
+            'file': faFile,
+            'flask': faFlask,
+            'cookie-bite': faCookieBite,
+            'spray-can': faSprayCan,
+            'soap': faSoap,
+            'expand': faExpand,
+            'cloud': faCloud,
+            'comment': faComment,
+            'file-upload': faFileUpload,
+            'ellipsis-h': faEllipsisH,
+            'plane': faPlane,
+            'graduation-cap': faGraduationCap,
+            'file-excel': faFileExcel,
+            'sign-out-alt': faSignOutAlt,
+            'smile': faSmile,
+            'frown': faFrown,
+            'mask': faMask,
+            'box-open': faBoxOpen,
+            'seedling': faSeedling,
+            'volume-up': faVolumeUp,
+            'expand-arrows-alt': faExpandArrowsAlt,
+            'volume-mute': faVolumeMute,
+            'bars': faBars,
+            'briefcase': faBriefcase,
+            'microchip': faMicrochip,
+            'heartbeat': faHeartbeat,
+            'history': faHistory,
+            'microphone': faMicrophone,
+            'lightbulb': faLightbulb,
+            'key': faKey,
+            'layer-group': faLayerGroup,
+            'list-ul': faListUl,
+            'volume-down': faVolumeDown,
+            'pills': faPills,
+            'mobile': faMobile,
+            'mobile-alt': faMobileAlt,
+            'money-bill': faMoneyBill,
+            'sticky-note': faStickyNote,
+            'ellipsis-v': faEllipsisV,
+            'lungs': faLungs,
+            'cash-register': faCashRegister,
+            'paper-plane': faPaperPlane,
+            'desktop': faDesktop,
+            'package': faBox,
+            'chart-pie': faChartPie,
+            'mouse-pointer': faMousePointer,
+            'swimming-pool': faSwimmingPool,
+            'ban': faBan,
+            'tag': faTag,
+            'shield': faShield,
+            'qrcode': faQrcode,
+            'redo': faRedo,
+            'ruler': faRuler,
+            'utensils': faUtensils,
+            'tshirt': faTshirt,
+            'sliders-h': faSlidersH,
+            'glass-whiskey': faGlassWhiskey,
+            'sort': faSort,
+            'tachometer-alt': faTachometerAlt,
+            'spoon': faSpoon,
+            'store': faStore,
+            'tablet': faTablet,
+            'tablet-alt': faTabletAlt,
+            'thermometer-half': faThermometerHalf,
+            'bolt': faBolt,
+            'ticket-alt': faTicketAlt,
+            'sitemap': faSitemap,
+            'bath': faBath,
+            // Nuevos iconos agregados
+            'cell': faDesktop,
+            'grid': faThLarge,
+            'group': faUsers,
+            'link': faLink,
+            'copy': faCopy,
+            'accessibility-alt': faUniversalAccess,
+            'accessibility': faUniversalAccess,
+            'activity': faRunning,
+            'add-document': faFile,
+            'add-image': faImage,
+            'analytics': faChartBar,
+            'analytics-raise': faChartLine,
+            'apple': faAppleAlt,
+            'assistant': faRobot,
+            'bag-of-flour': faGift,
+            'bag-with-gift': faGift,
+            'bags': faShoppingBag,
+            'balance': faBalanceScale,
+            'battery-alt': faBatteryThreeQuarters,
+            'battery-charginig': faBatteryHalf,
+            'battery-full': faBatteryHalf,
+            'battery-half': faBatteryHalf,
+            'battery-low': faBatteryQuarter,
+            'bell-new-message': faBell,
+            'bell-off': faBellSlash,
+            'bicycle': faBicycle,
+            'bookmark-simple': faBookmark,
+            'bowl': faBowlFood,
+            'bus-front': faBus,
+            'butter': faBirthdayCake,
+            'cake': faBirthdayCake,
+            'calculator': faCalculator,
+            'calendar-history-alt': faCalendarDay,
+            'calendar-history': faCalendarDay,
+            'camera': faCamera,
+            'candy': faCookieBite,
+            'caret-down': faCaretDown,
+            'caret-left': faCaretLeft,
+            'caret-right': faCaretRight,
+            'caret-up': faCaretUp,
+            'cells-document': faFile,
+            'chart-bar': faChartBar,
+            'chart-pie-slice': faChartPie,
+            'chat-circle-text': faComments,
+            'chemical-experiment': faFlask,
+            'chemical-test': faMicroscope,
+            'chocolate-bar': faCookieBite,
+            'cleaner': faSprayCan,
+            'cleaner-dispenser': faSoap,
+            'close-full-screen': faExpand,
+            'cloud-offline': faCloud,
+            'cloud-problem': faCloud,
+            'coffee': faCoffee,
+            'comments': faComment,
+            'cookie': faCookieBite,
+            'credit-card': faCreditCard,
+            'crop-alt': faCropAlt,
+            'crop': faCrop,
+            'crop-health': faCrop,
+            'delivery-guy': faTruck,
+            'density': faDesktop,
+            'detergent': faSoap,
+            'document-upload': faFileUpload,
+            'dots-three': faEllipsisH,
+            'download-alt': faDownload,
+            'dron': faPlane,
+            'education': faGraduationCap,
+            'envelope-new-message': faEnvelope,
+            'equals': faEquals,
+            'eraser': faEraser,
+            'excel': faFileExcel,
+            'excel-download': faFileDownload,
+            'exit': faSignOutAlt,
+            'face-satisfied': faSmile,
+            'face-dissatisfied': faFrown,
+            'face-mask': faMask,
+            'facebook': faShare,
+            'fast-truck': faTruck,
+            'favorite-medal': faMedal,
+            'favorite-package': faBoxOpen,
+            'feeder': faSeedling,
+            'file-download': faFileDownload,
+            'filter': faFilter,
+            'fingerprint': faFingerprint,
+            'fire': faFire,
+            'fireworks': faFire,
+            'first-place': faTrophy,
+            'fish': faFish,
+            'flag': faFlag,
+            'forward': faForward,
+            'full-volume': faVolumeUp,
+            'full-screen': faExpandArrowsAlt,
+            'gear': faCog,
+            'gift': faGift,
+            'gift-delivery': faGift,
+            'globe': faGlobe,
+            'group-bigger': faUsers,
+            'half-volume': faVolumeMute,
+            'hamburger': faBars,
+            'handbag': faBriefcase,
+            'happy-chip': faMicrochip,
+            'healthy': faHeartbeat,
+            'history-time': faHistory,
+            'hydrophone': faMicrophone,
+            'ice-cream': faIceCream,
+            'idea': faLightbulb,
+            'instagram': faShare,
+            'intelligence-a-i': faRobot,
+            'laptop': faLaptop,
+            'layer': faLayerGroup,
+            'list-bulleted': faListUl,
+            'load-balancer-classic': faDesktop,
+            'low-volume': faVolumeDown,
+            'machine-learning-model': faRobot,
+            'magnifying-glass': faSearch,
+            'map': faMapPin,
+            'map-pin': faMapPin,
+            'medal': faMedal,
+            'medicine-alert': faExclamationTriangle,
+            'medicine': faPills,
+            'micro-chip-alt': faMicrochip,
+            'micro-chip': faMicrochip,
+            'microscope': faMicroscope,
+            'mobile-horizontal': faMobile,
+            'mobile-vertical': faMobileAlt,
+            'money': faMoneyBill,
+            'motorcycle': faMotorcycle,
+            'note-pencil': faStickyNote,
+            'openlock': faUnlock,
+            'overflow-menu-vertical': faEllipsisV,
+            'oxygen': faLungs,
+            'p-o-s': faCashRegister,
+            'paper-plane-right': faPaperPlane,
+            'paperclip': faPaperclip,
+            'parallel-screen': faDesktop,
+            'pause': faPause,
+            'percent': faPercent,
+            'piggy-bank': faPiggyBank,
+            'pill': faPills,
+            'place-location': faMapMarkerAlt,
+            'play': faPlay,
+            'pointer': faMousePointer,
+            'pointer-lock': faMousePointer,
+            'pool-ladder': faSwimmingPool,
+            'post-history': faHistory,
+            'postit': faStickyNote,
+            'prohibit': faBan,
+            'promotion': faTag,
+            'protection-checked': faShield,
+            'qr': faQrcode,
+            'receipt': faReceipt,
+            'receipt-checked': faReceipt,
+            'renew': faRedo,
+            'repeat': faRedo,
+            'repeat-purchase': faRedo,
+            'ruc': faUser,
+            'ruler-alt': faRuler,
+            'sauce': faUtensils,
+            'scan': faQrcode,
+            'search-layers': faSearch,
+            'sensor': faMicrochip,
+            'settings-alt': faCog,
+            'share-network': faShare,
+            'shirt': faTshirt,
+            'shopping-cart': faShoppingCart,
+            'shrimp': faFish,
+            'sign-out': faSignOutAlt,
+            'sliders-horizontal': faSlidersH,
+            'soda': faGlassWhiskey,
+            'sort-by': faSort,
+            'soup-dispenser': faUtensils,
+            'soup-noodles': faUtensils,
+            'speedometer': faTachometerAlt,
+            'sponge': faSpoon,
+            'star-half': faStarHalf,
+            'stop': faStop,
+            'storefront': faStore,
+            'styling-cream': faSoap,
+            'substract-volume': faVolumeMute,
+            'tablet-horizontal': faDesktop,
+            'tablet-vertical': faDesktop,
+            'temperature': faThermometerHalf,
+            'thumbs-down': faThumbsDown,
+            'thumbs-up': faThumbsUp,
+            'thunder': faBolt,
+            'ticket': faTicketAlt,
+            'toothpaste': faSoap,
+            'tree-view': faSitemap,
+            'trend-down': faChartLine,
+            'trend-up': faChartLine,
+            'trophy': faTrophy,
+            'truck': faTruck,
+            'tub': faBath,
+            'twitter': faShare,
+            'undo': faUndo,
+            'upload': faUpload,
+            'user-avatar': faUser,
+            'user-add': faUserPlus,
+            'user-plus': faUserPlus,
+            'user-substract': faUserMinus,
+            'user-minus': faUserMinus,
+            'user-with-cart': faUser,
+            'video': faVideo,
+            'video-layer': faVideo,
+            'exclamation-circle': faExclamationCircle,
+            'warning-circle': faExclamationCircle,
+            'warning-triangle': faExclamationTriangle,
+            'whatsapp': faShare,
+            'wifi': faWifi,
+            'wi-fi': faWifi,
+            'wi-fi-off': faWifi,
+            'x': faTimes,
+            'youtube': faShare,
+            // También soporta formato fas fa-
+            'fas fa-spinner': faSpinner,
+            'fas fa-download': faDownload,
+            'fas fa-trash': faTrash,
+            'fas fa-share': faShare,
+            'fas fa-print': faPrint,
+            'fas fa-heart': faHeart,
+            'fas fa-home': faHome,
+            'fas fa-user': faUser,
+            'fas fa-cog': faCog,
+            'fas fa-search': faSearch,
+            'fas fa-star': faStar,
+            'fas fa-edit': faEdit,
+            'fas fa-save': faSave,
+            'fas fa-plus': faPlus,
+            'fas fa-minus': faMinus,
+            'fas fa-check': faCheck,
+            'fas fa-times': faTimes,
+            'fas fa-eye': faEye,
+            'fas fa-eye-slash': faEyeSlash,
+            'fas fa-lock': faLock,
+            'fas fa-unlock': faUnlock,
+            'fas fa-bell': faBell,
+            'fas fa-envelope': faEnvelope,
+            'fas fa-phone': faPhone,
+            'fas fa-map-marker-alt': faMapMarkerAlt,
+            'fas fa-calendar': faCalendar,
+            'fas fa-clock': faClock,
+            'fas fa-info': faInfo,
+            'fas fa-exclamation-triangle': faExclamationTriangle,
+            'fas fa-question': faQuestion,
+            'fas fa-chevron-down': faChevronDown,
+            'fas fa-chevron-up': faChevronUp,
+            'fas fa-chevron-left': faChevronLeft,
+            'fas fa-chevron-right': faChevronRight,
+            'fas fa-arrow-left': faArrowLeft,
+            'fas fa-arrow-right': faArrowRight,
+            'fas fa-arrow-up': faArrowUp,
+            'fas fa-arrow-down': faArrowDown,
+            'fas fa-pencil': faPencil,
+            'fas fa-user-plus': faUserPlus,
+            'fas fa-user-minus': faUserMinus,
+            'fas fa-video': faVideo,
+            'fas fa-exclamation-circle': faExclamationCircle,
+            'fas fa-wifi': faWifi,
+            'fas fa-table': faTable,
+            'fas fa-th-large': faThLarge,
+            'fas fa-users': faUsers,
+            'fas fa-universal-access': faUniversalAccess,
+            'fas fa-running': faRunning,
+            'fas fa-image': faImage,
+            'fas fa-calendar-alt': faCalendarAlt,
+            'fas fa-chart-line': faChartLine,
+            'fas fa-apple-alt': faAppleAlt,
+            'fas fa-robot': faRobot,
+            'fas fa-shopping-bag': faShoppingBag,
+            'fas fa-balance-scale': faBalanceScale,
+            'fas fa-battery-three-quarters': faBatteryThreeQuarters,
+            'fas fa-battery-quarter': faBatteryQuarter,
+            'fas fa-battery-empty': faBatteryEmpty,
+            'fas fa-bell-slash': faBellSlash,
+            'fas fa-bookmark': faBookmark,
+            'fas fa-bowl-food': faBowlFood,
+            'fas fa-box': faBox,
+            'fas fa-bus': faBus,
+            'fas fa-birthday-cake': faBirthdayCake,
+            'fas fa-calendar-day': faCalendarDay,
+            'fas fa-file': faFile,
+            'fas fa-flask': faFlask,
+            'fas fa-cookie-bite': faCookieBite,
+            'fas fa-spray-can': faSprayCan,
+            'fas fa-soap': faSoap,
+            'fas fa-expand': faExpand,
+            'fas fa-cloud': faCloud,
+            'fas fa-comment': faComment,
+            'fas fa-file-upload': faFileUpload,
+            'fas fa-ellipsis-h': faEllipsisH,
+            'fas fa-plane': faPlane,
+            'fas fa-graduation-cap': faGraduationCap,
+            'fas fa-file-excel': faFileExcel,
+            'fas fa-sign-out-alt': faSignOutAlt,
+            'fas fa-smile': faSmile,
+            'fas fa-frown': faFrown,
+            'fas fa-mask': faMask,
+            'fas fa-box-open': faBoxOpen,
+            'fas fa-seedling': faSeedling,
+            'fas fa-volume-up': faVolumeUp,
+            'fas fa-expand-arrows-alt': faExpandArrowsAlt,
+            'fas fa-volume-mute': faVolumeMute,
+            'fas fa-bars': faBars,
+            'fas fa-briefcase': faBriefcase,
+            'fas fa-microchip': faMicrochip,
+            'fas fa-heartbeat': faHeartbeat,
+            'fas fa-history': faHistory,
+            'fas fa-microphone': faMicrophone,
+            'fas fa-lightbulb': faLightbulb,
+            'fas fa-key': faKey,
+            'fas fa-layer-group': faLayerGroup,
+            'fas fa-list-ul': faListUl,
+            'fas fa-volume-down': faVolumeDown,
+            'fas fa-pills': faPills,
+            'fas fa-mobile': faMobile,
+            'fas fa-mobile-alt': faMobileAlt,
+            'fas fa-money-bill': faMoneyBill,
+            'fas fa-sticky-note': faStickyNote,
+            'fas fa-ellipsis-v': faEllipsisV,
+            'fas fa-lungs': faLungs,
+            'fas fa-cash-register': faCashRegister,
+            'fas fa-paper-plane': faPaperPlane,
+            'fas fa-desktop': faDesktop,
+            'fas fa-package': faBox,
+            'fas fa-chart-pie': faChartPie,
+            'fas fa-mouse-pointer': faMousePointer,
+            'fas fa-swimming-pool': faSwimmingPool,
+            'fas fa-ban': faBan,
+            'fas fa-tag': faTag,
+            'fas fa-shield': faShield,
+            'fas fa-qrcode': faQrcode,
+            'fas fa-redo': faRedo,
+            'fas fa-ruler': faRuler,
+            'fas fa-utensils': faUtensils,
+            'fas fa-tshirt': faTshirt,
+            'fas fa-sliders-h': faSlidersH,
+            'fas fa-glass-whiskey': faGlassWhiskey,
+            'fas fa-sort': faSort,
+            'fas fa-tachometer-alt': faTachometerAlt,
+            'fas fa-spoon': faSpoon,
+            'fas fa-store': faStore,
+            'fas fa-tablet': faTablet,
+            'fas fa-tablet-alt': faTabletAlt,
+            'fas fa-thermometer-half': faThermometerHalf,
+            'fas fa-bolt': faBolt,
+            'fas fa-ticket-alt': faTicketAlt,
+            'fas fa-sitemap': faSitemap,
+            'fas fa-bath': faBath
+        };
+        // Si está en el mapeo local, úsalo
+        if (localIconMap[this.name]) {
+            return localIconMap[this.name];
+        }
+        // Si no está en el mapeo local, intenta con findIconDefinition
+        let iconName = this.name;
+        if (this.name.includes('fas fa-')) {
+            iconName = this.name.replace('fas fa-', '');
+        }
+        else if (this.name.includes('fa-')) {
+            iconName = this.name.replace('fa-', '');
+        }
+        const foundIcon = findIconDefinition({ prefix: 'fas', iconName: iconName });
+        if (foundIcon) {
+            return foundIcon;
+        }
+        // Si no se encuentra, retorna undefined
+        return undefined;
+    }
+    get iconClasses() {
+        const classes = [
+            'icon',
+            `icon-${this.size}`
+        ];
+        return classes.filter(Boolean).join(' ');
+    }
+    get iconStyles() {
+        return {
+            'color': this.color
+        };
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaIconComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaIconComponent, selector: "sa-icon", inputs: { name: "name", color: "color", size: "size" }, ngImport: i0, template: "<fa-icon \n  *ngIf=\"iconDefinition\"\n  [icon]=\"iconDefinition\"\n  [class]=\"iconClasses\"\n  [ngStyle]=\"iconStyles\">\n</fa-icon>\n", styles: ["@charset \"UTF-8\";:host{display:inline-block!important;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block!important;vertical-align:middle}.icon{display:inline-block;vertical-align:middle}.icon.icon-sm{font-size:.875rem}.icon.icon-md{font-size:1rem}.icon.icon-lg{font-size:1.25rem}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "component", type: i2.FaIconComponent, selector: "fa-icon", inputs: ["icon", "title", "animation", "mask", "flip", "size", "pull", "border", "inverse", "symbol", "rotate", "fixedWidth", "transform", "a11yRole"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaIconComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-icon', template: "<fa-icon \n  *ngIf=\"iconDefinition\"\n  [icon]=\"iconDefinition\"\n  [class]=\"iconClasses\"\n  [ngStyle]=\"iconStyles\">\n</fa-icon>\n", styles: ["@charset \"UTF-8\";:host{display:inline-block!important;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block!important;vertical-align:middle}.icon{display:inline-block;vertical-align:middle}.icon.icon-sm{font-size:.875rem}.icon.icon-md{font-size:1rem}.icon.icon-lg{font-size:1.25rem}\n"] }]
+        }], propDecorators: { name: [{
+                type: Input
+            }], color: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }] } });
+
+class SaMessageboxComponent {
+    sanitizer;
+    // Property que DEBE usar property binding: [message]="'texto'"
+    message = '';
+    // Propiedades con setters/getters para flexibilidad máxima
+    _type = 'success';
+    _iconName;
+    _iconSize;
+    _iconColor;
+    set type(value) {
+        this._type = value || 'success';
+    }
+    get type() {
+        return this._type;
+    }
+    set iconName(value) {
+        this._iconName = value;
+    }
+    get iconName() {
+        return this._iconName;
+    }
+    set iconSize(value) {
+        this._iconSize = value;
+    }
+    get iconSize() {
+        return this._iconSize;
+    }
+    set iconColor(value) {
+        this._iconColor = value;
+    }
+    get iconColor() {
+        return this._iconColor;
+    }
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    get sanitizedMessage() {
+        return this.sanitizer.bypassSecurityTrustHtml(this.message);
+    }
+    get hasIcon() {
+        return !!this.iconName;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaMessageboxComponent, deps: [{ token: i1$1.DomSanitizer }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaMessageboxComponent, selector: "sa-messagebox", inputs: { message: "message", type: "type", iconName: "iconName", iconSize: "iconSize", iconColor: "iconColor" }, ngImport: i0, template: "<div class=\"messagebox\" \n     [class.success]=\"type === 'success'\"\n     [class.warning]=\"type === 'warning'\"\n     [class.error]=\"type === 'error'\"\n     [class.info]=\"type === 'info'\">\n  <div class=\"messagebox-content\">\n    <sa-icon *ngIf=\"hasIcon\" \n              [name]=\"iconName!\" \n              [size]=\"iconSize || 'md'\"\n              [color]=\"iconColor || '#000000'\"\n              class=\"messagebox-icon\">\n    </sa-icon>\n    <p class=\"message-text\" [innerHTML]=\"sanitizedMessage\"></p>\n  </div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.messagebox{position:relative;font-size:14px;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important;display:flex;flex-direction:row;border:.0625rem solid rgb(14,144,105);border-radius:8px;width:100%;max-width:100%;min-height:auto;padding:1rem;background-color:#f2fdf9;color:#006e4a;margin:8px 0;transition:all .3s ease;box-sizing:border-box;overflow-wrap:break-word}.messagebox.success{background-color:#f2fdf9;color:#006e4a;border:.0625rem solid rgb(14,144,105)}.messagebox.warning{background-color:#fff9f2;color:#9f5200;border:.0625rem solid rgb(217,125,8)}.messagebox.error{background-color:#fff2f7;color:#9f003c;border:.0625rem solid rgb(226,8,103)}.messagebox.info{background-color:#f2f7ff;color:#003d9f;border:.0625rem solid rgb(0,100,209)}.messagebox .messagebox-content{display:flex;align-items:center;gap:.75rem;width:100%}.messagebox .messagebox-icon{flex-shrink:0}.messagebox .message-text{margin:0!important;padding:0;text-align:left;word-wrap:break-word;flex:1;line-height:1.28;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: SaIconComponent, selector: "sa-icon", inputs: ["name", "color", "size"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaMessageboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-messagebox', template: "<div class=\"messagebox\" \n     [class.success]=\"type === 'success'\"\n     [class.warning]=\"type === 'warning'\"\n     [class.error]=\"type === 'error'\"\n     [class.info]=\"type === 'info'\">\n  <div class=\"messagebox-content\">\n    <sa-icon *ngIf=\"hasIcon\" \n              [name]=\"iconName!\" \n              [size]=\"iconSize || 'md'\"\n              [color]=\"iconColor || '#000000'\"\n              class=\"messagebox-icon\">\n    </sa-icon>\n    <p class=\"message-text\" [innerHTML]=\"sanitizedMessage\"></p>\n  </div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.messagebox{position:relative;font-size:14px;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important;display:flex;flex-direction:row;border:.0625rem solid rgb(14,144,105);border-radius:8px;width:100%;max-width:100%;min-height:auto;padding:1rem;background-color:#f2fdf9;color:#006e4a;margin:8px 0;transition:all .3s ease;box-sizing:border-box;overflow-wrap:break-word}.messagebox.success{background-color:#f2fdf9;color:#006e4a;border:.0625rem solid rgb(14,144,105)}.messagebox.warning{background-color:#fff9f2;color:#9f5200;border:.0625rem solid rgb(217,125,8)}.messagebox.error{background-color:#fff2f7;color:#9f003c;border:.0625rem solid rgb(226,8,103)}.messagebox.info{background-color:#f2f7ff;color:#003d9f;border:.0625rem solid rgb(0,100,209)}.messagebox .messagebox-content{display:flex;align-items:center;gap:.75rem;width:100%}.messagebox .messagebox-icon{flex-shrink:0}.messagebox .message-text{margin:0!important;padding:0;text-align:left;word-wrap:break-word;flex:1;line-height:1.28;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}\n"] }]
+        }], ctorParameters: () => [{ type: i1$1.DomSanitizer }], propDecorators: { message: [{
+                type: Input
+            }], type: [{
+                type: Input
+            }], iconName: [{
+                type: Input
+            }], iconSize: [{
+                type: Input
+            }], iconColor: [{
+                type: Input
+            }] } });
+
+class SaHeadingComponent {
+    // Propiedad que DEBE usar property binding: [children]="'texto'"
+    children = '';
+    // Propiedades con setters/getters para flexibilidad máxima
+    _size = 'md';
+    _weight = 'bold';
+    _mt;
+    _mb;
+    _mr;
+    _ml;
+    set size(value) {
+        this._size = value || 'md';
+    }
+    get size() {
+        return this._size;
+    }
+    set weight(value) {
+        this._weight = value || 'bold';
+    }
+    get weight() {
+        return this._weight;
+    }
+    set mt(value) {
+        this._mt = value;
+    }
+    get mt() {
+        return this._mt;
+    }
+    set mb(value) {
+        this._mb = value;
+    }
+    get mb() {
+        return this._mb;
+    }
+    set mr(value) {
+        this._mr = value;
+    }
+    get mr() {
+        return this._mr;
+    }
+    set ml(value) {
+        this._ml = value;
+    }
+    get ml() {
+        return this._ml;
+    }
+    get headingClasses() {
+        const sizeClasses = {
+            'xs': 'fs-6',
+            'sm': 'fs-5',
+            'md': 'fs-4',
+            'lg': 'fs-3',
+            'xl': 'fs-2',
+            '2xl': 'fs-1',
+            '3xl': 'display-6',
+            '4xl': 'display-5',
+            '5xl': 'display-4'
+        };
+        const weightClasses = {
+            'bold': 'fw-bold',
+            'regular': 'fw-normal',
+            'light': 'fw-light',
+            'semibold': 'fw-semibold'
+        };
+        const marginTopClass = this.mt ? `mt-${this.mt}` : '';
+        const marginBottomClass = this.mb ? `mb-${this.mb}` : '';
+        const marginRightClass = this.mr ? `me-${this.mr}` : '';
+        const marginLeftClass = this.ml ? `ms-${this.ml}` : '';
+        return `${sizeClasses[this.size] || 'fs-4'} ${weightClasses[this.weight] || 'fw-bold'} ${marginTopClass} ${marginBottomClass} ${marginRightClass} ${marginLeftClass}`.trim();
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaHeadingComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaHeadingComponent, selector: "sa-heading", inputs: { children: "children", size: "size", weight: "weight", mt: "mt", mb: "mb", mr: "mr", ml: "ml" }, ngImport: i0, template: "<h1 [class]=\"headingClasses\">{{ children }}</h1>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block!important;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block!important;vertical-align:middle}h1,h2,h3,h4,h5,h6{margin-bottom:.5rem;line-height:1.2;color:#2a3547}h1:last-child,h2:last-child,h3:last-child,h4:last-child,h5:last-child,h6:last-child{margin-bottom:0}.fs-6{font-size:.875rem!important}.fs-5{font-size:1rem!important}.fs-4{font-size:1.125rem!important}.fs-3{font-size:1.25rem!important}.fs-2{font-size:1.5rem!important}.fs-1{font-size:1.75rem!important}.display-6{font-size:2rem!important}.display-5{font-size:2.5rem!important}.display-4{font-size:3rem!important}\n"] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaHeadingComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-heading', template: "<h1 [class]=\"headingClasses\">{{ children }}</h1>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block!important;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block!important;vertical-align:middle}h1,h2,h3,h4,h5,h6{margin-bottom:.5rem;line-height:1.2;color:#2a3547}h1:last-child,h2:last-child,h3:last-child,h4:last-child,h5:last-child,h6:last-child{margin-bottom:0}.fs-6{font-size:.875rem!important}.fs-5{font-size:1rem!important}.fs-4{font-size:1.125rem!important}.fs-3{font-size:1.25rem!important}.fs-2{font-size:1.5rem!important}.fs-1{font-size:1.75rem!important}.display-6{font-size:2rem!important}.display-5{font-size:2.5rem!important}.display-4{font-size:3rem!important}\n"] }]
+        }], propDecorators: { children: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], weight: [{
+                type: Input
+            }], mt: [{
+                type: Input
+            }], mb: [{
+                type: Input
+            }], mr: [{
+                type: Input
+            }], ml: [{
+                type: Input
+            }] } });
+
+class SaTextComponent {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTextComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTextComponent, selector: "sa-text", ngImport: i0, template: "<p>sa-text works!</p>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}p,span,div,text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}\n"] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTextComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-text', template: "<p>sa-text works!</p>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}p,span,div,text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}\n"] }]
+        }] });
+
+class SaColumnDefDirective {
+    templateRef;
+    columnKey;
+    constructor(templateRef) {
+        this.templateRef = templateRef;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaColumnDefDirective, deps: [{ token: i0.TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.13", type: SaColumnDefDirective, isStandalone: true, selector: "[saColumnDef]", inputs: { columnKey: ["saColumnDef", "columnKey"] }, ngImport: i0 });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaColumnDefDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[saColumnDef]',
+                    standalone: true
+                }]
+        }], ctorParameters: () => [{ type: i0.TemplateRef }], propDecorators: { columnKey: [{
+                type: Input,
+                args: ['saColumnDef']
+            }] } });
+
+class SaTableComponent {
+    cdr;
+    resizeListener = null;
+    constructor(cdr) {
+        this.cdr = cdr;
+    }
+    // Arrays/objetos que siempre usan property binding
+    columns = [];
+    data = [];
+    // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
+    emptyMessage = 'No hay datos disponibles';
+    // Templates dinámicos por columna usando ContentChildren
+    columnDefs;
+    defaultCellTemplate;
+    // Propiedades con setters/getters para flexibilidad máxima
+    _itemsPerPage = 5;
+    _showPagination = true;
+    _showItemsPerPage = true;
+    _showTotal = true;
+    _hover = false;
+    _loading = false;
+    _showFirstLastButtons = true;
+    _showFilters = false;
+    set itemsPerPage(value) {
+        this._itemsPerPage = value != null ? +value : 5;
+    }
+    get itemsPerPage() {
+        return this._itemsPerPage;
+    }
+    set showPagination(value) {
+        this._showPagination = value === true || value === 'true';
+    }
+    get showPagination() {
+        return this._showPagination;
+    }
+    set showItemsPerPage(value) {
+        this._showItemsPerPage = value === true || value === 'true';
+    }
+    get showItemsPerPage() {
+        return this._showItemsPerPage;
+    }
+    set showTotal(value) {
+        this._showTotal = value === true || value === 'true';
+    }
+    get showTotal() {
+        return this._showTotal;
+    }
+    set hover(value) {
+        this._hover = value === true || value === 'true';
+    }
+    get hover() {
+        return this._hover;
+    }
+    set loading(value) {
+        this._loading = value === true || value === 'true';
+    }
+    get loading() {
+        return this._loading;
+    }
+    set showFirstLastButtons(value) {
+        this._showFirstLastButtons = value === true || value === 'true';
+    }
+    get showFirstLastButtons() {
+        return this._showFirstLastButtons;
+    }
+    set showFilters(value) {
+        this._showFilters = value === true || value === 'true';
+    }
+    get showFilters() {
+        return this._showFilters;
+    }
+    // Propiedad para el ancho mínimo de la tabla
+    _minWidth = '600px';
+    set minWidth(value) {
+        this._minWidth = value || '600px';
+    }
+    get minWidth() {
+        return this._minWidth;
+    }
+    pageChange = new EventEmitter();
+    itemsPerPageChange = new EventEmitter();
+    sortChange = new EventEmitter();
+    rowClick = new EventEmitter();
+    rowDoubleClick = new EventEmitter();
+    filterChange = new EventEmitter();
+    currentPage = 1;
+    currentSort = null;
+    paginationInfo = {
+        currentPage: 1,
+        totalPages: 0,
+        totalItems: 0,
+        itemsPerPage: this._itemsPerPage,
+        startItem: 0,
+        endItem: 0
+    };
+    paginatedData = [];
+    itemsPerPageOptions = [5, 10, 25, 50, 100];
+    // Propiedad para controlar la animación
+    animationKey = 0;
+    // Propiedad para acceder a Array desde el template
+    Array = Array;
+    // Propiedad para la fila seleccionada
+    selectedRow = null;
+    // Propiedades para filtros
+    columnFilters = {};
+    filteredData = [];
+    ngOnInit() {
+        // Asegurar que el itemsPerPage esté sincronizado con paginationInfo
+        this.paginationInfo.itemsPerPage = this.itemsPerPage;
+        this.applyFilters();
+        this.updatePagination();
+        this.setupResizeListener();
+    }
+    ngAfterViewInit() {
+        // Forzar la detección de cambios para asegurar que los templates se detecten
+        setTimeout(() => {
+            this.cdr.detectChanges();
+        });
+    }
+    ngOnChanges(changes) {
+        if (changes['data'] || changes['itemsPerPage']) {
+            this.applyFilters();
+            this.updatePagination();
+        }
+    }
+    updatePagination() {
+        // Usar datos filtrados en lugar de datos originales
+        const dataToUse = this.filteredData.length > 0 || Object.keys(this.columnFilters).length > 0 ? this.filteredData : this.data;
+        if (!dataToUse || dataToUse.length === 0) {
+            this.paginatedData = [];
+            this.paginationInfo = {
+                currentPage: 1,
+                totalPages: 0,
+                totalItems: 0,
+                itemsPerPage: this._itemsPerPage,
+                startItem: 0,
+                endItem: 0
+            };
+            return;
+        }
+        const totalItems = dataToUse.length;
+        const totalPages = Math.ceil(totalItems / this._itemsPerPage);
+        const startItem = (this.currentPage - 1) * this._itemsPerPage;
+        const endItem = Math.min(startItem + this._itemsPerPage, totalItems);
+        this.paginationInfo = {
+            currentPage: this.currentPage,
+            totalPages,
+            totalItems,
+            itemsPerPage: this._itemsPerPage,
+            startItem: startItem + 1,
+            endItem
+        };
+        this.paginatedData = dataToUse.slice(startItem, endItem);
+    }
+    onPageChange(page) {
+        if (page >= 1 && page <= this.paginationInfo.totalPages) {
+            this.currentPage = page;
+            this.animationKey = 0; // Reiniciar la animación
+            this.updatePagination();
+            this.pageChange.emit(page);
+            // Activar la animación después de un breve delay
+            setTimeout(() => {
+                this.animationKey = Date.now();
+                // Marcar como completa después de la duración de la animación
+                setTimeout(() => {
+                    const tbody = document.querySelector('tbody[data-animation-key]');
+                    if (tbody) {
+                        tbody.classList.add('animation-complete');
+                    }
+                }, 300); // Duración de la animación
+            }, 10);
+        }
+    }
+    onItemsPerPageChange(itemsPerPage) {
+        this._itemsPerPage = itemsPerPage;
+        this.currentPage = 1;
+        this.animationKey = 0; // Reiniciar la animación
+        this.updatePagination();
+        this.itemsPerPageChange.emit(itemsPerPage);
+        // Activar la animación después de un breve delay
+        setTimeout(() => {
+            this.animationKey = Date.now();
+            // Marcar como completa después de la duración de la animación
+            setTimeout(() => {
+                const tbody = document.querySelector('tbody[data-animation-key]');
+                if (tbody) {
+                    tbody.classList.add('animation-complete');
+                }
+            }, 300); // Duración de la animación
+        }, 10);
+    }
+    onSort(column) {
+        if (!this.columns.find(col => col.key === column)?.sortable) {
+            return;
+        }
+        if (this.currentSort?.column === column) {
+            this.currentSort.direction = this.currentSort.direction === 'asc' ? 'desc' : 'asc';
+        }
+        else {
+            this.currentSort = { column, direction: 'asc' };
+        }
+        this.sortChange.emit(this.currentSort);
+    }
+    getSortIcon(column) {
+        if (this.currentSort?.column !== column) {
+            return 'bi-arrow-down-up';
+        }
+        return this.currentSort.direction === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down';
+    }
+    trackByFn(index, item) {
+        return index;
+    }
+    // Método para obtener el template de una columna específica
+    getColumnTemplate(columnKey) {
+        if (!this.columnDefs) {
+            return null;
+        }
+        const columnDef = this.columnDefs.find(def => def.columnKey === columnKey);
+        return columnDef ? columnDef.templateRef : null;
+    }
+    // Método para obtener el contexto del template
+    getTemplateContext(row, column) {
+        return {
+            $implicit: row,
+            row: row,
+            column: column,
+            element: row,
+            value: row[column.key],
+            data: row[column.key]
+        };
+    }
+    onSelectChange(event) {
+        const target = event.target;
+        if (target) {
+            this.onItemsPerPageChange(+target.value);
+        }
+    }
+    setupResizeListener() {
+        this.resizeListener = () => {
+            // Actualizar paginación cuando cambie el tamaño de la ventana
+            this.updatePagination();
+        };
+        window.addEventListener('resize', this.resizeListener);
+    }
+    // Método para manejar el click en una fila
+    onRowClick(row) {
+        this.selectedRow = row;
+        this.rowClick.emit(row);
+    }
+    // Método para manejar el doble click en una fila
+    onRowDoubleClick(row) {
+        this.rowDoubleClick.emit(row);
+    }
+    // Método para verificar si una fila está seleccionada
+    isRowSelected(row) {
+        return this.selectedRow === row;
+    }
+    // Métodos para manejar filtros
+    applyFilters() {
+        if (!this.data) {
+            this.filteredData = [];
+            return;
+        }
+        // Si no hay filtros activos, usar todos los datos
+        const activeFilters = Object.keys(this.columnFilters).filter(key => this.columnFilters[key] && this.columnFilters[key].trim() !== '');
+        if (activeFilters.length === 0) {
+            this.filteredData = [...this.data];
+            return;
+        }
+        // Aplicar filtros
+        this.filteredData = this.data.filter(row => {
+            return activeFilters.every(columnKey => {
+                const filterValue = this.columnFilters[columnKey].toLowerCase().trim();
+                const cellValue = row[columnKey]?.toString().toLowerCase() || '';
+                return cellValue.includes(filterValue);
+            });
+        });
+    }
+    onFilterInputChange(event, columnKey) {
+        const target = event.target;
+        const value = target?.value || '';
+        this.onFilterChange(columnKey, value);
+    }
+    onFilterChange(columnKey, value) {
+        this.columnFilters[columnKey] = value;
+        this.currentPage = 1; // Resetear a la primera página
+        this.applyFilters();
+        this.updatePagination();
+        // Emitir evento de filtro
+        this.filterChange.emit({ ...this.columnFilters });
+    }
+    clearFilters() {
+        this.columnFilters = {};
+        this.currentPage = 1;
+        this.applyFilters();
+        this.updatePagination();
+        this.filterChange.emit({});
+    }
+    ngOnDestroy() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTableComponent, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTableComponent, selector: "sa-table", inputs: { columns: "columns", data: "data", emptyMessage: "emptyMessage", itemsPerPage: "itemsPerPage", showPagination: "showPagination", showItemsPerPage: "showItemsPerPage", showTotal: "showTotal", hover: "hover", loading: "loading", showFirstLastButtons: "showFirstLastButtons", showFilters: "showFilters", minWidth: "minWidth" }, outputs: { pageChange: "pageChange", itemsPerPageChange: "itemsPerPageChange", sortChange: "sortChange", rowClick: "rowClick", rowDoubleClick: "rowDoubleClick", filterChange: "filterChange" }, queries: [{ propertyName: "columnDefs", predicate: SaColumnDefDirective }], viewQueries: [{ propertyName: "defaultCellTemplate", first: true, predicate: ["defaultCellTemplate"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0, template: "<!-- Table Container -->\n<div class=\"sa-table-container\">\n  <!-- Table Content (siempre visible) -->\n  <div class=\"table-content\" [class.loading]=\"loading\">\n  \n  <!-- Table -->\n  <div class=\"table-responsive table-container\">\n    <table class=\"table\" \n           [class.table-hover]=\"hover\"\n           [style.min-width]=\"minWidth\">\n      <thead class=\"table-light\">\n        <tr>\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <div class=\"d-flex align-items-center justify-content-between\">\n              <span>{{ column.label }}</span>\n            </div>\n          </th>\n        </tr>\n        <!-- Fila de filtros -->\n        <tr *ngIf=\"showFilters\" class=\"filter-row\">\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <input \n              type=\"text\" \n              class=\"form-control form-control-sm filter-input\"\n              [placeholder]=\"\"\n              [value]=\"columnFilters[column.key] || ''\"\n              (input)=\"onFilterInputChange($event, column.key)\"\n              />\n          </th>\n        </tr>\n      </thead>\n      <tbody [class.animate-fade-in]=\"animationKey > 0\" [class.animation-complete]=\"animationKey > 0\" [attr.data-animation-key]=\"animationKey\">\n        <tr *ngFor=\"let row of paginatedData; trackBy: trackByFn\"\n            [class.selected-row]=\"isRowSelected(row)\"\n            (click)=\"onRowClick(row)\"\n            (dblclick)=\"onRowDoubleClick(row)\">\n          <td *ngFor=\"let column of columns\" [style.width]=\"column.width\">\n            <!-- Usar template espec\u00EDfico de la columna si existe, sino usar el default -->\n            <ng-container *ngTemplateOutlet=\"getColumnTemplate(column.key) || defaultCellTemplate!; context: getTemplateContext(row, column)\">\n            </ng-container>\n          </td>\n        </tr>\n        <tr *ngIf=\"paginatedData.length === 0\">\n          <td [attr.colspan]=\"columns.length\" class=\"text-center py-4 text-muted\">\n            {{ emptyMessage }}\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    \n    <!-- Loading Overlay solo sobre la tabla -->\n    <div *ngIf=\"loading\" class=\"loading-overlay\">\n      <div class=\"loading-content\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n        </div>\n        <div class=\"loading-text\">Cargando...</div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Items Per Page Selector and Pagination Controls (en una sola fila) -->\n  <div *ngIf=\"showPagination && data.length > 0\" class=\"d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2\">\n    <!-- Items Per Page Selector (izquierda) -->\n    <div *ngIf=\"showItemsPerPage\" class=\"d-flex align-items-center mb-2 mb-md-0\">\n      <span class=\"text-muted me-2\">Registros por p\u00E1gina:</span>\n      <select \n        id=\"itemsPerPage\"\n        class=\"form-select form-select-sm sa-table-items-per-page\" \n        [value]=\"itemsPerPage\"\n        (change)=\"onSelectChange($event)\">\n        <option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option\">\n          {{ option }}\n        </option>\n      </select>\n    </div>\n    \n    <!-- Pagination Info and Controls (derecha) -->\n    <div class=\"d-flex flex-column flex-md-row align-items-center\">\n      <div *ngIf=\"showTotal\" class=\"text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start\">\n        P\u00E1gina: {{ paginationInfo.currentPage }} - {{ paginationInfo.startItem }} de {{ paginationInfo.totalItems }}\n      </div>\n      \n      <nav *ngIf=\"paginationInfo.totalPages > 1\" aria-label=\"Navegaci\u00F3n de p\u00E1ginas\">\n        <div class=\"pagination-controls d-flex align-items-center\">\n          <!-- First Page Button -->\n          <button *ngIf=\"showFirstLastButtons\" \n                  class=\"btn btn-outline-secondary btn-sm me-1\" \n                  (click)=\"onPageChange(1)\"\n                  [disabled]=\"currentPage === 1\"\n                  aria-label=\"Primera p\u00E1gina\"\n                  title=\"Primera p\u00E1gina\">\n            <span class=\"pagination-icon pagination-first\">\u00AB</span>\n          </button>\n\n          <!-- Previous Button -->\n          <button class=\"btn btn-outline-secondary btn-sm me-2\" \n                  (click)=\"onPageChange(currentPage - 1)\"\n                  [disabled]=\"currentPage === 1\"\n                  aria-label=\"P\u00E1gina anterior\"\n                  title=\"P\u00E1gina anterior\">\n            <span class=\"pagination-icon\">\u2039</span>\n          </button>\n\n          <!-- Page Indicator -->\n          <span class=\"page-indicator mx-2 text-muted\">\n            {{ currentPage }} de {{ paginationInfo.totalPages }}\n          </span>\n\n          <!-- Next Button -->\n          <button class=\"btn btn-outline-secondary btn-sm ms-2\" \n                  (click)=\"onPageChange(currentPage + 1)\"\n                  [disabled]=\"currentPage === paginationInfo.totalPages\"\n                  aria-label=\"P\u00E1gina siguiente\"\n                  title=\"P\u00E1gina siguiente\">\n            <span class=\"pagination-icon\">\u203A</span>\n          </button>\n\n          <!-- Last Page Button -->\n          <button *ngIf=\"showFirstLastButtons\" \n                  class=\"btn btn-outline-secondary btn-sm ms-1\" \n                  (click)=\"onPageChange(paginationInfo.totalPages)\"\n                  [disabled]=\"currentPage === paginationInfo.totalPages\"\n                  aria-label=\"\u00DAltima p\u00E1gina\"\n                  title=\"\u00DAltima p\u00E1gina\">\n            <span class=\"pagination-icon pagination-last\">\u00BB</span>\n          </button>\n        </div>\n      </nav>\n    </div>\n  </div>\n</div>\n\n<!-- Template por defecto para celdas -->\n<ng-template #defaultCellTemplate let-row=\"row\" let-column=\"column\">\n  <ng-container *ngIf=\"row[column.key] !== undefined && row[column.key] !== null\">\n    {{ row[column.key] }}\n  </ng-container>\n</ng-template>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.d-flex{display:flex!important}.justify-content-between{justify-content:space-between!important}.align-items-center{align-items:center!important}.mb-3{margin-bottom:1rem!important}.mt-3{margin-top:1rem!important}.me-2{margin-right:.5rem!important}.text-muted{color:#6c757d!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.form-select{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e\");background-repeat:no-repeat;background-position:right .75rem center;background-size:16px 12px;border:1px solid #ced4da;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;appearance:none}.form-select-sm{padding-top:.25rem;padding-bottom:.25rem;padding-left:.5rem;font-size:.875rem}.sa-table-items-per-page{width:auto!important;min-width:70px;max-width:120px}.sa-table-items-per-page:focus{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-items-per-page:focus-visible{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-items-per-page:active{outline:none!important;box-shadow:none!important;border-color:#ced4da!important}.table{width:100%;margin-bottom:1rem;color:#212529;vertical-align:top;border:none!important}.table>:not(caption)>*>*{padding:.5rem;background-color:transparent;border:none!important;box-shadow:none!important}.table>tbody{vertical-align:inherit}.table>thead{vertical-align:bottom}.table-light{color:#000;background-color:#f8f9fa}.table-hover>tbody>tr:hover>*{background-color:#00000013;color:#000}.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}.table-bordered>:not(caption)>*{border-width:0!important}.table-bordered>:not(caption)>*>*{border-width:0!important}.spinner-border{display:inline-block;width:2rem;height:2rem;vertical-align:text-bottom;border:.25em solid currentColor;border-right-color:transparent;border-radius:50%;animation:spinner-border .75s linear infinite}.text-primary{color:#0d6efd!important}.pagination{display:flex;padding-left:0;list-style:none;border-radius:.375rem}.page-item{list-style:none}.page-link{position:relative;display:block;color:#0d6efd;text-decoration:none;background-color:#fff;border:1px solid #dee2e6}.page-item:first-child .page-link{border-top-left-radius:.375rem;border-bottom-left-radius:.375rem}.page-item:last-child .page-link{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.page-item.active .page-link{z-index:3;color:#fff;background-color:#0d6efd;border-color:#0d6efd}.page-item.disabled .page-link{color:#6c757d;pointer-events:none;background-color:#fff;border-color:#dee2e6}.mb-0{margin-bottom:0!important}@keyframes spinner-border{to{transform:rotate(360deg)}}.sa-table-container{position:relative;border-radius:.375rem;overflow:hidden;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table-content{transition:opacity .3s ease}.sa-table-container .table-content.loading{opacity:.5;pointer-events:none}.sa-table-container .loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-color:#fffc;border-radius:.375rem;z-index:10;margin-top:0;margin-bottom:0}.sa-table-container .loading-overlay .loading-content{display:flex;flex-direction:column;align-items:center;gap:1rem}.sa-table-container .loading-overlay .loading-content .loading-text{color:#6c757d;font-size:.875rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sa-table-container .table-responsive{border-radius:.375rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;border:1px solid #e1e2e4!important}.sa-table-container .table{margin-bottom:0;border-radius:.375rem!important;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important;border:none!important}.sa-table-container .table th{cursor:default!important;-webkit-user-select:text!important;user-select:text!important;border-radius:0!important;border:none!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table th:first-child{border-top-left-radius:.375rem!important}.sa-table-container .table th:last-child{border-top-right-radius:.375rem!important}.sa-table-container .table th:hover{background-color:transparent!important}.sa-table-container .table td{border-bottom:1px solid #e1e2e4!important;border-right:none!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table tbody.animate-fade-in{animation:fadeIn .5s ease-out;animation-fill-mode:both}.sa-table-container .table tbody.animate-fade-in td{color:transparent!important;transition:color .5s ease-out}.sa-table-container .table tbody.animate-fade-in.animation-complete td{color:inherit!important}.sa-table-container .table thead th{cursor:default!important;border-bottom:none!important;border-right:none!important;background-color:#eef8f0!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table thead th:hover{background-color:#eef8f0!important}.sa-table-container .table thead tr th{background-color:#eef8f0!important;border-bottom:none!important;border-right:none!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table thead tr th:hover{background-color:#eef8f0!important}.sa-table-container .table tbody tr td{text-align:left!important;vertical-align:middle!important}.sa-table-container .table tbody tr td.text-center{text-align:center!important;vertical-align:middle!important;font-weight:400!important;color:#6c757d!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important;border-right:none!important}.sa-table-container .table>tbody>tr:last-child>td:first-child{border-bottom-left-radius:.375rem!important}.sa-table-container .table>tbody>tr:last-child>td:last-child{border-bottom-right-radius:.375rem!important}.sa-table-container .table>tbody>tr>td:first-child,.sa-table-container .table>thead>tr>th:first-child{padding-left:1rem!important}.sa-table-container .table.table-hover>tbody>tr:hover>td{background-color:#f8f9fa!important}.sa-table-container .table.table-hover>tbody>tr:has(td.text-center):hover>td{background-color:#fff!important}.sa-table-container .table.table-hover>tbody>tr>td.text-center:hover{background-color:#fff!important}.sa-table-container .table>tbody>tr.selected-row:hover td{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover td{background-color:#fff!important}.sa-table-container .d-flex.justify-content-between.align-items-center.mt-3{margin-top:.75rem!important}.sa-table-container .pagination{margin-bottom:0;flex-wrap:wrap;justify-content:flex-end;gap:.5rem}.sa-table-container .pagination .page-link{border-radius:.25rem;border:1px solid #dddfe0;min-width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;padding:0;background-color:transparent;color:#5bab5f;font-size:1.125rem;text-align:center;line-height:1;width:2rem;box-sizing:border-box;letter-spacing:0;word-spacing:0;outline:none!important;cursor:pointer!important;font-size:.9rem;font-weight:500}.sa-table-container .pagination .page-link .pagination-icon{font-size:1.5rem;font-weight:500;line-height:0;display:flex;align-items:center;justify-content:center;margin:0;margin-top:-5px!important;padding:0;height:100%;width:100%}.sa-table-container .pagination .page-link:hover{background-color:#fff;border-color:#5bab5f;color:#5bab5f}.sa-table-container .pagination .page-link:focus{outline:none!important;box-shadow:none!important}.sa-table-container .pagination .page-item.active .page-link{background-color:#5bab5f;color:#fff;font-weight:500;border:none!important;cursor:pointer!important}.sa-table-container .pagination .page-item.active .page-link:hover{background-color:#5bab5f!important;color:#fff!important;border:none!important}.sa-table-container .pagination .page-item.disabled .page-link{color:#dee2e6;pointer-events:none;background-color:#fafafa;border-color:#dee2e6;cursor:not-allowed!important}.sa-table-container .pagination .page-item:first-child .page-link,.sa-table-container .pagination .page-item:last-child .page-link{min-width:2rem;width:2rem}.sa-table-container .pagination .page-link *{display:inline-block;vertical-align:middle}.sa-table-container .pagination-controls .form-select,.sa-table-container .table-controls .form-select{border-radius:.375rem;border:1px solid #ced4da!important;padding:.375rem .75rem!important;font-size:1rem!important;font-weight:400!important;line-height:1.5!important;color:#212529!important;background-color:#fff!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e\")!important;background-repeat:no-repeat!important;background-position:right .75rem center!important;background-size:16px 12px!important;appearance:none!important;width:auto!important;min-width:70px!important;display:inline-block!important;outline:none!important}.sa-table-container .pagination-controls .form-select:focus,.sa-table-container .table-controls .form-select:focus{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-container .pagination-controls .form-select:active,.sa-table-container .table-controls .form-select:active,.sa-table-container .pagination-controls .form-select:hover,.sa-table-container .table-controls .form-select:hover{outline:none!important;box-shadow:none!important}.sa-table-container .pagination-controls .form-select-sm,.sa-table-container .table-controls .form-select-sm{padding-top:.25rem!important;padding-bottom:.25rem!important;padding-left:.5rem!important;font-size:.875rem!important}.sa-table-container .table-container{position:relative}.sa-table-container .table-bordered{border:1px solid #e1e2e4!important;border-right:none!important}.sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}@media (max-width: 768px){.sa-table-container .d-flex.justify-content-between{flex-direction:column}.sa-table-container .pagination{justify-content:center!important;flex-wrap:wrap}.sa-table-container .pagination .page-link{padding:.375rem .5rem;font-size:.875rem;min-width:2.5rem;height:2.5rem;border-radius:.25rem}.sa-table-container .pagination .page-item:has(.pagination-first),.sa-table-container .pagination .page-item:has(.pagination-last){display:none}}@media (max-width: 480px){.sa-table-container .pagination{gap:.125rem}.sa-table-container .pagination .page-link{min-width:2.25rem;height:2.25rem;font-size:.8rem;padding:.25rem .375rem}}@media (min-width: 481px) and (max-width: 600px){.sa-table-container .pagination{gap:.375rem}}@media (min-width: 601px) and (max-width: 768px){.sa-table-container .pagination{gap:.5rem}}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"]{overflow:visible;padding:.5rem 0}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"] .pagination{margin:0;padding:0}.sa-table-container .table.table-bordered{border:1px solid #e1e2e4!important}.sa-table-container .table.table-bordered>:not(caption)>*{border-width:0!important}.sa-table-container .table.table-bordered>:not(caption)>*>*{border-width:0!important}.sa-table-container .table>:not(caption)>*>*{border:none!important;border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table{border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table>tbody>tr>td{border:none!important;border-bottom:1px solid #e1e2e4!important;border-right:none!important;border-top:none!important;border-left:none!important;padding:.5rem!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table>tbody>tr>td.text-center{text-align:center!important;vertical-align:middle!important;font-weight:400!important;color:#6c757d!important;padding:2rem .5rem!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover>td{background-color:#fff!important}.sa-table-container .table>tbody>tr>td.text-center:hover{background-color:#fff!important}.sa-table-container .table>thead>tr>th{border:none!important;padding:.5rem!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important}.sa-table-container .table,.sa-table-container .table>thead,.sa-table-container .table>tbody,.sa-table-container .table>tfoot,.sa-table-container .table>tr,.sa-table-container .table>th,.sa-table-container .table>td{border:none!important;border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table>tbody>tr:not(:last-child)>td{border-bottom:1px solid #e1e2e4!important;border-top:none!important;border-left:none!important;border-right:none!important}.sa-table-container .table-responsive{border:1px solid #e1e2e4!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch}.sa-table-container .table-responsive::-webkit-scrollbar{height:8px}.sa-table-container .table-responsive::-webkit-scrollbar-track{background:#f1f1f1;border-radius:4px}.sa-table-container .table-responsive::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:4px}.sa-table-container .table-responsive::-webkit-scrollbar-thumb:hover{background:#a8a8a8}.sa-table-container .table-responsive .table{width:100%}@media (max-width: 480px){.sa-table-container .table-responsive .table{min-width:400px!important}}.sa-table-container .table-container{border:1px solid #e1e2e4!important;border-radius:.375rem!important;overflow:hidden}.table-scrollable{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#c1c1c1 #f1f1f1}.table-scrollable .table{table-layout:fixed;width:100%}.table-scrollable .table th,.table-scrollable .table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@keyframes fadeIn{0%{opacity:0}to{opacity:1}}.sa-table-container .table>tbody>tr{cursor:pointer;transition:background-color .2s ease}.sa-table-container .table>tbody>tr:hover{background-color:#f8f9fa!important}.sa-table-container .table>tbody>tr:hover td{background-color:#f8f9fa!important}.sa-table-container .table>tbody>tr.selected-row{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr.selected-row td{background-color:#1f8be1!important;color:#fff!important}.sa-table-container .table>tbody>tr.selected-row:hover{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr.selected-row:hover td{background-color:#1f8be1!important;color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center){cursor:default}.sa-table-container .table>tbody>tr:has(td.text-center):hover{background-color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover td{background-color:#fff!important;color:#6c757d!important}.sa-table-container .table>tbody>tr:has(td.text-center).selected-row{background-color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center).selected-row td{background-color:#fff!important;color:#6c757d!important}.pagination-controls .btn{border-color:#cacaca;min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:.375rem;transition:none!important;background-color:transparent}.pagination-controls .btn .pagination-icon{font-size:16px;line-height:1;font-weight:700}.pagination-controls .btn:disabled{opacity:.3;cursor:not-allowed;background-color:transparent!important;border-color:#cacaca!important}.pagination-controls .btn:not(:disabled):hover{background-color:#32a047!important;border-color:#32a047!important;color:#fff!important}.pagination-controls .btn:not(:disabled):active{background-color:#32a047!important;border-color:#32a047!important;color:#fff!important;box-shadow:none!important;transform:none!important}.pagination-controls .btn:focus,.pagination-controls .btn:focus-visible{box-shadow:none!important;outline:none!important}.pagination-controls .page-indicator{font-size:.875rem;font-weight:500;white-space:nowrap;min-width:80px;text-align:center}@media (max-width: 576px){.pagination-controls .btn{min-width:32px;height:32px}.pagination-controls .btn .pagination-icon{font-size:14px}.pagination-controls .page-indicator{font-size:.75rem;min-width:70px}}.sa-table-container .filter-row th{background-color:#f8f9fa!important;border-bottom:1px solid #e1e2e4!important;border-top:1px solid #e1e2e4!important;padding:.5rem!important}.sa-table-container .filter-row th:hover{background-color:#f8f9fa!important}.sa-table-container .filter-row .filter-input{border:1px solid #ced4da;border-radius:.25rem;font-size:.875rem;padding:.25rem .5rem;background-color:#fff;color:#495057;width:100%;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.sa-table-container .filter-row .filter-input:focus{border-color:#32a047!important;outline:none!important;box-shadow:inset 0 0 0 1px #32a047!important}.sa-table-container .filter-row .filter-input:focus-visible{border-color:#32a047!important;outline:none!important;box-shadow:inset 0 0 0 1px #32a047!important}.sa-table-container .filter-row .filter-input::placeholder{color:#6c757d;font-style:italic;font-size:.8rem}.sa-table-container .filter-row .filter-input:hover{border-color:#adb5bd}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i2$1.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i2$1.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTableComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-table', template: "<!-- Table Container -->\n<div class=\"sa-table-container\">\n  <!-- Table Content (siempre visible) -->\n  <div class=\"table-content\" [class.loading]=\"loading\">\n  \n  <!-- Table -->\n  <div class=\"table-responsive table-container\">\n    <table class=\"table\" \n           [class.table-hover]=\"hover\"\n           [style.min-width]=\"minWidth\">\n      <thead class=\"table-light\">\n        <tr>\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <div class=\"d-flex align-items-center justify-content-between\">\n              <span>{{ column.label }}</span>\n            </div>\n          </th>\n        </tr>\n        <!-- Fila de filtros -->\n        <tr *ngIf=\"showFilters\" class=\"filter-row\">\n          <th *ngFor=\"let column of columns\" \n              [style.width]=\"column.width\">\n            <input \n              type=\"text\" \n              class=\"form-control form-control-sm filter-input\"\n              [placeholder]=\"\"\n              [value]=\"columnFilters[column.key] || ''\"\n              (input)=\"onFilterInputChange($event, column.key)\"\n              />\n          </th>\n        </tr>\n      </thead>\n      <tbody [class.animate-fade-in]=\"animationKey > 0\" [class.animation-complete]=\"animationKey > 0\" [attr.data-animation-key]=\"animationKey\">\n        <tr *ngFor=\"let row of paginatedData; trackBy: trackByFn\"\n            [class.selected-row]=\"isRowSelected(row)\"\n            (click)=\"onRowClick(row)\"\n            (dblclick)=\"onRowDoubleClick(row)\">\n          <td *ngFor=\"let column of columns\" [style.width]=\"column.width\">\n            <!-- Usar template espec\u00EDfico de la columna si existe, sino usar el default -->\n            <ng-container *ngTemplateOutlet=\"getColumnTemplate(column.key) || defaultCellTemplate!; context: getTemplateContext(row, column)\">\n            </ng-container>\n          </td>\n        </tr>\n        <tr *ngIf=\"paginatedData.length === 0\">\n          <td [attr.colspan]=\"columns.length\" class=\"text-center py-4 text-muted\">\n            {{ emptyMessage }}\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    \n    <!-- Loading Overlay solo sobre la tabla -->\n    <div *ngIf=\"loading\" class=\"loading-overlay\">\n      <div class=\"loading-content\">\n        <div class=\"spinner-border text-primary\" role=\"status\">\n        </div>\n        <div class=\"loading-text\">Cargando...</div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Items Per Page Selector and Pagination Controls (en una sola fila) -->\n  <div *ngIf=\"showPagination && data.length > 0\" class=\"d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2\">\n    <!-- Items Per Page Selector (izquierda) -->\n    <div *ngIf=\"showItemsPerPage\" class=\"d-flex align-items-center mb-2 mb-md-0\">\n      <span class=\"text-muted me-2\">Registros por p\u00E1gina:</span>\n      <select \n        id=\"itemsPerPage\"\n        class=\"form-select form-select-sm sa-table-items-per-page\" \n        [value]=\"itemsPerPage\"\n        (change)=\"onSelectChange($event)\">\n        <option *ngFor=\"let option of itemsPerPageOptions\" [value]=\"option\">\n          {{ option }}\n        </option>\n      </select>\n    </div>\n    \n    <!-- Pagination Info and Controls (derecha) -->\n    <div class=\"d-flex flex-column flex-md-row align-items-center\">\n      <div *ngIf=\"showTotal\" class=\"text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start\">\n        P\u00E1gina: {{ paginationInfo.currentPage }} - {{ paginationInfo.startItem }} de {{ paginationInfo.totalItems }}\n      </div>\n      \n      <nav *ngIf=\"paginationInfo.totalPages > 1\" aria-label=\"Navegaci\u00F3n de p\u00E1ginas\">\n        <div class=\"pagination-controls d-flex align-items-center\">\n          <!-- First Page Button -->\n          <button *ngIf=\"showFirstLastButtons\" \n                  class=\"btn btn-outline-secondary btn-sm me-1\" \n                  (click)=\"onPageChange(1)\"\n                  [disabled]=\"currentPage === 1\"\n                  aria-label=\"Primera p\u00E1gina\"\n                  title=\"Primera p\u00E1gina\">\n            <span class=\"pagination-icon pagination-first\">\u00AB</span>\n          </button>\n\n          <!-- Previous Button -->\n          <button class=\"btn btn-outline-secondary btn-sm me-2\" \n                  (click)=\"onPageChange(currentPage - 1)\"\n                  [disabled]=\"currentPage === 1\"\n                  aria-label=\"P\u00E1gina anterior\"\n                  title=\"P\u00E1gina anterior\">\n            <span class=\"pagination-icon\">\u2039</span>\n          </button>\n\n          <!-- Page Indicator -->\n          <span class=\"page-indicator mx-2 text-muted\">\n            {{ currentPage }} de {{ paginationInfo.totalPages }}\n          </span>\n\n          <!-- Next Button -->\n          <button class=\"btn btn-outline-secondary btn-sm ms-2\" \n                  (click)=\"onPageChange(currentPage + 1)\"\n                  [disabled]=\"currentPage === paginationInfo.totalPages\"\n                  aria-label=\"P\u00E1gina siguiente\"\n                  title=\"P\u00E1gina siguiente\">\n            <span class=\"pagination-icon\">\u203A</span>\n          </button>\n\n          <!-- Last Page Button -->\n          <button *ngIf=\"showFirstLastButtons\" \n                  class=\"btn btn-outline-secondary btn-sm ms-1\" \n                  (click)=\"onPageChange(paginationInfo.totalPages)\"\n                  [disabled]=\"currentPage === paginationInfo.totalPages\"\n                  aria-label=\"\u00DAltima p\u00E1gina\"\n                  title=\"\u00DAltima p\u00E1gina\">\n            <span class=\"pagination-icon pagination-last\">\u00BB</span>\n          </button>\n        </div>\n      </nav>\n    </div>\n  </div>\n</div>\n\n<!-- Template por defecto para celdas -->\n<ng-template #defaultCellTemplate let-row=\"row\" let-column=\"column\">\n  <ng-container *ngIf=\"row[column.key] !== undefined && row[column.key] !== null\">\n    {{ row[column.key] }}\n  </ng-container>\n</ng-template>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.d-flex{display:flex!important}.justify-content-between{justify-content:space-between!important}.align-items-center{align-items:center!important}.mb-3{margin-bottom:1rem!important}.mt-3{margin-top:1rem!important}.me-2{margin-right:.5rem!important}.text-muted{color:#6c757d!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.form-select{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e\");background-repeat:no-repeat;background-position:right .75rem center;background-size:16px 12px;border:1px solid #ced4da;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;appearance:none}.form-select-sm{padding-top:.25rem;padding-bottom:.25rem;padding-left:.5rem;font-size:.875rem}.sa-table-items-per-page{width:auto!important;min-width:70px;max-width:120px}.sa-table-items-per-page:focus{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-items-per-page:focus-visible{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-items-per-page:active{outline:none!important;box-shadow:none!important;border-color:#ced4da!important}.table{width:100%;margin-bottom:1rem;color:#212529;vertical-align:top;border:none!important}.table>:not(caption)>*>*{padding:.5rem;background-color:transparent;border:none!important;box-shadow:none!important}.table>tbody{vertical-align:inherit}.table>thead{vertical-align:bottom}.table-light{color:#000;background-color:#f8f9fa}.table-hover>tbody>tr:hover>*{background-color:#00000013;color:#000}.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}.table-bordered>:not(caption)>*{border-width:0!important}.table-bordered>:not(caption)>*>*{border-width:0!important}.spinner-border{display:inline-block;width:2rem;height:2rem;vertical-align:text-bottom;border:.25em solid currentColor;border-right-color:transparent;border-radius:50%;animation:spinner-border .75s linear infinite}.text-primary{color:#0d6efd!important}.pagination{display:flex;padding-left:0;list-style:none;border-radius:.375rem}.page-item{list-style:none}.page-link{position:relative;display:block;color:#0d6efd;text-decoration:none;background-color:#fff;border:1px solid #dee2e6}.page-item:first-child .page-link{border-top-left-radius:.375rem;border-bottom-left-radius:.375rem}.page-item:last-child .page-link{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.page-item.active .page-link{z-index:3;color:#fff;background-color:#0d6efd;border-color:#0d6efd}.page-item.disabled .page-link{color:#6c757d;pointer-events:none;background-color:#fff;border-color:#dee2e6}.mb-0{margin-bottom:0!important}@keyframes spinner-border{to{transform:rotate(360deg)}}.sa-table-container{position:relative;border-radius:.375rem;overflow:hidden;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sa-table-container .table-content{transition:opacity .3s ease}.sa-table-container .table-content.loading{opacity:.5;pointer-events:none}.sa-table-container .loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-color:#fffc;border-radius:.375rem;z-index:10;margin-top:0;margin-bottom:0}.sa-table-container .loading-overlay .loading-content{display:flex;flex-direction:column;align-items:center;gap:1rem}.sa-table-container .loading-overlay .loading-content .loading-text{color:#6c757d;font-size:.875rem;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sa-table-container .table-responsive{border-radius:.375rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;border:1px solid #e1e2e4!important}.sa-table-container .table{margin-bottom:0;border-radius:.375rem!important;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important;border:none!important}.sa-table-container .table th{cursor:default!important;-webkit-user-select:text!important;user-select:text!important;border-radius:0!important;border:none!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table th:first-child{border-top-left-radius:.375rem!important}.sa-table-container .table th:last-child{border-top-right-radius:.375rem!important}.sa-table-container .table th:hover{background-color:transparent!important}.sa-table-container .table td{border-bottom:1px solid #e1e2e4!important;border-right:none!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table tbody.animate-fade-in{animation:fadeIn .5s ease-out;animation-fill-mode:both}.sa-table-container .table tbody.animate-fade-in td{color:transparent!important;transition:color .5s ease-out}.sa-table-container .table tbody.animate-fade-in.animation-complete td{color:inherit!important}.sa-table-container .table thead th{cursor:default!important;border-bottom:none!important;border-right:none!important;background-color:#eef8f0!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table thead th:hover{background-color:#eef8f0!important}.sa-table-container .table thead tr th{background-color:#eef8f0!important;border-bottom:none!important;border-right:none!important;border-radius:0!important;-webkit-user-select:text!important;user-select:text!important;font-weight:500!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table thead tr th:hover{background-color:#eef8f0!important}.sa-table-container .table tbody tr td{text-align:left!important;vertical-align:middle!important}.sa-table-container .table tbody tr td.text-center{text-align:center!important;vertical-align:middle!important;font-weight:400!important;color:#6c757d!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important;border-right:none!important}.sa-table-container .table>tbody>tr:last-child>td:first-child{border-bottom-left-radius:.375rem!important}.sa-table-container .table>tbody>tr:last-child>td:last-child{border-bottom-right-radius:.375rem!important}.sa-table-container .table>tbody>tr>td:first-child,.sa-table-container .table>thead>tr>th:first-child{padding-left:1rem!important}.sa-table-container .table.table-hover>tbody>tr:hover>td{background-color:#f8f9fa!important}.sa-table-container .table.table-hover>tbody>tr:has(td.text-center):hover>td{background-color:#fff!important}.sa-table-container .table.table-hover>tbody>tr>td.text-center:hover{background-color:#fff!important}.sa-table-container .table>tbody>tr.selected-row:hover td{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover td{background-color:#fff!important}.sa-table-container .d-flex.justify-content-between.align-items-center.mt-3{margin-top:.75rem!important}.sa-table-container .pagination{margin-bottom:0;flex-wrap:wrap;justify-content:flex-end;gap:.5rem}.sa-table-container .pagination .page-link{border-radius:.25rem;border:1px solid #dddfe0;min-width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;padding:0;background-color:transparent;color:#5bab5f;font-size:1.125rem;text-align:center;line-height:1;width:2rem;box-sizing:border-box;letter-spacing:0;word-spacing:0;outline:none!important;cursor:pointer!important;font-size:.9rem;font-weight:500}.sa-table-container .pagination .page-link .pagination-icon{font-size:1.5rem;font-weight:500;line-height:0;display:flex;align-items:center;justify-content:center;margin:0;margin-top:-5px!important;padding:0;height:100%;width:100%}.sa-table-container .pagination .page-link:hover{background-color:#fff;border-color:#5bab5f;color:#5bab5f}.sa-table-container .pagination .page-link:focus{outline:none!important;box-shadow:none!important}.sa-table-container .pagination .page-item.active .page-link{background-color:#5bab5f;color:#fff;font-weight:500;border:none!important;cursor:pointer!important}.sa-table-container .pagination .page-item.active .page-link:hover{background-color:#5bab5f!important;color:#fff!important;border:none!important}.sa-table-container .pagination .page-item.disabled .page-link{color:#dee2e6;pointer-events:none;background-color:#fafafa;border-color:#dee2e6;cursor:not-allowed!important}.sa-table-container .pagination .page-item:first-child .page-link,.sa-table-container .pagination .page-item:last-child .page-link{min-width:2rem;width:2rem}.sa-table-container .pagination .page-link *{display:inline-block;vertical-align:middle}.sa-table-container .pagination-controls .form-select,.sa-table-container .table-controls .form-select{border-radius:.375rem;border:1px solid #ced4da!important;padding:.375rem .75rem!important;font-size:1rem!important;font-weight:400!important;line-height:1.5!important;color:#212529!important;background-color:#fff!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e\")!important;background-repeat:no-repeat!important;background-position:right .75rem center!important;background-size:16px 12px!important;appearance:none!important;width:auto!important;min-width:70px!important;display:inline-block!important;outline:none!important}.sa-table-container .pagination-controls .form-select:focus,.sa-table-container .table-controls .form-select:focus{border-color:#ced4da!important;box-shadow:none!important;outline:none!important}.sa-table-container .pagination-controls .form-select:active,.sa-table-container .table-controls .form-select:active,.sa-table-container .pagination-controls .form-select:hover,.sa-table-container .table-controls .form-select:hover{outline:none!important;box-shadow:none!important}.sa-table-container .pagination-controls .form-select-sm,.sa-table-container .table-controls .form-select-sm{padding-top:.25rem!important;padding-bottom:.25rem!important;padding-left:.5rem!important;font-size:.875rem!important}.sa-table-container .table-container{position:relative}.sa-table-container .table-bordered{border:1px solid #e1e2e4!important;border-right:none!important}.sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(odd)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:nth-of-type(2n)>td{background-color:#fff!important}.sa-table-container .sa-table-container .table>tbody>tr:hover>td{background-color:#fff!important}@media (max-width: 768px){.sa-table-container .d-flex.justify-content-between{flex-direction:column}.sa-table-container .pagination{justify-content:center!important;flex-wrap:wrap}.sa-table-container .pagination .page-link{padding:.375rem .5rem;font-size:.875rem;min-width:2.5rem;height:2.5rem;border-radius:.25rem}.sa-table-container .pagination .page-item:has(.pagination-first),.sa-table-container .pagination .page-item:has(.pagination-last){display:none}}@media (max-width: 480px){.sa-table-container .pagination{gap:.125rem}.sa-table-container .pagination .page-link{min-width:2.25rem;height:2.25rem;font-size:.8rem;padding:.25rem .375rem}}@media (min-width: 481px) and (max-width: 600px){.sa-table-container .pagination{gap:.375rem}}@media (min-width: 601px) and (max-width: 768px){.sa-table-container .pagination{gap:.5rem}}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"]{overflow:visible;padding:.5rem 0}nav[aria-label=\"Navegaci\\f3n de p\\e1ginas\"] .pagination{margin:0;padding:0}.sa-table-container .table.table-bordered{border:1px solid #e1e2e4!important}.sa-table-container .table.table-bordered>:not(caption)>*{border-width:0!important}.sa-table-container .table.table-bordered>:not(caption)>*>*{border-width:0!important}.sa-table-container .table>:not(caption)>*>*{border:none!important;border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table{border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table>tbody>tr>td{border:none!important;border-bottom:1px solid #e1e2e4!important;border-right:none!important;border-top:none!important;border-left:none!important;padding:.5rem!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table>tbody>tr>td.text-center{text-align:center!important;vertical-align:middle!important;font-weight:400!important;color:#6c757d!important;padding:2rem .5rem!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover>td{background-color:#fff!important}.sa-table-container .table>tbody>tr>td.text-center:hover{background-color:#fff!important}.sa-table-container .table>thead>tr>th{border:none!important;padding:.5rem!important;text-align:left!important;vertical-align:middle!important}.sa-table-container .table>tbody>tr:last-child>td{border-bottom:none!important}.sa-table-container .table,.sa-table-container .table>thead,.sa-table-container .table>tbody,.sa-table-container .table>tfoot,.sa-table-container .table>tr,.sa-table-container .table>th,.sa-table-container .table>td{border:none!important;border-collapse:collapse!important;border-spacing:0!important}.sa-table-container .table>tbody>tr:not(:last-child)>td{border-bottom:1px solid #e1e2e4!important;border-top:none!important;border-left:none!important;border-right:none!important}.sa-table-container .table-responsive{border:1px solid #e1e2e4!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch}.sa-table-container .table-responsive::-webkit-scrollbar{height:8px}.sa-table-container .table-responsive::-webkit-scrollbar-track{background:#f1f1f1;border-radius:4px}.sa-table-container .table-responsive::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:4px}.sa-table-container .table-responsive::-webkit-scrollbar-thumb:hover{background:#a8a8a8}.sa-table-container .table-responsive .table{width:100%}@media (max-width: 480px){.sa-table-container .table-responsive .table{min-width:400px!important}}.sa-table-container .table-container{border:1px solid #e1e2e4!important;border-radius:.375rem!important;overflow:hidden}.table-scrollable{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#c1c1c1 #f1f1f1}.table-scrollable .table{table-layout:fixed;width:100%}.table-scrollable .table th,.table-scrollable .table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@keyframes fadeIn{0%{opacity:0}to{opacity:1}}.sa-table-container .table>tbody>tr{cursor:pointer;transition:background-color .2s ease}.sa-table-container .table>tbody>tr:hover{background-color:#f8f9fa!important}.sa-table-container .table>tbody>tr:hover td{background-color:#f8f9fa!important}.sa-table-container .table>tbody>tr.selected-row{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr.selected-row td{background-color:#1f8be1!important;color:#fff!important}.sa-table-container .table>tbody>tr.selected-row:hover{background-color:#1f8be1!important}.sa-table-container .table>tbody>tr.selected-row:hover td{background-color:#1f8be1!important;color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center){cursor:default}.sa-table-container .table>tbody>tr:has(td.text-center):hover{background-color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center):hover td{background-color:#fff!important;color:#6c757d!important}.sa-table-container .table>tbody>tr:has(td.text-center).selected-row{background-color:#fff!important}.sa-table-container .table>tbody>tr:has(td.text-center).selected-row td{background-color:#fff!important;color:#6c757d!important}.pagination-controls .btn{border-color:#cacaca;min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:.375rem;transition:none!important;background-color:transparent}.pagination-controls .btn .pagination-icon{font-size:16px;line-height:1;font-weight:700}.pagination-controls .btn:disabled{opacity:.3;cursor:not-allowed;background-color:transparent!important;border-color:#cacaca!important}.pagination-controls .btn:not(:disabled):hover{background-color:#32a047!important;border-color:#32a047!important;color:#fff!important}.pagination-controls .btn:not(:disabled):active{background-color:#32a047!important;border-color:#32a047!important;color:#fff!important;box-shadow:none!important;transform:none!important}.pagination-controls .btn:focus,.pagination-controls .btn:focus-visible{box-shadow:none!important;outline:none!important}.pagination-controls .page-indicator{font-size:.875rem;font-weight:500;white-space:nowrap;min-width:80px;text-align:center}@media (max-width: 576px){.pagination-controls .btn{min-width:32px;height:32px}.pagination-controls .btn .pagination-icon{font-size:14px}.pagination-controls .page-indicator{font-size:.75rem;min-width:70px}}.sa-table-container .filter-row th{background-color:#f8f9fa!important;border-bottom:1px solid #e1e2e4!important;border-top:1px solid #e1e2e4!important;padding:.5rem!important}.sa-table-container .filter-row th:hover{background-color:#f8f9fa!important}.sa-table-container .filter-row .filter-input{border:1px solid #ced4da;border-radius:.25rem;font-size:.875rem;padding:.25rem .5rem;background-color:#fff;color:#495057;width:100%;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.sa-table-container .filter-row .filter-input:focus{border-color:#32a047!important;outline:none!important;box-shadow:inset 0 0 0 1px #32a047!important}.sa-table-container .filter-row .filter-input:focus-visible{border-color:#32a047!important;outline:none!important;box-shadow:inset 0 0 0 1px #32a047!important}.sa-table-container .filter-row .filter-input::placeholder{color:#6c757d;font-style:italic;font-size:.8rem}.sa-table-container .filter-row .filter-input:hover{border-color:#adb5bd}\n"] }]
+        }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }], propDecorators: { columns: [{
+                type: Input
+            }], data: [{
+                type: Input
+            }], emptyMessage: [{
+                type: Input
+            }], columnDefs: [{
+                type: ContentChildren,
+                args: [SaColumnDefDirective]
+            }], defaultCellTemplate: [{
+                type: ViewChild,
+                args: ['defaultCellTemplate', { static: true }]
+            }], itemsPerPage: [{
+                type: Input
+            }], showPagination: [{
+                type: Input
+            }], showItemsPerPage: [{
+                type: Input
+            }], showTotal: [{
+                type: Input
+            }], hover: [{
+                type: Input
+            }], loading: [{
+                type: Input
+            }], showFirstLastButtons: [{
+                type: Input
+            }], showFilters: [{
+                type: Input
+            }], minWidth: [{
+                type: Input
+            }], pageChange: [{
+                type: Output
+            }], itemsPerPageChange: [{
+                type: Output
+            }], sortChange: [{
+                type: Output
+            }], rowClick: [{
+                type: Output
+            }], rowDoubleClick: [{
+                type: Output
+            }], filterChange: [{
+                type: Output
+            }] } });
+
+class SaTagComponent {
+    // Propiedades con setters/getters para flexibilidad máxima
+    _text = '';
+    _type = 'primary';
+    _size = 'medium';
+    set text(value) {
+        this._text = value || '';
+    }
+    get text() {
+        return this._text;
+    }
+    set type(value) {
+        this._type = value || 'primary';
+    }
+    get type() {
+        return this._type;
+    }
+    set size(value) {
+        this._size = value || 'medium';
+    }
+    get size() {
+        return this._size;
+    }
+    get tagClasses() {
+        const classes = [
+            'tag',
+            `tag-${this.type}`,
+            this.getSizeClass()
+        ];
+        return classes.filter(Boolean).join(' ');
+    }
+    getSizeClass() {
+        switch (this.size) {
+            case 'small':
+                return 'tag-sm';
+            case 'medium':
+                return 'tag-md';
+            case 'large':
+                return 'tag-lg';
+            default:
+                return 'tag-md';
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTagComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTagComponent, selector: "sa-tag", inputs: { text: "text", type: "type", size: "size" }, host: { properties: { "class.tag-inline": "true" } }, ngImport: i0, template: "<span [class]=\"tagClasses\">\n  <span class=\"tag-text\">{{ text }}</span>\n</span>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block;vertical-align:middle}:host.tag-inline{display:inline-block;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block;vertical-align:middle}.tag{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important;display:inline-flex;align-items:center;justify-content:center;border-radius:.375rem;font-weight:500;white-space:nowrap;transition:all .2s ease-in-out;vertical-align:middle;line-height:1;border:1px solid transparent}.tag .tag-text{display:inline-block;line-height:1}.tag.tag-sm{padding:.25rem .5rem;font-size:.75rem}.tag.tag-md{padding:.375rem .75rem;font-size:.875rem}.tag.tag-lg{padding:.5rem 1rem;font-size:1rem}.tag.tag-primary{background-color:#36ad55;color:#fff;border-color:#36ad55}.tag.tag-secondary{background-color:#fff;color:#00ab4a;border-color:#00ab4a}.tag.tag-success{background-color:#d3f7e3;color:#00ab4a;border-color:#00ab4a}.tag.tag-danger{background-color:#faeded;color:#dc3545;border-color:#dc3545}.tag.tag-warning{background-color:#fff3cd;color:#856404;border-color:#ffc107}.tag.tag-info{background-color:#dae9fc4a;color:#007bff;border-color:#007bff}.tag.tag-dark{background-color:#343a40;color:#fff;border-color:#343a40}.tag.tag-light{background-color:#f8f9fa;color:#495057;border-color:#dee2e6}\n"] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTagComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-tag', host: {
+                        '[class.tag-inline]': 'true'
+                    }, template: "<span [class]=\"tagClasses\">\n  <span class=\"tag-text\">{{ text }}</span>\n</span>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:inline-block;vertical-align:middle}:host.tag-inline{display:inline-block;vertical-align:middle}.container :host,.row :host,.col :host,[class*=col-] :host{display:inline-block;vertical-align:middle}.tag{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important;display:inline-flex;align-items:center;justify-content:center;border-radius:.375rem;font-weight:500;white-space:nowrap;transition:all .2s ease-in-out;vertical-align:middle;line-height:1;border:1px solid transparent}.tag .tag-text{display:inline-block;line-height:1}.tag.tag-sm{padding:.25rem .5rem;font-size:.75rem}.tag.tag-md{padding:.375rem .75rem;font-size:.875rem}.tag.tag-lg{padding:.5rem 1rem;font-size:1rem}.tag.tag-primary{background-color:#36ad55;color:#fff;border-color:#36ad55}.tag.tag-secondary{background-color:#fff;color:#00ab4a;border-color:#00ab4a}.tag.tag-success{background-color:#d3f7e3;color:#00ab4a;border-color:#00ab4a}.tag.tag-danger{background-color:#faeded;color:#dc3545;border-color:#dc3545}.tag.tag-warning{background-color:#fff3cd;color:#856404;border-color:#ffc107}.tag.tag-info{background-color:#dae9fc4a;color:#007bff;border-color:#007bff}.tag.tag-dark{background-color:#343a40;color:#fff;border-color:#343a40}.tag.tag-light{background-color:#f8f9fa;color:#495057;border-color:#dee2e6}\n"] }]
+        }], propDecorators: { text: [{
+                type: Input
+            }], type: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }] } });
+
+class SannaIconModule {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, declarations: [SaIconComponent], imports: [CommonModule,
+            SannaUiFontAwesomeModule], exports: [SaIconComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, imports: [CommonModule,
+            SannaUiFontAwesomeModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaIconModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    declarations: [
+                        SaIconComponent,
+                    ],
+                    imports: [
+                        CommonModule,
+                        SannaUiFontAwesomeModule,
+                    ],
+                    exports: [
+                        SaIconComponent,
+                    ]
+                }]
+        }] });
+
+class SaInputComponent {
+    value = '';
+    type = 'text';
+    placeholder = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    leftIcon = '';
+    rightIcon = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    autocomplete = 'off';
+    min = null;
+    max = null;
+    minlength = null;
+    maxlength = null;
+    pattern = '';
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    showPassword = false;
+    isFocused = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    get inputClasses() {
+        const sizeMap = {
+            'sm': 'form-control-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-control-lg'
+        };
+        const baseClasses = ['form-control'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    get inputGroupClasses() {
+        const hasIcons = this.leftIcon || this.rightIcon || this.type === 'password';
+        if (hasIcons) {
+            const sizeMap = {
+                'sm': 'input-group-sm',
+                'md': '', // Bootstrap default
+                'lg': 'input-group-lg'
+            };
+            const classes = ['input-group'];
+            if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+                classes.push(sizeMap[this.size]);
+            }
+            return classes.join(' ');
+        }
+        return '';
+    }
+    get inputType() {
+        if (this.type === 'password') {
+            return this.showPassword ? 'text' : 'password';
+        }
+        return this.type;
+    }
+    writeValue(value) {
+        this.value = value ?? '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onInputFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onInputBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaInputComponent, selector: "sa-input", inputs: { value: "value", type: "type", placeholder: "placeholder", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", leftIcon: "leftIcon", rightIcon: "rightIcon", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", autocomplete: "autocomplete", min: "min", max: "max", minlength: "minlength", maxlength: "maxlength", pattern: "pattern" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaInputComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div [class]=\"inputGroupClasses\">\n    <span *ngIf=\"leftIcon\" class=\"input-group-text\">\n      <sa-icon \n        *ngIf=\"!leftIcon.includes('fa-')\" \n        [name]=\"leftIcon\" \n        size=\"sm\">\n      </sa-icon>\n      <i \n        *ngIf=\"leftIcon.includes('fa-')\" \n        [class]=\"leftIcon\">\n      </i>\n    </span>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <span *ngIf=\"rightIcon && type !== 'password'\" class=\"input-group-text\">\n      <sa-icon \n        *ngIf=\"!rightIcon.includes('fa-')\" \n        [name]=\"rightIcon\" \n        size=\"sm\">\n      </sa-icon>\n      <i \n        *ngIf=\"rightIcon.includes('fa-')\" \n        [class]=\"rightIcon\">\n      </i>\n    </span>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"btn btn-outline-secondary\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <sa-icon \n        [name]=\"showPassword ? 'eye-slash' : 'eye'\" \n        size=\"sm\">\n      </sa-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#10b981}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #10b981!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .input-group-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;background-color:#f8f9fa;border-color:#dee2e6;color:#6c757d}:host .btn-outline-secondary{border-color:#dee2e6;color:#6c757d}:host .btn-outline-secondary:hover{background-color:#f8f9fa;border-color:#dee2e6;color:#495057}:host .btn-outline-secondary:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.MinLengthValidator, selector: "[minlength][formControlName],[minlength][formControl],[minlength][ngModel]", inputs: ["minlength"] }, { kind: "directive", type: i2$1.MaxLengthValidator, selector: "[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]", inputs: ["maxlength"] }, { kind: "directive", type: i2$1.PatternValidator, selector: "[pattern][formControlName],[pattern][formControl],[pattern][ngModel]", inputs: ["pattern"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: SaIconComponent, selector: "sa-icon", inputs: ["name", "color", "size"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-input', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaInputComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div [class]=\"inputGroupClasses\">\n    <span *ngIf=\"leftIcon\" class=\"input-group-text\">\n      <sa-icon \n        *ngIf=\"!leftIcon.includes('fa-')\" \n        [name]=\"leftIcon\" \n        size=\"sm\">\n      </sa-icon>\n      <i \n        *ngIf=\"leftIcon.includes('fa-')\" \n        [class]=\"leftIcon\">\n      </i>\n    </span>\n\n    <input\n      [id]=\"id\"\n      [name]=\"name\"\n      [type]=\"inputType\"\n      [class]=\"inputClasses\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [autocomplete]=\"autocomplete\"\n      [min]=\"min\"\n      [max]=\"max\"\n      [minlength]=\"minlength\"\n      [maxlength]=\"maxlength\"\n      [pattern]=\"pattern\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n    />\n\n    <span *ngIf=\"rightIcon && type !== 'password'\" class=\"input-group-text\">\n      <sa-icon \n        *ngIf=\"!rightIcon.includes('fa-')\" \n        [name]=\"rightIcon\" \n        size=\"sm\">\n      </sa-icon>\n      <i \n        *ngIf=\"rightIcon.includes('fa-')\" \n        [class]=\"rightIcon\">\n      </i>\n    </span>\n\n    <button\n      *ngIf=\"type === 'password'\"\n      type=\"button\"\n      class=\"btn btn-outline-secondary\"\n      (click)=\"togglePasswordVisibility()\"\n      [attr.aria-label]=\"showPassword ? 'Ocultar contrase\u00F1a' : 'Mostrar contrase\u00F1a'\"\n    >\n      <sa-icon \n        [name]=\"showPassword ? 'eye-slash' : 'eye'\" \n        size=\"sm\">\n      </sa-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#10b981}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #10b981!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .input-group-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;background-color:#f8f9fa;border-color:#dee2e6;color:#6c757d}:host .btn-outline-secondary{border-color:#dee2e6;color:#6c757d}:host .btn-outline-secondary:hover{background-color:#f8f9fa;border-color:#dee2e6;color:#495057}:host .btn-outline-secondary:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}\n"] }]
+        }], propDecorators: { value: [{
+                type: Input
+            }], type: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], leftIcon: [{
+                type: Input
+            }], rightIcon: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], autocomplete: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], minlength: [{
+                type: Input
+            }], maxlength: [{
+                type: Input
+            }], pattern: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaSelectComponent {
+    value = '';
+    options = [];
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    placeholder = '--Seleccione--';
+    showPlaceholder = true;
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    get selectClasses() {
+        const sizeMap = {
+            'sm': 'form-select-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-select-lg'
+        };
+        const baseClasses = ['form-select'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    get hasValidSelection() {
+        if (!this.showPlaceholder)
+            return true;
+        return this.value !== '' && this.value !== null && this.value !== undefined;
+    }
+    writeValue(value) {
+        this.value = value ?? '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onSelectFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onSelectBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaSelectComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaSelectComponent, selector: "sa-select", inputs: { value: "value", options: "options", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", placeholder: "placeholder", showPlaceholder: "showPlaceholder" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaSelectComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n  \n  <select\n    [id]=\"id\"\n    [name]=\"name\"\n    [class]=\"selectClasses\"\n    [(ngModel)]=\"value\"\n    (ngModelChange)=\"onModelChange($event)\"\n    [required]=\"required\"\n    [disabled]=\"disabled || readonly\"\n    (focus)=\"onSelectFocus($event)\"\n    (blur)=\"onSelectBlur($event)\"\n  >\n    <option *ngIf=\"showPlaceholder\" value=\"\" [disabled]=\"required\">\n      {{ placeholder }}\n    </option>\n    <option\n      *ngFor=\"let option of options\"\n      [value]=\"option.value\"\n      [disabled]=\"option.disabled\"\n    >\n      {{ option.label }}\n    </option>\n  </select>\n  \n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-select{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;width:100%!important;box-sizing:border-box!important;min-width:0!important;max-width:100%!important}:host .form-select:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-select:focus-visible{outline:none!important;box-shadow:none!important}:host .form-select.is-valid{border-color:#10b981}:host .form-select.is-valid:focus,:host .form-select.is-valid:focus-visible{border-color:#10b981!important;outline:none!important;box-shadow:none!important}:host .form-select.is-invalid{border-color:#ef4444}:host .form-select.is-invalid:focus,:host .form-select.is-invalid:focus-visible{border-color:#ef4444!important;outline:none!important;box-shadow:none!important}.form-select-lg{padding:.5rem 1rem;font-size:1.25rem;border-radius:.5rem;min-height:calc(1.5em + 1rem + 2px)}.form-select-sm{padding:.25rem .5rem;font-size:.875rem;border-radius:.375rem;min-height:calc(1.5em + .5rem + 2px)}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400;margin-bottom:-1px}.form-label .text-danger{margin-left:2px}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}.mb-3:last-child{margin-bottom:0!important}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i2$1.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i2$1.SelectControlValueAccessor, selector: "select:not([multiple])[formControlName],select:not([multiple])[formControl],select:not([multiple])[ngModel]", inputs: ["compareWith"] }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaSelectComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-select', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaSelectComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n  \n  <select\n    [id]=\"id\"\n    [name]=\"name\"\n    [class]=\"selectClasses\"\n    [(ngModel)]=\"value\"\n    (ngModelChange)=\"onModelChange($event)\"\n    [required]=\"required\"\n    [disabled]=\"disabled || readonly\"\n    (focus)=\"onSelectFocus($event)\"\n    (blur)=\"onSelectBlur($event)\"\n  >\n    <option *ngIf=\"showPlaceholder\" value=\"\" [disabled]=\"required\">\n      {{ placeholder }}\n    </option>\n    <option\n      *ngFor=\"let option of options\"\n      [value]=\"option.value\"\n      [disabled]=\"option.disabled\"\n    >\n      {{ option.label }}\n    </option>\n  </select>\n  \n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-select{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;width:100%!important;box-sizing:border-box!important;min-width:0!important;max-width:100%!important}:host .form-select:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-select:focus-visible{outline:none!important;box-shadow:none!important}:host .form-select.is-valid{border-color:#10b981}:host .form-select.is-valid:focus,:host .form-select.is-valid:focus-visible{border-color:#10b981!important;outline:none!important;box-shadow:none!important}:host .form-select.is-invalid{border-color:#ef4444}:host .form-select.is-invalid:focus,:host .form-select.is-invalid:focus-visible{border-color:#ef4444!important;outline:none!important;box-shadow:none!important}.form-select-lg{padding:.5rem 1rem;font-size:1.25rem;border-radius:.5rem;min-height:calc(1.5em + 1rem + 2px)}.form-select-sm{padding:.25rem .5rem;font-size:.875rem;border-radius:.375rem;min-height:calc(1.5em + .5rem + 2px)}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400;margin-bottom:-1px}.form-label .text-danger{margin-left:2px}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}.mb-3:last-child{margin-bottom:0!important}\n"] }]
+        }], propDecorators: { value: [{
+                type: Input
+            }], options: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], showPlaceholder: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaTextareaComponent {
+    value = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    placeholder = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    rows = 3;
+    cols = 50;
+    minlength = null;
+    maxlength = null;
+    resize = 'vertical';
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    get textareaClasses() {
+        const sizeMap = {
+            'sm': 'form-control-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-control-lg'
+        };
+        const baseClasses = ['form-control'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    get textareaStyles() {
+        return {
+            resize: this.resize
+        };
+    }
+    writeValue(value) {
+        this.value = value || '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onTextareaFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onTextareaBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTextareaComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaTextareaComponent, selector: "sa-textarea", inputs: { value: "value", size: "size", status: "status", label: "label", placeholder: "placeholder", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", rows: "rows", cols: "cols", minlength: "minlength", maxlength: "maxlength", resize: "resize" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaTextareaComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <textarea\n    [id]=\"id\"\n    [name]=\"name\"\n    [class]=\"textareaClasses\"\n    [style]=\"textareaStyles\"\n    [(ngModel)]=\"value\"\n    (ngModelChange)=\"onModelChange($event)\"\n    [placeholder]=\"placeholder\"\n    [required]=\"required\"\n    [readonly]=\"readonly\"\n    [disabled]=\"disabled\"\n    [rows]=\"rows\"\n    [cols]=\"cols\"\n    [minlength]=\"minlength\"\n    [maxlength]=\"maxlength\"\n    (focus)=\"onTextareaFocus($event)\"\n    (blur)=\"onTextareaBlur($event)\"\n  ></textarea>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#10b981}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #10b981!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.MinLengthValidator, selector: "[minlength][formControlName],[minlength][formControl],[minlength][ngModel]", inputs: ["minlength"] }, { kind: "directive", type: i2$1.MaxLengthValidator, selector: "[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]", inputs: ["maxlength"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaTextareaComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-textarea', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaTextareaComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"id\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <textarea\n    [id]=\"id\"\n    [name]=\"name\"\n    [class]=\"textareaClasses\"\n    [style]=\"textareaStyles\"\n    [(ngModel)]=\"value\"\n    (ngModelChange)=\"onModelChange($event)\"\n    [placeholder]=\"placeholder\"\n    [required]=\"required\"\n    [readonly]=\"readonly\"\n    [disabled]=\"disabled\"\n    [rows]=\"rows\"\n    [cols]=\"cols\"\n    [minlength]=\"minlength\"\n    [maxlength]=\"maxlength\"\n    (focus)=\"onTextareaFocus($event)\"\n    (blur)=\"onTextareaBlur($event)\"\n  ></textarea>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#10b981}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #10b981!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}\n"] }]
+        }], propDecorators: { value: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], rows: [{
+                type: Input
+            }], cols: [{
+                type: Input
+            }], minlength: [{
+                type: Input
+            }], maxlength: [{
+                type: Input
+            }], resize: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaCheckboxComponent {
+    checked = false;
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    disabled = false;
+    readonly = false;
+    id = '';
+    name = '';
+    value = '';
+    indeterminate = false;
+    checkedChange = new EventEmitter();
+    change = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    _generatedId;
+    onChange = (_) => { };
+    onTouched = () => { };
+    constructor() {
+        this._generatedId = `sa-checkbox-${Math.random().toString(36).substr(2, 9)}`;
+    }
+    get checkboxId() {
+        return this.id || this._generatedId;
+    }
+    get checkboxClasses() {
+        const sizeMap = {
+            'sm': 'form-check-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-check-lg'
+        };
+        const baseClasses = ['form-check-input'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            // Note: Bootstrap doesn't have built-in size classes for checkboxes
+            // We'll handle this in CSS
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-check-label';
+    }
+    get containerClasses() {
+        const sizeMap = {
+            'sm': 'form-check-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-check-lg'
+        };
+        const baseClasses = ['form-check'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        return baseClasses.join(' ');
+    }
+    writeValue(value) {
+        this.checked = !!value;
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onCheckboxChange(event) {
+        const target = event.target;
+        this.checked = target.checked;
+        this.onChange(this.checked);
+        this.checkedChange.emit(this.checked);
+        this.change.emit(event);
+    }
+    onCheckboxFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onCheckboxBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaCheckboxComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaCheckboxComponent, selector: "sa-checkbox", inputs: { checked: "checked", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", required: "required", disabled: "disabled", readonly: "readonly", id: "id", name: "name", value: "value", indeterminate: "indeterminate" }, outputs: { checkedChange: "checkedChange", change: "change", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaCheckboxComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"sa-checkbox-wrapper\">\n  <div [class]=\"containerClasses\">\n    <input\n      [id]=\"checkboxId\"\n      [name]=\"name\"\n      [class]=\"checkboxClasses\"\n      type=\"checkbox\"\n      [checked]=\"checked\"\n      [value]=\"value\"\n      [required]=\"required\"\n      [disabled]=\"disabled\"\n      [readonly]=\"readonly\"\n      [indeterminate]=\"indeterminate\"\n      (change)=\"onCheckboxChange($event)\"\n      (focus)=\"onCheckboxFocus($event)\"\n      (blur)=\"onCheckboxBlur($event)\"\n    />\n    <label *ngIf=\"label\" [for]=\"checkboxId\" [class]=\"labelClasses\">\n      {{ label }}\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\n    </label>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .sa-checkbox-wrapper{width:100%;box-sizing:border-box;margin-bottom:1rem}:host .sa-checkbox-wrapper:last-child{margin-bottom:0}:host-context(.row) .sa-checkbox-wrapper,:host-context(.col) .sa-checkbox-wrapper,:host-context(.col-*) .sa-checkbox-wrapper{position:relative;z-index:1}:host-context(.p-1) .form-check,:host-context(.p-2) .form-check,:host-context(.p-3) .form-check,:host-context(.p-4) .form-check,:host-context(.p-5) .form-check{margin-left:0!important;padding-left:0!important}:host .form-check .form-check-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-check .form-check-input:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-check .form-check-input:checked,:host .form-check .form-check-input[type=checkbox]:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input:indeterminate,:host .form-check .form-check-input[type=checkbox]:indeterminate{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-valid{border-color:#32a047}:host .form-check .form-check-input.is-valid:focus{outline:none!important;box-shadow:none!important;border-color:#32a047!important}:host .form-check .form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-invalid{border-color:#ef4444}:host .form-check .form-check-input.is-invalid:focus{outline:none!important;box-shadow:none!important;border-color:#ef4444!important}:host .form-check{display:flex!important;align-items:center!important;min-height:auto;padding-left:0!important;margin-bottom:0;position:relative}:host .form-check .form-check-input{margin-top:0!important;margin-right:.5rem;margin-left:0!important;flex-shrink:0;position:static!important}:host .form-check .form-check-label{margin-bottom:0;line-height:1;flex:1}:host .form-check-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;cursor:pointer;display:flex;align-items:center}:host .form-check-sm .form-check-input{width:.875rem;height:.875rem;margin-right:.5rem}:host .form-check-sm .form-check-label{font-size:.875rem;line-height:.875rem}:host .form-check-lg .form-check-input{width:1.25rem;height:1.25rem;margin-right:.5rem}:host .form-check-lg .form-check-label{font-size:1.125rem;line-height:1.25rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-input{width:1rem;height:1rem;margin-right:.5rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-label{font-size:14px;line-height:1rem}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem;margin-left:1.5rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;margin-left:1.5rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-check-input:disabled{opacity:.5;cursor:not-allowed}:host .form-check-input:disabled~.form-check-label{opacity:.5;cursor:not-allowed}:host sa-checkbox .form-check input[type=checkbox]:checked,:host .form-check input[type=checkbox]:checked,:host input[type=checkbox].form-check-input:checked,:host .form-check input[type=checkbox].is-valid:checked,:host input[type=checkbox].form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host sa-checkbox .form-check input[type=checkbox]:indeterminate,:host .form-check input[type=checkbox]:indeterminate,:host input[type=checkbox].form-check-input:indeterminate{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e\")!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaCheckboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-checkbox', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaCheckboxComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"sa-checkbox-wrapper\">\n  <div [class]=\"containerClasses\">\n    <input\n      [id]=\"checkboxId\"\n      [name]=\"name\"\n      [class]=\"checkboxClasses\"\n      type=\"checkbox\"\n      [checked]=\"checked\"\n      [value]=\"value\"\n      [required]=\"required\"\n      [disabled]=\"disabled\"\n      [readonly]=\"readonly\"\n      [indeterminate]=\"indeterminate\"\n      (change)=\"onCheckboxChange($event)\"\n      (focus)=\"onCheckboxFocus($event)\"\n      (blur)=\"onCheckboxBlur($event)\"\n    />\n    <label *ngIf=\"label\" [for]=\"checkboxId\" [class]=\"labelClasses\">\n      {{ label }}\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\n    </label>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .sa-checkbox-wrapper{width:100%;box-sizing:border-box;margin-bottom:1rem}:host .sa-checkbox-wrapper:last-child{margin-bottom:0}:host-context(.row) .sa-checkbox-wrapper,:host-context(.col) .sa-checkbox-wrapper,:host-context(.col-*) .sa-checkbox-wrapper{position:relative;z-index:1}:host-context(.p-1) .form-check,:host-context(.p-2) .form-check,:host-context(.p-3) .form-check,:host-context(.p-4) .form-check,:host-context(.p-5) .form-check{margin-left:0!important;padding-left:0!important}:host .form-check .form-check-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-check .form-check-input:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-check .form-check-input:checked,:host .form-check .form-check-input[type=checkbox]:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input:indeterminate,:host .form-check .form-check-input[type=checkbox]:indeterminate{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-valid{border-color:#32a047}:host .form-check .form-check-input.is-valid:focus{outline:none!important;box-shadow:none!important;border-color:#32a047!important}:host .form-check .form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-invalid{border-color:#ef4444}:host .form-check .form-check-input.is-invalid:focus{outline:none!important;box-shadow:none!important;border-color:#ef4444!important}:host .form-check{display:flex!important;align-items:center!important;min-height:auto;padding-left:0!important;margin-bottom:0;position:relative}:host .form-check .form-check-input{margin-top:0!important;margin-right:.5rem;margin-left:0!important;flex-shrink:0;position:static!important}:host .form-check .form-check-label{margin-bottom:0;line-height:1;flex:1}:host .form-check-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;cursor:pointer;display:flex;align-items:center}:host .form-check-sm .form-check-input{width:.875rem;height:.875rem;margin-right:.5rem}:host .form-check-sm .form-check-label{font-size:.875rem;line-height:.875rem}:host .form-check-lg .form-check-input{width:1.25rem;height:1.25rem;margin-right:.5rem}:host .form-check-lg .form-check-label{font-size:1.125rem;line-height:1.25rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-input{width:1rem;height:1rem;margin-right:.5rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-label{font-size:14px;line-height:1rem}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem;margin-left:1.5rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;margin-left:1.5rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-check-input:disabled{opacity:.5;cursor:not-allowed}:host .form-check-input:disabled~.form-check-label{opacity:.5;cursor:not-allowed}:host sa-checkbox .form-check input[type=checkbox]:checked,:host .form-check input[type=checkbox]:checked,:host input[type=checkbox].form-check-input:checked,:host .form-check input[type=checkbox].is-valid:checked,:host input[type=checkbox].form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e\")!important}:host sa-checkbox .form-check input[type=checkbox]:indeterminate,:host .form-check input[type=checkbox]:indeterminate,:host input[type=checkbox].form-check-input:indeterminate{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e\")!important}\n"] }]
+        }], ctorParameters: () => [], propDecorators: { checked: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], indeterminate: [{
+                type: Input
+            }], checkedChange: [{
+                type: Output
+            }], change: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaRadioComponent {
+    value = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    disabled = false;
+    readonly = false;
+    id = '';
+    name = '';
+    valueChange = new EventEmitter();
+    change = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    selectedValue = null;
+    isFocused = false;
+    _generatedId;
+    onChange = (_) => { };
+    onTouched = () => { };
+    constructor() {
+        this._generatedId = `sa-radio-${Math.random().toString(36).substr(2, 9)}`;
+    }
+    get radioId() {
+        return this.id || this._generatedId;
+    }
+    get isChecked() {
+        return this.selectedValue === this.value;
+    }
+    get radioClasses() {
+        const sizeMap = {
+            'sm': 'form-check-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-check-lg'
+        };
+        const baseClasses = ['form-check-input'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            // Note: Bootstrap doesn't have built-in size classes for radios
+            // We'll handle this in CSS
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-check-label';
+    }
+    get containerClasses() {
+        const sizeMap = {
+            'sm': 'form-check-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-check-lg'
+        };
+        const baseClasses = ['form-check'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        return baseClasses.join(' ');
+    }
+    writeValue(value) {
+        this.selectedValue = value;
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onRadioChange(event) {
+        const target = event.target;
+        if (target.checked) {
+            this.selectedValue = this.value;
+            this.onChange(this.selectedValue);
+            this.valueChange.emit(this.selectedValue);
+            this.change.emit(event);
+        }
+    }
+    onRadioFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onRadioBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaRadioComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaRadioComponent, selector: "sa-radio", inputs: { value: "value", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", required: "required", disabled: "disabled", readonly: "readonly", id: "id", name: "name" }, outputs: { valueChange: "valueChange", change: "change", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaRadioComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <div [class]=\"containerClasses\">\n    <input\n      [id]=\"radioId\"\n      [name]=\"name\"\n      [class]=\"radioClasses\"\n      type=\"radio\"\n      [checked]=\"isChecked\"\n      [value]=\"value\"\n      [required]=\"required\"\n      [disabled]=\"disabled\"\n      [readonly]=\"readonly\"\n      (change)=\"onRadioChange($event)\"\n      (focus)=\"onRadioFocus($event)\"\n      (blur)=\"onRadioBlur($event)\"\n    />\n    <label *ngIf=\"label\" [for]=\"radioId\" [class]=\"labelClasses\">\n      {{ label }}\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\n    </label>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-check .form-check-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-check .form-check-input:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-check .form-check-input:checked,:host .form-check .form-check-input[type=radio]:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-valid{border-color:#32a047}:host .form-check .form-check-input.is-valid:focus{outline:none!important;box-shadow:none!important;border-color:#32a047!important}:host .form-check .form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-invalid{border-color:#ef4444}:host .form-check .form-check-input.is-invalid:focus{outline:none!important;box-shadow:none!important;border-color:#ef4444!important}:host .form-check{display:flex;align-items:center;min-height:auto;padding-left:0}:host .form-check .form-check-input{margin-top:0;margin-right:.5rem;flex-shrink:0}:host .form-check .form-check-label{margin-bottom:0;line-height:1}:host .form-check-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;cursor:pointer;display:flex;align-items:center}:host .form-check-sm .form-check-input{width:.875rem;height:.875rem;margin-right:.5rem}:host .form-check-sm .form-check-label{font-size:.875rem;line-height:.875rem}:host .form-check-lg .form-check-input{width:1.25rem;height:1.25rem;margin-right:.5rem}:host .form-check-lg .form-check-label{font-size:1.125rem;line-height:1.25rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-input{width:1rem;height:1rem;margin-right:.5rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-label{font-size:14px;line-height:1rem}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem;margin-left:1.5rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;margin-left:1.5rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-check-input:disabled{opacity:.5;cursor:not-allowed}:host .form-check-input:disabled~.form-check-label{opacity:.5;cursor:not-allowed}:host sa-radio .form-check input[type=radio]:checked,:host .form-check input[type=radio]:checked,:host input[type=radio].form-check-input:checked,:host .form-check input[type=radio].is-valid:checked,:host input[type=radio].form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaRadioComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-radio', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaRadioComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <div [class]=\"containerClasses\">\n    <input\n      [id]=\"radioId\"\n      [name]=\"name\"\n      [class]=\"radioClasses\"\n      type=\"radio\"\n      [checked]=\"isChecked\"\n      [value]=\"value\"\n      [required]=\"required\"\n      [disabled]=\"disabled\"\n      [readonly]=\"readonly\"\n      (change)=\"onRadioChange($event)\"\n      (focus)=\"onRadioFocus($event)\"\n      (blur)=\"onRadioBlur($event)\"\n    />\n    <label *ngIf=\"label\" [for]=\"radioId\" [class]=\"labelClasses\">\n      {{ label }}\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\n    </label>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-check .form-check-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-check .form-check-input:focus{outline:none!important;box-shadow:none!important;border-color:#dee2e6!important}:host .form-check .form-check-input:checked,:host .form-check .form-check-input[type=radio]:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-valid{border-color:#32a047}:host .form-check .form-check-input.is-valid:focus{outline:none!important;box-shadow:none!important;border-color:#32a047!important}:host .form-check .form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}:host .form-check .form-check-input.is-invalid{border-color:#ef4444}:host .form-check .form-check-input.is-invalid:focus{outline:none!important;box-shadow:none!important;border-color:#ef4444!important}:host .form-check{display:flex;align-items:center;min-height:auto;padding-left:0}:host .form-check .form-check-input{margin-top:0;margin-right:.5rem;flex-shrink:0}:host .form-check .form-check-label{margin-bottom:0;line-height:1}:host .form-check-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;cursor:pointer;display:flex;align-items:center}:host .form-check-sm .form-check-input{width:.875rem;height:.875rem;margin-right:.5rem}:host .form-check-sm .form-check-label{font-size:.875rem;line-height:.875rem}:host .form-check-lg .form-check-input{width:1.25rem;height:1.25rem;margin-right:.5rem}:host .form-check-lg .form-check-label{font-size:1.125rem;line-height:1.25rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-input{width:1rem;height:1rem;margin-right:.5rem}:host .form-check:not(.form-check-sm):not(.form-check-lg) .form-check-label{font-size:14px;line-height:1rem}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem;margin-left:1.5rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;margin-left:1.5rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-check-input:disabled{opacity:.5;cursor:not-allowed}:host .form-check-input:disabled~.form-check-label{opacity:.5;cursor:not-allowed}:host sa-radio .form-check input[type=radio]:checked,:host .form-check input[type=radio]:checked,:host input[type=radio].form-check-input:checked,:host .form-check input[type=radio].is-valid:checked,:host input[type=radio].form-check-input.is-valid:checked{background-color:#32a047!important;border-color:#32a047!important;background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e\")!important}\n"] }]
+        }], ctorParameters: () => [], propDecorators: { value: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], change: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SaDateComponent {
+    value = '';
+    size = 'md';
+    status = 'default';
+    label = '';
+    placeholder = '';
+    helperText = '';
+    errorText = '';
+    required = false;
+    readonly = false;
+    disabled = false;
+    id = '';
+    name = '';
+    min = '';
+    max = '';
+    blockFutureDates = false;
+    showCurrentDate = false;
+    valueChange = new EventEmitter();
+    focus = new EventEmitter();
+    blur = new EventEmitter();
+    isFocused = false;
+    _generatedId;
+    onChange = (_) => { };
+    onTouched = () => { };
+    constructor() {
+        this._generatedId = `sa-date-${Math.random().toString(36).substr(2, 9)}`;
+        // Si showCurrentDate está habilitado, establecer fecha actual
+        if (this.showCurrentDate && !this.value) {
+            this.value = this.getCurrentDateISO();
+        }
+    }
+    ngOnInit() {
+        // Configurar límites de fecha
+        if (this.blockFutureDates && !this.max) {
+            this.max = this.getCurrentDateISO();
+        }
+        // Si showCurrentDate está habilitado y no hay valor, establecer fecha actual
+        if (this.showCurrentDate && !this.value) {
+            this.value = this.getCurrentDateISO();
+            this.onChange(this.value);
+        }
+    }
+    get dateId() {
+        return this.id || this._generatedId;
+    }
+    get inputClasses() {
+        const sizeMap = {
+            'sm': 'form-control-sm',
+            'md': '', // Bootstrap default
+            'lg': 'form-control-lg'
+        };
+        const baseClasses = ['form-control'];
+        if (sizeMap[this.size] && sizeMap[this.size] !== '') {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        if (this.status === 'error' || this.errorText) {
+            baseClasses.push('is-invalid');
+        }
+        else if (this.status === 'success') {
+            baseClasses.push('is-valid');
+        }
+        return baseClasses.join(' ');
+    }
+    get labelClasses() {
+        return 'form-label';
+    }
+    getCurrentDateISO() {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    }
+    writeValue(value) {
+        this.value = value || '';
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+    }
+    onModelChange(value) {
+        this.value = value;
+        this.onChange(value);
+        this.valueChange.emit(value);
+    }
+    onInputFocus(event) {
+        this.isFocused = true;
+        this.focus.emit(event);
+    }
+    onInputBlur(event) {
+        this.isFocused = false;
+        this.onTouched();
+        this.blur.emit(event);
+    }
+    openCalendar(event) {
+        // Si el input no está deshabilitado ni en solo lectura
+        if (!this.disabled && !this.readonly) {
+            const inputElement = event.target;
+            // Intentar abrir el calendario programáticamente
+            try {
+                inputElement.showPicker();
+            }
+            catch (error) {
+                // Fallback para navegadores que no soportan showPicker()
+                // En estos casos, el click normal en el input debería funcionar
+                console.debug('showPicker() no soportado, usando comportamiento por defecto');
+            }
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaDateComponent, selector: "sa-date", inputs: { value: "value", size: "size", status: "status", label: "label", placeholder: "placeholder", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", min: "min", max: "max", blockFutureDates: "blockFutureDates", showCurrentDate: "showCurrentDate" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaDateComponent),
+                multi: true
+            }
+        ], ngImport: i0, template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <!-- Input date nativo -->\n    <input\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .position-relative{position:relative}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-control[type=date]{cursor:pointer}:host .form-control[type=date]::-webkit-calendar-picker-indicator{color:#6c757d;cursor:pointer;filter:invert(.5)}:host .form-control[type=date]::-webkit-calendar-picker-indicator:hover{filter:invert(.3)}:host .form-control[type=date]::-moz-calendar-picker-indicator{cursor:pointer}:host .form-control[type=date]:disabled,:host .form-control[type=date][readonly]{cursor:default}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-date', providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaDateComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"mb-3\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <!-- Input date nativo -->\n    <input\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .mb-3{width:100%;box-sizing:border-box}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .position-relative{position:relative}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#2e3438;font-size:14px;font-weight:400!important;margin-bottom:2px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem}:host .mb-3:last-child{margin-bottom:0!important}:host .form-control[type=date]{cursor:pointer}:host .form-control[type=date]::-webkit-calendar-picker-indicator{color:#6c757d;cursor:pointer;filter:invert(.5)}:host .form-control[type=date]::-webkit-calendar-picker-indicator:hover{filter:invert(.3)}:host .form-control[type=date]::-moz-calendar-picker-indicator{cursor:pointer}:host .form-control[type=date]:disabled,:host .form-control[type=date][readonly]{cursor:default}\n"] }]
+        }], ctorParameters: () => [], propDecorators: { value: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], label: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], blockFutureDates: [{
+                type: Input
+            }], showCurrentDate: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], focus: [{
+                type: Output
+            }], blur: [{
+                type: Output
+            }] } });
+
+class SannaFormsModule {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, declarations: [SaInputComponent,
+            SaSelectComponent,
+            SaTextareaComponent,
+            SaCheckboxComponent,
+            SaRadioComponent,
+            SaDateComponent], imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            SannaIconModule], exports: [SaInputComponent,
+            SaSelectComponent,
+            SaTextareaComponent,
+            SaCheckboxComponent,
+            SaRadioComponent,
+            SaDateComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            SannaIconModule] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    declarations: [
+                        SaInputComponent,
+                        SaSelectComponent,
+                        SaTextareaComponent,
+                        SaCheckboxComponent,
+                        SaRadioComponent,
+                        SaDateComponent,
+                    ],
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        SannaIconModule,
+                    ],
+                    exports: [
+                        SaInputComponent,
+                        SaSelectComponent,
+                        SaTextareaComponent,
+                        SaCheckboxComponent,
+                        SaRadioComponent,
+                        SaDateComponent,
+                    ]
+                }]
+        }] });
+
 class SannaUiModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
     static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, declarations: [SannaUiComponent,
-            ButtonComponent], imports: [CommonModule], exports: [SannaUiComponent,
-            ButtonComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, imports: [CommonModule] });
+            SaButtonComponent,
+            SaMessageboxComponent,
+            SaHeadingComponent,
+            SaTextComponent,
+            SaTableComponent,
+            SaTagComponent], imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule,
+            SaColumnDefDirective], exports: [SannaUiComponent,
+            SaButtonComponent,
+            SaMessageboxComponent,
+            SaHeadingComponent,
+            SaTextComponent,
+            SaTableComponent,
+            SaTagComponent,
+            SaColumnDefDirective,
+            SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, imports: [CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule, SannaUiFontAwesomeModule,
+            SannaFormsModule,
+            SannaIconModule] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaUiModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [
                         SannaUiComponent,
-                        ButtonComponent
+                        SaButtonComponent,
+                        SaMessageboxComponent,
+                        SaHeadingComponent,
+                        SaTextComponent,
+                        SaTableComponent,
+                        SaTagComponent,
                     ],
                     imports: [
-                        CommonModule
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        SannaUiFontAwesomeModule,
+                        SannaFormsModule,
+                        SannaIconModule,
+                        SaColumnDefDirective
                     ],
                     exports: [
                         SannaUiComponent,
-                        ButtonComponent
+                        SaButtonComponent,
+                        SaMessageboxComponent,
+                        SaHeadingComponent,
+                        SaTextComponent,
+                        SaTableComponent,
+                        SaTagComponent,
+                        SaColumnDefDirective,
+                        SannaUiFontAwesomeModule,
+                        SannaFormsModule,
+                        SannaIconModule
                     ]
                 }]
         }] });
@@ -114,10 +2507,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
 /*
  * Public API Surface of sanna-ui
  */
+// Estilos y configuración (para personalización avanzada)
+// Los usuarios pueden importar directamente: import 'sanna-ui/lib/_styles/sanna-fonts.scss';
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { ButtonComponent, SannaUiComponent, SannaUiModule, SannaUiService };
+export { SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaDateComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaTableComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map
