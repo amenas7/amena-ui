@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { IconDefinition, findIconDefinition, library, IconName } from '@fortawesome/fontawesome-svg-core';
 import { 
   faSpinner, 
@@ -51,6 +51,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   selector: 'sa-button',
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss',
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[class.full-width]': 'fullWidth'
   }
