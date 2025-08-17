@@ -37,7 +37,7 @@ export declare class SaButtonComponent {
     clicked: EventEmitter<void>;
     readonly spinnerIcon: IconDefinition;
     get iconDefinition(): IconDefinition | undefined;
-    onClick(): void;
+    onClick(event?: Event): void;
     get buttonClasses(): string;
     get isInteractive(): boolean;
     get showSpinner(): boolean;
