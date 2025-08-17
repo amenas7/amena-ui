@@ -51,10 +51,10 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   selector: 'sa-button',
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss',
-  encapsulation: ViewEncapsulation.None,
   host: {
     '[class.full-width]': 'fullWidth',
-    'style': 'display: inline-block; vertical-align: middle;'
+    'style': 'visibility: hidden;',
+    '[style.visibility]': '"visible"'
   }
 })
 export class SaButtonComponent {
