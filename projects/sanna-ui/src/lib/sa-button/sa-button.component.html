@@ -5,6 +5,7 @@
   [attr.disabled]="disabled || loading ? '' : null"
   [disabled]="disabled || loading"
   (click)="onClick($event)"
+  style="border: none; border-radius: 0.375rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; font-weight: 400; transition: all 0.2s ease-in-out; text-align: center; user-select: none; vertical-align: middle; white-space: nowrap; text-decoration: none; outline: none; position: relative; overflow: visible;"
 >
   <!-- Contenido del botón -->
   <div class="button-content" [class.loading-hidden]="showSpinner">

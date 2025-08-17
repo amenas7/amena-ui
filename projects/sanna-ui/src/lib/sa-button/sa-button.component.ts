@@ -53,7 +53,8 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   styleUrl: './sa-button.component.scss',
   encapsulation: ViewEncapsulation.None,
   host: {
-    '[class.full-width]': 'fullWidth'
+    '[class.full-width]': 'fullWidth',
+    'style': 'display: inline-block; vertical-align: middle;'
   }
 })
 export class SaButtonComponent {
