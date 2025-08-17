@@ -1,0 +1,215 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../../_styles/sanna-fonts';
+
+// Variables para el color personalizado
+$switch-color: #32A047;
+$switch-color-hover: darken($switch-color, 10%);
+$switch-color-disabled: #e9ecef;
+
+:host {
+  display: block;
+  width: 100%;
+  font-family: $sanna-font-stack;
+  
+  // Forzar que el contenedor mantenga su ancho
+  .mb-3 {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+// Personalización del switch para usar el color #32A047
+:host .form-switch {
+  font-family: $sanna-font-stack;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  .form-check-input {
+    cursor:  pointer !important;
+    background-color: #dee2e6 !important;
+    border-color: #dee2e6 !important;
+    margin: 0; // Resetear margin por defecto de Bootstrap
+    flex-shrink: 0; // Evitar que se encoja
+    background-image: none !important; // Eliminar cualquier imagen de fondo por defecto
+    position: relative; // Para posicionar el pseudo-elemento del thumb
+    z-index: 3; // Asegurar que esté por encima de todo
+    
+    // Thumb siempre presente que se mueve
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: calc(1em - 4px);
+      height: calc(1em - 4px);
+      background-color: #adb5bd;
+      border-radius: 50%;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      transform: translateY(-50%);
+      pointer-events: none; // Permitir que los clicks pasen al input
+    }
+    
+    // Cuando está marcado (checked)
+    &:checked {
+      background-color: $switch-color !important;
+      //border-color: $switch-color !important;
+      
+      &::before {
+        left: calc(100% - 1em + 2px);
+        background-color: #ffffff;
+      }
+    }
+    
+    // Estado unchecked - thumb en posición izquierda
+    &:not(:checked) {
+      background-color: #fff !important;
+      border-color: #777777 !important;
+      
+      &::before {
+        left: 2px;
+        background-color: #adb5bd;
+      }
+    }
+    
+    // Focus state - solo cuando se navega con teclado, no al hacer click
+    &:focus:not(:focus-visible) {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    &:focus-visible {
+      outline: none !important;
+      box-shadow: 0 0 0 0.25rem rgba(50, 160, 71, 0.25) !important;
+      border-color: $switch-color !important;
+    }
+        
+    // Forzar que no haya círculo azul en ningún estado
+    &:not(:checked) {
+      background-image: none !important;
+    }
+    
+    // Disabled state
+    &:disabled {
+      background-color: $switch-color-disabled !important;
+      border-color: $switch-color-disabled !important;
+      
+      &:checked {
+        background-color: rgba($switch-color, 0.5) !important;
+        border-color: rgba($switch-color, 0.5) !important;
+      }
+    }
+  }
+  
+  // Estados de validación
+  &.is-valid .form-check-input {
+    border-color: #32A047;
+    
+    &:focus:not(:focus-visible) {
+      box-shadow: none !important;
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25) !important;
+    }
+    
+    &:checked {
+      background-color: #32A047 !important;
+    }
+    
+  }
+  
+  &.is-invalid .form-check-input {
+    border-color: #ef4444;
+    
+    &:focus:not(:focus-visible) {
+      box-shadow: none !important;
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 0.25rem rgba(239, 68, 68, 0.25) !important;
+    }
+    
+    &:checked {
+      background-color: $switch-color !important; // Mantener verde cuando está checked
+    }
+    
+  }
+}
+
+// Tamaños personalizados
+:host .form-switch-sm {
+  .form-check-input {
+    width: 2rem;
+    height: 1.2rem;
+    font-size: 1.1rem;
+  }
+}
+
+:host .form-switch-md {
+  .form-check-input {
+    width: 3rem;
+    height: 1.6rem;
+    font-size: 1.4rem;
+  }
+}
+
+:host .form-switch-lg {
+  .form-check-input {
+    width: 4rem;
+    height: 2rem;
+    font-size: 1.8rem;
+  }
+}
+
+// Personalizar el label
+:host .form-check-label {
+  font-family: $sanna-font-stack;
+  color: #2E3438;
+  font-size: 14px;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  margin: 0; // Resetear margin por defecto
+  line-height: 1; // Asegurar altura consistente
+  display: flex;
+  align-items: center;
+  user-select: none; // Evitar selección de texto al hacer click
+  z-index: 2; // Asegurar que esté por encima del thumb
+  
+  &:hover {
+    color: #1a1a1a; // Color más oscuro en hover para indicar interactividad
+  }
+  
+  &.text-muted {
+    cursor: not-allowed !important;
+    
+    &:hover {
+      color: #2E3438; // Mantener color original si está deshabilitado
+    }
+  }
+}
+
+// Personalizar textos de ayuda y error
+:host .form-text {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+:host .invalid-feedback {
+  font-family: $sanna-font-stack;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+// Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
+:host .mb-3:last-child {
+  margin-bottom: 0 !important;
+}
+
+// Mejoras adicionales para la accesibilidad
+:host .form-check-input:disabled + .form-check-label {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

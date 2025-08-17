@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { SaHeadingComponent } from './sa-heading.component';
 
 const meta: Meta<SaHeadingComponent> = {
-  title: 'Componentes/Typografia/Heading',
+  title: 'Typografia/Heading',
   component: SaHeadingComponent,
   parameters: {
     layout: 'centered',
