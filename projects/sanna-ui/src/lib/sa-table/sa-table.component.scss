@@ -344,31 +344,35 @@
     }
   }
   
-  // Forzar que no haya hover en las cabeceras
-  .table thead th {
+  // Forzar que no haya hover en las cabeceras con máxima especificidad
+  .table thead th,
+  .table thead th:hover,
+  .table thead th:focus,
+  .table thead th:active,
+  .table.table-light thead th,
+  .table-light thead th {
     cursor: default !important;
     border-bottom: none !important;
     border-right: none !important;
     background-color: #EEF8F0 !important;
+    background: #EEF8F0 !important;
     border-radius: 0 !important;
     user-select: text !important;
     font-weight: 500 !important;
     text-align: left !important;
     vertical-align: middle !important;
-    
-    &:hover {
-      background-color: #EEF8F0 !important;
-    }
+    color: #2E3438 !important;
   }
   
-  .table thead th:hover {
+  // Sobrescribir cualquier estilo de Bootstrap para las cabeceras con máxima especificidad
+  .table thead tr th,
+  .table thead tr th:hover,
+  .table thead tr th:focus,
+  .table thead tr th:active,
+  .table.table-light thead tr th,
+  .table-light thead tr th {
     background-color: #EEF8F0 !important;
-  }
-  
-  // Sobrescribir cualquier estilo de Bootstrap para las cabeceras
-  .table thead tr th {
-    background-color: #EEF8F0 !important;
-    //background-color: red !important;
+    background: #EEF8F0 !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
@@ -376,10 +380,7 @@
     font-weight: 500 !important;
     text-align: left !important;
     vertical-align: middle !important;
-    
-    &:hover {
-      background-color: #EEF8F0 !important;
-    }
+    color: #2E3438 !important;
   }
   
   // Estilos específicos para las celdas de datos
@@ -804,6 +805,10 @@ nav[aria-label="Navegación de páginas"] {
   padding: 0.5rem 0.5rem !important;
   text-align: left !important;
   vertical-align: middle !important;
+  background-color: #EEF8F0 !important;
+  background: #EEF8F0 !important;
+  color: #2E3438 !important;
+  font-weight: 500 !important;
 }
 
 .sa-table-container .table > tbody > tr:last-child > td {
@@ -1085,4 +1090,26 @@ nav[aria-label="Navegación de páginas"] {
       }
     }
   }
+}
+
+/* REGLA FINAL CON MÁXIMA ESPECIFICIDAD PARA ENCABEZADOS */
+.sa-table-container .table > thead > tr > th,
+.sa-table-container .table.table-light > thead > tr > th,
+.sa-table-container .table-light > thead > tr > th,
+.sa-table-container .table thead th.table-light,
+.sa-table-container .table thead th {
+  background-color: #EEF8F0 !important;
+  background: #EEF8F0 !important;
+  color: #2E3438 !important;
+  font-weight: 500 !important;
+}
+
+.sa-table-container .table > thead > tr > th:hover,
+.sa-table-container .table.table-light > thead > tr > th:hover,
+.sa-table-container .table-light > thead > tr > th:hover,
+.sa-table-container .table thead th.table-light:hover,
+.sa-table-container .table thead th:hover {
+  background-color: #EEF8F0 !important;
+  background: #EEF8F0 !important;
+  color: #2E3438 !important;
 }

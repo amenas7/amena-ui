@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-import { IconDefinition, findIconDefinition, library, IconName } from '@fortawesome/fontawesome-svg-core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { IconDefinition, findIconDefinition, IconName } from '@fortawesome/fontawesome-svg-core';
 import { 
   faSpinner, 
   faDownload, 
