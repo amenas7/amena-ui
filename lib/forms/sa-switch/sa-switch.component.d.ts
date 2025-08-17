@@ -1,0 +1,37 @@
+import { EventEmitter } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import * as i0 from "@angular/core";
+export type SwitchSize = 'sm' | 'md' | 'lg';
+export type SwitchStatus = 'default' | 'success' | 'error';
+export declare class SaSwitchComponent implements ControlValueAccessor {
+    value: boolean;
+    size: SwitchSize;
+    status: SwitchStatus;
+    label: string;
+    helperText: string;
+    errorText: string;
+    required: boolean;
+    disabled: boolean;
+    id: string;
+    name: string;
+    get uniqueId(): string;
+    valueChange: EventEmitter<boolean>;
+    change: EventEmitter<boolean>;
+    focus: EventEmitter<FocusEvent>;
+    blur: EventEmitter<FocusEvent>;
+    private onChange;
+    private onTouched;
+    get switchClasses(): string;
+    get inputClasses(): string;
+    get labelClasses(): string;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    onModelChange(event: Event): void;
+    onInputFocus(event: FocusEvent): void;
+    onInputBlur(event: FocusEvent): void;
+    toggleSwitch(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SaSwitchComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+}

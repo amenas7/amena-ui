@@ -13,6 +13,7 @@ export * from './lib/forms/sa-textarea/sa-textarea.component';
 export * from './lib/forms/sa-checkbox/sa-checkbox.component';
 export * from './lib/forms/sa-radio/sa-radio.component';
 export * from './lib/forms/sa-date/sa-date.component';
+export * from './lib/forms/sa-switch/sa-switch.component';
 export * from './lib/sa-heading/sa-heading.component';
 export * from './lib/sa-text/sa-text.component';
 export * from './lib/sa-table/sa-table.component';
