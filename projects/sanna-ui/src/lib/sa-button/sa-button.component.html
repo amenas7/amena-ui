@@ -2,7 +2,7 @@
   #buttonElement
   [class]="buttonClasses"
   [type]="type"
-  [disabled]="!isInteractive"
+  [attr.disabled]="disabled || loading ? '' : null"
   (click)="onClick()"
 >
   <!-- Contenido del botón -->
