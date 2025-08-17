@@ -19,7 +19,7 @@
         </tr>
         <!-- Fila de filtros -->
         <tr *ngIf="showFilters" class="filter-row">
-          <th *ngFor="let column of columns" 
+          <th class="filter-row-th" *ngFor="let column of columns" 
               [style.width]="column.width">
             <input 
               type="text" 

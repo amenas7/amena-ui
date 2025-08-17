@@ -43,7 +43,7 @@
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 1rem !important;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -62,7 +62,7 @@
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.875rem !important;
 }
 
 // Quitar focus del select de "Registros por página" específicamente
@@ -248,7 +248,7 @@
       
       .loading-text {
         color: #6c757d;
-        font-size: 0.875rem;
+        font-size: 0.875rem !important;
         @include sanna-font-medium;
       }
     }
@@ -494,7 +494,7 @@
       padding: 0;
       background-color: transparent;
       color: #5BAB5F;
-      font-size: 1.125rem;
+      font-size: 1.125rem !important;
       text-align: center;
       line-height: 1;
       width: 2rem;
@@ -505,12 +505,12 @@
       cursor: pointer !important;
       
       // Estilos para iconos de paginación
-      font-size: 0.9rem;
+      font-size: 0.9rem !important;
       font-weight: 500;
       
       // Iconos de paginación
       .pagination-icon {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
         font-weight: 500;
         line-height: 0;
         display: flex;
@@ -680,7 +680,7 @@
       
       .page-link {
         padding: 0.375rem 0.5rem;
-        font-size: 0.875rem;
+        font-size: 0.875rem !important;
         min-width: 2.5rem;
         height: 2.5rem;
         border-radius: 0.25rem;
@@ -704,7 +704,7 @@
       .page-link {
         min-width: 2.25rem;
         height: 2.25rem;
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
         padding: 0.25rem 0.375rem;
       }
     }
@@ -803,6 +803,7 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table > thead > tr > th {
   border: none !important;
   padding: 0.5rem 0.5rem !important;
+  //padding-top: 0px !important;
   text-align: left !important;
   vertical-align: middle !important;
   background-color: #EEF8F0 !important;
@@ -980,7 +981,7 @@ nav[aria-label="Navegación de páginas"] {
     background-color: transparent;
     
     .pagination-icon {
-      font-size: 16px;
+      font-size: 16px !important;
       line-height: 1;
       font-weight: bold;
     }
@@ -1016,7 +1017,7 @@ nav[aria-label="Navegación de páginas"] {
   }
   
   .page-indicator {
-    font-size: 0.875rem;
+    font-size: 0.875rem !important;
     font-weight: 500;
     white-space: nowrap;
     min-width: 80px;
@@ -1032,15 +1033,19 @@ nav[aria-label="Navegación de páginas"] {
       height: 32px;
       
       .pagination-icon {
-        font-size: 14px;
+        font-size: 14px !important;
       }
     }
     
     .page-indicator {
-      font-size: 0.75rem;
+      font-size: 0.75rem !important;
       min-width: 70px;
     }
   }
+}
+
+.sa-table-container .table .filter-row .filter-row-th {
+  padding-top: 0px !important;
 }
 
 /* Estilos para la fila de filtros */
@@ -1049,8 +1054,8 @@ nav[aria-label="Navegación de páginas"] {
     th {
       background-color: #f8f9fa !important;
       border-bottom: 1px solid #e1e2e4 !important;
-      border-top: 1px solid #e1e2e4 !important;
-      padding: 0.5rem !important;
+      border-top: none !important;
+      padding: 0.25rem 0.1rem !important;
       
       &:hover {
         background-color: #f8f9fa !important;
@@ -1060,7 +1065,7 @@ nav[aria-label="Navegación de páginas"] {
     .filter-input {
       border: 1px solid #ced4da;
       border-radius: 0.25rem;
-      font-size: 0.875rem;
+      font-size: 0.875rem !important;
       padding: 0.25rem 0.5rem;
       background-color: white;
       color: #495057;
@@ -1082,7 +1087,7 @@ nav[aria-label="Navegación de páginas"] {
       &::placeholder {
         color: #6c757d;
         font-style: italic;
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
       }
       
       &:hover {
