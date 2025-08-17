@@ -266,11 +266,19 @@ export class SaButtonComponent {
     return undefined;
   }
 
-  onClick(): void {
-    // No permitir clic si está disabled o loading
-    if (!this.disabled && !this.loading) {
-      this.clicked.emit();
+  onClick(event?: Event): void {
+    // Si está disabled o loading, prevenir completamente el evento
+    if (this.disabled || this.loading) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+      return;
     }
+    
+    // Solo emitir si no está disabled ni loading
+    this.clicked.emit();
   }
 
   get buttonClasses(): string {

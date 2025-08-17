@@ -3,7 +3,8 @@
   [class]="buttonClasses"
   [type]="type"
   [attr.disabled]="disabled || loading ? '' : null"
-  (click)="onClick()"
+  [disabled]="disabled || loading"
+  (click)="onClick($event)"
 >
   <!-- Contenido del botón -->
   <div class="button-content" [class.loading-hidden]="showSpinner">
