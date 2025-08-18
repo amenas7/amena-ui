@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { SaColumnDefDirective } from './sa-column-def.directive';
 
 export interface TableColumn {
@@ -24,7 +24,8 @@ export interface PaginationInfo {
 @Component({
   selector: 'sa-table',
   templateUrl: './sa-table.component.html',
-  styleUrls: ['./sa-table.component.scss']
+  styleUrls: ['./sa-table.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   private resizeListener: (() => void) | null = null;
