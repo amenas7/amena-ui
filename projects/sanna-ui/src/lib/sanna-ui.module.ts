@@ -12,6 +12,7 @@ import { SaTextComponent } from './sa-text/sa-text.component';
 import { SaTableComponent } from './sa-table/sa-table.component';
 import { SaColumnDefDirective } from './sa-table/sa-column-def.directive';
 import { SaTagComponent } from './sa-tag/sa-tag.component';
+import { SaLegendComponent } from './sa-legend/sa-legend.component';
 
 // Módulos
 import { SannaFormsModule } from './forms/forms.module';
@@ -26,6 +27,7 @@ import { SannaIconModule } from './sa-icon/icon.module';
     SaTextComponent,
     SaTableComponent,
     SaTagComponent,
+    SaLegendComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { SannaIconModule } from './sa-icon/icon.module';
     SaTextComponent,
     SaTableComponent,
     SaTagComponent,
+    SaLegendComponent,
     SaColumnDefDirective,
     SannaUiFontAwesomeModule,
     SannaFormsModule,

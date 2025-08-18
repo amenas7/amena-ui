@@ -27,6 +27,10 @@ export * from './lib/sa-text/sa-text.component';
 export * from './lib/sa-table/sa-table.component';
 export * from './lib/sa-table/sa-column-def.directive';
 export * from './lib/sa-tag/sa-tag.component';
+export * from './lib/sa-legend/sa-legend.component';
+
+// Tipos compartidos
+export * from './lib/types/tooltip.types';
 
 // Estilos y configuración (para personalización avanzada)
 // Los usuarios pueden importar directamente: import 'sanna-ui/lib/_styles/sanna-fonts.scss';

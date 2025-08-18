@@ -1,0 +1,17 @@
+<div 
+  class="legend-rectangle"
+  [style.background-color]="color"
+  [class.has-tooltip]="tooltip">
+  
+  <!-- Tooltip personalizado (igual al de sa-button) -->
+  <div *ngIf="tooltip" 
+       class="custom-tooltip" 
+       [class.tooltip-top]="tooltipPosition === 'top'"
+       [class.tooltip-bottom]="tooltipPosition === 'bottom'"
+       [class.tooltip-left]="tooltipPosition === 'left'"
+       [class.tooltip-right]="tooltipPosition === 'right'"
+       [class.multiline]="isLongTooltip"
+       [attr.data-tooltip]="tooltip">
+    {{ tooltip }}
+  </div>
+</div>

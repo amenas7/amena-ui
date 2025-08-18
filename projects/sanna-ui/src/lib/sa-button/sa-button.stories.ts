@@ -32,6 +32,8 @@ export default {
           result = result.replace(/\[icon\]="'([^']+)'"/g, 'icon="$1"');
           result = result.replace(/\[position\]="'([^']+)'"/g, 'position="$1"');
           result = result.replace(/\[type\]="'([^']+)'"/g, 'type="$1"');
+          result = result.replace(/\[tooltip\]="'([^']+)'"/g, 'tooltip="$1"');
+          result = result.replace(/\[tooltipPosition\]="'([^']+)'"/g, 'tooltipPosition="$1"');
           
           // Transformar boolean properties
           result = result.replace(/\[disabled\]="true"/g, 'disabled="true"');
@@ -95,6 +97,15 @@ export default {
       control: { type: 'select' },
       options: ['button', 'submit', 'reset'],
       description: 'Tipo de botón HTML'
+    },
+    tooltip: {
+      control: { type: 'text' },
+      description: 'Texto que se muestra como tooltip al pasar el mouse sobre el botón'
+    },
+    tooltipPosition: {
+      control: { type: 'select' },
+      options: ['top', 'bottom', 'left', 'right'],
+      description: 'Posición donde aparecerá el tooltip'
     }
   }
 } as Meta<SaButtonComponent>;
@@ -103,12 +114,12 @@ export default {
 export const Primary: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
-    variant: 'primary'
+    variant: 'primary',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Botón principal interactivo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+        story: 'Botón principal interactivo con tooltip. Pasa el cursor sobre el botón para ver el tooltip. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -227,6 +238,280 @@ export const Disabled: StoryObj<SaButtonComponent> = {
 };
 
 
+
+// Historia con todas las posiciones de tooltip
+export const TooltipPositions: StoryObj<SaButtonComponent> = {
+  render: () => ({
+    template: `
+      <div class="p-5">
+        <h4 class="mb-3">Posiciones del Tooltip</h4>
+        <p class="mb-4 text-muted">Pasa el cursor sobre cada botón para ver el tooltip en diferentes posiciones:</p>
+        
+        <div class="d-flex flex-column align-items-center gap-4">
+          <!-- Tooltip TOP -->
+          <div class="text-center">
+            <p class="text-muted mb-2">Posición: <strong>TOP</strong> (por defecto)</p>
+            <sa-button 
+              label="Tooltip arriba" 
+              variant="primary" 
+              tooltip="¡Tooltip en la parte superior!"
+              tooltipPosition="top">
+            </sa-button>
+          </div>
+          
+          <!-- Tooltips LEFT y RIGHT en la misma fila -->
+          <div class="d-flex justify-content-center align-items-center gap-5">
+            <!-- Tooltip LEFT -->
+            <div class="text-center">
+              <p class="text-muted mb-2">Posición: <strong>LEFT</strong></p>
+              <sa-button 
+                label="Tooltip izquierda" 
+                variant="info" 
+                tooltip="¡Tooltip a la izquierda!"
+                tooltipPosition="left">
+              </sa-button>
+            </div>
+            
+            <!-- Tooltip RIGHT -->
+            <div class="text-center">
+              <p class="text-muted mb-2">Posición: <strong>RIGHT</strong></p>
+              <sa-button 
+                label="Tooltip derecha" 
+                variant="warning" 
+                tooltip="¡Tooltip a la derecha!"
+                tooltipPosition="right">
+              </sa-button>
+            </div>
+          </div>
+          
+          <!-- Tooltip BOTTOM -->
+          <div class="text-center">
+            <p class="text-muted mb-2">Posición: <strong>BOTTOM</strong></p>
+            <sa-button 
+              label="Tooltip abajo" 
+              variant="success" 
+              tooltip="¡Tooltip en la parte inferior!"
+              tooltipPosition="bottom">
+            </sa-button>
+          </div>
+        </div>
+        
+        <div class="mt-5">
+          <h5 class="mb-3">Ejemplo con botones de solo icono</h5>
+          <div class="d-flex justify-content-center gap-3">
+            <sa-button 
+              icon="edit" 
+              iconOnly="true"
+              variant="primary" 
+              tooltip="Editar (arriba)"
+              tooltipPosition="top">
+            </sa-button>
+            <sa-button 
+              icon="trash" 
+              iconOnly="true"
+              variant="danger" 
+              tooltip="Eliminar (derecha)"
+              tooltipPosition="right">
+            </sa-button>
+            <sa-button 
+              icon="eye" 
+              iconOnly="true"
+              variant="info" 
+              tooltip="Ver (abajo)"
+              tooltipPosition="bottom">
+            </sa-button>
+            <sa-button 
+              icon="share" 
+              iconOnly="true"
+              variant="secondary" 
+              tooltip="Compartir (izquierda)"
+              tooltipPosition="left">
+            </sa-button>
+          </div>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demostración de todas las posiciones disponibles para el tooltip: top, bottom, left y right. Cada posición es útil según el contexto y espacio disponible.'
+      },
+      source: {
+        code: `<!-- Tooltip en diferentes posiciones -->
+<sa-button label="Tooltip arriba" tooltip="¡Arriba!" tooltipPosition="top"></sa-button>
+<sa-button label="Tooltip abajo" tooltip="¡Abajo!" tooltipPosition="bottom"></sa-button>
+<sa-button label="Tooltip izquierda" tooltip="¡Izquierda!" tooltipPosition="left"></sa-button>
+<sa-button label="Tooltip derecha" tooltip="¡Derecha!" tooltipPosition="right"></sa-button>
+
+<!-- Con botones de solo icono -->
+<sa-button icon="edit" iconOnly="true" tooltip="Editar" tooltipPosition="top"></sa-button>
+<sa-button icon="trash" iconOnly="true" tooltip="Eliminar" tooltipPosition="bottom"></sa-button>`
+      }
+    }
+  }
+};
+
+// Historia con tooltips de texto largo (múltiples líneas)
+export const LongTextTooltips: StoryObj<SaButtonComponent> = {
+  render: () => ({
+    template: `
+      <div class="p-5">
+        <h4 class="mb-3">Tooltips con Texto Largo - Múltiples Líneas</h4>
+        <p class="mb-4 text-muted">Los tooltips automáticamente se adaptan a texto largo dividiéndolo en múltiples líneas con un ancho máximo de 250px:</p>
+        
+        <div class="d-flex flex-column align-items-center gap-4">
+          <!-- Tooltip con texto muy largo -->
+          <div class="text-center">
+            <p class="text-muted mb-2">Tooltip con descripción larga:</p>
+            <sa-button 
+              label="Información detallada" 
+              variant="primary" 
+              tooltip="Este es un tooltip con mucho texto que automáticamente se divide en múltiples líneas cuando el contenido es demasiado largo para caber en una sola línea."
+              tooltipPosition="top">
+            </sa-button>
+          </div>
+          
+          <!-- Tooltips en diferentes posiciones con texto largo -->
+          <div class="d-flex justify-content-center align-items-center gap-5">
+            <div class="text-center">
+              <p class="text-muted mb-2">Posición: LEFT</p>
+              <sa-button 
+                label="Ayuda izquierda" 
+                variant="info" 
+                tooltip="Instrucciones detalladas: Para usar esta función, primero debes completar todos los campos requeridos y luego hacer clic en este botón."
+                tooltipPosition="left">
+              </sa-button>
+            </div>
+            
+            <div class="text-center">
+              <p class="text-muted mb-2">Posición: RIGHT</p>
+              <sa-button 
+                label="Ayuda derecha" 
+                variant="warning" 
+                tooltip="Advertencia importante: Esta acción modificará permanentemente los datos del sistema. Asegúrate de tener una copia de seguridad antes de continuar."
+                tooltipPosition="right">
+              </sa-button>
+            </div>
+          </div>
+          
+          <!-- Tooltip BOTTOM con texto largo -->
+          <div class="text-center">
+            <p class="text-muted mb-2">Posición: BOTTOM</p>
+            <sa-button 
+              label="Procesar datos" 
+              variant="success" 
+              tooltip="Proceso de datos: Esta operación puede tardar varios minutos dependiendo del volumen de información. Durante el proceso no cierres la ventana del navegador."
+              tooltipPosition="bottom">
+            </sa-button>
+          </div>
+        </div>
+        
+        <div class="mt-5">
+          <h5 class="mb-3">Botones con solo icono y descripciones largas</h5>
+          <div class="d-flex justify-content-center gap-3">
+            <sa-button 
+              icon="edit" 
+              iconOnly="true"
+              variant="primary" 
+              tooltip="Editar elemento: Permite modificar todos los campos del registro seleccionado. Los cambios se guardan automáticamente."
+              tooltipPosition="top">
+            </sa-button>
+            <sa-button 
+              icon="trash" 
+              iconOnly="true"
+              variant="danger" 
+              tooltip="Eliminar permanentemente: Esta acción no se puede deshacer. El elemento se eliminará de forma definitiva del sistema."
+              tooltipPosition="bottom">
+            </sa-button>
+            <sa-button 
+              icon="download" 
+              iconOnly="true"
+              variant="success" 
+              tooltip="Descargar archivo: Genera un archivo Excel con todos los datos filtrados. El proceso puede tardar unos segundos."
+              tooltipPosition="left">
+            </sa-button>
+            <sa-button 
+              icon="cog" 
+              iconOnly="true"
+              variant="gray" 
+              tooltip="Configuración avanzada: Accede a opciones adicionales de personalización del sistema. Requiere permisos de administrador."
+              tooltipPosition="right">
+            </sa-button>
+          </div>
+        </div>
+        
+        <div class="mt-5">
+          <h5 class="mb-3">Comparación: Texto Corto vs Texto Largo</h5>
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <sa-button 
+              label="Tooltip corto" 
+              variant="secondary" 
+              tooltip="Texto corto"
+              tooltipPosition="top">
+            </sa-button>
+            <sa-button 
+              label="Tooltip medio" 
+              variant="info" 
+              tooltip="Este es un texto de longitud media que se mantiene en una línea"
+              tooltipPosition="top">
+            </sa-button>
+            <sa-button 
+              label="Tooltip largo" 
+              variant="warning" 
+              tooltip="Este es un texto mucho más largo que automáticamente se convierte en multilínea porque excede los 60 caracteres permitidos"
+              tooltipPosition="top">
+            </sa-button>
+          </div>
+        </div>
+        
+        <div class="mt-5 alert alert-info">
+          <h6>✅ Sistema inteligente mejorado:</h6>
+          <ul class="mb-0">
+            <li><strong>Texto corto (&lt;60 caracteres):</strong> Una sola línea, ancho máximo 350px</li>
+            <li><strong>Texto largo (&gt;60 caracteres):</strong> Múltiples líneas, ancho máximo 280px</li>
+            <li><strong>Ancho mínimo (multilínea):</strong> 200px para mejor legibilidad</li>
+            <li><strong>Alineación inteligente:</strong> Centrado para texto corto, izquierda para texto largo</li>
+            <li><strong>Detección automática:</strong> Basada en longitud de caracteres</li>
+          </ul>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Los tooltips pueden manejar texto largo automáticamente, dividiéndolo en múltiples líneas con un ancho máximo de 250px. Esto los hace perfectos para descripciones detalladas e instrucciones.'
+      },
+      source: {
+        code: `<!-- Tooltip con texto largo -->
+<sa-button 
+  label="Información detallada" 
+  variant="primary" 
+  tooltip="Este es un tooltip con mucho texto que automáticamente se divide en múltiples líneas cuando el contenido es demasiado largo para caber en una sola línea."
+  tooltipPosition="top">
+</sa-button>
+
+<!-- Botón con solo icono y descripción larga -->
+<sa-button 
+  icon="edit" 
+  iconOnly="true"
+  variant="primary" 
+  tooltip="Editar elemento: Permite modificar todos los campos del registro seleccionado. Los cambios se guardan automáticamente."
+  tooltipPosition="top">
+</sa-button>
+
+<!-- Advertencia con texto largo -->
+<sa-button 
+  label="Eliminar" 
+  variant="danger" 
+  tooltip="Advertencia importante: Esta acción modificará permanentemente los datos del sistema. Asegúrate de tener una copia de seguridad antes de continuar."
+  tooltipPosition="bottom">
+</sa-button>`
+      }
+    }
+  }
+};
 
 // Historia con diferentes variantes
 export const Variants: StoryObj<SaButtonComponent> = {

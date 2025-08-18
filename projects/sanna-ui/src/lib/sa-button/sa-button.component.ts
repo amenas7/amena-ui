@@ -42,6 +42,8 @@ import {
   faPencil
 } from '@fortawesome/free-solid-svg-icons';
 
+import { TooltipPosition } from '../types/tooltip.types';
+
 export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray' | 'red' | 'success';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
@@ -71,6 +73,32 @@ export class SaButtonComponent {
   private _icon?: string;
   private _position: 'left' | 'right' = 'left';
   private _iconOnly: boolean = false;
+  private _tooltip?: string;
+  private _tooltipPosition: TooltipPosition = 'top';
+
+  @Input()
+  set tooltip(value: string | any) {
+    this._tooltip = value;
+  }
+  get tooltip(): string | undefined {
+    return this._tooltip;
+  }
+
+  @Input()
+  set tooltipPosition(value: TooltipPosition | any) {
+    this._tooltipPosition = value || 'top';
+  }
+  get tooltipPosition(): TooltipPosition {
+    return this._tooltipPosition;
+  }
+
+  // Determinar si el tooltip necesita múltiples líneas
+  get isLongTooltip(): boolean {
+    if (!this.tooltip) return false;
+    // Considerar texto largo si tiene más de 60 caracteres o contiene saltos de línea
+    // 60 caracteres es aproximadamente lo que cabe en 350px con font-size 12px
+    return this.tooltip.length > 60 || this.tooltip.includes('\n');
+  }
 
   @Input()
   set variant(value: ButtonVariant | any) {

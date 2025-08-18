@@ -4,6 +4,7 @@
   [type]="type"
   [attr.disabled]="disabled || loading ? '' : null"
   [disabled]="disabled || loading"
+  [class.has-tooltip]="tooltip"
   (click)="onClick($event)"
 >
   <!-- Contenido del botón -->
@@ -20,5 +21,17 @@
       class="spinner-icon"
       [class.spinning]="loading">
     </fa-icon>
+  </div>
+  
+  <!-- Tooltip personalizado -->
+  <div *ngIf="tooltip" 
+       class="custom-tooltip" 
+       [class.tooltip-top]="tooltipPosition === 'top'"
+       [class.tooltip-bottom]="tooltipPosition === 'bottom'"
+       [class.tooltip-left]="tooltipPosition === 'left'"
+       [class.tooltip-right]="tooltipPosition === 'right'"
+       [class.multiline]="isLongTooltip"
+       [attr.data-tooltip]="tooltip">
+    {{ tooltip }}
   </div>
 </button>
