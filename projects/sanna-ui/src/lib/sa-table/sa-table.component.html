@@ -64,7 +64,7 @@
   <div *ngIf="showPagination && data.length > 0" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
     <!-- Items Per Page Selector (izquierda) -->
     <div *ngIf="showItemsPerPage" class="d-flex align-items-center mb-2 mb-md-0">
-      <span class="text-muted me-2" style="font-size: 0.75rem !important;">Registros por página:</span>
+      <span class="text-muted me-2" style="font-size: 11px !important;">Registros por página:</span>
       <select 
         id="itemsPerPage"
         class="form-select form-select-sm sa-table-items-per-page" 
@@ -78,7 +78,7 @@
     
     <!-- Pagination Info and Controls (derecha) -->
     <div class="d-flex flex-column flex-md-row align-items-center">
-      <div *ngIf="showTotal" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 0.75rem !important;">
+      <div *ngIf="showTotal" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 11px !important;">
         Página: {{ paginationInfo.currentPage }} - {{ paginationInfo.startItem }} de {{ paginationInfo.totalItems }}
       </div>
       

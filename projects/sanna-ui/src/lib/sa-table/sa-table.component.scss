@@ -95,7 +95,7 @@
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
 // Quitar focus del select de "Registros por página" específicamente
@@ -104,7 +104,7 @@
   width: auto !important;
   min-width: 60px; // Ancho mínimo para asegurar que siempre se vea bien
   max-width: 120px; // Ancho máximo para evitar que sea demasiado grande
-  font-size: 12px !important; /* Agregar tamaño de fuente para el select de registros por página */
+  font-size: 11px !important; /* Agregar tamaño de fuente para el select de registros por página */
   
   &:focus {
     border-color: #ced4da !important;
@@ -282,7 +282,7 @@
       
       .loading-text {
         color: #6c757d;
-        font-size: 12px !important;
+        font-size: 11px !important;
         @include sanna-font-medium;
       }
     }
@@ -454,7 +454,7 @@
   // Efecto hover personalizado cuando hover es true
 .table.table-hover > tbody > tr:hover > td {
   background-color: #f8f9fa !important;
-  font-size: 12px !important; /* Mantener tamaño de fuente en hover */
+  font-size: 11px !important; /* Mantener tamaño de fuente en hover */
 }
   
   // Deshabilitar hover específicamente en la fila del mensaje vacío
@@ -509,7 +509,7 @@
   
   // Reducir espacio entre tabla y paginación
   .d-flex.justify-content-between.align-items-center.mt-3 {
-    margin-top: 12px !important;
+    margin-top: 11px !important;
   }
   
   .pagination {
@@ -616,8 +616,8 @@
   .table-controls .form-select {
     border-radius: 0.375rem;
     border: 1px solid #ced4da !important;
-    padding: 0.375rem 12px !important;
-    font-size: 12px !important; /* Cambiar a 12px para consistencia */
+    padding: 0.375rem 11px !important;
+    font-size: 11px !important; /* Cambiar a 12px para consistencia */
     font-weight: 400 !important;
     line-height: 1.5 !important;
     color: #212529 !important;
@@ -625,7 +625,7 @@
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
     background-repeat: no-repeat !important;
     background-position: right 12px center !important;
-    background-size: 16px 12px !important;
+    background-size: 16px 11px !important;
     //transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
     appearance: none !important;
     width: auto !important;
@@ -655,7 +655,7 @@
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
     padding-left: 0.5rem !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
   
 
@@ -721,7 +721,7 @@
       
       .page-link {
         padding: 0.375rem 0.5rem;
-        font-size: 12px !important;
+        font-size: 11px !important;
         min-width: 2.5rem;
         height: 2.5rem;
         border-radius: 0.25rem;
@@ -820,7 +820,7 @@ nav[aria-label="Navegación de páginas"] {
   padding: 0.5rem 0.5rem !important;
   text-align: left !important;
   vertical-align: middle !important;
-  font-size: 12px !important; /* Cambiar tamaño de fuente del contenido de la tabla */
+  font-size: 11px !important; /* Cambiar tamaño de fuente del contenido de la tabla */
 }
 
 /* Estilos específicos para el mensaje de estado vacío */
@@ -856,7 +856,7 @@ nav[aria-label="Navegación de páginas"] {
   background: #EEF8F0 !important;
   color: #2E3438 !important;
   font-weight: 600 !important;
-  font-size: 12px !important; /* Agregar tamaño de fuente para encabezados */
+  font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
 }
 
 .sa-table-container .table > tbody > tr:last-child > td {
@@ -969,7 +969,7 @@ nav[aria-label="Navegación de páginas"] {
     
     td {
       background-color: #f8f9fa !important;
-      font-size: 12px !important; /* Mantener tamaño de fuente en hover */
+      font-size: 11px !important; /* Mantener tamaño de fuente en hover */
     }
   }
   
@@ -979,7 +979,7 @@ nav[aria-label="Navegación de páginas"] {
     td {
       background-color: #1F8BE1 !important;
       color: white !important;
-      font-size: 12px !important; /* Mantener tamaño de fuente en filas seleccionadas */
+      font-size: 11px !important; /* Mantener tamaño de fuente en filas seleccionadas */
     }
     
     &:hover {
@@ -988,7 +988,7 @@ nav[aria-label="Navegación de páginas"] {
       td {
         background-color: #1F8BE1 !important;
         color: white !important;
-        font-size: 12px !important; /* Mantener tamaño de fuente en hover de filas seleccionadas */
+        font-size: 11px !important; /* Mantener tamaño de fuente en hover de filas seleccionadas */
       }
     }
   }
@@ -1146,7 +1146,7 @@ nav[aria-label="Navegación de páginas"] {
   }
   
   .page-indicator {
-    font-size: 12px !important;
+    font-size: 11px !important;
     font-weight: 500;
     white-space: nowrap;
     min-width: 80px;
@@ -1203,7 +1203,7 @@ nav[aria-label="Navegación de páginas"] {
     }
     
     .page-indicator {
-      font-size: 12px !important;
+      font-size: 11px !important;
       min-width: 60px;
     }
   }
@@ -1233,7 +1233,7 @@ nav[aria-label="Navegación de páginas"] {
     .filter-input {
       border: 1px solid #ced4da;
       border-radius: 0.25rem;
-      font-size: 12px !important;
+      font-size: 11px !important;
       padding: 0.25rem 0.5rem;
       background-color: white;
       color: #495057;
@@ -1256,7 +1256,7 @@ nav[aria-label="Navegación de páginas"] {
       &::placeholder {
         color: #6c757d;
         font-style: italic;
-        font-size: 12px !important;
+        font-size: 11px !important;
       }
       
       &:hover {
@@ -1276,7 +1276,7 @@ nav[aria-label="Navegación de páginas"] {
   background: #EEF8F0 !important;
   color: #2E3438 !important;
   font-weight: 600 !important;
-  font-size: 12px !important; /* Agregar tamaño de fuente para encabezados */
+  font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
 }
 
 .sa-table-container .table > thead > tr > th:hover,
@@ -1287,7 +1287,7 @@ nav[aria-label="Navegación de páginas"] {
   background-color: #EEF8F0 !important;
   background: #EEF8F0 !important;
   color: #2E3438 !important;
-  font-size: 12px !important; /* Mantener tamaño de fuente en hover de encabezados */
+  font-size: 11px !important; /* Mantener tamaño de fuente en hover de encabezados */
 }
 
 /* FIN DEL ARCHIVO - DISEÑO ORIGINAL MANTENIDO */
