@@ -19,3 +19,5 @@ export * from './lib/sa-text/sa-text.component';
 export * from './lib/sa-table/sa-table.component';
 export * from './lib/sa-table/sa-column-def.directive';
 export * from './lib/sa-tag/sa-tag.component';
+export * from './lib/sa-legend/sa-legend.component';
+export * from './lib/types/tooltip.types';
