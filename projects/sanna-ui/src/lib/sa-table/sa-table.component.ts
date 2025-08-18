@@ -171,6 +171,10 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   ngOnInit(): void {
     // Asegurar que el itemsPerPage esté sincronizado con paginationInfo
     this.paginationInfo.itemsPerPage = this.itemsPerPage;
+    
+    // Resetear a la primera página al inicializar
+    this.currentPage = 1;
+    
     this.applyFilters();
     this.updatePagination();
     this.setupResizeListener();
@@ -185,6 +189,10 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] || changes['itemsPerPage']) {
+      // Resetear a la primera página cuando cambian los datos
+      if (changes['data']) {
+        this.currentPage = 1;
+      }
       this.applyFilters();
       this.updatePagination();
     }
@@ -192,7 +200,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   updatePagination(): void {
     // Usar datos filtrados en lugar de datos originales
-    const dataToUse = this.filteredData.length > 0 || Object.keys(this.columnFilters).length > 0 ? this.filteredData : this.data;
+    const dataToUse = this.filteredData.length > 0 ? this.filteredData : this.data;
     
     if (!dataToUse || dataToUse.length === 0) {
       this.paginatedData = [];
@@ -204,11 +212,21 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
         startItem: 0,
         endItem: 0
       };
+      this.currentPage = 1; // Resetear a la primera página
       return;
     }
 
     const totalItems = dataToUse.length;
     const totalPages = Math.ceil(totalItems / this._itemsPerPage);
+    
+    // Asegurar que currentPage esté dentro del rango válido
+    if (this.currentPage > totalPages) {
+      this.currentPage = totalPages;
+    }
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+    
     const startItem = (this.currentPage - 1) * this._itemsPerPage;
     const endItem = Math.min(startItem + this._itemsPerPage, totalItems);
 
@@ -225,7 +243,8 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   }
 
   onPageChange(page: number): void {
-    if (page >= 1 && page <= this.paginationInfo.totalPages) {
+    // Validar que la página esté dentro del rango válido
+    if (page >= 1 && page <= this.paginationInfo.totalPages && this.paginationInfo.totalPages > 0) {
       this.currentPage = page;
       this.animationKey = 0; // Reiniciar la animación
       this.updatePagination();
@@ -248,7 +267,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   onItemsPerPageChange(itemsPerPage: number): void {
     this._itemsPerPage = itemsPerPage;
-    this.currentPage = 1;
+    this.currentPage = 1; // Resetear a la primera página
     this.animationKey = 0; // Reiniciar la animación
     this.updatePagination();
     this.itemsPerPageChange.emit(itemsPerPage);
@@ -361,17 +380,19 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
     if (activeFilters.length === 0) {
       this.filteredData = [...this.data];
-      return;
-    }
-
-    // Aplicar filtros
-    this.filteredData = this.data.filter(row => {
-      return activeFilters.every(columnKey => {
-        const filterValue = this.columnFilters[columnKey].toLowerCase().trim();
-        const cellValue = row[columnKey]?.toString().toLowerCase() || '';
-        return cellValue.includes(filterValue);
+    } else {
+      // Aplicar filtros
+      this.filteredData = this.data.filter(row => {
+        return activeFilters.every(columnKey => {
+          const filterValue = this.columnFilters[columnKey].toLowerCase().trim();
+          const cellValue = row[columnKey]?.toString().toLowerCase() || '';
+          return cellValue.includes(filterValue);
+        });
       });
-    });
+    }
+    
+    // Resetear a la primera página cuando se aplican filtros
+    this.currentPage = 1;
   }
 
   onFilterInputChange(event: Event, columnKey: string): void {
@@ -382,8 +403,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   onFilterChange(columnKey: string, value: string): void {
     this.columnFilters[columnKey] = value;
-    this.currentPage = 1; // Resetear a la primera página
-    this.applyFilters();
+    this.applyFilters(); // Esto ya resetea currentPage a 1
     this.updatePagination();
     
     // Emitir evento de filtro
@@ -392,8 +412,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   clearFilters(): void {
     this.columnFilters = {};
-    this.currentPage = 1;
-    this.applyFilters();
+    this.applyFilters(); // Esto ya resetea currentPage a 1
     this.updatePagination();
     this.filterChange.emit({});
   }

@@ -63,7 +63,9 @@
   <!-- Items Per Page Selector and Pagination Controls (en una sola fila) -->
   <div *ngIf="showPagination && data.length > 0" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
     <!-- Items Per Page Selector (izquierda) -->
-    <div *ngIf="showItemsPerPage" class="d-flex align-items-center mb-2 mb-md-0">
+    <div *ngIf="showItemsPerPage" 
+         class="d-flex align-items-center mb-2 mb-md-0"
+         [class.no-pagination]="paginationInfo.totalPages <= 1">
       <span class="text-muted me-2" style="font-size: 11px !important;">Registros por página:</span>
       <select 
         id="itemsPerPage"
@@ -79,7 +81,7 @@
     <!-- Pagination Info and Controls (derecha) -->
     <div class="d-flex flex-column flex-md-row align-items-center">
       <div *ngIf="showTotal" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 11px !important;">
-        Página: {{ paginationInfo.currentPage }} - {{ paginationInfo.startItem }} de {{ paginationInfo.totalItems }}
+        Página {{ paginationInfo.currentPage }}: {{ paginationInfo.startItem }}-{{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
       </div>
       
       <nav *ngIf="paginationInfo.totalPages > 1" aria-label="Navegación de páginas">
@@ -104,9 +106,9 @@
           </button>
 
           <!-- Page Indicator -->
-          <span class="page-indicator mx-2 text-muted">
+          <!-- <span class="page-indicator mx-2 text-muted">
             {{ currentPage }} de {{ paginationInfo.totalPages }}
-          </span>
+          </span> -->
 
           <!-- Next Button -->
           <button class="btn btn-outline-secondary btn-sm ms-2" 

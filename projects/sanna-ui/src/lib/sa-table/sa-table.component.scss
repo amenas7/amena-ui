@@ -360,22 +360,39 @@
       vertical-align: middle !important;
     }
     
-    // Animación para el tbody al cambiar de página
-    tbody.animate-fade-in {
-      animation: fadeIn 0.5s ease-out;
-      animation-fill-mode: both;
-      
-      // Ocultar el contenido al inicio de la animación
-      td {
-        color: transparent !important;
-        transition: color 0.5s ease-out;
-      }
-      
-      // Mostrar el contenido al final de la animación
-      &.animation-complete td {
-        color: inherit !important;
-      }
-    }
+         // Animación para el tbody al cambiar de página
+     tbody.animate-fade-in {
+       animation: fadeIn 0.3s ease-out;
+       animation-fill-mode: both;
+       
+       // Ocultar el contenido al inicio de la animación
+       td {
+         color: transparent !important;
+         transition: color 0.3s ease-out;
+       }
+       
+       // Mostrar el contenido al final de la animación
+       &.animation-complete td {
+         color: inherit !important;
+       }
+       
+       // Evitar que la animación interfiera con filas seleccionadas
+       tr.selected-row td {
+         color: white !important;
+         transition: none !important;
+         background-color: #1F8BE1 !important;
+       }
+       
+       // Asegurar que las filas seleccionadas mantengan su color durante la animación
+       tr.selected-row {
+         background-color: #1F8BE1 !important;
+         
+         td {
+           background-color: #1F8BE1 !important;
+           color: white !important;
+         }
+       }
+     }
   }
   
   // Forzar que no haya hover en las cabeceras con máxima especificidad
@@ -848,7 +865,7 @@ nav[aria-label="Navegación de páginas"] {
 
 .sa-table-container .table > thead > tr > th {
   border: none !important;
-  padding: 0.5rem 0.5rem !important;
+  padding: 0.3125rem 0.5rem !important; /* Reducir padding-bottom de 8px a 5px */
   //padding-top: 0px !important;
   text-align: left !important;
   vertical-align: middle !important;
@@ -952,7 +969,7 @@ nav[aria-label="Navegación de páginas"] {
 /* Animaciones para la tabla */
 @keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity: 0.8;
   }
   100% {
     opacity: 1;
@@ -980,6 +997,7 @@ nav[aria-label="Navegación de páginas"] {
       background-color: #1F8BE1 !important;
       color: white !important;
       font-size: 11px !important; /* Mantener tamaño de fuente en filas seleccionadas */
+      transition: none !important; /* Evitar transiciones en filas seleccionadas */
     }
     
     &:hover {
@@ -1047,6 +1065,11 @@ nav[aria-label="Navegación de páginas"] {
     justify-content: flex-start !important;
     margin-bottom: 0 !important;
   }
+}
+
+/* Agregar margin-top cuando no hay botones de paginación */
+.d-flex.align-items-center.mb-2.mb-md-0.no-pagination {
+  margin-top: 10px !important;
 }
 
 /* Estilos para los controles de paginación - RESPETANDO LA ORIENTACIÓN HORIZONTAL */
@@ -1233,7 +1256,7 @@ nav[aria-label="Navegación de páginas"] {
     .filter-input {
       border: 1px solid #ced4da;
       border-radius: 0.25rem;
-      font-size: 11px !important;
+      font-size: 13px !important;
       padding: 0.25rem 0.5rem;
       background-color: white;
       color: #495057;
