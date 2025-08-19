@@ -1,7 +1,8 @@
-<!-- Table Container -->
-<div class="sa-table-container">
-  <!-- Table Content (siempre visible) -->
-  <div class="table-content" [class.loading]="loading">
+  <!-- Table Container -->
+  <div class="sa-table-container">
+    
+    <!-- Table Content (siempre visible) -->
+    <div class="table-content" [class.loading]="loading">
   
   <!-- Table -->
   <div class="table-responsive table-container">
@@ -44,7 +45,9 @@
         </tr>
         <tr *ngIf="paginatedData.length === 0">
           <td [attr.colspan]="columns.length" class="text-center py-4 text-muted">
-            {{ emptyMessage }}
+            <div>
+              <p class="mb-2">{{ emptyMessage }}</p>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -61,9 +64,9 @@
   </div>
 
   <!-- Items Per Page Selector and Pagination Controls (en una sola fila) -->
-  <div *ngIf="showPagination && data.length > 0" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
+  <div *ngIf="showPagination && paginatedData.length > 0" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
     <!-- Items Per Page Selector (izquierda) -->
-    <div *ngIf="showItemsPerPage" 
+    <div *ngIf="showItemsPerPage && paginatedData.length > 0" 
          class="d-flex align-items-center mb-2 mb-md-0"
          [class.no-pagination]="paginationInfo.totalPages <= 1">
       <span class="text-muted me-2" style="font-size: 11px !important;">Registros por página:</span>
@@ -78,11 +81,11 @@
       </select>
     </div>
     
-    <!-- Pagination Info and Controls (derecha) -->
-    <div class="d-flex flex-column flex-md-row align-items-center">
-      <div *ngIf="showTotal" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 11px !important;">
-        Página {{ paginationInfo.currentPage }}: {{ paginationInfo.startItem }}-{{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
-      </div>
+          <!-- Pagination Info and Controls (derecha) -->
+      <div class="d-flex flex-column flex-md-row align-items-center">
+        <div *ngIf="showTotal && paginatedData.length > 0" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 11px !important;">
+          Página {{ paginationInfo.currentPage }}: {{ paginationInfo.startItem }}-{{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
+        </div>
       
       <nav *ngIf="paginationInfo.totalPages > 1" aria-label="Navegación de páginas">
         <div class="pagination-controls d-flex align-items-center">

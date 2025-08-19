@@ -154,6 +154,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   // Propiedad para acceder a Array desde el template
   Array = Array;
+  
+  // Propiedad para acceder a Object desde el template
+  Object = Object;
 
   // Propiedad para la fila seleccionada
   selectedRow: TableData | null = null;
@@ -161,12 +164,6 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   // Propiedades para filtros
   columnFilters: {[key: string]: string} = {};
   filteredData: TableData[] = [];
-
-
-
-
-
-
 
   ngOnInit(): void {
     // Asegurar que el itemsPerPage esté sincronizado con paginationInfo
@@ -199,8 +196,16 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   }
 
   updatePagination(): void {
-    // Usar datos filtrados en lugar de datos originales
-    const dataToUse = this.filteredData.length > 0 ? this.filteredData : this.data;
+    // LÓGICA CORREGIDA: Si hay filtros activos, solo usar filteredData
+    let dataToUse: TableData[] = [];
+    
+    if (this.hasActiveFilters()) {
+      // Si hay filtros activos, solo usar datos filtrados
+      dataToUse = this.filteredData;
+    } else {
+      // Si no hay filtros activos, usar todos los datos
+      dataToUse = this.data;
+    }
     
     if (!dataToUse || dataToUse.length === 0) {
       this.paginatedData = [];
@@ -212,7 +217,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
         startItem: 0,
         endItem: 0
       };
-      this.currentPage = 1; // Resetear a la primera página
+      this.currentPage = 1;
       return;
     }
 
@@ -240,6 +245,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     };
 
     this.paginatedData = dataToUse.slice(startItem, endItem);
+    
+    // Forzar detección de cambios
+    this.cdr.detectChanges();
   }
 
   onPageChange(page: number): void {
@@ -307,8 +315,6 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this.currentSort.direction === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down';
   }
 
-
-
   trackByFn(index: number, item: any): any {
     return index;
   }
@@ -366,7 +372,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this.selectedRow === row;
   }
 
-  // Métodos para manejar filtros
+  // Métodos para manejar filtros - SIMPLIFICADO CON NORMALIZACIÓN DE TILDES
   applyFilters(): void {
     if (!this.data) {
       this.filteredData = [];
@@ -381,18 +387,31 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     if (activeFilters.length === 0) {
       this.filteredData = [...this.data];
     } else {
-      // Aplicar filtros
+      // Aplicar filtros con normalización de tildes
       this.filteredData = this.data.filter(row => {
         return activeFilters.every(columnKey => {
-          const filterValue = this.columnFilters[columnKey].toLowerCase().trim();
-          const cellValue = row[columnKey]?.toString().toLowerCase() || '';
-          return cellValue.includes(filterValue);
+          const filterValue = this.columnFilters[columnKey].trim();
+          const cellValue = row[columnKey]?.toString() || '';
+          
+          // Filtrado con normalización: incluye el texto (insensible a mayúsculas/minúsculas y tildes)
+          return this.normalizeText(cellValue).includes(this.normalizeText(filterValue));
         });
       });
     }
     
     // Resetear a la primera página cuando se aplican filtros
     this.currentPage = 1;
+    
+    // Forzar detección de cambios
+    this.cdr.detectChanges();
+  }
+
+  // Método simple para normalizar texto (quitar tildes)
+  private normalizeText(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Quitar tildes y diacríticos
   }
 
   onFilterInputChange(event: Event, columnKey: string): void {
@@ -403,6 +422,7 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
 
   onFilterChange(columnKey: string, value: string): void {
     this.columnFilters[columnKey] = value;
+    
     this.applyFilters(); // Esto ya resetea currentPage a 1
     this.updatePagination();
     
@@ -415,6 +435,18 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     this.applyFilters(); // Esto ya resetea currentPage a 1
     this.updatePagination();
     this.filterChange.emit({});
+  }
+
+  // Método para verificar si hay filtros activos
+  hasActiveFilters(): boolean {
+    return Object.keys(this.columnFilters).some(key => 
+      this.columnFilters[key] && this.columnFilters[key].trim() !== ''
+    );
+  }
+
+  // Método para obtener el número de resultados filtrados
+  getFilteredResultsCount(): number {
+    return this.filteredData.length;
   }
 
   ngOnDestroy(): void {
