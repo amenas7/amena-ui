@@ -75,6 +75,7 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     itemsPerPageOptions: number[];
     animationKey: number;
     Array: ArrayConstructor;
+    Object: ObjectConstructor;
     selectedRow: TableData | null;
     columnFilters: {
         [key: string]: string;
@@ -97,9 +98,12 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     onRowDoubleClick(row: TableData): void;
     isRowSelected(row: TableData): boolean;
     applyFilters(): void;
+    private normalizeText;
     onFilterInputChange(event: Event, columnKey: string): void;
     onFilterChange(columnKey: string, value: string): void;
     clearFilters(): void;
+    hasActiveFilters(): boolean;
+    getFilteredResultsCount(): number;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "showFilters": { "alias": "showFilters"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; "filterChange": "filterChange"; }, ["columnDefs"], never, false, never>;
