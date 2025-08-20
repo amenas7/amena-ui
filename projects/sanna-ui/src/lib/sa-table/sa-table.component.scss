@@ -405,14 +405,14 @@
     cursor: default !important;
     border-bottom: none !important;
     border-right: none !important;
-    background-color: #EEF8F0 !important;
-    background: #EEF8F0 !important;
+    background-color: #F6F7FB !important;
+    background: #F6F7FB !important;
     border-radius: 0 !important;
     user-select: text !important;
     font-weight: 600 !important;
     text-align: left !important;
     vertical-align: middle !important;
-    color: #2E3438 !important;
+    color: #555b5f !important;
   }
   
   // Sobrescribir cualquier estilo de Bootstrap para las cabeceras con máxima especificidad
@@ -422,8 +422,8 @@
   .table thead tr th:active,
   .table.table-light thead tr th,
   .table-light thead tr th {
-    background-color: #EEF8F0 !important;
-    background: #EEF8F0 !important;
+    background-color: #F6F7FB !important;
+    background: #F6F7FB !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
@@ -431,7 +431,7 @@
     font-weight: 600 !important;
     text-align: left !important;
     vertical-align: middle !important;
-    color: #2E3438 !important;
+    color: #7e8386 !important;
   }
   
   // Estilos específicos para las celdas de datos
@@ -868,9 +868,9 @@ nav[aria-label="Navegación de páginas"] {
   padding: 0.3125rem 0.5rem !important; /* Reducir padding-bottom de 8px a 5px */
   text-align: left !important;
   vertical-align: middle !important;
-  background-color: #EEF8F0 !important;
-  background: #EEF8F0 !important;
-  color: #2E3438 !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
+  color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
 }
@@ -1237,8 +1237,8 @@ nav[aria-label="Navegación de páginas"] {
   font-weight: 800px !important;
 }
 
-/* Padding-bottom solo para los th de columnas (no filtros) */
-.sa-table-container .table thead th.column-header {
+/* Padding-bottom solo para los th de columnas cuando hay filtros activos */
+.sa-table-container .table thead.has-filters th.column-header {
   padding-bottom: 0px !important;
 }
 
@@ -1301,9 +1301,9 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th,
 .sa-table-container .table thead th.table-light,
 .sa-table-container .table thead th {
-  background-color: #EEF8F0 !important;
-  background: #EEF8F0 !important;
-  color: #2E3438 !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
+  color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
 }
@@ -1313,9 +1313,9 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th:hover,
 .sa-table-container .table thead th.table-light:hover,
 .sa-table-container .table thead th:hover {
-  background-color: #EEF8F0 !important;
-  background: #EEF8F0 !important;
-  color: #2E3438 !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
+  color: #555b5f !important;
   font-size: 11px !important; /* Mantener tamaño de fuente en hover de encabezados */
 }
 

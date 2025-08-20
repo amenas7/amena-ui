@@ -9,13 +9,13 @@
     <table class="table" 
            [class.table-hover]="hover"
            [style.min-width]="minWidth">
-      <thead class="table-light">
+      <thead class="table-light" [class.has-filters]="showFilters">
         <tr>
           <th *ngFor="let column of columns" 
               class="column-header"
               [style.width]="column.width">
             <div class="d-flex align-items-center justify-content-between">
-              <b>{{ column.label }}</b>
+              <span style="font-weight: 700 !important;">{{ column.label }}</span>
             </div>
           </th>
         </tr>
@@ -71,7 +71,7 @@
     <div *ngIf="showItemsPerPage && paginatedData.length > 0" 
          class="d-flex align-items-center mb-2 mb-md-0"
          [class.no-pagination]="paginationInfo.totalPages <= 1">
-      <span class="text-muted me-2" style="font-size: 11px !important;">Registros por página:</span>
+      <span class="text-muted me-2" style="font-size: 12px !important;">Registros por página:</span>
       <select 
         id="itemsPerPage"
         class="form-select form-select-sm sa-table-items-per-page" 
@@ -85,7 +85,7 @@
     
           <!-- Pagination Info and Controls (derecha) -->
       <div class="d-flex flex-column flex-md-row align-items-center">
-        <div *ngIf="showTotal && paginatedData.length > 0" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 11px !important;">
+        <div *ngIf="showTotal && paginatedData.length > 0" class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start" style="font-size: 12px !important;">
           Página {{ paginationInfo.currentPage }}: {{ paginationInfo.startItem }}-{{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
         </div>
       
