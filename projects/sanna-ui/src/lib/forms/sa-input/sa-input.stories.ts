@@ -226,15 +226,6 @@ export const WithLeftIcon: Story = {
   }
 };
 
-export const WithLeftIconFontAwesome: Story = {
-  args: {
-    ...Basic.args,
-    label: 'Usuario (FontAwesome)',
-    leftIcon: 'fas fa-user', // Usando clases CSS de FontAwesome
-    placeholder: 'Ingrese su usuario',
-  }
-};
-
 export const WithRightIcon: Story = {
   args: {
     ...Basic.args,

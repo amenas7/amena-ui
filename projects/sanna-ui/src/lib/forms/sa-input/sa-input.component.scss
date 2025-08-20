@@ -1,31 +1,77 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../../_styles/sanna-fonts';
 
-// Variables para personalización de Bootstrap
+// Variables para personalización
 :host {
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
+  box-sizing: border-box;
+}
+
+// Estilos base del contenedor
+:host .mb-3 {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem !important;
+}
+
+// Estilos del label
+:host .form-label {
+  font-family: $sanna-font-stack;
+  color: #2E3438;
+  font-size: 14px;
+  font-weight: 400 !important;
+  margin-bottom: 2px;
+  display: inline-block;
   
-  // Forzar que el contenedor mantenga su ancho
-  .mb-3 {
-    width: 100%;
-    box-sizing: border-box;
+  // Clases de tamaño para los labels
+  &.label-sm {
+    font-size: 11px;
+  }
+  
+  &.label-md {
+    font-size: 14px;
+  }
+  
+  &.label-lg {
+    font-size: 16px;
   }
 }
 
-// Personalizaciones mínimas sobre Bootstrap
+// Estilos del input principal
 :host .form-control {
   font-family: $sanna-font-stack;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
   
-  // Borde interno verde al hacer focus sin empujar elementos
   &:focus {
     outline: none !important;
     box-shadow: inset 0 0 0 2px #36AD55 !important;
     border-color: transparent !important;
   }
   
-  // Personalizar estados de validación
+  &:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+  }
+  
+  &:read-only {
+    background-color: #e9ecef;
+  }
+  
+  // Estados de validación
   &.is-valid {
     border-color: #10b981;
     
@@ -45,20 +91,138 @@
       border-color: transparent !important;
     }
   }
+  
+  // Tamaños de input
+  &.form-control-sm {
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+  
+  &.form-control-lg {
+    min-height: calc(1.5em + 1rem + 2px);
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+  }
 }
 
-// Personalizar input groups para iconos
+// Estilos del input group
+:host .input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  
+  // Asegurar que el input y los iconos estén alineados
+  > .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+    
+    // Remover bordes cuando está en un input group
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  
+  // Tamaños del input group
+  &.input-group-sm > .form-control,
+  &.input-group-sm > .input-group-text {
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+  
+  &.input-group-lg > .form-control,
+  &.input-group-lg > .input-group-text {
+    min-height: calc(1.5em + 1rem + 2px);
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+  }
+}
+
+// Estilos del input group text (para iconos)
 :host .input-group-text {
   font-family: $sanna-font-stack;
-  background-color: #f8f9fa;
-  border-color: #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: #6c757d;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  
+  // Ajustar bordes cuando está en un input group
+  &:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  &:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  // Ajustar tamaños según el input group
+  .input-group-sm & {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .input-group-lg & {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+  }
 }
 
-// Personalizar el botón de password toggle
+// Estilos del botón de password toggle
 :host .btn-outline-secondary {
-  border-color: #dee2e6;
+  font-family: $sanna-font-stack;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  line-height: 1.5;
   color: #6c757d;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  
+  // Ajustar bordes cuando está en un input group
+  .input-group &:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
   
   &:hover {
     background-color: #f8f9fa;
@@ -71,18 +235,25 @@
     box-shadow: none !important;
     border-color: #dee2e6 !important;
   }
+  
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  
+  // Ajustar tamaños según el input group
+  .input-group-sm & {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .input-group-lg & {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+  }
 }
 
-// Personalizar el label para que sea consistente con sa-select
-:host .form-label {
-  font-family: $sanna-font-stack;
-  color: #2E3438;
-  font-size: 14px;
-  font-weight: 400 !important;
-  margin-bottom: 2px; // Ajuste para consistencia
-}
-
-// Personalizar textos de ayuda y error
+// Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
@@ -90,13 +261,242 @@
   margin-top: 0.25rem;
 }
 
+// Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   margin-top: 0.25rem;
+  color: #dc3545;
+  display: block;
+}
+
+// Estilos para el asterisco de campo requerido
+:host .text-danger {
+  color: #dc3545 !important;
 }
 
 // Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
 :host .mb-3:last-child {
   margin-bottom: 0 !important;
+}
+
+// Estilos para iconos
+:host i {
+  font-style: normal;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+// Estilos para el componente sa-icon en Shadow DOM
+:host sa-icon {
+  display: inline-block !important;
+  vertical-align: middle;
+  line-height: 1;
+  
+  // Asegurar que fa-icon dentro de sa-icon funcione en Shadow DOM
+  fa-icon {
+    display: inline-block !important;
+    vertical-align: middle;
+    line-height: 1;
+  }
+  
+  // Estilos básicos para SVG de FontAwesome en Shadow DOM
+  svg {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    width: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+  }
+  
+  // Soporte para diferentes tamaños de iconos
+  &[size="sm"] {
+    font-size: 0.875rem;
+    
+    svg {
+      height: 0.875em;
+      width: 0.875em;
+    }
+  }
+  
+  &[size="md"] {
+    font-size: 1rem;
+    
+    svg {
+      height: 1em;
+      width: 1em;
+    }
+  }
+  
+  &[size="lg"] {
+    font-size: 1.25rem;
+    
+    svg {
+      height: 1.25em;
+      width: 1.25em;
+    }
+  }
+}
+
+// Asegurar que los iconos en input-group-text estén centrados
+:host .input-group-text i,
+:host .input-group-text sa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  
+  // Para FontAwesome SVG
+  fa-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+// Ajustes específicos para iconos en input groups de diferentes tamaños
+:host .input-group-sm .input-group-text sa-icon {
+  font-size: 0.875rem;
+  
+  svg {
+    width: 0.875em;
+    height: 0.875em;
+  }
+}
+
+:host .input-group-lg .input-group-text sa-icon {
+  font-size: 1.25rem;
+  
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
+
+// Estilos específicos para botones con iconos
+:host .btn sa-icon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  
+  fa-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  svg {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+// Ajustes de tamaño para botones en input groups
+:host .input-group-sm .btn sa-icon {
+  font-size: 0.875rem;
+  
+  svg {
+    width: 0.875em;
+    height: 0.875em;
+  }
+}
+
+:host .input-group-lg .btn sa-icon {
+  font-size: 1.25rem;
+  
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
+
+// Estilos específicos para el botón de password toggle
+:host .input-group .btn-outline-secondary {
+  // Asegurar que el botón tenga la misma altura que el input
+  min-height: calc(1.5em + 0.75rem + 2px);
+  
+  // Centrado perfecto del contenido
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  
+  sa-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    
+    fa-icon {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    
+    svg {
+      display: block;
+      vertical-align: baseline;
+    }
+  }
+}
+
+// Ajustes para diferentes tamaños de input group en password toggle
+:host .input-group-sm .btn-outline-secondary {
+  min-height: calc(1.5em + 0.5rem + 2px);
+  
+  sa-icon {
+    font-size: 0.875rem;
+    
+    svg {
+      width: 0.875em;
+      height: 0.875em;
+    }
+  }
+}
+
+:host .input-group-lg .btn-outline-secondary {
+  min-height: calc(1.5em + 1rem + 2px);
+  
+  sa-icon {
+    font-size: 1.25rem;
+    
+    svg {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+}
+
+// Asegurar compatibilidad completa con FontAwesome en Shadow DOM
+:host fa-icon {
+  display: inline-block !important;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+// Estilos de respaldo para iconos que no cargan
+:host .input-group-text:empty::before,
+:host .btn:empty::before {
+  content: "◯";
+  color: #6c757d;
+  font-size: inherit;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// Evitar que el contenido de respaldo aparezca cuando hay iconos
+:host .input-group-text:not(:empty)::before,
+:host .btn:not(:empty)::before {
+  display: none;
 }
