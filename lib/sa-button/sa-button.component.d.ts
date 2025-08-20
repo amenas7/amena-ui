@@ -2,7 +2,7 @@ import { EventEmitter, ElementRef } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { TooltipPosition } from '../types/tooltip.types';
 import * as i0 from "@angular/core";
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'warning' | 'info' | 'gray' | 'red' | 'success';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'info' | 'gray' | 'red' | 'success';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export declare class SaButtonComponent {
@@ -18,6 +18,7 @@ export declare class SaButtonComponent {
     private _iconOnly;
     private _tooltip?;
     private _tooltipPosition;
+    private _noAnimate;
     set tooltip(value: string | any);
     get tooltip(): string | undefined;
     set tooltipPosition(value: TooltipPosition | any);
@@ -41,6 +42,8 @@ export declare class SaButtonComponent {
     get position(): 'left' | 'right';
     set iconOnly(value: boolean | any);
     get iconOnly(): boolean;
+    set noAnimate(value: boolean | any);
+    get noAnimate(): boolean;
     buttonText: ElementRef;
     clicked: EventEmitter<void>;
     readonly spinnerIcon: IconDefinition;
@@ -52,5 +55,5 @@ export declare class SaButtonComponent {
     get showContent(): boolean;
     private getSizeClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaButtonComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaButtonComponent, "sa-button", never, { "label": { "alias": "label"; "required": false; }; "tooltip": { "alias": "tooltip"; "required": false; }; "tooltipPosition": { "alias": "tooltipPosition"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "size": { "alias": "size"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "fullWidth": { "alias": "fullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "position": { "alias": "position"; "required": false; }; "iconOnly": { "alias": "iconOnly"; "required": false; }; }, { "clicked": "clicked"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaButtonComponent, "sa-button", never, { "label": { "alias": "label"; "required": false; }; "tooltip": { "alias": "tooltip"; "required": false; }; "tooltipPosition": { "alias": "tooltipPosition"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "size": { "alias": "size"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "fullWidth": { "alias": "fullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "position": { "alias": "position"; "required": false; }; "iconOnly": { "alias": "iconOnly"; "required": false; }; "noAnimate": { "alias": "noAnimate"; "required": false; }; }, { "clicked": "clicked"; }, never, never, false, never>;
 }
