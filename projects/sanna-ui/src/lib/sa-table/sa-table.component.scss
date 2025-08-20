@@ -1315,4 +1315,122 @@ nav[aria-label="Navegación de páginas"] {
 
 
 
+/* ESTILOS DE FONTAWESOME PARA SHADOW DOM */
+/* Estos estilos son necesarios para que los iconos de FontAwesome funcionen correctamente
+   dentro del Shadow DOM cuando se usan botones sa-button en templates de columnas */
+
+/* Estilos básicos de FontAwesome */
+fa-icon {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+fa-icon svg {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+}
+
+/* Clases de tamaño para iconos */
+fa-icon.fa-xs {
+  font-size: 0.75em;
+  line-height: 0.08333em;
+  vertical-align: 0.125em;
+}
+
+fa-icon.fa-sm {
+  font-size: 0.875em;
+  line-height: 0.07143em;
+  vertical-align: 0.05357em;
+}
+
+fa-icon.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+fa-icon.fa-xl {
+  font-size: 1.5em;
+  line-height: 0.04167em;
+  vertical-align: -0.125em;
+}
+
+fa-icon.fa-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em;
+}
+
+/* Estilos para animaciones */
+fa-icon.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+fa-icon.fa-pulse {
+  animation: fa-pulse 1s infinite steps(8);
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Estilos específicos para sa-button dentro de sa-table */
+:host sa-button fa-icon,
+:host ::ng-deep sa-button fa-icon {
+  display: inline-block !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+:host sa-button fa-icon svg,
+:host ::ng-deep sa-button fa-icon svg {
+  fill: currentColor !important;
+  width: 1em !important;
+  height: 1em !important;
+  vertical-align: middle !important;
+}
+
+/* Asegurar que los botones sa-button funcionen correctamente dentro de celdas */
+:host sa-button,
+:host ::ng-deep sa-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Spinner específico para botones en loading */
+:host sa-button .spinner-icon,
+:host ::ng-deep sa-button .spinner-icon {
+  animation: fa-spin 1s infinite linear !important;
+}
+
+:host sa-button .spinner-icon.spinning,
+:host ::ng-deep sa-button .spinner-icon.spinning {
+  animation: fa-spin 1s infinite linear !important;
+}
+
 /* FIN DEL ARCHIVO - DISEÑO ORIGINAL MANTENIDO */
