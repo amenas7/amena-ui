@@ -14,10 +14,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `
-        Componente de leyenda que muestra un rectángulo coloreado con tooltip opcional.
-        Ideal para leyendas de gráficos, indicadores de estado y visualizaciones de datos.
-        `
+        component: ``
       },
       source: {
         type: 'dynamic',

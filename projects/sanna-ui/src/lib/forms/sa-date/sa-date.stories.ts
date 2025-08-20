@@ -16,7 +16,7 @@ const meta: Meta<SaDateComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de fecha que soporta diferentes tamaños, estados de validación y restricciones de fecha. Compatible con ngModel y ReactiveForm.'
+        component: ''
       },
       source: {
         type: 'dynamic',

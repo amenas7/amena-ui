@@ -16,7 +16,7 @@ const meta: Meta<SaTextareaComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de textarea que soporta diferentes tamaños, estados y opciones de redimensionamiento. Compatible con ngModel y ReactiveForm.'
+        component: ''
       },
       source: {
         type: 'dynamic',

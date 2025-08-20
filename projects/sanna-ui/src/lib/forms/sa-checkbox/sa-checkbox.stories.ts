@@ -16,7 +16,7 @@ const meta: Meta<SaCheckboxComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de checkbox que soporta diferentes tamaños y estados de validación. Compatible con ngModel y ReactiveForm.'
+        component: ''
       },
       source: {
         type: 'dynamic',

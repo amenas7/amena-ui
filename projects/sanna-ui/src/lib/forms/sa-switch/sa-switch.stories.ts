@@ -15,7 +15,7 @@ const meta: Meta<SaSwitchComponent> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Componente Switch Toggle basado en Bootstrap 5 compatible con ngModel y ReactiveFormsModule.'
+        component: ''
       },
       source: {
         type: 'dynamic',

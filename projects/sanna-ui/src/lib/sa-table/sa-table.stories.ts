@@ -42,8 +42,6 @@ const meta: Meta<SaTableComponent> = {
       },
       description: {
         component: `
-Un componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.
-## Comportamiento con Datos Vacíos
 
 ## Events
 

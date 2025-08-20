@@ -13,16 +13,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `
-          El componente sa-tag es un elemento inline basado en Bootstrap 5 que permite mostrar etiquetas o tags con diferentes tipos y tamaños. Es completamente responsive y compatible con la metodología de Bootstrap.
-          
-          ## Características principales:
-          - **100% Responsive**: Basado en Bootstrap 5 para máxima compatibilidad
-          - **Elemento inline**: Se integra naturalmente en el flujo del texto
-          - **Múltiples tipos**: primary, secondary, success, danger, warning, info, dark, light
-          - **Diferentes tamaños**: small, medium, large
-          - **Accesible**: Diseñado siguiendo las mejores prácticas de accesibilidad
-        `
+        component: ``
       },
       source: {
         type: 'dynamic',

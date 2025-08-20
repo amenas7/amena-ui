@@ -17,7 +17,7 @@ const meta: Meta<SaInputComponent> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de input que soporta diferentes tipos, tamaños y estados. Compatible con ngModel y ReactiveForm.'
+        component: ''
       },
       source: {
         type: 'dynamic',
