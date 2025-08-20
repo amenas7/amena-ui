@@ -19,6 +19,10 @@
     [cols]="cols"
     [minlength]="minlength"
     [maxlength]="maxlength"
+    spellcheck="false"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
     (focus)="onTextareaFocus($event)"
     (blur)="onTextareaBlur($event)"
   ></textarea>
