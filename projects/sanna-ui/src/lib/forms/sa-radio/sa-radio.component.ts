@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type RadioSize = 'sm' | 'md' | 'lg';
@@ -8,6 +8,7 @@ export type RadioStatus = 'default' | 'success' | 'error';
   selector: 'sa-radio',
   templateUrl: './sa-radio.component.html',
   styleUrls: ['./sa-radio.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -77,7 +78,13 @@ export class SaRadioComponent implements ControlValueAccessor {
   }
 
   get labelClasses(): string {
-    return 'form-check-label';
+    const sizeMap = {
+      'sm': 'form-check-label label-sm',
+      'md': 'form-check-label label-md',
+      'lg': 'form-check-label label-lg'
+    };
+    
+    return sizeMap[this.size] || 'form-check-label label-md';
   }
 
   get containerClasses(): string {

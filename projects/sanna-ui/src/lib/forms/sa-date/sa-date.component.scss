@@ -1,31 +1,116 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../../_styles/sanna-fonts';
 
-// Variables para personalización de Bootstrap
+// Variables para personalización
 :host {
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
+  box-sizing: border-box;
+}
+
+// Estilos base del contenedor
+:host {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem !important;
+}
+
+// Estilos del label
+:host .form-label {
+  font-family: $sanna-font-stack;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 400 !important;
+  margin-bottom: 2px;
+  display: inline-block;
   
-  // Forzar que el contenedor mantenga su ancho
-  .mb-3 {
-    width: 100%;
-    box-sizing: border-box;
+  // Clases de tamaño para los labels
+  &.label-sm {
+    font-size: 11px !important;
+  }
+  
+  &.label-md {
+    font-size: 14px !important;
+  }
+  
+  &.label-lg {
+    font-size: 16px !important;
   }
 }
 
-// Personalizaciones mínimas sobre Bootstrap
+// Contenedor posicional
+:host .position-relative {
+  position: relative;
+}
+
+// Estilos del input principal
 :host .form-control {
   font-family: $sanna-font-stack;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
   
-  // Borde interno verde al hacer focus sin empujar elementos
+  // Quitar corrector ortográfico y autocompletado
+  outline: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  // Forzar desactivación del corrector ortográfico en Shadow DOM
+  &::-webkit-grammar-error-underline {
+    display: none !important;
+    text-decoration: none !important;
+    background: none !important;
+  }
+  
+  &::-webkit-spell-check-decoration {
+    display: none !important;
+    text-decoration: none !important;
+    background: none !important;
+  }
+  
+  &::-moz-spell-check {
+    display: none !important;
+    text-decoration: none !important;
+    background: none !important;
+  }
+  
+  // Sobrescribir cualquier decoración de texto
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-style: none !important;
+  text-decoration-color: transparent !important;
+  
   &:focus {
     outline: none !important;
     box-shadow: inset 0 0 0 2px #36AD55 !important;
     border-color: transparent !important;
   }
   
-  // Personalizar estados de validación
+  &:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: default;
+  }
+  
+  &:read-only {
+    background-color: #e9ecef;
+  }
+  
+  // Estados de validación
   &.is-valid {
     border-color: #32A047;
     
@@ -45,23 +130,116 @@
       border-color: transparent !important;
     }
   }
+  
+  // Tamaños de input
+  &.form-control-sm {
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 4.125px 8.25px !important;
+    font-size: 11px !important;
+    border-radius: 0.25rem;
+  }
+  
+  &.form-control-lg {
+    min-height: calc(1.5em + 1rem + 2px);
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+  }
 }
 
-// Contenedor posicional
-:host .position-relative {
-  position: relative;
+// Ocultar el icono nativo del calendario (problemático en Shadow DOM)
+:host .form-control[type="date"] {
+  // Ocultar iconos nativos que no funcionan en Shadow DOM
+  &::-webkit-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  &::-moz-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  &::-ms-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
 
-// Personalizar el label para que sea consistente con otros componentes
-:host .form-label {
-  font-family: $sanna-font-stack;
-  color: #2E3438;
-  font-size: 14px;
-  font-weight: 400 !important;
-  margin-bottom: 2px; // Ajuste para consistencia
+// Icono personalizado del calendario
+:host .calendar-icon {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  pointer-events: all;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  transition: color 0.15s ease-in-out;
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+  }
+  
+  &:hover {
+    color: #495057;
+  }
+  
+  &.disabled {
+    color: #adb5bd;
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
-// Personalizar textos de ayuda y error
+// Ajustar padding del input para hacer espacio al icono
+:host .form-control[type="date"] {
+  padding-right: 2.5rem !important;
+  
+  &.form-control-sm {
+    padding-right: 2.25rem !important;
+  }
+  
+  &.form-control-lg {
+    padding-right: 3rem !important;
+  }
+}
+
+// Ajustar posición del icono según el tamaño del input
+:host .form-control-sm ~ .calendar-icon {
+  right: 0.5rem;
+  width: 18px;
+  height: 18px;
+  
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+:host .form-control-lg ~ .calendar-icon {
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
@@ -69,41 +247,21 @@
   margin-top: 0.25rem;
 }
 
+// Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   margin-top: 0.25rem;
+  color: #dc3545;
+  display: block;
+}
+
+// Estilos para el asterisco de campo requerido
+:host .text-danger {
+  color: #dc3545 !important;
 }
 
 // Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
-:host .mb-3:last-child {
+:host :last-child {
   margin-bottom: 0 !important;
 }
-
-// Personalizar el icono del calendario en navegadores compatibles
-:host .form-control[type="date"] {
-  cursor: pointer; // Hacer todo el input clickeable visualmente
-  
-  &::-webkit-calendar-picker-indicator {
-    color: #6c757d;
-    cursor: pointer;
-    filter: invert(0.5);
-    
-    &:hover {
-      filter: invert(0.3);
-    }
-  }
-  
-  // Firefox
-  &::-moz-calendar-picker-indicator {
-    cursor: pointer;
-  }
-  
-  // Estados disabled y readonly no deben parecer clickeables
-  &:disabled,
-  &[readonly] {
-    cursor: default;
-  }
-}
-
-

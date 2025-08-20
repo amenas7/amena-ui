@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type DateSize = 'sm' | 'md' | 'lg';
@@ -8,6 +8,7 @@ export type DateStatus = 'default' | 'success' | 'error';
   selector: 'sa-date',
   templateUrl: './sa-date.component.html',
   styleUrls: ['./sa-date.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -93,7 +94,13 @@ export class SaDateComponent implements ControlValueAccessor, OnInit {
   }
 
   get labelClasses(): string {
-    return 'form-label';
+    const sizeMap = {
+      'sm': 'form-label label-sm',
+      'md': 'form-label label-md',
+      'lg': 'form-label label-lg'
+    };
+    
+    return sizeMap[this.size] || 'form-label label-md';
   }
 
   private getCurrentDateISO(): string {

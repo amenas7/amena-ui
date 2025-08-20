@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type SwitchSize = 'sm' | 'md' | 'lg';
@@ -8,6 +8,7 @@ export type SwitchStatus = 'default' | 'success' | 'error';
   selector: 'sa-switch',
   templateUrl: './sa-switch.component.html',
   styleUrls: ['./sa-switch.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -76,7 +77,13 @@ export class SaSwitchComponent implements ControlValueAccessor {
   }
 
   get labelClasses(): string {
-    const baseClasses = ['form-check-label'];
+    const sizeMap = {
+      'sm': 'form-check-label label-sm',
+      'md': 'form-check-label label-md',
+      'lg': 'form-check-label label-lg'
+    };
+    
+    const baseClasses = [sizeMap[this.size] || 'form-check-label label-md'];
     
     if (this.disabled) {
       baseClasses.push('text-muted');

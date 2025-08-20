@@ -170,6 +170,6 @@
 }
 
 // Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
-:host .mb-3:last-child {
+:host :last-child {
   margin-bottom: 0 !important;
 }

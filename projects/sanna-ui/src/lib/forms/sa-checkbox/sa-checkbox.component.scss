@@ -1,72 +1,85 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../../_styles/sanna-fonts';
 
-// Variables para personalización de Bootstrap
+// Variables para personalización
 :host {
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
+  box-sizing: border-box;
 }
 
 // Wrapper principal del componente
 :host .sa-checkbox-wrapper {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 1rem; // Equivalente a mb-3
+  margin-bottom: 1rem;
   
-  // Cuando se usa como último elemento, no necesita margin bottom
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-// Estilos específicos para uso dentro de Bootstrap grid/row/col
-:host-context(.row) .sa-checkbox-wrapper,
-:host-context(.col) .sa-checkbox-wrapper,
-:host-context(.col-*) .sa-checkbox-wrapper {
-  // Asegurar que el padding del parent no afecte solo el label
-  position: relative;
-  z-index: 1;
-}
-
-// Override para evitar desplazamientos cuando se usa dentro de containers con padding
-:host-context(.p-1) .form-check,
-:host-context(.p-2) .form-check,
-:host-context(.p-3) .form-check,
-:host-context(.p-4) .form-check,
-:host-context(.p-5) .form-check {
-  margin-left: 0 !important;
+// Estilos del contenedor form-check
+:host .form-check {
+  display: flex !important;
+  align-items: center !important;
+  min-height: auto;
   padding-left: 0 !important;
+  margin-bottom: 0;
+  position: relative;
+  gap: 0.5rem;
 }
 
-// Personalizaciones mínimas sobre Bootstrap con mayor especificidad
-:host .form-check .form-check-input {
+// Estilos del checkbox input
+:host .form-check-input {
   font-family: $sanna-font-stack;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 !important;
+  flex-shrink: 0;
+  position: static !important;
+  vertical-align: middle;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25em;
+  appearance: none;
+  color-adjust: exact;
   
-  // Sin borde en focus
   &:focus {
     outline: none !important;
     box-shadow: none !important;
     border-color: #dee2e6 !important;
   }
   
-  // Color personalizado para checkbox marcado con máxima especificidad
-  &:checked,
-  &[type="checkbox"]:checked {
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    ~ .form-check-label {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  // Color personalizado para checkbox marcado
+  &:checked {
     background-color: #32A047 !important;
     border-color: #32A047 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") !important;
   }
   
-  // Estado indeterminado también usa el color personalizado
-  &:indeterminate,
-  &[type="checkbox"]:indeterminate {
+  // Estado indeterminado
+  &:indeterminate {
     background-color: #32A047 !important;
     border-color: #32A047 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e") !important;
   }
   
-  // Personalizar estados de validación - mantener color personalizado
+  // Estados de validación
   &.is-valid {
     border-color: #32A047;
     
@@ -76,7 +89,6 @@
       border-color: #32A047 !important;
     }
     
-    // Mantener el color personalizado #32A047 incluso en estado success
     &:checked {
       background-color: #32A047 !important;
       border-color: #32A047 !important;
@@ -95,130 +107,101 @@
   }
 }
 
-// Asegurar alineación horizontal correcta del contenedor
-:host .form-check {
-  display: flex !important;
-  align-items: center !important;
-  min-height: auto;
-  padding-left: 0 !important;
-  margin-bottom: 0;
-  position: relative;
-  
-  .form-check-input {
-    margin-top: 0 !important;
-    margin-right: 0.5rem;
-    margin-left: 0 !important;
-    flex-shrink: 0;
-    position: static !important; // Evitar problemas de posicionamiento
-  }
-  
-  .form-check-label {
-    margin-bottom: 0;
-    line-height: 1;
-    flex: 1; // Permitir que el label tome el espacio restante
-  }
-}
-
-// Personalizar el label para que sea consistente con otros componentes
+// Estilos del label
 :host .form-check-label {
   font-family: $sanna-font-stack;
-  color: #2E3438;
+  color: #212529;
   font-size: 14px;
   font-weight: 400 !important;
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin: 0 !important;
+  line-height: 1.2;
+  flex: 1;
+  
+  // Clases de tamaño para los labels
+  &.label-sm {
+    font-size: 11px !important;
+  }
+  
+  &.label-md {
+    font-size: 14px !important;
+  }
+  
+  &.label-lg {
+    font-size: 16px !important;
+  }
 }
 
-// Tamaños personalizados para checkboxes con alineación perfecta
+// Tamaños personalizados para checkboxes
 :host .form-check-sm {
+  align-items: center;
+  
   .form-check-input {
     width: 0.875rem;
     height: 0.875rem;
-    margin-right: 0.5rem;
+    border-radius: 0.2em;
   }
   
   .form-check-label {
-    font-size: 0.875rem;
-    line-height: 0.875rem;
+    font-size: 11px !important;
+    line-height: 1.2;
   }
 }
 
 :host .form-check-lg {
+  align-items: center;
+  
   .form-check-input {
     width: 1.25rem;
     height: 1.25rem;
-    margin-right: 0.5rem;
+    border-radius: 0.3em;
   }
   
   .form-check-label {
-    font-size: 1.125rem;
-    line-height: 1.25rem;
+    font-size: 16px !important;
+    line-height: 1.2;
   }
 }
 
 // Tamaño mediano (default)
 :host .form-check:not(.form-check-sm):not(.form-check-lg) {
+  align-items: center;
+  
   .form-check-input {
     width: 1rem;
     height: 1rem;
-    margin-right: 0.5rem;
+    border-radius: 0.25em;
   }
   
   .form-check-label {
-    font-size: 14px;
-    line-height: 1rem;
+    font-size: 14px !important;
+    line-height: 1.2;
   }
 }
 
-// Personalizar textos de ayuda y error
+// Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   color: #6b7280;
   margin-top: 0.25rem;
-  margin-left: 1.5rem; // Alinear con el texto del label
+  margin-left: 1.5rem;
 }
 
+// Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   margin-top: 0.25rem;
-  margin-left: 1.5rem; // Alinear con el texto del label
+  margin-left: 1.5rem;
+  color: #dc3545;
+  display: block;
 }
 
-// Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
-:host .mb-3:last-child {
-  margin-bottom: 0 !important;
-}
-
-// Mejorar el contraste y accesibilidad
-:host .form-check-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  
-  ~ .form-check-label {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-// Regla de máxima prioridad para sobrescribir cualquier CSS externo
-:host sa-checkbox .form-check input[type="checkbox"]:checked,
-:host .form-check input[type="checkbox"]:checked,
-:host input[type="checkbox"].form-check-input:checked,
-:host .form-check input[type="checkbox"].is-valid:checked,
-:host input[type="checkbox"].form-check-input.is-valid:checked {
-  background-color: #32A047 !important;
-  border-color: #32A047 !important;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") !important;
-}
-
-// Regla específica para estado indeterminado
-:host sa-checkbox .form-check input[type="checkbox"]:indeterminate,
-:host .form-check input[type="checkbox"]:indeterminate,
-:host input[type="checkbox"].form-check-input:indeterminate {
-  background-color: #32A047 !important;
-  border-color: #32A047 !important;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3e%3c/svg%3e") !important;
+// Estilos para el asterisco de campo requerido
+:host .text-danger {
+  color: #dc3545 !important;
+  margin-left: 2px;
 }

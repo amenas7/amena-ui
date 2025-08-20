@@ -6,16 +6,19 @@ $switch-color: #32A047;
 $switch-color-hover: darken($switch-color, 10%);
 $switch-color-disabled: #e9ecef;
 
+// Variables para personalización
 :host {
   display: block;
   width: 100%;
   font-family: $sanna-font-stack;
-  
-  // Forzar que el contenedor mantenga su ancho
-  .mb-3 {
-    width: 100%;
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
+
+// Estilos base del contenedor
+:host .mb-3 {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem !important;
 }
 
 // Personalización del switch para usar el color #32A047
@@ -24,39 +27,48 @@ $switch-color-disabled: #e9ecef;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding-left: 0 !important;
+  margin-bottom: 0;
+  min-height: auto;
   
   .form-check-input {
-    cursor:  pointer !important;
-    background-color: #dee2e6 !important;
-    border-color: #dee2e6 !important;
-    margin: 0; // Resetear margin por defecto de Bootstrap
-    flex-shrink: 0; // Evitar que se encoja
-    background-image: none !important; // Eliminar cualquier imagen de fondo por defecto
-    position: relative; // Para posicionar el pseudo-elemento del thumb
-    z-index: 3; // Asegurar que esté por encima de todo
+    cursor: pointer !important;
+    width: 3rem;
+    height: 1.6rem;
+    background-color: #fff !important;
+    border: 1px solid #c9c9c9 !important;
+    border-color: #c9c9c9 !important;
+    margin: 0;
+    flex-shrink: 0;
+    background-image: none !important;
+    position: relative;
+    z-index: 3;
+    border-radius: 3rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
     
     // Thumb siempre presente que se mueve
     &::before {
       content: '';
       position: absolute;
       top: 50%;
-      width: calc(1em - 4px);
-      height: calc(1em - 4px);
-      background-color: #adb5bd;
+      width: calc(1.6rem - 4px);
+      height: calc(1.6rem - 4px);
+      background-color: #a4a8ac;
       border-radius: 50%;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1;
       transform: translateY(-50%);
-      pointer-events: none; // Permitir que los clicks pasen al input
+      pointer-events: none;
     }
     
     // Cuando está marcado (checked)
     &:checked {
       background-color: $switch-color !important;
-      //border-color: $switch-color !important;
+      border-color: $switch-color !important;
       
       &::before {
-        left: calc(100% - 1em + 2px);
+        left: calc(100% - 1.6rem + 2px);
         background-color: #ffffff;
       }
     }
@@ -64,15 +76,16 @@ $switch-color-disabled: #e9ecef;
     // Estado unchecked - thumb en posición izquierda
     &:not(:checked) {
       background-color: #fff !important;
-      border-color: #777777 !important;
+      border: 1px solid #c9c9c9 !important;
+      border-color: #c9c9c9 !important;
       
       &::before {
         left: 2px;
-        background-color: #adb5bd;
+        background-color: #a4a8ac;
       }
     }
     
-    // Focus state - solo cuando se navega con teclado, no al hacer click
+    // Focus state
     &:focus:not(:focus-visible) {
       outline: none !important;
       box-shadow: none !important;
@@ -83,20 +96,20 @@ $switch-color-disabled: #e9ecef;
       box-shadow: 0 0 0 0.25rem rgba(50, 160, 71, 0.25) !important;
       border-color: $switch-color !important;
     }
-        
-    // Forzar que no haya círculo azul en ningún estado
-    &:not(:checked) {
-      background-image: none !important;
-    }
     
     // Disabled state
     &:disabled {
-      background-color: $switch-color-disabled !important;
-      border-color: $switch-color-disabled !important;
+      background-color: #E9ECEF !important;
+      border-color: #E9ECEF !important;
+      cursor: not-allowed !important;
       
       &:checked {
-        background-color: rgba($switch-color, 0.5) !important;
-        border-color: rgba($switch-color, 0.5) !important;
+        background-color: #E9ECEF !important;
+        border-color: #E9ECEF !important;
+      }
+      
+      &::before {
+        background-color: #a4a8ac;
       }
     }
   }
@@ -116,7 +129,6 @@ $switch-color-disabled: #e9ecef;
     &:checked {
       background-color: #32A047 !important;
     }
-    
   }
   
   &.is-invalid .form-check-input {
@@ -131,9 +143,8 @@ $switch-color-disabled: #e9ecef;
     }
     
     &:checked {
-      background-color: $switch-color !important; // Mantener verde cuando está checked
+      background-color: $switch-color !important;
     }
-    
   }
 }
 
@@ -142,7 +153,15 @@ $switch-color-disabled: #e9ecef;
   .form-check-input {
     width: 2rem;
     height: 1.2rem;
-    font-size: 1.1rem;
+    
+    &::before {
+      width: calc(1.2rem - 4px);
+      height: calc(1.2rem - 4px);
+    }
+    
+    &:checked::before {
+      left: calc(100% - 1.2rem + 2px);
+    }
   }
 }
 
@@ -150,7 +169,15 @@ $switch-color-disabled: #e9ecef;
   .form-check-input {
     width: 3rem;
     height: 1.6rem;
-    font-size: 1.4rem;
+    
+    &::before {
+      width: calc(1.6rem - 4px);
+      height: calc(1.6rem - 4px);
+    }
+    
+    &:checked::before {
+      left: calc(100% - 1.6rem + 2px);
+    }
   }
 }
 
@@ -158,49 +185,83 @@ $switch-color-disabled: #e9ecef;
   .form-check-input {
     width: 4rem;
     height: 2rem;
-    font-size: 1.8rem;
+    
+    &::before {
+      width: calc(2rem - 4px);
+      height: calc(2rem - 4px);
+    }
+    
+    &:checked::before {
+      left: calc(100% - 2rem + 2px);
+    }
   }
 }
 
 // Personalizar el label
 :host .form-check-label {
   font-family: $sanna-font-stack;
-  color: #2E3438;
+  color: #212529;
   font-size: 14px;
   font-weight: 400 !important;
   cursor: pointer !important;
-  margin: 0; // Resetear margin por defecto
-  line-height: 1; // Asegurar altura consistente
+  margin: 0;
+  line-height: 1.2;
   display: flex;
   align-items: center;
-  user-select: none; // Evitar selección de texto al hacer click
-  z-index: 2; // Asegurar que esté por encima del thumb
+  user-select: none;
+  z-index: 2;
+  flex: 1;
+  
+  // Clases de tamaño para los labels
+  &.label-sm {
+    font-size: 11px !important;
+  }
+  
+  &.label-md {
+    font-size: 14px !important;
+  }
+  
+  &.label-lg {
+    font-size: 16px !important;
+  }
   
   &:hover {
-    color: #1a1a1a; // Color más oscuro en hover para indicar interactividad
+    color: #1a1a1a;
   }
   
   &.text-muted {
     cursor: not-allowed !important;
+    opacity: 0.65;
     
     &:hover {
-      color: #2E3438; // Mantener color original si está deshabilitado
+      color: #212529;
     }
   }
 }
 
-// Personalizar textos de ayuda y error
+// Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   color: #6b7280;
   margin-top: 0.25rem;
+  margin-left: 3.5rem; // Alineado con el label
 }
 
+// Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
   font-size: 0.75rem;
   margin-top: 0.25rem;
+  margin-left: 3.5rem; // Alineado con el label
+  color: #dc3545;
+  display: block;
+}
+
+// Estilos para el asterisco de campo requerido
+:host .text-danger {
+  color: #dc3545 !important;
+  margin-left: 2px;
 }
 
 // Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes

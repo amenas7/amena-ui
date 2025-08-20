@@ -10,7 +10,7 @@
 }
 
 // Estilos base del contenedor
-:host .mb-3 {
+:host {
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 1rem !important;
@@ -314,7 +314,7 @@
 }
 
 // Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
-:host .mb-3:last-child {
+:host :last-child {
   margin-bottom: 0 !important;
 }
 
