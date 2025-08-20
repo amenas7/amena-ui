@@ -23,6 +23,7 @@
           <th class="filter-row-th" *ngFor="let column of columns" 
               [style.width]="column.width">
             <input 
+              *ngIf="!column.noFilter"
               type="text" 
               class="form-control form-control-sm filter-input"
               [placeholder]=""

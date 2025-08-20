@@ -66,6 +66,18 @@
   &:active {
     transform: translateY(1px);
   }
+  
+  /* Desactivar animaciones de hover cuando se especifica noAnimate */
+  &.no-animate {
+    &:hover {
+      transform: none !important;
+      z-index: 10000; /* Mantener z-index para tooltips */
+    }
+    
+    &:active {
+      transform: none !important;
+    }
+  }
 
   /* Estado loading - mantiene el color original pero bloquea interacción */
   &.loading {
@@ -337,6 +349,36 @@
   
   .spinner-overlay {
     background-color: #FFE7E7 !important;
+    opacity: 1 !important;
+  }
+}
+
+.btn-danger-light {
+  background-color: #ffffff;
+  border: 1px solid #DC3545;
+  color: #DC3545;
+  
+  &:hover {
+    background-color: #ffffff;
+    //border-color: #C82333;
+    color: #C82333;
+  }
+  
+  /* Estado loading específico para danger-light */
+  &.loading {
+    background-color: #ffffff !important;
+    color: #DC3545 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Estilos específicos para el spinner */
+  .spinner-icon {
+    color: #DC3545 !important;
+    opacity: 1 !important;
+  }
+  
+  .spinner-overlay {
+    background-color: #ffffff !important;
     opacity: 1 !important;
   }
 }

@@ -6,6 +6,7 @@ export interface TableColumn {
   label: string;
   sortable?: boolean;
   width?: string;
+  noFilter?: boolean;
 }
 
 export interface TableData {

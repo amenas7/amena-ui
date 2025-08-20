@@ -115,6 +115,11 @@ Este comportamiento mejora la experiencia de usuario al eliminar controles innec
 - **Hover**: Mantiene el color de selección
 - **Accesibilidad**: Indicadores visuales claros
 
+### Control de Filtros por Columna
+- **noFilter**: Propiedad opcional que permite ocultar el filtro en columnas específicas
+- **Uso común**: Para columnas de acciones, botones, o datos que no requieren filtrado
+- **Por defecto**: false (el filtro se muestra)
+
 ## Interfaces
 
 ### TableColumn
@@ -124,6 +129,7 @@ interface TableColumn {
   label: string;         // Etiqueta visible
   sortable?: boolean;    // Si la columna es ordenable
   width?: string;        // Ancho de la columna (opcional)
+  noFilter?: boolean;    // Oculta el filtro para esta columna (por defecto: false)
 }
 \`\`\`
 
@@ -143,7 +149,8 @@ import { SaTableComponent } from '@sanna-ui/sa-table';
 const columns: TableColumn[] = [
   { key: 'id', label: 'ID', sortable: true },
   { key: 'name', label: 'Nombre', sortable: true },
-  { key: 'email', label: 'Email' }
+  { key: 'email', label: 'Email' },
+  { key: 'actions', label: 'Acciones', noFilter: true }  // Sin filtro
 ];
 
 const data: TableData[] = [
@@ -871,6 +878,64 @@ onFilterChange(filters: {[column: string]: string}) {
 
 - **clearFilters()**: Limpia todos los filtros programáticamente
 - **applyFilters()**: Reaplica los filtros manualmente (llamado automáticamente)
+        `
+      }
+    }
+  }
+};
+
+export const FiltrosSelectivos: Story = {
+  name: 'Filtros Selectivos (noFilter)',
+  args: {
+    columns: [
+      { key: 'id', label: 'ID', sortable: true, width: '80px' },
+      { key: 'name', label: 'Nombre', sortable: true },
+      { key: 'department', label: 'Departamento', sortable: true },
+      { key: 'status', label: 'Estado', sortable: true },
+      { key: 'actions', label: 'Acciones', noFilter: true, width: '120px' }
+    ],
+    data: [
+      { id: 1, name: 'Juan Pérez', department: 'Desarrollo', status: 'Activo', actions: 'Editar | Ver' },
+      { id: 2, name: 'María García', department: 'Diseño', status: 'Activo', actions: 'Editar | Ver' },
+      { id: 3, name: 'Carlos López', department: 'Desarrollo', status: 'Inactivo', actions: 'Editar | Ver' },
+      { id: 4, name: 'Ana Martínez', department: 'Marketing', status: 'Activo', actions: 'Editar | Ver' },
+      { id: 5, name: 'Pedro Sánchez', department: 'Ventas', status: 'Activo', actions: 'Editar | Ver' }
+    ],
+    showFilters: true,
+    itemsPerPage: 10,
+    hover: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Control de Filtros por Columna
+
+Esta historia demuestra el uso de la propiedad \`noFilter\` que permite ocultar el filtro en columnas específicas.
+
+### Características:
+
+- **Columnas con filtro**: ID, Nombre, Departamento, Estado
+- **Columna sin filtro**: Acciones (configurada con \`noFilter: true\`)
+- **Uso típico**: Para columnas de botones, acciones, o datos que no requieren filtrado
+
+### Configuración:
+
+\`\`\`typescript
+const columns: TableColumn[] = [
+  { key: 'id', label: 'ID', sortable: true, width: '80px' },
+  { key: 'name', label: 'Nombre', sortable: true },
+  { key: 'department', label: 'Departamento', sortable: true },
+  { key: 'status', label: 'Estado', sortable: true },
+  { key: 'actions', label: 'Acciones', noFilter: true, width: '120px' }  // Sin filtro
+];
+\`\`\`
+
+### Ventajas:
+
+- **Interfaz más limpia**: No muestra filtros innecesarios
+- **Mejor UX**: Reduce la confusión del usuario
+- **Flexibilidad**: Control granular por columna
         `
       }
     }

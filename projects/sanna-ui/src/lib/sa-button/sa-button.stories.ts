@@ -44,6 +44,8 @@ export default {
           result = result.replace(/\[fullWidth\]="false"/g, 'fullWidth="false"');
           result = result.replace(/\[iconOnly\]="true"/g, 'iconOnly="true"');
           result = result.replace(/\[iconOnly\]="false"/g, 'iconOnly="false"');
+          result = result.replace(/\[noAnimate\]="true"/g, 'noAnimate="true"');
+          result = result.replace(/\[noAnimate\]="false"/g, 'noAnimate="false"');
           
           // Limpiar espacios extra
           result = result.replace(/\n\s*\n/g, '\n');
@@ -60,7 +62,7 @@ export default {
     },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'terciary', 'danger', 'warning', 'info', 'gray', 'red', 'success'],
+      options: ['primary', 'secondary', 'terciary', 'danger', 'danger-light', 'warning', 'info', 'gray', 'red', 'success'],
       description: 'Variante de color del botón'
     },
     size: {
@@ -82,7 +84,7 @@ export default {
     },
     icon: {
       control: { type: 'text' },
-      description: 'Icono de FontAwesome (ej: "heart", "save", "trash")'
+      description: 'Icono de FontAwesome. Ejemplos: "edit", "trash", "eye", "download", "plus", "check", "times", "heart", "star", "user", "cog", "search", "save", "home", "bell", "calendar", "clock", "info", "warning-triangle"'
     },
     position: {
       control: { type: 'select' },
@@ -106,6 +108,10 @@ export default {
       control: { type: 'select' },
       options: ['top', 'bottom', 'left', 'right'],
       description: 'Posición donde aparecerá el tooltip'
+    },
+    noAnimate: {
+      control: { type: 'boolean' },
+      description: 'Desactivar animaciones de hover (transform: translateY). Útil para interfaces más estáticas o barras de herramientas densas.'
     }
   }
 } as Meta<SaButtonComponent>;
@@ -115,6 +121,7 @@ export const Primary: StoryObj<SaButtonComponent> = {
   args: {
     label: 'Click me',
     variant: 'primary',
+    noAnimate: false
   },
   parameters: {
     docs: {
@@ -525,6 +532,7 @@ export const Variants: StoryObj<SaButtonComponent> = {
         <sa-button label="Red" variant="red"></sa-button>
         <sa-button label="Success" variant="success"></sa-button>
         <sa-button label="Danger" variant="danger"></sa-button>
+        <sa-button label="Danger Light" variant="danger-light"></sa-button>
         <sa-button label="Warning" variant="warning"></sa-button>
         <sa-button label="Info" variant="info"></sa-button>
       </div>
