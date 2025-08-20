@@ -405,8 +405,8 @@
     cursor: default !important;
     border-bottom: none !important;
     border-right: none !important;
-    background-color: #e7e7e9 !important;
-    background: #e7e7e9 !important;
+    background-color: #f0f0f0 !important;
+    background: #f0f0f0 !important;
     border-radius: 0 !important;
     user-select: text !important;
     font-weight: 600 !important;
@@ -422,8 +422,8 @@
   .table thead tr th:active,
   .table.table-light thead tr th,
   .table-light thead tr th {
-    background-color: #e7e7e9 !important;
-    background: #e7e7e9 !important;
+    background-color: #f0f0f0 !important;
+    background: #f0f0f0 !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
@@ -868,8 +868,8 @@ nav[aria-label="Navegación de páginas"] {
   padding: 0.3125rem 0.5rem !important; /* Reducir padding-bottom de 8px a 5px */
   text-align: left !important;
   vertical-align: middle !important;
-  background-color: #e7e7e9 !important;
-  background: #e7e7e9 !important;
+  background-color: #f0f0f0 !important;
+  background: #f0f0f0 !important;
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
@@ -1301,8 +1301,8 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th,
 .sa-table-container .table thead th.table-light,
 .sa-table-container .table thead th {
-  background-color: #e7e7e9 !important;
-  background: #e7e7e9 !important;
+  background-color: #f0f0f0 !important;
+  background: #f0f0f0 !important;
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
@@ -1313,8 +1313,8 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th:hover,
 .sa-table-container .table thead th.table-light:hover,
 .sa-table-container .table thead th:hover {
-  background-color: #e7e7e9 !important;
-  background: #e7e7e9 !important;
+  background-color: #f0f0f0 !important;
+  background: #f0f0f0 !important;
   color: #555b5f !important;
   font-size: 11px !important; /* Mantener tamaño de fuente en hover de encabezados */
 }
