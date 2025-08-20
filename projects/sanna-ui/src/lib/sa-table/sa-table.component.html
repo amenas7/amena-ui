@@ -12,9 +12,10 @@
       <thead class="table-light">
         <tr>
           <th *ngFor="let column of columns" 
+              class="column-header"
               [style.width]="column.width">
             <div class="d-flex align-items-center justify-content-between">
-              <span>{{ column.label }}</span>
+              <b>{{ column.label }}</b>
             </div>
           </th>
         </tr>

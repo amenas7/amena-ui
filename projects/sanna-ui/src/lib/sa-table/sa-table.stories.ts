@@ -43,48 +43,7 @@ const meta: Meta<SaTableComponent> = {
       description: {
         component: `
 Un componente de tabla responsive con paginación y múltiples opciones de configuración. Diseñado con estilos personalizados para una apariencia moderna y limpia.
-
-## Estilos Personalizados
-
-### Tabla
-- **Border-radius**: Esquinas redondeadas (0.375rem)
-- **Cabeceras**: Fondo verde claro (#EEF8F0), sin bordes inferiores
-- **Filas**: Fondo blanco puro, sin efectos hover por defecto
-- **Efecto hover**: Color gris claro (#f8f9fa) cuando hover es true
-- **Filas seleccionables**: Fondo azul (#1F8BE1) con texto blanco
-
-### Paginación
-- **Botones**: Border-radius sutil (0.25rem), bordes grises claros (#dddfe0)
-- **Colores activos**: Fondo verde (#5BAB5F) con texto blanco
-- **Botones primera/última página**: Opcionales, se pueden ocultar
-
-## Props
-
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| columns | TableColumn[] | [] | Configuración de las columnas |
-| data | TableData[] | [] | Datos a mostrar en la tabla |
-| itemsPerPage | number | 5 | Elementos por página |
-| showItemsPerPage | boolean | true | Mostrar selector de elementos por página |
-| showPagination | boolean | true | Mostrar controles de paginación |
-| showTotal | boolean | true | Mostrar información de totales |
-| showFirstLastButtons | boolean | true | Mostrar botones de primera y última página |
-| showFilters | boolean | false | Mostrar inputs de filtrado debajo de cada columna |
-| hover | boolean | false | Efecto hover en las filas (deshabilitado por defecto) |
-| loading | boolean | false | Estado de carga |
-| emptyMessage | string | 'No hay datos disponibles' | Mensaje cuando no hay datos |
-| minWidth | string | 600px | Ancho mínimo de la tabla para scroll horizontal |
-
 ## Comportamiento con Datos Vacíos
-
-Cuando \`data.length === 0\` (tabla sin datos), el componente automáticamente:
-
-- ✅ **Oculta el selector "Registros por página"** - No hay elementos que paginar
-- ✅ **Oculta la información de paginación** - No hay registros que contar
-- ✅ **Oculta los controles de paginación** - No hay páginas que navegar
-- ✅ **Muestra el mensaje de estado vacío** - Centrado y con estilo apropiado
-
-Este comportamiento mejora la experiencia de usuario al eliminar controles innecesarios cuando no hay datos para mostrar.
 
 ## Events
 
@@ -103,22 +62,10 @@ Este comportamiento mejora la experiencia de usuario al eliminar controles innec
 - **Selección visual**: La fila seleccionada cambia su color de fondo a #1F8BE1
 - **Evento**: Emite \`rowClick\` con los datos de la fila
 - **Selección única**: Solo una fila puede estar seleccionada a la vez
-- **Persistencia**: La selección se mantiene al cambiar de página
 
 ### Doble Click
 - **Evento**: Emite \`rowDoubleClick\` con los datos de la fila
 - **Uso común**: Abrir detalles, editar, navegar a otra vista
-
-### Estilos Visuales
-- **Cursor**: Pointer al pasar sobre las filas
-- **Transición**: Suave al cambiar de color (0.2s)
-- **Hover**: Mantiene el color de selección
-- **Accesibilidad**: Indicadores visuales claros
-
-### Control de Filtros por Columna
-- **noFilter**: Propiedad opcional que permite ocultar el filtro en columnas específicas
-- **Uso común**: Para columnas de acciones, botones, o datos que no requieren filtrado
-- **Por defecto**: false (el filtro se muestra)
 
 ## Interfaces
 
