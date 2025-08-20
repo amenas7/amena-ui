@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type TextareaSize = 'sm' | 'md' | 'lg';
@@ -8,6 +8,7 @@ export type TextareaStatus = 'default' | 'success' | 'error';
   selector: 'sa-textarea',
   templateUrl: './sa-textarea.component.html',
   styleUrls: ['./sa-textarea.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -67,7 +68,13 @@ export class SaTextareaComponent implements ControlValueAccessor {
   }
 
   get labelClasses(): string {
-    return 'form-label';
+    const sizeMap = {
+      'sm': 'form-label label-sm',
+      'md': 'form-label label-md',
+      'lg': 'form-label label-lg'
+    };
+    
+    return sizeMap[this.size] || 'form-label label-md';
   }
 
   get textareaStyles(): any {
