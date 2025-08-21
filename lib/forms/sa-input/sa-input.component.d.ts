@@ -40,6 +40,8 @@ export declare class SaInputComponent implements ControlValueAccessor {
     get inputGroupClasses(): string;
     get inputType(): string;
     get inputStyles(): any;
+    get helperTextClasses(): string;
+    get errorTextClasses(): string;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
