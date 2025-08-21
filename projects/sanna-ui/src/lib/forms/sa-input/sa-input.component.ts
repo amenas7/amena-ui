@@ -126,6 +126,38 @@ export class SaInputComponent implements ControlValueAccessor {
     return styles;
   }
 
+  get helperTextClasses(): string {
+    const baseClasses = ['form-text'];
+    
+    const sizeMap = {
+      'sm': 'helper-text-sm',
+      'md': 'helper-text-md',
+      'lg': 'helper-text-lg'
+    };
+    
+    if (sizeMap[this.size]) {
+      baseClasses.push(sizeMap[this.size]);
+    }
+    
+    return baseClasses.join(' ');
+  }
+
+  get errorTextClasses(): string {
+    const baseClasses = ['invalid-feedback', 'd-block'];
+    
+    const sizeMap = {
+      'sm': 'error-text-sm',
+      'md': 'error-text-md',
+      'lg': 'error-text-lg'
+    };
+    
+    if (sizeMap[this.size]) {
+      baseClasses.push(sizeMap[this.size]);
+    }
+    
+    return baseClasses.join(' ');
+  }
+
   writeValue(value: any): void {
     this.value = value ?? '';
   }

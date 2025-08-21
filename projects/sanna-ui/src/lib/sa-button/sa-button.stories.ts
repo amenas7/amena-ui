@@ -67,7 +67,7 @@ export default {
     },
     size: {
       control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
+      options: ['sm', 'md', 'lg'],
       description: 'Tamaño del botón'
     },
     disabled: {
@@ -552,16 +552,16 @@ export const Sizes: StoryObj<SaButtonComponent> = {
   render: () => ({
     template: `
       <div class="d-flex gap-3 align-items-center">
-        <sa-button label="Small" size="small" variant="primary"></sa-button>
-        <sa-button label="Medium" size="medium" variant="primary"></sa-button>
-        <sa-button label="Large" size="large" variant="primary"></sa-button>
+        <sa-button label="Small" size="sm" variant="primary"></sa-button>
+        <sa-button label="Medium" size="md" variant="primary"></sa-button>
+        <sa-button label="Large" size="lg" variant="primary"></sa-button>
       </div>
     `
   }),
   parameters: {
     docs: {
       source: {
-        code: `<sa-button label=\"Small\" size=\"small\" variant=\"primary\"></sa-button>\n<sa-button label=\"Medium\" size=\"medium\" variant=\"primary\"></sa-button>\n<sa-button label=\"Large\" size=\"large\" variant=\"primary\"></sa-button>`
+        code: `<sa-button label=\"Small\" size=\"sm\" variant=\"primary\"></sa-button>\n<sa-button label=\"Medium\" size=\"md\" variant=\"primary\"></sa-button>\n<sa-button label=\"Large\" size=\"lg\" variant=\"primary\"></sa-button>`
       }
     }
   }
@@ -775,18 +775,18 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-primary mb-2">Acciones Básicas</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-            <sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-            <sa-button icon="plus" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="minus" iconOnly="true" variant="warning" size="small"></sa-button>
-            <sa-button icon="check" iconOnly="true" variant="success" size="small"></sa-button>
-            <sa-button icon="times" iconOnly="true" variant="danger" size="small"></sa-button>
-            <sa-button icon="pencil" iconOnly="true" variant="warning" size="small"></sa-button>
-            <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
-            <sa-button icon="cog" iconOnly="true" variant="gray" size="small"></sa-button>
-            <sa-button icon="user" iconOnly="true" variant="gray" size="small"></sa-button>
-            <sa-button icon="heart" iconOnly="true" variant="red" size="small"></sa-button>
-            <sa-button icon="star" iconOnly="true" variant="red" size="small"></sa-button>
+            <sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+            <sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+            <sa-button icon="plus" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="minus" iconOnly="true" variant="warning" size="sm"></sa-button>
+            <sa-button icon="check" iconOnly="true" variant="success" size="sm"></sa-button>
+            <sa-button icon="times" iconOnly="true" variant="danger" size="sm"></sa-button>
+            <sa-button icon="pencil" iconOnly="true" variant="warning" size="sm"></sa-button>
+            <sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
+            <sa-button icon="cog" iconOnly="true" variant="gray" size="sm"></sa-button>
+            <sa-button icon="user" iconOnly="true" variant="gray" size="sm"></sa-button>
+            <sa-button icon="heart" iconOnly="true" variant="red" size="sm"></sa-button>
+            <sa-button icon="star" iconOnly="true" variant="red" size="sm"></sa-button>
           </div>
         </div>
 
@@ -794,14 +794,14 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-success mb-2">Navegación</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button icon="home" iconOnly="true" variant="secondary" size="small"></sa-button>
-            <sa-button icon="search" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="arrow-left" iconOnly="true" variant="primary" size="small"></sa-button>
-            <sa-button icon="arrow-right" iconOnly="true" variant="primary" size="small"></sa-button>
-            <sa-button icon="arrow-up" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="arrow-down" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="chevron-left" iconOnly="true" variant="gray" size="small"></sa-button>
-            <sa-button icon="chevron-right" iconOnly="true" variant="gray" size="small"></sa-button>
+            <sa-button icon="home" iconOnly="true" variant="secondary" size="sm"></sa-button>
+            <sa-button icon="search" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="arrow-left" iconOnly="true" variant="primary" size="sm"></sa-button>
+            <sa-button icon="arrow-right" iconOnly="true" variant="primary" size="sm"></sa-button>
+            <sa-button icon="arrow-up" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="arrow-down" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="chevron-left" iconOnly="true" variant="gray" size="sm"></sa-button>
+            <sa-button icon="chevron-right" iconOnly="true" variant="gray" size="sm"></sa-button>
           </div>
         </div>
 
@@ -809,10 +809,10 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-warning mb-2">Comunicación</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button icon="envelope" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="phone" iconOnly="true" variant="success" size="small"></sa-button>
-            <sa-button icon="bell" iconOnly="true" variant="warning" size="small"></sa-button>
-            <sa-button icon="share" iconOnly="true" variant="primary" size="small"></sa-button>
+            <sa-button icon="envelope" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="phone" iconOnly="true" variant="success" size="sm"></sa-button>
+            <sa-button icon="bell" iconOnly="true" variant="warning" size="sm"></sa-button>
+            <sa-button icon="share" iconOnly="true" variant="primary" size="sm"></sa-button>
           </div>
         </div>
 
@@ -820,9 +820,9 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-info mb-2">Diferentes Tamaños</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button icon="heart" iconOnly="true" variant="danger" size="small"></sa-button>
-            <sa-button icon="heart" iconOnly="true" variant="danger" size="medium"></sa-button>
-            <sa-button icon="heart" iconOnly="true" variant="danger" size="large"></sa-button>
+            <sa-button icon="heart" iconOnly="true" variant="danger" size="sm"></sa-button>
+            <sa-button icon="heart" iconOnly="true" variant="danger" size="md"></sa-button>
+            <sa-button icon="heart" iconOnly="true" variant="danger" size="lg"></sa-button>
           </div>
         </div>
 
@@ -830,9 +830,9 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-danger mb-2">Estados</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button icon="eye" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="eye" iconOnly="true" variant="info" size="small" disabled="true"></sa-button>
-            <sa-button icon="spinner" iconOnly="true" variant="primary" size="small" loading="true"></sa-button>
+            <sa-button icon="eye" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="eye" iconOnly="true" variant="info" size="sm" disabled="true"></sa-button>
+            <sa-button icon="spinner" iconOnly="true" variant="primary" size="sm" loading="true"></sa-button>
           </div>
         </div>
 
@@ -840,14 +840,14 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-primary mb-2">Ejemplo de Barra de Herramientas</h5>
           <div class="d-flex gap-2 flex-wrap align-items-center p-3 bg-light rounded">
-            <sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-            <sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-            <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
+            <sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+            <sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+            <sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
             <div class="vr mx-2"></div>
-            <sa-button icon="eye" iconOnly="true" variant="info" size="small"></sa-button>
-            <sa-button icon="share" iconOnly="true" variant="secondary" size="small"></sa-button>
+            <sa-button icon="eye" iconOnly="true" variant="info" size="sm"></sa-button>
+            <sa-button icon="share" iconOnly="true" variant="secondary" size="sm"></sa-button>
             <div class="vr mx-2"></div>
-            <sa-button icon="cog" iconOnly="true" variant="gray" size="small"></sa-button>
+            <sa-button icon="cog" iconOnly="true" variant="gray" size="sm"></sa-button>
           </div>
         </div>
       </div>
@@ -860,19 +860,19 @@ export const IconOnlyButtons: StoryObj<SaButtonComponent> = {
       },
       source: {
         code: `<!-- Botón solo con icono -->
-<sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-<sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-<sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
+<sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+<sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+<sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
 
 <!-- Con diferentes tamaños -->
-<sa-button icon="heart" iconOnly="true" variant="danger" size="small"></sa-button>
-<sa-button icon="heart" iconOnly="true" variant="danger" size="medium"></sa-button>
-<sa-button icon="heart" iconOnly="true" variant="danger" size="large"></sa-button>
+<sa-button icon="heart" iconOnly="true" variant="danger" size="sm"></sa-button>
+<sa-button icon="heart" iconOnly="true" variant="danger" size="md"></sa-button>
+<sa-button icon="heart" iconOnly="true" variant="danger" size="lg"></sa-button>
 
 <!-- Con estados -->
-<sa-button icon="eye" iconOnly="true" variant="info" size="small"></sa-button>
-<sa-button icon="eye" iconOnly="true" variant="info" size="small" disabled="true"></sa-button>
-<sa-button icon="spinner" iconOnly="true" variant="primary" size="small" loading="true"></sa-button>`
+<sa-button icon="eye" iconOnly="true" variant="info" size="sm"></sa-button>
+<sa-button icon="eye" iconOnly="true" variant="info" size="sm" disabled="true"></sa-button>
+<sa-button icon="spinner" iconOnly="true" variant="primary" size="sm" loading="true"></sa-button>`
       }
     }
   }
@@ -892,19 +892,19 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
           <div class="mb-3">
             <h6 class="text-muted mb-2">Con texto:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button label="Editar" icon="edit" position="left" variant="primary" size="small"></sa-button>
-              <sa-button label="Guardar" icon="save" position="right" variant="success" size="small"></sa-button>
-              <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="small"></sa-button>
-              <sa-button label="Configuración" icon="cog" position="right" variant="gray" size="small"></sa-button>
+              <sa-button label="Editar" icon="edit" position="left" variant="primary" size="sm"></sa-button>
+              <sa-button label="Guardar" icon="save" position="right" variant="success" size="sm"></sa-button>
+              <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="sm"></sa-button>
+              <sa-button label="Configuración" icon="cog" position="right" variant="gray" size="sm"></sa-button>
             </div>
           </div>
           <div class="mb-3">
             <h6 class="text-muted mb-2">Solo icono:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-              <sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-              <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
-              <sa-button icon="cog" iconOnly="true" variant="gray" size="small"></sa-button>
+              <sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+              <sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+              <sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
+              <sa-button icon="cog" iconOnly="true" variant="gray" size="sm"></sa-button>
             </div>
           </div>
         </div>
@@ -915,19 +915,19 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
           <div class="mb-3">
             <h6 class="text-muted mb-2">Con texto:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button label="Inicio" icon="home" position="left" variant="secondary" size="small"></sa-button>
-              <sa-button label="Buscar" icon="search" position="right" variant="info" size="small"></sa-button>
-              <sa-button label="Anterior" icon="arrow-left" position="left" variant="primary" size="small"></sa-button>
-              <sa-button label="Siguiente" icon="arrow-right" position="right" variant="primary" size="small"></sa-button>
+              <sa-button label="Inicio" icon="home" position="left" variant="secondary" size="sm"></sa-button>
+              <sa-button label="Buscar" icon="search" position="right" variant="info" size="sm"></sa-button>
+              <sa-button label="Anterior" icon="arrow-left" position="left" variant="primary" size="sm"></sa-button>
+              <sa-button label="Siguiente" icon="arrow-right" position="right" variant="primary" size="sm"></sa-button>
             </div>
           </div>
           <div class="mb-3">
             <h6 class="text-muted mb-2">Solo icono:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button icon="home" iconOnly="true" variant="secondary" size="small"></sa-button>
-              <sa-button icon="search" iconOnly="true" variant="info" size="small"></sa-button>
-              <sa-button icon="arrow-left" iconOnly="true" variant="primary" size="small"></sa-button>
-              <sa-button icon="arrow-right" iconOnly="true" variant="primary" size="small"></sa-button>
+              <sa-button icon="home" iconOnly="true" variant="secondary" size="sm"></sa-button>
+              <sa-button icon="search" iconOnly="true" variant="info" size="sm"></sa-button>
+              <sa-button icon="arrow-left" iconOnly="true" variant="primary" size="sm"></sa-button>
+              <sa-button icon="arrow-right" iconOnly="true" variant="primary" size="sm"></sa-button>
             </div>
           </div>
         </div>
@@ -938,19 +938,19 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
           <div class="mb-3">
             <h6 class="text-muted mb-2">Con texto:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button label="Correo" icon="envelope" position="left" variant="info" size="small"></sa-button>
-              <sa-button label="Teléfono" icon="phone" position="right" variant="success" size="small"></sa-button>
-              <sa-button label="Notificaciones" icon="bell" position="left" variant="warning" size="small"></sa-button>
-              <sa-button label="Compartir" icon="share" position="right" variant="primary" size="small"></sa-button>
+              <sa-button label="Correo" icon="envelope" position="left" variant="info" size="sm"></sa-button>
+              <sa-button label="Teléfono" icon="phone" position="right" variant="success" size="sm"></sa-button>
+              <sa-button label="Notificaciones" icon="bell" position="left" variant="warning" size="sm"></sa-button>
+              <sa-button label="Compartir" icon="share" position="right" variant="primary" size="sm"></sa-button>
             </div>
           </div>
           <div class="mb-3">
             <h6 class="text-muted mb-2">Solo icono:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button icon="envelope" iconOnly="true" variant="info" size="small"></sa-button>
-              <sa-button icon="phone" iconOnly="true" variant="success" size="small"></sa-button>
-              <sa-button icon="bell" iconOnly="true" variant="warning" size="small"></sa-button>
-              <sa-button icon="share" iconOnly="true" variant="primary" size="small"></sa-button>
+              <sa-button icon="envelope" iconOnly="true" variant="info" size="sm"></sa-button>
+              <sa-button icon="phone" iconOnly="true" variant="success" size="sm"></sa-button>
+              <sa-button icon="bell" iconOnly="true" variant="warning" size="sm"></sa-button>
+              <sa-button icon="share" iconOnly="true" variant="primary" size="sm"></sa-button>
             </div>
           </div>
         </div>
@@ -961,17 +961,17 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
           <div class="mb-3">
             <h6 class="text-muted mb-2">Con texto:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="small"></sa-button>
-              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="medium"></sa-button>
-              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="large"></sa-button>
+              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="sm"></sa-button>
+              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="md"></sa-button>
+              <sa-button label="Me gusta" icon="heart" position="left" variant="danger" size="lg"></sa-button>
             </div>
           </div>
           <div class="mb-3">
             <h6 class="text-muted mb-2">Solo icono:</h6>
             <div class="d-flex gap-3 flex-wrap align-items-center">
-              <sa-button icon="heart" iconOnly="true" variant="danger" size="small"></sa-button>
-              <sa-button icon="heart" iconOnly="true" variant="danger" size="medium"></sa-button>
-              <sa-button icon="heart" iconOnly="true" variant="danger" size="large"></sa-button>
+              <sa-button icon="heart" iconOnly="true" variant="danger" size="sm"></sa-button>
+              <sa-button icon="heart" iconOnly="true" variant="danger" size="md"></sa-button>
+              <sa-button icon="heart" iconOnly="true" variant="danger" size="lg"></sa-button>
             </div>
           </div>
         </div>
@@ -982,23 +982,23 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
           <div class="mb-3">
             <h6 class="text-muted mb-2">Barra de herramientas con texto:</h6>
             <div class="d-flex gap-2 flex-wrap align-items-center p-3 bg-light rounded">
-              <sa-button label="Editar" icon="edit" position="left" variant="primary" size="small"></sa-button>
-              <sa-button label="Guardar" icon="save" position="left" variant="success" size="small"></sa-button>
-              <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="small"></sa-button>
+              <sa-button label="Editar" icon="edit" position="left" variant="primary" size="sm"></sa-button>
+              <sa-button label="Guardar" icon="save" position="left" variant="success" size="sm"></sa-button>
+              <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="sm"></sa-button>
               <div class="vr mx-2"></div>
-              <sa-button label="Vista" icon="eye" position="left" variant="info" size="small"></sa-button>
-              <sa-button label="Compartir" icon="share" position="left" variant="secondary" size="small"></sa-button>
+              <sa-button label="Vista" icon="eye" position="left" variant="info" size="sm"></sa-button>
+              <sa-button label="Compartir" icon="share" position="left" variant="secondary" size="sm"></sa-button>
             </div>
           </div>
           <div class="mb-3">
             <h6 class="text-muted mb-2">Barra de herramientas solo iconos (más compacta):</h6>
             <div class="d-flex gap-2 flex-wrap align-items-center p-3 bg-light rounded">
-              <sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-              <sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-              <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
+              <sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+              <sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+              <sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
               <div class="vr mx-2"></div>
-              <sa-button icon="eye" iconOnly="true" variant="info" size="small"></sa-button>
-              <sa-button icon="share" iconOnly="true" variant="secondary" size="small"></sa-button>
+              <sa-button icon="eye" iconOnly="true" variant="info" size="sm"></sa-button>
+              <sa-button icon="share" iconOnly="true" variant="secondary" size="sm"></sa-button>
             </div>
           </div>
         </div>
@@ -1012,23 +1012,23 @@ export const TextVsIconOnly: StoryObj<SaButtonComponent> = {
       },
       source: {
         code: `<!-- Botón con texto e icono -->
-<sa-button label="Editar" icon="edit" position="left" variant="primary" size="small"></sa-button>
+<sa-button label="Editar" icon="edit" position="left" variant="primary" size="sm"></sa-button>
 
 <!-- Botón solo con icono -->
-<sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
+<sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
 
 <!-- Barra de herramientas con texto -->
 <div class="toolbar">
-  <sa-button label="Editar" icon="edit" position="left" variant="primary" size="small"></sa-button>
-  <sa-button label="Guardar" icon="save" position="left" variant="success" size="small"></sa-button>
-  <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="small"></sa-button>
+  <sa-button label="Editar" icon="edit" position="left" variant="primary" size="sm"></sa-button>
+  <sa-button label="Guardar" icon="save" position="left" variant="success" size="sm"></sa-button>
+  <sa-button label="Eliminar" icon="trash" position="left" variant="danger" size="sm"></sa-button>
 </div>
 
 <!-- Barra de herramientas solo iconos (más compacta) -->
 <div class="toolbar">
-  <sa-button icon="edit" iconOnly="true" variant="primary" size="small"></sa-button>
-  <sa-button icon="save" iconOnly="true" variant="success" size="small"></sa-button>
-  <sa-button icon="trash" iconOnly="true" variant="danger" size="small"></sa-button>
+  <sa-button icon="edit" iconOnly="true" variant="primary" size="sm"></sa-button>
+  <sa-button icon="save" iconOnly="true" variant="success" size="sm"></sa-button>
+  <sa-button icon="trash" iconOnly="true" variant="danger" size="sm"></sa-button>
 </div>`
       }
     }

@@ -193,7 +193,7 @@ import {
 import { TooltipPosition } from '../types/tooltip.types';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'info' | 'gray' | 'red' | 'success';
-export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
 
@@ -213,7 +213,7 @@ export class SaButtonComponent {
   
   // Propiedades con setters/getters para flexibilidad máxima
   private _variant: ButtonVariant = 'primary';
-  private _size: ButtonSize = 'medium';
+  private _size: ButtonSize = 'md';
   private _disabled: boolean = false;
   private _loading: boolean = false;
   private _fullWidth: boolean = false;
@@ -259,7 +259,7 @@ export class SaButtonComponent {
 
   @Input()
   set size(value: ButtonSize | any) {
-    this._size = value || 'medium';
+    this._size = value || 'md';
   }
   get size(): ButtonSize {
     return this._size;
@@ -953,11 +953,11 @@ export class SaButtonComponent {
 
   private getSizeClass(): string {
     switch (this.size) {
-      case 'small':
+      case 'sm':
         return 'btn-sm';
-      case 'medium':
+      case 'md':
         return 'btn-md';
-      case 'large':
+      case 'lg':
         return 'btn-lg';
       default:
         return 'btn-md'; // Por defecto usa el tamaño mediano

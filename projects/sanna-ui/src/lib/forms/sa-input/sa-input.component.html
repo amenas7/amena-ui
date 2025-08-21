@@ -71,6 +71,6 @@
     </button>
   </div>
 
-  <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
-  <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
+  <div *ngIf="helperText && !errorText" [class]="helperTextClasses">{{ helperText }}</div>
+  <div *ngIf="errorText" [class]="errorTextClasses">{{ errorText }}</div>
 </div>

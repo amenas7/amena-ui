@@ -294,18 +294,44 @@
 // Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
+  font-size: 12px; // Tamaño por defecto (medium)
   color: #6b7280;
-  margin-top: 0.25rem;
+  margin-top: 2px;
+  
+  // Tamaños específicos según el tamaño del input
+  &.helper-text-sm {
+    font-size: 12px;
+  }
+  
+  &.helper-text-md {
+    font-size: 12px;
+  }
+  
+  &.helper-text-lg {
+    font-size: 14px;
+  }
 }
 
 // Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
+  font-size: 12px; // Tamaño por defecto (medium)
+  margin-top: 2px;
   color: #dc3545;
   display: block;
+  
+  // Tamaños específicos según el tamaño del input
+  &.error-text-sm {
+    font-size: 12px;
+  }
+  
+  &.error-text-md {
+    font-size: 12px;
+  }
+  
+  &.error-text-lg {
+    font-size: 14px;
+  }
 }
 
 // Estilos para el asterisco de campo requerido
