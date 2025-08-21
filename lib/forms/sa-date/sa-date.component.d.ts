@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit } from '@angular/core';
+import { EventEmitter, OnInit, ElementRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type DateSize = 'sm' | 'md' | 'lg';
@@ -23,6 +23,7 @@ export declare class SaDateComponent implements ControlValueAccessor, OnInit {
     valueChange: EventEmitter<string>;
     focus: EventEmitter<FocusEvent>;
     blur: EventEmitter<FocusEvent>;
+    dateInput: ElementRef<HTMLInputElement>;
     isFocused: boolean;
     private _generatedId;
     private onChange;
