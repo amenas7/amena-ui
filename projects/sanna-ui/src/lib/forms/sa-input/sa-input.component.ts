@@ -40,6 +40,8 @@ export class SaInputComponent implements ControlValueAccessor {
   @Input() minlength: number | null = null;
   @Input() maxlength: number | null = null;
   @Input() pattern: string = '';
+  @Input() backgroundColor: string = '';
+  @Input() textColor: string = '';
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<FocusEvent>();
@@ -108,6 +110,20 @@ export class SaInputComponent implements ControlValueAccessor {
       return this.showPassword ? 'text' : 'password';
     }
     return this.type;
+  }
+
+  get inputStyles(): any {
+    const styles: any = {};
+    
+    if (this.backgroundColor) {
+      styles['background-color'] = this.backgroundColor;
+    }
+    
+    if (this.textColor) {
+      styles['color'] = this.textColor;
+    }
+    
+    return styles;
   }
 
   writeValue(value: any): void {

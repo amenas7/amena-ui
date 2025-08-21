@@ -36,6 +36,8 @@ const meta: Meta<SaInputComponent> = {
           result = result.replace(/\[errorText\]="'([^']+)'"/g, 'errorText="$1"');
           result = result.replace(/\[leftIcon\]="'([^']+)'"/g, 'leftIcon="$1"');
           result = result.replace(/\[rightIcon\]="'([^']+)'"/g, 'rightIcon="$1"');
+          result = result.replace(/\[backgroundColor\]="'([^']+)'"/g, 'backgroundColor="$1"');
+          result = result.replace(/\[textColor\]="'([^']+)'"/g, 'textColor="$1"');
           
           // Transformar boolean properties
           result = result.replace(/\[required\]="true"/g, 'required="true"');
@@ -149,6 +151,22 @@ const meta: Meta<SaInputComponent> = {
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
+      },
+    },
+    backgroundColor: {
+      control: 'color',
+      description: 'Color de fondo personalizado del input (valor hexadecimal)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '""' },
+      },
+    },
+    textColor: {
+      control: 'color',
+      description: 'Color del texto personalizado del input (valor hexadecimal)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '""' },
       },
     },
   },
@@ -293,6 +311,35 @@ export const Required: Story = {
     label: 'Nombre completo',
     required: true,
     placeholder: 'Ingrese su nombre completo',
+  }
+};
+
+// Colores personalizados
+export const CustomBackgroundColor: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Fondo personalizado',
+    placeholder: 'Input con fondo azul claro',
+    backgroundColor: '#e6f3ff',
+  }
+};
+
+export const CustomTextColor: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Texto personalizado',
+    placeholder: 'Input con texto azul',
+    textColor: '#0066cc',
+  }
+};
+
+export const CustomColors: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Colores personalizados',
+    placeholder: 'Fondo verde claro y texto verde oscuro',
+    backgroundColor: '#f0f8f0',
+    textColor: '#006600',
   }
 };
 
