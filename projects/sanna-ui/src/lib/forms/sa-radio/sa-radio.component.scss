@@ -34,8 +34,8 @@
 // Estilos del radio input
 :host .form-check-input {
   font-family: $sanna-font-stack;
-  width: 16px !important;
-  height: 16px !important;
+  width: 16px;
+  height: 16px;
   margin: 0 !important;
   flex-shrink: 0;
   position: static !important;
@@ -132,8 +132,8 @@
   align-items: center;
   
   .form-check-input {
-    width: 12px !important;
-    height: 12px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
   
   .form-check-label {
@@ -146,8 +146,8 @@
   align-items: center;
   
   .form-check-input {
-    width: 18px !important;
-    height: 18px !important;
+    width: 20px !important;
+    height: 20px !important;
   }
   
   .form-check-label {
@@ -166,7 +166,7 @@
   }
   
   .form-check-label {
-    font-size: 16px !important;
+    font-size: 14px !important;
     line-height: 1.2;
   }
 }
