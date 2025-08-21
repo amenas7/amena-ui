@@ -7,13 +7,17 @@
   width: auto;
   font-family: $sanna-font-stack;
   box-sizing: border-box;
+  vertical-align: top;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 // Wrapper principal del componente
 :host .sa-checkbox-wrapper {
   width: auto;
   box-sizing: border-box;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  height: auto;
   
   &:last-child {
     margin-bottom: 0;
