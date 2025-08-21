@@ -3,15 +3,15 @@
 
 // Variables para personalización
 :host {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: auto;
   font-family: $sanna-font-stack;
   box-sizing: border-box;
 }
 
 // Wrapper principal del componente
 :host .sa-checkbox-wrapper {
-  width: 100%;
+  width: auto;
   box-sizing: border-box;
   margin-bottom: 1rem;
   
