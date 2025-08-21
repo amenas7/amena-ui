@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type DateSize = 'sm' | 'md' | 'lg';
@@ -38,6 +38,8 @@ export class SaDateComponent implements ControlValueAccessor, OnInit {
   @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
+
+  @ViewChild('dateInput', { static: false }) dateInput!: ElementRef<HTMLInputElement>;
 
   isFocused: boolean = false;
   private _generatedId: string;
@@ -142,17 +144,26 @@ export class SaDateComponent implements ControlValueAccessor, OnInit {
   }
 
   openCalendar(event: MouseEvent) {
+    // Prevenir propagación del evento
+    event.preventDefault();
+    event.stopPropagation();
+    
     // Si el input no está deshabilitado ni en solo lectura
     if (!this.disabled && !this.readonly) {
-      const inputElement = event.target as HTMLInputElement;
+      // Usar ViewChild para acceder al input
+      const inputElement = this.dateInput?.nativeElement;
       
-      // Intentar abrir el calendario programáticamente
-      try {
-        inputElement.showPicker();
-      } catch (error) {
-        // Fallback para navegadores que no soportan showPicker()
-        // En estos casos, el click normal en el input debería funcionar
-        console.debug('showPicker() no soportado, usando comportamiento por defecto');
+      if (inputElement) {
+        // Enfocar el input primero
+        inputElement.focus();
+        
+        // Intentar abrir el calendario programáticamente
+        try {
+          inputElement.showPicker();
+        } catch (error) {
+          // Fallback: simular click en el input
+          inputElement.click();
+        }
       }
     }
   }
