@@ -1,4 +1,4 @@
-<!-- Estilos críticos para evitar FOUC en Shadow DOM -->
+<!-- Estilos críticos para evitar FOUC en Shadow DOM con CSS Variables -->
 <style>
   :host {
     display: inline-block;
@@ -19,12 +19,17 @@
     white-space: nowrap;
     font-weight: 400;
     line-height: 1;
-    padding: 8px 12px;
-    font-size: 13px;
-    background-color: #36AD55;
-    color: #ffffff;
+    padding: var(--btn-size, 8px 12px);
+    font-size: var(--btn-font-size, 13px);
+    background-color: var(--btn-bg, #36AD55);
+    border: var(--btn-border, 1px solid #36AD55);
+    color: var(--btn-color, #ffffff);
     font-family: 'Nunito Sans', sans-serif;
     transition: all 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: var(--btn-hover-bg, #239A5C);
   }
   
   /* Estilos críticos para el spinner */
@@ -38,6 +43,7 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
+    background-color: var(--btn-bg, #36AD55);
   }
   
   .spinner-icon {
@@ -45,6 +51,7 @@
     align-items: center;
     justify-content: center;
     animation: spin 1s linear infinite;
+    color: var(--btn-color, #ffffff);
   }
   
   @keyframes spin {
@@ -61,6 +68,7 @@
   [disabled]="disabled || loading"
   [class.has-tooltip]="tooltip"
   (click)="onClick($event)"
+  [ngStyle]="cssVariables"
 >
   <!-- Contenido del botón -->
   <div class="button-content" [class.loading-hidden]="showSpinner">

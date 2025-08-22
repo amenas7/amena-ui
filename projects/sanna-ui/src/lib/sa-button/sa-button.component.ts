@@ -209,6 +209,125 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 export class SaButtonComponent {
   // Propiedades con flexibilidad máxima: soportan attribute y property binding
   @Input() label: string = 'Button'; // Mantener como @Input simple para strings
+
+  get cssVariables(): { [key: string]: string } {
+    const colors = this.getVariantColors();
+    return {
+      '--btn-bg': colors.background,
+      '--btn-border': colors.border,
+      '--btn-color': colors.color,
+      '--btn-hover-bg': colors.hoverBackground,
+      '--btn-size': this.getSizePadding(),
+      '--btn-font-size': this.getFontSize()
+    };
+  }
+
+  private getVariantColors() {
+    if (this.disabled) {
+      return {
+        background: '#f8f9fa',
+        border: '1px solid #858585',
+        color: '#858585',
+        hoverBackground: '#f8f9fa'
+      };
+    }
+
+    switch (this.variant) {
+      case 'primary':
+        return {
+          background: '#36AD55',
+          border: '1px solid #36AD55',
+          color: '#ffffff',
+          hoverBackground: '#239A5C'
+        };
+      case 'secondary':
+        return {
+          background: '#ffffff',
+          border: '1px solid #00ab4a',
+          color: '#00ab4a',
+          hoverBackground: '#effcf5'
+        };
+      case 'terciary':
+        return {
+          background: '#ffffff',
+          border: '1px solid #c7cace',
+          color: '#2e3b60',
+          hoverBackground: '#f4f6f8'
+        };
+      case 'danger':
+        return {
+          background: '#faeded',
+          border: '1px solid #DC3545',
+          color: '#DC3545',
+          hoverBackground: '#fcdcdc'
+        };
+      case 'danger-light':
+        return {
+          background: '#ffffff',
+          border: '1px solid #DC3545',
+          color: '#DC3545',
+          hoverBackground: '#ffffff'
+        };
+      case 'warning':
+        return {
+          background: '#FFF3CD',
+          border: '1px solid #FFC107',
+          color: '#856404',
+          hoverBackground: '#FFEAA7'
+        };
+      case 'info':
+        return {
+          background: '#dae9fc4a',
+          border: '1px solid #007bff',
+          color: '#007bff',
+          hoverBackground: '#98c8ff4a'
+        };
+      case 'gray':
+        return {
+          background: '#777777',
+          border: '1px solid #777777',
+          color: '#ffffff',
+          hoverBackground: '#5C5C5C'
+        };
+      case 'red':
+        return {
+          background: '#DC3545',
+          border: '1px solid #DC3545',
+          color: '#ffffff',
+          hoverBackground: '#C82333'
+        };
+      case 'success':
+        return {
+          background: '#D3F7E3',
+          border: '1px solid #00ab4a',
+          color: '#00ab4a',
+          hoverBackground: '#C0F0D0'
+        };
+      default:
+        return {
+          background: '#36AD55',
+          border: '1px solid #36AD55',
+          color: '#ffffff',
+          hoverBackground: '#239A5C'
+        };
+    }
+  }
+
+  private getSizePadding(): string {
+    switch (this.size) {
+      case 'sm': return '6px 8px';
+      case 'lg': return '12px 24px';
+      default: return '8px 12px';
+    }
+  }
+
+  private getFontSize(): string {
+    switch (this.size) {
+      case 'sm': return '12px';
+      case 'lg': return '16px';
+      default: return '13px';
+    }
+  }
   
   // Propiedades con setters/getters para flexibilidad máxima
   private _variant: ButtonVariant = 'primary';
