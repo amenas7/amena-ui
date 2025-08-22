@@ -7,9 +7,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export declare class SaButtonComponent {
     label: string;
-    get cssVariables(): {
-        [key: string]: string;
-    };
+    get criticalInlineStyles(): string;
     private getVariantColors;
     private getSizePadding;
     private getFontSize;
