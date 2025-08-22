@@ -34,10 +34,3 @@ export * from './lib/types/tooltip.types';
 
 // Estilos y configuración (para personalización avanzada)
 // Los usuarios pueden importar directamente: import 'sanna-ui/lib/_styles/sanna-fonts.scss';
-
-// Exportar rutas de estilos para facilitar la importación
-export const SANNA_UI_STYLES = {
-  fonts: 'sanna-ui/lib/_styles/sanna-fonts.scss',
-  preload: 'sanna-ui/lib/_styles/sanna-preload.scss',
-  bundle: 'sanna-ui/sanna-ui-bundle.scss'
-};
