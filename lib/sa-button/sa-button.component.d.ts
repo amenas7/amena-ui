@@ -1,21 +1,12 @@
-import { EventEmitter, ElementRef, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, ElementRef } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { TooltipPosition } from '../types/tooltip.types';
 import * as i0 from "@angular/core";
 export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'info' | 'gray' | 'red' | 'success';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
-export declare class SaButtonComponent implements OnInit, AfterViewInit {
-    private cdr;
-    isReady: boolean;
-    constructor(cdr: ChangeDetectorRef);
+export declare class SaButtonComponent {
     label: string;
-    ngOnInit(): void;
-    ngAfterViewInit(): void;
-    get criticalInlineStyles(): string;
-    private getVariantColors;
-    private getSizePadding;
-    private getFontSize;
     private _variant;
     private _size;
     private _disabled;
