@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -9,7 +9,7 @@ export type InputStatus = 'default' | 'success' | 'error';
   selector: 'sa-input',
   templateUrl: './sa-input.component.html',
   styleUrls: ['./sa-input.component.scss'],
-  //encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.ShadowDom,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,7 +18,7 @@ export type InputStatus = 'default' | 'success' | 'error';
     }
   ]
 })
-export class SaInputComponent implements ControlValueAccessor, OnInit {
+export class SaInputComponent implements ControlValueAccessor {
   @Input() value: string = '';
   @Input() type: InputType = 'text';
   @Input() placeholder: string = '';
@@ -34,8 +34,6 @@ export class SaInputComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean = false;
   @Input() id: string = '';
   @Input() name: string = '';
-  
-  private static idCounter = 0;
   @Input() autocomplete: string = 'off';
   @Input() min: number | null = null;
   @Input() max: number | null = null;
@@ -54,13 +52,6 @@ export class SaInputComponent implements ControlValueAccessor, OnInit {
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
-
-  ngOnInit(): void {
-    // Generar ID único si no se proporciona
-    if (!this.id) {
-      this.id = `sa-input-${++SaInputComponent.idCounter}`;
-    }
-  }
 
   get inputClasses(): string {
     const sizeMap = {

@@ -1,44 +1,46 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../../_styles/sanna-fonts';
 
-/* ESTILOS AUTOCONTENIDOS PARA SHADOW DOM - COMO SA-TABLE */
+// Variables para personalización
 :host {
   display: block;
   width: 100%;
-  box-sizing: border-box;
   font-family: $sanna-font-stack;
-  contain: style;
-  isolation: isolate;
+  box-sizing: border-box;
 }
 
-/* Definir todas las clases Bootstrap necesarias dentro del componente */
+// Estilos base del contenedor
+:host {
+  width: 100%;
+  box-sizing: border-box;
+  //margin-bottom: 1rem !important;
+}
 
-/* FORM-LABEL - Label styling */
-.form-label {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  font-weight: 400;
-  color: #212529;
+// Estilos del label
+:host .form-label {
   font-family: $sanna-font-stack;
+  color: #212529;
   font-size: 14px;
+  font-weight: 400 !important;
   margin-bottom: 2px;
+  display: inline-block;
   
   // Clases de tamaño para los labels
   &.label-sm {
-    font-size: 11px;
+    font-size: 11px !important;
   }
   
   &.label-md {
-    font-size: 14px;
+    font-size: 14px !important;
   }
   
   &.label-lg {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 }
 
-/* FORM-CONTROL - Input principal autocontenido */
-.form-control {
+// Estilos del input principal
+:host .form-control {
   font-family: $sanna-font-stack;
   display: block;
   width: 100%;
@@ -144,8 +146,8 @@
   }
 }
 
-/* INPUT-GROUP - Grupo de input autocontenido */
-.input-group {
+// Estilos del input group
+:host .input-group {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -190,8 +192,8 @@
   }
 }
 
-/* INPUT-GROUP-TEXT - Contenedor de iconos autocontenido */
-.input-group-text {
+// Estilos del input group text (para iconos)
+:host .input-group-text {
   font-family: $sanna-font-stack;
   display: flex;
   align-items: center;
@@ -231,38 +233,8 @@
   }
 }
 
-/* BTN - Botón base autocontenido */
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  border-radius: 0.375rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  font-family: $sanna-font-stack;
-  
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  }
-  
-  &:disabled {
-    pointer-events: none;
-    opacity: 0.65;
-  }
-}
-
-/* BTN-OUTLINE-SECONDARY - Botón de password toggle */
-.btn-outline-secondary {
+// Estilos del botón de password toggle
+:host .btn-outline-secondary {
   font-family: $sanna-font-stack;
   display: flex;
   align-items: center;
@@ -319,8 +291,8 @@
   }
 }
 
-/* FORM-TEXT - Textos de ayuda autocontenidos */
-.form-text {
+// Estilos para textos de ayuda
+:host .form-text {
   font-family: $sanna-font-stack;
   font-size: 12px; // Tamaño por defecto (medium)
   color: #6b7280;
@@ -340,8 +312,8 @@
   }
 }
 
-/* INVALID-FEEDBACK - Mensajes de error autocontenidos */
-.invalid-feedback {
+// Estilos para mensajes de error
+:host .invalid-feedback {
   font-family: $sanna-font-stack;
   font-size: 12px; // Tamaño por defecto (medium)
   margin-top: 2px;
@@ -362,23 +334,18 @@
   }
 }
 
-/* TEXT-DANGER - Asterisco de campo requerido */
-.text-danger {
+// Estilos para el asterisco de campo requerido
+:host .text-danger {
   color: #dc3545 !important;
 }
 
-/* BOOTSTRAP UTILITIES - Utilidades necesarias */
-.d-block {
-  display: block !important;
-}
-
-/* Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes */
+// Asegurar que el contenedor no tenga margin extra cuando se use dentro de otros componentes
 :host :last-child {
   margin-bottom: 0 !important;
 }
 
-/* Estilos para iconos */
-i {
+// Estilos para iconos
+:host i {
   font-style: normal;
   display: inline-block;
   width: 1em;
@@ -386,13 +353,13 @@ i {
   vertical-align: middle;
 }
 
-/* Estilos para el componente sa-icon */
-sa-icon {
+// Estilos para el componente sa-icon en Shadow DOM
+:host sa-icon {
   display: inline-block !important;
   vertical-align: middle;
   line-height: 1;
   
-  // Asegurar que fa-icon dentro de sa-icon funcione correctamente
+  // Asegurar que fa-icon dentro de sa-icon funcione en Shadow DOM
   fa-icon {
     display: inline-block !important;
     vertical-align: middle;
@@ -438,9 +405,9 @@ sa-icon {
   }
 }
 
-/* Asegurar que los iconos en input-group-text estén centrados */
-.input-group-text i,
-.input-group-text sa-icon {
+// Asegurar que los iconos en input-group-text estén centrados
+:host .input-group-text i,
+:host .input-group-text sa-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -460,8 +427,8 @@ sa-icon {
   }
 }
 
-/* Ajustes específicos para iconos en input groups de diferentes tamaños */
-.input-group-sm .input-group-text sa-icon {
+// Ajustes específicos para iconos en input groups de diferentes tamaños
+:host .input-group-sm .input-group-text sa-icon {
   font-size: 0.875rem;
   
   svg {
@@ -470,7 +437,7 @@ sa-icon {
   }
 }
 
-.input-group-lg .input-group-text sa-icon {
+:host .input-group-lg .input-group-text sa-icon {
   font-size: 1.25rem;
   
   svg {
@@ -479,8 +446,8 @@ sa-icon {
   }
 }
 
-/* Estilos específicos para botones con iconos */
-.btn sa-icon {
+// Estilos específicos para botones con iconos
+:host .btn sa-icon {
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -497,8 +464,8 @@ sa-icon {
   }
 }
 
-/* Ajustes de tamaño para botones en input groups */
-.input-group-sm .btn sa-icon {
+// Ajustes de tamaño para botones en input groups
+:host .input-group-sm .btn sa-icon {
   font-size: 0.875rem;
   
   svg {
@@ -507,7 +474,7 @@ sa-icon {
   }
 }
 
-.input-group-lg .btn sa-icon {
+:host .input-group-lg .btn sa-icon {
   font-size: 1.25rem;
   
   svg {
@@ -516,8 +483,8 @@ sa-icon {
   }
 }
 
-/* Estilos específicos para el botón de password toggle */
-.input-group .btn-outline-secondary {
+// Estilos específicos para el botón de password toggle
+:host .input-group .btn-outline-secondary {
   // Asegurar que el botón tenga la misma altura que el input
   min-height: calc(1.5em + 0.75rem + 2px);
   
@@ -545,8 +512,8 @@ sa-icon {
   }
 }
 
-/* Ajustes para diferentes tamaños de input group en password toggle */
-.input-group-sm .btn-outline-secondary {
+// Ajustes para diferentes tamaños de input group en password toggle
+:host .input-group-sm .btn-outline-secondary {
   min-height: calc(1.5em + 0.5rem + 2px);
   
   sa-icon {
@@ -559,7 +526,7 @@ sa-icon {
   }
 }
 
-.input-group-lg .btn-outline-secondary {
+:host .input-group-lg .btn-outline-secondary {
   min-height: calc(1.5em + 1rem + 2px);
   
   sa-icon {
@@ -572,8 +539,8 @@ sa-icon {
   }
 }
 
-/* Asegurar compatibilidad completa con FontAwesome */
-fa-icon {
+// Asegurar compatibilidad completa con FontAwesome en Shadow DOM
+:host fa-icon {
   display: inline-block !important;
   font-size: inherit;
   height: 1em;
@@ -581,9 +548,9 @@ fa-icon {
   vertical-align: -0.125em;
 }
 
-/* Estilos de respaldo para iconos que no cargan */
-.input-group-text:empty::before,
-.btn:empty::before {
+// Estilos de respaldo para iconos que no cargan
+:host .input-group-text:empty::before,
+:host .btn:empty::before {
   content: "◯";
   color: #6c757d;
   font-size: inherit;
@@ -591,8 +558,8 @@ fa-icon {
   vertical-align: middle;
 }
 
-/* Evitar que el contenido de respaldo aparezca cuando hay iconos */
-.input-group-text:not(:empty)::before,
-.btn:not(:empty)::before {
+// Evitar que el contenido de respaldo aparezca cuando hay iconos
+:host .input-group-text:not(:empty)::before,
+:host .btn:not(:empty)::before {
   display: none;
 }
