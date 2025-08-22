@@ -6,6 +6,7 @@
   [disabled]="disabled || loading"
   [class.has-tooltip]="tooltip"
   (click)="onClick($event)"
+  [style]="criticalStyles"
 >
   <!-- Contenido del botón -->
   <div class="button-content" [class.loading-hidden]="showSpinner">

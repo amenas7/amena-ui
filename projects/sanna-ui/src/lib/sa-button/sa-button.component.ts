@@ -202,7 +202,8 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss',
   host: {
-    '[class.full-width]': 'fullWidth'
+    '[class.full-width]': 'fullWidth',
+    'style': 'display: inline-block; vertical-align: middle;'
   }
 })
 export class SaButtonComponent {
@@ -933,6 +934,70 @@ export class SaButtonComponent {
       this.noAnimate ? 'no-animate' : ''
     ];
     return classes.filter(Boolean).join(' ');
+  }
+
+  get criticalStyles(): string {
+    // Estilos críticos que se aplican inmediatamente para evitar FOUC
+    const baseStyles = 'border: none; border-radius: 0.375rem; cursor: pointer; outline: none; position: relative; display: inline-flex; align-items: center; justify-content: center; text-align: center; user-select: none; vertical-align: middle; white-space: nowrap; font-weight: 400; line-height: 1; transition: all 0.2s ease-in-out;';
+    
+    // Estilos de tamaño
+    let sizeStyles = '';
+    switch (this.size) {
+      case 'sm':
+        sizeStyles = 'padding: 6px 8px; font-size: 12px;';
+        break;
+      case 'lg':
+        sizeStyles = 'padding: 12px 24px; font-size: 16px;';
+        break;
+      default: // md
+        sizeStyles = 'padding: 8px 12px; font-size: 13px;';
+    }
+    
+    // Estilos de variante
+    let variantStyles = '';
+    if (this.disabled) {
+      variantStyles = 'background-color: #f8f9fa; border: 1px solid #858585; color: #858585; cursor: not-allowed;';
+    } else {
+      switch (this.variant) {
+        case 'primary':
+          variantStyles = 'background-color: #36AD55; border: 1px solid #36AD55; color: #ffffff;';
+          break;
+        case 'secondary':
+          variantStyles = 'background-color: #ffffff; border: 1px solid #00ab4a; color: #00ab4a;';
+          break;
+        case 'terciary':
+          variantStyles = 'background-color: #ffffff; border: 1px solid #c7cace; color: #2e3b60;';
+          break;
+        case 'danger':
+          variantStyles = 'background-color: #faeded; border: 1px solid #DC3545; color: #DC3545;';
+          break;
+        case 'danger-light':
+          variantStyles = 'background-color: #ffffff; border: 1px solid #DC3545; color: #DC3545;';
+          break;
+        case 'warning':
+          variantStyles = 'background-color: #FFF3CD; border: 1px solid #FFC107; color: #856404;';
+          break;
+        case 'info':
+          variantStyles = 'background-color: #dae9fc4a; border: 1px solid #007bff; color: #007bff;';
+          break;
+        case 'gray':
+          variantStyles = 'background-color: #777777; border: 1px solid #777777; color: #ffffff;';
+          break;
+        case 'red':
+          variantStyles = 'background-color: #DC3545; border: 1px solid #DC3545; color: #ffffff;';
+          break;
+        case 'success':
+          variantStyles = 'background-color: #D3F7E3; border: 1px solid #00ab4a; color: #00ab4a;';
+          break;
+        default:
+          variantStyles = 'background-color: #36AD55; border: 1px solid #36AD55; color: #ffffff;';
+      }
+    }
+    
+    // Estilos de ancho completo
+    const widthStyles = this.fullWidth ? 'width: 100%; display: flex;' : '';
+    
+    return `${baseStyles} ${sizeStyles} ${variantStyles} ${widthStyles}`;
   }
 
   get isInteractive(): boolean {
