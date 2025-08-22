@@ -68,7 +68,7 @@
   <!-- Items Per Page Selector and Pagination Controls (en una sola fila) -->
   <div *ngIf="showPagination && paginatedData.length > 0" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
     <!-- Items Per Page Selector (izquierda) -->
-    <div *ngIf="showItemsPerPage && paginatedData.length > 0 && paginationInfo.totalItems >= 5" 
+    <div *ngIf="showItemsPerPage && paginatedData.length > 0 && paginationInfo.totalItems >= 6" 
          class="d-flex align-items-center mb-2 mb-md-0"
          [class.no-pagination]="paginationInfo.totalPages <= 1">
       <span class="text-muted me-2" style="font-size: 12px !important;">Registros por página:</span>
@@ -87,7 +87,7 @@
       <div class="d-flex flex-column flex-md-row align-items-center">
         <div *ngIf="showTotal && paginatedData.length > 0" 
              class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start"
-             [class.mt-custom-pagination]="paginationInfo.totalItems < 5"
+             [class.mt-custom-pagination]="paginationInfo.totalItems < 6"
              style="font-size: 12px !important;">
           Página {{ paginationInfo.currentPage }}: {{ paginationInfo.startItem }}-{{ paginationInfo.endItem }} de {{ paginationInfo.totalItems }} registros
         </div>
