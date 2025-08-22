@@ -210,16 +210,34 @@ export class SaButtonComponent {
   // Propiedades con flexibilidad máxima: soportan attribute y property binding
   @Input() label: string = 'Button'; // Mantener como @Input simple para strings
 
-  get cssVariables(): { [key: string]: string } {
+  get criticalInlineStyles(): string {
     const colors = this.getVariantColors();
-    return {
-      '--btn-bg': colors.background,
-      '--btn-border': colors.border,
-      '--btn-color': colors.color,
-      '--btn-hover-bg': colors.hoverBackground,
-      '--btn-size': this.getSizePadding(),
-      '--btn-font-size': this.getFontSize()
-    };
+    const size = this.getSizePadding();
+    const fontSize = this.getFontSize();
+    
+    return `
+      border: none !important;
+      border-radius: 0.375rem !important;
+      cursor: pointer !important;
+      outline: none !important;
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      user-select: none !important;
+      vertical-align: middle !important;
+      white-space: nowrap !important;
+      font-weight: 400 !important;
+      line-height: 1 !important;
+      padding: ${size} !important;
+      font-size: ${fontSize} !important;
+      background-color: ${colors.background} !important;
+      border: ${colors.border} !important;
+      color: ${colors.color} !important;
+      font-family: 'Nunito Sans', sans-serif !important;
+      transition: all 0.2s ease-in-out !important;
+    `.replace(/\s+/g, ' ').trim();
   }
 
   private getVariantColors() {
