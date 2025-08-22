@@ -159,6 +159,11 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   // Propiedad para acceder a Object desde el template
   Object = Object;
 
+  // Propiedad computada para determinar el table-layout
+  get shouldUseFixedLayout(): boolean {
+    return this.columns.some(column => column.width);
+  }
+
   // Propiedad para la fila seleccionada
   selectedRow: TableData | null = null;
   

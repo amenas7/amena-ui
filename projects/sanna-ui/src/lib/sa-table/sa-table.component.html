@@ -8,6 +8,8 @@
   <div class="table-responsive table-container">
     <table class="table" 
            [class.table-hover]="hover"
+           [class.fixed-layout]="shouldUseFixedLayout"
+           [class.auto-layout]="!shouldUseFixedLayout"
            [style.min-width]="minWidth">
       <thead class="table-light" [class.has-filters]="showFilters">
         <tr>

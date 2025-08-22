@@ -330,7 +330,15 @@
     border-radius: 0.375rem !important;
     @include sanna-font-regular;
     border: none !important;
-    table-layout: fixed !important; /* Forzar table-layout fixed para respetar anchos de columna */
+    
+    /* Layout dinámico basado en si hay anchos especificados */
+    &.fixed-layout {
+      table-layout: fixed !important; /* Solo cuando hay anchos especificados */
+    }
+    
+    &.auto-layout {
+      table-layout: auto !important; /* Calcular automáticamente basado en contenido */
+    }
     
     th {
       cursor: default !important;
