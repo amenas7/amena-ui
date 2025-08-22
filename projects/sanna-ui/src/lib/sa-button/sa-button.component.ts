@@ -202,9 +202,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss',
   host: {
-    '[class.full-width]': 'fullWidth',
-    'style': 'visibility: hidden;',
-    '[style.visibility]': '"visible"'
+    '[class.full-width]': 'fullWidth'
   }
 })
 export class SaButtonComponent {
