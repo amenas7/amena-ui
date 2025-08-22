@@ -1,10 +1,11 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type InputSize = 'sm' | 'md' | 'lg';
 export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel';
 export type InputStatus = 'default' | 'success' | 'error';
-export declare class SaInputComponent implements ControlValueAccessor {
+export declare class SaInputComponent implements ControlValueAccessor, AfterViewInit {
+    private cdr;
     value: string;
     type: InputType;
     placeholder: string;
@@ -33,8 +34,10 @@ export declare class SaInputComponent implements ControlValueAccessor {
     blur: EventEmitter<FocusEvent>;
     showPassword: boolean;
     isFocused: boolean;
+    styleLoaded: boolean;
     private onChange;
     private onTouched;
+    constructor(cdr: ChangeDetectorRef);
     get inputClasses(): string;
     get labelClasses(): string;
     get inputGroupClasses(): string;
@@ -50,6 +53,9 @@ export declare class SaInputComponent implements ControlValueAccessor {
     onInputFocus(event: FocusEvent): void;
     onInputBlur(event: FocusEvent): void;
     togglePasswordVisibility(): void;
+    ngAfterViewInit(): void;
+    private checkStylesLoaded;
+    private areStylesReady;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaInputComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SaInputComponent, "sa-input", never, { "value": { "alias": "value"; "required": false; }; "type": { "alias": "type"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "leftIcon": { "alias": "leftIcon"; "required": false; }; "rightIcon": { "alias": "rightIcon"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "autocomplete": { "alias": "autocomplete"; "required": false; }; "min": { "alias": "min"; "required": false; }; "max": { "alias": "max"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "pattern": { "alias": "pattern"; "required": false; }; "backgroundColor": { "alias": "backgroundColor"; "required": false; }; "textColor": { "alias": "textColor"; "required": false; }; }, { "valueChange": "valueChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
