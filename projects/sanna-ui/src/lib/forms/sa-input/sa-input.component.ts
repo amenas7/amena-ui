@@ -9,7 +9,7 @@ export type InputStatus = 'default' | 'success' | 'error';
   selector: 'sa-input',
   templateUrl: './sa-input.component.html',
   styleUrls: ['./sa-input.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.Emulated,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
