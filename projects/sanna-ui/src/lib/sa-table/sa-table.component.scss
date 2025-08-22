@@ -352,14 +352,20 @@
       
       th, td {
         width: auto !important; /* Ancho automático basado en contenido */
-        white-space: nowrap !important; /* Evitar que el contenido se corte */
         min-width: 0 !important; /* Permitir que se contraiga si es necesario */
         max-width: none !important; /* Sin límite máximo */
       }
       
-      /* Permitir que la primera muestra de datos ayude a calcular el ancho */
-      tbody tr:first-child td {
-        width: auto !important;
+      /* Para los encabezados, permitir que calculen su ancho basado en el texto completo */
+      th {
+        white-space: normal !important; /* Permitir que el texto del label se ajuste naturalmente */
+        text-align: center !important; /* Centrar el texto del label */
+        vertical-align: top !important; /* Alinear hacia arriba si hay múltiples líneas */
+      }
+      
+      /* Para las celdas de datos, mantener en una línea si es posible */
+      td {
+        white-space: nowrap !important; /* Los datos mejor en una línea */
       }
     }
     
