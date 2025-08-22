@@ -2227,31 +2227,11 @@ class SaInputComponent {
         this.showPassword = !this.showPassword;
     }
     ngAfterViewInit() {
-        // Método 1: Detectar cuando los estilos están listos
-        this.checkStylesLoaded();
-    }
-    checkStylesLoaded() {
-        // Verificar si los estilos del Shadow DOM están aplicados
-        if (this.areStylesReady()) {
+        // Marcar como cargado después de que los estilos se hayan aplicado
+        setTimeout(() => {
             this.styleLoaded = true;
             this.cdr.detectChanges();
-        }
-        else {
-            // Reintentar después de un frame
-            requestAnimationFrame(() => this.checkStylesLoaded());
-        }
-    }
-    areStylesReady() {
-        // Verificar si los estilos críticos están aplicados
-        try {
-            // Intentar acceder a una propiedad CSS específica del Shadow DOM
-            return !!(document.defaultView?.getComputedStyle &&
-                this.cdr &&
-                performance.now() > 10); // Garantizar tiempo mínimo
-        }
-        catch {
-            return false;
-        }
+        }, 50); // Pequeño delay para asegurar que los estilos estén aplicados
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaInputComponent, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaInputComponent, selector: "sa-input", inputs: { value: "value", type: "type", placeholder: "placeholder", size: "size", status: "status", label: "label", helperText: "helperText", errorText: "errorText", leftIcon: "leftIcon", rightIcon: "rightIcon", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", autocomplete: "autocomplete", min: "min", max: "max", minlength: "minlength", maxlength: "maxlength", pattern: "pattern", backgroundColor: "backgroundColor", textColor: "textColor" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
