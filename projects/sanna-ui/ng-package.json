@@ -8,7 +8,7 @@
     "./src/lib/_styles/**/*.scss",
     "./src/styles.scss",
     "./src/lib/**/*.scss",
-    "./src/lib/_styles/sanna-preload.scss"
+    "./sanna-ui-bundle.scss"
   ],
   "allowedNonPeerDependencies": [
     "@fortawesome/angular-fontawesome",
