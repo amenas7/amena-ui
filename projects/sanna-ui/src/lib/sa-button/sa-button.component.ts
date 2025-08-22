@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { IconDefinition, findIconDefinition, IconName } from '@fortawesome/fontawesome-svg-core';
 import { 
   faSpinner, 
@@ -203,14 +203,36 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   styleUrl: './sa-button.component.scss',
   encapsulation: ViewEncapsulation.ShadowDom,
   host: {
-    '[class.full-width]': 'fullWidth'
+    '[class.full-width]': 'fullWidth',
+    '[style.visibility]': 'isReady ? "visible" : "hidden"',
+    '[style.opacity]': 'isReady ? "1" : "0"'
   }
 })
-export class SaButtonComponent {
+export class SaButtonComponent implements OnInit, AfterViewInit {
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
   // Propiedades con flexibilidad máxima: soportan attribute y property binding
   @Input() label: string = 'Button'; // Mantener como @Input simple para strings
 
+  ngOnInit(): void {
+    // No hacer nada aquí para evitar FOUC
+  }
+
+  ngAfterViewInit(): void {
+    // Hacer visible después del primer ciclo de renderizado completo
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
   get criticalInlineStyles(): string {
+    // Solo devolver estilos si está listo
+    if (!this.isReady) {
+      return '';
+    }
+
     const colors = this.getVariantColors();
     const size = this.getSizePadding();
     const fontSize = this.getFontSize();
