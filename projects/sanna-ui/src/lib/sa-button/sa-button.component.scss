@@ -29,15 +29,14 @@
 
 /* Aplicar la fuente usando mixins globales */
 .btn {
-  /* Los estilos críticos ya están aplicados en el template, aquí solo mejoramos */
-  @include sanna-font-medium;
-  overflow: visible;
-  width: auto;
   border: none;
   border-radius: 0.375rem;
+  @include sanna-font-medium;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
   outline: none;
   position: relative;
+  overflow: visible;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -45,7 +44,7 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  transition: all 0.2s ease-in-out;
+  width: auto;
   
   &.w-100 {
     width: 100% !important;
@@ -177,47 +176,16 @@
   width: 100%;
   height: 100%;
   opacity: 1 !important;
-  
-  /* Asegurar centrado perfecto */
-  fa-icon {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: auto !important;
-    height: auto !important;
-    line-height: 1 !important;
-    
-    svg {
-      display: block !important;
-      margin: auto !important;
-    }
-  }
 }
 
 /* Spinner de carga */
 .spinner-icon {
   animation: spin 1s linear infinite;
   opacity: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
   
   &.spinning {
     animation: spin 1s linear infinite;
     opacity: 1 !important;
-  }
-  
-  /* Centrado específico para fa-icon */
-  &[class*="fa-"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    
-    svg {
-      display: block !important;
-      margin: 0 !important;
-    }
   }
 }
 
@@ -693,185 +661,6 @@
   .custom-tooltip {
     pointer-events: none;
   }
-}
-
-/* Contenido del botón */
-.button-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  
-  &.loading-hidden {
-    visibility: hidden;
-  }
-}
-
-/* Estilos específicos para botones que solo tienen icono */
-.btn:has(.button-content:not(:has(span))) {
-  min-width: 40px;
-  min-height: 40px;
-  padding: 8px;
-  
-  &.btn-sm {
-    min-width: 32px;
-    min-height: 32px;
-    padding: 6px;
-  }
-  
-  &.btn-md {
-    min-width: 40px;
-    min-height: 40px;
-    padding: 8px;
-  }
-  
-  &.btn-lg {
-    min-width: 48px;
-    min-height: 48px;
-    padding: 12px;
-  }
-}
-
-/* ESTILOS DE FONTAWESOME PARA SHADOW DOM */
-/* Estos estilos son necesarios para que los iconos de FontAwesome funcionen correctamente
-   dentro del Shadow DOM */
-
-/* Estilos básicos de FontAwesome */
-fa-icon {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-  vertical-align: middle;
-  
-  /* Mejora del centrado */
-  &.spinner-icon {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-  }
-}
-
-fa-icon svg {
-  fill: currentColor;
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
-  
-  /* Para el spinner, asegurar centrado perfecto */
-  .spinner-icon & {
-    display: block !important;
-    margin: 0 auto !important;
-  }
-}
-
-/* Clases de tamaño para iconos */
-fa-icon.fa-xs {
-  font-size: 0.75em;
-  line-height: 0.08333em;
-  vertical-align: 0.125em;
-}
-
-fa-icon.fa-sm {
-  font-size: 0.875em;
-  line-height: 0.07143em;
-  vertical-align: 0.05357em;
-}
-
-fa-icon.fa-lg {
-  font-size: 1.33333em;
-  line-height: 0.75em;
-  vertical-align: -0.0667em;
-}
-
-fa-icon.fa-xl {
-  font-size: 1.5em;
-  line-height: 0.04167em;
-  vertical-align: -0.125em;
-}
-
-fa-icon.fa-2xl {
-  font-size: 2em;
-  line-height: 0.03125em;
-  vertical-align: -0.1875em;
-}
-
-/* Estilos para animaciones */
-fa-icon.fa-spin {
-  animation: fa-spin 2s infinite linear;
-}
-
-fa-icon.fa-pulse {
-  animation: fa-pulse 1s infinite steps(8);
-}
-
-@keyframes fa-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fa-pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.25;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Estilos específicos para sa-button dentro de sa-table */
-:host fa-icon,
-:host ::ng-deep fa-icon {
-  display: inline-block !important;
-  font-style: normal !important;
-  font-variant: normal !important;
-  text-rendering: auto !important;
-  line-height: 1 !important;
-  vertical-align: middle !important;
-}
-
-:host fa-icon svg,
-:host ::ng-deep fa-icon svg {
-  fill: currentColor !important;
-  width: 1em !important;
-  height: 1em !important;
-  vertical-align: middle !important;
-}
-
-/* Asegurar que los botones sa-button funcionen correctamente dentro de celdas */
-:host {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Spinner específico para botones en loading */
-:host .spinner-icon,
-:host ::ng-deep .spinner-icon {
-  animation: fa-spin 1s infinite linear !important;
-}
-
-:host .spinner-icon.spinning,
-:host ::ng-deep .spinner-icon.spinning {
-  animation: fa-spin 1s infinite linear !important;
-}
-
-/* Clases de utilidad para espaciado de iconos */
-.me-1 {
-  margin-right: 0.25rem !important;
-}
-
-.ms-1 {
-  margin-left: 0.25rem !important;
 }
 
 

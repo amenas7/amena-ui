@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { IconDefinition, findIconDefinition, IconName } from '@fortawesome/fontawesome-svg-core';
 import { 
   faSpinner, 
@@ -201,173 +201,15 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   selector: 'sa-button',
   templateUrl: './sa-button.component.html',
   styleUrl: './sa-button.component.scss',
-  encapsulation: ViewEncapsulation.ShadowDom,
   host: {
     '[class.full-width]': 'fullWidth',
-    '[style.visibility]': 'isReady ? "visible" : "hidden"',
-    '[style.opacity]': 'isReady ? "1" : "0"'
+    'style': 'visibility: hidden;',
+    '[style.visibility]': '"visible"'
   }
 })
-export class SaButtonComponent implements OnInit, AfterViewInit {
-  isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
+export class SaButtonComponent {
   // Propiedades con flexibilidad máxima: soportan attribute y property binding
   @Input() label: string = 'Button'; // Mantener como @Input simple para strings
-
-  ngOnInit(): void {
-    // No hacer nada aquí para evitar FOUC
-  }
-
-  ngAfterViewInit(): void {
-    // Hacer visible después del primer ciclo de renderizado completo
-    setTimeout(() => {
-      this.isReady = true;
-      this.cdr.detectChanges();
-    }, 0);
-  }
-
-  get criticalInlineStyles(): string {
-    // Solo devolver estilos si está listo
-    if (!this.isReady) {
-      return '';
-    }
-
-    const colors = this.getVariantColors();
-    const size = this.getSizePadding();
-    const fontSize = this.getFontSize();
-    
-    return `
-      border: none !important;
-      border-radius: 0.375rem !important;
-      cursor: pointer !important;
-      outline: none !important;
-      position: relative !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      user-select: none !important;
-      vertical-align: middle !important;
-      white-space: nowrap !important;
-      font-weight: 400 !important;
-      line-height: 1 !important;
-      padding: ${size} !important;
-      font-size: ${fontSize} !important;
-      background-color: ${colors.background} !important;
-      border: ${colors.border} !important;
-      color: ${colors.color} !important;
-      font-family: 'Nunito Sans', sans-serif !important;
-      transition: all 0.2s ease-in-out !important;
-    `.replace(/\s+/g, ' ').trim();
-  }
-
-  private getVariantColors() {
-    if (this.disabled) {
-      return {
-        background: '#f8f9fa',
-        border: '1px solid #858585',
-        color: '#858585',
-        hoverBackground: '#f8f9fa'
-      };
-    }
-
-    switch (this.variant) {
-      case 'primary':
-        return {
-          background: '#36AD55',
-          border: '1px solid #36AD55',
-          color: '#ffffff',
-          hoverBackground: '#239A5C'
-        };
-      case 'secondary':
-        return {
-          background: '#ffffff',
-          border: '1px solid #00ab4a',
-          color: '#00ab4a',
-          hoverBackground: '#effcf5'
-        };
-      case 'terciary':
-        return {
-          background: '#ffffff',
-          border: '1px solid #c7cace',
-          color: '#2e3b60',
-          hoverBackground: '#f4f6f8'
-        };
-      case 'danger':
-        return {
-          background: '#faeded',
-          border: '1px solid #DC3545',
-          color: '#DC3545',
-          hoverBackground: '#fcdcdc'
-        };
-      case 'danger-light':
-        return {
-          background: '#ffffff',
-          border: '1px solid #DC3545',
-          color: '#DC3545',
-          hoverBackground: '#ffffff'
-        };
-      case 'warning':
-        return {
-          background: '#FFF3CD',
-          border: '1px solid #FFC107',
-          color: '#856404',
-          hoverBackground: '#FFEAA7'
-        };
-      case 'info':
-        return {
-          background: '#dae9fc4a',
-          border: '1px solid #007bff',
-          color: '#007bff',
-          hoverBackground: '#98c8ff4a'
-        };
-      case 'gray':
-        return {
-          background: '#777777',
-          border: '1px solid #777777',
-          color: '#ffffff',
-          hoverBackground: '#5C5C5C'
-        };
-      case 'red':
-        return {
-          background: '#DC3545',
-          border: '1px solid #DC3545',
-          color: '#ffffff',
-          hoverBackground: '#C82333'
-        };
-      case 'success':
-        return {
-          background: '#D3F7E3',
-          border: '1px solid #00ab4a',
-          color: '#00ab4a',
-          hoverBackground: '#C0F0D0'
-        };
-      default:
-        return {
-          background: '#36AD55',
-          border: '1px solid #36AD55',
-          color: '#ffffff',
-          hoverBackground: '#239A5C'
-        };
-    }
-  }
-
-  private getSizePadding(): string {
-    switch (this.size) {
-      case 'sm': return '6px 8px';
-      case 'lg': return '12px 24px';
-      default: return '8px 12px';
-    }
-  }
-
-  private getFontSize(): string {
-    switch (this.size) {
-      case 'sm': return '12px';
-      case 'lg': return '16px';
-      default: return '13px';
-    }
-  }
   
   // Propiedades con setters/getters para flexibilidad máxima
   private _variant: ButtonVariant = 'primary';
