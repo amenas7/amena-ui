@@ -350,22 +350,26 @@
       table-layout: auto !important; /* Calcular automáticamente basado en contenido */
       width: 100% !important; /* Asegurar que use todo el ancho disponible */
       
-      th, td {
-        width: auto !important; /* Ancho automático basado en contenido */
-        min-width: 0 !important; /* Permitir que se contraiga si es necesario */
-        max-width: none !important; /* Sin límite máximo */
-      }
-      
-      /* Para los encabezados, permitir que calculen su ancho basado en el texto completo */
+      /* Distribución completamente automática basada en labels */
       th {
-        white-space: normal !important; /* Permitir que el texto del label se ajuste naturalmente */
+        width: auto !important; /* Ancho automático basado en el label */
+        white-space: nowrap !important; /* Mantener labels en una línea */
         text-align: center !important; /* Centrar el texto del label */
-        vertical-align: top !important; /* Alinear hacia arriba si hay múltiples líneas */
+        vertical-align: middle !important; /* Centrar verticalmente */
+        min-width: fit-content !important; /* Mínimo: ancho del label */
+        /* Sin max-width para permitir ancho completamente automático */
       }
       
-      /* Para las celdas de datos, mantener en una línea si es posible */
+      /* Para las celdas de datos, ancho completamente automático */
       td {
-        white-space: nowrap !important; /* Los datos mejor en una línea */
+        white-space: normal !important; /* Permitir salto de línea automático */
+        word-wrap: break-word !important; /* Romper palabras largas si es necesario */
+        word-break: break-word !important; /* Compatibilidad adicional */
+        overflow-wrap: break-word !important; /* Estándar moderno */
+        width: auto !important; /* Ancho automático sin límites */
+        line-height: 1.4 !important; /* Espaciado entre líneas más cómodo */
+        padding: 0.5rem 0.5rem !important; /* Padding vertical para celdas con múltiples líneas */
+        vertical-align: top !important; /* Alinear contenido hacia arriba */
       }
     }
     
