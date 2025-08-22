@@ -339,9 +339,20 @@
       border: none !important;
       text-align: left !important;
       vertical-align: middle !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
+      
+      /* Solo aplicar ellipsis a las celdas de encabezado, no a las de filtro */
+      &.column-header {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      
+      /* Las celdas de filtro no deben tener ellipsis */
+      &.filter-row-th {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: initial !important;
+      }
       
       // Border radius para las esquinas de la cabecera
       &:first-child {
@@ -883,9 +894,20 @@ nav[aria-label="Navegación de páginas"] {
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
+}
+
+/* Solo aplicar ellipsis a las celdas de encabezado, no a las de filtro */
+.sa-table-container .table > thead > tr > th.column-header {
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+}
+
+/* Las celdas de filtro no deben tener ellipsis */
+.sa-table-container .table > thead > tr > th.filter-row-th {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: initial !important;
 }
 
 .sa-table-container .table > tbody > tr:last-child > td {
@@ -1319,6 +1341,16 @@ nav[aria-label="Navegación de páginas"] {
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
+}
+
+/* Ellipsis solo para celdas de encabezado con máxima especificidad */
+.sa-table-container .table > thead > tr > th.column-header,
+.sa-table-container .table.table-light > thead > tr > th.column-header,
+.sa-table-container .table-light > thead > tr > th.column-header,
+.sa-table-container .table thead th.column-header {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .sa-table-container .table > thead > tr > th:hover,
