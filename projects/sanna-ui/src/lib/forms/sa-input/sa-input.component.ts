@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -9,7 +9,7 @@ export type InputStatus = 'default' | 'success' | 'error';
   selector: 'sa-input',
   templateUrl: './sa-input.component.html',
   styleUrls: ['./sa-input.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.Emulated,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,7 +18,7 @@ export type InputStatus = 'default' | 'success' | 'error';
     }
   ]
 })
-export class SaInputComponent implements ControlValueAccessor, AfterViewInit {
+export class SaInputComponent implements ControlValueAccessor {
   @Input() value: string = '';
   @Input() type: InputType = 'text';
   @Input() placeholder: string = '';
@@ -49,12 +49,9 @@ export class SaInputComponent implements ControlValueAccessor, AfterViewInit {
 
   showPassword: boolean = false;
   isFocused: boolean = false;
-  styleLoaded: boolean = false;
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   get inputClasses(): string {
     const sizeMap = {
@@ -196,13 +193,5 @@ export class SaInputComponent implements ControlValueAccessor, AfterViewInit {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
-  }
-
-  ngAfterViewInit() {
-    // Marcar como cargado después de que los estilos se hayan aplicado
-    setTimeout(() => {
-      this.styleLoaded = true;
-      this.cdr.detectChanges();
-    }, 50); // Pequeño delay para asegurar que los estilos estén aplicados
   }
 }
