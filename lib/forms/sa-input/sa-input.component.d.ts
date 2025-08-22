@@ -1,10 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type InputSize = 'sm' | 'md' | 'lg';
 export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel';
 export type InputStatus = 'default' | 'success' | 'error';
-export declare class SaInputComponent implements ControlValueAccessor {
+export declare class SaInputComponent implements ControlValueAccessor, OnInit {
     value: string;
     type: InputType;
     placeholder: string;
@@ -20,6 +20,7 @@ export declare class SaInputComponent implements ControlValueAccessor {
     disabled: boolean;
     id: string;
     name: string;
+    private static idCounter;
     autocomplete: string;
     min: number | null;
     max: number | null;
@@ -35,6 +36,7 @@ export declare class SaInputComponent implements ControlValueAccessor {
     isFocused: boolean;
     private onChange;
     private onTouched;
+    ngOnInit(): void;
     get inputClasses(): string;
     get labelClasses(): string;
     get inputGroupClasses(): string;
