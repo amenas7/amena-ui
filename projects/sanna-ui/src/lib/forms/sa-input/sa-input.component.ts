@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -18,7 +18,7 @@ export type InputStatus = 'default' | 'success' | 'error';
     }
   ]
 })
-export class SaInputComponent implements ControlValueAccessor {
+export class SaInputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() value: string = '';
   @Input() type: InputType = 'text';
   @Input() placeholder: string = '';
@@ -49,9 +49,12 @@ export class SaInputComponent implements ControlValueAccessor {
 
   showPassword: boolean = false;
   isFocused: boolean = false;
+  styleLoaded: boolean = false;
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   get inputClasses(): string {
     const sizeMap = {
@@ -193,5 +196,33 @@ export class SaInputComponent implements ControlValueAccessor {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  ngAfterViewInit() {
+    // Método 1: Detectar cuando los estilos están listos
+    this.checkStylesLoaded();
+  }
+
+  private checkStylesLoaded() {
+    // Verificar si los estilos del Shadow DOM están aplicados
+    if (this.areStylesReady()) {
+      this.styleLoaded = true;
+      this.cdr.detectChanges();
+    } else {
+      // Reintentar después de un frame
+      requestAnimationFrame(() => this.checkStylesLoaded());
+    }
+  }
+
+  private areStylesReady(): boolean {
+    // Verificar si los estilos críticos están aplicados
+    try {
+      // Intentar acceder a una propiedad CSS específica del Shadow DOM
+      return !!(document.defaultView?.getComputedStyle && 
+               this.cdr && 
+               performance.now() > 10); // Garantizar tiempo mínimo
+    } catch {
+      return false;
+    }
   }
 }
