@@ -199,30 +199,10 @@ export class SaInputComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Método 1: Detectar cuando los estilos están listos
-    this.checkStylesLoaded();
-  }
-
-  private checkStylesLoaded() {
-    // Verificar si los estilos del Shadow DOM están aplicados
-    if (this.areStylesReady()) {
+    // Marcar como cargado después de que los estilos se hayan aplicado
+    setTimeout(() => {
       this.styleLoaded = true;
       this.cdr.detectChanges();
-    } else {
-      // Reintentar después de un frame
-      requestAnimationFrame(() => this.checkStylesLoaded());
-    }
-  }
-
-  private areStylesReady(): boolean {
-    // Verificar si los estilos críticos están aplicados
-    try {
-      // Intentar acceder a una propiedad CSS específica del Shadow DOM
-      return !!(document.defaultView?.getComputedStyle && 
-               this.cdr && 
-               performance.now() > 10); // Garantizar tiempo mínimo
-    } catch {
-      return false;
-    }
+    }, 50); // Pequeño delay para asegurar que los estilos estén aplicados
   }
 }
