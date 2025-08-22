@@ -77,6 +77,7 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     animationKey: number;
     Array: ArrayConstructor;
     Object: ObjectConstructor;
+    get shouldUseFixedLayout(): boolean;
     selectedRow: TableData | null;
     columnFilters: {
         [key: string]: string;
