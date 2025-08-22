@@ -5,7 +5,9 @@
     <div class="table-content" [class.loading]="loading">
   
   <!-- Table -->
-  <div class="table-responsive table-container">
+  <div class="table-responsive table-container" 
+       [class.auto-layout-container]="!shouldUseFixedLayout"
+       [class.fixed-layout-container]="shouldUseFixedLayout">
     <table class="table" 
            [class.table-hover]="hover"
            [class.fixed-layout]="shouldUseFixedLayout"

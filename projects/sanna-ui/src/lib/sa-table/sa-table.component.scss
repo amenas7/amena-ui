@@ -295,6 +295,16 @@
     -webkit-overflow-scrolling: touch;
     border: 1px solid #e1e2e4 !important;
     
+    /* Comportamiento específico para tablas con auto-layout */
+    &.auto-layout-container {
+      width: 100% !important;
+      
+      .table {
+        width: max-content !important; /* La tabla toma el ancho que necesita */
+        min-width: 100% !important; /* Como mínimo usa todo el ancho disponible */
+      }
+    }
+    
     /* Scrollbar personalizado para mejor UX */
     &::-webkit-scrollbar {
       height: 8px;
@@ -338,6 +348,19 @@
     
     &.auto-layout {
       table-layout: auto !important; /* Calcular automáticamente basado en contenido */
+      width: 100% !important; /* Asegurar que use todo el ancho disponible */
+      
+      th, td {
+        width: auto !important; /* Ancho automático basado en contenido */
+        white-space: nowrap !important; /* Evitar que el contenido se corte */
+        min-width: 0 !important; /* Permitir que se contraiga si es necesario */
+        max-width: none !important; /* Sin límite máximo */
+      }
+      
+      /* Permitir que la primera muestra de datos ayude a calcular el ancho */
+      tbody tr:first-child td {
+        width: auto !important;
+      }
     }
     
     th {
