@@ -330,6 +330,7 @@
     border-radius: 0.375rem !important;
     @include sanna-font-regular;
     border: none !important;
+    table-layout: fixed !important; /* Forzar table-layout fixed para respetar anchos de columna */
     
     th {
       cursor: default !important;
@@ -338,6 +339,9 @@
       border: none !important;
       text-align: left !important;
       vertical-align: middle !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
       
       // Border radius para las esquinas de la cabecera
       &:first-child {
@@ -358,6 +362,9 @@
       border-right: none !important;
       text-align: left !important;
       vertical-align: middle !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
     }
     
          // Animación para el tbody al cambiar de página
@@ -838,6 +845,9 @@ nav[aria-label="Navegación de páginas"] {
   text-align: left !important;
   vertical-align: middle !important;
   font-size: 11px !important; /* Cambiar tamaño de fuente del contenido de la tabla */
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* Estilos específicos para el mensaje de estado vacío */
@@ -873,6 +883,9 @@ nav[aria-label="Navegación de páginas"] {
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .sa-table-container .table > tbody > tr:last-child > td {
