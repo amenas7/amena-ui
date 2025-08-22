@@ -214,21 +214,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaMessageboxComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaMessageboxComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje por defecto (success) con texto plano. El componente también soporta HTML y emojis, pero por defecto muestra texto simple. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -254,11 +254,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Campo de fecha básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -274,16 +284,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de nacimiento',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Campo de fecha básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -294,11 +294,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "defaultOptions",
@@ -344,26 +344,6 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -384,6 +364,26 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -394,11 +394,11 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "DisabledChecked",
@@ -454,16 +454,6 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'error',\r\n    errorText: 'Este campo es requerido',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -484,6 +474,16 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -494,11 +494,11 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'error',\r\n    errorText: 'Este campo es requerido',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Examples",
@@ -634,26 +634,6 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -674,6 +654,26 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -684,11 +684,11 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Light",
@@ -794,26 +794,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSelectComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSwitchComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -834,6 +814,26 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaRadioComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaSwitchComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -844,11 +844,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<SaRadioComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
+                "type": "Meta<SaSelectComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "NgModelExample",
@@ -954,16 +954,6 @@
                 "name": "Readonly",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    readonly: true,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Readonly",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -979,6 +969,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Información (solo lectura)',\r\n    value: 'Este contenido es de solo lectura.',\r\n    readonly: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Readonly",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    readonly: true,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ReadOnly",
@@ -1034,26 +1034,6 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1074,6 +1054,26 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1084,11 +1084,11 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ResizeOptions",
@@ -1244,26 +1244,6 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1284,6 +1264,26 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1294,11 +1294,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "States",
@@ -1314,21 +1314,21 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaMessageboxComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\r\n    type: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaButtonComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaMessageboxComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\r\n    type: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1354,26 +1354,6 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1394,6 +1374,26 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1404,11 +1404,11 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "TagCollection",
@@ -1524,11 +1524,21 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Email',\n    type: 'email',\n    placeholder: 'ejemplo@dominio.com',\n    helperText: 'Ingrese un email válido',\n  }\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithHelperText",
@@ -1544,16 +1554,6 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Email',\n    type: 'email',\n    placeholder: 'ejemplo@dominio.com',\n    helperText: 'Ingrese un email válido',\n  }\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1564,11 +1564,11 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithIcon",
@@ -1644,16 +1644,6 @@
                 "name": "WithValue",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con valor preseleccionado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "WithValue",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1669,6 +1659,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Descripción',\r\n    value: 'Este es un texto de ejemplo que ya está en el textarea.',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithValue",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con valor preseleccionado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             }
         ],
         "functions": [],
@@ -1710,28 +1710,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaSelectComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaSwitchComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<SaDateComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts",
                 "deprecated": false,
@@ -1754,6 +1732,28 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<SaRadioComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaSwitchComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<SaTextareaComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
@@ -1765,8 +1765,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaRadioComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "rawtype": "StoryObj<SaSelectComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -3025,6 +3025,108 @@
                     "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje con un icono a la izquierda.',\r\n    type: 'success',\r\n    iconName: 'paperclip',\r\n    iconSize: 'md',\r\n    iconColor: '#5BAB5F'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje que incluye un icono a la izquierda. El icono se alinea correctamente con el texto y mantiene el estilo del componente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
+            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SaRadioComponent>",
+                    "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "RadioGroup",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Grupo de Radio Buttons</h4>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6\">\r\n            <h6>Método de pago</h6>\r\n            <sa-radio\r\n              label=\"Tarjeta de crédito\"\r\n              value=\"credit\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"PayPal\"\r\n              value=\"paypal\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Transferencia bancaria\"\r\n              value=\"transfer\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n          </div>\r\n          <div class=\"col-md-6\">\r\n            <h6>Tamaños</h6>\r\n            <sa-radio\r\n              label=\"Pequeño\"\r\n              value=\"sm\"\r\n              name=\"sizes\"\r\n              size=\"sm\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Mediano\"\r\n              value=\"md\"\r\n              name=\"sizes\"\r\n              size=\"md\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Grande\"\r\n              value=\"lg\"\r\n              name=\"sizes\"\r\n              size=\"lg\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Ejemplo de múltiples radio buttons agrupados por nombre. Solo una opción puede estar seleccionada por grupo.'\r\n      },\r\n      source: {\r\n        code: `<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n    <h6>Método de pago</h6>\r\n    <sa-radio label=\"Tarjeta de crédito\" value=\"credit\" name=\"payment\"></sa-radio>\r\n    <sa-radio label=\"PayPal\" value=\"paypal\" name=\"payment\"></sa-radio>\r\n    <sa-radio label=\"Transferencia bancaria\" value=\"transfer\" name=\"payment\"></sa-radio>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <h6>Tamaños</h6>\r\n    <sa-radio label=\"Pequeño\" value=\"sm\" name=\"sizes\" size=\"sm\"></sa-radio>\r\n    <sa-radio label=\"Mediano\" value=\"md\" name=\"sizes\" size=\"md\"></sa-radio>\r\n    <sa-radio label=\"Grande\" value=\"lg\" name=\"sizes\" size=\"lg\"></sa-radio>\r\n  </div>\r\n</div>`\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Required",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "WithHelperText",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts": [
                 {
                     "name": "Default",
@@ -3155,108 +3257,6 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {\r\n    label: 'Descripción',\r\n    value: 'Este es un texto de ejemplo que ya está en el textarea.',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Error",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<SaRadioComponent>",
-                    "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "RadioGroup",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Grupo de Radio Buttons</h4>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6\">\r\n            <h6>Método de pago</h6>\r\n            <sa-radio\r\n              label=\"Tarjeta de crédito\"\r\n              value=\"credit\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"PayPal\"\r\n              value=\"paypal\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Transferencia bancaria\"\r\n              value=\"transfer\"\r\n              name=\"payment\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n          </div>\r\n          <div class=\"col-md-6\">\r\n            <h6>Tamaños</h6>\r\n            <sa-radio\r\n              label=\"Pequeño\"\r\n              value=\"sm\"\r\n              name=\"sizes\"\r\n              size=\"sm\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Mediano\"\r\n              value=\"md\"\r\n              name=\"sizes\"\r\n              size=\"md\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n            <sa-radio\r\n              label=\"Grande\"\r\n              value=\"lg\"\r\n              name=\"sizes\"\r\n              size=\"lg\"\r\n              class=\"mb-2\">\r\n            </sa-radio>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Ejemplo de múltiples radio buttons agrupados por nombre. Solo una opción puede estar seleccionada por grupo.'\r\n      },\r\n      source: {\r\n        code: `<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n    <h6>Método de pago</h6>\r\n    <sa-radio label=\"Tarjeta de crédito\" value=\"credit\" name=\"payment\"></sa-radio>\r\n    <sa-radio label=\"PayPal\" value=\"paypal\" name=\"payment\"></sa-radio>\r\n    <sa-radio label=\"Transferencia bancaria\" value=\"transfer\" name=\"payment\"></sa-radio>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <h6>Tamaños</h6>\r\n    <sa-radio label=\"Pequeño\" value=\"sm\" name=\"sizes\" size=\"sm\"></sa-radio>\r\n    <sa-radio label=\"Mediano\" value=\"md\" name=\"sizes\" size=\"md\"></sa-radio>\r\n    <sa-radio label=\"Grande\" value=\"lg\" name=\"sizes\" size=\"lg\"></sa-radio>\r\n  </div>\r\n</div>`\r\n      }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Required",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "Success",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "WithHelperText",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/sa-legend/sa-legend.stories.ts": [
@@ -3508,32 +3508,6 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSelectComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSwitchComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-date/sa-date.stories.ts": [
                 {
                     "name": "Story",
@@ -3560,6 +3534,32 @@
                     "kind": 183
                 }
             ],
+            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaRadioComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaSwitchComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts": [
                 {
                     "name": "Story",
@@ -3573,13 +3573,13 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
+            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<SaRadioComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "rawtype": "StoryObj<SaSelectComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
