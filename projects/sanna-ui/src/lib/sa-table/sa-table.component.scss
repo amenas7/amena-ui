@@ -347,28 +347,29 @@
     }
     
     &.auto-layout {
-      table-layout: auto !important; /* Calcular automáticamente basado en contenido */
+      table-layout: fixed !important; /* Usar fixed para controlar los anchos fijos */
       width: 100% !important; /* Asegurar que use todo el ancho disponible */
       
-      /* Distribución completamente automática basada en labels */
+      /* Ancho fijo de 100px para columnas sin width especificado */
       th {
-        width: auto !important; /* Ancho automático basado en el label */
-        white-space: nowrap !important; /* Mantener labels en una línea */
+        width: 100px !important; /* Ancho fijo por defecto */
         text-align: center !important; /* Centrar el texto del label */
         vertical-align: middle !important; /* Centrar verticalmente */
-        min-width: fit-content !important; /* Mínimo: ancho del label */
-        /* Sin max-width para permitir ancho completamente automático */
+        white-space: normal !important; /* Permitir salto de línea en labels largos */
+        word-wrap: break-word !important; /* Romper palabras largas en labels */
+        line-height: 1.3 !important; /* Espaciado cómodo para labels */
+        padding: 0.5rem 0.25rem !important; /* Padding ajustado para labels */
       }
       
-      /* Para las celdas de datos, ancho completamente automático */
+      /* Para las celdas de datos, usar salto de línea con ancho fijo */
       td {
+        width: 100px !important; /* Mismo ancho que los headers */
         white-space: normal !important; /* Permitir salto de línea automático */
         word-wrap: break-word !important; /* Romper palabras largas si es necesario */
         word-break: break-word !important; /* Compatibilidad adicional */
         overflow-wrap: break-word !important; /* Estándar moderno */
-        width: auto !important; /* Ancho automático sin límites */
         line-height: 1.4 !important; /* Espaciado entre líneas más cómodo */
-        padding: 0.5rem 0.5rem !important; /* Padding vertical para celdas con múltiples líneas */
+        padding: 0.5rem 0.25rem !important; /* Padding ajustado para contenido */
         vertical-align: top !important; /* Alinear contenido hacia arriba */
       }
     }
