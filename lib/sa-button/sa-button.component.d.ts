@@ -50,6 +50,7 @@ export declare class SaButtonComponent {
     get iconDefinition(): IconDefinition | undefined;
     onClick(event?: Event): void;
     get buttonClasses(): string;
+    get criticalStyles(): string;
     get isInteractive(): boolean;
     get showSpinner(): boolean;
     get showContent(): boolean;
