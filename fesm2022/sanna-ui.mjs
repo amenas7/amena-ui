@@ -3328,10 +3328,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  */
 // Estilos y configuración (para personalización avanzada)
 // Los usuarios pueden importar directamente: import 'sanna-ui/lib/_styles/sanna-fonts.scss';
+// Exportar rutas de estilos para facilitar la importación
+const SANNA_UI_STYLES = {
+    fonts: 'sanna-ui/lib/_styles/sanna-fonts.scss',
+    preload: 'sanna-ui/lib/_styles/sanna-preload.scss',
+    bundle: 'sanna-ui/sanna-ui-bundle.scss'
+};
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaDateComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
+export { SANNA_UI_STYLES, SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaDateComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map

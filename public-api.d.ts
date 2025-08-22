@@ -21,3 +21,8 @@ export * from './lib/sa-table/sa-column-def.directive';
 export * from './lib/sa-tag/sa-tag.component';
 export * from './lib/sa-legend/sa-legend.component';
 export * from './lib/types/tooltip.types';
+export declare const SANNA_UI_STYLES: {
+    fonts: string;
+    preload: string;
+    bundle: string;
+};
