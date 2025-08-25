@@ -1,0 +1,199 @@
+<div class="sa-calendar-container">
+  <!-- Input field (if not inline) -->
+  <div *ngIf="!inline" class="calendar-input-container">
+    <label *ngIf="label" [for]="calendarId" [class]="labelClasses">
+      {{ label }}
+      <span *ngIf="required" class="text-danger">*</span>
+    </label>
+
+    <div class="position-relative">
+      <input
+        [id]="calendarId"
+        [name]="name"
+        [class]="inputClasses"
+        type="text"
+        [value]="inputValue"
+        [placeholder]="placeholder"
+        [required]="required"
+        readonly="true"
+        [disabled]="disabled"
+        spellcheck="false"
+        autocomplete="off"
+        (click)="onInputClick()"
+        (focus)="onInputFocus($event)"
+        (blur)="onInputBlur($event)"
+      />
+      
+      <!-- Clear icon (X) cuando hay valor -->
+      <div 
+        *ngIf="inputValue && !disabled"
+        class="clear-icon" 
+        (click)="onClearValue($event)"
+        title="Limpiar fecha">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+
+      <!-- Calendar icon (cuando no hay valor o está deshabilitado) -->
+      <div 
+        *ngIf="!inputValue || disabled"
+        class="calendar-icon" 
+        [class.disabled]="disabled || readonly"
+        (click)="onInputClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </div>
+    </div>
+
+    <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>
+    <div *ngIf="errorText" class="invalid-feedback d-block">{{ errorText }}</div>
+  </div>
+
+  <!-- Calendar popup/inline -->
+  <div 
+    class="calendar-popup" 
+    [class.inline]="inline"
+    [class.open]="isOpen"
+    [style.--primary-color]="mergedColors.primary"
+    [style.--secondary-color]="mergedColors.secondary"
+    [style.--success-color]="mergedColors.success"
+    [style.--error-color]="mergedColors.error"
+    [style.--background-color]="mergedColors.background"
+    [style.--surface-color]="mergedColors.surface"
+    [style.--border-color]="mergedColors.border"
+    [style.--disabled-color]="mergedColors.disabled"
+    [style.--hover-color]="mergedColors.hover"
+    [style.--weekday-header-bg]="mergedColors.weekdayHeaderBg"
+    [style.--weekday-header-color]="mergedColors.weekdayHeaderColor"
+    *ngIf="inline || isOpen">
+    
+    <!-- Calendar header -->
+    <div class="calendar-header" *ngIf="mergedConfig.showHeader">
+      <!-- Navigation -->
+      <div class="calendar-navigation" *ngIf="mergedConfig.showNavigation">
+        <button 
+          type="button" 
+          class="nav-button prev" 
+          (click)="navigatePrevious()"
+          [disabled]="disabled">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15,18 9,12 15,6"></polyline>
+          </svg>
+        </button>
+
+        <div class="header-title-container">
+          <button 
+            type="button" 
+            class="header-title"
+            (click)="currentView === 'day' ? setView('month') : currentView === 'month' ? setView('year') : null"
+            [disabled]="disabled">
+            {{ getHeaderTitle() }}
+          </button>
+        </div>
+
+        <button 
+          type="button" 
+          class="nav-button next" 
+          (click)="navigateNext()"
+          [disabled]="disabled">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Action buttons (ocultos por defecto para diseño más limpio) -->
+      <div class="calendar-actions" *ngIf="mergedConfig.showTodayButton || mergedConfig.showClearButton">
+        <button 
+          *ngIf="mergedConfig.showTodayButton"
+          type="button" 
+          class="action-button today-button"
+          (click)="onTodayClick()"
+          [disabled]="disabled">
+          {{ mergedLocale.today }}
+        </button>
+        
+        <button 
+          *ngIf="mergedConfig.showClearButton"
+          type="button" 
+          class="action-button clear-button"
+          (click)="onClearClick()"
+          [disabled]="disabled">
+          {{ mergedLocale.clear }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Calendar content -->
+    <div class="calendar-content">
+      <!-- Day view -->
+      <div class="calendar-days" *ngIf="currentView === 'day'">
+        <!-- Weekday headers -->
+        <div class="weekdays">
+          <div 
+            class="weekday-header" 
+            *ngFor="let weekday of getWeekdays()">
+            {{ weekday }}
+          </div>
+        </div>
+
+        <!-- Calendar grid -->
+        <div class="days-grid">
+          <div 
+            class="week-row" 
+            *ngFor="let week of calendarDays">
+            <div 
+              class="day-cell"
+              *ngFor="let day of week"
+              [class.today]="day.isToday && mergedConfig.highlightToday"
+              [class.selected]="day.isSelected"
+              [class.disabled]="day.isDisabled"
+              [class.other-month]="!day.isInCurrentMonth"
+              [class.weekend]="day.isWeekend && mergedConfig.highlightWeekends"
+              [class.has-event]="day.hasEvent"
+              (click)="onDayClick(day)">
+              <span class="day-number">{{ day.day }}</span>
+              <div *ngIf="day.hasEvent" class="event-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month view -->
+      <div class="calendar-months" *ngIf="currentView === 'month'">
+        <div class="months-grid">
+          <div 
+            class="month-cell"
+            *ngFor="let month of calendarMonths"
+            [class.selected]="month.isSelected"
+            [class.disabled]="month.isDisabled"
+            [class.current]="month.isCurrent"
+            (click)="onMonthClick(month)">
+            {{ month.name }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Year view -->
+      <div class="calendar-years" *ngIf="currentView === 'year'">
+        <div class="years-grid">
+          <div 
+            class="year-cell"
+            *ngFor="let year of calendarYears"
+            [class.selected]="year.isSelected"
+            [class.disabled]="year.isDisabled"
+            [class.current]="year.isCurrent"
+            (click)="onYearClick(year)">
+            {{ year.year }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

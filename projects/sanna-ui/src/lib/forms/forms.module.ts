@@ -9,7 +9,7 @@ import { SaSelectComponent } from './sa-select/sa-select.component';
 import { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 import { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 import { SaRadioComponent } from './sa-radio/sa-radio.component';
-import { SaDateComponent } from './sa-date/sa-date.component';
+import { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 import { SaSwitchComponent } from './sa-switch/sa-switch.component';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { SaSwitchComponent } from './sa-switch/sa-switch.component';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
-    SaDateComponent,
+    SaCalendarComponent,
     SaSwitchComponent,
   ],
   imports: [
@@ -34,7 +34,7 @@ import { SaSwitchComponent } from './sa-switch/sa-switch.component';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
-    SaDateComponent,
+    SaCalendarComponent,
     SaSwitchComponent,
   ]
 })
@@ -46,5 +46,5 @@ export { SaSelectComponent } from './sa-select/sa-select.component';
 export { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 export { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 export { SaRadioComponent } from './sa-radio/sa-radio.component';
-export { SaDateComponent } from './sa-date/sa-date.component';
+export { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 export { SaSwitchComponent } from './sa-switch/sa-switch.component';

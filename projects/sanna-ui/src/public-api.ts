@@ -20,7 +20,7 @@ export * from './lib/forms/sa-select/sa-select.component';
 export * from './lib/forms/sa-textarea/sa-textarea.component';
 export * from './lib/forms/sa-checkbox/sa-checkbox.component';
 export * from './lib/forms/sa-radio/sa-radio.component';
-export * from './lib/forms/sa-date/sa-date.component';
+export * from './lib/forms/sa-calendar/sa-calendar.component';
 export * from './lib/forms/sa-switch/sa-switch.component';
 export * from './lib/sa-heading/sa-heading.component';
 export * from './lib/sa-text/sa-text.component';
@@ -31,6 +31,7 @@ export * from './lib/sa-legend/sa-legend.component';
 
 // Tipos compartidos
 export * from './lib/types/tooltip.types';
+export * from './lib/types/calendar.types';
 
 // Estilos y configuración (para personalización avanzada)
 // Los usuarios pueden importar directamente: import 'sanna-ui/lib/_styles/sanna-fonts.scss';
