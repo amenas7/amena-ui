@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, Directive, ViewEncapsulation, ContentChildren, forwardRef } from '@angular/core';
+import { Injectable, Component, NgModule, EventEmitter, Input, ViewChild, Output, Directive, ViewEncapsulation, ContentChildren, forwardRef, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i2$1 from '@angular/forms';
@@ -2868,12 +2868,74 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Output
             }] } });
 
-class SaDateComponent {
-    value = '';
+// Default locale (Spanish)
+const DEFAULT_CALENDAR_LOCALE = {
+    months: [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ],
+    monthsShort: [
+        'ene', 'feb', 'mar', 'abr', 'may', 'jun',
+        'jul', 'ago', 'sep', 'oct', 'nov', 'dic'
+    ],
+    weekdays: [
+        'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+    ],
+    weekdaysShort: [
+        'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'
+    ],
+    weekdaysMin: [
+        'D', 'L', 'M', 'M', 'J', 'V', 'S'
+    ],
+    today: 'Hoy',
+    clear: 'Limpiar',
+    dateFormat: 'dd/mmm/yyyy',
+    firstDayOfWeek: 1 // Monday
+};
+// Default colors
+const DEFAULT_CALENDAR_COLORS = {
+    primary: '#36AD55',
+    secondary: '#6c757d',
+    success: '#32A047',
+    error: '#ef4444',
+    warning: '#f59e0b',
+    info: '#3b82f6',
+    light: '#f8f9fa',
+    dark: '#212529',
+    background: '#ffffff',
+    surface: '#f8f9fa',
+    onPrimary: '#ffffff',
+    onSurface: '#212529',
+    border: '#dee2e6',
+    disabled: '#e9ecef',
+    hover: '#e9ecef',
+    weekdayHeaderBg: '#f8f9fa',
+    weekdayHeaderColor: '#212529'
+};
+// Default configuration
+const DEFAULT_CALENDAR_CONFIG = {
+    showWeekNumbers: false,
+    showAdjacentMonths: true,
+    highlightWeekends: false,
+    highlightToday: true,
+    allowMultiSelect: false,
+    allowRangeSelect: false,
+    showClearButton: false,
+    showTodayButton: false,
+    showHeader: true,
+    showNavigation: true,
+    animateTransitions: true,
+    closeOnSelect: true
+};
+
+class SaCalendarComponent {
+    cdr;
+    // Basic inputs
+    _value = null;
     size = 'md';
     status = 'default';
     label = '';
-    placeholder = '';
+    placeholder = 'Seleccionar fecha';
     helperText = '';
     errorText = '';
     required = false;
@@ -2881,46 +2943,87 @@ class SaDateComponent {
     disabled = false;
     id = '';
     name = '';
-    min = '';
-    max = '';
-    blockFutureDates = false;
-    showCurrentDate = false;
-    valueChange = new EventEmitter();
+    // Calendar specific inputs
+    locale = DEFAULT_CALENDAR_LOCALE;
+    colors = DEFAULT_CALENDAR_COLORS;
+    config = DEFAULT_CALENDAR_CONFIG;
+    validation = {};
+    events = [];
+    inline = false;
+    showInput = true;
+    // Outputs
+    dateSelect = new EventEmitter();
+    viewChange = new EventEmitter();
+    monthChange = new EventEmitter();
+    yearChange = new EventEmitter();
     focus = new EventEmitter();
     blur = new EventEmitter();
-    dateInput;
+    // Internal state
+    currentView = 'day';
+    currentDate = new Date();
+    selectedDates = [];
+    calendarDays = [];
+    calendarMonths = [];
+    calendarYears = [];
+    isOpen = false;
     isFocused = false;
     _generatedId;
     onChange = (_) => { };
     onTouched = () => { };
-    constructor() {
-        this._generatedId = `sa-date-${Math.random().toString(36).substr(2, 9)}`;
-        // Si showCurrentDate está habilitado, establecer fecha actual
-        if (this.showCurrentDate && !this.value) {
-            this.value = this.getCurrentDateISO();
-        }
+    constructor(cdr) {
+        this.cdr = cdr;
+        this._generatedId = `sa-calendar-${Math.random().toString(36).substr(2, 9)}`;
     }
     ngOnInit() {
-        // Configurar límites de fecha
-        if (this.blockFutureDates && !this.max) {
-            this.max = this.getCurrentDateISO();
-        }
-        // Si showCurrentDate está habilitado y no hay valor, establecer fecha actual
-        if (this.showCurrentDate && !this.value) {
-            this.value = this.getCurrentDateISO();
-            this.onChange(this.value);
+        this.initializeCalendar();
+        if (this.inline) {
+            this.isOpen = true;
         }
     }
-    get dateId() {
+    ngOnChanges(changes) {
+        if (changes['locale'] || changes['config']) {
+            this.initializeCalendar();
+        }
+    }
+    onDocumentClick(event) {
+        if (!this.inline && this.isOpen) {
+            const target = event.target;
+            const calendarElement = event.target.closest('sa-calendar');
+            if (!calendarElement) {
+                this.closeCalendar();
+            }
+        }
+    }
+    get calendarId() {
         return this.id || this._generatedId;
+    }
+    get mergedColors() {
+        return { ...DEFAULT_CALENDAR_COLORS, ...this.colors };
+    }
+    get mergedConfig() {
+        return { ...DEFAULT_CALENDAR_CONFIG, ...this.config };
+    }
+    get mergedLocale() {
+        return { ...DEFAULT_CALENDAR_LOCALE, ...this.locale };
+    }
+    get inputValue() {
+        if (!this._value)
+            return '';
+        if (Array.isArray(this._value)) {
+            if (this.mergedConfig.allowRangeSelect && this._value.length === 2) {
+                return `${this.formatDate(this._value[0])} - ${this.formatDate(this._value[1])}`;
+            }
+            return this._value.map(date => this.formatDate(date)).join(', ');
+        }
+        return this.formatDate(this._value);
     }
     get inputClasses() {
         const sizeMap = {
             'sm': 'form-control-sm',
-            'md': '', // Bootstrap default
+            'md': '',
             'lg': 'form-control-lg'
         };
-        const baseClasses = ['form-control'];
+        const baseClasses = ['form-control', 'calendar-input'];
         if (sizeMap[this.size] && sizeMap[this.size] !== '') {
             baseClasses.push(sizeMap[this.size]);
         }
@@ -2940,12 +3043,11 @@ class SaDateComponent {
         };
         return sizeMap[this.size] || 'form-label label-md';
     }
-    getCurrentDateISO() {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    }
+    // ControlValueAccessor implementation
     writeValue(value) {
-        this.value = value || '';
+        this._value = value;
+        this.updateSelectedDates();
+        this.cdr.markForCheck();
     }
     registerOnChange(fn) {
         this.onChange = fn;
@@ -2955,11 +3057,153 @@ class SaDateComponent {
     }
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
+        this.cdr.markForCheck();
     }
-    onModelChange(value) {
-        this.value = value;
-        this.onChange(value);
-        this.valueChange.emit(value);
+    // Calendar initialization
+    initializeCalendar() {
+        this.updateSelectedDates();
+        this.generateCalendarDays();
+        this.generateCalendarMonths();
+        this.generateCalendarYears();
+        this.cdr.markForCheck();
+    }
+    updateSelectedDates() {
+        this.selectedDates = [];
+        if (this._value) {
+            if (Array.isArray(this._value)) {
+                this.selectedDates = [...this._value];
+            }
+            else {
+                this.selectedDates = [this._value];
+            }
+        }
+    }
+    // Calendar generation methods
+    generateCalendarDays() {
+        const year = this.currentDate.getFullYear();
+        const month = this.currentDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startDate = new Date(firstDay);
+        const endDate = new Date(lastDay);
+        // Adjust start date to show previous month days if needed
+        const firstDayOfWeek = this.mergedLocale.firstDayOfWeek;
+        const startDayOfWeek = firstDay.getDay();
+        const diff = (startDayOfWeek - firstDayOfWeek + 7) % 7;
+        startDate.setDate(startDate.getDate() - diff);
+        // Adjust end date to show next month days
+        const endDayOfWeek = endDate.getDay();
+        const endDiff = (6 - endDayOfWeek + firstDayOfWeek) % 7;
+        endDate.setDate(endDate.getDate() + endDiff);
+        this.calendarDays = [];
+        const weeks = [];
+        let week = [];
+        const currentDateIter = new Date(startDate);
+        while (currentDateIter <= endDate) {
+            const calendarDay = this.createCalendarDay(currentDateIter, month);
+            week.push(calendarDay);
+            if (week.length === 7) {
+                weeks.push([...week]);
+                week = [];
+            }
+            currentDateIter.setDate(currentDateIter.getDate() + 1);
+        }
+        this.calendarDays = weeks;
+    }
+    createCalendarDay(date, currentMonth) {
+        const today = new Date();
+        const isToday = this.isSameDay(date, today);
+        const isSelected = this.selectedDates.some(selectedDate => this.isSameDay(date, selectedDate));
+        const isDisabled = this.isDateDisabled(date);
+        const isInCurrentMonth = date.getMonth() === currentMonth;
+        const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+        const hasEvent = this.events.some(event => this.isSameDay(event.date, date));
+        return {
+            date: new Date(date),
+            day: date.getDate(),
+            month: date.getMonth(),
+            year: date.getFullYear(),
+            isToday,
+            isSelected,
+            isDisabled,
+            isInCurrentMonth,
+            isWeekend,
+            hasEvent
+        };
+    }
+    generateCalendarMonths() {
+        const currentYear = this.currentDate.getFullYear();
+        this.calendarMonths = this.mergedLocale.months.map((month, index) => ({
+            name: month,
+            number: index,
+            year: currentYear,
+            isSelected: this.selectedDates.some(date => date.getFullYear() === currentYear && date.getMonth() === index),
+            isDisabled: this.isMonthDisabled(currentYear, index),
+            isCurrent: new Date().getFullYear() === currentYear && new Date().getMonth() === index
+        }));
+    }
+    generateCalendarYears() {
+        const currentYear = this.currentDate.getFullYear();
+        const startYear = currentYear - 10;
+        const endYear = currentYear + 10;
+        this.calendarYears = [];
+        for (let year = startYear; year <= endYear; year++) {
+            this.calendarYears.push({
+                year,
+                isSelected: this.selectedDates.some(date => date.getFullYear() === year),
+                isDisabled: this.isYearDisabled(year),
+                isCurrent: new Date().getFullYear() === year
+            });
+        }
+    }
+    // Date validation methods
+    isDateDisabled(date) {
+        if (this.validation.minDate && date < this.validation.minDate) {
+            return true;
+        }
+        if (this.validation.maxDate && date > this.validation.maxDate) {
+            return true;
+        }
+        if (this.validation.disabledDates?.some(disabledDate => this.isSameDay(date, disabledDate))) {
+            return true;
+        }
+        if (this.validation.disabledDays?.includes(date.getDay())) {
+            return true;
+        }
+        if (this.validation.enabledDates && !this.validation.enabledDates.some(enabledDate => this.isSameDay(date, enabledDate))) {
+            return true;
+        }
+        if (this.validation.customValidator && !this.validation.customValidator(date)) {
+            return true;
+        }
+        return false;
+    }
+    isMonthDisabled(year, month) {
+        const firstDayOfMonth = new Date(year, month, 1);
+        const lastDayOfMonth = new Date(year, month + 1, 0);
+        // Check if all days in the month are disabled
+        for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+            const date = new Date(year, month, day);
+            if (!this.isDateDisabled(date)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    isYearDisabled(year) {
+        // Check if all months in the year are disabled
+        for (let month = 0; month < 12; month++) {
+            if (!this.isMonthDisabled(year, month)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // Event handlers
+    onInputClick() {
+        if (!this.disabled && !this.readonly && !this.inline) {
+            this.toggleCalendar();
+        }
     }
     onInputFocus(event) {
         this.isFocused = true;
@@ -2970,49 +3214,238 @@ class SaDateComponent {
         this.onTouched();
         this.blur.emit(event);
     }
-    openCalendar(event) {
+    onDayClick(day) {
+        if (day.isDisabled || this.disabled || this.readonly) {
+            return;
+        }
+        const selectedDate = new Date(day.date);
+        this.selectDate(selectedDate);
+    }
+    onMonthClick(month) {
+        if (month.isDisabled) {
+            return;
+        }
+        this.currentDate = new Date(month.year, month.number, 1);
+        this.setView('day');
+        this.monthChange.emit(new Date(this.currentDate));
+    }
+    onYearClick(year) {
+        if (year.isDisabled) {
+            return;
+        }
+        this.currentDate = new Date(year.year, this.currentDate.getMonth(), 1);
+        this.setView('month');
+        this.yearChange.emit(year.year);
+    }
+    onTodayClick() {
+        const today = new Date();
+        if (!this.isDateDisabled(today)) {
+            this.selectDate(today);
+            this.currentDate = new Date(today);
+            this.generateCalendarDays();
+        }
+    }
+    onClearClick() {
+        this.selectDate(null);
+    }
+    onClearValue(event) {
         // Prevenir propagación del evento
         event.preventDefault();
         event.stopPropagation();
-        // Si el input no está deshabilitado ni en solo lectura
-        if (!this.disabled && !this.readonly) {
-            // Usar ViewChild para acceder al input
-            const inputElement = this.dateInput?.nativeElement;
-            if (inputElement) {
-                // Enfocar el input primero
-                inputElement.focus();
-                // Intentar abrir el calendario programáticamente
-                try {
-                    inputElement.showPicker();
-                }
-                catch (error) {
-                    // Fallback: simular click en el input
-                    inputElement.click();
-                }
-            }
+        if (!this.disabled) {
+            this.selectDate(null);
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaDateComponent, selector: "sa-date", inputs: { value: "value", size: "size", status: "status", label: "label", placeholder: "placeholder", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", min: "min", max: "max", blockFutureDates: "blockFutureDates", showCurrentDate: "showCurrentDate" }, outputs: { valueChange: "valueChange", focus: "focus", blur: "blur" }, providers: [
+    // Navigation methods
+    navigatePrevious() {
+        switch (this.currentView) {
+            case 'day':
+                this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
+                this.generateCalendarDays();
+                break;
+            case 'month':
+                this.currentDate = new Date(this.currentDate.getFullYear() - 1, this.currentDate.getMonth(), 1);
+                this.generateCalendarMonths();
+                break;
+            case 'year':
+                this.currentDate = new Date(this.currentDate.getFullYear() - 21, this.currentDate.getMonth(), 1);
+                this.generateCalendarYears();
+                break;
+        }
+        this.cdr.markForCheck();
+    }
+    navigateNext() {
+        switch (this.currentView) {
+            case 'day':
+                this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
+                this.generateCalendarDays();
+                break;
+            case 'month':
+                this.currentDate = new Date(this.currentDate.getFullYear() + 1, this.currentDate.getMonth(), 1);
+                this.generateCalendarMonths();
+                break;
+            case 'year':
+                this.currentDate = new Date(this.currentDate.getFullYear() + 21, this.currentDate.getMonth(), 1);
+                this.generateCalendarYears();
+                break;
+        }
+        this.cdr.markForCheck();
+    }
+    setView(view) {
+        this.currentView = view;
+        this.viewChange.emit({
+            view,
+            date: new Date(this.currentDate),
+            month: this.currentDate.getMonth(),
+            year: this.currentDate.getFullYear()
+        });
+        this.cdr.markForCheck();
+    }
+    toggleCalendar() {
+        this.isOpen = !this.isOpen;
+        this.cdr.markForCheck();
+    }
+    closeCalendar() {
+        this.isOpen = false;
+        this.cdr.markForCheck();
+    }
+    // Date selection logic
+    selectDate(date) {
+        if (date === null) {
+            this.selectedDates = [];
+            this._value = null;
+        }
+        else if (this.mergedConfig.allowMultiSelect) {
+            this.handleMultiSelect(date);
+        }
+        else if (this.mergedConfig.allowRangeSelect) {
+            this.handleRangeSelect(date);
+        }
+        else {
+            this.selectedDates = [date];
+            this._value = date;
+        }
+        this.updateValue();
+        if (this.mergedConfig.closeOnSelect && !this.mergedConfig.allowMultiSelect && !this.mergedConfig.allowRangeSelect) {
+            this.closeCalendar();
+        }
+    }
+    handleMultiSelect(date) {
+        const existingIndex = this.selectedDates.findIndex(selectedDate => this.isSameDay(selectedDate, date));
+        if (existingIndex > -1) {
+            this.selectedDates.splice(existingIndex, 1);
+        }
+        else {
+            this.selectedDates.push(date);
+        }
+        this._value = [...this.selectedDates];
+    }
+    handleRangeSelect(date) {
+        if (this.selectedDates.length === 0 || this.selectedDates.length === 2) {
+            this.selectedDates = [date];
+        }
+        else if (this.selectedDates.length === 1) {
+            const startDate = this.selectedDates[0];
+            if (date < startDate) {
+                this.selectedDates = [date, startDate];
+            }
+            else {
+                this.selectedDates = [startDate, date];
+            }
+        }
+        this._value = [...this.selectedDates];
+    }
+    updateValue() {
+        const selectEvent = {
+            date: this.selectedDates[0] || new Date(),
+            formattedDate: this.inputValue,
+            selectedDates: [...this.selectedDates]
+        };
+        if (this.mergedConfig.allowRangeSelect && this.selectedDates.length === 2) {
+            selectEvent.isRange = true;
+            selectEvent.startDate = this.selectedDates[0];
+            selectEvent.endDate = this.selectedDates[1];
+        }
+        this.onChange(this._value);
+        this.dateSelect.emit(selectEvent);
+        this.generateCalendarDays();
+        this.cdr.markForCheck();
+    }
+    // Utility methods
+    isSameDay(date1, date2) {
+        return date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate();
+    }
+    formatDate(date) {
+        const day = date.getDate().toString();
+        const month = date.getMonth();
+        const year = date.getFullYear().toString();
+        let formattedDate = this.mergedLocale.dateFormat;
+        // Reemplazar día
+        formattedDate = formattedDate.replace('dd', day);
+        // Reemplazar mes (verificar si es formato largo o corto)
+        if (formattedDate.includes('mmmm')) {
+            // Mes completo en español
+            formattedDate = formattedDate.replace('mmmm', this.mergedLocale.months[month].toLowerCase());
+        }
+        else if (formattedDate.includes('mmm')) {
+            // Mes abreviado
+            formattedDate = formattedDate.replace('mmm', this.mergedLocale.monthsShort[month]);
+        }
+        else if (formattedDate.includes('mm')) {
+            // Mes numérico con padding
+            formattedDate = formattedDate.replace('mm', (month + 1).toString().padStart(2, '0'));
+        }
+        else if (formattedDate.includes('m')) {
+            // Mes numérico sin padding
+            formattedDate = formattedDate.replace('m', (month + 1).toString());
+        }
+        // Reemplazar año
+        formattedDate = formattedDate.replace('yyyy', year);
+        return formattedDate;
+    }
+    getHeaderTitle() {
+        switch (this.currentView) {
+            case 'day':
+                return `${this.mergedLocale.months[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+            case 'month':
+                return this.currentDate.getFullYear().toString();
+            case 'year':
+                const startYear = this.currentDate.getFullYear() - 10;
+                const endYear = this.currentDate.getFullYear() + 10;
+                return `${startYear} - ${endYear}`;
+            default:
+                return '';
+        }
+    }
+    getWeekdays() {
+        const weekdays = [...this.mergedLocale.weekdaysMin];
+        const firstDay = this.mergedLocale.firstDayOfWeek;
+        return [
+            ...weekdays.slice(firstDay),
+            ...weekdays.slice(0, firstDay)
+        ];
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaCalendarComponent, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaCalendarComponent, selector: "sa-calendar", inputs: { size: "size", status: "status", label: "label", placeholder: "placeholder", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", locale: "locale", colors: "colors", config: "config", validation: "validation", events: "events", inline: "inline", showInput: "showInput" }, outputs: { dateSelect: "dateSelect", viewChange: "viewChange", monthChange: "monthChange", yearChange: "yearChange", focus: "focus", blur: "blur" }, host: { listeners: { "document:click": "onDocumentClick($event)" } }, providers: [
             {
                 provide: NG_VALUE_ACCESSOR,
-                useExisting: forwardRef(() => SaDateComponent),
+                useExisting: forwardRef(() => SaCalendarComponent),
                 multi: true
             }
-        ], viewQueries: [{ propertyName: "dateInput", first: true, predicate: ["dateInput"], descendants: true }], ngImport: i0, template: "<div class=\"\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <input\n      #dateInput\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      spellcheck=\"false\"\n      autocomplete=\"off\"\n      autocorrect=\"off\"\n      autocapitalize=\"off\"\n      data-gramm=\"false\"\n      data-gramm_editor=\"false\"\n      data-enable-grammarly=\"false\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n    <!-- Icono personalizado del calendario como fallback -->\n    <div class=\"calendar-icon\" \n         [class.disabled]=\"disabled || readonly\"\n         (click)=\"openCalendar($event)\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\n        <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"></line>\n        <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"></line>\n        <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"></line>\n      </svg>\n    </div>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;box-sizing:border-box}:host{width:100%;box-sizing:border-box}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#212529;font-size:14px;font-weight:400!important;margin-bottom:2px;display:inline-block}:host .form-label.label-sm{font-size:11px!important}:host .form-label.label-md{font-size:14px!important}:host .form-label.label-lg{font-size:16px!important}:host .position-relative{position:relative}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-clip:padding-box;border:1px solid #dee2e6;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;box-sizing:border-box;cursor:pointer;outline:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-decoration:none!important;text-decoration-line:none!important;text-decoration-style:none!important;text-decoration-color:transparent!important}:host .form-control::-webkit-grammar-error-underline{display:none!important;text-decoration:none!important;background:none!important}:host .form-control::-webkit-spell-check-decoration{display:none!important;text-decoration:none!important;background:none!important}:host .form-control::-moz-spell-check{display:none!important;text-decoration:none!important;background:none!important}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control:disabled{background-color:#e9ecef;opacity:1;cursor:default}:host .form-control:read-only{background-color:#e9ecef}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .form-control.form-control-sm{min-height:calc(1.5em + .5rem + 2px);padding:4.125px 8.25px!important;font-size:11px!important;border-radius:.25rem}:host .form-control.form-control-lg{min-height:calc(1.5em + 1rem + 2px);padding:.5rem 1rem;font-size:1.25rem;border-radius:.5rem}:host .form-control[type=date]::-webkit-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .form-control[type=date]::-moz-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .form-control[type=date]::-ms-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .calendar-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;color:#6c757d;transition:color .15s ease-in-out}:host .calendar-icon svg{width:16px;height:16px;stroke:currentColor}:host .calendar-icon:hover{color:#495057}:host .calendar-icon.disabled{color:#adb5bd;cursor:default;pointer-events:none}:host .form-control[type=date]{padding-right:2.5rem!important}:host .form-control[type=date].form-control-sm{padding-right:2.25rem!important}:host .form-control[type=date].form-control-lg{padding-right:3rem!important}:host .form-control-sm~.calendar-icon{right:.5rem;width:18px;height:18px}:host .form-control-sm~.calendar-icon svg{width:14px;height:14px}:host .form-control-lg~.calendar-icon{right:1rem;width:24px;height:24px}:host .form-control-lg~.calendar-icon svg{width:20px;height:20px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;color:#dc3545;display:block}:host .text-danger{color:#dc3545!important}:host :last-child{margin-bottom:0!important}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2$1.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }], encapsulation: i0.ViewEncapsulation.ShadowDom });
+        ], usesOnChanges: true, ngImport: i0, template: "<div class=\"sa-calendar-container\">\r\n  <!-- Input field (if not inline) -->\r\n  <div *ngIf=\"!inline\" class=\"calendar-input-container\">\r\n    <label *ngIf=\"label\" [for]=\"calendarId\" [class]=\"labelClasses\">\r\n      {{ label }}\r\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\r\n    </label>\r\n\r\n    <div class=\"position-relative\">\r\n      <input\r\n        [id]=\"calendarId\"\r\n        [name]=\"name\"\r\n        [class]=\"inputClasses\"\r\n        type=\"text\"\r\n        [value]=\"inputValue\"\r\n        [placeholder]=\"placeholder\"\r\n        [required]=\"required\"\r\n        readonly=\"true\"\r\n        [disabled]=\"disabled\"\r\n        spellcheck=\"false\"\r\n        autocomplete=\"off\"\r\n        (click)=\"onInputClick()\"\r\n        (focus)=\"onInputFocus($event)\"\r\n        (blur)=\"onInputBlur($event)\"\r\n      />\r\n      \r\n      <!-- Clear icon (X) cuando hay valor -->\r\n      <div \r\n        *ngIf=\"inputValue && !disabled\"\r\n        class=\"clear-icon\" \r\n        (click)=\"onClearValue($event)\"\r\n        title=\"Limpiar fecha\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n          <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n          <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n        </svg>\r\n      </div>\r\n\r\n      <!-- Calendar icon (cuando no hay valor o est\u00E1 deshabilitado) -->\r\n      <div \r\n        *ngIf=\"!inputValue || disabled\"\r\n        class=\"calendar-icon\" \r\n        [class.disabled]=\"disabled || readonly\"\r\n        (click)=\"onInputClick()\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n          <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\r\n          <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"></line>\r\n          <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"></line>\r\n          <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"></line>\r\n        </svg>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\r\n    <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\r\n  </div>\r\n\r\n  <!-- Calendar popup/inline -->\r\n  <div \r\n    class=\"calendar-popup\" \r\n    [class.inline]=\"inline\"\r\n    [class.open]=\"isOpen\"\r\n    [style.--primary-color]=\"mergedColors.primary\"\r\n    [style.--secondary-color]=\"mergedColors.secondary\"\r\n    [style.--success-color]=\"mergedColors.success\"\r\n    [style.--error-color]=\"mergedColors.error\"\r\n    [style.--background-color]=\"mergedColors.background\"\r\n    [style.--surface-color]=\"mergedColors.surface\"\r\n    [style.--border-color]=\"mergedColors.border\"\r\n    [style.--disabled-color]=\"mergedColors.disabled\"\r\n    [style.--hover-color]=\"mergedColors.hover\"\r\n    [style.--weekday-header-bg]=\"mergedColors.weekdayHeaderBg\"\r\n    [style.--weekday-header-color]=\"mergedColors.weekdayHeaderColor\"\r\n    *ngIf=\"inline || isOpen\">\r\n    \r\n    <!-- Calendar header -->\r\n    <div class=\"calendar-header\" *ngIf=\"mergedConfig.showHeader\">\r\n      <!-- Navigation -->\r\n      <div class=\"calendar-navigation\" *ngIf=\"mergedConfig.showNavigation\">\r\n        <button \r\n          type=\"button\" \r\n          class=\"nav-button prev\" \r\n          (click)=\"navigatePrevious()\"\r\n          [disabled]=\"disabled\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n            <polyline points=\"15,18 9,12 15,6\"></polyline>\r\n          </svg>\r\n        </button>\r\n\r\n        <div class=\"header-title-container\">\r\n          <button \r\n            type=\"button\" \r\n            class=\"header-title\"\r\n            (click)=\"currentView === 'day' ? setView('month') : currentView === 'month' ? setView('year') : null\"\r\n            [disabled]=\"disabled\">\r\n            {{ getHeaderTitle() }}\r\n          </button>\r\n        </div>\r\n\r\n        <button \r\n          type=\"button\" \r\n          class=\"nav-button next\" \r\n          (click)=\"navigateNext()\"\r\n          [disabled]=\"disabled\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n            <polyline points=\"9,18 15,12 9,6\"></polyline>\r\n          </svg>\r\n        </button>\r\n      </div>\r\n\r\n      <!-- Action buttons (ocultos por defecto para dise\u00F1o m\u00E1s limpio) -->\r\n      <div class=\"calendar-actions\" *ngIf=\"mergedConfig.showTodayButton || mergedConfig.showClearButton\">\r\n        <button \r\n          *ngIf=\"mergedConfig.showTodayButton\"\r\n          type=\"button\" \r\n          class=\"action-button today-button\"\r\n          (click)=\"onTodayClick()\"\r\n          [disabled]=\"disabled\">\r\n          {{ mergedLocale.today }}\r\n        </button>\r\n        \r\n        <button \r\n          *ngIf=\"mergedConfig.showClearButton\"\r\n          type=\"button\" \r\n          class=\"action-button clear-button\"\r\n          (click)=\"onClearClick()\"\r\n          [disabled]=\"disabled\">\r\n          {{ mergedLocale.clear }}\r\n        </button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Calendar content -->\r\n    <div class=\"calendar-content\">\r\n      <!-- Day view -->\r\n      <div class=\"calendar-days\" *ngIf=\"currentView === 'day'\">\r\n        <!-- Weekday headers -->\r\n        <div class=\"weekdays\">\r\n          <div \r\n            class=\"weekday-header\" \r\n            *ngFor=\"let weekday of getWeekdays()\">\r\n            {{ weekday }}\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Calendar grid -->\r\n        <div class=\"days-grid\">\r\n          <div \r\n            class=\"week-row\" \r\n            *ngFor=\"let week of calendarDays\">\r\n            <div \r\n              class=\"day-cell\"\r\n              *ngFor=\"let day of week\"\r\n              [class.today]=\"day.isToday && mergedConfig.highlightToday\"\r\n              [class.selected]=\"day.isSelected\"\r\n              [class.disabled]=\"day.isDisabled\"\r\n              [class.other-month]=\"!day.isInCurrentMonth\"\r\n              [class.weekend]=\"day.isWeekend && mergedConfig.highlightWeekends\"\r\n              [class.has-event]=\"day.hasEvent\"\r\n              (click)=\"onDayClick(day)\">\r\n              <span class=\"day-number\">{{ day.day }}</span>\r\n              <div *ngIf=\"day.hasEvent\" class=\"event-indicator\"></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Month view -->\r\n      <div class=\"calendar-months\" *ngIf=\"currentView === 'month'\">\r\n        <div class=\"months-grid\">\r\n          <div \r\n            class=\"month-cell\"\r\n            *ngFor=\"let month of calendarMonths\"\r\n            [class.selected]=\"month.isSelected\"\r\n            [class.disabled]=\"month.isDisabled\"\r\n            [class.current]=\"month.isCurrent\"\r\n            (click)=\"onMonthClick(month)\">\r\n            {{ month.name }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Year view -->\r\n      <div class=\"calendar-years\" *ngIf=\"currentView === 'year'\">\r\n        <div class=\"years-grid\">\r\n          <div \r\n            class=\"year-cell\"\r\n            *ngFor=\"let year of calendarYears\"\r\n            [class.selected]=\"year.isSelected\"\r\n            [class.disabled]=\"year.isDisabled\"\r\n            [class.current]=\"year.isCurrent\"\r\n            (click)=\"onYearClick(year)\">\r\n            {{ year.year }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;box-sizing:border-box;--primary-color: #36AD55;--secondary-color: #6c757d;--success-color: #32A047;--error-color: #ef4444;--warning-color: #f59e0b;--info-color: #3b82f6;--light-color: #f8f9fa;--dark-color: #212529;--background-color: #ffffff;--surface-color: #f8f9fa;--on-primary-color: #ffffff;--on-surface-color: #212529;--border-color: #dee2e6;--disabled-color: #e9ecef;--hover-color: #e9ecef;--weekday-header-bg: #f8f9fa;--weekday-header-color: #212529;--transition-duration: .2s;--border-radius: .375rem;--box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);--box-shadow-focus: 0 0 0 .2rem rgba(54, 173, 85, .25)}.sa-calendar-container{position:relative;width:100%}.calendar-input-container{width:100%;margin-bottom:0}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:var(--on-surface-color);font-size:14px;font-weight:400!important;margin-bottom:2px;display:inline-block}.form-label.label-sm{font-size:11px!important}.form-label.label-md{font-size:14px!important}.form-label.label-lg{font-size:16px!important}.position-relative{position:relative}.calendar-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:var(--on-surface-color);background-color:var(--background-color);background-clip:padding-box;border:1px solid var(--border-color);border-radius:var(--border-radius);transition:border-color var(--transition-duration) ease-in-out,box-shadow var(--transition-duration) ease-in-out;box-sizing:border-box;cursor:pointer;padding-right:2.5rem!important}.calendar-input:focus{outline:none!important;box-shadow:inset 0 0 0 2px var(--primary-color)!important;border-color:transparent!important}.calendar-input:disabled{background-color:var(--disabled-color);opacity:1;cursor:default}.calendar-input:read-only{background-color:#fff!important;cursor:pointer}.calendar-input.is-valid{border-color:var(--success-color)}.calendar-input.is-valid:focus{box-shadow:inset 0 0 0 2px var(--success-color)!important;border-color:transparent!important}.calendar-input.is-invalid{border-color:var(--error-color)}.calendar-input.is-invalid:focus{box-shadow:inset 0 0 0 2px var(--error-color)!important;border-color:transparent!important}.calendar-input.form-control-sm{min-height:calc(1.5em + .5rem + 2px);padding:4.125px 8.25px!important;padding-right:2.25rem!important;font-size:11px!important;border-radius:.25rem}.calendar-input.form-control-lg{min-height:calc(1.5em + 1rem + 2px);padding:.5rem 1rem;padding-right:3rem!important;font-size:1.25rem;border-radius:.5rem}.calendar-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;color:var(--secondary-color);transition:color var(--transition-duration) ease-in-out}.calendar-icon svg{width:16px;height:16px;stroke:currentColor}.calendar-icon:hover{color:var(--primary-color)}.calendar-icon.disabled{color:var(--disabled-color);cursor:default;pointer-events:none}.clear-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;transition:color var(--transition-duration) ease-in-out,background-color var(--transition-duration) ease-in-out;border-radius:50%;color:var(--error-color)}.clear-icon svg{width:14px;height:14px;stroke:currentColor}.clear-icon:hover{background-color:#ef44441a}.form-control-sm~.calendar-icon,.form-control-sm~.clear-icon{right:.5rem;width:18px;height:18px}.form-control-sm~.calendar-icon svg,.form-control-sm~.clear-icon svg{width:14px;height:14px}.form-control-lg~.calendar-icon,.form-control-lg~.clear-icon{right:1rem;width:24px;height:24px}.form-control-lg~.calendar-icon svg,.form-control-lg~.clear-icon svg{width:20px;height:20px}.calendar-popup{position:absolute;top:100%;left:0;z-index:1000;background:var(--background-color);border:1px solid var(--border-color);border-radius:8px;box-shadow:0 8px 24px #0000001f;margin-top:4px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:opacity var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out,visibility var(--transition-duration) ease-in-out;width:320px;max-width:90vw}.calendar-popup.open{opacity:1;transform:translateY(0);visibility:visible}.calendar-popup.inline{position:static;opacity:1;transform:none;visibility:visible;margin-top:0;box-shadow:none;border:1px solid var(--border-color)}.calendar-header{padding:1rem 1rem .5rem;border-bottom:1px solid var(--border-color);background:var(--background-color);border-radius:8px 8px 0 0}.calendar-navigation{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}.nav-button{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:transparent;color:var(--secondary-color);border-radius:6px;cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out}.nav-button svg{width:14px;height:14px}.nav-button:hover:not(:disabled){background:var(--hover-color);color:var(--on-surface-color)}.nav-button:disabled{opacity:.3;cursor:not-allowed}.header-title-container{flex:1;text-align:center;display:flex;justify-content:center;align-items:center}.header-title{background:none;border:none;font-size:.9rem;font-weight:500;color:var(--on-surface-color);cursor:pointer;padding:.5rem 1.5rem;border-radius:6px;transition:background-color var(--transition-duration) ease-in-out;min-width:120px;min-height:36px;display:flex;align-items:center;justify-content:center}.header-title:hover:not(:disabled){background:var(--hover-color)}.header-title:disabled{cursor:default}.calendar-actions{display:none;gap:.5rem;justify-content:center;margin-top:.5rem}.action-button{padding:.375rem .75rem;font-size:.875rem;border:1px solid var(--border-color);background:var(--background-color);color:var(--on-surface-color);border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,border-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out}.action-button:hover:not(:disabled){background:var(--primary-color);border-color:var(--primary-color);color:var(--on-primary-color)}.action-button:disabled{opacity:.5;cursor:not-allowed}.calendar-content{padding:.75rem 1rem 1rem}.calendar-days .weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-bottom:8px;background-color:#f5f5f5;border-radius:4px;padding:.5rem 0}.calendar-days .weekday-header{text-align:center;font-size:.7rem;font-weight:800;color:var(--weekday-header-color);background-color:transparent;padding:0;text-transform:uppercase;letter-spacing:.3px}.calendar-days .days-grid .week-row{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}.calendar-days .day-cell{position:relative;display:flex;align-items:center;justify-content:center;min-height:32px;width:32px;margin:0 auto;border-radius:6px;cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none}.calendar-days .day-cell .day-number{font-size:.8rem;font-weight:400;z-index:1}.calendar-days .day-cell .event-indicator{position:absolute;bottom:4px;left:50%;transform:translate(-50%);width:4px;height:4px;background:var(--primary-color);border-radius:50%}.calendar-days .day-cell:hover:not(.disabled){background:var(--hover-color)}.calendar-days .day-cell.today{background:transparent;position:relative}.calendar-days .day-cell.today .day-number{color:var(--primary-color);font-weight:600}.calendar-days .day-cell.today:after{content:\"\";position:absolute;bottom:4px;left:50%;transform:translate(-50%);width:4px;height:4px;background-color:var(--primary-color);border-radius:50%}.calendar-days .day-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:500}.calendar-days .day-cell.selected .day-number{font-weight:500;color:var(--on-primary-color)}.calendar-days .day-cell.selected:hover{background:var(--primary-color);opacity:.9}.calendar-days .day-cell.today.selected{background:var(--primary-color);color:var(--on-primary-color)}.calendar-days .day-cell.today.selected .day-number{color:var(--on-primary-color);font-weight:600}.calendar-days .day-cell.today.selected:after{display:none}.calendar-days .day-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-days .day-cell.disabled:hover{background:transparent;transform:none}.calendar-days .day-cell.weekend{color:var(--error-color)}.calendar-days .day-cell.weekend .day-number{font-weight:500}.calendar-days .day-cell.has-event{background:#36ad551a}.calendar-days .day-cell.has-event:not(.selected):not(.today){border:1px solid var(--primary-color)}.calendar-months .months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.calendar-months .month-cell{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none;font-size:.875rem;font-weight:500}.calendar-months .month-cell:hover:not(.disabled):not(.current):not(.selected){background:var(--hover-color)}.calendar-months .month-cell.current{background:var(--primary-color);color:var(--on-primary-color)}.calendar-months .month-cell.current:hover{background:var(--primary-color);opacity:.9}.calendar-months .month-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:600}.calendar-months .month-cell.selected:hover{background:var(--primary-color);opacity:.9}.calendar-months .month-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-months .month-cell.disabled:hover{background:transparent;transform:none}.calendar-years .years-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.calendar-years .year-cell{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none;font-size:.875rem;font-weight:500}.calendar-years .year-cell:hover:not(.disabled):not(.current):not(.selected){background:var(--hover-color)}.calendar-years .year-cell.current{background:var(--primary-color);color:var(--on-primary-color)}.calendar-years .year-cell.current:hover{background:var(--primary-color);opacity:.9}.calendar-years .year-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:600}.calendar-years .year-cell.selected:hover{background:var(--primary-color);opacity:.9;transform:scale(1.02)}.calendar-years .year-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-years .year-cell.disabled:hover{background:transparent;transform:none}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:var(--secondary-color);margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;color:var(--error-color);display:block}.text-danger{color:var(--error-color)!important}@media (max-width: 576px){.calendar-popup{left:50%;transform:translate(-50%);width:300px;max-width:calc(100vw - 2rem)}.calendar-popup.open{transform:translate(-50%) translateY(0)}.calendar-header{padding:.75rem .75rem .5rem}.calendar-content{padding:.5rem .75rem .75rem}.header-title{min-width:100px;min-height:40px;padding:.75rem 1rem;font-size:.85rem}.day-cell{min-height:28px;width:28px}.day-cell .day-number{font-size:.75rem}.months-grid{grid-template-columns:repeat(2,1fr)!important}.years-grid{grid-template-columns:repeat(3,1fr)!important}}@keyframes fadeInUp{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.calendar-popup.open{animation:fadeInUp var(--transition-duration) ease-out}:host(.theme-dark){--background-color: #1f2937;--surface-color: #374151;--on-surface-color: #f9fafb;--border-color: #4b5563;--disabled-color: #374151;--hover-color: #4b5563;--secondary-color: #9ca3af}:host(.theme-compact) .day-cell{min-height:28px}:host(.theme-compact) .calendar-header{padding:.5rem}:host(.theme-compact) .calendar-content{padding:.5rem}:host(.size-sm) .calendar-popup{min-width:240px}:host(.size-sm) .day-cell{min-height:28px}:host(.size-sm) .month-cell,:host(.size-sm) .year-cell{min-height:36px;font-size:.75rem}:host(.size-lg) .calendar-popup{min-width:320px}:host(.size-lg) .day-cell{min-height:44px}:host(.size-lg) .month-cell,:host(.size-lg) .year-cell{min-height:56px;font-size:1rem}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.ShadowDom });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaDateComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaCalendarComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'sa-date', encapsulation: ViewEncapsulation.ShadowDom, providers: [
+            args: [{ selector: 'sa-calendar', encapsulation: ViewEncapsulation.ShadowDom, changeDetection: ChangeDetectionStrategy.OnPush, providers: [
                         {
                             provide: NG_VALUE_ACCESSOR,
-                            useExisting: forwardRef(() => SaDateComponent),
+                            useExisting: forwardRef(() => SaCalendarComponent),
                             multi: true
                         }
-                    ], template: "<div class=\"\">\n  <label *ngIf=\"label\" [for]=\"dateId\" [class]=\"labelClasses\">\n    {{ label }}\n    <span *ngIf=\"required\" class=\"text-danger\">*</span>\n  </label>\n\n  <div class=\"position-relative\">\n    <input\n      #dateInput\n      [id]=\"dateId\"\n      [name]=\"name\"\n      [class]=\"inputClasses\"\n      type=\"date\"\n      [(ngModel)]=\"value\"\n      (ngModelChange)=\"onModelChange($event)\"\n      [placeholder]=\"placeholder\"\n      [required]=\"required\"\n      [readonly]=\"readonly\"\n      [disabled]=\"disabled\"\n      [min]=\"min\"\n      [max]=\"max\"\n      spellcheck=\"false\"\n      autocomplete=\"off\"\n      autocorrect=\"off\"\n      autocapitalize=\"off\"\n      data-gramm=\"false\"\n      data-gramm_editor=\"false\"\n      data-enable-grammarly=\"false\"\n      (focus)=\"onInputFocus($event)\"\n      (blur)=\"onInputBlur($event)\"\n      (click)=\"openCalendar($event)\"\n    />\n    <!-- Icono personalizado del calendario como fallback -->\n    <div class=\"calendar-icon\" \n         [class.disabled]=\"disabled || readonly\"\n         (click)=\"openCalendar($event)\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\n        <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"></line>\n        <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"></line>\n        <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"></line>\n      </svg>\n    </div>\n  </div>\n\n  <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\n  <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\n</div>\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;box-sizing:border-box}:host{width:100%;box-sizing:border-box}:host .form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:#212529;font-size:14px;font-weight:400!important;margin-bottom:2px;display:inline-block}:host .form-label.label-sm{font-size:11px!important}:host .form-label.label-md{font-size:14px!important}:host .form-label.label-lg{font-size:16px!important}:host .position-relative{position:relative}:host .form-control{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-clip:padding-box;border:1px solid #dee2e6;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;box-sizing:border-box;cursor:pointer;outline:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-decoration:none!important;text-decoration-line:none!important;text-decoration-style:none!important;text-decoration-color:transparent!important}:host .form-control::-webkit-grammar-error-underline{display:none!important;text-decoration:none!important;background:none!important}:host .form-control::-webkit-spell-check-decoration{display:none!important;text-decoration:none!important;background:none!important}:host .form-control::-moz-spell-check{display:none!important;text-decoration:none!important;background:none!important}:host .form-control:focus{outline:none!important;box-shadow:inset 0 0 0 2px #36ad55!important;border-color:transparent!important}:host .form-control:disabled{background-color:#e9ecef;opacity:1;cursor:default}:host .form-control:read-only{background-color:#e9ecef}:host .form-control.is-valid{border-color:#32a047}:host .form-control.is-valid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #32a047!important;border-color:transparent!important}:host .form-control.is-invalid{border-color:#ef4444}:host .form-control.is-invalid:focus{outline:none!important;box-shadow:inset 0 0 0 2px #ef4444!important;border-color:transparent!important}:host .form-control.form-control-sm{min-height:calc(1.5em + .5rem + 2px);padding:4.125px 8.25px!important;font-size:11px!important;border-radius:.25rem}:host .form-control.form-control-lg{min-height:calc(1.5em + 1rem + 2px);padding:.5rem 1rem;font-size:1.25rem;border-radius:.5rem}:host .form-control[type=date]::-webkit-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .form-control[type=date]::-moz-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .form-control[type=date]::-ms-calendar-picker-indicator{display:none!important;opacity:0!important;visibility:hidden!important}:host .calendar-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;color:#6c757d;transition:color .15s ease-in-out}:host .calendar-icon svg{width:16px;height:16px;stroke:currentColor}:host .calendar-icon:hover{color:#495057}:host .calendar-icon.disabled{color:#adb5bd;cursor:default;pointer-events:none}:host .form-control[type=date]{padding-right:2.5rem!important}:host .form-control[type=date].form-control-sm{padding-right:2.25rem!important}:host .form-control[type=date].form-control-lg{padding-right:3rem!important}:host .form-control-sm~.calendar-icon{right:.5rem;width:18px;height:18px}:host .form-control-sm~.calendar-icon svg{width:14px;height:14px}:host .form-control-lg~.calendar-icon{right:1rem;width:24px;height:24px}:host .form-control-lg~.calendar-icon svg{width:20px;height:20px}:host .form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:#6b7280;margin-top:.25rem}:host .invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;color:#dc3545;display:block}:host .text-danger{color:#dc3545!important}:host :last-child{margin-bottom:0!important}\n"] }]
-        }], ctorParameters: () => [], propDecorators: { value: [{
-                type: Input
-            }], size: [{
+                    ], template: "<div class=\"sa-calendar-container\">\r\n  <!-- Input field (if not inline) -->\r\n  <div *ngIf=\"!inline\" class=\"calendar-input-container\">\r\n    <label *ngIf=\"label\" [for]=\"calendarId\" [class]=\"labelClasses\">\r\n      {{ label }}\r\n      <span *ngIf=\"required\" class=\"text-danger\">*</span>\r\n    </label>\r\n\r\n    <div class=\"position-relative\">\r\n      <input\r\n        [id]=\"calendarId\"\r\n        [name]=\"name\"\r\n        [class]=\"inputClasses\"\r\n        type=\"text\"\r\n        [value]=\"inputValue\"\r\n        [placeholder]=\"placeholder\"\r\n        [required]=\"required\"\r\n        readonly=\"true\"\r\n        [disabled]=\"disabled\"\r\n        spellcheck=\"false\"\r\n        autocomplete=\"off\"\r\n        (click)=\"onInputClick()\"\r\n        (focus)=\"onInputFocus($event)\"\r\n        (blur)=\"onInputBlur($event)\"\r\n      />\r\n      \r\n      <!-- Clear icon (X) cuando hay valor -->\r\n      <div \r\n        *ngIf=\"inputValue && !disabled\"\r\n        class=\"clear-icon\" \r\n        (click)=\"onClearValue($event)\"\r\n        title=\"Limpiar fecha\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n          <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n          <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n        </svg>\r\n      </div>\r\n\r\n      <!-- Calendar icon (cuando no hay valor o est\u00E1 deshabilitado) -->\r\n      <div \r\n        *ngIf=\"!inputValue || disabled\"\r\n        class=\"calendar-icon\" \r\n        [class.disabled]=\"disabled || readonly\"\r\n        (click)=\"onInputClick()\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n          <rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\r\n          <line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"></line>\r\n          <line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"></line>\r\n          <line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"></line>\r\n        </svg>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"helperText && !errorText\" class=\"form-text\">{{ helperText }}</div>\r\n    <div *ngIf=\"errorText\" class=\"invalid-feedback d-block\">{{ errorText }}</div>\r\n  </div>\r\n\r\n  <!-- Calendar popup/inline -->\r\n  <div \r\n    class=\"calendar-popup\" \r\n    [class.inline]=\"inline\"\r\n    [class.open]=\"isOpen\"\r\n    [style.--primary-color]=\"mergedColors.primary\"\r\n    [style.--secondary-color]=\"mergedColors.secondary\"\r\n    [style.--success-color]=\"mergedColors.success\"\r\n    [style.--error-color]=\"mergedColors.error\"\r\n    [style.--background-color]=\"mergedColors.background\"\r\n    [style.--surface-color]=\"mergedColors.surface\"\r\n    [style.--border-color]=\"mergedColors.border\"\r\n    [style.--disabled-color]=\"mergedColors.disabled\"\r\n    [style.--hover-color]=\"mergedColors.hover\"\r\n    [style.--weekday-header-bg]=\"mergedColors.weekdayHeaderBg\"\r\n    [style.--weekday-header-color]=\"mergedColors.weekdayHeaderColor\"\r\n    *ngIf=\"inline || isOpen\">\r\n    \r\n    <!-- Calendar header -->\r\n    <div class=\"calendar-header\" *ngIf=\"mergedConfig.showHeader\">\r\n      <!-- Navigation -->\r\n      <div class=\"calendar-navigation\" *ngIf=\"mergedConfig.showNavigation\">\r\n        <button \r\n          type=\"button\" \r\n          class=\"nav-button prev\" \r\n          (click)=\"navigatePrevious()\"\r\n          [disabled]=\"disabled\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n            <polyline points=\"15,18 9,12 15,6\"></polyline>\r\n          </svg>\r\n        </button>\r\n\r\n        <div class=\"header-title-container\">\r\n          <button \r\n            type=\"button\" \r\n            class=\"header-title\"\r\n            (click)=\"currentView === 'day' ? setView('month') : currentView === 'month' ? setView('year') : null\"\r\n            [disabled]=\"disabled\">\r\n            {{ getHeaderTitle() }}\r\n          </button>\r\n        </div>\r\n\r\n        <button \r\n          type=\"button\" \r\n          class=\"nav-button next\" \r\n          (click)=\"navigateNext()\"\r\n          [disabled]=\"disabled\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n            <polyline points=\"9,18 15,12 9,6\"></polyline>\r\n          </svg>\r\n        </button>\r\n      </div>\r\n\r\n      <!-- Action buttons (ocultos por defecto para dise\u00F1o m\u00E1s limpio) -->\r\n      <div class=\"calendar-actions\" *ngIf=\"mergedConfig.showTodayButton || mergedConfig.showClearButton\">\r\n        <button \r\n          *ngIf=\"mergedConfig.showTodayButton\"\r\n          type=\"button\" \r\n          class=\"action-button today-button\"\r\n          (click)=\"onTodayClick()\"\r\n          [disabled]=\"disabled\">\r\n          {{ mergedLocale.today }}\r\n        </button>\r\n        \r\n        <button \r\n          *ngIf=\"mergedConfig.showClearButton\"\r\n          type=\"button\" \r\n          class=\"action-button clear-button\"\r\n          (click)=\"onClearClick()\"\r\n          [disabled]=\"disabled\">\r\n          {{ mergedLocale.clear }}\r\n        </button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Calendar content -->\r\n    <div class=\"calendar-content\">\r\n      <!-- Day view -->\r\n      <div class=\"calendar-days\" *ngIf=\"currentView === 'day'\">\r\n        <!-- Weekday headers -->\r\n        <div class=\"weekdays\">\r\n          <div \r\n            class=\"weekday-header\" \r\n            *ngFor=\"let weekday of getWeekdays()\">\r\n            {{ weekday }}\r\n          </div>\r\n        </div>\r\n\r\n        <!-- Calendar grid -->\r\n        <div class=\"days-grid\">\r\n          <div \r\n            class=\"week-row\" \r\n            *ngFor=\"let week of calendarDays\">\r\n            <div \r\n              class=\"day-cell\"\r\n              *ngFor=\"let day of week\"\r\n              [class.today]=\"day.isToday && mergedConfig.highlightToday\"\r\n              [class.selected]=\"day.isSelected\"\r\n              [class.disabled]=\"day.isDisabled\"\r\n              [class.other-month]=\"!day.isInCurrentMonth\"\r\n              [class.weekend]=\"day.isWeekend && mergedConfig.highlightWeekends\"\r\n              [class.has-event]=\"day.hasEvent\"\r\n              (click)=\"onDayClick(day)\">\r\n              <span class=\"day-number\">{{ day.day }}</span>\r\n              <div *ngIf=\"day.hasEvent\" class=\"event-indicator\"></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Month view -->\r\n      <div class=\"calendar-months\" *ngIf=\"currentView === 'month'\">\r\n        <div class=\"months-grid\">\r\n          <div \r\n            class=\"month-cell\"\r\n            *ngFor=\"let month of calendarMonths\"\r\n            [class.selected]=\"month.isSelected\"\r\n            [class.disabled]=\"month.isDisabled\"\r\n            [class.current]=\"month.isCurrent\"\r\n            (click)=\"onMonthClick(month)\">\r\n            {{ month.name }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- Year view -->\r\n      <div class=\"calendar-years\" *ngIf=\"currentView === 'year'\">\r\n        <div class=\"years-grid\">\r\n          <div \r\n            class=\"year-cell\"\r\n            *ngFor=\"let year of calendarYears\"\r\n            [class.selected]=\"year.isSelected\"\r\n            [class.disabled]=\"year.isDisabled\"\r\n            [class.current]=\"year.isCurrent\"\r\n            (click)=\"onYearClick(year)\">\r\n            {{ year.year }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block;width:100%;font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;box-sizing:border-box;--primary-color: #36AD55;--secondary-color: #6c757d;--success-color: #32A047;--error-color: #ef4444;--warning-color: #f59e0b;--info-color: #3b82f6;--light-color: #f8f9fa;--dark-color: #212529;--background-color: #ffffff;--surface-color: #f8f9fa;--on-primary-color: #ffffff;--on-surface-color: #212529;--border-color: #dee2e6;--disabled-color: #e9ecef;--hover-color: #e9ecef;--weekday-header-bg: #f8f9fa;--weekday-header-color: #212529;--transition-duration: .2s;--border-radius: .375rem;--box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);--box-shadow-focus: 0 0 0 .2rem rgba(54, 173, 85, .25)}.sa-calendar-container{position:relative;width:100%}.calendar-input-container{width:100%;margin-bottom:0}.form-label{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;color:var(--on-surface-color);font-size:14px;font-weight:400!important;margin-bottom:2px;display:inline-block}.form-label.label-sm{font-size:11px!important}.form-label.label-md{font-size:14px!important}.form-label.label-lg{font-size:16px!important}.position-relative{position:relative}.calendar-input{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:var(--on-surface-color);background-color:var(--background-color);background-clip:padding-box;border:1px solid var(--border-color);border-radius:var(--border-radius);transition:border-color var(--transition-duration) ease-in-out,box-shadow var(--transition-duration) ease-in-out;box-sizing:border-box;cursor:pointer;padding-right:2.5rem!important}.calendar-input:focus{outline:none!important;box-shadow:inset 0 0 0 2px var(--primary-color)!important;border-color:transparent!important}.calendar-input:disabled{background-color:var(--disabled-color);opacity:1;cursor:default}.calendar-input:read-only{background-color:#fff!important;cursor:pointer}.calendar-input.is-valid{border-color:var(--success-color)}.calendar-input.is-valid:focus{box-shadow:inset 0 0 0 2px var(--success-color)!important;border-color:transparent!important}.calendar-input.is-invalid{border-color:var(--error-color)}.calendar-input.is-invalid:focus{box-shadow:inset 0 0 0 2px var(--error-color)!important;border-color:transparent!important}.calendar-input.form-control-sm{min-height:calc(1.5em + .5rem + 2px);padding:4.125px 8.25px!important;padding-right:2.25rem!important;font-size:11px!important;border-radius:.25rem}.calendar-input.form-control-lg{min-height:calc(1.5em + 1rem + 2px);padding:.5rem 1rem;padding-right:3rem!important;font-size:1.25rem;border-radius:.5rem}.calendar-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;color:var(--secondary-color);transition:color var(--transition-duration) ease-in-out}.calendar-icon svg{width:16px;height:16px;stroke:currentColor}.calendar-icon:hover{color:var(--primary-color)}.calendar-icon.disabled{color:var(--disabled-color);cursor:default;pointer-events:none}.clear-icon{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);width:20px;height:20px;cursor:pointer;pointer-events:all;z-index:10;display:flex;align-items:center;justify-content:center;transition:color var(--transition-duration) ease-in-out,background-color var(--transition-duration) ease-in-out;border-radius:50%;color:var(--error-color)}.clear-icon svg{width:14px;height:14px;stroke:currentColor}.clear-icon:hover{background-color:#ef44441a}.form-control-sm~.calendar-icon,.form-control-sm~.clear-icon{right:.5rem;width:18px;height:18px}.form-control-sm~.calendar-icon svg,.form-control-sm~.clear-icon svg{width:14px;height:14px}.form-control-lg~.calendar-icon,.form-control-lg~.clear-icon{right:1rem;width:24px;height:24px}.form-control-lg~.calendar-icon svg,.form-control-lg~.clear-icon svg{width:20px;height:20px}.calendar-popup{position:absolute;top:100%;left:0;z-index:1000;background:var(--background-color);border:1px solid var(--border-color);border-radius:8px;box-shadow:0 8px 24px #0000001f;margin-top:4px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:opacity var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out,visibility var(--transition-duration) ease-in-out;width:320px;max-width:90vw}.calendar-popup.open{opacity:1;transform:translateY(0);visibility:visible}.calendar-popup.inline{position:static;opacity:1;transform:none;visibility:visible;margin-top:0;box-shadow:none;border:1px solid var(--border-color)}.calendar-header{padding:1rem 1rem .5rem;border-bottom:1px solid var(--border-color);background:var(--background-color);border-radius:8px 8px 0 0}.calendar-navigation{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}.nav-button{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:transparent;color:var(--secondary-color);border-radius:6px;cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out}.nav-button svg{width:14px;height:14px}.nav-button:hover:not(:disabled){background:var(--hover-color);color:var(--on-surface-color)}.nav-button:disabled{opacity:.3;cursor:not-allowed}.header-title-container{flex:1;text-align:center;display:flex;justify-content:center;align-items:center}.header-title{background:none;border:none;font-size:.9rem;font-weight:500;color:var(--on-surface-color);cursor:pointer;padding:.5rem 1.5rem;border-radius:6px;transition:background-color var(--transition-duration) ease-in-out;min-width:120px;min-height:36px;display:flex;align-items:center;justify-content:center}.header-title:hover:not(:disabled){background:var(--hover-color)}.header-title:disabled{cursor:default}.calendar-actions{display:none;gap:.5rem;justify-content:center;margin-top:.5rem}.action-button{padding:.375rem .75rem;font-size:.875rem;border:1px solid var(--border-color);background:var(--background-color);color:var(--on-surface-color);border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,border-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out}.action-button:hover:not(:disabled){background:var(--primary-color);border-color:var(--primary-color);color:var(--on-primary-color)}.action-button:disabled{opacity:.5;cursor:not-allowed}.calendar-content{padding:.75rem 1rem 1rem}.calendar-days .weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-bottom:8px;background-color:#f5f5f5;border-radius:4px;padding:.5rem 0}.calendar-days .weekday-header{text-align:center;font-size:.7rem;font-weight:800;color:var(--weekday-header-color);background-color:transparent;padding:0;text-transform:uppercase;letter-spacing:.3px}.calendar-days .days-grid .week-row{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}.calendar-days .day-cell{position:relative;display:flex;align-items:center;justify-content:center;min-height:32px;width:32px;margin:0 auto;border-radius:6px;cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none}.calendar-days .day-cell .day-number{font-size:.8rem;font-weight:400;z-index:1}.calendar-days .day-cell .event-indicator{position:absolute;bottom:4px;left:50%;transform:translate(-50%);width:4px;height:4px;background:var(--primary-color);border-radius:50%}.calendar-days .day-cell:hover:not(.disabled){background:var(--hover-color)}.calendar-days .day-cell.today{background:transparent;position:relative}.calendar-days .day-cell.today .day-number{color:var(--primary-color);font-weight:600}.calendar-days .day-cell.today:after{content:\"\";position:absolute;bottom:4px;left:50%;transform:translate(-50%);width:4px;height:4px;background-color:var(--primary-color);border-radius:50%}.calendar-days .day-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:500}.calendar-days .day-cell.selected .day-number{font-weight:500;color:var(--on-primary-color)}.calendar-days .day-cell.selected:hover{background:var(--primary-color);opacity:.9}.calendar-days .day-cell.today.selected{background:var(--primary-color);color:var(--on-primary-color)}.calendar-days .day-cell.today.selected .day-number{color:var(--on-primary-color);font-weight:600}.calendar-days .day-cell.today.selected:after{display:none}.calendar-days .day-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-days .day-cell.disabled:hover{background:transparent;transform:none}.calendar-days .day-cell.weekend{color:var(--error-color)}.calendar-days .day-cell.weekend .day-number{font-weight:500}.calendar-days .day-cell.has-event{background:#36ad551a}.calendar-days .day-cell.has-event:not(.selected):not(.today){border:1px solid var(--primary-color)}.calendar-months .months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.calendar-months .month-cell{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none;font-size:.875rem;font-weight:500}.calendar-months .month-cell:hover:not(.disabled):not(.current):not(.selected){background:var(--hover-color)}.calendar-months .month-cell.current{background:var(--primary-color);color:var(--on-primary-color)}.calendar-months .month-cell.current:hover{background:var(--primary-color);opacity:.9}.calendar-months .month-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:600}.calendar-months .month-cell.selected:hover{background:var(--primary-color);opacity:.9}.calendar-months .month-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-months .month-cell.disabled:hover{background:transparent;transform:none}.calendar-years .years-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.calendar-years .year-cell{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:var(--border-radius);cursor:pointer;transition:background-color var(--transition-duration) ease-in-out,color var(--transition-duration) ease-in-out,transform var(--transition-duration) ease-in-out;-webkit-user-select:none;user-select:none;font-size:.875rem;font-weight:500}.calendar-years .year-cell:hover:not(.disabled):not(.current):not(.selected){background:var(--hover-color)}.calendar-years .year-cell.current{background:var(--primary-color);color:var(--on-primary-color)}.calendar-years .year-cell.current:hover{background:var(--primary-color);opacity:.9}.calendar-years .year-cell.selected{background:var(--primary-color);color:var(--on-primary-color);font-weight:600}.calendar-years .year-cell.selected:hover{background:var(--primary-color);opacity:.9;transform:scale(1.02)}.calendar-years .year-cell.disabled{opacity:.4;cursor:not-allowed}.calendar-years .year-cell.disabled:hover{background:transparent;transform:none}.form-text{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;color:var(--secondary-color);margin-top:.25rem}.invalid-feedback{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:.75rem;margin-top:.25rem;color:var(--error-color);display:block}.text-danger{color:var(--error-color)!important}@media (max-width: 576px){.calendar-popup{left:50%;transform:translate(-50%);width:300px;max-width:calc(100vw - 2rem)}.calendar-popup.open{transform:translate(-50%) translateY(0)}.calendar-header{padding:.75rem .75rem .5rem}.calendar-content{padding:.5rem .75rem .75rem}.header-title{min-width:100px;min-height:40px;padding:.75rem 1rem;font-size:.85rem}.day-cell{min-height:28px;width:28px}.day-cell .day-number{font-size:.75rem}.months-grid{grid-template-columns:repeat(2,1fr)!important}.years-grid{grid-template-columns:repeat(3,1fr)!important}}@keyframes fadeInUp{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.calendar-popup.open{animation:fadeInUp var(--transition-duration) ease-out}:host(.theme-dark){--background-color: #1f2937;--surface-color: #374151;--on-surface-color: #f9fafb;--border-color: #4b5563;--disabled-color: #374151;--hover-color: #4b5563;--secondary-color: #9ca3af}:host(.theme-compact) .day-cell{min-height:28px}:host(.theme-compact) .calendar-header{padding:.5rem}:host(.theme-compact) .calendar-content{padding:.5rem}:host(.size-sm) .calendar-popup{min-width:240px}:host(.size-sm) .day-cell{min-height:28px}:host(.size-sm) .month-cell,:host(.size-sm) .year-cell{min-height:36px;font-size:.75rem}:host(.size-lg) .calendar-popup{min-width:320px}:host(.size-lg) .day-cell{min-height:44px}:host(.size-lg) .month-cell,:host(.size-lg) .year-cell{min-height:56px;font-size:1rem}\n"] }]
+        }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }], propDecorators: { size: [{
                 type: Input
             }], status: [{
                 type: Input
@@ -3034,23 +3467,35 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Input
             }], name: [{
                 type: Input
-            }], min: [{
+            }], locale: [{
                 type: Input
-            }], max: [{
+            }], colors: [{
                 type: Input
-            }], blockFutureDates: [{
+            }], config: [{
                 type: Input
-            }], showCurrentDate: [{
+            }], validation: [{
                 type: Input
-            }], valueChange: [{
+            }], events: [{
+                type: Input
+            }], inline: [{
+                type: Input
+            }], showInput: [{
+                type: Input
+            }], dateSelect: [{
+                type: Output
+            }], viewChange: [{
+                type: Output
+            }], monthChange: [{
+                type: Output
+            }], yearChange: [{
                 type: Output
             }], focus: [{
                 type: Output
             }], blur: [{
                 type: Output
-            }], dateInput: [{
-                type: ViewChild,
-                args: ['dateInput', { static: false }]
+            }], onDocumentClick: [{
+                type: HostListener,
+                args: ['document:click', ['$event']]
             }] } });
 
 class SaSwitchComponent {
@@ -3206,7 +3651,7 @@ class SannaFormsModule {
             SaTextareaComponent,
             SaCheckboxComponent,
             SaRadioComponent,
-            SaDateComponent,
+            SaCalendarComponent,
             SaSwitchComponent], imports: [CommonModule,
             FormsModule,
             ReactiveFormsModule,
@@ -3215,7 +3660,7 @@ class SannaFormsModule {
             SaTextareaComponent,
             SaCheckboxComponent,
             SaRadioComponent,
-            SaDateComponent,
+            SaCalendarComponent,
             SaSwitchComponent] });
     static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SannaFormsModule, imports: [CommonModule,
             FormsModule,
@@ -3231,7 +3676,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
-                        SaDateComponent,
+                        SaCalendarComponent,
                         SaSwitchComponent,
                     ],
                     imports: [
@@ -3246,7 +3691,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
-                        SaDateComponent,
+                        SaCalendarComponent,
                         SaSwitchComponent,
                     ]
                 }]
@@ -3337,5 +3782,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { SaButtonComponent, SaCheckboxComponent, SaColumnDefDirective, SaDateComponent, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
+export { DEFAULT_CALENDAR_COLORS, DEFAULT_CALENDAR_CONFIG, DEFAULT_CALENDAR_LOCALE, SaButtonComponent, SaCalendarComponent, SaCheckboxComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService };
 //# sourceMappingURL=sanna-ui.mjs.map
