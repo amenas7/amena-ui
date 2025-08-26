@@ -76,7 +76,7 @@
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--on-surface-color);
@@ -137,7 +137,7 @@
     min-height: calc(1.5em + 1rem + 2px);
     padding: 0.5rem 1rem;
     padding-right: 3rem !important;
-    font-size: 1.25rem;
+    font-size: 20px;
     border-radius: 0.5rem;
   }
 }
@@ -323,7 +323,7 @@
 .header-title {
   background: none;
   border: none;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--on-surface-color);
   cursor: pointer;
@@ -354,7 +354,7 @@
 
 .action-button {
   padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 14px;
   border: 1px solid var(--border-color);
   background: var(--background-color);
   color: var(--on-surface-color);
@@ -395,7 +395,7 @@
   
   .weekday-header {
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 11px;
     font-weight: 800;
     color: var(--weekday-header-color);
     background-color: transparent;
@@ -429,7 +429,7 @@
     user-select: none;
     
     .day-number {
-      font-size: 0.8rem;
+      font-size: 13px;
       font-weight: 400;
       z-index: 1;
     }
@@ -555,7 +555,7 @@
                 color var(--transition-duration) ease-in-out,
                 transform var(--transition-duration) ease-in-out;
     user-select: none;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
@@ -617,7 +617,7 @@
                 color var(--transition-duration) ease-in-out,
                 transform var(--transition-duration) ease-in-out;
     user-select: none;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
@@ -663,14 +663,14 @@
 // Textos de ayuda y errores
 .form-text {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--secondary-color);
   margin-top: 0.25rem;
 }
 
 .invalid-feedback {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
+  font-size: 12px;
   margin-top: 0.25rem;
   color: var(--error-color);
   display: block;
@@ -705,7 +705,7 @@
     min-width: 100px;
     min-height: 40px;
     padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    font-size: 14px;
   }
   
   .day-cell {
@@ -713,7 +713,7 @@
     width: 28px;
     
     .day-number {
-      font-size: 0.75rem;
+      font-size: 12px;
     }
   }
   
@@ -779,7 +779,7 @@
   
   .month-cell, .year-cell {
     min-height: 36px;
-    font-size: 0.75rem;
+    font-size: 12px;
   }
 }
 
@@ -794,6 +794,6 @@
   
   .month-cell, .year-cell {
     min-height: 56px;
-    font-size: 1rem;
+    font-size: 16px;
   }
 }
