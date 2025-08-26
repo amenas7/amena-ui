@@ -247,7 +247,7 @@
   transition: opacity var(--transition-duration) ease-in-out,
               transform var(--transition-duration) ease-in-out,
               visibility var(--transition-duration) ease-in-out;
-  width: 320px;
+  width: 220px;
   max-width: 90vw;
   
   &.open {
@@ -323,15 +323,15 @@
 .header-title {
   background: none;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--on-surface-color);
   cursor: pointer;
-  padding: 0.5rem 1.5rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 6px;
   transition: background-color var(--transition-duration) ease-in-out;
-  min-width: 120px;
-  min-height: 36px;
+  min-width: 80px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -378,7 +378,7 @@
 
 // Contenido del calendario
 .calendar-content {
-  padding: 0.75rem 1rem 1rem 1rem;
+  padding: 0.5rem 0.75rem 0.75rem 0.75rem;
 }
 
 // Vista de días
@@ -387,15 +387,15 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     background-color: #f5f5f5;
     border-radius: 4px;
-    padding: 0.5rem 0;
+    padding: 0.375rem 0;
   }
   
   .weekday-header {
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     color: var(--weekday-header-color);
     background-color: transparent;
@@ -408,8 +408,8 @@
     .week-row {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      margin-bottom: 4px;
+      gap: 2px;
+      margin-bottom: 2px;
     }
   }
   
@@ -418,10 +418,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 32px;
-    width: 32px;
+    min-height: 26px;
+    width: 100%;
+    max-width: 26px;
     margin: 0 auto;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
@@ -429,7 +430,7 @@
     user-select: none;
     
     .day-number {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 400;
       z-index: 1;
     }
@@ -548,14 +549,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
+    min-height: 40px;
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
                 transform var(--transition-duration) ease-in-out;
     user-select: none;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 500;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
@@ -610,14 +611,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
+    min-height: 40px;
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
                 transform var(--transition-duration) ease-in-out;
     user-select: none;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 500;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
@@ -685,7 +686,7 @@
   .calendar-popup {
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 200px;
     max-width: calc(100vw - 2rem);
   }
   
@@ -698,22 +699,23 @@
   }
   
   .calendar-content {
-    padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+    padding: 0.375rem 0.5rem 0.5rem 0.5rem;
   }
   
   .header-title {
-    min-width: 100px;
-    min-height: 40px;
-    padding: 0.75rem 1rem;
-    font-size: 14px;
+    min-width: 70px;
+    min-height: 30px;
+    padding: 0.5rem 0.75rem;
+    font-size: 11px;
   }
   
   .day-cell {
-    min-height: 28px;
-    width: 28px;
+    min-height: 24px;
+    width: 100%;
+    max-width: 24px;
     
     .day-number {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
   
@@ -778,8 +780,8 @@
   }
   
   .month-cell, .year-cell {
-    min-height: 36px;
-    font-size: 12px;
+    min-height: 32px;
+    font-size: 10px;
   }
 }
 
