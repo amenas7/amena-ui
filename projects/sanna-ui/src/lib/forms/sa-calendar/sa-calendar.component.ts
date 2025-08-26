@@ -630,14 +630,14 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   private formatDate(date: Date): string {
-    const day = date.getDate().toString();
+    const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear().toString();
 
     let formattedDate = this.mergedLocale.dateFormat;
     
-    // Reemplazar día
-    formattedDate = formattedDate.replace('dd', day);
+    // Reemplazar día (con padding de cero para días menores a 10)
+    formattedDate = formattedDate.replace('dd', day.toString().padStart(2, '0'));
     
     // Reemplazar mes (verificar si es formato largo o corto)
     if (formattedDate.includes('mmmm')) {
