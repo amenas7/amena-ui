@@ -16,9 +16,31 @@
   }
 }
 
+/* ===================================================================
+   REGLAS ESPECÍFICAS DE FONT-WEIGHT PARA SHADOW DOM
+   ================================================================= */
+/* Con ShadowDom necesitamos definir explícitamente todas las clases */
+
+/* Font-weight utilities - Bootstrap classes redefinidas para encapsulación */
+.fw-light {
+  font-weight: 300 !important;
+}
+
+.fw-normal {
+  font-weight: 400 !important;
+}
+
+.fw-semibold {
+  font-weight: 600 !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
 // Estilos adicionales para mejorar la apariencia
 h1, h2, h3, h4, h5, h6 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   line-height: 1.2;
   color: #2A3547;
   
@@ -27,39 +49,80 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-// Estilos específicos para diferentes tamaños
+/* ===================================================================
+   REGLAS DE TAMAÑO DE FUENTE PARA SHADOW DOM
+   ================================================================= */
+/* Bootstrap font-size utilities redefinidas para encapsulación */
+
 .fs-6 {
-  font-size: 0.875rem !important;
+  font-size: 14px !important;
 }
 
 .fs-5 {
-  font-size: 1rem !important;
+  font-size: 16px !important;
 }
 
 .fs-4 {
-  font-size: 1.125rem !important;
+  font-size: 18px !important;
 }
 
 .fs-3 {
-  font-size: 1.25rem !important;
+  font-size: 20px !important;
 }
 
 .fs-2 {
-  font-size: 1.5rem !important;
+  font-size: 24px !important;
 }
 
 .fs-1 {
-  font-size: 1.75rem !important;
+  font-size: 28px !important;
 }
 
 .display-6 {
-  font-size: 2rem !important;
+  font-size: 32px !important;
 }
 
 .display-5 {
-  font-size: 2.5rem !important;
+  font-size: 40px !important;
 }
 
 .display-4 {
-  font-size: 3rem !important;
+  font-size: 48px !important;
 }
+
+/* ===================================================================
+   REGLAS DE MARGIN UTILITIES PARA SHADOW DOM
+   ================================================================= */
+/* Bootstrap margin utilities redefinidas para encapsulación */
+
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: 4px !important; }
+.mt-2 { margin-top: 8px !important; }
+.mt-3 { margin-top: 16px !important; }
+.mt-4 { margin-top: 24px !important; }
+.mt-5 { margin-top: 48px !important; }
+.mt-auto { margin-top: auto !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 4px !important; }
+.mb-2 { margin-bottom: 8px !important; }
+.mb-3 { margin-bottom: 16px !important; }
+.mb-4 { margin-bottom: 24px !important; }
+.mb-5 { margin-bottom: 48px !important; }
+.mb-auto { margin-bottom: auto !important; }
+
+.me-0 { margin-right: 0 !important; }
+.me-1 { margin-right: 4px !important; }
+.me-2 { margin-right: 8px !important; }
+.me-3 { margin-right: 16px !important; }
+.me-4 { margin-right: 24px !important; }
+.me-5 { margin-right: 48px !important; }
+.me-auto { margin-right: auto !important; }
+
+.ms-0 { margin-left: 0 !important; }
+.ms-1 { margin-left: 4px !important; }
+.ms-2 { margin-left: 8px !important; }
+.ms-3 { margin-left: 16px !important; }
+.ms-4 { margin-left: 24px !important; }
+.ms-5 { margin-left: 48px !important; }
+.ms-auto { margin-left: auto !important; }

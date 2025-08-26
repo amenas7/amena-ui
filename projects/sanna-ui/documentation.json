@@ -101,7 +101,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex flex-column gap-2\">\r\n        <sa-heading [children]=\"'Tamaño XS'\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño SM'\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño MD'\" size=\"md\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño LG'\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño XL'\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 2XL'\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 3XL'\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 4XL'\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 5XL'\" size=\"5xl\" weight=\"bold\"></sa-heading>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Todos los tamaños disponibles del componente sa-heading, desde xs (más pequeño) hasta 5xl (más grande).'\r\n      },\r\n      source: {\r\n        code: `<sa-heading [children]=\"'Tamaño XS'\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño SM'\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño MD'\" size=\"md\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño LG'\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño XL'\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 2XL'\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 3XL'\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 4XL'\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 5XL'\" size=\"5xl\" weight=\"bold\"></sa-heading>`\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex flex-column gap-2\">\r\n        <sa-heading text=\"Tamaño XS\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño SM\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño MD\" size=\"md\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño LG\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño XL\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 2XL\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 3XL\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 4XL\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 5XL\" size=\"5xl\" weight=\"bold\"></sa-heading>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Todos los tamaños disponibles del componente sa-heading, desde xs (más pequeño) hasta 5xl (más grande).'\r\n      },\r\n      source: {\r\n        code: `<sa-heading text=\"Tamaño XS\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño SM\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño MD\" size=\"md\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño LG\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño XL\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 2XL\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 3XL\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 4XL\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 5XL\" size=\"5xl\" weight=\"bold\"></sa-heading>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "AllSizes",
@@ -237,21 +237,21 @@
                 "name": "CustomColors",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Colores personalizados',\r\n    placeholder: 'Calendario con colores custom',\r\n    colors: {\r\n      primary: '#8b5cf6',\r\n      secondary: '#64748b',\r\n      success: '#10b981',\r\n      error: '#f97316',\r\n      background: '#fefefe',\r\n      surface: '#f1f5f9',\r\n      border: '#cbd5e1',\r\n      weekdayHeaderBg: '#e0e7ff',\r\n      weekdayHeaderColor: '#3730a3'\r\n    } as CalendarColors\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      story: { height: '450px' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "CustomColors",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Colores personalizados',\n    placeholder: 'Fondo verde claro y texto verde oscuro',\n    backgroundColor: '#f0f8f0',\n    textColor: '#006600',\n  }\n}"
+            },
+            {
+                "name": "CustomColors",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Colores personalizados',\r\n    placeholder: 'Calendario con colores custom',\r\n    colors: {\r\n      primary: '#8b5cf6',\r\n      secondary: '#64748b',\r\n      success: '#10b981',\r\n      error: '#f97316',\r\n      background: '#fefefe',\r\n      surface: '#f1f5f9',\r\n      border: '#cbd5e1',\r\n      weekdayHeaderBg: '#e0e7ff',\r\n      weekdayHeaderColor: '#3730a3'\r\n    } as CalendarColors\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      story: { height: '450px' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "CustomMinWidth",
@@ -311,7 +311,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    text: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -337,21 +337,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de inicio',\r\n    placeholder: 'Fecha no seleccionada',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      story: { height: '450px' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos y condiciones',\r\n    size: 'md',\r\n    status: 'default',\r\n    checked: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox básico sin seleccionar. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Fecha de inicio',\r\n    placeholder: 'Fecha no seleccionada',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      story: { height: '450px' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -367,11 +367,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Activar notificaciones',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -387,11 +387,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Activar notificaciones',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "defaultOptions",
@@ -437,6 +437,16 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    disabled: true,\n    value: 'Valor deshabilitado',\n    label: 'Input deshabilitado',\n  }\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -447,11 +457,11 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Disabled",
@@ -467,21 +477,11 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    disabled: true,\n    value: 'Valor deshabilitado',\n    label: 'Input deshabilitado',\n  }\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "DisabledChecked",
@@ -537,26 +537,6 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Mensaje con error',\r\n    value: 'Contenido con errores...',\r\n    status: 'error',\r\n    errorText: 'El mensaje debe tener al menos 10 caracteres',\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -567,11 +547,31 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'error',\r\n    errorText: 'Este campo es requerido',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Mensaje con error',\r\n    value: 'Contenido con errores...',\r\n    status: 'error',\r\n    errorText: 'El mensaje debe tener al menos 10 caracteres',\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Examples",
@@ -717,6 +717,16 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    size: 'lg',\n    label: 'Input grande',\n  }\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -727,11 +737,11 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Large",
@@ -747,21 +757,11 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    size: 'lg',\n    label: 'Input grande',\n  }\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "Light",
@@ -841,7 +841,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaHeadingComponent>",
-                "defaultValue": "{\r\n  title: 'Typografia/Heading',\r\n  component: SaHeadingComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Solo children usa property binding, las demás NO tienen comillas simples\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[weight\\]=\"'([^']+)'\"/g, 'weight=\"$1\"');\r\n          result = result.replace(/\\[mt\\]=\"'([^']+)'\"/g, 'mt=\"$1\"');\r\n          result = result.replace(/\\[mb\\]=\"'([^']+)'\"/g, 'mb=\"$1\"');\r\n          result = result.replace(/\\[mr\\]=\"'([^']+)'\"/g, 'mr=\"$1\"');\r\n          result = result.replace(/\\[ml\\]=\"'([^']+)'\"/g, 'ml=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    children: {\r\n      control: 'text',\r\n      description: '🔤 **ÚNICA propiedad que usa property binding**: `[children]=\"\\'Mi texto\\'\"` o `[children]=\"dynamicText\"`. El contenido del encabezado.'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\r\n      description: 'Tamaño del encabezado (xs=fs-6, sm=fs-5, md=fs-4, lg=fs-3, xl=fs-2, 2xl=fs-1, 3xl=display-6, 4xl=display-5, 5xl=display-4)'\r\n    },\r\n    weight: {\r\n      control: 'select',\r\n      options: ['bold', 'regular', 'light', 'semibold'],\r\n      description: 'Peso de la fuente (bold=fw-bold, regular=fw-normal, light=fw-light, semibold=fw-semibold)'\r\n    },\r\n    mt: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-top usando clases Bootstrap (mt-0, mt-1, mt-2, mt-3, mt-4, mt-5, mt-auto)'\r\n    },\r\n    mb: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-bottom usando clases Bootstrap (mb-0, mb-1, mb-2, mb-3, mb-4, mb-5, mb-auto)'\r\n    },\r\n    mr: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-right usando clases Bootstrap (me-0, me-1, me-2, me-3, me-4, me-5, me-auto)'\r\n    },\r\n    ml: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-left usando clases Bootstrap (ms-0, ms-1, ms-2, ms-3, ms-4, ms-5, ms-auto)'\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  title: 'Typografia/Heading',\r\n  component: SaHeadingComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[text\\]=\"'([^']+)'\"/g, 'text=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[weight\\]=\"'([^']+)'\"/g, 'weight=\"$1\"');\r\n          result = result.replace(/\\[mt\\]=\"'([^']+)'\"/g, 'mt=\"$1\"');\r\n          result = result.replace(/\\[mb\\]=\"'([^']+)'\"/g, 'mb=\"$1\"');\r\n          result = result.replace(/\\[mr\\]=\"'([^']+)'\"/g, 'mr=\"$1\"');\r\n          result = result.replace(/\\[ml\\]=\"'([^']+)'\"/g, 'ml=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    text: {\r\n      control: 'text',\r\n      description: '📝 Texto del encabezado. Se usa como atributo simple: `text=\"Mi título\"`.'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\r\n      description: 'Tamaño del encabezado (xs=fs-6, sm=fs-5, md=fs-4, lg=fs-3, xl=fs-2, 2xl=fs-1, 3xl=display-6, 4xl=display-5, 5xl=display-4)'\r\n    },\r\n    weight: {\r\n      control: 'select',\r\n      options: ['bold', 'regular', 'light', 'semibold'],\r\n      description: 'Peso de la fuente (bold=fw-bold, regular=fw-normal, light=fw-light, semibold=fw-semibold)'\r\n    },\r\n    mt: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-top usando clases Bootstrap (mt-0, mt-1, mt-2, mt-3, mt-4, mt-5, mt-auto)'\r\n    },\r\n    mb: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-bottom usando clases Bootstrap (mb-0, mb-1, mb-2, mb-3, mb-4, mb-5, mb-auto)'\r\n    },\r\n    mr: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-right usando clases Bootstrap (me-0, me-1, me-2, me-3, me-4, me-5, me-auto)'\r\n    },\r\n    ml: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-left usando clases Bootstrap (ms-0, ms-1, ms-2, ms-3, ms-4, ms-5, ms-auto)'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "meta",
@@ -857,51 +857,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaCalendarComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Calendar',\r\n  component: SaCalendarComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    layout: 'padded',\r\n    viewport: {\r\n      defaultViewport: 'desktop'\r\n    },\r\n    docs: {\r\n      story: {\r\n        height: '500px'\r\n      },\r\n      description: {\r\n        component: `\r\n## 📅 Formatos de Fecha Soportados\r\n\r\n**IMPORTANTE**: El componente sa-calendar acepta múltiples formatos para minDate y maxDate:\r\n\r\n\\`\\`\\`typescript\r\n// ✅ Todos estos formatos funcionan:\r\nminDate: new Date()                    // Objeto Date\r\nminDate: '2025-08-24'                  // String ISO (YYYY-MM-DD)\r\nminDate: 1756011600000                 // Timestamp en milisegundos\r\nminDate: new Date('2025-08-24')        // Constructor con string\r\n\\`\\`\\`\r\n\r\n## Uso con Angular Forms:\r\n\r\n### Template-driven Forms (ngModel):\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [(ngModel)]=\"fechaSeleccionada\" \r\n  [minDate]=\"new Date()\"\r\n  [maxDate]=\"fechaMaxima\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n\r\n### Reactive Forms:\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [formControl]=\"fechaControl\"\r\n  [minDate]=\"'2024-01-01'\"\r\n  [maxDate]=\"fechaLimite\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n        `\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar timestamps de fecha a formato legible\r\n          result = result.replace(/\\[minDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[minDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          result = result.replace(/\\[maxDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[maxDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding (strings)\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled');\r\n          result = result.replace(/\\[inline\\]=\"true\"/g, 'inline');\r\n          result = result.replace(/\\[showInput\\]=\"true\"/g, 'showInput');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly');\r\n          \r\n          // Eliminar boolean properties false (no necesarios)\r\n          result = result.replace(/\\[required\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[disabled\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[inline\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[showInput\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[readonly\\]=\"false\"\\s*/g, '');\r\n          \r\n          // Limpiar objetos vacíos o por defecto\r\n          result = result.replace(/\\[locale\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[colors\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[config\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[validation\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"null\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"\\[\\]\"\\s*/g, '');\r\n          \r\n          // Limpiar atributos vacíos y espacios extra\r\n          result = result.replace(/\\s+\\w+=\"\"\\s*/g, ' ');\r\n          result = result.replace(/\\s+>/g, '>');\r\n          result = result.replace(/\\s{2,}/g, ' ');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  argTypes: {\r\n    size: {\r\n      description: 'Tamaño del componente',\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg']\r\n    },\r\n    status: {\r\n      description: 'Estado del componente',\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error']\r\n    },\r\n    label: {\r\n      description: 'Etiqueta del campo',\r\n      control: { type: 'text' }\r\n    },\r\n    placeholder: {\r\n      description: 'Texto de placeholder',\r\n      control: { type: 'text' }\r\n    },\r\n    helperText: {\r\n      description: 'Texto de ayuda',\r\n      control: { type: 'text' }\r\n    },\r\n    errorText: {\r\n      description: 'Texto de error',\r\n      control: { type: 'text' }\r\n    },\r\n    required: {\r\n      description: 'Campo requerido',\r\n      control: { type: 'boolean' }\r\n    },\r\n    readonly: {\r\n      description: 'Solo lectura',\r\n      control: { type: 'boolean' }\r\n    },\r\n    disabled: {\r\n      description: 'Deshabilitado',\r\n      control: { type: 'boolean' }\r\n    },\r\n    minDate: {\r\n      description: 'Fecha mínima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    maxDate: {\r\n      description: 'Fecha máxima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    inline: {\r\n      description: 'Mostrar calendario inline (sin input)',\r\n      control: { type: 'boolean' }\r\n    },\r\n    showInput: {\r\n      description: 'Mostrar campo de input',\r\n      control: { type: 'boolean' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaCheckboxComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Checkbox',\r\n  component: SaCheckboxComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[checked\\]=\"true\"/g, 'checked=\"true\"');\r\n          result = result.replace(/\\[checked\\]=\"false\"/g, 'checked=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[indeterminate\\]=\"true\"/g, 'indeterminate=\"true\"');\r\n          result = result.replace(/\\[indeterminate\\]=\"false\"/g, 'indeterminate=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del checkbox'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del checkbox'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del checkbox'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del checkbox'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    checked: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado marcado del checkbox'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del checkbox cuando está marcado'\r\n    },\r\n    indeterminate: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado indeterminado (guión en lugar de check)'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaRadioComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSwitchComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaTextareaComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Textarea',\r\n  component: SaTextareaComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          result = result.replace(/\\[resize\\]=\"'([^']+)'\"/g, 'resize=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          \r\n          // Transformar number properties\r\n          result = result.replace(/\\[rows\\]=\"(\\d+)\"/g, 'rows=\"$1\"');\r\n          result = result.replace(/\\[cols\\]=\"(\\d+)\"/g, 'cols=\"$1\"');\r\n          result = result.replace(/\\[minlength\\]=\"(\\d+)\"/g, 'minlength=\"$1\"');\r\n          result = result.replace(/\\[maxlength\\]=\"(\\d+)\"/g, 'maxlength=\"$1\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del textarea'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del textarea'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del textarea'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del textarea'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del textarea'\r\n    },\r\n    rows: {\r\n      control: { type: 'number', min: 1, max: 20 },\r\n      description: 'Número de filas visibles'\r\n    },\r\n    cols: {\r\n      control: { type: 'number', min: 10, max: 100 },\r\n      description: 'Número de columnas (ancho en caracteres)'\r\n    },\r\n    resize: {\r\n      control: { type: 'select' },\r\n      options: ['none', 'both', 'horizontal', 'vertical'],\r\n      description: 'Tipo de redimensionamiento permitido'\r\n    },\r\n    minlength: {\r\n      control: { type: 'number', min: 0 },\r\n      description: 'Longitud mínima del texto'\r\n    },\r\n    maxlength: {\r\n      control: { type: 'number', min: 1 },\r\n      description: 'Longitud máxima del texto'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "meta",
@@ -917,11 +877,51 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaCalendarComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Calendar',\r\n  component: SaCalendarComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    layout: 'padded',\r\n    viewport: {\r\n      defaultViewport: 'desktop'\r\n    },\r\n    docs: {\r\n      story: {\r\n        height: '500px'\r\n      },\r\n      description: {\r\n        component: `\r\n## 📅 Formatos de Fecha Soportados\r\n\r\n**IMPORTANTE**: El componente sa-calendar acepta múltiples formatos para minDate y maxDate:\r\n\r\n\\`\\`\\`typescript\r\n// ✅ Todos estos formatos funcionan:\r\nminDate: new Date()                    // Objeto Date\r\nminDate: '2025-08-24'                  // String ISO (YYYY-MM-DD)\r\nminDate: 1756011600000                 // Timestamp en milisegundos\r\nminDate: new Date('2025-08-24')        // Constructor con string\r\n\\`\\`\\`\r\n\r\n## Uso con Angular Forms:\r\n\r\n### Template-driven Forms (ngModel):\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [(ngModel)]=\"fechaSeleccionada\" \r\n  [minDate]=\"new Date()\"\r\n  [maxDate]=\"fechaMaxima\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n\r\n### Reactive Forms:\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [formControl]=\"fechaControl\"\r\n  [minDate]=\"'2024-01-01'\"\r\n  [maxDate]=\"fechaLimite\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n        `\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar timestamps de fecha a formato legible\r\n          result = result.replace(/\\[minDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[minDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          result = result.replace(/\\[maxDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[maxDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding (strings)\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled');\r\n          result = result.replace(/\\[inline\\]=\"true\"/g, 'inline');\r\n          result = result.replace(/\\[showInput\\]=\"true\"/g, 'showInput');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly');\r\n          \r\n          // Eliminar boolean properties false (no necesarios)\r\n          result = result.replace(/\\[required\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[disabled\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[inline\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[showInput\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[readonly\\]=\"false\"\\s*/g, '');\r\n          \r\n          // Limpiar objetos vacíos o por defecto\r\n          result = result.replace(/\\[locale\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[colors\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[config\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[validation\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"null\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"\\[\\]\"\\s*/g, '');\r\n          \r\n          // Limpiar atributos vacíos y espacios extra\r\n          result = result.replace(/\\s+\\w+=\"\"\\s*/g, ' ');\r\n          result = result.replace(/\\s+>/g, '>');\r\n          result = result.replace(/\\s{2,}/g, ' ');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  argTypes: {\r\n    size: {\r\n      description: 'Tamaño del componente',\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg']\r\n    },\r\n    status: {\r\n      description: 'Estado del componente',\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error']\r\n    },\r\n    label: {\r\n      description: 'Etiqueta del campo',\r\n      control: { type: 'text' }\r\n    },\r\n    placeholder: {\r\n      description: 'Texto de placeholder',\r\n      control: { type: 'text' }\r\n    },\r\n    helperText: {\r\n      description: 'Texto de ayuda',\r\n      control: { type: 'text' }\r\n    },\r\n    errorText: {\r\n      description: 'Texto de error',\r\n      control: { type: 'text' }\r\n    },\r\n    required: {\r\n      description: 'Campo requerido',\r\n      control: { type: 'boolean' }\r\n    },\r\n    readonly: {\r\n      description: 'Solo lectura',\r\n      control: { type: 'boolean' }\r\n    },\r\n    disabled: {\r\n      description: 'Deshabilitado',\r\n      control: { type: 'boolean' }\r\n    },\r\n    minDate: {\r\n      description: 'Fecha mínima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    maxDate: {\r\n      description: 'Fecha máxima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    inline: {\r\n      description: 'Mostrar calendario inline (sin input)',\r\n      control: { type: 'boolean' }\r\n    },\r\n    showInput: {\r\n      description: 'Mostrar campo de input',\r\n      control: { type: 'boolean' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaRadioComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaSelectComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaTextareaComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Textarea',\r\n  component: SaTextareaComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          result = result.replace(/\\[resize\\]=\"'([^']+)'\"/g, 'resize=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          \r\n          // Transformar number properties\r\n          result = result.replace(/\\[rows\\]=\"(\\d+)\"/g, 'rows=\"$1\"');\r\n          result = result.replace(/\\[cols\\]=\"(\\d+)\"/g, 'cols=\"$1\"');\r\n          result = result.replace(/\\[minlength\\]=\"(\\d+)\"/g, 'minlength=\"$1\"');\r\n          result = result.replace(/\\[maxlength\\]=\"(\\d+)\"/g, 'maxlength=\"$1\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del textarea'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del textarea'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del textarea'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del textarea'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del textarea'\r\n    },\r\n    rows: {\r\n      control: { type: 'number', min: 1, max: 20 },\r\n      description: 'Número de filas visibles'\r\n    },\r\n    cols: {\r\n      control: { type: 'number', min: 10, max: 100 },\r\n      description: 'Número de columnas (ancho en caracteres)'\r\n    },\r\n    resize: {\r\n      control: { type: 'select' },\r\n      options: ['none', 'both', 'horizontal', 'vertical'],\r\n      description: 'Tipo de redimensionamiento permitido'\r\n    },\r\n    minlength: {\r\n      control: { type: 'number', min: 0 },\r\n      description: 'Longitud mínima del texto'\r\n    },\r\n    maxlength: {\r\n      control: { type: 'number', min: 1 },\r\n      description: 'Longitud máxima del texto'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaSwitchComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "MinMaxDates",
@@ -1087,21 +1087,21 @@
                 "name": "Readonly",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Información (solo lectura)',\r\n    value: 'Este contenido es de solo lectura.',\r\n    readonly: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Readonly",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    readonly: true,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Readonly",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Información (solo lectura)',\r\n    value: 'Este contenido es de solo lectura.',\r\n    readonly: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea en modo solo lectura. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ReadOnly",
@@ -1157,6 +1157,16 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Nombre completo',\n    required: true,\n    placeholder: 'Ingrese su nombre completo',\n  }\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1167,11 +1177,11 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Required",
@@ -1187,21 +1197,11 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Nombre completo',\n    required: true,\n    placeholder: 'Ingrese su nombre completo',\n  }\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "ResizeOptions",
@@ -1357,6 +1357,16 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    size: 'sm',\n    label: 'Input pequeño',\n  }\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1367,11 +1377,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Small",
@@ -1387,21 +1397,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    size: 'sm',\n    label: 'Input pequeño',\n  }\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "States",
@@ -1467,6 +1467,16 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    status: 'success',\n    label: 'Input exitoso',\n    helperText: 'El valor es válido',\n  }\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1477,11 +1487,11 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1497,21 +1507,11 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    status: 'success',\n    label: 'Input exitoso',\n    helperText: 'El valor es válido',\n  }\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
             },
             {
                 "name": "TagCollection",
@@ -1627,6 +1627,16 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Email',\n    type: 'email',\n    placeholder: 'ejemplo@dominio.com',\n    helperText: 'Ingrese un email válido',\n  }\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1637,11 +1647,11 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir emails promocionales',\r\n    helperText: 'Puedes cambiar esta configuración en cualquier momento',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithHelperText",
@@ -1657,21 +1667,11 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Email',\n    type: 'email',\n    placeholder: 'ejemplo@dominio.com',\n    helperText: 'Ingrese un email válido',\n  }\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir emails promocionales',\r\n    helperText: 'Puedes cambiar esta configuración en cualquier momento',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "WithIcon",
@@ -1757,21 +1757,21 @@
                 "name": "WithValue",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Descripción',\r\n    value: 'Este es un texto de ejemplo que ya está en el textarea.',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "WithValue",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con valor preseleccionado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithValue",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Descripción',\r\n    value: 'Este es un texto de ejemplo que ya está en el textarea.',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             }
         ],
         "functions": [],
@@ -1802,52 +1802,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaCalendarComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<SaCheckboxComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaRadioComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaSwitchComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaTextareaComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1868,8 +1824,52 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<SaCalendarComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaRadioComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<SaSelectComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaTextareaComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaSwitchComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1887,7 +1887,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex flex-column gap-2\">\r\n        <sa-heading [children]=\"'Tamaño XS'\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño SM'\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño MD'\" size=\"md\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño LG'\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño XL'\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 2XL'\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 3XL'\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 4XL'\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading [children]=\"'Tamaño 5XL'\" size=\"5xl\" weight=\"bold\"></sa-heading>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Todos los tamaños disponibles del componente sa-heading, desde xs (más pequeño) hasta 5xl (más grande).'\r\n      },\r\n      source: {\r\n        code: `<sa-heading [children]=\"'Tamaño XS'\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño SM'\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño MD'\" size=\"md\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño LG'\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño XL'\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 2XL'\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 3XL'\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 4XL'\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading [children]=\"'Tamaño 5XL'\" size=\"5xl\" weight=\"bold\"></sa-heading>`\r\n      }\r\n    }\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex flex-column gap-2\">\r\n        <sa-heading text=\"Tamaño XS\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño SM\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño MD\" size=\"md\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño LG\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño XL\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 2XL\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 3XL\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 4XL\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n        <sa-heading text=\"Tamaño 5XL\" size=\"5xl\" weight=\"bold\"></sa-heading>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Todos los tamaños disponibles del componente sa-heading, desde xs (más pequeño) hasta 5xl (más grande).'\r\n      },\r\n      source: {\r\n        code: `<sa-heading text=\"Tamaño XS\" size=\"xs\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño SM\" size=\"sm\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño MD\" size=\"md\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño LG\" size=\"lg\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño XL\" size=\"xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 2XL\" size=\"2xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 3XL\" size=\"3xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 4XL\" size=\"4xl\" weight=\"bold\"></sa-heading>\r\n<sa-heading text=\"Tamaño 5XL\" size=\"5xl\" weight=\"bold\"></sa-heading>`\r\n      }\r\n    }\r\n  }\r\n}"
                 },
                 {
                     "name": "Default",
@@ -1897,7 +1897,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    children: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    text: 'Encabezado por defecto',\r\n    size: 'md',\r\n    weight: 'bold'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Encabezado por defecto con tamaño mediano y peso bold. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
                 },
                 {
                     "name": "meta",
@@ -1907,7 +1907,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SaHeadingComponent>",
-                    "defaultValue": "{\r\n  title: 'Typografia/Heading',\r\n  component: SaHeadingComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Solo children usa property binding, las demás NO tienen comillas simples\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[weight\\]=\"'([^']+)'\"/g, 'weight=\"$1\"');\r\n          result = result.replace(/\\[mt\\]=\"'([^']+)'\"/g, 'mt=\"$1\"');\r\n          result = result.replace(/\\[mb\\]=\"'([^']+)'\"/g, 'mb=\"$1\"');\r\n          result = result.replace(/\\[mr\\]=\"'([^']+)'\"/g, 'mr=\"$1\"');\r\n          result = result.replace(/\\[ml\\]=\"'([^']+)'\"/g, 'ml=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    children: {\r\n      control: 'text',\r\n      description: '🔤 **ÚNICA propiedad que usa property binding**: `[children]=\"\\'Mi texto\\'\"` o `[children]=\"dynamicText\"`. El contenido del encabezado.'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\r\n      description: 'Tamaño del encabezado (xs=fs-6, sm=fs-5, md=fs-4, lg=fs-3, xl=fs-2, 2xl=fs-1, 3xl=display-6, 4xl=display-5, 5xl=display-4)'\r\n    },\r\n    weight: {\r\n      control: 'select',\r\n      options: ['bold', 'regular', 'light', 'semibold'],\r\n      description: 'Peso de la fuente (bold=fw-bold, regular=fw-normal, light=fw-light, semibold=fw-semibold)'\r\n    },\r\n    mt: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-top usando clases Bootstrap (mt-0, mt-1, mt-2, mt-3, mt-4, mt-5, mt-auto)'\r\n    },\r\n    mb: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-bottom usando clases Bootstrap (mb-0, mb-1, mb-2, mb-3, mb-4, mb-5, mb-auto)'\r\n    },\r\n    mr: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-right usando clases Bootstrap (me-0, me-1, me-2, me-3, me-4, me-5, me-auto)'\r\n    },\r\n    ml: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-left usando clases Bootstrap (ms-0, ms-1, ms-2, ms-3, ms-4, ms-5, ms-auto)'\r\n    }\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  title: 'Typografia/Heading',\r\n  component: SaHeadingComponent,\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[text\\]=\"'([^']+)'\"/g, 'text=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[weight\\]=\"'([^']+)'\"/g, 'weight=\"$1\"');\r\n          result = result.replace(/\\[mt\\]=\"'([^']+)'\"/g, 'mt=\"$1\"');\r\n          result = result.replace(/\\[mb\\]=\"'([^']+)'\"/g, 'mb=\"$1\"');\r\n          result = result.replace(/\\[mr\\]=\"'([^']+)'\"/g, 'mr=\"$1\"');\r\n          result = result.replace(/\\[ml\\]=\"'([^']+)'\"/g, 'ml=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    text: {\r\n      control: 'text',\r\n      description: '📝 Texto del encabezado. Se usa como atributo simple: `text=\"Mi título\"`.'\r\n    },\r\n    size: {\r\n      control: 'select',\r\n      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],\r\n      description: 'Tamaño del encabezado (xs=fs-6, sm=fs-5, md=fs-4, lg=fs-3, xl=fs-2, 2xl=fs-1, 3xl=display-6, 4xl=display-5, 5xl=display-4)'\r\n    },\r\n    weight: {\r\n      control: 'select',\r\n      options: ['bold', 'regular', 'light', 'semibold'],\r\n      description: 'Peso de la fuente (bold=fw-bold, regular=fw-normal, light=fw-light, semibold=fw-semibold)'\r\n    },\r\n    mt: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-top usando clases Bootstrap (mt-0, mt-1, mt-2, mt-3, mt-4, mt-5, mt-auto)'\r\n    },\r\n    mb: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-bottom usando clases Bootstrap (mb-0, mb-1, mb-2, mb-3, mb-4, mb-5, mb-auto)'\r\n    },\r\n    mr: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-right usando clases Bootstrap (me-0, me-1, me-2, me-3, me-4, me-5, me-auto)'\r\n    },\r\n    ml: {\r\n      control: 'select',\r\n      options: ['0', '1', '2', '3', '4', '5', 'auto'],\r\n      description: 'Margin-left usando clases Bootstrap (ms-0, ms-1, ms-2, ms-3, ms-4, ms-5, ms-auto)'\r\n    }\r\n  }\r\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/sa-tag/sa-tag.stories.ts": [
@@ -3618,19 +3618,6 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaCalendarComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts": [
                 {
                     "name": "Story",
@@ -3638,45 +3625,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaCheckboxComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaRadioComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSwitchComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaTextareaComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -3696,6 +3644,32 @@
                     "kind": 183
                 }
             ],
+            "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaCalendarComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaRadioComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
                 {
                     "name": "Story",
@@ -3703,6 +3677,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaSelectComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaTextareaComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaSwitchComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",

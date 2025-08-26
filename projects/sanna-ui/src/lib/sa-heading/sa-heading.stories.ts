@@ -14,7 +14,8 @@ const meta: Meta<SaHeadingComponent> = {
           // Transformación simple que preserva el resaltado de sintaxis
           let result = code;
           
-          // Solo children usa property binding, las demás NO tienen comillas simples
+          // Transformar property bindings innecesarios a attribute binding
+          result = result.replace(/\[text\]="'([^']+)'"/g, 'text="$1"');
           result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
           result = result.replace(/\[weight\]="'([^']+)'"/g, 'weight="$1"');
           result = result.replace(/\[mt\]="'([^']+)'"/g, 'mt="$1"');
@@ -32,9 +33,9 @@ const meta: Meta<SaHeadingComponent> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    children: {
+    text: {
       control: 'text',
-      description: '🔤 **ÚNICA propiedad que usa property binding**: `[children]="\'Mi texto\'"` o `[children]="dynamicText"`. El contenido del encabezado.'
+      description: '📝 Texto del encabezado. Se usa como atributo simple: `text="Mi título"`.'
     },
     size: {
       control: 'select',
@@ -74,7 +75,7 @@ type Story = StoryObj<SaHeadingComponent>;
 
 export const Default: Story = {
   args: {
-    children: 'Encabezado por defecto',
+    text: 'Encabezado por defecto',
     size: 'md',
     weight: 'bold'
   },
@@ -94,15 +95,15 @@ export const AllSizes: Story = {
   render: () => ({
     template: `
       <div class="d-flex flex-column gap-2">
-        <sa-heading [children]="'Tamaño XS'" size="xs" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño SM'" size="sm" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño MD'" size="md" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño LG'" size="lg" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño XL'" size="xl" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño 2XL'" size="2xl" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño 3XL'" size="3xl" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño 4XL'" size="4xl" weight="bold"></sa-heading>
-        <sa-heading [children]="'Tamaño 5XL'" size="5xl" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño XS" size="xs" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño SM" size="sm" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño MD" size="md" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño LG" size="lg" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño XL" size="xl" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño 2XL" size="2xl" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño 3XL" size="3xl" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño 4XL" size="4xl" weight="bold"></sa-heading>
+        <sa-heading text="Tamaño 5XL" size="5xl" weight="bold"></sa-heading>
       </div>
     `
   }),
@@ -112,15 +113,15 @@ export const AllSizes: Story = {
         story: 'Todos los tamaños disponibles del componente sa-heading, desde xs (más pequeño) hasta 5xl (más grande).'
       },
       source: {
-        code: `<sa-heading [children]="'Tamaño XS'" size="xs" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño SM'" size="sm" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño MD'" size="md" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño LG'" size="lg" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño XL'" size="xl" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño 2XL'" size="2xl" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño 3XL'" size="3xl" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño 4XL'" size="4xl" weight="bold"></sa-heading>
-<sa-heading [children]="'Tamaño 5XL'" size="5xl" weight="bold"></sa-heading>`
+        code: `<sa-heading text="Tamaño XS" size="xs" weight="bold"></sa-heading>
+<sa-heading text="Tamaño SM" size="sm" weight="bold"></sa-heading>
+<sa-heading text="Tamaño MD" size="md" weight="bold"></sa-heading>
+<sa-heading text="Tamaño LG" size="lg" weight="bold"></sa-heading>
+<sa-heading text="Tamaño XL" size="xl" weight="bold"></sa-heading>
+<sa-heading text="Tamaño 2XL" size="2xl" weight="bold"></sa-heading>
+<sa-heading text="Tamaño 3XL" size="3xl" weight="bold"></sa-heading>
+<sa-heading text="Tamaño 4XL" size="4xl" weight="bold"></sa-heading>
+<sa-heading text="Tamaño 5XL" size="5xl" weight="bold"></sa-heading>`
       }
     }
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 type HeadingWeight = 'bold' | 'regular' | 'light' | 'semibold';
@@ -7,11 +7,12 @@ type HeadingMargin = '0' | '1' | '2' | '3' | '4' | '5' | 'auto';
 @Component({
   selector: 'sa-heading',
   templateUrl: './sa-heading.component.html',
-  styleUrl: './sa-heading.component.scss'
+  styleUrl: './sa-heading.component.scss',
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class SaHeadingComponent {
-  // Propiedad que DEBE usar property binding: [children]="'texto'"
-  @Input() children: string = '';
+  // Propiedad para el texto del heading - uso simple sin comillas anidadas
+  @Input() text: string = '';
   
   // Propiedades con setters/getters para flexibilidad máxima
   private _size: HeadingSize = 'md';
