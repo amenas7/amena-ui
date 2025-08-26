@@ -32,12 +32,26 @@ const meta: Meta<SaCalendarComponent> = {
       },
       description: {
         component: `
+## 📅 Formatos de Fecha Soportados
+
+**IMPORTANTE**: El componente sa-calendar acepta múltiples formatos para minDate y maxDate:
+
+\`\`\`typescript
+// ✅ Todos estos formatos funcionan:
+minDate: new Date()                    // Objeto Date
+minDate: '2025-08-24'                  // String ISO (YYYY-MM-DD)
+minDate: 1756011600000                 // Timestamp en milisegundos
+minDate: new Date('2025-08-24')        // Constructor con string
+\`\`\`
+
 ## Uso con Angular Forms:
 
 ### Template-driven Forms (ngModel):
 \`\`\`html
 <sa-calendar 
   [(ngModel)]="fechaSeleccionada" 
+  [minDate]="new Date()"
+  [maxDate]="fechaMaxima"
   label="Fecha"
   (dateSelect)="onDateSelect($event)">
 </sa-calendar>
@@ -47,6 +61,8 @@ const meta: Meta<SaCalendarComponent> = {
 \`\`\`html
 <sa-calendar 
   [formControl]="fechaControl"
+  [minDate]="'2024-01-01'"
+  [maxDate]="fechaLimite"
   label="Fecha"
   (dateSelect)="onDateSelect($event)">
 </sa-calendar>
@@ -58,6 +74,16 @@ const meta: Meta<SaCalendarComponent> = {
         language: 'html',
         transform: (code: string, storyContext: any) => {
           let result = code;
+          
+          // Transformar timestamps de fecha a formato legible
+          result = result.replace(/\[minDate\]="(\d+)"/g, (match, timestamp) => {
+            const date = new Date(parseInt(timestamp));
+            return `[minDate]="new Date('${date.toISOString().split('T')[0]}')"`;
+          });
+          result = result.replace(/\[maxDate\]="(\d+)"/g, (match, timestamp) => {
+            const date = new Date(parseInt(timestamp));
+            return `[maxDate]="new Date('${date.toISOString().split('T')[0]}')"`;
+          });
           
           // Transformar property bindings innecesarios a attribute binding (strings)
           result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
@@ -138,6 +164,26 @@ const meta: Meta<SaCalendarComponent> = {
     disabled: {
       description: 'Deshabilitado',
       control: { type: 'boolean' }
+    },
+    minDate: {
+      description: 'Fecha mínima seleccionable',
+      control: { 
+        type: 'date' 
+      },
+      table: {
+        type: { summary: 'Date | string | number' },
+        defaultValue: { summary: 'null' }
+      }
+    },
+    maxDate: {
+      description: 'Fecha máxima seleccionable',
+      control: { 
+        type: 'date' 
+      },
+      table: {
+        type: { summary: 'Date | string | number' },
+        defaultValue: { summary: 'null' }
+      }
     },
     inline: {
       description: 'Mostrar calendario inline (sin input)',
@@ -453,6 +499,400 @@ export const ReactiveForm: Story = {
   parameters: {
     docs: {
       story: { height: '600px' }
+    }
+  }
+};
+
+// Ejemplo básico con fechas min/max
+export const MinMaxExample: Story = {
+  args: {
+    label: 'Fecha con restricciones',
+    placeholder: 'Solo fechas futuras',
+    helperText: 'Solo puedes seleccionar fechas desde hoy en adelante',
+    minDate: '2024-01-15', // Formato YYYY-MM-DD para Storybook
+    maxDate: '2024-07-15'  // 6 meses después
+  },
+  parameters: {
+    docs: {
+      story: { height: '450px' },
+      description: {
+        story: `
+## Ejemplo básico de fechas mínimas y máximas
+
+Este ejemplo muestra un calendario que:
+- **minDate**: Solo permite fechas desde hoy en adelante
+- **maxDate**: Solo permite fechas hasta 6 meses en el futuro
+- Los botones de navegación se deshabilitan automáticamente cuando no hay fechas válidas
+
+**💡 Tip**: Puedes usar cualquier formato de fecha (Date, string, timestamp) como se muestra en la documentación principal.
+
+### Código TypeScript:
+\`\`\`typescript
+export class MiComponente {
+  // Usando objetos Date
+  today = new Date();
+  maxDate6Months = new Date();
+  
+  // O usando strings ISO
+  minDateString = '2024-01-15';
+  maxDateString = '2024-07-15';
+  
+  constructor() {
+    this.maxDate6Months.setMonth(this.today.getMonth() + 6);
+  }
+}
+\`\`\`
+        `
+      }
+    }
+  }
+};
+
+// Solo fechas pasadas
+export const OnlyPastDates: Story = {
+  args: {
+    label: 'Fecha de nacimiento',
+    placeholder: 'Selecciona una fecha pasada',
+    helperText: 'Solo fechas anteriores a hoy',
+    maxDate: '2023-12-31' // Solo fechas hasta el año pasado
+  },
+  parameters: {
+    docs: {
+      story: { height: '450px' },
+      description: {
+        story: `
+## Solo fechas pasadas
+
+Ejemplo para casos como fecha de nacimiento, fecha de eventos históricos, etc.
+
+**Formatos de fecha soportados:**
+
+### Código TypeScript:
+\`\`\`typescript
+export class MiComponente {
+  // ✅ Usando objeto Date
+  yesterday = new Date();
+  
+  // ✅ Usando string ISO
+  maxDateString = '2023-12-31';
+  
+  // ✅ Usando timestamp
+  maxDateTimestamp = 1704067199000; // 31 dic 2023
+  
+  constructor() {
+    this.yesterday.setDate(this.yesterday.getDate() - 1);
+  }
+}
+\`\`\`
+
+### Template HTML:
+\`\`\`html
+<sa-calendar 
+  [maxDate]="yesterday"
+  label="Fecha de nacimiento"
+  placeholder="Selecciona una fecha pasada"
+  helperText="Solo fechas anteriores a hoy">
+</sa-calendar>
+\`\`\`
+        `
+      }
+    }
+  }
+};
+
+// Rango específico de fechas
+export const DateRange: Story = {
+  args: {
+    label: 'Fecha de cita',
+    placeholder: 'Solo próxima semana',
+    helperText: 'Citas disponibles solo la próxima semana',
+    minDate: '2024-02-01', // Inicio del rango
+    maxDate: '2024-02-07'  // Fin del rango (una semana)
+  },
+  parameters: {
+    docs: {
+      story: { height: '450px' },
+      description: {
+        story: `
+## Rango específico de fechas
+
+Ejemplo para restricciones de fechas a un rango específico.
+
+### Código TypeScript:
+\`\`\`typescript
+export class MiComponente {
+  nextWeekStart = new Date();
+  nextWeekEnd = new Date();
+  
+  constructor() {
+    this.nextWeekStart.setDate(this.nextWeekStart.getDate() + 7);
+    this.nextWeekEnd.setDate(this.nextWeekEnd.getDate() + 13);
+  }
+}
+\`\`\`
+
+### Template HTML:
+\`\`\`html
+<sa-calendar 
+  [minDate]="nextWeekStart"
+  [maxDate]="nextWeekEnd"
+  label="Fecha de cita"
+  placeholder="Solo próxima semana"
+  helperText="Citas disponibles solo la próxima semana">
+</sa-calendar>
+\`\`\`
+        `
+      }
+    }
+  }
+};
+
+// Fechas mínimas y máximas - Ejemplos completos
+export const MinMaxDates: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 500px;">
+        <h3>Control de Fechas Mínimas y Máximas</h3>
+        
+        <div>
+          <h4>Solo fechas futuras (minDate = hoy)</h4>
+          <sa-calendar 
+            [minDate]="today"
+            label="Fecha de reserva"
+            placeholder="Selecciona una fecha futura"
+            helperText="Solo puedes seleccionar fechas a partir de hoy">
+          </sa-calendar>
+        </div>
+        
+        <div>
+          <h4>Solo próximos 30 días</h4>
+          <sa-calendar 
+            [minDate]="today"
+            [maxDate]="maxDate30Days"
+            label="Fecha de entrega"
+            placeholder="Dentro de 30 días"
+            helperText="Fechas disponibles: hoy hasta {{ maxDate30Days | date:'dd/MM/yyyy' }}">
+          </sa-calendar>
+        </div>
+        
+        <div>
+          <h4>Solo fechas pasadas (maxDate = ayer)</h4>
+          <sa-calendar 
+            [maxDate]="yesterday"
+            label="Fecha de nacimiento"
+            placeholder="Selecciona una fecha pasada"
+            helperText="Solo fechas anteriores a hoy">
+          </sa-calendar>
+        </div>
+        
+        <div>
+          <h4>Rango específico (próxima semana)</h4>
+          <sa-calendar 
+            [minDate]="nextWeekStart"
+            [maxDate]="nextWeekEnd"
+            label="Fecha de cita"
+            placeholder="Solo próxima semana"
+            helperText="Del {{ nextWeekStart | date:'dd/MM/yyyy' }} al {{ nextWeekEnd | date:'dd/MM/yyyy' }}">
+          </sa-calendar>
+        </div>
+      </div>
+    `,
+    props: {
+      today: new Date(),
+      yesterday: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() - 1);
+        return date;
+      })(),
+      maxDate30Days: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 30);
+        return date;
+      })(),
+      nextWeekStart: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 7);
+        return date;
+      })(),
+      nextWeekEnd: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 13);
+        return date;
+      })()
+    }
+  }),
+  parameters: {
+    docs: {
+      story: { height: '700px' },
+      source: {
+        code: `// Componente TypeScript
+export class MiComponente {
+  today = new Date();
+  yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  maxDate30Days = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  nextWeekStart = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  nextWeekEnd = new Date(Date.now() + 13 * 24 * 60 * 60 * 1000);
+}
+
+<!-- 1. Solo fechas futuras (minDate = hoy) -->
+<sa-calendar 
+  [minDate]="today"
+  label="Fecha de reserva"
+  placeholder="Selecciona una fecha futura"
+  helperText="Solo puedes seleccionar fechas a partir de hoy">
+</sa-calendar>
+
+<!-- 2. Solo próximos 30 días -->
+<sa-calendar 
+  [minDate]="today"
+  [maxDate]="maxDate30Days"
+  label="Fecha de entrega"
+  placeholder="Dentro de 30 días"
+  helperText="Fechas disponibles: hoy hasta {{ maxDate30Days | date:'dd/MM/yyyy' }}">
+</sa-calendar>
+
+<!-- 3. Solo fechas pasadas (maxDate = ayer) -->
+<sa-calendar 
+  [maxDate]="yesterday"
+  label="Fecha de nacimiento"
+  placeholder="Selecciona una fecha pasada"
+  helperText="Solo fechas anteriores a hoy">
+</sa-calendar>
+
+<!-- 4. Rango específico (próxima semana) -->
+<sa-calendar 
+  [minDate]="nextWeekStart"
+  [maxDate]="nextWeekEnd"
+  label="Fecha de cita"
+  placeholder="Solo próxima semana"
+  helperText="Del {{ nextWeekStart | date:'dd/MM/yyyy' }} al {{ nextWeekEnd | date:'dd/MM/yyyy' }}">
+</sa-calendar>`
+      }
+    }
+  }
+};
+
+// Casos de uso comunes
+export const CommonUseCases: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px;">
+        <h3>Casos de Uso Comunes</h3>
+        
+        <div class="card p-3">
+          <h5>🎫 Sistema de Reservas</h5>
+          <sa-calendar 
+            [minDate]="tomorrow"
+            [maxDate]="maxReservationDate"
+            label="Fecha de reserva"
+            placeholder="Selecciona tu fecha"
+            helperText="Reservas disponibles con 24h de anticipación">
+          </sa-calendar>
+        </div>
+        
+        <div class="card p-3">
+          <h5>📅 Fecha de Vencimiento</h5>
+          <sa-calendar 
+            [minDate]="today"
+            [maxDate]="maxExpiryDate"
+            label="Fecha de vencimiento"
+            placeholder="Máximo 1 año"
+            helperText="La fecha no puede exceder 1 año">
+          </sa-calendar>
+        </div>
+        
+        <div class="card p-3">
+          <h5>📊 Reporte Histórico</h5>
+          <sa-calendar 
+            [maxDate]="today"
+            [minDate]="minHistoricalDate"
+            label="Fecha del reporte"
+            placeholder="Últimos 2 años"
+            helperText="Datos disponibles desde {{ minHistoricalDate | date:'dd/MM/yyyy' }}">
+          </sa-calendar>
+        </div>
+        
+        <div class="alert alert-info">
+          <strong>💡 Tip:</strong> Los botones de navegación se deshabilitan automáticamente 
+          cuando no hay fechas válidas en el mes/año correspondiente.
+        </div>
+      </div>
+    `,
+    props: {
+      today: new Date(),
+      tomorrow: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        return date;
+      })(),
+      maxReservationDate: (() => {
+        const date = new Date();
+        date.setMonth(date.getMonth() + 6); // 6 meses adelante
+        return date;
+      })(),
+      maxExpiryDate: (() => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + 1); // 1 año adelante
+        return date;
+      })(),
+      minHistoricalDate: (() => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() - 2); // 2 años atrás
+        return date;
+      })()
+    }
+  }),
+  parameters: {
+    docs: {
+      story: { height: '650px' },
+      source: {
+        code: `// Componente TypeScript
+export class CasosUsoComponent {
+  today = new Date();
+  tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  maxReservationDate = new Date();
+  maxExpiryDate = new Date();
+  minHistoricalDate = new Date();
+  
+  constructor() {
+    // Reservas hasta 6 meses adelante
+    this.maxReservationDate.setMonth(this.today.getMonth() + 6);
+    
+    // Vencimiento hasta 1 año
+    this.maxExpiryDate.setFullYear(this.today.getFullYear() + 1);
+    
+    // Histórico desde 2 años atrás
+    this.minHistoricalDate.setFullYear(this.today.getFullYear() - 2);
+  }
+}
+
+<!-- Sistema de Reservas -->
+<sa-calendar 
+  [minDate]="tomorrow"
+  [maxDate]="maxReservationDate"
+  label="Fecha de reserva"
+  placeholder="Selecciona tu fecha"
+  helperText="Reservas disponibles con 24h de anticipación">
+</sa-calendar>
+
+<!-- Fecha de Vencimiento -->
+<sa-calendar 
+  [minDate]="today"
+  [maxDate]="maxExpiryDate"
+  label="Fecha de vencimiento"
+  placeholder="Máximo 1 año"
+  helperText="La fecha no puede exceder 1 año">
+</sa-calendar>
+
+<!-- Reporte Histórico -->
+<sa-calendar 
+  [maxDate]="today"
+  [minDate]="minHistoricalDate"
+  label="Fecha del reporte"
+  placeholder="Últimos 2 años"
+  helperText="Datos disponibles desde {{ minHistoricalDate | date:'dd/MM/yyyy' }}">
+</sa-calendar>`
+      }
     }
   }
 };

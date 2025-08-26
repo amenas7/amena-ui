@@ -81,7 +81,7 @@
           type="button" 
           class="nav-button prev" 
           (click)="navigatePrevious()"
-          [disabled]="disabled">
+          [disabled]="disabled || !canNavigateToPreviousMonth() && currentView === 'day' || !canNavigateToPreviousYear() && currentView === 'month'">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15,18 9,12 15,6"></polyline>
           </svg>
@@ -101,7 +101,7 @@
           type="button" 
           class="nav-button next" 
           (click)="navigateNext()"
-          [disabled]="disabled">
+          [disabled]="disabled || !canNavigateToNextMonth() && currentView === 'day' || !canNavigateToNextYear() && currentView === 'month'">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9,18 15,12 9,6"></polyline>
           </svg>

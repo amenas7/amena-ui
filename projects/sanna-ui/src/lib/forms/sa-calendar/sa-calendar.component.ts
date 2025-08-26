@@ -58,6 +58,8 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() required: boolean = false;
   @Input() readonly: boolean = false;
   @Input() disabled: boolean = false;
+  @Input() minDate: Date | string | number | null = null;
+  @Input() maxDate: Date | string | number | null = null;
   @Input() id: string = '';
   @Input() name: string = '';
 
@@ -287,7 +289,7 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
 
   private generateCalendarMonths() {
     const currentYear = this.currentDate.getFullYear();
-    this.calendarMonths = this.mergedLocale.months.map((month, index) => ({
+    this.calendarMonths = this.mergedLocale.monthsShort.map((month, index) => ({
       name: month,
       number: index,
       year: currentYear,
@@ -317,6 +319,19 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
 
   // Date validation methods
   private isDateDisabled(date: Date): boolean {
+    // Check component-level min/max dates
+    const minDate = this.getDateFromInput(this.minDate);
+    const maxDate = this.getDateFromInput(this.maxDate);
+    
+    if (minDate && date < minDate) {
+      return true;
+    }
+
+    if (maxDate && date > maxDate) {
+      return true;
+    }
+
+    // Check validation-level min/max dates (legacy support)
     if (this.validation.minDate && date < this.validation.minDate) {
       return true;
     }
@@ -496,6 +511,48 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   closeCalendar() {
     this.isOpen = false;
     this.cdr.markForCheck();
+  }
+
+  // Helper methods
+  private getDateFromInput(dateInput: Date | string | number | null): Date | null {
+    if (!dateInput) return null;
+    if (dateInput instanceof Date) return dateInput;
+    return new Date(dateInput);
+  }
+
+  // Navigation methods
+  canNavigateToPreviousMonth(): boolean {
+    const minDate = this.getDateFromInput(this.minDate);
+    if (!minDate) return true;
+    
+    const currentMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+    const previousMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    
+    return previousMonth >= new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+  }
+
+  canNavigateToNextMonth(): boolean {
+    const maxDate = this.getDateFromInput(this.maxDate);
+    if (!maxDate) return true;
+    
+    const currentMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+    const nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    
+    return nextMonth <= new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+  }
+
+  canNavigateToPreviousYear(): boolean {
+    const minDate = this.getDateFromInput(this.minDate);
+    if (!minDate) return true;
+    
+    return this.currentDate.getFullYear() - 1 >= minDate.getFullYear();
+  }
+
+  canNavigateToNextYear(): boolean {
+    const maxDate = this.getDateFromInput(this.maxDate);
+    if (!maxDate) return true;
+    
+    return this.currentDate.getFullYear() + 1 <= maxDate.getFullYear();
   }
 
   // Date selection logic
