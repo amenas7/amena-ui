@@ -344,6 +344,39 @@
     /* Layout dinámico basado en si hay anchos especificados */
     &.fixed-layout {
       table-layout: fixed !important; /* Solo cuando hay anchos especificados */
+      
+      /* Reglas específicas para fixed-layout - permitir saltos de línea */
+      th {
+        white-space: nowrap !important; /* Mantener labels en una línea */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      
+      /* Para encabezados en fixed-layout sin width específico */
+      th:not([style*="width"]) {
+        min-width: 150px !important; /* Ancho mínimo para columnas sin width definido */
+      }
+      
+      /* Para las celdas de datos en fixed-layout, permitir salto de línea */
+      td {
+        white-space: normal !important; /* Permitir salto de línea automático */
+        word-wrap: break-word !important; /* Romper palabras largas si es necesario */
+        word-break: break-word !important; /* Compatibilidad adicional */
+        overflow-wrap: break-word !important; /* Estándar moderno */
+        line-height: 1.4 !important; /* Espaciado entre líneas más cómodo */
+        vertical-align: top !important; /* Alinear contenido hacia arriba */
+        overflow: hidden !important; /* Evitar desbordamiento */
+        
+        /* Asegurar que las celdas respeten el ancho definido */
+        box-sizing: border-box !important;
+        max-width: 0 !important; /* Forzar que respete el ancho de la columna */
+      }
+      
+      /* Para celdas en fixed-layout sin width específico */
+      td:not([style*="width"]) {
+        min-width: 150px !important; /* Ancho mínimo para celdas sin width definido */
+        max-width: 250px !important; /* Máximo para forzar saltos de línea */
+      }
     }
     
     &.auto-layout {
@@ -356,14 +389,15 @@
         white-space: nowrap !important; /* Mantener labels en una línea */
         text-align: center !important; /* Centrar el texto del label */
         vertical-align: middle !important; /* Centrar verticalmente */
-        min-width: fit-content !important; /* Mínimo: ancho del label */
-        max-width: 150px !important; /* Máximo para evitar columnas demasiado anchas */
+        min-width: 120px !important; /* Ancho mínimo fijo por defecto */
+        max-width: 200px !important; /* Máximo para evitar columnas demasiado anchas */
       }
       
       /* Para las celdas de datos, permitir salto de línea para mostrar todo el contenido */
       td {
         white-space: normal !important; /* Permitir salto de línea automático */
-        max-width: 150px !important; /* Límite de ancho para forzar saltos de línea */
+        min-width: 120px !important; /* Ancho mínimo fijo por defecto - igual que th */
+        max-width: 200px !important; /* Límite de ancho para forzar saltos de línea */
         word-wrap: break-word !important; /* Romper palabras largas si es necesario */
         word-break: break-word !important; /* Compatibilidad adicional */
         overflow-wrap: break-word !important; /* Estándar moderno */
@@ -887,6 +921,47 @@ nav[aria-label="Navegación de páginas"] {
   text-align: left !important;
   vertical-align: middle !important;
   font-size: 11px !important; /* Cambiar tamaño de fuente del contenido de la tabla */
+}
+
+/* Reglas específicas para fixed-layout con mayor especificidad */
+.sa-table-container .table.fixed-layout > thead > tr > th:not([style*="width"]) {
+  min-width: 150px !important; /* Ancho mínimo para encabezados sin width definido */
+  width: 150px !important; /* Forzar ancho fijo */
+}
+
+.sa-table-container .table.fixed-layout > tbody > tr > td {
+  white-space: normal !important; /* Permitir salto de línea automático */
+  word-wrap: break-word !important; /* Romper palabras largas si es necesario */
+  word-break: break-word !important; /* Compatibilidad adicional */
+  overflow-wrap: break-word !important; /* Estándar moderno */
+  line-height: 1.4 !important; /* Espaciado entre líneas más cómodo */
+  vertical-align: top !important; /* Alinear contenido hacia arriba */
+  overflow: hidden !important; /* Evitar desbordamiento */
+  box-sizing: border-box !important;
+  max-width: 0 !important; /* Forzar que respete el ancho de la columna */
+}
+
+.sa-table-container .table.fixed-layout > tbody > tr > td:not([style*="width"]) {
+  min-width: 150px !important; /* Ancho mínimo para celdas sin width definido */
+  width: 150px !important; /* Forzar ancho fijo */
+  max-width: 250px !important; /* Máximo para forzar saltos de línea */
+}
+
+/* Reglas específicas para auto-layout con mayor especificidad */
+.sa-table-container .table.auto-layout > thead > tr > th {
+  min-width: 120px !important; /* Ancho mínimo fijo por defecto para encabezados */
+  max-width: 200px !important; /* Máximo para evitar columnas demasiado anchas */
+}
+
+.sa-table-container .table.auto-layout > tbody > tr > td {
+  min-width: 120px !important; /* Ancho mínimo fijo por defecto para celdas */
+  max-width: 200px !important; /* Límite de ancho para forzar saltos de línea */
+  white-space: normal !important; /* Permitir salto de línea automático */
+  word-wrap: break-word !important; /* Romper palabras largas si es necesario */
+  word-break: break-word !important; /* Compatibilidad adicional */
+  overflow-wrap: break-word !important; /* Estándar moderno */
+  line-height: 1.4 !important; /* Espaciado entre líneas más cómodo */
+  vertical-align: top !important; /* Alinear contenido hacia arriba */
 }
 
 /* Estilos específicos para el mensaje de estado vacío */
