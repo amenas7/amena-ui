@@ -29,16 +29,57 @@ export class SaSelectComponent implements ControlValueAccessor {
   @Input() size: SelectSize = 'md';
   @Input() status: SelectStatus = 'default';
   @Input() label: string = '';
-  @Input() noLabel: boolean = false;
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
-  @Input() required: boolean = false;
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
+  
+  private _required: boolean = false;
+  @Input()
+  set required(value: boolean | any) {
+    this._required = value === true || value === 'true';
+  }
+  get required(): boolean {
+    return this._required;
+  }
+  
+  private _readonly: boolean = false;
+  @Input()
+  set readonly(value: boolean | any) {
+    this._readonly = value === true || value === 'true';
+  }
+  get readonly(): boolean {
+    return this._readonly;
+  }
+  
+  private _disabled: boolean = false;
+  @Input()
+  set disabled(value: boolean | any) {
+    this._disabled = value === true || value === 'true';
+  }
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  
   @Input() id: string = '';
   @Input() name: string = '';
   @Input() placeholder: string = '--Seleccione--';
-  @Input() showPlaceholder: boolean = true;
+  
+  private _showPlaceholder: boolean = true;
+  @Input()
+  set showPlaceholder(value: boolean | any) {
+    this._showPlaceholder = value === true || value === 'true';
+  }
+  get showPlaceholder(): boolean {
+    return this._showPlaceholder;
+  }
 
   @Output() valueChange = new EventEmitter<string | number>();
   @Output() focus = new EventEmitter<FocusEvent>();
@@ -110,7 +151,7 @@ export class SaSelectComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this._disabled = isDisabled;
   }
 
   onModelChange(value: string | number) {
