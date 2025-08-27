@@ -2303,16 +2303,46 @@ class SaSelectComponent {
     size = 'md';
     status = 'default';
     label = '';
-    noLabel = false;
+    _noLabel = false;
+    set noLabel(value) {
+        this._noLabel = value === true || value === 'true';
+    }
+    get noLabel() {
+        return this._noLabel;
+    }
     helperText = '';
     errorText = '';
-    required = false;
-    readonly = false;
-    disabled = false;
+    _required = false;
+    set required(value) {
+        this._required = value === true || value === 'true';
+    }
+    get required() {
+        return this._required;
+    }
+    _readonly = false;
+    set readonly(value) {
+        this._readonly = value === true || value === 'true';
+    }
+    get readonly() {
+        return this._readonly;
+    }
+    _disabled = false;
+    set disabled(value) {
+        this._disabled = value === true || value === 'true';
+    }
+    get disabled() {
+        return this._disabled;
+    }
     id = '';
     name = '';
     placeholder = '--Seleccione--';
-    showPlaceholder = true;
+    _showPlaceholder = true;
+    set showPlaceholder(value) {
+        this._showPlaceholder = value === true || value === 'true';
+    }
+    get showPlaceholder() {
+        return this._showPlaceholder;
+    }
     valueChange = new EventEmitter();
     focus = new EventEmitter();
     blur = new EventEmitter();
@@ -2368,7 +2398,7 @@ class SaSelectComponent {
         this.onTouched = fn;
     }
     setDisabledState(isDisabled) {
-        this.disabled = isDisabled;
+        this._disabled = isDisabled;
     }
     onModelChange(value) {
         this.value = value;
