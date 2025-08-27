@@ -29,6 +29,7 @@ export class SaSelectComponent implements ControlValueAccessor {
   @Input() size: SelectSize = 'md';
   @Input() status: SelectStatus = 'default';
   @Input() label: string = '';
+  @Input() noLabel: boolean = false;
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -77,7 +78,18 @@ export class SaSelectComponent implements ControlValueAccessor {
       'lg': 'form-label label-lg'
     };
     
-    return sizeMap[this.size] || 'form-label label-md';
+    const baseClasses = sizeMap[this.size] || 'form-label label-md';
+    
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      return `${baseClasses} ghost-label`;
+    }
+    
+    return baseClasses;
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   get hasValidSelection(): boolean {

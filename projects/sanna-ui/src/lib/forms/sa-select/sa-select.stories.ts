@@ -44,6 +44,8 @@ const meta: Meta<SaSelectComponent> = {
           result = result.replace(/\[disabled\]="false"/g, 'disabled="false"');
           result = result.replace(/\[showPlaceholder\]="true"/g, 'showPlaceholder="true"');
           result = result.replace(/\[showPlaceholder\]="false"/g, 'showPlaceholder="false"');
+          result = result.replace(/\[noLabel\]="true"/g, 'noLabel="true"');
+          result = result.replace(/\[noLabel\]="false"/g, 'noLabel="false"');
           
           return result;
         }
@@ -56,6 +58,10 @@ const meta: Meta<SaSelectComponent> = {
     label: {
       control: 'text',
       description: 'Etiqueta del select'
+    },
+    noLabel: {
+      control: { type: 'boolean' },
+      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'
     },
     size: {
       control: { type: 'select' },
@@ -374,6 +380,56 @@ export const WithDisabledOptions: Story = {
         story: 'Select con algunas opciones deshabilitadas. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const NoLabelAlignment: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-3">Alineación perfecta usando noLabel</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <sa-select 
+              label="Clasificación"
+              size="sm"
+              [options]="[
+                { value: '1', label: 'Tipo A' },
+                { value: '2', label: 'Tipo B' },
+                { value: '3', label: 'Tipo C' }
+              ]"
+              placeholder="--Seleccione--">
+            </sa-select>
+          </div>
+          <div class="col-md-6">
+            <sa-select 
+              [noLabel]="true"
+              size="sm"
+              [options]="[
+                { value: 'activo', label: 'Activo' },
+                { value: 'inactivo', label: 'Inactivo' },
+                { value: 'pendiente', label: 'Pendiente' }
+              ]"
+              placeholder="--Seleccione--">
+            </sa-select>
+          </div>
+        </div>
+        <p class="mt-3 text-muted">
+          <strong>Nota:</strong> El segundo select usa <code>noLabel="true"</code> para mantener el mismo espaciado que el primero con label, 
+          logrando una alineación perfecta. Esto es útil cuando necesitas que algunos selects no tengan label visible pero 
+          mantengan la misma altura que otros con label.
+        </p>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstración de cómo usar `noLabel` para alinear perfectamente selects con y sin labels visibles. La propiedad `noLabel` mantiene el espacio del label pero lo hace invisible, útil para crear layouts balanceados.'
+      }
     }
   }
 };
