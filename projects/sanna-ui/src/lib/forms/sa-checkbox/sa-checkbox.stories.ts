@@ -45,6 +45,8 @@ const meta: Meta<SaCheckboxComponent> = {
           result = result.replace(/\[readonly\]="false"/g, 'readonly="false"');
           result = result.replace(/\[indeterminate\]="true"/g, 'indeterminate="true"');
           result = result.replace(/\[indeterminate\]="false"/g, 'indeterminate="false"');
+          result = result.replace(/\[bold\]="true"/g, 'bold="true"');
+          result = result.replace(/\[bold\]="false"/g, 'bold="false"');
           
           return result;
         }
@@ -99,6 +101,10 @@ const meta: Meta<SaCheckboxComponent> = {
     indeterminate: {
       control: { type: 'boolean' },
       description: 'Estado indeterminado (guión en lugar de check)'
+    },
+    bold: {
+      control: { type: 'boolean' },
+      description: 'Texto del label en negrita'
     }
   }
 };
@@ -278,6 +284,22 @@ export const Indeterminate: Story = {
     docs: {
       description: {
         story: 'Checkbox en estado indeterminado (muestra un guión). Útil para selecciones parciales en listas. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const BoldLabel: Story = {
+  args: {
+    label: 'Etiqueta en negrita',
+    bold: true,
+    checked: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkbox con etiqueta en negrita. Útil para destacar opciones importantes. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: { type: 'dynamic' }
     }

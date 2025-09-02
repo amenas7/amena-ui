@@ -31,6 +31,7 @@ export class SaCheckboxComponent implements ControlValueAccessor {
   @Input() name: string = '';
   @Input() value: string = '';
   @Input() indeterminate: boolean = false;
+  @Input() bold: boolean = false;
 
   @Output() checkedChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<Event>();
@@ -81,7 +82,13 @@ export class SaCheckboxComponent implements ControlValueAccessor {
       'lg': 'form-check-label label-lg'
     };
     
-    return sizeMap[this.size] || 'form-check-label label-md';
+    let classes = sizeMap[this.size] || 'form-check-label label-md';
+    
+    if (this.bold) {
+      classes += ' label-bold';
+    }
+    
+    return classes;
   }
 
   get containerClasses(): string {

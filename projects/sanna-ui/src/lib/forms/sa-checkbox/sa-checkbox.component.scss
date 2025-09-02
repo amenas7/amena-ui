@@ -136,6 +136,11 @@
   &.label-lg {
     font-size: 16px !important;
   }
+  
+  // Clase para texto en negrita
+  &.label-bold {
+    font-weight: 600 !important;
+  }
 }
 
 // Tamaños personalizados para checkboxes
