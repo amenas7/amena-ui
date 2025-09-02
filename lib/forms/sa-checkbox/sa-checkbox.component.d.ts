@@ -17,6 +17,7 @@ export declare class SaCheckboxComponent implements ControlValueAccessor {
     name: string;
     value: string;
     indeterminate: boolean;
+    bold: boolean;
     checkedChange: EventEmitter<boolean>;
     change: EventEmitter<Event>;
     focus: EventEmitter<FocusEvent>;
@@ -38,5 +39,5 @@ export declare class SaCheckboxComponent implements ControlValueAccessor {
     onCheckboxFocus(event: FocusEvent): void;
     onCheckboxBlur(event: FocusEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaCheckboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaCheckboxComponent, "sa-checkbox", never, { "checked": { "alias": "checked"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "value": { "alias": "value"; "required": false; }; "indeterminate": { "alias": "indeterminate"; "required": false; }; }, { "checkedChange": "checkedChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaCheckboxComponent, "sa-checkbox", never, { "checked": { "alias": "checked"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "value": { "alias": "value"; "required": false; }; "indeterminate": { "alias": "indeterminate"; "required": false; }; "bold": { "alias": "bold"; "required": false; }; }, { "checkedChange": "checkedChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
