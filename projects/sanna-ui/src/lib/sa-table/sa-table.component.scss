@@ -574,9 +574,24 @@
     background-color: white !important;
   }
   
+  // Deshabilitar borde en hover para fila de mensaje vacío
+  .table.table-hover > tbody > tr:has(td.text-center):hover {
+    outline-color: transparent !important;
+    background-color: white !important;
+  }
+  
   // Alternativa para navegadores que no soportan :has()
   .table.table-hover > tbody > tr > td.text-center:hover {
     background-color: white !important;
+  }
+  
+  // Regla adicional para asegurar que la fila de mensaje vacío no tenga outline
+  .table > tbody > tr:has(td.text-center) {
+    outline-color: transparent !important;
+    
+    &:hover {
+      outline-color: transparent !important;
+    }
   }
 
   // Estilos para filas seleccionables
@@ -617,6 +632,7 @@
     
     &:hover {
       background-color: white !important;
+      outline-color: transparent !important;
       
       td {
         background-color: white !important;
@@ -992,8 +1008,12 @@ nav[aria-label="Navegación de páginas"] {
 
 /* Deshabilitar hover en la fila del mensaje vacío */
 .sa-table-container .table > tbody > tr:has(td.text-center) {
-  &:hover > td {
-    background-color: white !important;
+  &:hover {
+    outline-color: transparent !important;
+    
+    > td {
+      background-color: white !important;
+    }
   }
 }
 
@@ -1172,6 +1192,7 @@ nav[aria-label="Navegación de páginas"] {
   
   &:hover {
     background-color: white !important;
+    outline-color: transparent !important;
     
     td {
       background-color: white !important;
