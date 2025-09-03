@@ -183,7 +183,7 @@
 }
 
 .text-primary {
-  color: #0d6efd !important;
+  color: #32A047 !important;
 }
 
 /* Clases de paginación */
@@ -201,7 +201,7 @@
 .page-link {
   position: relative;
   display: block;
-  color: #0d6efd;
+  color: #32A047;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;
@@ -221,8 +221,8 @@
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #32A047;
+  border-color: #32A047;
 }
 
 .page-item.disabled .page-link {
@@ -459,22 +459,23 @@
          color: inherit !important;
        }
        
-       // Evitar que la animación interfiera con filas seleccionadas
-       tr.selected-row td {
-         color: white !important;
-         transition: none !important;
-         background-color: #1F8BE1 !important;
-       }
-       
-       // Asegurar que las filas seleccionadas mantengan su color durante la animación
-       tr.selected-row {
-         background-color: #1F8BE1 !important;
-         
-         td {
-           background-color: #1F8BE1 !important;
-           color: white !important;
-         }
-       }
+             // Evitar que la animación interfiera con filas seleccionadas
+      tr.selected-row td {
+        color: inherit !important;
+        transition: none !important;
+        background-color: transparent !important;
+      }
+      
+      // Asegurar que las filas seleccionadas mantengan su color durante la animación
+      tr.selected-row {
+        background-color: transparent !important;
+        outline-color: #999 !important;
+        
+        td {
+          background-color: transparent !important;
+          color: inherit !important;
+        }
+      }
      }
   }
   
@@ -488,8 +489,8 @@
     cursor: default !important;
     border-bottom: none !important;
     border-right: none !important;
-    background-color: #E9ECEF !important;
-    background: #E9ECEF !important;
+    background-color: #F6F7FB !important;
+    background: #F6F7FB !important;
     border-radius: 0 !important;
     user-select: text !important;
     font-weight: 600 !important;
@@ -505,8 +506,8 @@
   .table thead tr th:active,
   .table.table-light thead tr th,
   .table-light thead tr th {
-    background-color: #E9ECEF !important;
-    background: #E9ECEF !important;
+    background-color: #F6F7FB !important;
+    background: #F6F7FB !important;
     border-bottom: none !important;
     border-right: none !important;
     border-radius: 0 !important;
@@ -553,8 +554,19 @@
   
   // Efecto hover personalizado cuando hover es true
 .table.table-hover > tbody > tr:hover > td {
-  background-color: #f8f9fa !important;
+  background-color: transparent !important;
   font-size: 11px !important; /* Mantener tamaño de fuente en hover */
+}
+
+// Agregar borde en hover para feedback visual
+.table.table-hover > tbody > tr {
+  outline: 1px solid transparent !important;
+  outline-offset: -1px !important;
+  transition: outline-color 0.05s ease !important;
+}
+
+.table.table-hover > tbody > tr:hover {
+  outline-color: #999 !important;
 }
   
   // Deshabilitar hover específicamente en la fila del mensaje vacío
@@ -570,25 +582,30 @@
   // Estilos para filas seleccionables
   .table > tbody > tr {
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    outline: 1px solid transparent !important;
+    outline-offset: -1px !important;
+    transition: outline-color 0.05s ease !important;
     
     &:hover {
-      background-color: #f8f9fa !important;
+      background-color: transparent !important;
+      outline-color: #999 !important;
     }
     
     &.selected-row {
-      background-color: #1F8BE1 !important;
+      background-color: transparent !important;
+      outline-color: #999 !important;
       
       td {
-        background-color: #1F8BE1 !important;
-        color: white !important;
+        background-color: transparent !important;
+        color: inherit !important;
       }
       
       &:hover {
-        background-color: #1F8BE1 !important;
+        background-color: transparent !important;
+        outline-color: #999 !important;
         
         td {
-          background-color: #1F8BE1 !important;
+          background-color: transparent !important;
         }
       }
     }
@@ -631,7 +648,7 @@
       justify-content: center;
       padding: 0;
       background-color: transparent;
-      color: #5BAB5F;
+      color: #32A047;
       font-size: 1.125rem !important;
       text-align: center;
       line-height: 1;
@@ -663,8 +680,8 @@
       
       &:hover {
         background-color: white;
-        border-color: #5BAB5F;
-        color: #5BAB5F;
+        border-color: #32A047;
+        color: #32A047;
       }
       
       &:focus {
@@ -674,14 +691,14 @@
     }
     
     .page-item.active .page-link {
-      background-color: #5BAB5F;
+      background-color: #32A047;
       color: white;
       font-weight: 500;
       border: none !important;
       cursor: pointer !important;
       
       &:hover {
-        background-color: #5BAB5F !important;
+        background-color: #32A047 !important;
         color: white !important;
         border: none !important;
       }
@@ -992,8 +1009,8 @@ nav[aria-label="Navegación de páginas"] {
   padding: 0.3125rem 0.5rem !important; /* Reducir padding-bottom de 8px a 5px */
   text-align: left !important;
   vertical-align: middle !important;
-  background-color: #E9ECEF !important;
-  background: #E9ECEF !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
@@ -1111,33 +1128,38 @@ nav[aria-label="Navegación de páginas"] {
 /* Estilos específicos para filas seleccionables */
 .sa-table-container .table > tbody > tr {
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  outline: 2px solid transparent !important;
+  outline-offset: -1px !important;
+  transition: outline-color 0.15s ease !important;
   
-  &:hover {
-    background-color: #f8f9fa !important;
-    
-    td {
-      background-color: #f8f9fa !important;
-      font-size: 11px !important; /* Mantener tamaño de fuente en hover */
+      &:hover {
+      background-color: transparent !important;
+      outline-color: #999 !important;
+      
+      td {
+        background-color: transparent !important;
+        font-size: 11px !important; /* Mantener tamaño de fuente en hover */
+      }
     }
-  }
   
   &.selected-row {
-    background-color: #1F8BE1 !important;
+    background-color: transparent !important;
+    outline-color: #999 !important;
     
     td {
-      background-color: #1F8BE1 !important;
-      color: white !important;
+      background-color: transparent !important;
+      color: inherit !important;
       font-size: 11px !important; /* Mantener tamaño de fuente en filas seleccionadas */
       transition: none !important; /* Evitar transiciones en filas seleccionadas */
     }
     
     &:hover {
-      background-color: #1F8BE1 !important;
+      background-color: transparent !important;
+      outline-color: #999 !important;
       
       td {
-        background-color: #1F8BE1 !important;
-        color: white !important;
+        background-color: transparent !important;
+        color: inherit !important;
         font-size: 11px !important; /* Mantener tamaño de fuente en hover de filas seleccionadas */
       }
     }
@@ -1159,6 +1181,7 @@ nav[aria-label="Navegación de páginas"] {
   
   &.selected-row {
     background-color: white !important;
+    outline-color: transparent !important;
     
     td {
       background-color: white !important;
@@ -1220,7 +1243,7 @@ nav[aria-label="Navegación de páginas"] {
   }
   
   .btn {
-    border-color: #cacaca;
+    border: none;
     min-width: 36px;
     height: 36px;
     display: flex;
@@ -1228,7 +1251,7 @@ nav[aria-label="Navegación de páginas"] {
     justify-content: center;
     border-radius: 0.375rem;
     transition: none !important;
-    background-color: transparent;
+    background-color: #F6F7FB;
     box-shadow: none !important; /* Eliminar sombra */
     filter: none !important; /* Eliminar filtros que puedan causar sombras */
     text-shadow: none !important; /* Eliminar sombra de texto */
@@ -1255,16 +1278,8 @@ nav[aria-label="Navegación de páginas"] {
     }
     
     &:not(:disabled) {
-      &:hover {
-        background-color: #32A047 !important;
-        border-color: #32A047 !important;
-        color: white !important;
-      }
       
       &:active {
-        background-color: #32A047 !important;
-        border-color: #32A047 !important;
-        color: white !important;
         box-shadow: none !important;
         transform: none !important;
       }
@@ -1434,8 +1449,8 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th,
 .sa-table-container .table thead th.table-light,
 .sa-table-container .table thead th {
-  background-color: #E9ECEF !important;
-  background: #E9ECEF !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
   color: #555b5f !important;
   font-weight: 600 !important;
   font-size: 11px !important; /* Agregar tamaño de fuente para encabezados */
@@ -1448,8 +1463,8 @@ nav[aria-label="Navegación de páginas"] {
 .sa-table-container .table-light > thead > tr > th:hover,
 .sa-table-container .table thead th.table-light:hover,
 .sa-table-container .table thead th:hover {
-  background-color: #E9ECEF !important;
-  background: #E9ECEF !important;
+  background-color: #F6F7FB !important;
+  background: #F6F7FB !important;
   color: #555b5f !important;
   font-size: 11px !important; /* Mantener tamaño de fuente en hover de encabezados */
 }
