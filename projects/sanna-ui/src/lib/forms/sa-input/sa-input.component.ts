@@ -25,6 +25,15 @@ export class SaInputComponent implements ControlValueAccessor {
   @Input() size: InputSize = 'md';
   @Input() status: InputStatus = 'default';
   @Input() label: string = '';
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() leftIcon: string = '';
@@ -82,7 +91,18 @@ export class SaInputComponent implements ControlValueAccessor {
       'lg': 'form-label label-lg'
     };
     
-    return sizeMap[this.size] || 'form-label label-md';
+    const baseClasses = sizeMap[this.size] || 'form-label label-md';
+    
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      return `${baseClasses} ghost-label`;
+    }
+    
+    return baseClasses;
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   get inputGroupClasses(): string {

@@ -37,6 +37,16 @@
   &.label-lg {
     font-size: 16px !important;
   }
+  
+  // Label fantasma - mantiene el espacio pero es invisible
+  &.ghost-label {
+    visibility: hidden;
+    
+    // Usar un contenido mínimo para mantener la altura
+    &::before {
+      content: '\00A0'; // Non-breaking space
+    }
+  }
 }
 
 // Estilos del input principal

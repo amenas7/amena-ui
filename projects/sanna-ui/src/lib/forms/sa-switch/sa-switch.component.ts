@@ -22,6 +22,15 @@ export class SaSwitchComponent implements ControlValueAccessor {
   @Input() size: SwitchSize = 'md';
   @Input() status: SwitchStatus = 'default';
   @Input() label: string = '';
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -88,8 +97,17 @@ export class SaSwitchComponent implements ControlValueAccessor {
     if (this.disabled) {
       baseClasses.push('text-muted');
     }
+    
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      baseClasses.push('ghost-label');
+    }
 
     return baseClasses.join(' ');
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   writeValue(value: any): void {

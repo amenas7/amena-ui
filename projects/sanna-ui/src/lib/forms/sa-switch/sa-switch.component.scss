@@ -225,6 +225,16 @@ $switch-color-disabled: #e9ecef;
     font-size: 16px !important;
   }
   
+  // Label fantasma - mantiene el espacio pero es invisible
+  &.ghost-label {
+    visibility: hidden;
+    
+    // Usar un contenido mínimo para mantener la altura
+    &::before {
+      content: '\00A0'; // Non-breaking space
+    }
+  }
+  
   &:hover {
     color: #1a1a1a;
   }

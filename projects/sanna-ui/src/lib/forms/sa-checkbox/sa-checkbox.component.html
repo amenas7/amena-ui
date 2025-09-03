@@ -15,9 +15,9 @@
       (focus)="onCheckboxFocus($event)"
       (blur)="onCheckboxBlur($event)"
     />
-    <label *ngIf="label" [for]="checkboxId" [class]="labelClasses">
+    <label *ngIf="shouldShowLabel" [for]="checkboxId" [class]="labelClasses">
       {{ label }}
-      <span *ngIf="required" class="text-danger">*</span>
+      <span *ngIf="required && label" class="text-danger">*</span>
     </label>
   </div>
 

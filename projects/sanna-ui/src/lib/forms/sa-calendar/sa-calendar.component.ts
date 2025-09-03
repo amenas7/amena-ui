@@ -52,6 +52,15 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() size: CalendarSize = 'md';
   @Input() status: CalendarStatus = 'default';
   @Input() label: string = '';
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() placeholder: string = 'Seleccionar fecha';
   @Input() helperText: string = '';
   @Input() errorText: string = '';
@@ -180,7 +189,18 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       'lg': 'form-label label-lg'
     };
     
-    return sizeMap[this.size] || 'form-label label-md';
+    const baseClasses = sizeMap[this.size] || 'form-label label-md';
+    
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      return `${baseClasses} ghost-label`;
+    }
+    
+    return baseClasses;
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   // ControlValueAccessor implementation

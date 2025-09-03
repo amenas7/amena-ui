@@ -22,6 +22,15 @@ export class SaRadioComponent implements ControlValueAccessor {
   @Input() size: RadioSize = 'md';
   @Input() status: RadioStatus = 'default';
   @Input() label: string = '';
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -84,7 +93,18 @@ export class SaRadioComponent implements ControlValueAccessor {
       'lg': 'form-check-label label-lg'
     };
     
-    return sizeMap[this.size] || 'form-check-label label-md';
+    let classes = sizeMap[this.size] || 'form-check-label label-md';
+    
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      classes += ' ghost-label';
+    }
+    
+    return classes;
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   get containerClasses(): string {

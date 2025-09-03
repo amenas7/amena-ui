@@ -1,9 +1,9 @@
 <div class="sa-calendar-container">
   <!-- Input field (if not inline) -->
   <div *ngIf="!inline" class="calendar-input-container">
-    <label *ngIf="label" [for]="calendarId" [class]="labelClasses">
+    <label *ngIf="shouldShowLabel" [for]="calendarId" [class]="labelClasses">
       {{ label }}
-      <span *ngIf="required" class="text-danger">*</span>
+      <span *ngIf="required && label" class="text-danger">*</span>
     </label>
 
     <div class="position-relative">

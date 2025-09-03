@@ -14,9 +14,9 @@
       (focus)="onRadioFocus($event)"
       (blur)="onRadioBlur($event)"
     />
-    <label *ngIf="label" [for]="radioId" [class]="labelClasses">
+    <label *ngIf="shouldShowLabel" [for]="radioId" [class]="labelClasses">
       {{ label }}
-      <span *ngIf="required" class="text-danger">*</span>
+      <span *ngIf="required && label" class="text-danger">*</span>
     </label>
   </div>
 

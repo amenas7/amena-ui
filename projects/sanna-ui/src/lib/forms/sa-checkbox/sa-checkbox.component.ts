@@ -22,6 +22,15 @@ export class SaCheckboxComponent implements ControlValueAccessor {
   @Input() size: CheckboxSize = 'md';
   @Input() status: CheckboxStatus = 'default';
   @Input() label: string = '';
+  
+  private _noLabel: boolean = false;
+  @Input()
+  set noLabel(value: boolean | any) {
+    this._noLabel = value === true || value === 'true';
+  }
+  get noLabel(): boolean {
+    return this._noLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -88,7 +97,16 @@ export class SaCheckboxComponent implements ControlValueAccessor {
       classes += ' label-bold';
     }
     
+    // Si es noLabel, agregar clase para label fantasma
+    if (this.noLabel) {
+      classes += ' ghost-label';
+    }
+    
     return classes;
+  }
+
+  get shouldShowLabel(): boolean {
+    return !!this.label || this.noLabel;
   }
 
   get containerClasses(): string {

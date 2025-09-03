@@ -13,12 +13,12 @@
       (blur)="onInputBlur($event)"
     />
     <label 
-      *ngIf="label" 
+      *ngIf="shouldShowLabel" 
       [for]="uniqueId" 
       [class]="labelClasses"
       (click)="toggleSwitch()">
       {{ label }}
-      <span *ngIf="required" class="text-danger">*</span>
+      <span *ngIf="required && label" class="text-danger">*</span>
     </label>
   </div>
 
