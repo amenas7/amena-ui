@@ -8,6 +8,9 @@ export declare class SaTextareaComponent implements ControlValueAccessor {
     size: TextareaSize;
     status: TextareaStatus;
     label: string;
+    private _noLabel;
+    set noLabel(value: boolean | any);
+    get noLabel(): boolean;
     placeholder: string;
     helperText: string;
     errorText: string;
@@ -29,6 +32,7 @@ export declare class SaTextareaComponent implements ControlValueAccessor {
     private onTouched;
     get textareaClasses(): string;
     get labelClasses(): string;
+    get shouldShowLabel(): boolean;
     get textareaStyles(): any;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
@@ -38,5 +42,5 @@ export declare class SaTextareaComponent implements ControlValueAccessor {
     onTextareaFocus(event: FocusEvent): void;
     onTextareaBlur(event: FocusEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTextareaComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTextareaComponent, "sa-textarea", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "cols": { "alias": "cols"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "resize": { "alias": "resize"; "required": false; }; }, { "valueChange": "valueChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTextareaComponent, "sa-textarea", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "cols": { "alias": "cols"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "resize": { "alias": "resize"; "required": false; }; }, { "valueChange": "valueChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }

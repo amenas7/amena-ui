@@ -11,6 +11,9 @@ export declare class SaInputComponent implements ControlValueAccessor {
     size: InputSize;
     status: InputStatus;
     label: string;
+    private _noLabel;
+    set noLabel(value: boolean | any);
+    get noLabel(): boolean;
     helperText: string;
     errorText: string;
     leftIcon: string;
@@ -37,6 +40,7 @@ export declare class SaInputComponent implements ControlValueAccessor {
     private onTouched;
     get inputClasses(): string;
     get labelClasses(): string;
+    get shouldShowLabel(): boolean;
     get inputGroupClasses(): string;
     get inputType(): string;
     get inputStyles(): any;
@@ -51,5 +55,5 @@ export declare class SaInputComponent implements ControlValueAccessor {
     onInputBlur(event: FocusEvent): void;
     togglePasswordVisibility(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaInputComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaInputComponent, "sa-input", never, { "value": { "alias": "value"; "required": false; }; "type": { "alias": "type"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "leftIcon": { "alias": "leftIcon"; "required": false; }; "rightIcon": { "alias": "rightIcon"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "autocomplete": { "alias": "autocomplete"; "required": false; }; "min": { "alias": "min"; "required": false; }; "max": { "alias": "max"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "pattern": { "alias": "pattern"; "required": false; }; "backgroundColor": { "alias": "backgroundColor"; "required": false; }; "textColor": { "alias": "textColor"; "required": false; }; }, { "valueChange": "valueChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaInputComponent, "sa-input", never, { "value": { "alias": "value"; "required": false; }; "type": { "alias": "type"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "leftIcon": { "alias": "leftIcon"; "required": false; }; "rightIcon": { "alias": "rightIcon"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "autocomplete": { "alias": "autocomplete"; "required": false; }; "min": { "alias": "min"; "required": false; }; "max": { "alias": "max"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "pattern": { "alias": "pattern"; "required": false; }; "backgroundColor": { "alias": "backgroundColor"; "required": false; }; "textColor": { "alias": "textColor"; "required": false; }; }, { "valueChange": "valueChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }

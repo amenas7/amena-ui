@@ -8,6 +8,9 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     size: RadioSize;
     status: RadioStatus;
     label: string;
+    private _noLabel;
+    set noLabel(value: boolean | any);
+    get noLabel(): boolean;
     helperText: string;
     errorText: string;
     required: boolean;
@@ -29,6 +32,7 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     get isChecked(): boolean;
     get radioClasses(): string;
     get labelClasses(): string;
+    get shouldShowLabel(): boolean;
     get containerClasses(): string;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
@@ -38,5 +42,5 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     onRadioFocus(event: FocusEvent): void;
     onRadioBlur(event: FocusEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaRadioComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaRadioComponent, "sa-radio", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaRadioComponent, "sa-radio", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }

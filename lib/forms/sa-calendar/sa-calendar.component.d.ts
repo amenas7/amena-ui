@@ -8,6 +8,9 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     size: CalendarSize;
     status: CalendarStatus;
     label: string;
+    private _noLabel;
+    set noLabel(value: boolean | any);
+    get noLabel(): boolean;
     placeholder: string;
     helperText: string;
     errorText: string;
@@ -53,6 +56,7 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     get inputValue(): string;
     get inputClasses(): string;
     get labelClasses(): string;
+    get shouldShowLabel(): boolean;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
@@ -94,5 +98,5 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     getHeaderTitle(): string;
     getWeekdays(): string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<SaCalendarComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaCalendarComponent, "sa-calendar", never, { "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "minDate": { "alias": "minDate"; "required": false; }; "maxDate": { "alias": "maxDate"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "locale": { "alias": "locale"; "required": false; }; "colors": { "alias": "colors"; "required": false; }; "config": { "alias": "config"; "required": false; }; "validation": { "alias": "validation"; "required": false; }; "events": { "alias": "events"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "showInput": { "alias": "showInput"; "required": false; }; }, { "dateSelect": "dateSelect"; "viewChange": "viewChange"; "monthChange": "monthChange"; "yearChange": "yearChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaCalendarComponent, "sa-calendar", never, { "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "minDate": { "alias": "minDate"; "required": false; }; "maxDate": { "alias": "maxDate"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "locale": { "alias": "locale"; "required": false; }; "colors": { "alias": "colors"; "required": false; }; "config": { "alias": "config"; "required": false; }; "validation": { "alias": "validation"; "required": false; }; "events": { "alias": "events"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "showInput": { "alias": "showInput"; "required": false; }; }, { "dateSelect": "dateSelect"; "viewChange": "viewChange"; "monthChange": "monthChange"; "yearChange": "yearChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }

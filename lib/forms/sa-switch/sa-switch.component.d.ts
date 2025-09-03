@@ -8,6 +8,9 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     size: SwitchSize;
     status: SwitchStatus;
     label: string;
+    private _noLabel;
+    set noLabel(value: boolean | any);
+    get noLabel(): boolean;
     helperText: string;
     errorText: string;
     required: boolean;
@@ -24,6 +27,7 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     get switchClasses(): string;
     get inputClasses(): string;
     get labelClasses(): string;
+    get shouldShowLabel(): boolean;
     writeValue(value: any): void;
     registerOnChange(fn: any): void;
     registerOnTouched(fn: any): void;
@@ -33,5 +37,5 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     onInputBlur(event: FocusEvent): void;
     toggleSwitch(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaSwitchComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
