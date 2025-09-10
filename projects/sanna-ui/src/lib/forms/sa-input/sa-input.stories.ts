@@ -169,6 +169,14 @@ const meta: Meta<SaInputComponent> = {
         defaultValue: { summary: '""' },
       },
     },
+    boldText: {
+      control: 'boolean',
+      description: 'Hacer el texto del input en negrita (bold)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
 
 };
@@ -340,6 +348,24 @@ export const CustomColors: Story = {
     placeholder: 'Fondo verde claro y texto verde oscuro',
     backgroundColor: '#f0f8f0',
     textColor: '#006600',
+  }
+};
+
+export const BoldText: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Texto en negrita',
+    placeholder: 'Escriba aquí... el texto aparecerá en negrita',
+    value: 'Este texto está en negrita',
+    boldText: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input con texto en negrita usando la propiedad boldText.'
+      },
+      source: { type: 'dynamic' }
+    }
   }
 };
 

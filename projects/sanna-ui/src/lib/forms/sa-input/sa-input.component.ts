@@ -51,6 +51,7 @@ export class SaInputComponent implements ControlValueAccessor {
   @Input() pattern: string = '';
   @Input() backgroundColor: string = '';
   @Input() textColor: string = '';
+  @Input() boldText: boolean = false; // Hacer el texto del input bold
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<FocusEvent>();
@@ -73,6 +74,11 @@ export class SaInputComponent implements ControlValueAccessor {
     
     if (sizeMap[this.size] && sizeMap[this.size] !== '') {
       baseClasses.push(sizeMap[this.size]);
+    }
+    
+    // Agregar clase bold si está activa
+    if (this.boldText) {
+      baseClasses.push('input-bold');
     }
     
     if (this.status === 'error' || this.errorText) {

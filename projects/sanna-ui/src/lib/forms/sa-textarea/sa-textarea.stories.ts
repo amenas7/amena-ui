@@ -49,6 +49,7 @@ const meta: Meta<SaTextareaComponent> = {
           result = result.replace(/\[cols\]="(\d+)"/g, 'cols="$1"');
           result = result.replace(/\[minlength\]="(\d+)"/g, 'minlength="$1"');
           result = result.replace(/\[maxlength\]="(\d+)"/g, 'maxlength="$1"');
+          result = result.replace(/\[height\]="(\d+)"/g, 'height="$1"');
           
           return result;
         }
@@ -120,6 +121,10 @@ const meta: Meta<SaTextareaComponent> = {
     maxlength: {
       control: { type: 'number', min: 1 },
       description: 'Longitud máxima del texto'
+    },
+    height: {
+      control: { type: 'number', min: 50, max: 500 },
+      description: 'Altura fija en píxeles. Cuando se especifica, deshabilita el resize manual y habilita scroll vertical automático'
     }
   }
 };
@@ -156,6 +161,23 @@ export const WithValue: Story = {
     docs: {
       description: {
         story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const FixedHeight: Story = {
+  args: {
+    label: 'Comentarios con altura fija',
+    placeholder: 'Escriba aquí... Este textarea tiene altura fija de 150px.',
+    value: 'Este textarea tiene una altura fija de 150 píxeles. Cuando el contenido excede esta altura, aparece automáticamente un scroll vertical. El resize manual está deshabilitado para mantener la altura constante.\n\nPuede escribir más texto aquí para ver cómo funciona el scroll automático.',
+    height: 150,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea con altura fija en píxeles. Cuando se especifica la propiedad height, el resize manual se deshabilita y se habilita scroll vertical automático.'
       },
       source: { type: 'dynamic' }
     }

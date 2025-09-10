@@ -44,6 +44,7 @@ export class SaTextareaComponent implements ControlValueAccessor {
   @Input() minlength: number | null = null;
   @Input() maxlength: number | null = null;
   @Input() resize: 'none' | 'both' | 'horizontal' | 'vertical' = 'vertical';
+  @Input() height: number | null = null; // Altura fija en píxeles
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<FocusEvent>();
@@ -98,9 +99,19 @@ export class SaTextareaComponent implements ControlValueAccessor {
   }
 
   get textareaStyles(): any {
-    return {
-      resize: this.resize
-    };
+    const styles: any = {};
+    
+    if (this.height !== null) {
+      // Cuando se especifica altura, usar altura fija y deshabilitar resize
+      styles.height = `${this.height}px`;
+      styles.resize = 'none';
+      styles.overflowY = 'auto'; // Habilitar scroll vertical
+    } else {
+      // Comportamiento normal cuando no hay altura especificada
+      styles.resize = this.resize;
+    }
+    
+    return styles;
   }
 
   writeValue(value: any): void {

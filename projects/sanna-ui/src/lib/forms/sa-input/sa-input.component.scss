@@ -38,6 +38,7 @@
     font-size: 16px !important;
   }
   
+  
   // Label fantasma - mantiene el espacio pero es invisible
   &.ghost-label {
     visibility: hidden;
@@ -153,6 +154,31 @@
     padding: 0.5rem 1rem;
     font-size: 1.25rem;
     border-radius: 0.5rem;
+  }
+  
+  // Input con texto bold
+  &.input-bold {
+    font-weight: 700 !important;
+    
+    // El placeholder debe mantener su peso normal
+    &::placeholder {
+      font-weight: 400 !important;
+    }
+    
+    // Para navegadores que usan -webkit-input-placeholder
+    &::-webkit-input-placeholder {
+      font-weight: 400 !important;
+    }
+    
+    // Para Firefox
+    &::-moz-placeholder {
+      font-weight: 400 !important;
+    }
+    
+    // Para IE/Edge
+    &:-ms-input-placeholder {
+      font-weight: 400 !important;
+    }
   }
 }
 
