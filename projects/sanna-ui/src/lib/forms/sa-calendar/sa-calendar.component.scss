@@ -107,12 +107,12 @@
   }
   
   &:disabled {
-    background-color: var(--disabled-color);
+    background-color: #E9ECEF !important;
     opacity: 1;
     cursor: default;
   }
   
-  &:read-only {
+  &:read-only:not(:disabled) {
     background-color: #ffffff !important;
     cursor: pointer;
   }
@@ -180,7 +180,7 @@
   }
   
   &.disabled {
-    color: var(--disabled-color);
+    color: var(--secondary-color);
     cursor: default;
     pointer-events: none;
   }
@@ -473,7 +473,7 @@
       &::after {
         content: '';
         position: absolute;
-        bottom: 4px;
+        bottom: 2px;
         left: 50%;
         transform: translateX(-50%);
         width: 4px;
