@@ -10,7 +10,8 @@ import {
   ViewEncapsulation, 
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  HostListener
+  HostListener,
+  ElementRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { 
@@ -38,6 +39,15 @@ import {
   styleUrls: ['./sa-calendar.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'class': 'sanna-ui-component sanna-ui-calendar',
+    '[class.sanna-ui-calendar-size-sm]': 'size === "sm"',
+    '[class.sanna-ui-calendar-size-md]': 'size === "md"',
+    '[class.sanna-ui-calendar-size-lg]': 'size === "lg"',
+    '[class.sanna-ui-calendar-disabled]': 'disabled',
+    '[class.sanna-ui-calendar-readonly]': 'readonly',
+    '[class.sanna-ui-calendar-inline]': 'inline'
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -103,7 +113,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   private onChange = (_: any) => {};
   private onTouched = () => {};
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private elementRef: ElementRef
+  ) {
     this._generatedId = `sa-calendar-${Math.random().toString(36).substr(2, 9)}`;
   }
 
@@ -124,12 +137,17 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   onDocumentClick(event: Event) {
     if (!this.inline && this.isOpen) {
       const target = event.target as Element;
-      const calendarElement = (event.target as Element).closest('sa-calendar');
-      if (!calendarElement) {
+      
+      // Con Shadow DOM, necesitamos verificar si el clic fue dentro del componente
+      const isInsideComponent = this.elementRef.nativeElement.contains(target);
+      
+      // Si el clic fue fuera del componente, cerrar el calendario
+      if (!isInsideComponent) {
         this.closeCalendar();
       }
     }
   }
+
 
   get calendarId(): string {
     return this.id || this._generatedId;
@@ -406,9 +424,18 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   // Event handlers
-  onInputClick() {
+  onInputClick(event?: Event) {
     if (!this.disabled && !this.readonly && !this.inline) {
-      this.toggleCalendar();
+      // Prevenir que el evento se propague para evitar que se cierre inmediatamente
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      
+      // Usar setTimeout para evitar conflictos con el document:click
+      setTimeout(() => {
+        this.toggleCalendar();
+      }, 0);
     }
   }
 
@@ -423,18 +450,28 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this.blur.emit(event);
   }
 
-  onDayClick(day: CalendarDay) {
+  onDayClick(day: CalendarDay, event?: Event) {
     if (day.isDisabled || this.disabled || this.readonly) {
       return;
+    }
+
+    // Prevenir que el evento se propague para evitar que se cierre el calendario
+    if (event) {
+      event.stopPropagation();
     }
 
     const selectedDate = new Date(day.date);
     this.selectDate(selectedDate);
   }
 
-  onMonthClick(month: CalendarMonth) {
+  onMonthClick(month: CalendarMonth, event?: Event) {
     if (month.isDisabled) {
       return;
+    }
+
+    // Prevenir que el evento se propague para evitar que se cierre el calendario
+    if (event) {
+      event.stopPropagation();
     }
 
     this.currentDate = new Date(month.year, month.number, 1);
@@ -442,9 +479,14 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this.monthChange.emit(new Date(this.currentDate));
   }
 
-  onYearClick(year: CalendarYear) {
+  onYearClick(year: CalendarYear, event?: Event) {
     if (year.isDisabled) {
       return;
+    }
+
+    // Prevenir que el evento se propague para evitar que se cierre el calendario
+    if (event) {
+      event.stopPropagation();
     }
 
     this.currentDate = new Date(year.year, this.currentDate.getMonth(), 1);
@@ -476,7 +518,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   // Navigation methods
-  navigatePrevious() {
+  navigatePrevious(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     switch (this.currentView) {
       case 'day':
         this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
@@ -494,7 +539,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this.cdr.markForCheck();
   }
 
-  navigateNext() {
+  navigateNext(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     switch (this.currentView) {
       case 'day':
         this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);

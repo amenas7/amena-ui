@@ -1,4 +1,4 @@
-<div class="sa-calendar-container">
+<div class="sa-calendar-container sanna-ui-calendar-root" [attr.data-sanna-calendar]="true">
   <!-- Input field (if not inline) -->
   <div *ngIf="!inline" class="calendar-input-container">
     <label *ngIf="shouldShowLabel" [for]="calendarId" [class]="labelClasses">
@@ -19,7 +19,7 @@
         [disabled]="disabled"
         spellcheck="false"
         autocomplete="off"
-        (click)="onInputClick()"
+        (click)="onInputClick($event)"
         (focus)="onInputFocus($event)"
         (blur)="onInputBlur($event)"
       />
@@ -41,7 +41,7 @@
         *ngIf="!inputValue || disabled"
         class="calendar-icon" 
         [class.disabled]="disabled || readonly"
-        (click)="onInputClick()">
+        (click)="onInputClick($event)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -80,7 +80,7 @@
         <button 
           type="button" 
           class="nav-button prev" 
-          (click)="navigatePrevious()"
+          (click)="navigatePrevious($event)"
           [disabled]="disabled || !canNavigateToPreviousMonth() && currentView === 'day' || !canNavigateToPreviousYear() && currentView === 'month'">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15,18 9,12 15,6"></polyline>
@@ -100,7 +100,7 @@
         <button 
           type="button" 
           class="nav-button next" 
-          (click)="navigateNext()"
+          (click)="navigateNext($event)"
           [disabled]="disabled || !canNavigateToNextMonth() && currentView === 'day' || !canNavigateToNextYear() && currentView === 'month'">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9,18 15,12 9,6"></polyline>
@@ -157,7 +157,7 @@
               [class.other-month]="!day.isInCurrentMonth"
               [class.weekend]="day.isWeekend && mergedConfig.highlightWeekends"
               [class.has-event]="day.hasEvent"
-              (click)="onDayClick(day)">
+              (click)="onDayClick(day, $event)">
               <span class="day-number">{{ day.day }}</span>
               <div *ngIf="day.hasEvent" class="event-indicator"></div>
             </div>
@@ -174,7 +174,7 @@
             [class.selected]="month.isSelected"
             [class.disabled]="month.isDisabled"
             [class.current]="month.isCurrent"
-            (click)="onMonthClick(month)">
+            (click)="onMonthClick(month, $event)">
             {{ month.name }}
           </div>
         </div>
@@ -189,7 +189,7 @@
             [class.selected]="year.isSelected"
             [class.disabled]="year.isDisabled"
             [class.current]="year.isCurrent"
-            (click)="onYearClick(year)">
+            (click)="onYearClick(year, $event)">
             {{ year.year }}
           </div>
         </div>
