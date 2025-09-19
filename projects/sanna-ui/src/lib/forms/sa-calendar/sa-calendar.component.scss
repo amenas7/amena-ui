@@ -9,18 +9,11 @@
   width: 100%;
   font-family: $sanna-font-stack;
   box-sizing: border-box;
+  position: relative;
   
-  // Resetear estilos de Angular Material y otros frameworks
-  // para asegurar encapsulación completa
+  // Asegurar que el componente no cause overflow
   * {
     box-sizing: border-box;
-    font-family: $sanna-font-stack !important;
-  }
-  
-  // Sobrescribir estilos de mat-form-field y otros componentes de Material
-  input, button, label, div, span {
-    font-family: $sanna-font-stack !important;
-    line-height: inherit !important;
   }
   
   // Variables CSS personalizables
@@ -54,6 +47,7 @@
   position: relative;
   width: 100%;
   font-family: $sanna-font-stack;
+  overflow: visible; // Permitir que el popup se muestre fuera del contenedor
 }
 
 // Estilos del input
@@ -332,6 +326,10 @@
   width: 220px;
   max-width: 90vw;
   
+  // Evitar que cause overflow en el contenedor padre
+  box-sizing: border-box;
+  overflow: hidden;
+  
   &.open {
     opacity: 1;
     transform: translateY(0);
@@ -464,6 +462,8 @@
 // Contenido del calendario
 .calendar-content {
   padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 // Vista de días
