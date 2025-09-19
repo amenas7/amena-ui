@@ -34,29 +34,82 @@
   --box-shadow-focus: 0 0 0 0.2rem rgba(54, 173, 85, 0.25);
 }
 
-// Container principal - MEJORADO para evitar overflow
+// REGLAS CRÍTICAS PARA EVITAR CONFLICTOS CON ESTILOS GLOBALES
+// Estas reglas deben ir PRIMERO para tener máxima prioridad
+:host {
+  // Reset completo para evitar herencia de estilos problemáticos
+  all: unset;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  
+  // Evitar que cualquier estilo global afecte el componente
+  * {
+    all: unset;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  // Reset específico para elementos que pueden causar problemas
+  div, span, button, input, table, tr, td, th {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+}
+
+// Container principal - REGLAS ULTRA ESPECÍFICAS
 .sa-calendar-container {
-  position: relative;
-  width: 100%;
-  overflow: visible !important; // CRÍTICO: Evita que el contenedor corte el popup
-  max-height: none !important; // CRÍTICO: Permite que el popup se expanda
-  height: auto !important; // CRÍTICO: Altura automática
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  // Forzar que todos los hijos también respeten estas reglas
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
 }
 
 // Estilos del input
 .calendar-input-container {
-  width: 100%;
-  margin-bottom: 0;
-  overflow: visible !important; // MEJORADO: Evita overflow en el contenedor del input
+  width: 100% !important;
+  margin-bottom: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  position: relative !important;
 }
 
 .form-label {
-  font-family: $sanna-font-stack;
-  color: var(--on-surface-color);
-  font-size: 14px;
+  font-family: $sanna-font-stack !important;
+  color: var(--on-surface-color) !important;
+  font-size: 14px !important;
   font-weight: 400 !important;
-  margin-bottom: 2px;
-  display: inline-block;
+  margin-bottom: 2px !important;
+  display: inline-block !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
   
   &.label-sm {
     font-size: 11px !important;
@@ -70,41 +123,46 @@
     font-size: 16px !important;
   }
   
-  // Label fantasma - mantiene el espacio pero es invisible
   &.ghost-label {
     visibility: hidden;
     
-    // Usar un contenido mínimo para mantener la altura
     &::before {
-      content: '\00A0'; // Non-breaking space
+      content: '\00A0';
     }
   }
 }
 
 .position-relative {
-  position: relative;
-  overflow: visible !important; // MEJORADO: Evita overflow en el contenedor relativo
+  position: relative !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  width: 100% !important;
 }
 
 .calendar-input {
-  font-family: $sanna-font-stack;
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--on-surface-color);
-  background-color: var(--background-color);
-  background-clip: padding-box;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+  font-family: $sanna-font-stack !important;
+  display: block !important;
+  width: 100% !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: var(--on-surface-color) !important;
+  background-color: var(--background-color) !important;
+  background-clip: padding-box !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
   transition: border-color var(--transition-duration) ease-in-out, 
-              box-shadow var(--transition-duration) ease-in-out;
-  box-sizing: border-box;
-  cursor: pointer;
+              box-shadow var(--transition-duration) ease-in-out !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
   padding-right: 2.5rem !important;
-  overflow: visible !important; // MEJORADO: Evita overflow en el input
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
   
   &:focus {
     outline: none !important;
@@ -114,17 +172,17 @@
   
   &:disabled {
     background-color: #E9ECEF !important;
-    opacity: 1;
-    cursor: default;
+    opacity: 1 !important;
+    cursor: default !important;
   }
   
   &:read-only:not(:disabled) {
     background-color: #ffffff !important;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   &.is-valid {
-    border-color: var(--success-color);
+    border-color: var(--success-color) !important;
     
     &:focus {
       box-shadow: inset 0 0 0 2px var(--success-color) !important;
@@ -133,7 +191,7 @@
   }
   
   &.is-invalid {
-    border-color: var(--error-color);
+    border-color: var(--error-color) !important;
     
     &:focus {
       box-shadow: inset 0 0 0 2px var(--error-color) !important;
@@ -142,549 +200,720 @@
   }
   
   &.form-control-sm {
-    min-height: calc(1.5em + 0.5rem + 2px);
+    min-height: calc(1.5em + 0.5rem + 2px) !important;
     padding: 4.125px 8.25px !important;
     padding-right: 2.25rem !important;
     font-size: 11px !important;
-    border-radius: 0.25rem;
+    border-radius: 0.25rem !important;
   }
   
   &.form-control-lg {
-    min-height: calc(1.5em + 1rem + 2px);
-    padding: 0.5rem 1rem;
+    min-height: calc(1.5em + 1rem + 2px) !important;
+    padding: 0.5rem 1rem !important;
     padding-right: 3rem !important;
-    font-size: 20px;
-    border-radius: 0.5rem;
+    font-size: 20px !important;
+    border-radius: 0.5rem !important;
   }
 }
 
 // Icono del calendario
 .calendar-icon {
-  position: absolute;
-  top: 50%;
-  right: 0.75rem;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  pointer-events: all;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--secondary-color);
-  transition: color var(--transition-duration) ease-in-out;
+  position: absolute !important;
+  top: 50% !important;
+  right: 0.75rem !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--secondary-color) !important;
+  transition: color var(--transition-duration) ease-in-out !important;
+  overflow: visible !important;
   
   svg {
-    width: 16px;
-    height: 16px;
-    stroke: currentColor;
+    width: 16px !important;
+    height: 16px !important;
+    stroke: currentColor !important;
   }
   
   &:hover {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
   }
   
   &.disabled {
-    color: var(--secondary-color);
-    cursor: default;
-    pointer-events: none;
+    color: var(--secondary-color) !important;
+    cursor: default !important;
+    pointer-events: none !important;
   }
 }
 
 // Icono de limpiar (X)
 .clear-icon {
-  position: absolute;
-  top: 50%;
-  right: 0.75rem;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  pointer-events: all;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute !important;
+  top: 50% !important;
+  right: 0.75rem !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   transition: color var(--transition-duration) ease-in-out, 
-              background-color var(--transition-duration) ease-in-out;
-  border-radius: 50%;
-  color: var(--error-color);
+              background-color var(--transition-duration) ease-in-out !important;
+  border-radius: 50% !important;
+  color: var(--error-color) !important;
+  overflow: visible !important;
+  
   svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
+    width: 14px !important;
+    height: 14px !important;
+    stroke: currentColor !important;
   }
   
   &:hover {
-    background-color: rgba(239, 68, 68, 0.1);
+    background-color: rgba(239, 68, 68, 0.1) !important;
   }
 }
 
 // Ajustes para diferentes tamaños
 .form-control-sm ~ .calendar-icon,
 .form-control-sm ~ .clear-icon {
-  right: 0.5rem;
-  width: 18px;
-  height: 18px;
+  right: 0.5rem !important;
+  width: 18px !important;
+  height: 18px !important;
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: 14px !important;
+    height: 14px !important;
   }
 }
 
 .form-control-lg ~ .calendar-icon,
 .form-control-lg ~ .clear-icon {
-  right: 1rem;
-  width: 24px;
-  height: 24px;
+  right: 1rem !important;
+  width: 24px !important;
+  height: 24px !important;
   
   svg {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
   }
 }
 
-// Popup del calendario - MEJORADO para evitar problemas de overflow
+// POPUP DEL CALENDARIO - REGLAS ULTRA CRÍTICAS
 .calendar-popup {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000 !important; // CRÍTICO: Z-index alto para estar por encima de todo
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  margin-top: 4px;
-  opacity: 0;
-  transform: translateY(-10px);
-  visibility: hidden;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  z-index: 9999 !important; // Z-index ultra alto
+  background: var(--background-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  margin-top: 4px !important;
+  opacity: 0 !important;
+  transform: translateY(-10px) !important;
+  visibility: hidden !important;
   transition: opacity var(--transition-duration) ease-in-out,
               transform var(--transition-duration) ease-in-out,
-              visibility var(--transition-duration) ease-in-out;
-  width: 220px;
-  max-width: 90vw;
-  overflow: visible !important; // CRÍTICO: Permite que el contenido se vea completo
-  max-height: none !important; // CRÍTICO: Sin restricción de altura
-  height: auto !important; // CRÍTICO: Altura automática
+              visibility var(--transition-duration) ease-in-out !important;
+  width: 220px !important;
+  max-width: 90vw !important;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  min-height: auto !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  // Forzar que todos los elementos internos también respeten estas reglas
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
   
   &.open {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
   }
   
   &.inline {
-    position: static;
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-    margin-top: 0;
-    box-shadow: none;
-    border: 1px solid var(--border-color);
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    margin-top: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--border-color) !important;
   }
 }
 
 // Header del calendario
 .calendar-header {
-  padding: 1rem 1rem 0.5rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--background-color);
-  border-radius: 8px 8px 0 0;
-  overflow: visible !important; // MEJORADO: Evita overflow en el header
+  padding: 1rem 1rem 0.5rem 1rem !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  background: var(--background-color) !important;
+  border-radius: 8px 8px 0 0 !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
 }
 
 .calendar-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 0.5rem !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .nav-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: none;
-  background: transparent;
-  color: var(--secondary-color);
-  border-radius: 6px;
-  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--secondary-color) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
   transition: background-color var(--transition-duration) ease-in-out,
-              color var(--transition-duration) ease-in-out;
+              color var(--transition-duration) ease-in-out !important;
+  overflow: visible !important;
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: 14px !important;
+    height: 14px !important;
   }
   
   &:hover:not(:disabled) {
-    background: var(--hover-color);
-    color: var(--on-surface-color);
+    background: var(--hover-color) !important;
+    color: var(--on-surface-color) !important;
   }
   
   &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
   }
 }
 
 .header-title-container {
-  flex: 1;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1 !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .header-title {
-  background: none;
-  border: none;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--on-surface-color);
-  cursor: pointer;
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  transition: background-color var(--transition-duration) ease-in-out;
-  min-width: 80px;
-  min-height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: none !important;
+  border: none !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--on-surface-color) !important;
+  cursor: pointer !important;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 6px !important;
+  transition: background-color var(--transition-duration) ease-in-out !important;
+  min-width: 80px !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
   
   &:hover:not(:disabled) {
-    background: var(--hover-color);
+    background: var(--hover-color) !important;
   }
   
   &:disabled {
-    cursor: default;
+    cursor: default !important;
   }
 }
 
 .calendar-actions {
-  display: none; // Oculto por defecto para apariencia más limpia
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 0.5rem;
+  display: none !important;
+  gap: 0.5rem !important;
+  justify-content: center !important;
+  margin-top: 0.5rem !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .action-button {
-  padding: 0.375rem 0.75rem;
-  font-size: 14px;
-  border: 1px solid var(--border-color);
-  background: var(--background-color);
-  color: var(--on-surface-color);
-  border-radius: var(--border-radius);
-  cursor: pointer;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 14px !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--background-color) !important;
+  color: var(--on-surface-color) !important;
+  border-radius: var(--border-radius) !important;
+  cursor: pointer !important;
   transition: background-color var(--transition-duration) ease-in-out,
               border-color var(--transition-duration) ease-in-out,
-              color var(--transition-duration) ease-in-out;
+              color var(--transition-duration) ease-in-out !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
   
   &:hover:not(:disabled) {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--on-primary-color);
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
   }
   
   &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
   }
 }
 
-// Contenido del calendario - MEJORADO para evitar overflow
+// CONTENIDO DEL CALENDARIO - REGLAS ULTRA CRÍTICAS
 .calendar-content {
-  padding: 0.5rem 0.75rem 0.75rem 0.75rem;
-  overflow: visible !important; // CRÍTICO: Permite que el contenido se vea completo
-  max-height: none !important; // CRÍTICO: Sin restricción de altura
-  height: auto !important; // CRÍTICO: Altura automática
+  padding: 0.5rem 0.75rem 0.75rem 0.75rem !important;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  min-height: auto !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  // Forzar que todos los elementos internos también respeten estas reglas
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
 }
 
-// Vista de días - MEJORADO para evitar overflow
+// VISTA DE DÍAS - REGLAS ULTRA CRÍTICAS
 .calendar-days {
-  overflow: visible !important; // CRÍTICO: Evita overflow en la vista de días
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  // Forzar que todos los elementos internos también respeten estas reglas
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
   
   .weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0;
-    margin-bottom: 6px;
-    background-color: #E2F3E6;
-    border-radius: 4px;
-    padding: 0.375rem 0;
-    overflow: visible !important; // MEJORADO: Evita overflow en los días de la semana
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 0 !important;
+    margin-bottom: 6px !important;
+    background-color: #E2F3E6 !important;
+    border-radius: 4px !important;
+    padding: 0.375rem 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    
+    * {
+      overflow: visible !important;
+      max-height: none !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
   }
   
   .weekday-header {
-    text-align: center;
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--weekday-header-color);
-    background-color: transparent;
-    padding: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    text-align: center !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    color: var(--weekday-header-color) !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .days-grid {
-    overflow: visible !important; // MEJORADO: Evita overflow en la grilla de días
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    
+    * {
+      overflow: visible !important;
+      max-height: none !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
     
     .week-row {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
-      margin-bottom: 2px;
-      overflow: visible !important; // MEJORADO: Evita overflow en las filas
+      display: grid !important;
+      grid-template-columns: repeat(7, 1fr) !important;
+      gap: 2px !important;
+      margin-bottom: 2px !important;
+      overflow: visible !important;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      box-sizing: border-box !important;
+      
+      * {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+        min-height: auto !important;
+      }
     }
   }
   
   .day-cell {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 26px;
-    width: 100%;
-    max-width: 26px;
-    margin: 0 auto;
-    border-radius: 4px;
-    cursor: pointer;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 26px !important;
+    width: 100% !important;
+    max-width: 26px !important;
+    margin: 0 auto !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
-                transform var(--transition-duration) ease-in-out;
-    user-select: none;
-    overflow: visible !important; // MEJORADO: Evita overflow en las celdas
+                transform var(--transition-duration) ease-in-out !important;
+    user-select: none !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    
+    * {
+      overflow: visible !important;
+      max-height: none !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
     
     .day-number {
-      font-size: 11px;
-      font-weight: 400;
-      z-index: 1;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      z-index: 1 !important;
+      overflow: visible !important;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
     }
     
     .event-indicator {
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 4px;
-      background: var(--primary-color);
-      border-radius: 50%;
+      position: absolute !important;
+      bottom: 4px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 4px !important;
+      height: 4px !important;
+      background: var(--primary-color) !important;
+      border-radius: 50% !important;
     }
     
     &:hover:not(.disabled) {
-      background: var(--hover-color);
+      background: var(--hover-color) !important;
     }
     
     &.today {
-      background: transparent;
-      position: relative;
+      background: transparent !important;
+      position: relative !important;
       
       .day-number {
-        color: var(--primary-color);
-        font-weight: 600;
+        color: var(--primary-color) !important;
+        font-weight: 600 !important;
       }
       
-      // Punto indicador debajo
       &::after {
-        content: '';
-        position: absolute;
-        bottom: 2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4px;
-        height: 4px;
-        background-color: var(--primary-color);
-        border-radius: 50%;
+        content: '' !important;
+        position: absolute !important;
+        bottom: 2px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 4px !important;
+        height: 4px !important;
+        background-color: var(--primary-color) !important;
+        border-radius: 50% !important;
       }
     }
     
     &.selected {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
-      font-weight: 500;
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
+      font-weight: 500 !important;
       
       .day-number {
-        font-weight: 500;
-        color: var(--on-primary-color);
+        font-weight: 500 !important;
+        color: var(--on-primary-color) !important;
       }
       
       &:hover {
-        background: var(--primary-color);
-        opacity: 0.9;
+        background: var(--primary-color) !important;
+        opacity: 0.9 !important;
       }
     }
     
-    // Si es today Y selected, priorizar el estilo de selected
     &.today.selected {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
       
       .day-number {
-        color: var(--on-primary-color);
-        font-weight: 600;
+        color: var(--on-primary-color) !important;
+        font-weight: 600 !important;
       }
       
-      // Ocultar el punto cuando está seleccionado
       &::after {
-        display: none;
+        display: none !important;
       }
     }
     
     &.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+      opacity: 0.4 !important;
+      cursor: not-allowed !important;
       
       &:hover {
-        background: transparent;
-        transform: none;
+        background: transparent !important;
+        transform: none !important;
       }
     }
     
     &.weekend {
-      color: var(--error-color);
+      color: var(--error-color) !important;
       
       .day-number {
-        font-weight: 500;
+        font-weight: 500 !important;
       }
     }
     
     &.has-event {
-      background: rgba(54, 173, 85, 0.1);
+      background: rgba(54, 173, 85, 0.1) !important;
       
       &:not(.selected):not(.today) {
-        border: 1px solid var(--primary-color);
+        border: 1px solid var(--primary-color) !important;
       }
     }
   }
 }
 
-// Vista de meses - MEJORADO para evitar overflow
+// VISTA DE MESES - REGLAS ULTRA CRÍTICAS
 .calendar-months {
-  overflow: visible !important; // MEJORADO: Evita overflow en la vista de meses
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
   
   .months-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    overflow: visible !important; // MEJORADO: Evita overflow en la grilla de meses
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    
+    * {
+      overflow: visible !important;
+      max-height: none !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
   }
   
   .month-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 40px !important;
+    border-radius: var(--border-radius) !important;
+    cursor: pointer !important;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
-                transform var(--transition-duration) ease-in-out;
-    user-select: none;
-    font-size: 11px;
-    font-weight: 500;
-    overflow: visible !important; // MEJORADO: Evita overflow en las celdas de mes
+                transform var(--transition-duration) ease-in-out !important;
+    user-select: none !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
-      background: var(--hover-color);
+      background: var(--hover-color) !important;
     }
     
     &.current {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
       
       &:hover {
-        background: var(--primary-color);
-        opacity: 0.9;
+        background: var(--primary-color) !important;
+        opacity: 0.9 !important;
       }
     }
     
     &.selected {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
-      font-weight: 600;
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
+      font-weight: 600 !important;
       
       &:hover {
-        background: var(--primary-color);
-        opacity: 0.9;
+        background: var(--primary-color) !important;
+        opacity: 0.9 !important;
       }
     }
     
     &.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+      opacity: 0.4 !important;
+      cursor: not-allowed !important;
       
       &:hover {
-        background: transparent;
-        transform: none;
+        background: transparent !important;
+        transform: none !important;
       }
     }
   }
 }
 
-// Vista de años - MEJORADO para evitar overflow
+// VISTA DE AÑOS - REGLAS ULTRA CRÍTICAS
 .calendar-years {
-  overflow: visible !important; // MEJORADO: Evita overflow en la vista de años
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
   
   .years-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    overflow: visible !important; // MEJORADO: Evita overflow en la grilla de años
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    
+    * {
+      overflow: visible !important;
+      max-height: none !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
   }
   
   .year-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 40px !important;
+    border-radius: var(--border-radius) !important;
+    cursor: pointer !important;
     transition: background-color var(--transition-duration) ease-in-out,
                 color var(--transition-duration) ease-in-out,
-                transform var(--transition-duration) ease-in-out;
-    user-select: none;
-    font-size: 11px;
-    font-weight: 500;
-    overflow: visible !important; // MEJORADO: Evita overflow en las celdas de año
+                transform var(--transition-duration) ease-in-out !important;
+    user-select: none !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
     
     &:hover:not(.disabled):not(.current):not(.selected) {
-      background: var(--hover-color);
+      background: var(--hover-color) !important;
     }
     
     &.current {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
       
       &:hover {
-        background: var(--primary-color);
-        opacity: 0.9;
+        background: var(--primary-color) !important;
+        opacity: 0.9 !important;
       }
     }
     
     &.selected {
-      background: var(--primary-color);
-      color: var(--on-primary-color);
-      font-weight: 600;
+      background: var(--primary-color) !important;
+      color: var(--on-primary-color) !important;
+      font-weight: 600 !important;
       
       &:hover {
-        background: var(--primary-color);
-        opacity: 0.9;
-        transform: scale(1.02);
+        background: var(--primary-color) !important;
+        opacity: 0.9 !important;
+        transform: scale(1.02) !important;
       }
     }
     
     &.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+      opacity: 0.4 !important;
+      cursor: not-allowed !important;
       
       &:hover {
-        background: transparent;
-        transform: none;
+        background: transparent !important;
+        transform: none !important;
       }
     }
   }
@@ -692,74 +921,99 @@
 
 // Textos de ayuda y errores
 .form-text {
-  font-family: $sanna-font-stack;
-  font-size: 12px;
-  color: var(--secondary-color);
-  margin-top: 0.25rem;
+  font-family: $sanna-font-stack !important;
+  font-size: 12px !important;
+  color: var(--secondary-color) !important;
+  margin-top: 0.25rem !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .invalid-feedback {
-  font-family: $sanna-font-stack;
-  font-size: 12px;
-  margin-top: 0.25rem;
-  color: var(--error-color);
-  display: block;
+  font-family: $sanna-font-stack !important;
+  font-size: 12px !important;
+  margin-top: 0.25rem !important;
+  color: var(--error-color) !important;
+  display: block !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .text-danger {
   color: var(--error-color) !important;
 }
 
-// Responsividad - MEJORADO para evitar problemas de overflow
+// RESPONSIVIDAD - REGLAS ULTRA CRÍTICAS
 @media (max-width: 576px) {
   .calendar-popup {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    max-width: calc(100vw - 2rem);
-    overflow: visible !important; // CRÍTICO: Mantener overflow visible en móviles
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 200px !important;
+    max-width: calc(100vw - 2rem) !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .calendar-popup.open {
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) !important;
   }
   
   .calendar-header {
-    padding: 0.75rem 0.75rem 0.5rem 0.75rem;
-    overflow: visible !important; // MEJORADO: Evita overflow en móviles
+    padding: 0.75rem 0.75rem 0.5rem 0.75rem !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .calendar-content {
-    padding: 0.375rem 0.5rem 0.5rem 0.5rem;
-    overflow: visible !important; // MEJORADO: Evita overflow en móviles
+    padding: 0.375rem 0.5rem 0.5rem 0.5rem !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .header-title {
-    min-width: 70px;
-    min-height: 30px;
-    padding: 0.5rem 0.75rem;
-    font-size: 11px;
+    min-width: 70px !important;
+    min-height: 30px !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 11px !important;
   }
   
   .day-cell {
-    min-height: 24px;
-    width: 100%;
-    max-width: 24px;
-    overflow: visible !important; // MEJORADO: Evita overflow en móviles
+    min-height: 24px !important;
+    width: 100% !important;
+    max-width: 24px !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
     
     .day-number {
-      font-size: 10px;
+      font-size: 10px !important;
     }
   }
   
   .months-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    overflow: visible !important; // MEJORADO: Evita overflow en móviles
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .years-grid {
     grid-template-columns: repeat(3, 1fr) !important;
-    overflow: visible !important; // MEJORADO: Evita overflow en móviles
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
 }
 
@@ -792,141 +1046,154 @@
 
 :host(.theme-compact) {
   .day-cell {
-    min-height: 28px;
+    min-height: 28px !important;
   }
   
   .calendar-header {
-    padding: 0.5rem;
+    padding: 0.5rem !important;
   }
   
   .calendar-content {
-    padding: 0.5rem;
+    padding: 0.5rem !important;
   }
 }
 
-// Estados de tamaño para el calendario completo - MEJORADO
+// Estados de tamaño para el calendario completo
 :host(.size-sm) {
   .calendar-popup {
-    min-width: 240px;
-    overflow: visible !important; // MEJORADO: Mantener overflow visible
+    min-width: 240px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .day-cell {
-    min-height: 28px;
-    overflow: visible !important; // MEJORADO: Evita overflow en tamaño pequeño
+    min-height: 28px !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
   
   .month-cell, .year-cell {
-    min-height: 32px;
-    font-size: 10px;
-    overflow: visible !important; // MEJORADO: Evita overflow en tamaño pequeño
+    min-height: 32px !important;
+    font-size: 10px !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
 }
 
 :host(.size-lg) {
   .calendar-popup {
-    min-width: 320px;
-    overflow: visible !important; // MEJORADO: Mantener overflow visible
+    min-width: 320px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
   
   .day-cell {
-    min-height: 44px;
-    overflow: visible !important; // MEJORADO: Evita overflow en tamaño grande
+    min-height: 44px !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
   
   .month-cell, .year-cell {
-    min-height: 56px;
-    font-size: 16px;
-    overflow: visible !important; // MEJORADO: Evita overflow en tamaño grande
-  }
-}
-
-// NUEVAS REGLAS PARA SOLUCIONAR CONFLICTOS CON ESTILOS GLOBALES
-// Override de estilos Material Design que pueden interferir
-:host {
-  .mat-mdc-form-field {
+    min-height: 56px !important;
+    font-size: 16px !important;
     overflow: visible !important;
-    max-height: none !important;
     height: auto !important;
-  }
-  
-  .mat-mdc-form-field-infix {
-    overflow: visible !important;
-    max-height: none !important;
-    height: auto !important;
-  }
-  
-  .mat-mdc-form-field-flex {
-    overflow: visible !important;
-    max-height: none !important;
-    height: auto !important;
-  }
-  
-  .mat-datepicker-popup {
-    overflow: visible !important;
-    max-height: none !important;
-    z-index: 1000 !important;
-  }
-  
-  .mat-calendar-table {
-    overflow: visible !important;
-    max-height: none !important;
-  }
-  
-  .mat-calendar-body {
-    overflow: visible !important;
-    max-height: none !important;
-  }
-  
-  .mat-calendar-header {
-    overflow: visible !important;
     max-height: none !important;
   }
 }
 
-// Override de estilos Bootstrap que pueden interferir
+// REGLAS FINALES PARA GARANTIZAR FUNCIONAMIENTO
+// Estas reglas tienen la máxima prioridad y sobrescriben cualquier estilo externo
 :host {
-  .container-fluid {
-    overflow-x: visible !important;
-  }
+  // Reset completo para evitar cualquier interferencia
+  all: unset !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: relative !important;
+  box-sizing: border-box !important;
   
-  .row {
-    overflow-x: visible !important;
-  }
-  
-  .col-md-4, .col-md-3, .col-md-6 {
-    overflow: visible !important;
-  }
-}
-
-// Reglas específicas para evitar conflictos con estilos del proyecto
-:host {
-  // Evitar que los estilos globales del proyecto afecten el calendario
-  * {
-    box-sizing: border-box;
-  }
-  
-  // Asegurar que el popup del calendario tenga prioridad visual
-  .calendar-popup {
-    position: absolute !important;
-    z-index: 1000 !important;
+  // Forzar que todos los elementos internos respeten estas reglas
+  *, *::before, *::after {
+    all: unset !important;
+    box-sizing: border-box !important;
     overflow: visible !important;
     max-height: none !important;
     height: auto !important;
+    min-height: auto !important;
   }
   
-  // Evitar que los estilos de scrollbar afecten el calendario
-  &::-webkit-scrollbar {
-    display: none !important;
-  }
-  
-  // Asegurar que el calendario no herede restricciones de altura
+  // Restaurar solo las propiedades necesarias
   .sa-calendar-container,
   .calendar-popup,
   .calendar-content,
   .calendar-days,
   .calendar-months,
-  .calendar-years {
+  .calendar-years,
+  .calendar-header,
+  .calendar-navigation,
+  .weekdays,
+  .days-grid,
+  .week-row,
+  .day-cell,
+  .months-grid,
+  .month-cell,
+  .years-grid,
+  .year-cell {
+    display: revert !important;
+    position: revert !important;
+    width: revert !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+  
+  // Asegurar que el popup tenga la máxima prioridad visual
+  .calendar-popup {
+    position: absolute !important;
+    z-index: 9999 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  // Eliminar cualquier scrollbar que pueda aparecer
+  &::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  
+  // Asegurar que no haya restricciones de altura en ningún elemento
+  .sa-calendar-container,
+  .calendar-popup,
+  .calendar-content,
+  .calendar-days,
+  .calendar-months,
+  .calendar-years,
+  .calendar-header,
+  .weekdays,
+  .days-grid,
+  .week-row,
+  .day-cell,
+  .months-grid,
+  .month-cell,
+  .years-grid,
+  .year-cell {
     min-height: auto !important;
     max-height: none !important;
     height: auto !important;
