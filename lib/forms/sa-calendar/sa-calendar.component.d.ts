@@ -1,9 +1,10 @@
-import { EventEmitter, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { CalendarSize, CalendarStatus, CalendarViewMode, CalendarDay, CalendarMonth, CalendarYear, CalendarEvent, CalendarColors, CalendarLocale, CalendarValidation, CalendarConfig, CalendarSelectEvent, CalendarViewChangeEvent } from '../../types/calendar.types';
 import * as i0 from "@angular/core";
 export declare class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChanges {
     private cdr;
+    private elementRef;
     private _value;
     size: CalendarSize;
     status: CalendarStatus;
@@ -45,7 +46,7 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     private _generatedId;
     private onChange;
     private onTouched;
-    constructor(cdr: ChangeDetectorRef);
+    constructor(cdr: ChangeDetectorRef, elementRef: ElementRef);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     onDocumentClick(event: Event): void;
@@ -70,17 +71,17 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     private isDateDisabled;
     private isMonthDisabled;
     private isYearDisabled;
-    onInputClick(): void;
+    onInputClick(event?: Event): void;
     onInputFocus(event: FocusEvent): void;
     onInputBlur(event: FocusEvent): void;
-    onDayClick(day: CalendarDay): void;
-    onMonthClick(month: CalendarMonth): void;
-    onYearClick(year: CalendarYear): void;
+    onDayClick(day: CalendarDay, event?: Event): void;
+    onMonthClick(month: CalendarMonth, event?: Event): void;
+    onYearClick(year: CalendarYear, event?: Event): void;
     onTodayClick(): void;
     onClearClick(): void;
     onClearValue(event: MouseEvent): void;
-    navigatePrevious(): void;
-    navigateNext(): void;
+    navigatePrevious(event?: Event): void;
+    navigateNext(event?: Event): void;
     setView(view: CalendarViewMode): void;
     toggleCalendar(): void;
     closeCalendar(): void;
