@@ -387,16 +387,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Activar notificaciones',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -412,6 +402,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Comentarios',\r\n    placeholder: 'Escriba sus comentarios aquí...',\r\n    size: 'md',\r\n    status: 'default',\r\n    rows: 3,\r\n    resize: 'vertical'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Activar notificaciones',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "defaultOptions",
@@ -477,16 +477,6 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -502,6 +492,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea deshabilitado',\r\n    value: 'Este contenido no se puede editar.',\r\n    disabled: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "DisabledChecked",
@@ -767,16 +767,6 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -792,6 +782,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea grande',\r\n    placeholder: 'Tamaño grande...',\r\n    size: 'lg',\r\n    rows: 5,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "Light",
@@ -927,16 +927,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSwitchComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -952,6 +942,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<SaTextareaComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Textarea',\r\n  component: SaTextareaComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          result = result.replace(/\\[resize\\]=\"'([^']+)'\"/g, 'resize=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          \r\n          // Transformar number properties\r\n          result = result.replace(/\\[rows\\]=\"(\\d+)\"/g, 'rows=\"$1\"');\r\n          result = result.replace(/\\[cols\\]=\"(\\d+)\"/g, 'cols=\"$1\"');\r\n          result = result.replace(/\\[minlength\\]=\"(\\d+)\"/g, 'minlength=\"$1\"');\r\n          result = result.replace(/\\[maxlength\\]=\"(\\d+)\"/g, 'maxlength=\"$1\"');\r\n          result = result.replace(/\\[height\\]=\"(\\d+)\"/g, 'height=\"$1\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del textarea'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del textarea'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del textarea'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del textarea'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del textarea'\r\n    },\r\n    rows: {\r\n      control: { type: 'number', min: 1, max: 20 },\r\n      description: 'Número de filas visibles'\r\n    },\r\n    cols: {\r\n      control: { type: 'number', min: 10, max: 100 },\r\n      description: 'Número de columnas (ancho en caracteres)'\r\n    },\r\n    resize: {\r\n      control: { type: 'select' },\r\n      options: ['none', 'both', 'horizontal', 'vertical'],\r\n      description: 'Tipo de redimensionamiento permitido'\r\n    },\r\n    minlength: {\r\n      control: { type: 'number', min: 0 },\r\n      description: 'Longitud mínima del texto'\r\n    },\r\n    maxlength: {\r\n      control: { type: 'number', min: 1 },\r\n      description: 'Longitud máxima del texto'\r\n    },\r\n    height: {\r\n      control: { type: 'number', min: 50, max: 500 },\r\n      description: 'Altura fija en píxeles. Cuando se especifica, deshabilita el resize manual y habilita scroll vertical automático'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaSwitchComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "MinMaxDates",
@@ -1217,16 +1217,6 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1242,6 +1232,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Mensaje',\r\n    placeholder: 'Este campo es obligatorio...',\r\n    required: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "ResizeOptions",
@@ -1417,16 +1417,6 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1442,6 +1432,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea pequeño',\r\n    placeholder: 'Tamaño pequeño...',\r\n    size: 'sm',\r\n    rows: 2,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "States",
@@ -1527,16 +1527,6 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1552,6 +1542,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Comentario validado',\r\n    value: 'Este comentario ha sido validado correctamente.',\r\n    status: 'success',\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
             },
             {
                 "name": "TagCollection",
@@ -1687,16 +1687,6 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir emails promocionales',\r\n    helperText: 'Puedes cambiar esta configuración en cualquier momento',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1712,6 +1702,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Feedback',\r\n    placeholder: 'Comparta sus comentarios...',\r\n    helperText: 'Sus comentarios nos ayudan a mejorar el servicio',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir emails promocionales',\r\n    helperText: 'Puedes cambiar esta configuración en cualquier momento',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
             },
             {
                 "name": "WithIcon",
@@ -1886,17 +1886,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaSwitchComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<SaSelectComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
@@ -1910,6 +1899,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<SaTextareaComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaSwitchComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -3750,19 +3750,6 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSwitchComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
                 {
                     "name": "Story",
@@ -3783,6 +3770,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaTextareaComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaSwitchComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",

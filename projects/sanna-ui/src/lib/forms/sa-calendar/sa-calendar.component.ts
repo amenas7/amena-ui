@@ -120,6 +120,34 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this._generatedId = `sa-calendar-${Math.random().toString(36).substr(2, 9)}`;
   }
 
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClickOutside(event: Event) {
+    // SOLUCION TEMPORAL: Usar click en lugar de mousedown con delay
+    setTimeout(() => {
+      if (!this.inline && this.isOpen) {
+        const target = event.target as Element;
+        
+        // Solo cerrar si el clic fue en SA-CALENDAR (área vacía)
+        if (target.tagName === 'SA-CALENDAR') {
+          // Verificar que no sea un clic en elementos internos usando coordenadas
+          const rect = this.elementRef.nativeElement.getBoundingClientRect();
+          const clickX = (event as MouseEvent).clientX;
+          const clickY = (event as MouseEvent).clientY;
+          
+          // Si el clic está en los bordes del componente (no en contenido), cerrar
+          const isNearEdge = 
+            clickX < rect.left + 20 || clickX > rect.right - 20 ||
+            clickY < rect.top + 20 || clickY > rect.bottom - 20;
+            
+          if (isNearEdge) {
+            this.closeCalendar();
+          }
+        }
+      }
+    }, 100); // Delay para permitir que otros clics se procesen primero
+  }
+
   ngOnInit() {
     this.initializeCalendar();
     if (this.inline) {
@@ -133,20 +161,6 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    if (!this.inline && this.isOpen) {
-      const target = event.target as Element;
-      
-      // Con Shadow DOM, necesitamos verificar si el clic fue dentro del componente
-      const isInsideComponent = this.elementRef.nativeElement.contains(target);
-      
-      // Si el clic fue fuera del componente, cerrar el calendario
-      if (!isInsideComponent) {
-        this.closeCalendar();
-      }
-    }
-  }
 
 
   get calendarId(): string {
@@ -266,10 +280,14 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     const year = this.currentDate.getFullYear();
     const month = this.currentDate.getMonth();
     
+    alert(`🔥 GENERATE CALENDAR: currentDate=${this.currentDate}, year=${year}, month=${month} (${month === 6 ? 'JULIO' : month === 8 ? 'SEPTIEMBRE' : 'MES ' + month})`);
+    
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const startDate = new Date(firstDay);
     const endDate = new Date(lastDay);
+
+    alert(`🔥 GENERATE CALENDAR: firstDay=${firstDay}, lastDay=${lastDay}`);
 
     // Adjust start date to show previous month days if needed
     const firstDayOfWeek = this.mergedLocale.firstDayOfWeek;
@@ -311,7 +329,7 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     const isWeekend = date.getDay() === 0 || date.getDay() === 6;
     const hasEvent = this.events.some(event => this.isSameDay(event.date, date));
 
-    return {
+    const calendarDay = {
       date: new Date(date),
       day: date.getDate(),
       month: date.getMonth(),
@@ -323,10 +341,19 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       isWeekend,
       hasEvent
     };
+
+    // Debug solo para el día 16
+    if (date.getDate() === 16) {
+      alert(`📅 CREATE DAY 16: date=${date}, currentMonth=${currentMonth}, calendarDay.date=${calendarDay.date}, isInCurrentMonth=${isInCurrentMonth}`);
+    }
+
+    return calendarDay;
   }
 
   private generateCalendarMonths() {
     const currentYear = this.currentDate.getFullYear();
+    alert(`📅 GENERATE MONTHS: currentDate=${this.currentDate}, currentYear=${currentYear}`);
+    
     this.calendarMonths = this.mergedLocale.monthsShort.map((month, index) => ({
       name: month,
       number: index,
@@ -337,6 +364,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       isDisabled: this.isMonthDisabled(currentYear, index),
       isCurrent: new Date().getFullYear() === currentYear && new Date().getMonth() === index
     }));
+    
+    // Debug para julio (mes 6)
+    const julioMonth = this.calendarMonths[6];
+    alert(`📅 JULIO GENERADO: name=${julioMonth.name}, number=${julioMonth.number}, year=${julioMonth.year}`);
   }
 
   private generateCalendarYears() {
@@ -432,7 +463,7 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
         event.preventDefault();
       }
       
-      // Usar setTimeout para evitar conflictos con el document:click
+      // Usar setTimeout para evitar conflictos con el document:mousedown
       setTimeout(() => {
         this.toggleCalendar();
       }, 0);
@@ -451,20 +482,25 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   onDayClick(day: CalendarDay, event?: Event) {
+    // MEGA DEBUG - Si no ves esto, hay código duplicado
+    alert(`MEGA DEBUG: Seleccionando día ${day.day}, fecha: ${day.date}`);
+    
     if (day.isDisabled || this.disabled || this.readonly) {
       return;
     }
 
-    // Prevenir que el evento se propague para evitar que se cierre el calendario
     if (event) {
       event.stopPropagation();
     }
 
     const selectedDate = new Date(day.date);
+    alert(`MEGA DEBUG: Fecha final: ${selectedDate}`);
     this.selectDate(selectedDate);
   }
 
   onMonthClick(month: CalendarMonth, event?: Event) {
+    console.log('🔥 *** NUEVA VERSION *** MonthClick - Month:', month.number, 'Year:', month.year);
+    
     if (month.isDisabled) {
       return;
     }
@@ -474,12 +510,16 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       event.stopPropagation();
     }
 
+    console.log('🔥 MonthClick - CurrentDate antes:', this.currentDate);
     this.currentDate = new Date(month.year, month.number, 1);
+    console.log('🔥 MonthClick - CurrentDate después:', this.currentDate);
     this.setView('day');
     this.monthChange.emit(new Date(this.currentDate));
   }
 
   onYearClick(year: CalendarYear, event?: Event) {
+    console.log('🌟 *** NUEVA VERSION *** YearClick - Year:', year.year, 'CurrentMonth:', this.currentDate.getMonth());
+    
     if (year.isDisabled) {
       return;
     }
@@ -489,7 +529,13 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       event.stopPropagation();
     }
 
+    console.log('🌟 YearClick - CurrentDate antes:', this.currentDate);
     this.currentDate = new Date(year.year, this.currentDate.getMonth(), 1);
+    console.log('🌟 YearClick - CurrentDate después:', this.currentDate);
+    
+    // ¡SOLUCION! Regenerar los meses después de cambiar el año
+    this.generateCalendarMonths();
+    
     this.setView('month');
     this.yearChange.emit(year.year);
   }
@@ -625,6 +671,8 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
 
   // Date selection logic
   private selectDate(date: Date | null) {
+    alert(`SELECTDATE MEGA DEBUG: Recibió fecha: ${date}`);
+    
     if (date === null) {
       this.selectedDates = [];
       this._value = null;
@@ -637,6 +685,7 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
       this._value = date;
     }
 
+    alert(`SELECTDATE MEGA DEBUG: _value final: ${this._value}`);
     this.updateValue();
     
     if (this.mergedConfig.closeOnSelect && !this.mergedConfig.allowMultiSelect && !this.mergedConfig.allowRangeSelect) {
@@ -672,6 +721,8 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   private updateValue() {
+    alert(`UPDATEVALUE MEGA DEBUG: selectedDates[0]: ${this.selectedDates[0]}, _value: ${this._value}, inputValue: ${this.inputValue}`);
+    
     const selectEvent: CalendarSelectEvent = {
       date: this.selectedDates[0] || new Date(),
       formattedDate: this.inputValue,
@@ -688,6 +739,8 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this.dateSelect.emit(selectEvent);
     this.generateCalendarDays();
     this.cdr.markForCheck();
+    
+    alert(`UPDATEVALUE MEGA DEBUG: Después de onChange - inputValue: ${this.inputValue}`);
   }
 
   // Utility methods
