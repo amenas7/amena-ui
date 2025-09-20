@@ -38,18 +38,23 @@ export class SaSwitchComponent implements ControlValueAccessor {
   @Input() id: string = '';
   @Input() name: string = '';
 
-  // Generar ID único si no se proporciona uno
-  get uniqueId(): string {
-    return this.id || `sa-switch-${Math.random().toString(36).substr(2, 9)}`;
-  }
-
   @Output() valueChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<boolean>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
 
+  private _generatedId: string;
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  constructor() {
+    this._generatedId = `sa-switch-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  // Generar ID único si no se proporciona uno
+  get uniqueId(): string {
+    return this.id || this._generatedId;
+  }
 
   get switchClasses(): string {
     const baseClasses = ['form-check', 'form-switch'];
@@ -149,6 +154,22 @@ export class SaSwitchComponent implements ControlValueAccessor {
       this.onChange(this.value);
       this.valueChange.emit(this.value);
       this.change.emit(this.value);
+    }
+  }
+
+  onLabelClick(event: Event) {
+    // Prevenir el comportamiento por defecto del label
+    event.preventDefault();
+    
+    // Solo cambiar el estado si no está deshabilitado
+    if (!this.disabled) {
+      this.value = !this.value;
+      this.onChange(this.value);
+      this.valueChange.emit(this.value);
+      this.change.emit(this.value);
+      
+      // Marcar como touched para validaciones
+      this.onTouched();
     }
   }
 }

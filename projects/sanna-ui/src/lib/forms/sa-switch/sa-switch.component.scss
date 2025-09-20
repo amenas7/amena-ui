@@ -26,15 +26,15 @@ $switch-color-disabled: #e9ecef;
   font-family: $sanna-font-stack;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   padding-left: 0 !important;
   margin-bottom: 0;
   min-height: auto;
   
   .form-check-input {
     cursor: pointer !important;
-    width: 3rem;
-    height: 1.6rem;
+    width: 48px;
+    height: 24px;
     background-color: #fff !important;
     border: 1px solid #c9c9c9 !important;
     border-color: #c9c9c9 !important;
@@ -42,8 +42,8 @@ $switch-color-disabled: #e9ecef;
     flex-shrink: 0;
     background-image: none !important;
     position: relative;
-    z-index: 3;
-    border-radius: 3rem;
+    z-index: 1;
+    border-radius: 48px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     appearance: none;
     
@@ -52,8 +52,8 @@ $switch-color-disabled: #e9ecef;
       content: '';
       position: absolute;
       top: 50%;
-      width: calc(1.6rem - 4px);
-      height: calc(1.6rem - 4px);
+      width: 20px;
+      height: 20px;
       background-color: #a4a8ac;
       border-radius: 50%;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,7 +68,7 @@ $switch-color-disabled: #e9ecef;
       border-color: $switch-color !important;
       
       &::before {
-        left: calc(100% - 1.6rem + 2px);
+        left: calc(100% - 22px);
         background-color: #ffffff;
       }
     }
@@ -93,7 +93,7 @@ $switch-color-disabled: #e9ecef;
     
     &:focus-visible {
       outline: none !important;
-      box-shadow: 0 0 0 0.25rem rgba(50, 160, 71, 0.25) !important;
+      box-shadow: 0 0 0 4px rgba(50, 160, 71, 0.25) !important;
       border-color: $switch-color !important;
     }
     
@@ -123,7 +123,7 @@ $switch-color-disabled: #e9ecef;
     }
     
     &:focus-visible {
-      box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25) !important;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25) !important;
     }
     
     &:checked {
@@ -139,7 +139,7 @@ $switch-color-disabled: #e9ecef;
     }
     
     &:focus-visible {
-      box-shadow: 0 0 0 0.25rem rgba(239, 68, 68, 0.25) !important;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25) !important;
     }
     
     &:checked {
@@ -148,51 +148,51 @@ $switch-color-disabled: #e9ecef;
   }
 }
 
-// Tamaños personalizados
+// Tamaños personalizados basados en sa-input
 :host .form-switch-sm {
   .form-check-input {
-    width: 2rem;
-    height: 1.2rem;
+    width: 32px;
+    height: 18px;
     
     &::before {
-      width: calc(1.2rem - 4px);
-      height: calc(1.2rem - 4px);
+      width: 14px;
+      height: 14px;
     }
     
     &:checked::before {
-      left: calc(100% - 1.2rem + 2px);
+      left: calc(100% - 16px);
     }
   }
 }
 
 :host .form-switch-md {
   .form-check-input {
-    width: 3rem;
-    height: 1.6rem;
+    width: 48px;
+    height: 24px;
     
     &::before {
-      width: calc(1.6rem - 4px);
-      height: calc(1.6rem - 4px);
+      width: 20px;
+      height: 20px;
     }
     
     &:checked::before {
-      left: calc(100% - 1.6rem + 2px);
+      left: calc(100% - 22px);
     }
   }
 }
 
 :host .form-switch-lg {
   .form-check-input {
-    width: 4rem;
-    height: 2rem;
+    width: 64px;
+    height: 32px;
     
     &::before {
-      width: calc(2rem - 4px);
-      height: calc(2rem - 4px);
+      width: 28px;
+      height: 28px;
     }
     
     &:checked::before {
-      left: calc(100% - 2rem + 2px);
+      left: calc(100% - 30px);
     }
   }
 }
@@ -209,8 +209,9 @@ $switch-color-disabled: #e9ecef;
   display: flex;
   align-items: center;
   user-select: none;
-  z-index: 2;
+  z-index: 1;
   flex: 1;
+  position: relative;
   
   // Clases de tamaño para los labels
   &.label-sm {
@@ -252,18 +253,18 @@ $switch-color-disabled: #e9ecef;
 // Estilos para textos de ayuda
 :host .form-text {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
+  font-size: 12px;
   color: #6b7280;
-  margin-top: 0.25rem;
-  margin-left: 3.5rem; // Alineado con el label
+  margin-top: 4px;
+  margin-left: 56px; // Alineado con el label (48px switch + 8px gap)
 }
 
 // Estilos para mensajes de error
 :host .invalid-feedback {
   font-family: $sanna-font-stack;
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-  margin-left: 3.5rem; // Alineado con el label
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 56px; // Alineado con el label (48px switch + 8px gap)
   color: #dc3545;
   display: block;
 }

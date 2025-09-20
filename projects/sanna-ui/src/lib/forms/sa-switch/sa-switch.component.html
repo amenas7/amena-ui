@@ -16,7 +16,7 @@
       *ngIf="shouldShowLabel" 
       [for]="uniqueId" 
       [class]="labelClasses"
-      (click)="toggleSwitch()">
+      (click)="onLabelClick($event)">
       {{ label }}
       <span *ngIf="required && label" class="text-danger">*</span>
     </label>
