@@ -66,7 +66,7 @@ export class SaInputComponent implements ControlValueAccessor {
   get inputClasses(): string {
     const sizeMap = {
       'sm': 'form-control-sm',
-      'md': '', // Bootstrap default
+      'md': 'form-control-md',
       'lg': 'form-control-lg'
     };
 

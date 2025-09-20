@@ -396,3 +396,94 @@ export const WithLengthLimits: Story = {
     }
   }
 };
+
+export const AllSizes: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-4">Comparación de Tamaños</h5>
+        <div class="row">
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Small (sm)</h6>
+            <sa-textarea 
+              label="Tamaño Pequeño"
+              size="sm"
+              placeholder="Escriba aquí..."
+              rows="3"
+              helperText="Altura: 23px, Font: 11px">
+            </sa-textarea>
+          </div>
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Medium (md)</h6>
+            <sa-textarea 
+              label="Tamaño Mediano"
+              size="md"
+              placeholder="Escriba aquí..."
+              rows="3"
+              helperText="Altura: 30px, Font: 13px">
+            </sa-textarea>
+          </div>
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Large (lg)</h6>
+            <sa-textarea 
+              label="Tamaño Grande"
+              size="lg"
+              placeholder="Escriba aquí..."
+              rows="3"
+              helperText="Altura: 37px, Font: 15px">
+            </sa-textarea>
+          </div>
+        </div>
+        
+        <div class="mt-5">
+          <h6 class="mb-3">Especificaciones Técnicas</h6>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Tamaño</th>
+                  <th>Altura (min-height)</th>
+                  <th>Padding</th>
+                  <th>Font Size</th>
+                  <th>Border Radius</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sm</code></td>
+                  <td>23px</td>
+                  <td>4px 8px</td>
+                  <td>11px</td>
+                  <td>5px</td>
+                </tr>
+                <tr>
+                  <td><code>md</code></td>
+                  <td>30px</td>
+                  <td>8px 12px</td>
+                  <td>13px</td>
+                  <td>6px</td>
+                </tr>
+                <tr>
+                  <td><code>lg</code></td>
+                  <td>37px</td>
+                  <td>10px 14px</td>
+                  <td>15px</td>
+                  <td>7px</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual de los tres tamaños disponibles del componente sa-textarea. Muestra las diferencias sutiles entre sm, md y lg, incluyendo las especificaciones técnicas detalladas.'
+      }
+    }
+  }
+};

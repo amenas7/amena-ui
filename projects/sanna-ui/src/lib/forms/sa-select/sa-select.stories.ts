@@ -433,3 +433,110 @@ export const NoLabelAlignment: Story = {
     }
   }
 };
+
+export const AllSizes: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-4">Comparación de Tamaños</h5>
+        <div class="row">
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Small (sm)</h6>
+            <sa-select 
+              label="Tamaño Pequeño"
+              size="sm"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' }
+              ]"
+              placeholder="--Seleccione--"
+              helperText="Altura: 23px, Font: 11px">
+            </sa-select>
+          </div>
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Medium (md)</h6>
+            <sa-select 
+              label="Tamaño Mediano"
+              size="md"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' }
+              ]"
+              placeholder="--Seleccione--"
+              helperText="Altura: 30px, Font: 13px">
+            </sa-select>
+          </div>
+          <div class="col-md-4">
+            <h6 class="mb-3 text-muted">Large (lg)</h6>
+            <sa-select 
+              label="Tamaño Grande"
+              size="lg"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' }
+              ]"
+              placeholder="--Seleccione--"
+              helperText="Altura: 37px, Font: 15px">
+            </sa-select>
+          </div>
+        </div>
+        
+        <div class="mt-5">
+          <h6 class="mb-3">Especificaciones Técnicas</h6>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Tamaño</th>
+                  <th>Altura (min-height)</th>
+                  <th>Padding</th>
+                  <th>Font Size</th>
+                  <th>Border Radius</th>
+                  <th>Flecha Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sm</code></td>
+                  <td>23px</td>
+                  <td>4px 28px 4px 8px</td>
+                  <td>11px</td>
+                  <td>5px</td>
+                  <td>right 8px</td>
+                </tr>
+                <tr>
+                  <td><code>md</code></td>
+                  <td>30px</td>
+                  <td>8px 36px 8px 12px</td>
+                  <td>13px</td>
+                  <td>6px</td>
+                  <td>right 12px</td>
+                </tr>
+                <tr>
+                  <td><code>lg</code></td>
+                  <td>37px</td>
+                  <td>10px 44px 10px 14px</td>
+                  <td>15px</td>
+                  <td>7px</td>
+                  <td>right 14px</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual de los tres tamaños disponibles del componente sa-select. Muestra las diferencias sutiles entre sm, md y lg, incluyendo las especificaciones técnicas detalladas.'
+      }
+    }
+  }
+};

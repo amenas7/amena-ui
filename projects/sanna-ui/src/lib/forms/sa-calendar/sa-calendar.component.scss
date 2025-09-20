@@ -37,9 +37,9 @@
   
   // Animation variables
   --transition-duration: 0.2s;
-  --border-radius: 0.375rem;
-  --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  --box-shadow-focus: 0 0 0 0.2rem rgba(54, 173, 85, 0.25);
+  --border-radius: 6px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.075);
+  --box-shadow-focus: 0 0 0 3px rgba(54, 173, 85, 0.25);
 }
 
 // Container principal - Shadow DOM maneja el aislamiento automáticamente
@@ -59,7 +59,7 @@
 .form-label {
   font-family: $sanna-font-stack;
   color: var(--on-surface-color);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   margin-bottom: 2px;
   display: inline-block;
@@ -69,11 +69,11 @@
   }
   
   &.label-md {
-    font-size: 14px !important;
+    font-size: 13px !important;
   }
   
   &.label-lg {
-    font-size: 16px !important;
+    font-size: 15px !important;
   }
   
   // Label fantasma - mantiene el espacio pero es invisible
@@ -95,20 +95,21 @@
   font-family: $sanna-font-stack;
   display: block;
   width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 16px;
+  min-height: 30px;
+  padding: 8px 12px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
+  border-radius: 6px;
   transition: border-color var(--transition-duration) ease-in-out, 
               box-shadow var(--transition-duration) ease-in-out;
   box-sizing: border-box;
   cursor: pointer;
-  padding-right: 2.5rem;
+  padding-right: 40px;
   
   &:focus,
   &:focus-visible,
@@ -156,19 +157,27 @@
   }
   
   &.form-control-sm {
-    min-height: calc(1.5em + 0.5rem + 2px);
-    padding: 4.125px 8.25px !important;
-    padding-right: 2.25rem !important;
+    min-height: 23px;
+    padding: 4px 8px !important;
+    padding-right: 32px !important;
     font-size: 11px !important;
-    border-radius: 0.25rem;
+    border-radius: 5px;
+  }
+  
+  &.form-control-md {
+    min-height: 30px;
+    padding: 8px 12px;
+    padding-right: 40px;
+    font-size: 13px;
+    border-radius: 6px;
   }
   
   &.form-control-lg {
-    min-height: calc(1.5em + 1rem + 2px);
-    padding: 0.5rem 1rem;
-    padding-right: 3rem !important;
-    font-size: 20px;
-    border-radius: 0.5rem;
+    min-height: 37px;
+    padding: 10px 14px;
+    padding-right: 48px !important;
+    font-size: 15px;
+    border-radius: 7px;
   }
 }
 
@@ -176,7 +185,7 @@
 .calendar-icon {
   position: absolute !important;
   top: 50% !important;
-  right: 0.75rem !important;
+  right: 12px !important;
   transform: translateY(-50%) !important;
   width: 20px !important;
   height: 20px !important;
@@ -216,7 +225,7 @@
 .clear-icon {
   position: absolute !important;
   top: 50% !important;
-  right: 0.75rem !important;
+  right: 12px !important;
   transform: translateY(-50%) !important;
   width: 20px !important;
   height: 20px !important;
@@ -247,7 +256,19 @@
 // Ajustes para diferentes tamaños
 .form-control-sm ~ .calendar-icon,
 .form-control-sm ~ .clear-icon {
-  right: 0.5rem;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.form-control-md ~ .calendar-icon,
+.form-control-md ~ .clear-icon {
+  right: 12px;
   width: 18px;
   height: 18px;
   
@@ -259,13 +280,13 @@
 
 .form-control-lg ~ .calendar-icon,
 .form-control-lg ~ .clear-icon {
-  right: 1rem;
-  width: 24px;
-  height: 24px;
+  right: 14px;
+  width: 20px;
+  height: 20px;
   
   svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -312,7 +333,7 @@
 
 // Header del calendario
 .calendar-header {
-  padding: 1rem 1rem 0.5rem 1rem;
+  padding: 16px 16px 8px 16px;
   border-bottom: 1px solid #dee2e6 !important;
   background: #ffffff !important;
   border-radius: 8px 8px 0 0;
@@ -322,7 +343,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .nav-button {
@@ -370,7 +391,7 @@
   font-weight: 500 !important;
   color: var(--on-surface-color) !important;
   cursor: pointer !important;
-  padding: 0.25rem 0.75rem !important;
+  padding: 4px 12px !important;
   border-radius: 6px !important;
   transition: background-color var(--transition-duration) ease-in-out !important;
   min-width: 80px !important;
@@ -393,13 +414,13 @@
 
 .calendar-actions {
   display: none; // Oculto por defecto para apariencia más limpia
-  gap: 0.5rem;
+  gap: 8px;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-top: 8px;
 }
 
 .action-button {
-  padding: 0.375rem 0.75rem;
+  padding: 6px 12px;
   font-size: 14px;
   border: 1px solid var(--border-color);
   background: var(--background-color);
@@ -424,7 +445,7 @@
 
 // Contenido del calendario
 .calendar-content {
-  padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+  padding: 8px 12px 12px 12px;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -439,7 +460,7 @@
     margin-bottom: 6px;
     background-color: #E2F3E6;
     border-radius: 4px;
-    padding: 0.375rem 0;
+    padding: 6px 0;
   }
   
   .weekday-header {
@@ -727,13 +748,13 @@
   font-family: $sanna-font-stack !important;
   font-size: 12px;
   color: var(--secondary-color);
-  margin-top: 0.25rem;
+  margin-top: 4px;
 }
 
 .invalid-feedback {
   font-family: $sanna-font-stack !important;
   font-size: 12px;
-  margin-top: 0.25rem;
+  margin-top: 4px;
   color: var(--error-color);
   display: block;
 }
@@ -748,7 +769,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
-    max-width: calc(100vw - 2rem);
+    max-width: calc(100vw - 32px);
   }
   
   .calendar-popup.open {
@@ -756,17 +777,17 @@
   }
   
   .calendar-header {
-    padding: 0.75rem 0.75rem 0.5rem 0.75rem;
+    padding: 12px 12px 8px 12px;
   }
   
   .calendar-content {
-    padding: 0.375rem 0.5rem 0.5rem 0.5rem;
+    padding: 6px 8px 8px 8px;
   }
   
   .header-title {
     min-width: 70px;
     min-height: 30px;
-    padding: 0.5rem 0.75rem;
+    padding: 8px 12px;
     font-size: 11px;
   }
   
@@ -822,11 +843,11 @@
   }
   
   .calendar-header {
-    padding: 0.5rem;
+    padding: 8px;
   }
   
   .calendar-content {
-    padding: 0.5rem;
+    padding: 8px;
   }
 }
 

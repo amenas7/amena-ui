@@ -58,7 +58,7 @@ export class SaTextareaComponent implements ControlValueAccessor {
   get textareaClasses(): string {
     const sizeMap = {
       'sm': 'form-control-sm',
-      'md': '', // Bootstrap default
+      'md': 'form-control-md',
       'lg': 'form-control-lg'
     };
 

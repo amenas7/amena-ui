@@ -93,7 +93,7 @@ export class SaSelectComponent implements ControlValueAccessor {
   get selectClasses(): string {
     const sizeMap = {
       'sm': 'form-select-sm',
-      'md': '', // Bootstrap default
+      'md': 'form-select-md',
       'lg': 'form-select-lg'
     };
 
