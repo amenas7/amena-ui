@@ -47,9 +47,9 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     private onChange;
     private onTouched;
     constructor(cdr: ChangeDetectorRef, elementRef: ElementRef);
+    onDocumentClickOutside(event: Event): void;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    onDocumentClick(event: Event): void;
     get calendarId(): string;
     get mergedColors(): CalendarColors;
     get mergedConfig(): CalendarConfig;
