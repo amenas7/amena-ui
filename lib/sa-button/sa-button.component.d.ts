@@ -2,7 +2,7 @@ import { EventEmitter, ElementRef } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { TooltipPosition } from '../types/tooltip.types';
 import * as i0 from "@angular/core";
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'info' | 'gray' | 'red' | 'success';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'warning-light' | 'info' | 'info-light' | 'gray' | 'red' | 'success' | 'success-light';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export declare class SaButtonComponent {
