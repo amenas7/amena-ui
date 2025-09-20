@@ -62,7 +62,7 @@ export default {
     },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'terciary', 'danger', 'danger-light', 'warning', 'info', 'gray', 'red', 'success'],
+      options: ['primary', 'secondary', 'terciary', 'danger', 'danger-light', 'warning', 'warning-light', 'info', 'info-light', 'gray', 'red', 'success', 'success-light'],
       description: 'Variante de color del botón'
     },
     size: {
@@ -217,6 +217,60 @@ export const Success: StoryObj<SaButtonComponent> = {
     docs: {
       description: {
         story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
+// Historia Info Light
+export const InfoLight: StoryObj<SaButtonComponent> = {
+  args: {
+    label: 'Click me',
+    variant: 'info-light'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Botón info-light con fondo blanco, borde azul y texto azul. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
+// Historia Warning Light
+export const WarningLight: StoryObj<SaButtonComponent> = {
+  args: {
+    label: 'Click me',
+    variant: 'warning-light'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Botón warning-light con fondo blanco, borde amarillo y texto amarillo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
+      },
+      source: {
+        type: 'dynamic'
+      }
+    }
+  }
+};
+
+// Historia Success Light
+export const SuccessLight: StoryObj<SaButtonComponent> = {
+  args: {
+    label: 'Click me',
+    variant: 'success-light'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Botón success-light con fondo blanco, borde verde y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -531,17 +585,20 @@ export const Variants: StoryObj<SaButtonComponent> = {
         <sa-button label="Gray" variant="gray"></sa-button>
         <sa-button label="Red" variant="red"></sa-button>
         <sa-button label="Success" variant="success"></sa-button>
+        <sa-button label="Success Light" variant="success-light"></sa-button>
         <sa-button label="Danger" variant="danger"></sa-button>
         <sa-button label="Danger Light" variant="danger-light"></sa-button>
         <sa-button label="Warning" variant="warning"></sa-button>
+        <sa-button label="Warning Light" variant="warning-light"></sa-button>
         <sa-button label="Info" variant="info"></sa-button>
+        <sa-button label="Info Light" variant="info-light"></sa-button>
       </div>
     `
   }),
   parameters: {
     docs: {
       source: {
-        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Red\" variant=\"red\"></sa-button>\n<sa-button label=\"Success\" variant=\"success\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>`
+        code: `<sa-button label=\"Primary\" variant=\"primary\"></sa-button>\n<sa-button label=\"Secondary\" variant=\"secondary\"></sa-button>\n<sa-button label=\"Terciary\" variant=\"terciary\"></sa-button>\n<sa-button label=\"Gray\" variant=\"gray\"></sa-button>\n<sa-button label=\"Red\" variant=\"red\"></sa-button>\n<sa-button label=\"Success\" variant=\"success\"></sa-button>\n<sa-button label=\"Success Light\" variant=\"success-light\"></sa-button>\n<sa-button label=\"Danger\" variant=\"danger\"></sa-button>\n<sa-button label=\"Danger Light\" variant=\"danger-light\"></sa-button>\n<sa-button label=\"Warning\" variant=\"warning\"></sa-button>\n<sa-button label=\"Warning Light\" variant=\"warning-light\"></sa-button>\n<sa-button label=\"Info\" variant=\"info\"></sa-button>\n<sa-button label=\"Info Light\" variant=\"info-light\"></sa-button>`
       }
     }
   }

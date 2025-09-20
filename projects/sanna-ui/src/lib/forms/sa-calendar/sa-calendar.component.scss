@@ -139,7 +139,6 @@
   
   &.is-valid {
     border-color: #32A047 !important;
-    padding-right: 3.5rem !important; // Más espacio para acomodar ambos iconos
     
     &:focus {
       box-shadow: inset 0 0 0 2px #32A047 !important;
@@ -149,7 +148,6 @@
   
   &.is-invalid {
     border-color: #ef4444 !important;
-    padding-right: 3.5rem !important; // Más espacio para acomodar ambos iconos
     
     &:focus {
       box-shadow: inset 0 0 0 2px #ef4444 !important;
@@ -202,47 +200,17 @@
   }
   
   &.disabled {
-    color: var(--secondary-color);
+    color: #8A8887 !important; // Mantener color verde incluso cuando está disabled
     cursor: default;
     pointer-events: none;
   }
 }
 
-// Ajustar posición del icono del calendario cuando hay estados de validación
-.calendar-input-container .position-relative {
-  .calendar-input.is-valid ~ .calendar-icon,
-  .calendar-input.is-invalid ~ .calendar-icon {
-    right: 2.25rem !important; // Mover el icono del calendario más a la izquierda
-  }
-}
+// Posición del icono del calendario - SIEMPRE fijo
+// El icono del calendario mantiene su posición sin importar el estado de validación
 
-// Iconos de estado de validación
-.validation-icon {
-  position: absolute !important;
-  top: 50% !important;
-  right: 0.75rem !important;
-  transform: translateY(-50%) !important;
-  width: 16px !important;
-  height: 16px !important;
-  z-index: 11 !important; // Mayor que el icono del calendario
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  
-  &.success {
-    color: #32A047 !important;
-  }
-  
-  &.error {
-    color: #ef4444 !important;
-  }
-  
-  svg {
-    width: 16px !important;
-    height: 16px !important;
-    stroke: currentColor !important;
-  }
-}
+// Iconos de estado de validación - ELIMINADOS
+// Los iconos de validación ya no se muestran, solo el icono del calendario
 
 // Icono de limpiar (X)
 .clear-icon {
@@ -273,13 +241,8 @@
   }
 }
 
-// Ajustar posición del icono de limpiar cuando hay estados de validación
-.calendar-input-container .position-relative {
-  .calendar-input.is-valid ~ .clear-icon,
-  .calendar-input.is-invalid ~ .clear-icon {
-    right: 2.25rem !important; // Mover el icono de limpiar más a la izquierda
-  }
-}
+// Posición del icono de limpiar - SIEMPRE fijo
+// El icono de limpiar mantiene su posición sin importar el estado de validación
 
 // Ajustes para diferentes tamaños
 .form-control-sm ~ .calendar-icon,

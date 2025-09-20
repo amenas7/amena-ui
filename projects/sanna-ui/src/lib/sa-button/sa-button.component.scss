@@ -323,6 +323,36 @@
     }
 }
 
+.btn-success-light {
+  background-color: #ffffff;
+  border: 1px solid #00ab4a;
+  color: #00ab4a;
+  
+  &:hover {
+    background-color: #ffffff;
+    border-color: #00ab4a;
+    color: #00ab4a;
+  }
+  
+  /* Estado loading específico para success-light */
+  &.loading {
+    background-color: #ffffff !important;
+    color: #00ab4a !important;
+    opacity: 1 !important;
+  }
+  
+  /* Estilos específicos para el spinner */
+  .spinner-icon {
+    color: #00ab4a !important;
+    opacity: 1 !important;
+  }
+  
+  .spinner-overlay {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+  }
+}
+
 .btn-danger {
   background-color: #faeded;
   border: 1px solid #DC3545;
@@ -413,6 +443,36 @@
   }
 }
 
+.btn-warning-light {
+  background-color: #ffffff;
+  border: 1px solid #FFC107;
+  color: #FFC107;
+  
+  &:hover {
+    background-color: #ffffff;
+    border-color: #FFC107;
+    color: #FFC107;
+  }
+  
+  /* Estado loading específico para warning-light */
+  &.loading {
+    background-color: #ffffff !important;
+    color: #FFC107 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Estilos específicos para el spinner */
+  .spinner-icon {
+    color: #FFC107 !important;
+    opacity: 1 !important;
+  }
+  
+  .spinner-overlay {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+  }
+}
+
 .btn-info {
   background-color: #dae9fc4a !important;
   border: 1px solid #007bff !important;
@@ -439,6 +499,36 @@
   
   .spinner-overlay {
     background-color: #b9d5f54a !important;
+    opacity: 1 !important;
+  }
+}
+
+.btn-info-light {
+  background-color: #ffffff;
+  border: 1px solid #007bff;
+  color: #007bff;
+  
+  &:hover {
+    background-color: #ffffff;
+    border-color: #007bff;
+    color: #007bff;
+  }
+  
+  /* Estado loading específico para info-light */
+  &.loading {
+    background-color: #ffffff !important;
+    color: #007bff !important;
+    opacity: 1 !important;
+  }
+  
+  /* Estilos específicos para el spinner */
+  .spinner-icon {
+    color: #007bff !important;
+    opacity: 1 !important;
+  }
+  
+  .spinner-overlay {
+    background-color: #ffffff !important;
     opacity: 1 !important;
   }
 }

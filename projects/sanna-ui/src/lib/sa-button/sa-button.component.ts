@@ -192,7 +192,7 @@ import {
 
 import { TooltipPosition } from '../types/tooltip.types';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'info' | 'gray' | 'red' | 'success';
+export type ButtonVariant = 'primary' | 'secondary' | 'terciary' | 'danger' | 'danger-light' | 'warning' | 'warning-light' | 'info' | 'info-light' | 'gray' | 'red' | 'success' | 'success-light';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
