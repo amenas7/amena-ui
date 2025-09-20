@@ -19,15 +19,15 @@
   
   // Tamaños
   &.icon-sm {
-    font-size: 0.875rem; // 14px
+    font-size: 16px; // Convertido de 1rem
   }
   
   &.icon-md {
-    font-size: 1rem; // 16px
+    font-size: 18px; // Convertido de 1.125rem
   }
   
   &.icon-lg {
-    font-size: 1.25rem; // 20px
+    font-size: 22px; // Convertido de 1.375rem
   }
   
   // Los pesos se manejan a través de diferentes iconos, no con font-weight
