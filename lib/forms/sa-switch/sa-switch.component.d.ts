@@ -17,13 +17,15 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     disabled: boolean;
     id: string;
     name: string;
-    get uniqueId(): string;
     valueChange: EventEmitter<boolean>;
     change: EventEmitter<boolean>;
     focus: EventEmitter<FocusEvent>;
     blur: EventEmitter<FocusEvent>;
+    private _generatedId;
     private onChange;
     private onTouched;
+    constructor();
+    get uniqueId(): string;
     get switchClasses(): string;
     get inputClasses(): string;
     get labelClasses(): string;
@@ -36,6 +38,7 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     onInputFocus(event: FocusEvent): void;
     onInputBlur(event: FocusEvent): void;
     toggleSwitch(): void;
+    onLabelClick(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaSwitchComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
