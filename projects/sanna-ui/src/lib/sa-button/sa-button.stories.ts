@@ -729,7 +729,11 @@ export const WithIcons: StoryObj<SaButtonComponent> = {
         <div class="mb-4">
           <h5 class="text-info mb-2">Ubicación y Tiempo</h5>
           <div class="d-flex gap-3 flex-wrap align-items-center">
-            <sa-button label="Map Marker" icon="map-marker-alt" position="left" variant="info"></sa-button>
+            <sa-button label="Ubicación" icon="location" position="left" variant="danger"></sa-button>
+            <sa-button label="Pin Mapa" icon="map-pin" position="right" variant="info"></sa-button>
+            <sa-button label="Dirección" icon="location-arrow" position="left" variant="primary"></sa-button>
+            <sa-button label="Brújula" icon="compass" position="right" variant="success"></sa-button>
+            <sa-button label="Mapas" icon="maps" position="left" variant="warning"></sa-button>
             <sa-button label="Calendar" icon="calendar" position="right" variant="primary"></sa-button>
             <sa-button label="Clock" icon="clock" position="left" variant="secondary"></sa-button>
           </div>
@@ -803,7 +807,11 @@ export const WithIcons: StoryObj<SaButtonComponent> = {
 <sa-button label="Unlock" icon="unlock" position="right" variant="success"></sa-button>
 
 <!-- Ubicación y Tiempo -->
-<sa-button label="Map Marker" icon="map-marker-alt" position="left" variant="info"></sa-button>
+<sa-button label="Ubicación" icon="location" position="left" variant="danger"></sa-button>
+<sa-button label="Pin Mapa" icon="map-pin" position="right" variant="info"></sa-button>
+<sa-button label="Dirección" icon="location-arrow" position="left" variant="primary"></sa-button>
+<sa-button label="Brújula" icon="compass" position="right" variant="success"></sa-button>
+<sa-button label="Mapas" icon="maps" position="left" variant="warning"></sa-button>
 <sa-button label="Calendar" icon="calendar" position="right" variant="primary"></sa-button>
 <sa-button label="Clock" icon="clock" position="left" variant="secondary"></sa-button>
 
