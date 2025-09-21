@@ -25,6 +25,13 @@ export * from './lib/forms/sa-switch/sa-switch.component';
 export * from './lib/sa-heading/sa-heading.component';
 export * from './lib/sa-text/sa-text.component';
 export * from './lib/sa-table/sa-table.component';
+export { SaTableServerComponent } from './lib/sa-table-server/sa-table-server.component';
+export type { 
+  ServerPaginationData,
+  ServerPaginationOptions,
+  ServerTableRequest,
+  ServerTableResponse
+} from './lib/sa-table-server/sa-table-server.component';
 export * from './lib/sa-table/sa-column-def.directive';
 export * from './lib/sa-tag/sa-tag.component';
 export * from './lib/sa-legend/sa-legend.component';

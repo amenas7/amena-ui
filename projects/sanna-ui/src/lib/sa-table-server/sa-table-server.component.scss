@@ -1,0 +1,61 @@
+// Importar estilos base del sa-table original
+@import '../sa-table/sa-table.component.scss';
+
+// Estilos específicos para server-side pagination
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.loading-overlay {
+  position: relative;
+  opacity: 0.7;
+}
+
+.pagination-controls {
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.page-indicator {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+// Estados de carga específicos para server-side
+.table-content.loading {
+  .table {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// Estilos para filtros mejorados en server-side
+.filter-input {
+  &:focus {
+    border-color: #32A047;
+    box-shadow: 0 0 0 0.2rem rgba(50, 160, 71, 0.25);
+  }
+}
+
+// Mejoras visuales para indicadores de ordenamiento
+.column-header {
+  &.sortable {
+    transition: background-color 0.2s ease;
+    
+    i {
+      transition: color 0.2s ease;
+      color: #6c757d;
+    }
+    
+    &:hover i {
+      color: #32A047;
+    }
+  }
+}

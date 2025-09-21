@@ -157,6 +157,16 @@
                 "name": "Basic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '100px' },\r\n      { key: 'fechaCreacion', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 25, 50],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true\r\n  },\r\n  render: (args) => {\r\n    // Simular estado del componente\r\n    let currentData = args.data;\r\n    let currentPaginationData = args.paginationData;\r\n    let isLoading = args.loading;\r\n    \r\n    return {\r\n      props: {\r\n        ...args,\r\n        data: currentData,\r\n        paginationData: currentPaginationData,\r\n        loading: isLoading,\r\n        onLoadData: (request: ServerTableRequest) => {\r\n          console.log('🔍 Server request:', request);\r\n          isLoading = true;\r\n          \r\n          // Simular llamada al servidor\r\n          simulateServerCall(request).subscribe(response => {\r\n            currentData = response.data;\r\n            currentPaginationData = {\r\n              currentPage: response.currentPage,\r\n              itemsPerPage: response.itemsPerPage,\r\n              totalItems: response.totalItems,\r\n              currentItemsCount: response.data.length\r\n            };\r\n            isLoading = false;\r\n            \r\n            console.log('📊 Server response:', response);\r\n          });\r\n        },\r\n        onRowClick: (row: TableData) => {\r\n          console.log('🖱️ Row clicked:', row);\r\n        },\r\n        onRowDoubleClick: (row: TableData) => {\r\n          console.log('🖱️ Row double-clicked:', row);\r\n        }\r\n      },\r\n      template: `\r\n        <sa-table-server \r\n          [columns]=\"columns\" \r\n          [data]=\"data\"\r\n          [paginationData]=\"paginationData\"\r\n          [paginationOptions]=\"paginationOptions\"\r\n          [loading]=\"loading\"\r\n          [hover]=\"hover\"\r\n          [showFilters]=\"showFilters\"\r\n          [showFirstLastButtons]=\"showFirstLastButtons\"\r\n          [autoLoad]=\"autoLoad\"\r\n          [emptyMessage]=\"emptyMessage\"\r\n          [minWidth]=\"minWidth\"\r\n          (loadData)=\"onLoadData($event)\"\r\n          (rowClick)=\"onRowClick($event)\"\r\n          (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n        </sa-table-server>\r\n      `\r\n    };\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🖥️ Tabla con Paginación Server-Side\r\n\r\nEsta es la implementación básica del componente **sa-table-server** que maneja la paginación en el servidor.\r\n\r\n### Características principales:\r\n\r\n**📡 Server-Side Processing:**\r\n- Los datos se cargan página por página desde el servidor\r\n- No mantiene todos los datos en memoria del cliente\r\n- Escalable para grandes volúmenes de datos\r\n\r\n**🔄 Estados de Carga:**\r\n- Overlay de loading durante las peticiones\r\n- Feedback visual inmediato al usuario\r\n- Botones deshabilitados durante carga\r\n\r\n**📄 Paginación Inteligente:**\r\n- Información de página actual y total de registros\r\n- Navegación por páginas (anterior/siguiente)\r\n- Selector de elementos por página\r\n- Botones de primera y última página opcionales\r\n\r\n### Eventos del Servidor:\r\n\r\n1. **loadData**: Se emite automáticamente cuando:\r\n   - El componente se inicializa (si autoLoad=true)\r\n   - Se cambia de página\r\n   - Se modifica el número de elementos por página\r\n   - Se aplica ordenamiento\r\n   - Se modifican filtros\r\n\r\n2. **Otros eventos**: rowClick, rowDoubleClick funcionan igual que sa-table\r\n\r\n### Flujo de Datos:\r\n\r\n1. Componente emite \\`loadData\\` con parámetros de la petición\r\n2. El componente padre hace la llamada HTTP al servidor\r\n3. El servidor procesa: filtros, ordenamiento, paginación\r\n4. El componente padre actualiza \\`data\\` y \\`paginationData\\`\r\n5. La tabla se renderiza con los nuevos datos\r\n\r\n### Uso en el Código:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  \r\n  this.apiService.getPagedData(request).subscribe(response => {\r\n    this.data = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.loading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Basic",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -244,6 +254,16 @@
                 "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <div class=\"container-fluid p-4\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-6\">\r\n            <sa-select \r\n              [label]=\"'País'\"\r\n              [options]=\"[\r\n                { value: 'pe', label: 'Perú' },\r\n                { value: 'co', label: 'Colombia' },\r\n                { value: 'mx', label: 'México' },\r\n                { value: 'ar', label: 'Argentina' }\r\n              ]\"\r\n              [required]=\"true\"\r\n              [placeholder]=\"'--Seleccione un país--'\">\r\n            </sa-select>\r\n          </div>\r\n          <div class=\"col-md-6\">\r\n            <sa-select \r\n              [label]=\"'Estado'\"\r\n              [options]=\"[\r\n                { value: 'activo', label: 'Activo' },\r\n                { value: 'inactivo', label: 'Inactivo' },\r\n                { value: 'pendiente', label: 'Pendiente' }\r\n              ]\"\r\n              [size]=\"'sm'\"\r\n              [helperText]=\"'Selecciona el estado del registro'\">\r\n            </sa-select>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  args: {},\r\n}"
             },
             {
+                "name": "ConCarga",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
                 "name": "ConFiltros",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -252,6 +272,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    columns: [\n      { key: 'id', label: 'ID', width: '80px' },\n      { key: 'name', label: 'Nombre', width: '200px' },\n      { key: 'email', label: 'Email', width: '300px' },\n      { key: 'department', label: 'Departamento', width: '180px' },\n      { key: 'status', label: 'Estado', width: '100px' }\n    ],\n    data: [\n      { id: 1, name: 'Juan Pérez', email: 'juan.perez@empresa.com', department: 'Desarrollo', status: 'Activo' },\n      { id: 2, name: 'María García', email: 'maria.garcia@empresa.com', department: 'Diseño', status: 'Activo' },\n      { id: 3, name: 'Carlos López', email: 'carlos.lopez@empresa.com', department: 'Marketing', status: 'Inactivo' },\n      { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },\n      { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' },\n      { id: 6, name: 'Sofia Herrera', email: 'sofia.herrera@empresa.com', department: 'Diseño', status: 'Activo' },\n      { id: 7, name: 'Diego Silva', email: 'diego.silva@empresa.com', department: 'Marketing', status: 'Inactivo' },\n      { id: 8, name: 'Carmen Vega', email: 'carmen.vega@empresa.com', department: 'Ventas', status: 'Activo' },\n      { id: 9, name: 'Roberto Torres', email: 'roberto.torres@empresa.com', department: 'Desarrollo', status: 'Activo' },\n      { id: 10, name: 'Patricia Ruiz', email: 'patricia.ruiz@empresa.com', department: 'Diseño', status: 'Inactivo' },\n      { id: 11, name: 'Fernando Morales', email: 'fernando.morales@empresa.com', department: 'Marketing', status: 'Activo' },\n      { id: 12, name: 'Isabel Castro', email: 'isabel.castro@empresa.com', department: 'Ventas', status: 'Activo' }\n    ],\n    hover: true,\n    showFilters: true,\n    showPagination: true,\n    showItemsPerPage: true,\n    showTotal: true,\n    itemsPerPage: 5\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n## 🔍 Tabla con Filtros\n\nEste story demuestra la nueva funcionalidad de filtrado por columnas.\n\n### Características:\n\n**Filtros por Columna:**\n- Input de texto debajo de cada encabezado de columna\n- Filtrado en tiempo real mientras escribes\n- Búsqueda case-insensitive (no distingue mayúsculas/minúsculas)\n- Filtros combinables (múltiples columnas a la vez)\n\n**Funcionalidad:**\n- **Filtrado dinámico**: Los resultados se actualizan automáticamente\n- **Paginación inteligente**: Se resetea a la página 1 al filtrar\n- **Contadores actualizados**: Los totales reflejan los datos filtrados\n- **Placeholder descriptivo**: \"Filtrar [Nombre de Columna]\"\n\n**Estilos Visuales:**\n- **Fila de filtros**: Fondo gris claro (#f8f9fa) para distinguirla\n- **Inputs**: Bordes redondeados con focus en verde (#32A047)\n- **Placeholder**: Texto en cursiva y color tenue\n- **Hover**: Bordes más oscuros al pasar el mouse\n\n### Uso en el Componente:\n\n\\`\\`\\`html\n<sa-table \n  [columns]=\"columns\" \n  [data]=\"data\"\n  showFilters=\"true\"\n  (filterChange)=\"onFilterChange($event)\">\n</sa-table>\n\\`\\`\\`\n\n\\`\\`\\`typescript\n// En el componente\nonFilterChange(filters: {[column: string]: string}) {\n  console.log('Filtros activos:', filters);\n  // Ejemplo: { name: 'juan', department: 'desarrollo' }\n}\n\\`\\`\\`\n\n### Eventos Disponibles:\n\n| Evento | Tipo | Descripción |\n|--------|------|-------------|\n| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |\n\n### Comportamiento del Filtrado:\n\n- **Búsqueda parcial**: Encuentra coincidencias parciales en cualquier parte del texto\n- **Múltiples filtros**: Combina filtros de diferentes columnas (AND logic)\n- **Filtros vacíos**: Se ignoran automáticamente\n- **Reset automático**: La página vuelve a 1 cuando se aplica un filtro\n\n### Pruebas Sugeridas:\n\n1. **Filtro simple**: Escribe \"Juan\" en la columna Nombre\n2. **Filtro combinado**: Filtra por \"Desarrollo\" en Departamento y \"Activo\" en Estado\n3. **Filtro parcial**: Escribe \"gmail\" en la columna Email\n4. **Limpiar filtros**: Borra el contenido de los inputs para ver todos los datos\n\n### Métodos Disponibles:\n\n- **clearFilters()**: Limpia todos los filtros programáticamente\n- **applyFilters()**: Reaplica los filtros manualmente (llamado automáticamente)\n        `\n      }\n    }\n  }\n}"
+            },
+            {
+                "name": "ConFiltros",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'dni', label: 'DNI', sortable: false, width: '100px' },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '120px' },\r\n      { key: 'distrito', label: 'Distrito', sortable: true, width: '140px' },\r\n      { key: 'clasificacion', label: 'Clasificación', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  render: Basic.render,\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Tabla con Filtros Server-Side\r\n\r\nDemuestra el filtrado en tiempo real con procesamiento en el servidor.\r\n\r\n### Funcionalidades de Filtrado:\r\n\r\n**🔍 Filtros por Columna:**\r\n- Input de texto debajo de cada encabezado\r\n- Búsqueda en tiempo real mientras escribes\r\n- Los filtros se envían al servidor para procesamiento\r\n- Configuración \\`noFilter: true\\` para excluir columnas\r\n\r\n**⚡ Comportamiento Inteligente:**\r\n- **Debounce automático**: Evita sobrecarga de peticiones\r\n- **Reset de página**: Vuelve a página 1 al filtrar\r\n- **Combinación de filtros**: Múltiples columnas simultáneamente\r\n- **Estado persistente**: Los filtros se mantienen al paginar\r\n\r\n**🎯 Optimizaciones:**\r\n- Solo se procesan en el servidor (no en cliente)\r\n- Ideal para datasets grandes\r\n- Menor consumo de ancho de banda\r\n\r\n### Pruebas Sugeridas:\r\n\r\n1. **Filtro por paciente**: Escribe \"María\" en la columna Paciente\r\n2. **Filtro por estado**: Escribe \"Pendiente\" en Estado\r\n3. **Filtros combinados**: Usa múltiples filtros a la vez\r\n4. **Navegación**: Cambia de página con filtros activos\r\n5. **Limpiar**: Borra los filtros para ver todos los datos\r\n\r\n### Configuración de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nconst columns = [\r\n  { key: 'codigo', label: 'Código', sortable: true },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'acciones', label: 'Acciones', noFilter: true } // Sin filtro\r\n];\r\n\\`\\`\\`\r\n\r\n### Evento de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  // request.filters contiene los filtros activos\r\n  console.log('Filtros activos:', request.filters);\r\n  \r\n  this.apiService.getFilteredData(request).subscribe(response => {\r\n    // Los datos ya vienen filtrados del servidor\r\n    this.updateTableData(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ConHover",
@@ -387,21 +417,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos y condiciones',\r\n    size: 'md',\r\n    status: 'default',\r\n    checked: false\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox básico sin seleccionar. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -417,21 +447,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Comentarios',\r\n    placeholder: 'Escriba sus comentarios aquí...',\r\n    size: 'md',\r\n    status: 'default',\r\n    rows: 3,\r\n    resize: 'vertical'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción 1',\r\n    value: 'option1',\r\n    name: 'defaultGroup',\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button básico. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "defaultOptions",
@@ -467,11 +497,11 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    disabled: true,\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Disabled",
@@ -487,11 +517,11 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    disabled: true,\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Disabled",
@@ -507,21 +537,21 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea deshabilitado',\r\n    value: 'Este contenido no se puede editar.',\r\n    disabled: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción deshabilitada',\r\n    value: 'disabled',\r\n    name: 'disabledGroup',\r\n    disabled: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "DisabledChecked",
@@ -567,11 +597,11 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'error',\r\n    errorText: 'Este campo es requerido',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    status: 'error',\r\n    errorText: 'Debe aceptar los términos para continuar',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Error",
@@ -587,21 +617,11 @@
                 "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    status: 'error',\r\n    errorText: 'Debe aceptar los términos para continuar',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'error',\r\n    errorText: 'Este campo es requerido',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Error",
@@ -612,6 +632,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Mensaje con error',\r\n    value: 'Contenido con errores...',\r\n    status: 'error',\r\n    errorText: 'El mensaje debe tener al menos 10 caracteres',\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción con error',\r\n    value: 'error',\r\n    name: 'errorGroup',\r\n    status: 'error',\r\n    errorText: 'Debe seleccionar una opción válida',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de error (borde rojo) y mensaje de error. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Examples",
@@ -767,11 +797,11 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Checkbox grande',\r\n    size: 'lg',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Large",
@@ -787,11 +817,11 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Checkbox grande',\r\n    size: 'lg',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Large",
@@ -807,21 +837,21 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea grande',\r\n    placeholder: 'Tamaño grande...',\r\n    size: 'lg',\r\n    rows: 5,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio grande',\r\n    value: 'large',\r\n    name: 'largeGroup',\r\n    size: 'lg',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Light",
@@ -917,31 +947,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaTableServerComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Table Server',\r\n  component: SaTableServerComponent,\r\n  parameters: {\r\n    layout: 'padded',\r\n    controls: {\r\n      expanded: true,\r\n      sort: 'requiredFirst'\r\n    },\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Limpiar property bindings innecesarios\r\n          result = result.replace(/\\[hover\\]=\"true\"/g, 'hover=\"true\"');\r\n          result = result.replace(/\\[hover\\]=\"false\"/g, 'hover=\"false\"');\r\n          result = result.replace(/\\[loading\\]=\"true\"/g, 'loading=\"true\"');\r\n          result = result.replace(/\\[loading\\]=\"false\"/g, 'loading=\"false\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"true\"/g, 'showFirstLastButtons=\"true\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"false\"/g, 'showFirstLastButtons=\"false\"');\r\n          result = result.replace(/\\[showFilters\\]=\"true\"/g, 'showFilters=\"true\"');\r\n          result = result.replace(/\\[showFilters\\]=\"false\"/g, 'showFilters=\"false\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"true\"/g, 'autoLoad=\"true\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"false\"/g, 'autoLoad=\"false\"');\r\n          result = result.replace(/\\[minWidth\\]=\"'([^']+)'\"/g, 'minWidth=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      },\r\n      description: {\r\n        component: `\r\n## Events\r\n\r\n| Event | Tipo | Descripción |\r\n|-------|------|-------------|\r\n| loadData | ServerTableRequest | Emitido cuando se necesita cargar datos del servidor |\r\n| pageChange | number | Emitido cuando cambia la página |\r\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\r\n| sortChange | {column: string, direction: 'asc' \\\\| 'desc'} | Emitido cuando cambia el ordenamiento |\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |\r\n\r\n## Interfaces\r\n\r\n### ServerTableRequest\r\n\\`\\`\\`typescript\r\ninterface ServerTableRequest {\r\n  pageNumber: number;        // Página actual (1-based)\r\n  rowsPerPage: number;       // Elementos por página\r\n  searchTerm?: string;       // Término de búsqueda global\r\n  sortColumn?: string;       // Columna a ordenar\r\n  sortDirection?: 'asc' | 'desc'; // Dirección del ordenamiento\r\n  filters?: { [key: string]: any }; // Filtros por columna\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerTableResponse\r\n\\`\\`\\`typescript\r\ninterface ServerTableResponse<T = TableData> {\r\n  data: T[];               // Datos de la página actual\r\n  totalItems: number;      // Total de elementos en el servidor\r\n  currentPage: number;     // Página actual\r\n  itemsPerPage: number;    // Elementos por página\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerPaginationData\r\n\\`\\`\\`typescript\r\ninterface ServerPaginationData {\r\n  currentPage: number;       // Página actual\r\n  itemsPerPage: number;      // Elementos por página\r\n  totalItems: number;        // Total de elementos\r\n  currentItemsCount: number; // Elementos en la página actual\r\n}\r\n\\`\\`\\`\r\n\r\n## Uso\r\n\r\n\\`\\`\\`typescript\r\nimport { SaTableServerComponent } from '@sanna-ui/sa-table-server';\r\n\r\n// Configuración\r\nconst columns: TableColumn[] = [\r\n  { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'estado', label: 'Estado', sortable: true, width: '100px' }\r\n];\r\n\r\nconst paginationData: ServerPaginationData = {\r\n  currentPage: 1,\r\n  itemsPerPage: 10,\r\n  totalItems: 0,\r\n  currentItemsCount: 0\r\n};\r\n\r\n// En el template\r\n<sa-table-server \r\n  [columns]=\"columns\" \r\n  [data]=\"currentPageData\"\r\n  [paginationData]=\"paginationData\"\r\n  [loading]=\"isLoading\"\r\n  showFilters=\"true\"\r\n  hover=\"true\"\r\n  (loadData)=\"onLoadData($event)\"\r\n  (rowClick)=\"onRowClick($event)\">\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.isLoading = true;\r\n  \r\n  this.dataService.getData(request).subscribe(response => {\r\n    this.currentPageData = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.isLoading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n## Diferencias con sa-table\r\n\r\n- **Server-Side**: Los datos se cargan desde el servidor página por página\r\n- **Paginación Real**: No carga todos los datos en memoria\r\n- **Filtros Remotos**: Los filtros se aplican en el servidor\r\n- **Escalabilidad**: Maneja miles/millones de registros eficientemente\r\n- **Latencia**: Puede tener latencia en navegación/filtros\r\n\r\n## Métodos Públicos\r\n\r\n- **reload()**: Recarga los datos de la página actual\r\n- **clearFilters()**: Limpia todos los filtros y recarga\r\n        `\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    columns: {\r\n      control: { type: 'object' },\r\n      description: 'Configuración de las columnas de la tabla'\r\n    },\r\n    data: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de la página actual (recibidos del servidor)'\r\n    },\r\n    paginationData: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de paginación del servidor'\r\n    },\r\n    paginationOptions: {\r\n      control: { type: 'object' },\r\n      description: 'Opciones de configuración de la paginación'\r\n    },\r\n    autoLoad: {\r\n      control: { type: 'boolean' },\r\n      description: 'Cargar datos automáticamente al inicializar. Usa attribute binding: autoLoad=\"true\"'\r\n    },\r\n    hover: {\r\n      control: { type: 'boolean' },\r\n      description: 'Aplicar efecto hover. Usa attribute binding: hover=\"true\"'\r\n    },\r\n    loading: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar estado de carga. Usa attribute binding: loading=\"true\"'\r\n    },\r\n    showFirstLastButtons: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons=\"true\"'\r\n    },\r\n    showFilters: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar inputs de filtrado. Usa attribute binding: showFilters=\"true\"'\r\n    },\r\n    emptyMessage: {\r\n      control: { type: 'text' },\r\n      description: 'Mensaje cuando no hay datos. Property binding: [emptyMessage]=\"mensaje\"'\r\n    },\r\n    minWidth: {\r\n      control: { type: 'text' },\r\n      description: 'Ancho mínimo de la tabla. Ejemplos: 600px, 800px, 1000px'\r\n    }\r\n  },\r\n  args: {\r\n    // Valores por defecto\r\n    hover: true,\r\n    loading: false,\r\n    showFirstLastButtons: true,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px'\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaCalendarComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Calendar',\r\n  component: SaCalendarComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    layout: 'padded',\r\n    viewport: {\r\n      defaultViewport: 'desktop'\r\n    },\r\n    docs: {\r\n      story: {\r\n        height: '500px'\r\n      },\r\n      description: {\r\n        component: `\r\n## 📅 Formatos de Fecha Soportados\r\n\r\n**IMPORTANTE**: El componente sa-calendar acepta múltiples formatos para minDate y maxDate:\r\n\r\n\\`\\`\\`typescript\r\n// ✅ Todos estos formatos funcionan:\r\nminDate: new Date()                    // Objeto Date\r\nminDate: '2025-08-24'                  // String ISO (YYYY-MM-DD)\r\nminDate: 1756011600000                 // Timestamp en milisegundos\r\nminDate: new Date('2025-08-24')        // Constructor con string\r\n\\`\\`\\`\r\n\r\n## Uso con Angular Forms:\r\n\r\n### Template-driven Forms (ngModel):\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [(ngModel)]=\"fechaSeleccionada\" \r\n  [minDate]=\"new Date()\"\r\n  [maxDate]=\"fechaMaxima\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n\r\n### Reactive Forms:\r\n\\`\\`\\`html\r\n<sa-calendar \r\n  [formControl]=\"fechaControl\"\r\n  [minDate]=\"'2024-01-01'\"\r\n  [maxDate]=\"fechaLimite\"\r\n  label=\"Fecha\"\r\n  (dateSelect)=\"onDateSelect($event)\">\r\n</sa-calendar>\r\n\\`\\`\\`\r\n        `\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar timestamps de fecha a formato legible\r\n          result = result.replace(/\\[minDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[minDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          result = result.replace(/\\[maxDate\\]=\"(\\d+)\"/g, (match, timestamp) => {\r\n            const date = new Date(parseInt(timestamp));\r\n            return `[maxDate]=\"new Date('${date.toISOString().split('T')[0]}')\"`;\r\n          });\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding (strings)\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled');\r\n          result = result.replace(/\\[inline\\]=\"true\"/g, 'inline');\r\n          result = result.replace(/\\[showInput\\]=\"true\"/g, 'showInput');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly');\r\n          \r\n          // Eliminar boolean properties false (no necesarios)\r\n          result = result.replace(/\\[required\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[disabled\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[inline\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[showInput\\]=\"false\"\\s*/g, '');\r\n          result = result.replace(/\\[readonly\\]=\"false\"\\s*/g, '');\r\n          \r\n          // Limpiar objetos vacíos o por defecto\r\n          result = result.replace(/\\[locale\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[colors\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[config\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[validation\\]=\"{\\s*}\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"null\"\\s*/g, '');\r\n          result = result.replace(/\\[events\\]=\"\\[\\]\"\\s*/g, '');\r\n          \r\n          // Limpiar atributos vacíos y espacios extra\r\n          result = result.replace(/\\s+\\w+=\"\"\\s*/g, ' ');\r\n          result = result.replace(/\\s+>/g, '>');\r\n          result = result.replace(/\\s{2,}/g, ' ');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    }\r\n  },\r\n  argTypes: {\r\n    size: {\r\n      description: 'Tamaño del componente',\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg']\r\n    },\r\n    status: {\r\n      description: 'Estado del componente',\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error']\r\n    },\r\n    label: {\r\n      description: 'Etiqueta del campo',\r\n      control: { type: 'text' }\r\n    },\r\n    placeholder: {\r\n      description: 'Texto de placeholder',\r\n      control: { type: 'text' }\r\n    },\r\n    helperText: {\r\n      description: 'Texto de ayuda',\r\n      control: { type: 'text' }\r\n    },\r\n    errorText: {\r\n      description: 'Texto de error',\r\n      control: { type: 'text' }\r\n    },\r\n    required: {\r\n      description: 'Campo requerido',\r\n      control: { type: 'boolean' }\r\n    },\r\n    readonly: {\r\n      description: 'Solo lectura',\r\n      control: { type: 'boolean' }\r\n    },\r\n    disabled: {\r\n      description: 'Deshabilitado',\r\n      control: { type: 'boolean' }\r\n    },\r\n    minDate: {\r\n      description: 'Fecha mínima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    maxDate: {\r\n      description: 'Fecha máxima seleccionable',\r\n      control: { \r\n        type: 'date' \r\n      },\r\n      table: {\r\n        type: { summary: 'Date | string | number' },\r\n        defaultValue: { summary: 'null' }\r\n      }\r\n    },\r\n    inline: {\r\n      description: 'Mostrar calendario inline (sin input)',\r\n      control: { type: 'boolean' }\r\n    },\r\n    showInput: {\r\n      description: 'Mostrar campo de input',\r\n      control: { type: 'boolean' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSelectComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          result = result.replace(/\\[noLabel\\]=\"true\"/g, 'noLabel=\"true\"');\r\n          result = result.replace(/\\[noLabel\\]=\"false\"/g, 'noLabel=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    noLabel: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaInputComponent>",
-                "defaultValue": "{\n  title: 'Componentes/Forms/Input',\n  component: SaInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule, FontAwesomeModule],\n      providers: [FormBuilder]\n    })\n  ],\n  parameters: {\n    docs: {\n      description: {\n        component: ''\n      },\n      source: {\n        type: 'dynamic',\n        language: 'html',\n        transform: (code: string, storyContext: any) => {\n          let result = code;\n          \n          // Transformar property bindings innecesarios a attribute binding\n          result = result.replace(/\\[type\\]=\"'([^']+)'\"/g, 'type=\"$1\"');\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\n          result = result.replace(/\\[leftIcon\\]=\"'([^']+)'\"/g, 'leftIcon=\"$1\"');\n          result = result.replace(/\\[rightIcon\\]=\"'([^']+)'\"/g, 'rightIcon=\"$1\"');\n          result = result.replace(/\\[backgroundColor\\]=\"'([^']+)'\"/g, 'backgroundColor=\"$1\"');\n          result = result.replace(/\\[textColor\\]=\"'([^']+)'\"/g, 'textColor=\"$1\"');\n          \n          // Transformar boolean properties\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\n          \n          return result;\n        }\n      }\n    },\n    actions: { argTypesRegex: '^on.*' },\n    controls: { expanded: true }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel'],\n      description: 'Tipo de input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'text' },\n      },\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Tamaño del input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    status: {\n      control: 'select',\n      options: ['default', 'success', 'error'],\n      description: 'Estado del input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    value: {\n      control: 'text',\n      description: 'Valor del input',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Ícono izquierdo. Usa nombres de sa-icon (ej: \"user\", \"email\") o clases FontAwesome (ej: \"fas fa-user\")',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Ícono derecho. Usa nombres de sa-icon (ej: \"search\", \"calendar\") o clases FontAwesome (ej: \"fas fa-search\")',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Campo de solo lectura',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Campo deshabilitado',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    backgroundColor: {\n      control: 'color',\n      description: 'Color de fondo personalizado del input (valor hexadecimal)',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '\"\"' },\n      },\n    },\n    textColor: {\n      control: 'color',\n      description: 'Color del texto personalizado del input (valor hexadecimal)',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '\"\"' },\n      },\n    },\n    boldText: {\n      control: 'boolean',\n      description: 'Hacer el texto del input en negrita (bold)',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n\n}"
             },
             {
                 "name": "meta",
@@ -957,6 +977,26 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaInputComponent>",
+                "defaultValue": "{\n  title: 'Componentes/Forms/Input',\n  component: SaInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule, FontAwesomeModule],\n      providers: [FormBuilder]\n    })\n  ],\n  parameters: {\n    docs: {\n      description: {\n        component: ''\n      },\n      source: {\n        type: 'dynamic',\n        language: 'html',\n        transform: (code: string, storyContext: any) => {\n          let result = code;\n          \n          // Transformar property bindings innecesarios a attribute binding\n          result = result.replace(/\\[type\\]=\"'([^']+)'\"/g, 'type=\"$1\"');\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\n          result = result.replace(/\\[leftIcon\\]=\"'([^']+)'\"/g, 'leftIcon=\"$1\"');\n          result = result.replace(/\\[rightIcon\\]=\"'([^']+)'\"/g, 'rightIcon=\"$1\"');\n          result = result.replace(/\\[backgroundColor\\]=\"'([^']+)'\"/g, 'backgroundColor=\"$1\"');\n          result = result.replace(/\\[textColor\\]=\"'([^']+)'\"/g, 'textColor=\"$1\"');\n          \n          // Transformar boolean properties\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\n          \n          return result;\n        }\n      }\n    },\n    actions: { argTypesRegex: '^on.*' },\n    controls: { expanded: true }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel'],\n      description: 'Tipo de input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'text' },\n      },\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Tamaño del input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    status: {\n      control: 'select',\n      options: ['default', 'success', 'error'],\n      description: 'Estado del input',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    value: {\n      control: 'text',\n      description: 'Valor del input',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Texto placeholder',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    label: {\n      control: 'text',\n      description: 'Etiqueta del input',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    helperText: {\n      control: 'text',\n      description: 'Texto de ayuda',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    errorText: {\n      control: 'text',\n      description: 'Texto de error',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    leftIcon: {\n      control: 'text',\n      description: 'Ícono izquierdo. Usa nombres de sa-icon (ej: \"user\", \"email\") o clases FontAwesome (ej: \"fas fa-user\")',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    rightIcon: {\n      control: 'text',\n      description: 'Ícono derecho. Usa nombres de sa-icon (ej: \"search\", \"calendar\") o clases FontAwesome (ej: \"fas fa-search\")',\n      table: {\n        type: { summary: 'string' },\n      },\n    },\n    required: {\n      control: 'boolean',\n      description: 'Campo requerido',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Campo de solo lectura',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Campo deshabilitado',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    backgroundColor: {\n      control: 'color',\n      description: 'Color de fondo personalizado del input (valor hexadecimal)',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '\"\"' },\n      },\n    },\n    textColor: {\n      control: 'color',\n      description: 'Color del texto personalizado del input (valor hexadecimal)',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '\"\"' },\n      },\n    },\n    boldText: {\n      control: 'boolean',\n      description: 'Hacer el texto del input en negrita (bold)',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaSelectComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          result = result.replace(/\\[noLabel\\]=\"true\"/g, 'noLabel=\"true\"');\r\n          result = result.replace(/\\[noLabel\\]=\"false\"/g, 'noLabel=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    noLabel: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -967,21 +1007,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaRadioComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaTextareaComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Textarea',\r\n  component: SaTextareaComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          result = result.replace(/\\[resize\\]=\"'([^']+)'\"/g, 'resize=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          \r\n          // Transformar number properties\r\n          result = result.replace(/\\[rows\\]=\"(\\d+)\"/g, 'rows=\"$1\"');\r\n          result = result.replace(/\\[cols\\]=\"(\\d+)\"/g, 'cols=\"$1\"');\r\n          result = result.replace(/\\[minlength\\]=\"(\\d+)\"/g, 'minlength=\"$1\"');\r\n          result = result.replace(/\\[maxlength\\]=\"(\\d+)\"/g, 'maxlength=\"$1\"');\r\n          result = result.replace(/\\[height\\]=\"(\\d+)\"/g, 'height=\"$1\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del textarea'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del textarea'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del textarea'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del textarea'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del textarea'\r\n    },\r\n    rows: {\r\n      control: { type: 'number', min: 1, max: 20 },\r\n      description: 'Número de filas visibles'\r\n    },\r\n    cols: {\r\n      control: { type: 'number', min: 10, max: 100 },\r\n      description: 'Número de columnas (ancho en caracteres)'\r\n    },\r\n    resize: {\r\n      control: { type: 'select' },\r\n      options: ['none', 'both', 'horizontal', 'vertical'],\r\n      description: 'Tipo de redimensionamiento permitido'\r\n    },\r\n    minlength: {\r\n      control: { type: 'number', min: 0 },\r\n      description: 'Longitud mínima del texto'\r\n    },\r\n    maxlength: {\r\n      control: { type: 'number', min: 1 },\r\n      description: 'Longitud máxima del texto'\r\n    },\r\n    height: {\r\n      control: { type: 'number', min: 50, max: 500 },\r\n      description: 'Altura fija en píxeles. Cuando se especifica, deshabilita el resize manual y habilita scroll vertical automático'\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaRadioComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Radio',\r\n  component: SaRadioComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del radio button'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor del radio button'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del radio button'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del radio button'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del radio button'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    name: {\r\n      control: 'text',\r\n      description: 'Nombre del grupo de radio buttons'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "MinMaxDates",
@@ -1217,11 +1257,11 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo obligatorio',\r\n    required: true,\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Required",
@@ -1237,11 +1277,11 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Campo obligatorio',\r\n    required: true,\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Required",
@@ -1257,21 +1297,21 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Mensaje',\r\n    placeholder: 'Este campo es obligatorio...',\r\n    required: true,\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción obligatoria',\r\n    value: 'required',\r\n    name: 'requiredGroup',\r\n    required: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ResizeOptions",
@@ -1292,6 +1332,16 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<SaTagComponent>",
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h5 class=\"mb-3\">Layout Responsive</h5>\r\n        <p class=\"mb-3 text-muted\">Los tags se adaptan automáticamente al espacio disponible y se envuelven correctamente en diferentes tamaños de pantalla.</p>\r\n        \r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-md-6\">\r\n            <h6 class=\"mb-2\">Columna Responsive</h6>\r\n            <div class=\"d-flex gap-2 flex-wrap\">\r\n              <sa-tag text=\"JavaScript\" type=\"primary\"></sa-tag>\r\n              <sa-tag text=\"TypeScript\" type=\"info\"></sa-tag>\r\n              <sa-tag text=\"Angular\" type=\"success\"></sa-tag>\r\n              <sa-tag text=\"React\" type=\"secondary\"></sa-tag>\r\n              <sa-tag text=\"Vue.js\" type=\"warning\"></sa-tag>\r\n              <sa-tag text=\"Node.js\" type=\"dark\"></sa-tag>\r\n              <sa-tag text=\"Express\" type=\"light\"></sa-tag>\r\n            </div>\r\n          </div>\r\n          \r\n          <div class=\"col-12 col-md-6\">\r\n            <h6 class=\"mb-2\">Tags en Grid</h6>\r\n            <div class=\"d-flex gap-2 flex-wrap\">\r\n              <sa-tag text=\"HTML5\" type=\"danger\"></sa-tag>\r\n              <sa-tag text=\"CSS3\" type=\"info\"></sa-tag>\r\n              <sa-tag text=\"SCSS\" type=\"warning\"></sa-tag>\r\n              <sa-tag text=\"Bootstrap\" type=\"primary\"></sa-tag>\r\n              <sa-tag text=\"Material UI\" type=\"secondary\"></sa-tag>\r\n              <sa-tag text=\"Tailwind\" type=\"success\"></sa-tag>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        \r\n        <div class=\"mt-4\">\r\n          <h6 class=\"mb-2\">Contenedor Flexible</h6>\r\n          <div class=\"border p-3 rounded\" style=\"max-width: 300px;\">\r\n            <p class=\"mb-2 text-muted\">En contenedores estrechos:</p>\r\n            <div class=\"d-flex gap-2 flex-wrap\">\r\n              <sa-tag text=\"Frontend\" type=\"primary\" size=\"small\"></sa-tag>\r\n              <sa-tag text=\"Backend\" type=\"success\" size=\"small\"></sa-tag>\r\n              <sa-tag text=\"Database\" type=\"info\" size=\"small\"></sa-tag>\r\n              <sa-tag text=\"DevOps\" type=\"warning\" size=\"small\"></sa-tag>\r\n              <sa-tag text=\"Testing\" type=\"secondary\" size=\"small\"></sa-tag>\r\n              <sa-tag text=\"Documentation\" type=\"dark\" size=\"small\"></sa-tag>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Demostración de cómo los tags se comportan en layouts responsive usando el sistema de grid de Bootstrap. Los tags se adaptan automáticamente y se envuelven según el espacio disponible.'\r\n      },\r\n      source: {\r\n        code: `<!-- Layout responsive con Bootstrap Grid -->\r\n<div class=\"row\">\r\n  <div class=\"col-12 col-md-6\">\r\n    <div class=\"d-flex gap-2 flex-wrap\">\r\n      <sa-tag text=\"JavaScript\" type=\"primary\"></sa-tag>\r\n      <sa-tag text=\"TypeScript\" type=\"info\"></sa-tag>\r\n      <sa-tag text=\"Angular\" type=\"success\"></sa-tag>\r\n      <sa-tag text=\"React\" type=\"secondary\"></sa-tag>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- Contenedor flexible -->\r\n<div class=\"d-flex gap-2 flex-wrap\">\r\n  <sa-tag text=\"Frontend\" type=\"primary\" size=\"small\"></sa-tag>\r\n  <sa-tag text=\"Backend\" type=\"success\" size=\"small\"></sa-tag>\r\n  <sa-tag text=\"Database\" type=\"info\" size=\"small\"></sa-tag>\r\n</div>`\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "SAMPLE_DATA",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "TableData[]",
+                "defaultValue": "[\r\n  { id: 1, codigo: 'LAB001', paciente: 'Juan Pérez García', dni: '12345678', estado: 'Pendiente', fechaCreacion: '2024-01-15', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 2, codigo: 'LAB002', paciente: 'María Elena Rodríguez', dni: '87654321', estado: 'En Proceso', fechaCreacion: '2024-01-16', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 3, codigo: 'LAB003', paciente: 'Carlos Antonio López', dni: '11223344', estado: 'Completado', fechaCreacion: '2024-01-17', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 4, codigo: 'LAB004', paciente: 'Ana Sofía Martínez', dni: '44332211', estado: 'Pendiente', fechaCreacion: '2024-01-18', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 5, codigo: 'LAB005', paciente: 'Luis Fernando Torres', dni: '55667788', estado: 'En Proceso', fechaCreacion: '2024-01-19', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 6, codigo: 'LAB006', paciente: 'Carmen Rosa Silva', dni: '88776655', estado: 'Completado', fechaCreacion: '2024-01-20', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 7, codigo: 'LAB007', paciente: 'Roberto Carlos Vega', dni: '99887766', estado: 'Pendiente', fechaCreacion: '2024-01-21', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 8, codigo: 'LAB008', paciente: 'Patricia Isabel Morales', dni: '66554433', estado: 'En Proceso', fechaCreacion: '2024-01-22', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 9, codigo: 'LAB009', paciente: 'Fernando José Castro', dni: '33445566', estado: 'Completado', fechaCreacion: '2024-01-23', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 10, codigo: 'LAB010', paciente: 'Isabel María Herrera', dni: '22334455', estado: 'Pendiente', fechaCreacion: '2024-01-24', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 11, codigo: 'LAB011', paciente: 'Diego Alejandro Ruiz', dni: '77889900', estado: 'En Proceso', fechaCreacion: '2024-01-25', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 12, codigo: 'LAB012', paciente: 'Sofía Valentina Díaz', dni: '00998877', estado: 'Completado', fechaCreacion: '2024-01-26', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 13, codigo: 'LAB013', paciente: 'Andrés Sebastián Flores', dni: '11000922', estado: 'Pendiente', fechaCreacion: '2024-01-27', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 14, codigo: 'LAB014', paciente: 'Valeria Nicole Mendoza', dni: '22119933', estado: 'En Proceso', fechaCreacion: '2024-01-28', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 15, codigo: 'LAB015', paciente: 'Joaquín Emilio Guerrero', dni: '33228844', estado: 'Completado', fechaCreacion: '2024-01-29', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 16, codigo: 'LAB016', paciente: 'Camila Esperanza Sánchez', dni: '44337755', estado: 'Pendiente', fechaCreacion: '2024-01-30', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 17, codigo: 'LAB017', paciente: 'Mateo Gabriel Ramírez', dni: '55446666', estado: 'En Proceso', fechaCreacion: '2024-02-01', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 18, codigo: 'LAB018', paciente: 'Lucía Fernanda Jiménez', dni: '66557777', estado: 'Completado', fechaCreacion: '2024-02-02', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 19, codigo: 'LAB019', paciente: 'Santiago Matías Vargas', dni: '77668888', estado: 'Pendiente', fechaCreacion: '2024-02-03', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 20, codigo: 'LAB020', paciente: 'Antonella Grace Romero', dni: '88779999', estado: 'En Proceso', fechaCreacion: '2024-02-04', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 21, codigo: 'LAB021', paciente: 'Emilio Maximiliano Cruz', dni: '99880011', estado: 'Completado', fechaCreacion: '2024-02-05', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 22, codigo: 'LAB022', paciente: 'Victoria Esperanza León', dni: '00991122', estado: 'Pendiente', fechaCreacion: '2024-02-06', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 23, codigo: 'LAB023', paciente: 'Nicolás Eduardo Peña', dni: '11002233', estado: 'En Proceso', fechaCreacion: '2024-02-07', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 24, codigo: 'LAB024', paciente: 'Renata Milagros Arias', dni: '22113344', estado: 'Completado', fechaCreacion: '2024-02-08', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 25, codigo: 'LAB025', paciente: 'Sebastián Rodrigo Medina', dni: '33224455', estado: 'Pendiente', fechaCreacion: '2024-02-09', distrito: 'San Isidro', clasificacion: 'R' }\r\n]"
             },
             {
                 "name": "sampleColumns",
@@ -1364,6 +1414,16 @@
                 "defaultValue": "{\n  args: {\n    ...Default.args,\n    showFirstLastButtons: false\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabla con paginación sin los botones de primera y última página. Útil para interfaces más limpias o cuando se prefiere navegación secuencial.'\n      },\n      source: {\n        type: 'dynamic'\n      }\n    }\n  }\n}"
             },
             {
+                "name": "SinDatos",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
                 "name": "SinPaginacion",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1417,11 +1477,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Checkbox pequeño',\r\n    size: 'sm',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Small",
@@ -1437,11 +1497,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Checkbox pequeño',\r\n    size: 'sm',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Small",
@@ -1457,21 +1517,21 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Textarea pequeño',\r\n    placeholder: 'Tamaño pequeño...',\r\n    size: 'sm',\r\n    rows: 2,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Radio pequeño',\r\n    value: 'small',\r\n    name: 'smallGroup',\r\n    size: 'sm',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "States",
@@ -1527,11 +1587,11 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    status: 'success',\r\n    checked: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1547,11 +1607,11 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    status: 'success',\r\n    checked: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1567,21 +1627,21 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Comentario validado',\r\n    value: 'Este comentario ha sido validado correctamente.',\r\n    status: 'success',\r\n    rows: 3,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Opción validada correctamente',\r\n    value: 'success',\r\n    name: 'successGroup',\r\n    status: 'success',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "SuccessLight",
@@ -1707,11 +1767,11 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir notificaciones',\r\n    helperText: 'Recibirás emails con las últimas actualizaciones',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithHelperText",
@@ -1727,11 +1787,11 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir notificaciones',\r\n    helperText: 'Recibirás emails con las últimas actualizaciones',\r\n    checked: false,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Checkbox con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithHelperText",
@@ -1747,21 +1807,21 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Feedback',\r\n    placeholder: 'Comparta sus comentarios...',\r\n    helperText: 'Sus comentarios nos ayudan a mejorar el servicio',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Notificaciones por email',\r\n    value: 'email',\r\n    name: 'helperGroup',\r\n    helperText: 'Recibirás todas las actualizaciones importantes',\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Radio button con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithIcon",
@@ -1864,7 +1924,37 @@
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Descripción',\r\n    value: 'Este es un texto de ejemplo que ya está en el textarea.',\r\n    rows: 4,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Textarea con valor predefinido. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             }
         ],
-        "functions": [],
+        "functions": [
+            {
+                "name": "simulateServerCall",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "request",
+                        "type": "ServerTableRequest",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "Observable<ServerTableResponse>",
+                "jsdoctags": [
+                    {
+                        "name": "request",
+                        "type": "ServerTableRequest",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
         "typealiases": [
             {
                 "name": "Story",
@@ -1892,30 +1982,19 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<SaTableServerComponent>",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<SaCalendarComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaSelectComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SaInputComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1936,6 +2015,28 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<SaInputComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SaSelectComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<SaSwitchComponent>",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
@@ -1947,8 +2048,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaRadioComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
+                "rawtype": "StoryObj<SaTextareaComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1958,8 +2059,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaTextareaComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                "rawtype": "StoryObj<SaRadioComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2496,6 +2597,68 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<SaIconComponent>",
                     "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></sa-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
+                }
+            ],
+            "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
+                {
+                    "name": "Basic",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '100px' },\r\n      { key: 'fechaCreacion', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 25, 50],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true\r\n  },\r\n  render: (args) => {\r\n    // Simular estado del componente\r\n    let currentData = args.data;\r\n    let currentPaginationData = args.paginationData;\r\n    let isLoading = args.loading;\r\n    \r\n    return {\r\n      props: {\r\n        ...args,\r\n        data: currentData,\r\n        paginationData: currentPaginationData,\r\n        loading: isLoading,\r\n        onLoadData: (request: ServerTableRequest) => {\r\n          console.log('🔍 Server request:', request);\r\n          isLoading = true;\r\n          \r\n          // Simular llamada al servidor\r\n          simulateServerCall(request).subscribe(response => {\r\n            currentData = response.data;\r\n            currentPaginationData = {\r\n              currentPage: response.currentPage,\r\n              itemsPerPage: response.itemsPerPage,\r\n              totalItems: response.totalItems,\r\n              currentItemsCount: response.data.length\r\n            };\r\n            isLoading = false;\r\n            \r\n            console.log('📊 Server response:', response);\r\n          });\r\n        },\r\n        onRowClick: (row: TableData) => {\r\n          console.log('🖱️ Row clicked:', row);\r\n        },\r\n        onRowDoubleClick: (row: TableData) => {\r\n          console.log('🖱️ Row double-clicked:', row);\r\n        }\r\n      },\r\n      template: `\r\n        <sa-table-server \r\n          [columns]=\"columns\" \r\n          [data]=\"data\"\r\n          [paginationData]=\"paginationData\"\r\n          [paginationOptions]=\"paginationOptions\"\r\n          [loading]=\"loading\"\r\n          [hover]=\"hover\"\r\n          [showFilters]=\"showFilters\"\r\n          [showFirstLastButtons]=\"showFirstLastButtons\"\r\n          [autoLoad]=\"autoLoad\"\r\n          [emptyMessage]=\"emptyMessage\"\r\n          [minWidth]=\"minWidth\"\r\n          (loadData)=\"onLoadData($event)\"\r\n          (rowClick)=\"onRowClick($event)\"\r\n          (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n        </sa-table-server>\r\n      `\r\n    };\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🖥️ Tabla con Paginación Server-Side\r\n\r\nEsta es la implementación básica del componente **sa-table-server** que maneja la paginación en el servidor.\r\n\r\n### Características principales:\r\n\r\n**📡 Server-Side Processing:**\r\n- Los datos se cargan página por página desde el servidor\r\n- No mantiene todos los datos en memoria del cliente\r\n- Escalable para grandes volúmenes de datos\r\n\r\n**🔄 Estados de Carga:**\r\n- Overlay de loading durante las peticiones\r\n- Feedback visual inmediato al usuario\r\n- Botones deshabilitados durante carga\r\n\r\n**📄 Paginación Inteligente:**\r\n- Información de página actual y total de registros\r\n- Navegación por páginas (anterior/siguiente)\r\n- Selector de elementos por página\r\n- Botones de primera y última página opcionales\r\n\r\n### Eventos del Servidor:\r\n\r\n1. **loadData**: Se emite automáticamente cuando:\r\n   - El componente se inicializa (si autoLoad=true)\r\n   - Se cambia de página\r\n   - Se modifica el número de elementos por página\r\n   - Se aplica ordenamiento\r\n   - Se modifican filtros\r\n\r\n2. **Otros eventos**: rowClick, rowDoubleClick funcionan igual que sa-table\r\n\r\n### Flujo de Datos:\r\n\r\n1. Componente emite \\`loadData\\` con parámetros de la petición\r\n2. El componente padre hace la llamada HTTP al servidor\r\n3. El servidor procesa: filtros, ordenamiento, paginación\r\n4. El componente padre actualiza \\`data\\` y \\`paginationData\\`\r\n5. La tabla se renderiza con los nuevos datos\r\n\r\n### Uso en el Código:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  \r\n  this.apiService.getPagedData(request).subscribe(response => {\r\n    this.data = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.loading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "ConCarga",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "ConFiltros",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'dni', label: 'DNI', sortable: false, width: '100px' },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '120px' },\r\n      { key: 'distrito', label: 'Distrito', sortable: true, width: '140px' },\r\n      { key: 'clasificacion', label: 'Clasificación', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  render: Basic.render,\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Tabla con Filtros Server-Side\r\n\r\nDemuestra el filtrado en tiempo real con procesamiento en el servidor.\r\n\r\n### Funcionalidades de Filtrado:\r\n\r\n**🔍 Filtros por Columna:**\r\n- Input de texto debajo de cada encabezado\r\n- Búsqueda en tiempo real mientras escribes\r\n- Los filtros se envían al servidor para procesamiento\r\n- Configuración \\`noFilter: true\\` para excluir columnas\r\n\r\n**⚡ Comportamiento Inteligente:**\r\n- **Debounce automático**: Evita sobrecarga de peticiones\r\n- **Reset de página**: Vuelve a página 1 al filtrar\r\n- **Combinación de filtros**: Múltiples columnas simultáneamente\r\n- **Estado persistente**: Los filtros se mantienen al paginar\r\n\r\n**🎯 Optimizaciones:**\r\n- Solo se procesan en el servidor (no en cliente)\r\n- Ideal para datasets grandes\r\n- Menor consumo de ancho de banda\r\n\r\n### Pruebas Sugeridas:\r\n\r\n1. **Filtro por paciente**: Escribe \"María\" en la columna Paciente\r\n2. **Filtro por estado**: Escribe \"Pendiente\" en Estado\r\n3. **Filtros combinados**: Usa múltiples filtros a la vez\r\n4. **Navegación**: Cambia de página con filtros activos\r\n5. **Limpiar**: Borra los filtros para ver todos los datos\r\n\r\n### Configuración de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nconst columns = [\r\n  { key: 'codigo', label: 'Código', sortable: true },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'acciones', label: 'Acciones', noFilter: true } // Sin filtro\r\n];\r\n\\`\\`\\`\r\n\r\n### Evento de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  // request.filters contiene los filtros activos\r\n  console.log('Filtros activos:', request.filters);\r\n  \r\n  this.apiService.getFilteredData(request).subscribe(response => {\r\n    // Los datos ya vienen filtrados del servidor\r\n    this.updateTableData(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SaTableServerComponent>",
+                    "defaultValue": "{\r\n  title: 'Componentes/Table Server',\r\n  component: SaTableServerComponent,\r\n  parameters: {\r\n    layout: 'padded',\r\n    controls: {\r\n      expanded: true,\r\n      sort: 'requiredFirst'\r\n    },\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Limpiar property bindings innecesarios\r\n          result = result.replace(/\\[hover\\]=\"true\"/g, 'hover=\"true\"');\r\n          result = result.replace(/\\[hover\\]=\"false\"/g, 'hover=\"false\"');\r\n          result = result.replace(/\\[loading\\]=\"true\"/g, 'loading=\"true\"');\r\n          result = result.replace(/\\[loading\\]=\"false\"/g, 'loading=\"false\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"true\"/g, 'showFirstLastButtons=\"true\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"false\"/g, 'showFirstLastButtons=\"false\"');\r\n          result = result.replace(/\\[showFilters\\]=\"true\"/g, 'showFilters=\"true\"');\r\n          result = result.replace(/\\[showFilters\\]=\"false\"/g, 'showFilters=\"false\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"true\"/g, 'autoLoad=\"true\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"false\"/g, 'autoLoad=\"false\"');\r\n          result = result.replace(/\\[minWidth\\]=\"'([^']+)'\"/g, 'minWidth=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      },\r\n      description: {\r\n        component: `\r\n## Events\r\n\r\n| Event | Tipo | Descripción |\r\n|-------|------|-------------|\r\n| loadData | ServerTableRequest | Emitido cuando se necesita cargar datos del servidor |\r\n| pageChange | number | Emitido cuando cambia la página |\r\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\r\n| sortChange | {column: string, direction: 'asc' \\\\| 'desc'} | Emitido cuando cambia el ordenamiento |\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |\r\n\r\n## Interfaces\r\n\r\n### ServerTableRequest\r\n\\`\\`\\`typescript\r\ninterface ServerTableRequest {\r\n  pageNumber: number;        // Página actual (1-based)\r\n  rowsPerPage: number;       // Elementos por página\r\n  searchTerm?: string;       // Término de búsqueda global\r\n  sortColumn?: string;       // Columna a ordenar\r\n  sortDirection?: 'asc' | 'desc'; // Dirección del ordenamiento\r\n  filters?: { [key: string]: any }; // Filtros por columna\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerTableResponse\r\n\\`\\`\\`typescript\r\ninterface ServerTableResponse<T = TableData> {\r\n  data: T[];               // Datos de la página actual\r\n  totalItems: number;      // Total de elementos en el servidor\r\n  currentPage: number;     // Página actual\r\n  itemsPerPage: number;    // Elementos por página\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerPaginationData\r\n\\`\\`\\`typescript\r\ninterface ServerPaginationData {\r\n  currentPage: number;       // Página actual\r\n  itemsPerPage: number;      // Elementos por página\r\n  totalItems: number;        // Total de elementos\r\n  currentItemsCount: number; // Elementos en la página actual\r\n}\r\n\\`\\`\\`\r\n\r\n## Uso\r\n\r\n\\`\\`\\`typescript\r\nimport { SaTableServerComponent } from '@sanna-ui/sa-table-server';\r\n\r\n// Configuración\r\nconst columns: TableColumn[] = [\r\n  { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'estado', label: 'Estado', sortable: true, width: '100px' }\r\n];\r\n\r\nconst paginationData: ServerPaginationData = {\r\n  currentPage: 1,\r\n  itemsPerPage: 10,\r\n  totalItems: 0,\r\n  currentItemsCount: 0\r\n};\r\n\r\n// En el template\r\n<sa-table-server \r\n  [columns]=\"columns\" \r\n  [data]=\"currentPageData\"\r\n  [paginationData]=\"paginationData\"\r\n  [loading]=\"isLoading\"\r\n  showFilters=\"true\"\r\n  hover=\"true\"\r\n  (loadData)=\"onLoadData($event)\"\r\n  (rowClick)=\"onRowClick($event)\">\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.isLoading = true;\r\n  \r\n  this.dataService.getData(request).subscribe(response => {\r\n    this.currentPageData = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.isLoading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n## Diferencias con sa-table\r\n\r\n- **Server-Side**: Los datos se cargan desde el servidor página por página\r\n- **Paginación Real**: No carga todos los datos en memoria\r\n- **Filtros Remotos**: Los filtros se aplican en el servidor\r\n- **Escalabilidad**: Maneja miles/millones de registros eficientemente\r\n- **Latencia**: Puede tener latencia en navegación/filtros\r\n\r\n## Métodos Públicos\r\n\r\n- **reload()**: Recarga los datos de la página actual\r\n- **clearFilters()**: Limpia todos los filtros y recarga\r\n        `\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    columns: {\r\n      control: { type: 'object' },\r\n      description: 'Configuración de las columnas de la tabla'\r\n    },\r\n    data: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de la página actual (recibidos del servidor)'\r\n    },\r\n    paginationData: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de paginación del servidor'\r\n    },\r\n    paginationOptions: {\r\n      control: { type: 'object' },\r\n      description: 'Opciones de configuración de la paginación'\r\n    },\r\n    autoLoad: {\r\n      control: { type: 'boolean' },\r\n      description: 'Cargar datos automáticamente al inicializar. Usa attribute binding: autoLoad=\"true\"'\r\n    },\r\n    hover: {\r\n      control: { type: 'boolean' },\r\n      description: 'Aplicar efecto hover. Usa attribute binding: hover=\"true\"'\r\n    },\r\n    loading: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar estado de carga. Usa attribute binding: loading=\"true\"'\r\n    },\r\n    showFirstLastButtons: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons=\"true\"'\r\n    },\r\n    showFilters: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar inputs de filtrado. Usa attribute binding: showFilters=\"true\"'\r\n    },\r\n    emptyMessage: {\r\n      control: { type: 'text' },\r\n      description: 'Mensaje cuando no hay datos. Property binding: [emptyMessage]=\"mensaje\"'\r\n    },\r\n    minWidth: {\r\n      control: { type: 'text' },\r\n      description: 'Ancho mínimo de la tabla. Ejemplos: 600px, 800px, 1000px'\r\n    }\r\n  },\r\n  args: {\r\n    // Valores por defecto\r\n    hover: true,\r\n    loading: false,\r\n    showFirstLastButtons: true,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px'\r\n  }\r\n}"
+                },
+                {
+                    "name": "SAMPLE_DATA",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TableData[]",
+                    "defaultValue": "[\r\n  { id: 1, codigo: 'LAB001', paciente: 'Juan Pérez García', dni: '12345678', estado: 'Pendiente', fechaCreacion: '2024-01-15', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 2, codigo: 'LAB002', paciente: 'María Elena Rodríguez', dni: '87654321', estado: 'En Proceso', fechaCreacion: '2024-01-16', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 3, codigo: 'LAB003', paciente: 'Carlos Antonio López', dni: '11223344', estado: 'Completado', fechaCreacion: '2024-01-17', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 4, codigo: 'LAB004', paciente: 'Ana Sofía Martínez', dni: '44332211', estado: 'Pendiente', fechaCreacion: '2024-01-18', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 5, codigo: 'LAB005', paciente: 'Luis Fernando Torres', dni: '55667788', estado: 'En Proceso', fechaCreacion: '2024-01-19', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 6, codigo: 'LAB006', paciente: 'Carmen Rosa Silva', dni: '88776655', estado: 'Completado', fechaCreacion: '2024-01-20', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 7, codigo: 'LAB007', paciente: 'Roberto Carlos Vega', dni: '99887766', estado: 'Pendiente', fechaCreacion: '2024-01-21', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 8, codigo: 'LAB008', paciente: 'Patricia Isabel Morales', dni: '66554433', estado: 'En Proceso', fechaCreacion: '2024-01-22', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 9, codigo: 'LAB009', paciente: 'Fernando José Castro', dni: '33445566', estado: 'Completado', fechaCreacion: '2024-01-23', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 10, codigo: 'LAB010', paciente: 'Isabel María Herrera', dni: '22334455', estado: 'Pendiente', fechaCreacion: '2024-01-24', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 11, codigo: 'LAB011', paciente: 'Diego Alejandro Ruiz', dni: '77889900', estado: 'En Proceso', fechaCreacion: '2024-01-25', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 12, codigo: 'LAB012', paciente: 'Sofía Valentina Díaz', dni: '00998877', estado: 'Completado', fechaCreacion: '2024-01-26', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 13, codigo: 'LAB013', paciente: 'Andrés Sebastián Flores', dni: '11000922', estado: 'Pendiente', fechaCreacion: '2024-01-27', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 14, codigo: 'LAB014', paciente: 'Valeria Nicole Mendoza', dni: '22119933', estado: 'En Proceso', fechaCreacion: '2024-01-28', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 15, codigo: 'LAB015', paciente: 'Joaquín Emilio Guerrero', dni: '33228844', estado: 'Completado', fechaCreacion: '2024-01-29', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 16, codigo: 'LAB016', paciente: 'Camila Esperanza Sánchez', dni: '44337755', estado: 'Pendiente', fechaCreacion: '2024-01-30', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 17, codigo: 'LAB017', paciente: 'Mateo Gabriel Ramírez', dni: '55446666', estado: 'En Proceso', fechaCreacion: '2024-02-01', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 18, codigo: 'LAB018', paciente: 'Lucía Fernanda Jiménez', dni: '66557777', estado: 'Completado', fechaCreacion: '2024-02-02', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 19, codigo: 'LAB019', paciente: 'Santiago Matías Vargas', dni: '77668888', estado: 'Pendiente', fechaCreacion: '2024-02-03', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 20, codigo: 'LAB020', paciente: 'Antonella Grace Romero', dni: '88779999', estado: 'En Proceso', fechaCreacion: '2024-02-04', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 21, codigo: 'LAB021', paciente: 'Emilio Maximiliano Cruz', dni: '99880011', estado: 'Completado', fechaCreacion: '2024-02-05', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 22, codigo: 'LAB022', paciente: 'Victoria Esperanza León', dni: '00991122', estado: 'Pendiente', fechaCreacion: '2024-02-06', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 23, codigo: 'LAB023', paciente: 'Nicolás Eduardo Peña', dni: '11002233', estado: 'En Proceso', fechaCreacion: '2024-02-07', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 24, codigo: 'LAB024', paciente: 'Renata Milagros Arias', dni: '22113344', estado: 'Completado', fechaCreacion: '2024-02-08', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 25, codigo: 'LAB025', paciente: 'Sebastián Rodrigo Medina', dni: '33224455', estado: 'Pendiente', fechaCreacion: '2024-02-09', distrito: 'San Isidro', clasificacion: 'R' }\r\n]"
+                },
+                {
+                    "name": "SinDatos",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
@@ -3769,7 +3932,39 @@
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
+                {
+                    "name": "simulateServerCall",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "ServerTableRequest",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "Observable<ServerTableResponse>",
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "ServerTableRequest",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
             "projects/sanna-ui/src/lib/sa-heading/sa-heading.stories.ts": [
@@ -3798,6 +3993,19 @@
                     "kind": 183
                 }
             ],
+            "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaTableServerComponent>",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts": [
                 {
                     "name": "Story",
@@ -3805,32 +4013,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaCalendarComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-calendar/sa-calendar.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSelectComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaInputComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -3850,6 +4032,32 @@
                     "kind": 183
                 }
             ],
+            "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaInputComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaSelectComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
                 {
                     "name": "Story",
@@ -3863,19 +4071,6 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaRadioComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts": [
                 {
                     "name": "Story",
@@ -3883,6 +4078,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaTextareaComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-textarea/sa-textarea.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaRadioComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-radio/sa-radio.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -5451,6 +5659,86 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "simulateServerCall",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Basic",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ConCarga",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ConFiltros",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SAMPLE_DATA",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SinDatos",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -1,0 +1,160 @@
+<!-- Table Container -->
+<div class="sa-table-container">
+  
+  <!-- Table Content (siempre visible) -->
+  <div class="table-content" [class.loading]="loading">
+
+<!-- Table -->
+<div class="table-responsive table-container" 
+     [class.auto-layout-container]="!shouldUseFixedLayout"
+     [class.fixed-layout-container]="shouldUseFixedLayout">
+  <table class="table" 
+         [class.table-hover]="hover"
+         [class.fixed-layout]="shouldUseFixedLayout"
+         [class.auto-layout]="!shouldUseFixedLayout"
+         [style.min-width]="minWidth">
+    <thead class="table-light" [class.has-filters]="showFilters">
+      <tr>
+        <th *ngFor="let column of columns" 
+            class="column-header"
+            [class.sortable]="isColumnSortable(column.key)"
+            [style.width]="column.width"
+            (click)="onSort(column.key)">
+          <div class="d-flex align-items-center justify-content-between">
+            <span style="font-weight: 700 !important;">{{ column.label }}</span>
+            <i *ngIf="isColumnSortable(column.key)" 
+               [class]="getSortIcon(column.key)" 
+               style="font-size: 12px; margin-left: 4px;"></i>
+          </div>
+        </th>
+      </tr>
+      <!-- Fila de filtros -->
+      <tr *ngIf="showFilters" class="filter-row">
+        <th class="filter-row-th" *ngFor="let column of columns" 
+            [style.width]="column.width">
+          <input 
+            *ngIf="shouldShowFilter(column.key)"
+            type="text" 
+            class="form-control form-control-sm filter-input"
+            [placeholder]="'Filtrar ' + column.label"
+            [value]="columnFilters[column.key] || ''"
+            (input)="onFilterChange(column.key, $any($event.target).value)"
+            />
+        </th>
+      </tr>
+    </thead>
+    <tbody [class.animate-fade-in]="data.length > 0" [class.animation-complete]="data.length > 0">
+      <tr *ngFor="let row of data; trackBy: trackByFn"
+          [class]="getRowClasses(row)"
+          (click)="onRowClick(row)"
+          (dblclick)="onRowDoubleClick(row)">
+        <td *ngFor="let column of columns" [style.width]="column.width">
+          <!-- Usar template específico de la columna si existe, sino usar el default -->
+          <ng-container *ngTemplateOutlet="getColumnTemplate(column.key) || defaultCellTemplate!; context: getTemplateContext(row, column)">
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="data.length === 0 && !loading">
+        <td [attr.colspan]="columns.length" class="text-center py-4 text-muted">
+          <div>
+            <p class="mb-2" style="font-size: 14px !important;">{{ emptyMessage }}</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Loading Overlay solo sobre la tabla -->
+  <div *ngIf="loading" class="loading-overlay">
+    <div class="loading-content">
+      <div class="spinner-border text-primary" role="status">
+      </div>
+      <div class="loading-text">Cargando...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Server-Side Pagination Controls -->
+<div *ngIf="paginationData.totalItems > 0 || loading" class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center mt-2">
+  <!-- Items Per Page Selector (izquierda) -->
+  <div *ngIf="paginationOptions.showItemsPerPageSelector && paginationData.totalItems >= 6" 
+       class="d-flex align-items-center mb-2 mb-md-0"
+       [class.no-pagination]="getTotalPages() <= 1">
+    <span class="text-muted me-2" style="font-size: 12px !important;">Registros por página:</span>
+    <select 
+      id="itemsPerPage"
+      class="form-select form-select-sm sa-table-items-per-page" 
+      [value]="paginationData.itemsPerPage"
+      (change)="onItemsPerPageChange(+$any($event.target).value)">
+      <option *ngFor="let option of paginationOptions.itemsPerPageOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+  
+  <!-- Pagination Info and Controls (derecha) -->
+  <div class="d-flex flex-column flex-md-row align-items-center">
+    <div *ngIf="paginationOptions.showPageInfo && paginationData.totalItems > 0" 
+         class="text-muted mb-2 mb-md-0 me-md-3 text-center text-md-start"
+         [class.mt-custom-pagination]="paginationData.totalItems < 6"
+         style="font-size: 12px !important;">
+      Página {{ paginationData.currentPage }}: 
+      {{ getStartItem() }}-{{ getEndItem() }} de {{ paginationData.totalItems }} registros
+    </div>
+  
+    <nav *ngIf="getTotalPages() > 1" aria-label="Navegación de páginas">
+      <div class="pagination-controls d-flex align-items-center">
+        <!-- First Page Button -->
+        <button *ngIf="showFirstLastButtons" 
+                class="btn btn-outline-secondary btn-sm me-1" 
+                (click)="onPageChange(1)"
+                [disabled]="paginationData.currentPage === 1 || loading"
+                aria-label="Primera página"
+                title="Primera página">
+          <span class="pagination-icon pagination-first">«</span>
+        </button>
+
+        <!-- Previous Button -->
+        <button class="btn btn-outline-secondary btn-sm me-2" 
+                (click)="onPreviousPage()"
+                [disabled]="paginationData.currentPage === 1 || loading"
+                aria-label="Página anterior"
+                title="Página anterior">
+          <span class="pagination-icon">‹</span>
+        </button>
+
+        <!-- Page Indicator -->
+        <span class="page-indicator mx-2 text-muted">
+          {{ paginationData.currentPage }} de {{ getTotalPages() }}
+        </span>
+
+        <!-- Next Button -->
+        <button class="btn btn-outline-secondary btn-sm ms-2" 
+                (click)="onNextPage()"
+                [disabled]="paginationData.currentPage === getTotalPages() || loading"
+                aria-label="Página siguiente"
+                title="Página siguiente">
+          <span class="pagination-icon">›</span>
+        </button>
+
+        <!-- Last Page Button -->
+        <button *ngIf="showFirstLastButtons" 
+                class="btn btn-outline-secondary btn-sm ms-1" 
+                (click)="onPageChange(getTotalPages())"
+                [disabled]="paginationData.currentPage === getTotalPages() || loading"
+                aria-label="Última página"
+                title="Última página">
+          <span class="pagination-icon pagination-last">»</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</div>
+</div>
+
+<!-- Template por defecto para celdas -->
+<ng-template #defaultCellTemplate let-row="row" let-column="column">
+  <ng-container *ngIf="row[column.key] !== undefined && row[column.key] !== null">
+    {{ row[column.key] }}
+  </ng-container>
+</ng-template>

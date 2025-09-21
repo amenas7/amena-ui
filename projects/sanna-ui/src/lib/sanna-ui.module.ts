@@ -10,6 +10,7 @@ import { SaMessageboxComponent } from './sa-messagebox/sa-messagebox.component';
 import { SaHeadingComponent } from './sa-heading/sa-heading.component';
 import { SaTextComponent } from './sa-text/sa-text.component';
 import { SaTableComponent } from './sa-table/sa-table.component';
+import { SaTableServerComponent } from './sa-table-server/sa-table-server.component';
 import { SaColumnDefDirective } from './sa-table/sa-column-def.directive';
 import { SaTagComponent } from './sa-tag/sa-tag.component';
 import { SaLegendComponent } from './sa-legend/sa-legend.component';
@@ -26,6 +27,7 @@ import { SannaIconModule } from './sa-icon/icon.module';
     SaHeadingComponent,
     SaTextComponent,
     SaTableComponent,
+    SaTableServerComponent,
     SaTagComponent,
     SaLegendComponent,
   ],
@@ -45,6 +47,7 @@ import { SannaIconModule } from './sa-icon/icon.module';
     SaHeadingComponent,
     SaTextComponent,
     SaTableComponent,
+    SaTableServerComponent,
     SaTagComponent,
     SaLegendComponent,
     SaColumnDefDirective,

@@ -1,0 +1,41 @@
+app-breadcrumb {
+    display: none;
+}
+
+.hidden-element {
+  visibility: hidden;
+}
+
+
+th {
+  white-space: nowrap;
+  width: 1%;
+}
+
+
+tr.table-danger.selected-row {
+  background-color: #dc3545 !important;
+  color: white !important;
+  
+  &:hover {
+    background-color: #c82333 !important;
+  }
+}
+
+tr.selected-row td {
+  background-color: #2196f3 !important;
+  color: white !important;
+}
+tr.table-danger.selected-row td {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+
+input[type="checkbox"]:disabled + label {
+  color: #212529 !important;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+
