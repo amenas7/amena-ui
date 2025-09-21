@@ -715,6 +715,26 @@ export const IconGallery: StoryObj<SaIconComponent> = {
                   <sa-icon name="map-pin" color="#000000" size="md"></sa-icon>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <code>location</code>
+                  <sa-icon name="location" color="#000000" size="md"></sa-icon>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <code>location-arrow</code>
+                  <sa-icon name="location-arrow" color="#000000" size="md"></sa-icon>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <code>location-dot</code>
+                  <sa-icon name="location-dot" color="#000000" size="md"></sa-icon>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <code>compass</code>
+                  <sa-icon name="compass" color="#000000" size="md"></sa-icon>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <code>maps</code>
+                  <sa-icon name="maps" color="#000000" size="md"></sa-icon>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
                   <code>pills</code>
                   <sa-icon name="pills" color="#000000" size="md"></sa-icon>
                 </li>

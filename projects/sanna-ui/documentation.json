@@ -157,21 +157,21 @@
                 "name": "Basic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '100px' },\r\n      { key: 'fechaCreacion', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 25, 50],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true\r\n  },\r\n  render: (args) => {\r\n    // Simular estado del componente\r\n    let currentData = args.data;\r\n    let currentPaginationData = args.paginationData;\r\n    let isLoading = args.loading;\r\n    \r\n    return {\r\n      props: {\r\n        ...args,\r\n        data: currentData,\r\n        paginationData: currentPaginationData,\r\n        loading: isLoading,\r\n        onLoadData: (request: ServerTableRequest) => {\r\n          console.log('🔍 Server request:', request);\r\n          isLoading = true;\r\n          \r\n          // Simular llamada al servidor\r\n          simulateServerCall(request).subscribe(response => {\r\n            currentData = response.data;\r\n            currentPaginationData = {\r\n              currentPage: response.currentPage,\r\n              itemsPerPage: response.itemsPerPage,\r\n              totalItems: response.totalItems,\r\n              currentItemsCount: response.data.length\r\n            };\r\n            isLoading = false;\r\n            \r\n            console.log('📊 Server response:', response);\r\n          });\r\n        },\r\n        onRowClick: (row: TableData) => {\r\n          console.log('🖱️ Row clicked:', row);\r\n        },\r\n        onRowDoubleClick: (row: TableData) => {\r\n          console.log('🖱️ Row double-clicked:', row);\r\n        }\r\n      },\r\n      template: `\r\n        <sa-table-server \r\n          [columns]=\"columns\" \r\n          [data]=\"data\"\r\n          [paginationData]=\"paginationData\"\r\n          [paginationOptions]=\"paginationOptions\"\r\n          [loading]=\"loading\"\r\n          [hover]=\"hover\"\r\n          [showFilters]=\"showFilters\"\r\n          [showFirstLastButtons]=\"showFirstLastButtons\"\r\n          [autoLoad]=\"autoLoad\"\r\n          [emptyMessage]=\"emptyMessage\"\r\n          [minWidth]=\"minWidth\"\r\n          (loadData)=\"onLoadData($event)\"\r\n          (rowClick)=\"onRowClick($event)\"\r\n          (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n        </sa-table-server>\r\n      `\r\n    };\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🖥️ Tabla con Paginación Server-Side\r\n\r\nEsta es la implementación básica del componente **sa-table-server** que maneja la paginación en el servidor.\r\n\r\n### Características principales:\r\n\r\n**📡 Server-Side Processing:**\r\n- Los datos se cargan página por página desde el servidor\r\n- No mantiene todos los datos en memoria del cliente\r\n- Escalable para grandes volúmenes de datos\r\n\r\n**🔄 Estados de Carga:**\r\n- Overlay de loading durante las peticiones\r\n- Feedback visual inmediato al usuario\r\n- Botones deshabilitados durante carga\r\n\r\n**📄 Paginación Inteligente:**\r\n- Información de página actual y total de registros\r\n- Navegación por páginas (anterior/siguiente)\r\n- Selector de elementos por página\r\n- Botones de primera y última página opcionales\r\n\r\n### Eventos del Servidor:\r\n\r\n1. **loadData**: Se emite automáticamente cuando:\r\n   - El componente se inicializa (si autoLoad=true)\r\n   - Se cambia de página\r\n   - Se modifica el número de elementos por página\r\n   - Se aplica ordenamiento\r\n   - Se modifican filtros\r\n\r\n2. **Otros eventos**: rowClick, rowDoubleClick funcionan igual que sa-table\r\n\r\n### Flujo de Datos:\r\n\r\n1. Componente emite \\`loadData\\` con parámetros de la petición\r\n2. El componente padre hace la llamada HTTP al servidor\r\n3. El servidor procesa: filtros, ordenamiento, paginación\r\n4. El componente padre actualiza \\`data\\` y \\`paginationData\\`\r\n5. La tabla se renderiza con los nuevos datos\r\n\r\n### Uso en el Código:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  \r\n  this.apiService.getPagedData(request).subscribe(response => {\r\n    this.data = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.loading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Basic",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Nombre',\n    placeholder: 'Ingrese su nombre',\n    size: 'md',\n    type: 'text',\n  }\n}"
+            },
+            {
+                "name": "Basico",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px' },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px' },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [\r\n      { id: 1, codigo: 'POST-001', titulo: 'sunt aut facere repellat provident occaecati excepturi', autor: 'Usuario 1', estado: 'Revisión', fecha: '01/01/2024' },\r\n      { id: 2, codigo: 'POST-002', titulo: 'qui est esse', autor: 'Usuario 1', estado: 'Borrador', fecha: '02/01/2024' },\r\n      { id: 3, codigo: 'POST-003', titulo: 'ea molestias quasi exercitationem repellat', autor: 'Usuario 1', estado: 'Publicado', fecha: '03/01/2024' },\r\n      { id: 4, codigo: 'POST-004', titulo: 'eum et est occaecati', autor: 'Usuario 1', estado: 'Revisión', fecha: '04/01/2024' },\r\n      { id: 5, codigo: 'POST-005', titulo: 'nesciunt quas odio', autor: 'Usuario 1', estado: 'Borrador', fecha: '05/01/2024' }\r\n    ],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 47,\r\n      currentItemsCount: 5\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 15],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px',\r\n    loadData: (request: ServerTableRequest) => {\r\n      console.log('🚀 SIMULACIÓN DE LLAMADA AL BACKEND:');\r\n      console.log('📡 Request:', {\r\n        method: 'GET',\r\n        url: `https://api.ejemplo.com/posts?page=${request.pageNumber}&limit=${request.rowsPerPage}`,\r\n        params: request\r\n      });\r\n      console.log('⏱️ En una app real aquí se vería loading: true');\r\n      console.log('📊 Después de 1-2s llegaría la respuesta del servidor');\r\n    },\r\n    rowClick: (row: TableData) => {\r\n      console.log('🖱️ Row clicked:', row);\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔄 Server-Side Simulation\r\n\r\nEsta demo simula el comportamiento real de server-side pagination con latencia de red.\r\n\r\n**⚠️ Limitación de Storybook:** Los stories no pueden actualizar la vista reactivamente. En una aplicación real Angular, verías:\r\n\r\n1. **Loading state** → Spinner durante petición\r\n2. **Nuevos datos** → Contenido actualizado automáticamente\r\n3. **Paginación actualizada** → Contadores y navegación sincronizados\r\n\r\n### 🔗 API Endpoint:\r\n- **URL**: \\`https://jsonplaceholder.typicode.com/posts\\`\r\n- **Método**: GET con parámetros de query\r\n- **Total de registros**: ~100 posts reales\r\n\r\n### 📋 Funcionalidades Reales:\r\n\r\n**✅ Paginación Server-Side:**\r\n- \\`_page=1&_limit=10\\` - Solicita página 1 con 10 elementos\r\n- \\`_page=2&_limit=10\\` - Solicita página 2 con 10 elementos\r\n- El servidor devuelve solo los datos de la página solicitada\r\n\r\n**✅ Ordenamiento:**\r\n- \\`_sort=title&_order=asc\\` - Ordena por título ascendente\r\n- \\`_sort=userId&_order=desc\\` - Ordena por usuario descendente\r\n- El servidor procesa el ordenamiento en backend\r\n\r\n**✅ Filtros (limitados):**\r\n- \\`title_like=search_term\\` - Busca títulos que contengan el término\r\n- \\`userId=1\\` - Filtra por usuario específico\r\n\r\n### 🔍 Monitoreo:\r\n\r\nAbre las **DevTools > Network** para ver las peticiones HTTP reales:\r\n\r\n\\`\\`\\`http\r\nGET https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10\r\nGET https://jsonplaceholder.typicode.com/posts?_page=2&_limit=10&_sort=title&_order=asc\r\n\\`\\`\\`\r\n\r\n### 📊 Transformación de Datos:\r\n\r\nLos datos de JSONPlaceholder se transforman a nuestro formato:\r\n\r\n\\`\\`\\`typescript\r\n// JSONPlaceholder original\r\n{\r\n  \"id\": 1,\r\n  \"title\": \"sunt aut facere repellat...\",\r\n  \"userId\": 1\r\n}\r\n\r\n// Transformado para la tabla\r\n{\r\n  \"id\": 1,\r\n  \"codigo\": \"POST-001\",\r\n  \"titulo\": \"sunt aut facere repellat...\",\r\n  \"userId\": 1,\r\n  \"autor\": \"Usuario 1\",\r\n  \"estado\": \"Revisión\",\r\n  \"fecha\": \"01/01/2024\"\r\n}\r\n\\`\\`\\`\r\n\r\n### 🎮 Interacciones:\r\n\r\n1. **Navegar páginas**: Ve las peticiones HTTP en Network tab\r\n2. **Cambiar elementos por página**: Observa el parámetro \\`_limit\\`\r\n3. **Ordenar columnas**: Ve los parámetros \\`_sort\\` y \\`_order\\`\r\n4. **Aplicar filtros**: Nota los filtros en la URL (título y userId)\r\n\r\n### 🚀 Sin Configuración:\r\n\r\n- **No necesitas backend local**\r\n- **No requiere configuración de CORS**\r\n- **Funciona directamente en Storybook**\r\n- **API pública y gratuita**\r\n\r\n¡Esta es la experiencia real de server-side pagination que tendrás en producción!\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "BoldLabel",
@@ -261,7 +261,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ConFiltros",
@@ -281,7 +281,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'dni', label: 'DNI', sortable: false, width: '100px' },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '120px' },\r\n      { key: 'distrito', label: 'Distrito', sortable: true, width: '140px' },\r\n      { key: 'clasificacion', label: 'Clasificación', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  render: Basic.render,\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Tabla con Filtros Server-Side\r\n\r\nDemuestra el filtrado en tiempo real con procesamiento en el servidor.\r\n\r\n### Funcionalidades de Filtrado:\r\n\r\n**🔍 Filtros por Columna:**\r\n- Input de texto debajo de cada encabezado\r\n- Búsqueda en tiempo real mientras escribes\r\n- Los filtros se envían al servidor para procesamiento\r\n- Configuración \\`noFilter: true\\` para excluir columnas\r\n\r\n**⚡ Comportamiento Inteligente:**\r\n- **Debounce automático**: Evita sobrecarga de peticiones\r\n- **Reset de página**: Vuelve a página 1 al filtrar\r\n- **Combinación de filtros**: Múltiples columnas simultáneamente\r\n- **Estado persistente**: Los filtros se mantienen al paginar\r\n\r\n**🎯 Optimizaciones:**\r\n- Solo se procesan en el servidor (no en cliente)\r\n- Ideal para datasets grandes\r\n- Menor consumo de ancho de banda\r\n\r\n### Pruebas Sugeridas:\r\n\r\n1. **Filtro por paciente**: Escribe \"María\" en la columna Paciente\r\n2. **Filtro por estado**: Escribe \"Pendiente\" en Estado\r\n3. **Filtros combinados**: Usa múltiples filtros a la vez\r\n4. **Navegación**: Cambia de página con filtros activos\r\n5. **Limpiar**: Borra los filtros para ver todos los datos\r\n\r\n### Configuración de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nconst columns = [\r\n  { key: 'codigo', label: 'Código', sortable: true },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'acciones', label: 'Acciones', noFilter: true } // Sin filtro\r\n];\r\n\\`\\`\\`\r\n\r\n### Evento de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  // request.filters contiene los filtros activos\r\n  console.log('Filtros activos:', request.filters);\r\n  \r\n  this.apiService.getFilteredData(request).subscribe(response => {\r\n    // Los datos ya vienen filtrados del servidor\r\n    this.updateTableData(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px', noFilter: true },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'userId', label: 'User ID', sortable: true, width: '100px' },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px', noFilter: true },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px', noFilter: true },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Filtros Reales con JSONPlaceholder\r\n\r\nEsta demo muestra filtros **reales** procesados por el servidor JSONPlaceholder.\r\n\r\n### 🎯 Filtros Disponibles:\r\n\r\n**✅ Título (title_like):**\r\n- Escribe en \"Título\" para buscar posts por contenido\r\n- Ejemplo: \"sunt\" → Filtra títulos que contengan \"sunt\"\r\n- URL: \\`?title_like=sunt\\`\r\n\r\n**✅ User ID (userId):**\r\n- Escribe números del 1-10 en \"User ID\"\r\n- Ejemplo: \"1\" → Solo posts del usuario 1\r\n- URL: \\`?userId=1\\`\r\n\r\n**❌ Filtros Deshabilitados:**\r\n- **Código, Autor, Estado, Fecha**: Configurados con \\`noFilter: true\\`\r\n- Solo se muestran para demostrar la configuración\r\n\r\n### 📡 Peticiones HTTP Reales:\r\n\r\n\\`\\`\\`http\r\n# Sin filtros\r\nGET /posts?_page=1&_limit=10\r\n\r\n# Con filtro de título\r\nGET /posts?_page=1&_limit=10&title_like=sunt\r\n\r\n# Con filtro de usuario\r\nGET /posts?_page=1&_limit=10&userId=1\r\n\r\n# Filtros combinados\r\nGET /posts?_page=1&_limit=10&title_like=sunt&userId=1\r\n\\`\\`\\`\r\n\r\n### 🧪 Pruebas Recomendadas:\r\n\r\n1. **Filtro por título**:\r\n   - Escribe \"sunt\" en Título\r\n   - Ve cómo se reduce el número total de registros\r\n   - Observa la URL en Network tab\r\n\r\n2. **Filtro por usuario**:\r\n   - Escribe \"1\" en User ID\r\n   - Solo verás posts del usuario 1\r\n   - Nota que la paginación se resetea a página 1\r\n\r\n3. **Filtros combinados**:\r\n   - Usa \"sunt\" en Título Y \"1\" en User ID\r\n   - Ve la intersección de ambos filtros\r\n\r\n4. **Limpiar filtros**:\r\n   - Borra el contenido de los inputs\r\n   - Regresa a mostrar todos los posts\r\n\r\n### ⚡ Características Técnicas:\r\n\r\n- **Debounce**: Espera 300ms antes de hacer la petición\r\n- **Reset automático**: Página vuelve a 1 al filtrar\r\n- **Estado persistente**: Filtros se mantienen al navegar páginas\r\n- **Fallback**: Si la API falla, muestra tabla vacía\r\n\r\n### 🔧 Configuración:\r\n\r\n\\`\\`\\`typescript\r\ncolumns: [\r\n  { key: 'titulo', label: 'Título' },           // ✅ Con filtro\r\n  { key: 'userId', label: 'User ID' },         // ✅ Con filtro\r\n  { key: 'estado', label: 'Estado', noFilter: true }  // ❌ Sin filtro\r\n]\r\n\\`\\`\\`\r\n\r\n¡Abre DevTools > Network para ver las peticiones HTTP reales en tiempo real!\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ConHover",
@@ -427,21 +427,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Activar notificaciones',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n    size: 'md',\r\n    status: 'default'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select básico con placeholder. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Default",
@@ -517,21 +517,21 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Función no disponible',\r\n    disabled: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    disabled: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select deshabilitado. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Disabled",
@@ -817,21 +817,21 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Switch grande',\r\n    value: true,\r\n    size: 'lg',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'lg',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño grande. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Large",
@@ -987,21 +987,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SaSelectComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          result = result.replace(/\\[noLabel\\]=\"true\"/g, 'noLabel=\"true\"');\r\n          result = result.replace(/\\[noLabel\\]=\"false\"/g, 'noLabel=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    noLabel: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SaSwitchComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Forms/Switch',\r\n  component: SaSwitchComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FormsModule, ReactiveFormsModule],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    layout: 'centered',\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[value\\]=\"true\"/g, '[value]=\"true\"');\r\n          result = result.replace(/\\[value\\]=\"false\"/g, '[value]=\"false\"');\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    value: { \r\n      control: 'boolean',\r\n      description: 'Estado del switch (activado/desactivado)',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    size: { \r\n      control: 'select', \r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'md' },\r\n      },\r\n    },\r\n    status: { \r\n      control: 'select', \r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del switch',\r\n      table: {\r\n        type: { summary: 'string' },\r\n        defaultValue: { summary: 'default' },\r\n      },\r\n    },\r\n    label: { \r\n      control: 'text', \r\n      description: 'Texto del label',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    helperText: { \r\n      control: 'text', \r\n      description: 'Texto de ayuda',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    errorText: { \r\n      control: 'text', \r\n      description: 'Texto de error',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    required: { \r\n      control: 'boolean', \r\n      description: 'Campo requerido',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: { \r\n      control: 'boolean', \r\n      description: 'Switch deshabilitado',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    id: { \r\n      control: 'text', \r\n      description: 'ID del elemento',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n    name: { \r\n      control: 'text', \r\n      description: 'Nombre del campo',\r\n      table: {\r\n        type: { summary: 'string' },\r\n      },\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SaSelectComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Forms/Select',\r\n  component: SaSelectComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, ReactiveFormsModule, SannaUiModule],\r\n      providers: [FormBuilder]\r\n    })\r\n  ],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: ''\r\n      },\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          let result = code;\r\n          \r\n          // Transformar property bindings innecesarios a attribute binding\r\n          result = result.replace(/\\[label\\]=\"'([^']+)'\"/g, 'label=\"$1\"');\r\n          result = result.replace(/\\[size\\]=\"'([^']+)'\"/g, 'size=\"$1\"');\r\n          result = result.replace(/\\[status\\]=\"'([^']+)'\"/g, 'status=\"$1\"');\r\n          result = result.replace(/\\[placeholder\\]=\"'([^']+)'\"/g, 'placeholder=\"$1\"');\r\n          result = result.replace(/\\[value\\]=\"'([^']+)'\"/g, 'value=\"$1\"');\r\n          result = result.replace(/\\[helperText\\]=\"'([^']+)'\"/g, 'helperText=\"$1\"');\r\n          result = result.replace(/\\[errorText\\]=\"'([^']+)'\"/g, 'errorText=\"$1\"');\r\n          result = result.replace(/\\[id\\]=\"'([^']+)'\"/g, 'id=\"$1\"');\r\n          result = result.replace(/\\[name\\]=\"'([^']+)'\"/g, 'name=\"$1\"');\r\n          \r\n          // Transformar boolean properties\r\n          result = result.replace(/\\[required\\]=\"true\"/g, 'required=\"true\"');\r\n          result = result.replace(/\\[required\\]=\"false\"/g, 'required=\"false\"');\r\n          result = result.replace(/\\[readonly\\]=\"true\"/g, 'readonly=\"true\"');\r\n          result = result.replace(/\\[readonly\\]=\"false\"/g, 'readonly=\"false\"');\r\n          result = result.replace(/\\[disabled\\]=\"true\"/g, 'disabled=\"true\"');\r\n          result = result.replace(/\\[disabled\\]=\"false\"/g, 'disabled=\"false\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"true\"/g, 'showPlaceholder=\"true\"');\r\n          result = result.replace(/\\[showPlaceholder\\]=\"false\"/g, 'showPlaceholder=\"false\"');\r\n          result = result.replace(/\\[noLabel\\]=\"true\"/g, 'noLabel=\"true\"');\r\n          result = result.replace(/\\[noLabel\\]=\"false\"/g, 'noLabel=\"false\"');\r\n          \r\n          return result;\r\n        }\r\n      }\r\n    },\r\n    actions: { argTypesRegex: '^on.*' },\r\n    controls: { expanded: true }\r\n  },\r\n  argTypes: {\r\n    label: {\r\n      control: 'text',\r\n      description: 'Etiqueta del select'\r\n    },\r\n    noLabel: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'\r\n    },\r\n    size: {\r\n      control: { type: 'select' },\r\n      options: ['sm', 'md', 'lg'],\r\n      description: 'Tamaño del select'\r\n    },\r\n    status: {\r\n      control: { type: 'select' },\r\n      options: ['default', 'success', 'error'],\r\n      description: 'Estado visual del select'\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Texto del placeholder/opción por defecto'\r\n    },\r\n    helperText: {\r\n      control: 'text',\r\n      description: 'Texto de ayuda debajo del select'\r\n    },\r\n    errorText: {\r\n      control: 'text',\r\n      description: 'Texto de error (solo se muestra si hay error)'\r\n    },\r\n    required: {\r\n      control: { type: 'boolean' },\r\n      description: 'Campo requerido (muestra asterisco rojo)'\r\n    },\r\n    disabled: {\r\n      control: { type: 'boolean' },\r\n      description: 'Estado deshabilitado'\r\n    },\r\n    readonly: {\r\n      control: { type: 'boolean' },\r\n      description: 'Solo lectura'\r\n    },\r\n    showPlaceholder: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar opción placeholder'\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: 'Valor seleccionado'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "meta",
@@ -1277,21 +1277,21 @@
                 "name": "Required",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Required",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Acepto los términos de servicio',\r\n    required: true,\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Required",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    required: true,\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select requerido con asterisco rojo. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Required",
@@ -1404,6 +1404,16 @@
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Mensaje corto'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje corto que mantiene su tamaño natural. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
+                "name": "SimulacionBackend",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px' },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px' },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [\r\n      { id: 1, codigo: 'POST-001', titulo: 'sunt aut facere repellat provident occaecati excepturi', autor: 'Usuario 1', estado: 'Revisión', fecha: '01/01/2024' },\r\n      { id: 2, codigo: 'POST-002', titulo: 'qui est esse', autor: 'Usuario 1', estado: 'Borrador', fecha: '02/01/2024' },\r\n      { id: 3, codigo: 'POST-003', titulo: 'ea molestias quasi exercitationem repellat', autor: 'Usuario 1', estado: 'Publicado', fecha: '03/01/2024' },\r\n      { id: 4, codigo: 'POST-004', titulo: 'eum et est occaecati', autor: 'Usuario 1', estado: 'Revisión', fecha: '04/01/2024' },\r\n      { id: 5, codigo: 'POST-005', titulo: 'nesciunt quas odio', autor: 'Usuario 1', estado: 'Borrador', fecha: '05/01/2024' }\r\n    ],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 100,\r\n      currentItemsCount: 5\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 15, 20],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px',\r\n    loadData: (request: ServerTableRequest) => {\r\n      console.clear();\r\n      console.log('🔥 ¡LLAMADA AL BACKEND DETECTADA!');\r\n      console.log('==========================================');\r\n      console.log('🌐 URL:', `GET https://jsonplaceholder.typicode.com/posts`);\r\n      console.log('📋 Parámetros de paginación:', {\r\n        page: request.pageNumber,\r\n        limit: request.rowsPerPage,\r\n        _start: (request.pageNumber - 1) * request.rowsPerPage,\r\n        _limit: request.rowsPerPage\r\n      });\r\n      \r\n      if (request.sortColumn) {\r\n        console.log('📊 Ordenamiento:', {\r\n          column: request.sortColumn,\r\n          direction: request.sortDirection\r\n        });\r\n      }\r\n      \r\n      if (request.filters && Object.keys(request.filters).length > 0) {\r\n        console.log('🔍 Filtros aplicados:', request.filters);\r\n      }\r\n      \r\n      console.log('⏳ Estado del componente:');\r\n      console.log('   - loading: true (debería mostrar spinner)');\r\n      console.log('   - data: [] (datos anteriores se limpian)');\r\n      console.log('');\r\n      console.log('📡 Simulando respuesta del servidor...');\r\n      console.log('🕐 Esperando 1.5 segundos...');\r\n      console.log('');\r\n      console.log('💡 En tu app Angular real:');\r\n      console.log('   1. Se ejecuta this.loadData.emit(request)');\r\n      console.log('   2. Tu componente padre recibe el evento');\r\n      console.log('   3. Haces la llamada HTTP al backend');\r\n      console.log('   4. Actualizas [data] y [paginationData]');\r\n      console.log('   5. Cambias [loading] = false');\r\n      console.log('==========================================');\r\n    },\r\n    rowClick: (row: TableData) => {\r\n      console.log('🖱️ Fila clickeada:', row);\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔥 Simulación Real de Backend\r\n\r\nEste story demuestra cómo se ejecutarían las llamadas al backend en una aplicación real.\r\n\r\n**Instrucciones:**\r\n1. 🔍 **Abre la consola del navegador** (F12 → Console)\r\n2. 🖱️ **Cambia de página** usando los controles de paginación\r\n3. 📊 **Observa los logs** que muestran las peticiones simuladas\r\n\r\n**Qué verás en los logs:**\r\n- URL completa de la petición HTTP\r\n- Parámetros de paginación calculados\r\n- Estado del loading y datos\r\n- Flujo completo de una app real\r\n\r\n**En una app Angular real:**\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  this.apiService.getPosts(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = {\r\n        currentPage: response.currentPage,\r\n        itemsPerPage: response.itemsPerPage,\r\n        totalItems: response.totalItems,\r\n        currentItemsCount: response.data.length\r\n      };\r\n      this.loading = false;\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
                 "name": "SinBotonesPrimeraUltima",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1421,7 +1431,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "SinPaginacion",
@@ -1437,21 +1447,21 @@
                 "name": "Sizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaButtonComponent>",
-                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 align-items-center\">\r\n        <sa-button label=\"Small\" size=\"sm\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Medium\" size=\"md\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Large\" size=\"lg\" variant=\"primary\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Small\\\" size=\\\"sm\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"md\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"lg\\\" variant=\\\"primary\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Sizes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-icon/sa-icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaIconComponent>",
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></sa-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Sizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaButtonComponent>",
+                "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"d-flex gap-3 align-items-center\">\r\n        <sa-button label=\"Small\" size=\"sm\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Medium\" size=\"md\" variant=\"primary\"></sa-button>\r\n        <sa-button label=\"Large\" size=\"lg\" variant=\"primary\"></sa-button>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-button label=\\\"Small\\\" size=\\\"sm\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Medium\\\" size=\\\"md\\\" variant=\\\"primary\\\"></sa-button>\\n<sa-button label=\\\"Large\\\" size=\\\"lg\\\" variant=\\\"primary\\\"></sa-button>`\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Sizes",
@@ -1497,21 +1507,21 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Switch pequeño',\r\n    value: false,\r\n    size: 'sm',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    size: 'sm',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select tamaño pequeño. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Small",
@@ -1557,21 +1567,21 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<SaButtonComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/sa-messagebox/sa-messagebox.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SaMessageboxComponent>",
                 "defaultValue": "{\r\n  args: {\r\n    message: 'Este es un mensaje de éxito que indica que la operación se completó correctamente.',\r\n    type: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Mensaje de éxito con colores verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/sa-button/sa-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SaButtonComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Click me',\r\n    variant: 'success'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Botón success con fondo #D3F7E3 y texto verde. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: {\r\n        type: 'dynamic'\r\n      }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1607,21 +1617,21 @@
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "Success",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Configuración guardada',\r\n    value: true,\r\n    size: 'md',\r\n    status: 'success',\r\n  },\r\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    status: 'success',\r\n    value: '2',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "Success",
@@ -1787,21 +1797,21 @@
                 "name": "WithHelperText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
-            },
-            {
-                "name": "WithHelperText",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Recibir emails promocionales',\r\n    helperText: 'Puedes cambiar esta configuración en cualquier momento',\r\n    value: false,\r\n    size: 'md',\r\n    status: 'default',\r\n  },\r\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Selecciona una opción',\r\n    options: defaultOptions,\r\n    helperText: 'Selecciona la opción que mejor se adapte a tus necesidades',\r\n    placeholder: '--Seleccione--',\r\n    showPlaceholder: true,\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Select con texto de ayuda. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'\r\n      },\r\n      source: { type: 'dynamic' }\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "WithHelperText",
@@ -1926,7 +1936,7 @@
         ],
         "functions": [
             {
-                "name": "simulateServerCall",
+                "name": "callRealAPI",
                 "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
                 "ctype": "miscellaneous",
                 "subtype": "function",
@@ -2026,8 +2036,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaSelectComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
+                "rawtype": "StoryObj<SaSwitchComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2037,8 +2047,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<SaSwitchComponent>",
-                "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                "rawtype": "StoryObj<SaSelectComponent>",
+                "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2599,68 +2609,6 @@
                     "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div class=\"p-4\">\r\n        <h4 class=\"mb-3\">Diferentes Tamaños</h4>\r\n        <p class=\"text-muted mb-3\">Compara los tres tamaños disponibles:</p>\r\n        \r\n        <div class=\"d-flex gap-4 align-items-center\">\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"sm\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Small (14px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"md\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Medium (16px)</small>\r\n          </div>\r\n          <div class=\"text-center\">\r\n            <sa-icon name=\"pencil\" color=\"#5BAB5F\" size=\"lg\"></sa-icon>\r\n            <small class=\"d-block mt-1 text-muted\">Large (20px)</small>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    `\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      source: {\r\n        code: `<sa-icon name=\"heart\" color=\"#ff0000\" size=\"sm\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"md\"></sa-icon>\r\n<sa-icon name=\"heart\" color=\"#ff0000\" size=\"lg\"></sa-icon>`\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
-            "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
-                {
-                    "name": "Basic",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '100px' },\r\n      { key: 'fechaCreacion', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 25, 50],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true\r\n  },\r\n  render: (args) => {\r\n    // Simular estado del componente\r\n    let currentData = args.data;\r\n    let currentPaginationData = args.paginationData;\r\n    let isLoading = args.loading;\r\n    \r\n    return {\r\n      props: {\r\n        ...args,\r\n        data: currentData,\r\n        paginationData: currentPaginationData,\r\n        loading: isLoading,\r\n        onLoadData: (request: ServerTableRequest) => {\r\n          console.log('🔍 Server request:', request);\r\n          isLoading = true;\r\n          \r\n          // Simular llamada al servidor\r\n          simulateServerCall(request).subscribe(response => {\r\n            currentData = response.data;\r\n            currentPaginationData = {\r\n              currentPage: response.currentPage,\r\n              itemsPerPage: response.itemsPerPage,\r\n              totalItems: response.totalItems,\r\n              currentItemsCount: response.data.length\r\n            };\r\n            isLoading = false;\r\n            \r\n            console.log('📊 Server response:', response);\r\n          });\r\n        },\r\n        onRowClick: (row: TableData) => {\r\n          console.log('🖱️ Row clicked:', row);\r\n        },\r\n        onRowDoubleClick: (row: TableData) => {\r\n          console.log('🖱️ Row double-clicked:', row);\r\n        }\r\n      },\r\n      template: `\r\n        <sa-table-server \r\n          [columns]=\"columns\" \r\n          [data]=\"data\"\r\n          [paginationData]=\"paginationData\"\r\n          [paginationOptions]=\"paginationOptions\"\r\n          [loading]=\"loading\"\r\n          [hover]=\"hover\"\r\n          [showFilters]=\"showFilters\"\r\n          [showFirstLastButtons]=\"showFirstLastButtons\"\r\n          [autoLoad]=\"autoLoad\"\r\n          [emptyMessage]=\"emptyMessage\"\r\n          [minWidth]=\"minWidth\"\r\n          (loadData)=\"onLoadData($event)\"\r\n          (rowClick)=\"onRowClick($event)\"\r\n          (rowDoubleClick)=\"onRowDoubleClick($event)\">\r\n        </sa-table-server>\r\n      `\r\n    };\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🖥️ Tabla con Paginación Server-Side\r\n\r\nEsta es la implementación básica del componente **sa-table-server** que maneja la paginación en el servidor.\r\n\r\n### Características principales:\r\n\r\n**📡 Server-Side Processing:**\r\n- Los datos se cargan página por página desde el servidor\r\n- No mantiene todos los datos en memoria del cliente\r\n- Escalable para grandes volúmenes de datos\r\n\r\n**🔄 Estados de Carga:**\r\n- Overlay de loading durante las peticiones\r\n- Feedback visual inmediato al usuario\r\n- Botones deshabilitados durante carga\r\n\r\n**📄 Paginación Inteligente:**\r\n- Información de página actual y total de registros\r\n- Navegación por páginas (anterior/siguiente)\r\n- Selector de elementos por página\r\n- Botones de primera y última página opcionales\r\n\r\n### Eventos del Servidor:\r\n\r\n1. **loadData**: Se emite automáticamente cuando:\r\n   - El componente se inicializa (si autoLoad=true)\r\n   - Se cambia de página\r\n   - Se modifica el número de elementos por página\r\n   - Se aplica ordenamiento\r\n   - Se modifican filtros\r\n\r\n2. **Otros eventos**: rowClick, rowDoubleClick funcionan igual que sa-table\r\n\r\n### Flujo de Datos:\r\n\r\n1. Componente emite \\`loadData\\` con parámetros de la petición\r\n2. El componente padre hace la llamada HTTP al servidor\r\n3. El servidor procesa: filtros, ordenamiento, paginación\r\n4. El componente padre actualiza \\`data\\` y \\`paginationData\\`\r\n5. La tabla se renderiza con los nuevos datos\r\n\r\n### Uso en el Código:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  \r\n  this.apiService.getPagedData(request).subscribe(response => {\r\n    this.data = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.loading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "ConCarga",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "ConFiltros",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'paciente', label: 'Paciente', sortable: true },\r\n      { key: 'dni', label: 'DNI', sortable: false, width: '100px' },\r\n      { key: 'estado', label: 'Estado', sortable: true, width: '120px' },\r\n      { key: 'distrito', label: 'Distrito', sortable: true, width: '140px' },\r\n      { key: 'clasificacion', label: 'Clasificación', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  render: Basic.render,\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Tabla con Filtros Server-Side\r\n\r\nDemuestra el filtrado en tiempo real con procesamiento en el servidor.\r\n\r\n### Funcionalidades de Filtrado:\r\n\r\n**🔍 Filtros por Columna:**\r\n- Input de texto debajo de cada encabezado\r\n- Búsqueda en tiempo real mientras escribes\r\n- Los filtros se envían al servidor para procesamiento\r\n- Configuración \\`noFilter: true\\` para excluir columnas\r\n\r\n**⚡ Comportamiento Inteligente:**\r\n- **Debounce automático**: Evita sobrecarga de peticiones\r\n- **Reset de página**: Vuelve a página 1 al filtrar\r\n- **Combinación de filtros**: Múltiples columnas simultáneamente\r\n- **Estado persistente**: Los filtros se mantienen al paginar\r\n\r\n**🎯 Optimizaciones:**\r\n- Solo se procesan en el servidor (no en cliente)\r\n- Ideal para datasets grandes\r\n- Menor consumo de ancho de banda\r\n\r\n### Pruebas Sugeridas:\r\n\r\n1. **Filtro por paciente**: Escribe \"María\" en la columna Paciente\r\n2. **Filtro por estado**: Escribe \"Pendiente\" en Estado\r\n3. **Filtros combinados**: Usa múltiples filtros a la vez\r\n4. **Navegación**: Cambia de página con filtros activos\r\n5. **Limpiar**: Borra los filtros para ver todos los datos\r\n\r\n### Configuración de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nconst columns = [\r\n  { key: 'codigo', label: 'Código', sortable: true },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'acciones', label: 'Acciones', noFilter: true } // Sin filtro\r\n];\r\n\\`\\`\\`\r\n\r\n### Evento de Filtros:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  // request.filters contiene los filtros activos\r\n  console.log('Filtros activos:', request.filters);\r\n  \r\n  this.apiService.getFilteredData(request).subscribe(response => {\r\n    // Los datos ya vienen filtrados del servidor\r\n    this.updateTableData(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<SaTableServerComponent>",
-                    "defaultValue": "{\r\n  title: 'Componentes/Table Server',\r\n  component: SaTableServerComponent,\r\n  parameters: {\r\n    layout: 'padded',\r\n    controls: {\r\n      expanded: true,\r\n      sort: 'requiredFirst'\r\n    },\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Limpiar property bindings innecesarios\r\n          result = result.replace(/\\[hover\\]=\"true\"/g, 'hover=\"true\"');\r\n          result = result.replace(/\\[hover\\]=\"false\"/g, 'hover=\"false\"');\r\n          result = result.replace(/\\[loading\\]=\"true\"/g, 'loading=\"true\"');\r\n          result = result.replace(/\\[loading\\]=\"false\"/g, 'loading=\"false\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"true\"/g, 'showFirstLastButtons=\"true\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"false\"/g, 'showFirstLastButtons=\"false\"');\r\n          result = result.replace(/\\[showFilters\\]=\"true\"/g, 'showFilters=\"true\"');\r\n          result = result.replace(/\\[showFilters\\]=\"false\"/g, 'showFilters=\"false\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"true\"/g, 'autoLoad=\"true\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"false\"/g, 'autoLoad=\"false\"');\r\n          result = result.replace(/\\[minWidth\\]=\"'([^']+)'\"/g, 'minWidth=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      },\r\n      description: {\r\n        component: `\r\n## Events\r\n\r\n| Event | Tipo | Descripción |\r\n|-------|------|-------------|\r\n| loadData | ServerTableRequest | Emitido cuando se necesita cargar datos del servidor |\r\n| pageChange | number | Emitido cuando cambia la página |\r\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\r\n| sortChange | {column: string, direction: 'asc' \\\\| 'desc'} | Emitido cuando cambia el ordenamiento |\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |\r\n\r\n## Interfaces\r\n\r\n### ServerTableRequest\r\n\\`\\`\\`typescript\r\ninterface ServerTableRequest {\r\n  pageNumber: number;        // Página actual (1-based)\r\n  rowsPerPage: number;       // Elementos por página\r\n  searchTerm?: string;       // Término de búsqueda global\r\n  sortColumn?: string;       // Columna a ordenar\r\n  sortDirection?: 'asc' | 'desc'; // Dirección del ordenamiento\r\n  filters?: { [key: string]: any }; // Filtros por columna\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerTableResponse\r\n\\`\\`\\`typescript\r\ninterface ServerTableResponse<T = TableData> {\r\n  data: T[];               // Datos de la página actual\r\n  totalItems: number;      // Total de elementos en el servidor\r\n  currentPage: number;     // Página actual\r\n  itemsPerPage: number;    // Elementos por página\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerPaginationData\r\n\\`\\`\\`typescript\r\ninterface ServerPaginationData {\r\n  currentPage: number;       // Página actual\r\n  itemsPerPage: number;      // Elementos por página\r\n  totalItems: number;        // Total de elementos\r\n  currentItemsCount: number; // Elementos en la página actual\r\n}\r\n\\`\\`\\`\r\n\r\n## Uso\r\n\r\n\\`\\`\\`typescript\r\nimport { SaTableServerComponent } from '@sanna-ui/sa-table-server';\r\n\r\n// Configuración\r\nconst columns: TableColumn[] = [\r\n  { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'estado', label: 'Estado', sortable: true, width: '100px' }\r\n];\r\n\r\nconst paginationData: ServerPaginationData = {\r\n  currentPage: 1,\r\n  itemsPerPage: 10,\r\n  totalItems: 0,\r\n  currentItemsCount: 0\r\n};\r\n\r\n// En el template\r\n<sa-table-server \r\n  [columns]=\"columns\" \r\n  [data]=\"currentPageData\"\r\n  [paginationData]=\"paginationData\"\r\n  [loading]=\"isLoading\"\r\n  showFilters=\"true\"\r\n  hover=\"true\"\r\n  (loadData)=\"onLoadData($event)\"\r\n  (rowClick)=\"onRowClick($event)\">\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.isLoading = true;\r\n  \r\n  this.dataService.getData(request).subscribe(response => {\r\n    this.currentPageData = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.isLoading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n## Diferencias con sa-table\r\n\r\n- **Server-Side**: Los datos se cargan desde el servidor página por página\r\n- **Paginación Real**: No carga todos los datos en memoria\r\n- **Filtros Remotos**: Los filtros se aplican en el servidor\r\n- **Escalabilidad**: Maneja miles/millones de registros eficientemente\r\n- **Latencia**: Puede tener latencia en navegación/filtros\r\n\r\n## Métodos Públicos\r\n\r\n- **reload()**: Recarga los datos de la página actual\r\n- **clearFilters()**: Limpia todos los filtros y recarga\r\n        `\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    columns: {\r\n      control: { type: 'object' },\r\n      description: 'Configuración de las columnas de la tabla'\r\n    },\r\n    data: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de la página actual (recibidos del servidor)'\r\n    },\r\n    paginationData: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de paginación del servidor'\r\n    },\r\n    paginationOptions: {\r\n      control: { type: 'object' },\r\n      description: 'Opciones de configuración de la paginación'\r\n    },\r\n    autoLoad: {\r\n      control: { type: 'boolean' },\r\n      description: 'Cargar datos automáticamente al inicializar. Usa attribute binding: autoLoad=\"true\"'\r\n    },\r\n    hover: {\r\n      control: { type: 'boolean' },\r\n      description: 'Aplicar efecto hover. Usa attribute binding: hover=\"true\"'\r\n    },\r\n    loading: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar estado de carga. Usa attribute binding: loading=\"true\"'\r\n    },\r\n    showFirstLastButtons: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons=\"true\"'\r\n    },\r\n    showFilters: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar inputs de filtrado. Usa attribute binding: showFilters=\"true\"'\r\n    },\r\n    emptyMessage: {\r\n      control: { type: 'text' },\r\n      description: 'Mensaje cuando no hay datos. Property binding: [emptyMessage]=\"mensaje\"'\r\n    },\r\n    minWidth: {\r\n      control: { type: 'text' },\r\n      description: 'Ancho mínimo de la tabla. Ejemplos: 600px, 800px, 1000px'\r\n    }\r\n  },\r\n  args: {\r\n    // Valores por defecto\r\n    hover: true,\r\n    loading: false,\r\n    showFirstLastButtons: true,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px'\r\n  }\r\n}"
-                },
-                {
-                    "name": "SAMPLE_DATA",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "TableData[]",
-                    "defaultValue": "[\r\n  { id: 1, codigo: 'LAB001', paciente: 'Juan Pérez García', dni: '12345678', estado: 'Pendiente', fechaCreacion: '2024-01-15', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 2, codigo: 'LAB002', paciente: 'María Elena Rodríguez', dni: '87654321', estado: 'En Proceso', fechaCreacion: '2024-01-16', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 3, codigo: 'LAB003', paciente: 'Carlos Antonio López', dni: '11223344', estado: 'Completado', fechaCreacion: '2024-01-17', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 4, codigo: 'LAB004', paciente: 'Ana Sofía Martínez', dni: '44332211', estado: 'Pendiente', fechaCreacion: '2024-01-18', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 5, codigo: 'LAB005', paciente: 'Luis Fernando Torres', dni: '55667788', estado: 'En Proceso', fechaCreacion: '2024-01-19', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 6, codigo: 'LAB006', paciente: 'Carmen Rosa Silva', dni: '88776655', estado: 'Completado', fechaCreacion: '2024-01-20', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 7, codigo: 'LAB007', paciente: 'Roberto Carlos Vega', dni: '99887766', estado: 'Pendiente', fechaCreacion: '2024-01-21', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 8, codigo: 'LAB008', paciente: 'Patricia Isabel Morales', dni: '66554433', estado: 'En Proceso', fechaCreacion: '2024-01-22', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 9, codigo: 'LAB009', paciente: 'Fernando José Castro', dni: '33445566', estado: 'Completado', fechaCreacion: '2024-01-23', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 10, codigo: 'LAB010', paciente: 'Isabel María Herrera', dni: '22334455', estado: 'Pendiente', fechaCreacion: '2024-01-24', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 11, codigo: 'LAB011', paciente: 'Diego Alejandro Ruiz', dni: '77889900', estado: 'En Proceso', fechaCreacion: '2024-01-25', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 12, codigo: 'LAB012', paciente: 'Sofía Valentina Díaz', dni: '00998877', estado: 'Completado', fechaCreacion: '2024-01-26', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 13, codigo: 'LAB013', paciente: 'Andrés Sebastián Flores', dni: '11000922', estado: 'Pendiente', fechaCreacion: '2024-01-27', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 14, codigo: 'LAB014', paciente: 'Valeria Nicole Mendoza', dni: '22119933', estado: 'En Proceso', fechaCreacion: '2024-01-28', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 15, codigo: 'LAB015', paciente: 'Joaquín Emilio Guerrero', dni: '33228844', estado: 'Completado', fechaCreacion: '2024-01-29', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 16, codigo: 'LAB016', paciente: 'Camila Esperanza Sánchez', dni: '44337755', estado: 'Pendiente', fechaCreacion: '2024-01-30', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 17, codigo: 'LAB017', paciente: 'Mateo Gabriel Ramírez', dni: '55446666', estado: 'En Proceso', fechaCreacion: '2024-02-01', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 18, codigo: 'LAB018', paciente: 'Lucía Fernanda Jiménez', dni: '66557777', estado: 'Completado', fechaCreacion: '2024-02-02', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 19, codigo: 'LAB019', paciente: 'Santiago Matías Vargas', dni: '77668888', estado: 'Pendiente', fechaCreacion: '2024-02-03', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 20, codigo: 'LAB020', paciente: 'Antonella Grace Romero', dni: '88779999', estado: 'En Proceso', fechaCreacion: '2024-02-04', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 21, codigo: 'LAB021', paciente: 'Emilio Maximiliano Cruz', dni: '99880011', estado: 'Completado', fechaCreacion: '2024-02-05', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 22, codigo: 'LAB022', paciente: 'Victoria Esperanza León', dni: '00991122', estado: 'Pendiente', fechaCreacion: '2024-02-06', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 23, codigo: 'LAB023', paciente: 'Nicolás Eduardo Peña', dni: '11002233', estado: 'En Proceso', fechaCreacion: '2024-02-07', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 24, codigo: 'LAB024', paciente: 'Renata Milagros Arias', dni: '22113344', estado: 'Completado', fechaCreacion: '2024-02-08', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 25, codigo: 'LAB025', paciente: 'Sebastián Rodrigo Medina', dni: '33224455', estado: 'Pendiente', fechaCreacion: '2024-02-09', distrito: 'San Isidro', clasificacion: 'R' }\r\n]"
-                },
-                {
-                    "name": "SinDatos",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    ...Basic.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-input/sa-input.stories.ts": [
                 {
                     "name": "Basic",
@@ -2871,6 +2819,78 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {\n    ...Basic.args,\n    label: 'Búsqueda',\n    rightIcon: 'search', // Usando sa-icon (recomendado)\n    placeholder: 'Buscar...',\n  }\n}"
+                }
+            ],
+            "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
+                {
+                    "name": "Basico",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px' },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px' },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [\r\n      { id: 1, codigo: 'POST-001', titulo: 'sunt aut facere repellat provident occaecati excepturi', autor: 'Usuario 1', estado: 'Revisión', fecha: '01/01/2024' },\r\n      { id: 2, codigo: 'POST-002', titulo: 'qui est esse', autor: 'Usuario 1', estado: 'Borrador', fecha: '02/01/2024' },\r\n      { id: 3, codigo: 'POST-003', titulo: 'ea molestias quasi exercitationem repellat', autor: 'Usuario 1', estado: 'Publicado', fecha: '03/01/2024' },\r\n      { id: 4, codigo: 'POST-004', titulo: 'eum et est occaecati', autor: 'Usuario 1', estado: 'Revisión', fecha: '04/01/2024' },\r\n      { id: 5, codigo: 'POST-005', titulo: 'nesciunt quas odio', autor: 'Usuario 1', estado: 'Borrador', fecha: '05/01/2024' }\r\n    ],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 47,\r\n      currentItemsCount: 5\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 15],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px',\r\n    loadData: (request: ServerTableRequest) => {\r\n      console.log('🚀 SIMULACIÓN DE LLAMADA AL BACKEND:');\r\n      console.log('📡 Request:', {\r\n        method: 'GET',\r\n        url: `https://api.ejemplo.com/posts?page=${request.pageNumber}&limit=${request.rowsPerPage}`,\r\n        params: request\r\n      });\r\n      console.log('⏱️ En una app real aquí se vería loading: true');\r\n      console.log('📊 Después de 1-2s llegaría la respuesta del servidor');\r\n    },\r\n    rowClick: (row: TableData) => {\r\n      console.log('🖱️ Row clicked:', row);\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔄 Server-Side Simulation\r\n\r\nEsta demo simula el comportamiento real de server-side pagination con latencia de red.\r\n\r\n**⚠️ Limitación de Storybook:** Los stories no pueden actualizar la vista reactivamente. En una aplicación real Angular, verías:\r\n\r\n1. **Loading state** → Spinner durante petición\r\n2. **Nuevos datos** → Contenido actualizado automáticamente\r\n3. **Paginación actualizada** → Contadores y navegación sincronizados\r\n\r\n### 🔗 API Endpoint:\r\n- **URL**: \\`https://jsonplaceholder.typicode.com/posts\\`\r\n- **Método**: GET con parámetros de query\r\n- **Total de registros**: ~100 posts reales\r\n\r\n### 📋 Funcionalidades Reales:\r\n\r\n**✅ Paginación Server-Side:**\r\n- \\`_page=1&_limit=10\\` - Solicita página 1 con 10 elementos\r\n- \\`_page=2&_limit=10\\` - Solicita página 2 con 10 elementos\r\n- El servidor devuelve solo los datos de la página solicitada\r\n\r\n**✅ Ordenamiento:**\r\n- \\`_sort=title&_order=asc\\` - Ordena por título ascendente\r\n- \\`_sort=userId&_order=desc\\` - Ordena por usuario descendente\r\n- El servidor procesa el ordenamiento en backend\r\n\r\n**✅ Filtros (limitados):**\r\n- \\`title_like=search_term\\` - Busca títulos que contengan el término\r\n- \\`userId=1\\` - Filtra por usuario específico\r\n\r\n### 🔍 Monitoreo:\r\n\r\nAbre las **DevTools > Network** para ver las peticiones HTTP reales:\r\n\r\n\\`\\`\\`http\r\nGET https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10\r\nGET https://jsonplaceholder.typicode.com/posts?_page=2&_limit=10&_sort=title&_order=asc\r\n\\`\\`\\`\r\n\r\n### 📊 Transformación de Datos:\r\n\r\nLos datos de JSONPlaceholder se transforman a nuestro formato:\r\n\r\n\\`\\`\\`typescript\r\n// JSONPlaceholder original\r\n{\r\n  \"id\": 1,\r\n  \"title\": \"sunt aut facere repellat...\",\r\n  \"userId\": 1\r\n}\r\n\r\n// Transformado para la tabla\r\n{\r\n  \"id\": 1,\r\n  \"codigo\": \"POST-001\",\r\n  \"titulo\": \"sunt aut facere repellat...\",\r\n  \"userId\": 1,\r\n  \"autor\": \"Usuario 1\",\r\n  \"estado\": \"Revisión\",\r\n  \"fecha\": \"01/01/2024\"\r\n}\r\n\\`\\`\\`\r\n\r\n### 🎮 Interacciones:\r\n\r\n1. **Navegar páginas**: Ve las peticiones HTTP en Network tab\r\n2. **Cambiar elementos por página**: Observa el parámetro \\`_limit\\`\r\n3. **Ordenar columnas**: Ve los parámetros \\`_sort\\` y \\`_order\\`\r\n4. **Aplicar filtros**: Nota los filtros en la URL (título y userId)\r\n\r\n### 🚀 Sin Configuración:\r\n\r\n- **No necesitas backend local**\r\n- **No requiere configuración de CORS**\r\n- **Funciona directamente en Storybook**\r\n- **API pública y gratuita**\r\n\r\n¡Esta es la experiencia real de server-side pagination que tendrás en producción!\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "ConCarga",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    loading: true,\r\n    data: SAMPLE_DATA.slice(0, 5),\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 25,\r\n      currentItemsCount: 5\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## ⏳ Estado de Carga\r\n\r\nMuestra cómo se ve la tabla durante las peticiones al servidor.\r\n\r\n### Estados de Loading:\r\n\r\n**🔄 Overlay de Carga:**\r\n- Spinner centrado sobre la tabla\r\n- Fondo semitransparente\r\n- Mensaje \"Cargando...\" descriptivo\r\n\r\n**🚫 Interacciones Bloqueadas:**\r\n- Botones de paginación deshabilitados\r\n- Tabla con opacidad reducida\r\n- Previene clicks durante carga\r\n\r\n**✨ Experiencia de Usuario:**\r\n- Feedback visual inmediato\r\n- No pérdida de contexto visual\r\n- Transiciones suaves\r\n\r\n### Implementación:\r\n\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true; // Activa el estado de carga\r\n  \r\n  this.apiService.getData(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = response.pagination;\r\n      this.loading = false; // Desactiva el estado de carga\r\n    },\r\n    error: (error) => {\r\n      console.error('Error cargando datos:', error);\r\n      this.loading = false; // Importante: desactivar en caso de error\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n### Mejores Prácticas:\r\n\r\n1. **Siempre desactivar loading**: En success y error\r\n2. **Timeouts**: Considerar timeout para peticiones lentas\r\n3. **Estados de error**: Manejar errores apropiadamente\r\n4. **Skeleton loading**: Para mejor UX (próximas versiones)\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "ConFiltros",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    showFilters: true,\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px', noFilter: true },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'userId', label: 'User ID', sortable: true, width: '100px' },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px', noFilter: true },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px', noFilter: true },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px', noFilter: true }\r\n    ]\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔍 Filtros Reales con JSONPlaceholder\r\n\r\nEsta demo muestra filtros **reales** procesados por el servidor JSONPlaceholder.\r\n\r\n### 🎯 Filtros Disponibles:\r\n\r\n**✅ Título (title_like):**\r\n- Escribe en \"Título\" para buscar posts por contenido\r\n- Ejemplo: \"sunt\" → Filtra títulos que contengan \"sunt\"\r\n- URL: \\`?title_like=sunt\\`\r\n\r\n**✅ User ID (userId):**\r\n- Escribe números del 1-10 en \"User ID\"\r\n- Ejemplo: \"1\" → Solo posts del usuario 1\r\n- URL: \\`?userId=1\\`\r\n\r\n**❌ Filtros Deshabilitados:**\r\n- **Código, Autor, Estado, Fecha**: Configurados con \\`noFilter: true\\`\r\n- Solo se muestran para demostrar la configuración\r\n\r\n### 📡 Peticiones HTTP Reales:\r\n\r\n\\`\\`\\`http\r\n# Sin filtros\r\nGET /posts?_page=1&_limit=10\r\n\r\n# Con filtro de título\r\nGET /posts?_page=1&_limit=10&title_like=sunt\r\n\r\n# Con filtro de usuario\r\nGET /posts?_page=1&_limit=10&userId=1\r\n\r\n# Filtros combinados\r\nGET /posts?_page=1&_limit=10&title_like=sunt&userId=1\r\n\\`\\`\\`\r\n\r\n### 🧪 Pruebas Recomendadas:\r\n\r\n1. **Filtro por título**:\r\n   - Escribe \"sunt\" en Título\r\n   - Ve cómo se reduce el número total de registros\r\n   - Observa la URL en Network tab\r\n\r\n2. **Filtro por usuario**:\r\n   - Escribe \"1\" en User ID\r\n   - Solo verás posts del usuario 1\r\n   - Nota que la paginación se resetea a página 1\r\n\r\n3. **Filtros combinados**:\r\n   - Usa \"sunt\" en Título Y \"1\" en User ID\r\n   - Ve la intersección de ambos filtros\r\n\r\n4. **Limpiar filtros**:\r\n   - Borra el contenido de los inputs\r\n   - Regresa a mostrar todos los posts\r\n\r\n### ⚡ Características Técnicas:\r\n\r\n- **Debounce**: Espera 300ms antes de hacer la petición\r\n- **Reset automático**: Página vuelve a 1 al filtrar\r\n- **Estado persistente**: Filtros se mantienen al navegar páginas\r\n- **Fallback**: Si la API falla, muestra tabla vacía\r\n\r\n### 🔧 Configuración:\r\n\r\n\\`\\`\\`typescript\r\ncolumns: [\r\n  { key: 'titulo', label: 'Título' },           // ✅ Con filtro\r\n  { key: 'userId', label: 'User ID' },         // ✅ Con filtro\r\n  { key: 'estado', label: 'Estado', noFilter: true }  // ❌ Sin filtro\r\n]\r\n\\`\\`\\`\r\n\r\n¡Abre DevTools > Network para ver las peticiones HTTP reales en tiempo real!\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SaTableServerComponent>",
+                    "defaultValue": "{\r\n  title: 'Componentes/Table Server',\r\n  component: SaTableServerComponent,\r\n  parameters: {\r\n    layout: 'padded',\r\n    controls: {\r\n      expanded: true,\r\n      sort: 'requiredFirst'\r\n    },\r\n    docs: {\r\n      source: {\r\n        type: 'dynamic',\r\n        language: 'html',\r\n        transform: (code: string, storyContext: any) => {\r\n          // Transformación simple que preserva el resaltado de sintaxis\r\n          let result = code;\r\n          \r\n          // Limpiar property bindings innecesarios\r\n          result = result.replace(/\\[hover\\]=\"true\"/g, 'hover=\"true\"');\r\n          result = result.replace(/\\[hover\\]=\"false\"/g, 'hover=\"false\"');\r\n          result = result.replace(/\\[loading\\]=\"true\"/g, 'loading=\"true\"');\r\n          result = result.replace(/\\[loading\\]=\"false\"/g, 'loading=\"false\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"true\"/g, 'showFirstLastButtons=\"true\"');\r\n          result = result.replace(/\\[showFirstLastButtons\\]=\"false\"/g, 'showFirstLastButtons=\"false\"');\r\n          result = result.replace(/\\[showFilters\\]=\"true\"/g, 'showFilters=\"true\"');\r\n          result = result.replace(/\\[showFilters\\]=\"false\"/g, 'showFilters=\"false\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"true\"/g, 'autoLoad=\"true\"');\r\n          result = result.replace(/\\[autoLoad\\]=\"false\"/g, 'autoLoad=\"false\"');\r\n          result = result.replace(/\\[minWidth\\]=\"'([^']+)'\"/g, 'minWidth=\"$1\"');\r\n          \r\n          // Limpiar espacios extra\r\n          result = result.replace(/\\n\\s*\\n/g, '\\n');\r\n          \r\n          return result;\r\n        }\r\n      },\r\n      description: {\r\n        component: `\r\n## Events\r\n\r\n| Event | Tipo | Descripción |\r\n|-------|------|-------------|\r\n| loadData | ServerTableRequest | Emitido cuando se necesita cargar datos del servidor |\r\n| pageChange | number | Emitido cuando cambia la página |\r\n| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |\r\n| sortChange | {column: string, direction: 'asc' \\\\| 'desc'} | Emitido cuando cambia el ordenamiento |\r\n| rowClick | TableData | Emitido al hacer click en una fila |\r\n| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |\r\n| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |\r\n\r\n## Interfaces\r\n\r\n### ServerTableRequest\r\n\\`\\`\\`typescript\r\ninterface ServerTableRequest {\r\n  pageNumber: number;        // Página actual (1-based)\r\n  rowsPerPage: number;       // Elementos por página\r\n  searchTerm?: string;       // Término de búsqueda global\r\n  sortColumn?: string;       // Columna a ordenar\r\n  sortDirection?: 'asc' | 'desc'; // Dirección del ordenamiento\r\n  filters?: { [key: string]: any }; // Filtros por columna\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerTableResponse\r\n\\`\\`\\`typescript\r\ninterface ServerTableResponse<T = TableData> {\r\n  data: T[];               // Datos de la página actual\r\n  totalItems: number;      // Total de elementos en el servidor\r\n  currentPage: number;     // Página actual\r\n  itemsPerPage: number;    // Elementos por página\r\n}\r\n\\`\\`\\`\r\n\r\n### ServerPaginationData\r\n\\`\\`\\`typescript\r\ninterface ServerPaginationData {\r\n  currentPage: number;       // Página actual\r\n  itemsPerPage: number;      // Elementos por página\r\n  totalItems: number;        // Total de elementos\r\n  currentItemsCount: number; // Elementos en la página actual\r\n}\r\n\\`\\`\\`\r\n\r\n## Uso\r\n\r\n\\`\\`\\`typescript\r\nimport { SaTableServerComponent } from '@sanna-ui/sa-table-server';\r\n\r\n// Configuración\r\nconst columns: TableColumn[] = [\r\n  { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n  { key: 'paciente', label: 'Paciente', sortable: true },\r\n  { key: 'estado', label: 'Estado', sortable: true, width: '100px' }\r\n];\r\n\r\nconst paginationData: ServerPaginationData = {\r\n  currentPage: 1,\r\n  itemsPerPage: 10,\r\n  totalItems: 0,\r\n  currentItemsCount: 0\r\n};\r\n\r\n// En el template\r\n<sa-table-server \r\n  [columns]=\"columns\" \r\n  [data]=\"currentPageData\"\r\n  [paginationData]=\"paginationData\"\r\n  [loading]=\"isLoading\"\r\n  showFilters=\"true\"\r\n  hover=\"true\"\r\n  (loadData)=\"onLoadData($event)\"\r\n  (rowClick)=\"onRowClick($event)\">\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.isLoading = true;\r\n  \r\n  this.dataService.getData(request).subscribe(response => {\r\n    this.currentPageData = response.data;\r\n    this.paginationData = {\r\n      currentPage: response.currentPage,\r\n      itemsPerPage: response.itemsPerPage,\r\n      totalItems: response.totalItems,\r\n      currentItemsCount: response.data.length\r\n    };\r\n    this.isLoading = false;\r\n  });\r\n}\r\n\\`\\`\\`\r\n\r\n## Diferencias con sa-table\r\n\r\n- **Server-Side**: Los datos se cargan desde el servidor página por página\r\n- **Paginación Real**: No carga todos los datos en memoria\r\n- **Filtros Remotos**: Los filtros se aplican en el servidor\r\n- **Escalabilidad**: Maneja miles/millones de registros eficientemente\r\n- **Latencia**: Puede tener latencia en navegación/filtros\r\n\r\n## Métodos Públicos\r\n\r\n- **reload()**: Recarga los datos de la página actual\r\n- **clearFilters()**: Limpia todos los filtros y recarga\r\n        `\r\n      }\r\n    }\r\n  },\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    columns: {\r\n      control: { type: 'object' },\r\n      description: 'Configuración de las columnas de la tabla'\r\n    },\r\n    data: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de la página actual (recibidos del servidor)'\r\n    },\r\n    paginationData: {\r\n      control: { type: 'object' },\r\n      description: 'Datos de paginación del servidor'\r\n    },\r\n    paginationOptions: {\r\n      control: { type: 'object' },\r\n      description: 'Opciones de configuración de la paginación'\r\n    },\r\n    autoLoad: {\r\n      control: { type: 'boolean' },\r\n      description: 'Cargar datos automáticamente al inicializar. Usa attribute binding: autoLoad=\"true\"'\r\n    },\r\n    hover: {\r\n      control: { type: 'boolean' },\r\n      description: 'Aplicar efecto hover. Usa attribute binding: hover=\"true\"'\r\n    },\r\n    loading: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar estado de carga. Usa attribute binding: loading=\"true\"'\r\n    },\r\n    showFirstLastButtons: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons=\"true\"'\r\n    },\r\n    showFilters: {\r\n      control: { type: 'boolean' },\r\n      description: 'Mostrar inputs de filtrado. Usa attribute binding: showFilters=\"true\"'\r\n    },\r\n    emptyMessage: {\r\n      control: { type: 'text' },\r\n      description: 'Mensaje cuando no hay datos. Property binding: [emptyMessage]=\"mensaje\"'\r\n    },\r\n    minWidth: {\r\n      control: { type: 'text' },\r\n      description: 'Ancho mínimo de la tabla. Ejemplos: 600px, 800px, 1000px'\r\n    }\r\n  },\r\n  args: {\r\n    // Valores por defecto\r\n    hover: true,\r\n    loading: false,\r\n    showFirstLastButtons: true,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px'\r\n  }\r\n}"
+                },
+                {
+                    "name": "SAMPLE_DATA",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TableData[]",
+                    "defaultValue": "[\r\n  { id: 1, codigo: 'LAB001', paciente: 'Juan Pérez García', dni: '12345678', estado: 'Pendiente', fechaCreacion: '2024-01-15', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 2, codigo: 'LAB002', paciente: 'María Elena Rodríguez', dni: '87654321', estado: 'En Proceso', fechaCreacion: '2024-01-16', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 3, codigo: 'LAB003', paciente: 'Carlos Antonio López', dni: '11223344', estado: 'Completado', fechaCreacion: '2024-01-17', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 4, codigo: 'LAB004', paciente: 'Ana Sofía Martínez', dni: '44332211', estado: 'Pendiente', fechaCreacion: '2024-01-18', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 5, codigo: 'LAB005', paciente: 'Luis Fernando Torres', dni: '55667788', estado: 'En Proceso', fechaCreacion: '2024-01-19', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 6, codigo: 'LAB006', paciente: 'Carmen Rosa Silva', dni: '88776655', estado: 'Completado', fechaCreacion: '2024-01-20', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 7, codigo: 'LAB007', paciente: 'Roberto Carlos Vega', dni: '99887766', estado: 'Pendiente', fechaCreacion: '2024-01-21', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 8, codigo: 'LAB008', paciente: 'Patricia Isabel Morales', dni: '66554433', estado: 'En Proceso', fechaCreacion: '2024-01-22', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 9, codigo: 'LAB009', paciente: 'Fernando José Castro', dni: '33445566', estado: 'Completado', fechaCreacion: '2024-01-23', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 10, codigo: 'LAB010', paciente: 'Isabel María Herrera', dni: '22334455', estado: 'Pendiente', fechaCreacion: '2024-01-24', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 11, codigo: 'LAB011', paciente: 'Diego Alejandro Ruiz', dni: '77889900', estado: 'En Proceso', fechaCreacion: '2024-01-25', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 12, codigo: 'LAB012', paciente: 'Sofía Valentina Díaz', dni: '00998877', estado: 'Completado', fechaCreacion: '2024-01-26', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 13, codigo: 'LAB013', paciente: 'Andrés Sebastián Flores', dni: '11000922', estado: 'Pendiente', fechaCreacion: '2024-01-27', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 14, codigo: 'LAB014', paciente: 'Valeria Nicole Mendoza', dni: '22119933', estado: 'En Proceso', fechaCreacion: '2024-01-28', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 15, codigo: 'LAB015', paciente: 'Joaquín Emilio Guerrero', dni: '33228844', estado: 'Completado', fechaCreacion: '2024-01-29', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 16, codigo: 'LAB016', paciente: 'Camila Esperanza Sánchez', dni: '44337755', estado: 'Pendiente', fechaCreacion: '2024-01-30', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 17, codigo: 'LAB017', paciente: 'Mateo Gabriel Ramírez', dni: '55446666', estado: 'En Proceso', fechaCreacion: '2024-02-01', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 18, codigo: 'LAB018', paciente: 'Lucía Fernanda Jiménez', dni: '66557777', estado: 'Completado', fechaCreacion: '2024-02-02', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 19, codigo: 'LAB019', paciente: 'Santiago Matías Vargas', dni: '77668888', estado: 'Pendiente', fechaCreacion: '2024-02-03', distrito: 'San Isidro', clasificacion: 'R' },\r\n  { id: 20, codigo: 'LAB020', paciente: 'Antonella Grace Romero', dni: '88779999', estado: 'En Proceso', fechaCreacion: '2024-02-04', distrito: 'Miraflores', clasificacion: 'T' },\r\n  { id: 21, codigo: 'LAB021', paciente: 'Emilio Maximiliano Cruz', dni: '99880011', estado: 'Completado', fechaCreacion: '2024-02-05', distrito: 'Surco', clasificacion: 'H' },\r\n  { id: 22, codigo: 'LAB022', paciente: 'Victoria Esperanza León', dni: '00991122', estado: 'Pendiente', fechaCreacion: '2024-02-06', distrito: 'La Molina', clasificacion: 'R' },\r\n  { id: 23, codigo: 'LAB023', paciente: 'Nicolás Eduardo Peña', dni: '11002233', estado: 'En Proceso', fechaCreacion: '2024-02-07', distrito: 'San Borja', clasificacion: 'T' },\r\n  { id: 24, codigo: 'LAB024', paciente: 'Renata Milagros Arias', dni: '22113344', estado: 'Completado', fechaCreacion: '2024-02-08', distrito: 'Barranco', clasificacion: 'H' },\r\n  { id: 25, codigo: 'LAB025', paciente: 'Sebastián Rodrigo Medina', dni: '33224455', estado: 'Pendiente', fechaCreacion: '2024-02-09', distrito: 'San Isidro', clasificacion: 'R' }\r\n]"
+                },
+                {
+                    "name": "SimulacionBackend",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    columns: [\r\n      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },\r\n      { key: 'titulo', label: 'Título', sortable: true },\r\n      { key: 'autor', label: 'Autor', sortable: false, width: '120px' },\r\n      { key: 'estado', label: 'Estado', sortable: false, width: '100px' },\r\n      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px' }\r\n    ],\r\n    data: [\r\n      { id: 1, codigo: 'POST-001', titulo: 'sunt aut facere repellat provident occaecati excepturi', autor: 'Usuario 1', estado: 'Revisión', fecha: '01/01/2024' },\r\n      { id: 2, codigo: 'POST-002', titulo: 'qui est esse', autor: 'Usuario 1', estado: 'Borrador', fecha: '02/01/2024' },\r\n      { id: 3, codigo: 'POST-003', titulo: 'ea molestias quasi exercitationem repellat', autor: 'Usuario 1', estado: 'Publicado', fecha: '03/01/2024' },\r\n      { id: 4, codigo: 'POST-004', titulo: 'eum et est occaecati', autor: 'Usuario 1', estado: 'Revisión', fecha: '04/01/2024' },\r\n      { id: 5, codigo: 'POST-005', titulo: 'nesciunt quas odio', autor: 'Usuario 1', estado: 'Borrador', fecha: '05/01/2024' }\r\n    ],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 5,\r\n      totalItems: 100,\r\n      currentItemsCount: 5\r\n    },\r\n    paginationOptions: {\r\n      itemsPerPageOptions: [5, 10, 15, 20],\r\n      showItemsPerPageSelector: true,\r\n      showPageInfo: true\r\n    },\r\n    hover: true,\r\n    loading: false,\r\n    showFilters: false,\r\n    autoLoad: true,\r\n    emptyMessage: 'No hay datos disponibles',\r\n    minWidth: '600px',\r\n    loadData: (request: ServerTableRequest) => {\r\n      console.clear();\r\n      console.log('🔥 ¡LLAMADA AL BACKEND DETECTADA!');\r\n      console.log('==========================================');\r\n      console.log('🌐 URL:', `GET https://jsonplaceholder.typicode.com/posts`);\r\n      console.log('📋 Parámetros de paginación:', {\r\n        page: request.pageNumber,\r\n        limit: request.rowsPerPage,\r\n        _start: (request.pageNumber - 1) * request.rowsPerPage,\r\n        _limit: request.rowsPerPage\r\n      });\r\n      \r\n      if (request.sortColumn) {\r\n        console.log('📊 Ordenamiento:', {\r\n          column: request.sortColumn,\r\n          direction: request.sortDirection\r\n        });\r\n      }\r\n      \r\n      if (request.filters && Object.keys(request.filters).length > 0) {\r\n        console.log('🔍 Filtros aplicados:', request.filters);\r\n      }\r\n      \r\n      console.log('⏳ Estado del componente:');\r\n      console.log('   - loading: true (debería mostrar spinner)');\r\n      console.log('   - data: [] (datos anteriores se limpian)');\r\n      console.log('');\r\n      console.log('📡 Simulando respuesta del servidor...');\r\n      console.log('🕐 Esperando 1.5 segundos...');\r\n      console.log('');\r\n      console.log('💡 En tu app Angular real:');\r\n      console.log('   1. Se ejecuta this.loadData.emit(request)');\r\n      console.log('   2. Tu componente padre recibe el evento');\r\n      console.log('   3. Haces la llamada HTTP al backend');\r\n      console.log('   4. Actualizas [data] y [paginationData]');\r\n      console.log('   5. Cambias [loading] = false');\r\n      console.log('==========================================');\r\n    },\r\n    rowClick: (row: TableData) => {\r\n      console.log('🖱️ Fila clickeada:', row);\r\n    }\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 🔥 Simulación Real de Backend\r\n\r\nEste story demuestra cómo se ejecutarían las llamadas al backend en una aplicación real.\r\n\r\n**Instrucciones:**\r\n1. 🔍 **Abre la consola del navegador** (F12 → Console)\r\n2. 🖱️ **Cambia de página** usando los controles de paginación\r\n3. 📊 **Observa los logs** que muestran las peticiones simuladas\r\n\r\n**Qué verás en los logs:**\r\n- URL completa de la petición HTTP\r\n- Parámetros de paginación calculados\r\n- Estado del loading y datos\r\n- Flujo completo de una app real\r\n\r\n**En una app Angular real:**\r\n\\`\\`\\`typescript\r\nonLoadData(request: ServerTableRequest) {\r\n  this.loading = true;\r\n  this.apiService.getPosts(request).subscribe({\r\n    next: (response) => {\r\n      this.data = response.data;\r\n      this.paginationData = {\r\n        currentPage: response.currentPage,\r\n        itemsPerPage: response.itemsPerPage,\r\n        totalItems: response.totalItems,\r\n        currentItemsCount: response.data.length\r\n      };\r\n      this.loading = false;\r\n    }\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "SinDatos",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    ...Basico.args,\r\n    data: [],\r\n    paginationData: {\r\n      currentPage: 1,\r\n      itemsPerPage: 10,\r\n      totalItems: 0,\r\n      currentItemsCount: 0\r\n    },\r\n    emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'\r\n  },\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: `\r\n## 📭 Estado Sin Datos\r\n\r\nMuestra cómo se comporta la tabla cuando no hay datos disponibles.\r\n\r\n### Características:\r\n\r\n**📝 Mensaje Personalizable:**\r\n- Texto configurable vía \\`emptyMessage\\`\r\n- Centrado y con estilos apropiados\r\n- Visible en toda la fila de la tabla\r\n\r\n**🎨 Diseño Consistente:**\r\n- Mantiene la estructura de la tabla\r\n- Encabezados visibles\r\n- Paginación oculta automáticamente\r\n\r\n**🔧 Casos de Uso:**\r\n- Sin datos iniciales\r\n- Filtros sin resultados\r\n- Errores de carga (con mensaje apropiado)\r\n- Estados de búsqueda vacía\r\n\r\n### Configuración:\r\n\r\n\\`\\`\\`typescript\r\n// Mensaje personalizado\r\n<sa-table-server \r\n  [emptyMessage]=\"'No se encontraron órdenes para los filtros seleccionados'\"\r\n  ...>\r\n</sa-table-server>\r\n\r\n// En el componente\r\nonLoadData(request: ServerTableRequest) {\r\n  this.apiService.getData(request).subscribe(response => {\r\n    if (response.totalItems === 0) {\r\n      this.emptyMessage = request.filters ? \r\n        'No hay resultados para los filtros aplicados' : \r\n        'No hay datos disponibles';\r\n    }\r\n    this.updateTable(response);\r\n  });\r\n}\r\n\\`\\`\\`\r\n        `\r\n      }\r\n    }\r\n  }\r\n}"
                 }
             ],
             "projects/sanna-ui/src/lib/forms/sa-checkbox/sa-checkbox.stories.ts": [
@@ -3935,7 +3955,7 @@
         "groupedFunctions": {
             "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts": [
                 {
-                    "name": "simulateServerCall",
+                    "name": "callRealAPI",
                     "file": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
                     "ctype": "miscellaneous",
                     "subtype": "function",
@@ -4045,19 +4065,6 @@
                     "kind": 183
                 }
             ],
-            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SaSelectComponent>",
-                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts": [
                 {
                     "name": "Story",
@@ -4065,6 +4072,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SaSwitchComponent>",
                     "file": "projects/sanna-ui/src/lib/forms/sa-switch/sa-switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SaSelectComponent>",
+                    "file": "projects/sanna-ui/src/lib/forms/sa-select/sa-select.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -5668,7 +5688,7 @@
                 "type": "function",
                 "linktype": "miscellaneous",
                 "linksubtype": "function",
-                "name": "simulateServerCall",
+                "name": "callRealAPI",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -5678,7 +5698,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Basic",
+                "name": "Basico",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -5719,6 +5739,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "SAMPLE_DATA",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/sanna-ui/src/lib/sa-table-server/sa-table-server.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SimulacionBackend",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
