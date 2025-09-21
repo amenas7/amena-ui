@@ -723,10 +723,6 @@ export const IconGallery: StoryObj<SaIconComponent> = {
                   <sa-icon name="location-arrow" color="#000000" size="md"></sa-icon>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <code>location-dot</code>
-                  <sa-icon name="location-dot" color="#000000" size="md"></sa-icon>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
                   <code>compass</code>
                   <sa-icon name="compass" color="#000000" size="md"></sa-icon>
                 </li>
