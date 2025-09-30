@@ -47,22 +47,17 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
     emptyMessage: string;
     columnDefs?: QueryList<SaColumnDefDirective>;
     defaultCellTemplate?: TemplateRef<any>;
-    private _hover;
     private _loading;
     private _showFirstLastButtons;
-    private _showFilters;
-    set hover(value: boolean | any);
-    get hover(): boolean;
     set loading(value: boolean | any);
     get loading(): boolean;
     set showFirstLastButtons(value: boolean | any);
     get showFirstLastButtons(): boolean;
-    set showFilters(value: boolean | any);
-    get showFilters(): boolean;
     paginationData: ServerPaginationData;
     paginationOptions: ServerPaginationOptions;
     autoLoad: boolean;
     minWidth: string;
+    minTableHeight: number;
     loadData: EventEmitter<ServerTableRequest>;
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
@@ -72,15 +67,10 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
     }>;
     rowClick: EventEmitter<TableData>;
     rowDoubleClick: EventEmitter<TableData>;
-    filterChange: EventEmitter<{
-        [column: string]: string;
-    }>;
     selectedRow: TableData | null;
     sortColumn: string;
     sortDirection: 'asc' | 'desc';
-    columnFilters: {
-        [key: string]: string;
-    };
+    private _hasInitialLoad;
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngAfterViewInit(): void;
@@ -110,10 +100,6 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
      */
     onSort(column: string): void;
     /**
-     * Cambio de filtro
-     */
-    onFilterChange(column: string, value: string): void;
-    /**
      * Click en fila
      */
     onRowClick(row: TableData): void;
@@ -130,10 +116,6 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
      */
     isColumnSortable(columnKey: string): boolean;
     /**
-     * Verifica si una columna debe mostrar filtro
-     */
-    shouldShowFilter(columnKey: string): boolean;
-    /**
      * Obtiene el total de páginas
      */
     getTotalPages(): number;
@@ -149,10 +131,6 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
      * Recargar datos
      */
     reload(): void;
-    /**
-     * Limpiar filtros
-     */
-    clearFilters(): void;
     /**
      * Verifica si debe usar layout fijo o automático
      */
@@ -173,6 +151,14 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
      * Obtiene el elemento final de la página actual
      */
     getEndItem(): number;
+    /**
+     * ✅ Calcula la altura mínima del tbody
+     */
+    getTableBodyMinHeight(): number;
+    /**
+     * ✅ Getter para usar en template
+     */
+    get hasInitialLoad(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableServerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableServerComponent, "sa-table-server", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "hover": { "alias": "hover"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "showFilters": { "alias": "showFilters"; "required": false; }; "paginationData": { "alias": "paginationData"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "autoLoad": { "alias": "autoLoad"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "loadData": "loadData"; "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; "filterChange": "filterChange"; }, ["columnDefs"], never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableServerComponent, "sa-table-server", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "paginationData": { "alias": "paginationData"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "autoLoad": { "alias": "autoLoad"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; "minTableHeight": { "alias": "minTableHeight"; "required": false; }; }, { "loadData": "loadData"; "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; }, ["columnDefs"], never, false, never>;
 }

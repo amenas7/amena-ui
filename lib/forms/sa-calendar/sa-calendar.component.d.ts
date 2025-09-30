@@ -12,6 +12,9 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     private _noLabel;
     set noLabel(value: boolean | any);
     get noLabel(): boolean;
+    private _hideLabel;
+    set hideLabel(value: boolean | any);
+    get hideLabel(): boolean;
     placeholder: string;
     helperText: string;
     errorText: string;
@@ -22,6 +25,7 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     maxDate: Date | string | number | null;
     id: string;
     name: string;
+    class: string;
     locale: CalendarLocale;
     colors: CalendarColors;
     config: CalendarConfig;
@@ -35,6 +39,8 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     yearChange: EventEmitter<number>;
     focus: EventEmitter<FocusEvent>;
     blur: EventEmitter<FocusEvent>;
+    change: EventEmitter<Event>;
+    valueChange: EventEmitter<Date | Date[] | null>;
     currentView: CalendarViewMode;
     currentDate: Date;
     selectedDates: Date[];
@@ -46,6 +52,7 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     private _generatedId;
     private onChange;
     private onTouched;
+    get hostClasses(): string;
     constructor(cdr: ChangeDetectorRef, elementRef: ElementRef);
     onDocumentClickOutside(event: Event): void;
     ngOnInit(): void;
@@ -74,6 +81,7 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     onInputClick(event?: Event): void;
     onInputFocus(event: FocusEvent): void;
     onInputBlur(event: FocusEvent): void;
+    onInputChange(event: Event): void;
     onDayClick(day: CalendarDay, event?: Event): void;
     onMonthClick(month: CalendarMonth, event?: Event): void;
     onYearClick(year: CalendarYear, event?: Event): void;
@@ -99,5 +107,5 @@ export declare class SaCalendarComponent implements ControlValueAccessor, OnInit
     getHeaderTitle(): string;
     getWeekdays(): string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<SaCalendarComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaCalendarComponent, "sa-calendar", never, { "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "minDate": { "alias": "minDate"; "required": false; }; "maxDate": { "alias": "maxDate"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "locale": { "alias": "locale"; "required": false; }; "colors": { "alias": "colors"; "required": false; }; "config": { "alias": "config"; "required": false; }; "validation": { "alias": "validation"; "required": false; }; "events": { "alias": "events"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "showInput": { "alias": "showInput"; "required": false; }; }, { "dateSelect": "dateSelect"; "viewChange": "viewChange"; "monthChange": "monthChange"; "yearChange": "yearChange"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaCalendarComponent, "sa-calendar", never, { "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "minDate": { "alias": "minDate"; "required": false; }; "maxDate": { "alias": "maxDate"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "class": { "alias": "class"; "required": false; }; "locale": { "alias": "locale"; "required": false; }; "colors": { "alias": "colors"; "required": false; }; "config": { "alias": "config"; "required": false; }; "validation": { "alias": "validation"; "required": false; }; "events": { "alias": "events"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "showInput": { "alias": "showInput"; "required": false; }; }, { "dateSelect": "dateSelect"; "viewChange": "viewChange"; "monthChange": "monthChange"; "yearChange": "yearChange"; "focus": "focus"; "blur": "blur"; "change": "change"; "valueChange": "valueChange"; }, never, never, false, never>;
 }

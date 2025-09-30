@@ -11,12 +11,16 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     private _noLabel;
     set noLabel(value: boolean | any);
     get noLabel(): boolean;
+    private _hideLabel;
+    set hideLabel(value: boolean | any);
+    get hideLabel(): boolean;
     helperText: string;
     errorText: string;
     required: boolean;
     disabled: boolean;
     id: string;
     name: string;
+    class: string;
     valueChange: EventEmitter<boolean>;
     change: EventEmitter<boolean>;
     focus: EventEmitter<FocusEvent>;
@@ -24,6 +28,7 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     private _generatedId;
     private onChange;
     private onTouched;
+    get hostClasses(): string;
     constructor();
     get uniqueId(): string;
     get switchClasses(): string;
@@ -40,5 +45,5 @@ export declare class SaSwitchComponent implements ControlValueAccessor {
     toggleSwitch(): void;
     onLabelClick(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaSwitchComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaSwitchComponent, "sa-switch", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "class": { "alias": "class"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }

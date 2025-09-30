@@ -11,6 +11,9 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     private _noLabel;
     set noLabel(value: boolean | any);
     get noLabel(): boolean;
+    private _hideLabel;
+    set hideLabel(value: boolean | any);
+    get hideLabel(): boolean;
     helperText: string;
     errorText: string;
     required: boolean;
@@ -18,6 +21,7 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     readonly: boolean;
     id: string;
     name: string;
+    class: string;
     valueChange: EventEmitter<any>;
     change: EventEmitter<Event>;
     focus: EventEmitter<FocusEvent>;
@@ -27,6 +31,7 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     private _generatedId;
     private onChange;
     private onTouched;
+    get hostClasses(): string;
     constructor();
     get radioId(): string;
     get isChecked(): boolean;
@@ -42,5 +47,5 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     onRadioFocus(event: FocusEvent): void;
     onRadioBlur(event: FocusEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaRadioComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaRadioComponent, "sa-radio", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaRadioComponent, "sa-radio", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "class": { "alias": "class"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
