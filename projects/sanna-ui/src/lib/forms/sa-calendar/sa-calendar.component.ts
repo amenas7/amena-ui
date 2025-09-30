@@ -11,7 +11,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostListener,
-  ElementRef
+  ElementRef,
+  HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { 
@@ -71,6 +72,15 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() placeholder: string = 'Seleccionar fecha';
   @Input() helperText: string = '';
   @Input() errorText: string = '';
@@ -81,6 +91,9 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() maxDate: Date | string | number | null = null;
   @Input() id: string = '';
   @Input() name: string = '';
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   // Calendar specific inputs
   @Input() locale: CalendarLocale = DEFAULT_CALENDAR_LOCALE;
@@ -98,6 +111,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   @Output() yearChange = new EventEmitter<number>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
+  
+  // Eventos estándar para consistencia con otros componentes de formulario
+  @Output() change = new EventEmitter<Event>();
+  @Output() valueChange = new EventEmitter<Date | Date[] | null>();
 
   // Internal state
   currentView: CalendarViewMode = 'day';
@@ -112,6 +129,12 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   private _generatedId: string;
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -212,7 +235,7 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     const baseClasses = sizeMap[this.size] || 'form-label label-md';
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       return `${baseClasses} ghost-label`;
     }
     
@@ -220,6 +243,11 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 
@@ -454,6 +482,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
     this.isFocused = false;
     this.onTouched();
     this.blur.emit(event);
+  }
+
+  onInputChange(event: Event) {
+    this.change.emit(event);
   }
 
   onDayClick(day: CalendarDay, event?: Event) {
@@ -699,6 +731,10 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
 
     this.onChange(this._value);
     this.dateSelect.emit(selectEvent);
+    
+    // Emitir eventos estándar para consistencia
+    this.valueChange.emit(this._value);
+    
     this.generateCalendarDays();
     this.cdr.markForCheck();
   }

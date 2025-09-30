@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type SwitchSize = 'sm' | 'md' | 'lg';
@@ -31,12 +31,24 @@ export class SaSwitchComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() id: string = '';
   @Input() name: string = '';
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Output() valueChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<boolean>();
@@ -46,6 +58,12 @@ export class SaSwitchComponent implements ControlValueAccessor {
   private _generatedId: string;
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   constructor() {
     this._generatedId = `sa-switch-${Math.random().toString(36).substr(2, 9)}`;
@@ -104,7 +122,7 @@ export class SaSwitchComponent implements ControlValueAccessor {
     }
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       baseClasses.push('ghost-label');
     }
 
@@ -112,6 +130,11 @@ export class SaSwitchComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 

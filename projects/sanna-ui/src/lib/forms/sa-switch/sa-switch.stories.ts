@@ -80,6 +80,22 @@ const meta: Meta<SaSwitchComponent> = {
         type: { summary: 'string' },
       },
     },
+    noLabel: {
+      control: { type: 'boolean' },
+      description: 'Ocultar el label pero mantener el espacio reservado (label fantasma)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideLabel: {
+      control: { type: 'boolean' },
+      description: 'Eliminar completamente el label y su espacio reservado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
     helperText: { 
       control: 'text', 
       description: 'Texto de ayuda',
@@ -124,6 +140,35 @@ const meta: Meta<SaSwitchComponent> = {
         type: { summary: 'string' },
       },
     },
+    // Eventos
+    valueChange: {
+      action: 'valueChange',
+      description: 'Evento emitido cuando cambia el estado del switch',
+      table: {
+        type: { summary: 'EventEmitter<boolean>' },
+      },
+    },
+    change: {
+      action: 'change',
+      description: 'Evento nativo del DOM emitido cuando cambia el estado del switch',
+      table: {
+        type: { summary: 'EventEmitter<boolean>' },
+      },
+    },
+    focus: {
+      action: 'focus',
+      description: 'Evento emitido cuando el switch recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
+    },
+    blur: {
+      action: 'blur',
+      description: 'Evento emitido cuando el switch pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
+    }
   },
 };
 
@@ -324,4 +369,109 @@ export const WithReactiveForms: Story = {
       imports: [FormsModule, ReactiveFormsModule],
     }),
   ],
+};
+
+export const NoLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    noLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switch con noLabel activado. El label se oculta pero mantiene el espacio reservado para mantener la alineación con otros switches.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const HideLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    hideLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switch con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para switches compactos.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const LabelComparison: Story = {
+  render: () => ({
+    template: `
+      <div style="padding: 20px; max-width: 500px;">
+        <h3>Comparación de comportamiento del label</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Switch normal con label</h4>
+          <sa-switch
+            label="Etiqueta normal"
+            [value]="true"
+            size="md">
+          </sa-switch>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Switch con noLabel (mantiene espacio fantasma)</h4>
+          <sa-switch
+            label="Etiqueta oculta"
+            [value]="false"
+            size="md"
+            [noLabel]="true">
+          </sa-switch>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Switch con hideLabel (sin espacio)</h4>
+          <sa-switch
+            label="Etiqueta eliminada"
+            [value]="false"
+            size="md"
+            [hideLabel]="true">
+          </sa-switch>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual entre switch normal, noLabel (mantiene espacio) y hideLabel (elimina completamente el espacio).'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Switch normal con label -->
+<sa-switch
+  label="Etiqueta normal"
+  [value]="true"
+  size="md">
+</sa-switch>
+
+<!-- Switch con noLabel (mantiene espacio fantasma) -->
+<sa-switch
+  label="Etiqueta oculta"
+  [value]="false"
+  size="md"
+  [noLabel]="true">
+</sa-switch>
+
+<!-- Switch con hideLabel (sin espacio) -->
+<sa-switch
+  label="Etiqueta eliminada"
+  [value]="false"
+  size="md"
+  [hideLabel]="true">
+</sa-switch>
+        `
+      }
+    }
+  }
 };

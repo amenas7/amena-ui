@@ -125,6 +125,35 @@ const meta: Meta<SaTextareaComponent> = {
     height: {
       control: { type: 'number', min: 50, max: 500 },
       description: 'Altura fija en píxeles. Cuando se especifica, deshabilita el resize manual y habilita scroll vertical automático'
+    },
+    // Eventos
+    valueChange: {
+      action: 'valueChange',
+      description: 'Evento emitido cuando cambia el valor del textarea',
+      table: {
+        type: { summary: 'EventEmitter<string>' },
+      },
+    },
+    change: {
+      action: 'change',
+      description: 'Evento nativo del DOM emitido cuando cambia el valor del textarea',
+      table: {
+        type: { summary: 'EventEmitter<Event>' },
+      },
+    },
+    focus: {
+      action: 'focus',
+      description: 'Evento emitido cuando el textarea recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
+    },
+    blur: {
+      action: 'blur',
+      description: 'Evento emitido cuando el textarea pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
     }
   }
 };

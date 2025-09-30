@@ -141,6 +141,22 @@ minDate: new Date('2025-08-24')        // Constructor con string
       description: 'Etiqueta del campo',
       control: { type: 'text' }
     },
+    noLabel: {
+      control: { type: 'boolean' },
+      description: 'Ocultar el label pero mantener el espacio reservado (label fantasma)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideLabel: {
+      control: { type: 'boolean' },
+      description: 'Eliminar completamente el label y su espacio reservado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
     placeholder: {
       description: 'Texto de placeholder',
       control: { type: 'text' }
@@ -369,39 +385,6 @@ export const Inline: Story = {
   }
 };
 
-// Selección múltiple
-export const MultiSelect: Story = {
-  args: {
-    label: 'Selección múltiple',
-    placeholder: 'Selecciona múltiples fechas',
-    config: {
-      allowMultiSelect: true,
-      closeOnSelect: false
-    } as CalendarConfig
-  },
-  parameters: {
-    docs: {
-      story: { height: '450px' }
-    }
-  }
-};
-
-// Selección de rango
-export const RangeSelect: Story = {
-  args: {
-    label: 'Selección de rango',
-    placeholder: 'Selecciona un rango de fechas',
-    config: {
-      allowRangeSelect: true,
-      closeOnSelect: false
-    } as CalendarConfig
-  },
-  parameters: {
-    docs: {
-      story: { height: '450px' }
-    }
-  }
-};
 
 // Colores personalizados
 export const CustomColors: Story = {
@@ -892,6 +875,111 @@ export class CasosUsoComponent {
   placeholder="Últimos 2 años"
   helperText="Datos disponibles desde {{ minHistoricalDate | date:'dd/MM/yyyy' }}">
 </sa-calendar>`
+      }
+    }
+  }
+};
+
+export const NoLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    noLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Calendar con noLabel activado. El label se oculta pero mantiene el espacio reservado para mantener la alineación con otros calendars.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const HideLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    hideLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Calendar con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para calendars compactos.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const LabelComparison: Story = {
+  render: () => ({
+    template: `
+      <div style="padding: 20px; max-width: 500px;">
+        <h3>Comparación de comportamiento del label</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Calendar normal con label</h4>
+          <sa-calendar
+            label="Etiqueta normal"
+            placeholder="Seleccionar fecha"
+            size="md">
+          </sa-calendar>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Calendar con noLabel (mantiene espacio fantasma)</h4>
+          <sa-calendar
+            label="Etiqueta oculta"
+            placeholder="Seleccionar fecha"
+            size="md"
+            [noLabel]="true">
+          </sa-calendar>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Calendar con hideLabel (sin espacio)</h4>
+          <sa-calendar
+            label="Etiqueta eliminada"
+            placeholder="Seleccionar fecha"
+            size="md"
+            [hideLabel]="true">
+          </sa-calendar>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual entre calendar normal, noLabel (mantiene espacio) y hideLabel (elimina completamente el espacio).'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Calendar normal con label -->
+<sa-calendar
+  label="Etiqueta normal"
+  placeholder="Seleccionar fecha"
+  size="md">
+</sa-calendar>
+
+<!-- Calendar con noLabel (mantiene espacio fantasma) -->
+<sa-calendar
+  label="Etiqueta oculta"
+  placeholder="Seleccionar fecha"
+  size="md"
+  [noLabel]="true">
+</sa-calendar>
+
+<!-- Calendar con hideLabel (sin espacio) -->
+<sa-calendar
+  label="Etiqueta eliminada"
+  placeholder="Seleccionar fecha"
+  size="md"
+  [hideLabel]="true">
+</sa-calendar>
+        `
       }
     }
   }

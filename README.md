@@ -1,27 +1,61 @@
-# SannaUiProject
+# Sanna UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.13.
+Librería de componentes UI desarrollada en **Angular 18.2.13** y documentada con **Storybook**.  
+Facilita la construcción de interfaces consistentes, reutilizables y escalables.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Instalación
 
-## Code scaffolding
+Agrega la dependencia en el `package.json` de tu proyecto principal:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```json
+"dependencies": {
+  "sanna-ui": "git+https://github.com/org-nsp-pacificoprestacion/nsp-dmas-ds-web-fe-design-system.git#v{version_tag}"
+}
 
-## Build
+//Ejemplo real
+"dependencies": {
+  "sanna-ui": "git+https://github.com/org-nsp-pacificoprestacion/nsp-dmas-ds-web-fe-design-system.git#v0.0.1"
+}
+```
+Luego instala las dependencias:
+`npm install`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+📦 Importar el módulo
+En tu `app.module.ts` (o en el módulo que desees):
+```import { SannaUiModule } from 'sanna-ui';
 
-## Running unit tests
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SannaUiModule
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+🎨 Uso de componentes
 
-## Running end-to-end tests
+Ejemplo de uso en tu HTML:
+```
+<sa-calendar label="Fecha"></sa-calendar>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+<sa-button
+  label="Descargar reporte"
+  variant="gray"
+  icon="search"
+  position="right"
+  noAnimate="false"
+></sa-button>
+```
 
-## Further help
+📚 Documentación con Storybook
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para ver todos los componentes disponibles
+```
+npm run storybook
+```

@@ -294,6 +294,8 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     border: 1px solid #e1e2e4 !important;
+    position: relative;
+    z-index: 1;
     
     /* Comportamiento específico para tablas con auto-layout */
     &.auto-layout-container {
@@ -552,21 +554,19 @@
     padding-left: 1rem !important;
   }
   
-  // Efecto hover personalizado cuando hover es true
+  // Efecto hover desactivado - sin efectos visuales
 .table.table-hover > tbody > tr:hover > td {
   background-color: transparent !important;
-  font-size: 11px !important; /* Mantener tamaño de fuente en hover */
+  font-size: 11px !important; /* Mantener tamaño de fuente */
 }
 
-// Agregar borde en hover para feedback visual
+// Sin transiciones ni efectos de hover
 .table.table-hover > tbody > tr {
-  outline: 1px solid transparent !important;
-  outline-offset: -1px !important;
-  transition: outline-color 0.05s ease !important;
+  transition: none !important;
 }
 
 .table.table-hover > tbody > tr:hover {
-  outline-color: #999 !important;
+  background-color: transparent !important;
 }
   
   // Deshabilitar hover específicamente en la fila del mensaje vacío
@@ -596,29 +596,25 @@
 
   // Estilos para filas seleccionables
   .table > tbody > tr {
-    cursor: pointer;
-    outline: 1px solid transparent !important;
-    outline-offset: -1px !important;
-    transition: outline-color 0.05s ease !important;
-    
+    cursor: default !important;
+    transition: none !important;
+
     &:hover {
       background-color: transparent !important;
-      outline-color: #999 !important;
     }
-    
+
     &.selected-row {
       background-color: transparent !important;
-      outline-color: #999 !important;
-      
+      box-shadow: inset 5px 0 0 #36AD55 !important;
+
       td {
         background-color: transparent !important;
         color: inherit !important;
       }
-      
+
       &:hover {
         background-color: transparent !important;
-        outline-color: #999 !important;
-        
+
         td {
           background-color: transparent !important;
         }
@@ -1147,10 +1143,8 @@ nav[aria-label="Navegación de páginas"] {
 
 /* Estilos específicos para filas seleccionables */
 .sa-table-container .table > tbody > tr {
-  cursor: pointer;
-  outline: 2px solid transparent !important;
-  outline-offset: -1px !important;
-  transition: outline-color 0.15s ease !important;
+  cursor: default !important;
+  transition: none !important;
   
       &:hover {
       background-color: transparent !important;
@@ -1164,26 +1158,57 @@ nav[aria-label="Navegación de páginas"] {
   
   &.selected-row {
     background-color: transparent !important;
-    outline-color: #999 !important;
-    
+    box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
+    border-bottom: 1px solid #36AD55 !important;
+
     td {
       background-color: transparent !important;
       color: inherit !important;
       font-size: 11px !important; /* Mantener tamaño de fuente en filas seleccionadas */
-      transition: none !important; /* Evitar transiciones en filas seleccionadas */
+      border-bottom: none !important;
+
+      &:first-child {
+        position: relative;
+
+        // Triángulo dentro de la primera celda
+        &::before {
+          content: '';
+          position: absolute;
+          left: 2px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 0;
+          height: 0;
+          z-index: 10;
+          pointer-events: none;
+        }
+      }
     }
-    
+
     &:hover {
       background-color: transparent !important;
-      outline-color: #999 !important;
-      
+      box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
+      border-bottom: 1px solid #36AD55 !important;
+      outline: none !important;
+      outline-color: transparent !important;
+
       td {
         background-color: transparent !important;
         color: inherit !important;
         font-size: 11px !important; /* Mantener tamaño de fuente en hover de filas seleccionadas */
+        border-bottom: none !important;
       }
     }
   }
+}
+
+/* Regla adicional para asegurar que las filas seleccionadas mantengan sus bordes en hover */
+.sa-table-container .table > tbody > tr.selected-row:hover {
+  background-color: transparent !important;
+  box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
+  border-bottom: 1px solid #36AD55 !important;
+  outline: none !important;
+  outline-color: transparent !important;
 }
 
 /* Deshabilitar cursor pointer y selección en la fila del mensaje vacío */
@@ -1615,4 +1640,3 @@ fa-icon.fa-pulse {
   margin-top: 8px !important;
 }
 
-/* FIN DEL ARCHIVO - DISEÑO ORIGINAL MANTENIDO */

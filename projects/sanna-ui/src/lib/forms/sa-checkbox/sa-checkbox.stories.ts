@@ -60,6 +60,22 @@ const meta: Meta<SaCheckboxComponent> = {
       control: 'text',
       description: 'Etiqueta del checkbox'
     },
+    noLabel: {
+      control: { type: 'boolean' },
+      description: 'Ocultar el label pero mantener el espacio reservado (label fantasma)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideLabel: {
+      control: { type: 'boolean' },
+      description: 'Eliminar completamente el label y su espacio reservado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
@@ -105,6 +121,35 @@ const meta: Meta<SaCheckboxComponent> = {
     bold: {
       control: { type: 'boolean' },
       description: 'Texto del label en negrita'
+    },
+    // Eventos
+    checkedChange: {
+      action: 'checkedChange',
+      description: 'Evento emitido cuando cambia el estado del checkbox',
+      table: {
+        type: { summary: 'EventEmitter<boolean>' },
+      },
+    },
+    change: {
+      action: 'change',
+      description: 'Evento nativo del DOM emitido cuando cambia el estado del checkbox',
+      table: {
+        type: { summary: 'EventEmitter<Event>' },
+      },
+    },
+    focus: {
+      action: 'focus',
+      description: 'Evento emitido cuando el checkbox recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
+    },
+    blur: {
+      action: 'blur',
+      description: 'Evento emitido cuando el checkbox pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
     }
   }
 };
@@ -374,6 +419,111 @@ export const CheckboxGroup: Story = {
     <sa-checkbox label="Grande" size="lg"></sa-checkbox>
   </div>
 </div>`
+      }
+    }
+  }
+};
+
+export const NoLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    noLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkbox con noLabel activado. El label se oculta pero mantiene el espacio reservado para mantener la alineación con otros checkboxes.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const HideLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    hideLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checkbox con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para checkboxes compactos.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const LabelComparison: Story = {
+  render: () => ({
+    template: `
+      <div style="padding: 20px; max-width: 500px;">
+        <h3>Comparación de comportamiento del label</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Checkbox normal con label</h4>
+          <sa-checkbox
+            label="Etiqueta normal"
+            [checked]="true"
+            size="md">
+          </sa-checkbox>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Checkbox con noLabel (mantiene espacio fantasma)</h4>
+          <sa-checkbox
+            label="Etiqueta oculta"
+            [checked]="true"
+            size="md"
+            [noLabel]="true">
+          </sa-checkbox>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Checkbox con hideLabel (sin espacio)</h4>
+          <sa-checkbox
+            label="Etiqueta eliminada"
+            [checked]="true"
+            size="md"
+            [hideLabel]="true">
+          </sa-checkbox>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual entre checkbox normal, noLabel (mantiene espacio) y hideLabel (elimina completamente el espacio).'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Checkbox normal con label -->
+<sa-checkbox
+  label="Etiqueta normal"
+  [checked]="true"
+  size="md">
+</sa-checkbox>
+
+<!-- Checkbox con noLabel (mantiene espacio fantasma) -->
+<sa-checkbox
+  label="Etiqueta oculta"
+  [checked]="true"
+  size="md"
+  [noLabel]="true">
+</sa-checkbox>
+
+<!-- Checkbox con hideLabel (sin espacio) -->
+<sa-checkbox
+  label="Etiqueta eliminada"
+  [checked]="true"
+  size="md"
+  [hideLabel]="true">
+</sa-checkbox>
+        `
       }
     }
   }

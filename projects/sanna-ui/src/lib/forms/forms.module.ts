@@ -12,6 +12,9 @@ import { SaRadioComponent } from './sa-radio/sa-radio.component';
 import { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 import { SaSwitchComponent } from './sa-switch/sa-switch.component';
 
+// Directivas de validación
+import { ValidatorsModule } from './validators/validators.module';
+
 @NgModule({
   declarations: [
     SaInputComponent,
@@ -27,6 +30,7 @@ import { SaSwitchComponent } from './sa-switch/sa-switch.component';
     FormsModule,
     ReactiveFormsModule,
     SannaIconModule,
+    ValidatorsModule,
   ],
   exports: [
     SaInputComponent,
@@ -36,6 +40,7 @@ import { SaSwitchComponent } from './sa-switch/sa-switch.component';
     SaRadioComponent,
     SaCalendarComponent,
     SaSwitchComponent,
+    ValidatorsModule,
   ]
 })
 export class SannaFormsModule { }
@@ -48,3 +53,8 @@ export { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 export { SaRadioComponent } from './sa-radio/sa-radio.component';
 export { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 export { SaSwitchComponent } from './sa-switch/sa-switch.component';
+
+// Exportamos las directivas de validación
+export { LettersOnlyDirective } from './validators/letters-only.directive';
+export { NumbersOnlyDirective } from './validators/numbers-only.directive';
+export { ValidatorsModule } from './validators/validators.module';

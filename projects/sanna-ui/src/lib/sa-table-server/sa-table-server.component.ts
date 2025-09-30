@@ -65,18 +65,9 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   @ViewChild('defaultCellTemplate', { static: true }) defaultCellTemplate?: TemplateRef<any>;
   
   // Propiedades con setters/getters para flexibilidad máxima
-  private _hover: boolean = false;
   private _loading: boolean = false;
   private _showFirstLastButtons: boolean = true;
-  private _showFilters: boolean = false;
 
-  @Input()
-  set hover(value: boolean | any) {
-    this._hover = value === true || value === 'true';
-  }
-  get hover(): boolean {
-    return this._hover;
-  }
 
   @Input()
   set loading(value: boolean | any) {
@@ -94,13 +85,6 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
     return this._showFirstLastButtons;
   }
 
-  @Input()
-  set showFilters(value: boolean | any) {
-    this._showFilters = value === true || value === 'true';
-  }
-  get showFilters(): boolean {
-    return this._showFilters;
-  }
 
   // Propiedades específicas de server-side pagination
   @Input() paginationData: ServerPaginationData = {
@@ -118,6 +102,7 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
 
   @Input() autoLoad: boolean = true;
   @Input() minWidth: string = '600px';
+  @Input() minTableHeight: number = 200; // ✅ Altura mínima en píxeles (~5 filas aprox)
 
   // Eventos para server-side
   @Output() loadData = new EventEmitter<ServerTableRequest>();
@@ -126,21 +111,29 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   @Output() sortChange = new EventEmitter<{column: string, direction: 'asc' | 'desc'}>();
   @Output() rowClick = new EventEmitter<TableData>();
   @Output() rowDoubleClick = new EventEmitter<TableData>();
-  @Output() filterChange = new EventEmitter<{[column: string]: string}>();
 
   // Estados internos
   selectedRow: TableData | null = null;
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
-  columnFilters: { [key: string]: string } = {};
+  
+  // ✅ Control de estados de carga
+  private _hasInitialLoad: boolean = false;
 
   ngOnInit(): void {
     if (this.autoLoad) {
+      // ✅ Activar loading automáticamente en primera carga
+      this._loading = true;
       this.requestData();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // ✅ Detectar cuando llegan datos por primera vez
+    if (changes['data'] && changes['data'].currentValue?.length > 0) {
+      this._hasInitialLoad = true;
+    }
+    
     if (changes['paginationData'] && !changes['paginationData'].firstChange) {
       this.cdr.detectChanges();
     }
@@ -165,8 +158,7 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
       pageNumber: this.paginationData.currentPage,
       rowsPerPage: this.paginationData.itemsPerPage,
       sortColumn: this.sortColumn || undefined,
-      sortDirection: this.sortDirection,
-      filters: Object.keys(this.columnFilters).length > 0 ? this.columnFilters : undefined
+      sortDirection: this.sortDirection
     };
 
     this.loadData.emit(request);
@@ -230,20 +222,6 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
     this.requestData();
   }
 
-  /**
-   * Cambio de filtro
-   */
-  onFilterChange(column: string, value: string): void {
-    if (value.trim() === '') {
-      delete this.columnFilters[column];
-    } else {
-      this.columnFilters[column] = value.trim();
-    }
-
-    this.filterChange.emit({ ...this.columnFilters });
-    this.paginationData.currentPage = 1; // Reset a la primera página
-    this.requestData();
-  }
 
   /**
    * Click en fila
@@ -278,14 +256,6 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
     return column?.sortable === true;
   }
 
-  /**
-   * Verifica si una columna debe mostrar filtro
-   */
-  shouldShowFilter(columnKey: string): boolean {
-    if (!this.showFilters) return false;
-    const column = this.columns.find(col => col.key === columnKey);
-    return column?.noFilter !== true;
-  }
 
   /**
    * Obtiene el total de páginas
@@ -308,7 +278,6 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
    */
   getRowClasses(row: TableData): string {
     let classes = 'cursor-pointer';
-    if (this.hover) classes += ' table-hover-row';
     if (this.selectedRow === row) classes += ' selected-row';
     return classes;
   }
@@ -320,15 +289,6 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
     this.requestData();
   }
 
-  /**
-   * Limpiar filtros
-   */
-  clearFilters(): void {
-    this.columnFilters = {};
-    this.filterChange.emit({});
-    this.paginationData.currentPage = 1;
-    this.requestData();
-  }
 
   /**
    * Verifica si debe usar layout fijo o automático
@@ -366,5 +326,23 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
     const startItem = this.getStartItem();
     if (startItem === 0) return 0;
     return Math.min(startItem + this.paginationData.currentItemsCount - 1, this.paginationData.totalItems);
+  }
+
+  /**
+   * ✅ Calcula la altura mínima del tbody
+   */
+  getTableBodyMinHeight(): number {
+    // Siempre mantener altura mínima cuando no hay datos (inicial o vacío)
+    if (this.data.length === 0) {
+      return this.minTableHeight;
+    }
+    return 0; // Altura automática cuando hay datos
+  }
+
+  /**
+   * ✅ Getter para usar en template
+   */
+  get hasInitialLoad(): boolean {
+    return this._hasInitialLoad;
   }
 }

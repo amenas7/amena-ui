@@ -1,4 +1,4 @@
-// Importar estilos base del sa-table original
+// Importar estilos base del sa-table original (ya incluye la corrección del hover)
 @import '../sa-table/sa-table.component.scss';
 
 // Estilos específicos para server-side pagination
@@ -36,16 +36,12 @@
   }
 }
 
-// Estilos para filtros mejorados en server-side
-.filter-input {
-  &:focus {
-    border-color: #32A047;
-    box-shadow: 0 0 0 0.2rem rgba(50, 160, 71, 0.25);
-  }
-}
 
 // Mejoras visuales para indicadores de ordenamiento
 .column-header {
+  text-align: center; // ✅ Centrado horizontal para encabezados
+  vertical-align: middle;
+  
   &.sortable {
     transition: background-color 0.2s ease;
     
@@ -57,5 +53,59 @@
     &:hover i {
       color: #32A047;
     }
+  }
+}
+
+// ✅ Fila espaciadora para mantener altura mínima
+.spacer-row {
+  height: 100% !important;
+  
+  .spacer-cell {
+    border: none !important;
+    background: transparent;
+    padding: 0 !important;
+    height: var(--min-table-height, 200px) !important; // Usar variable CSS o fallback
+    min-height: var(--min-table-height, 200px) !important;
+    vertical-align: middle;
+    text-align: center; // ✅ Centrado horizontal
+    position: relative;
+  }
+}
+
+// ✅ Asegurar que el tbody respete la altura mínima
+tbody {
+  transition: min-height 0.3s ease;
+  
+  // Forzar altura mínima directamente en el tbody
+  &[style*="min-height"] {
+    height: auto !important;
+    min-height: inherit !important;
+  }
+  
+  &.animate-fade-in {
+    animation: fadeInUp 0.4s ease forwards;
+  }
+  
+  // ✅ Centrado horizontal para todas las celdas de datos
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  // ✅ Mensaje de estado vacío centrado
+  .text-center {
+    text-align: center !important;
+    vertical-align: middle !important;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

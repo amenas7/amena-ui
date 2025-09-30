@@ -10,6 +10,7 @@
     [class]="selectClasses"
     [(ngModel)]="value"
     (ngModelChange)="onModelChange($event)"
+    (change)="onSelectChange($event)"
     [required]="required"
     [disabled]="disabled || readonly"
     (focus)="onSelectFocus($event)"

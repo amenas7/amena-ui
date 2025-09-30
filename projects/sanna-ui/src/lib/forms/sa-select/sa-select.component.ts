@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type SelectSize = 'sm' | 'md' | 'lg';
@@ -38,6 +38,15 @@ export class SaSelectComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   
@@ -72,6 +81,9 @@ export class SaSelectComponent implements ControlValueAccessor {
   @Input() name: string = '';
   @Input() placeholder: string = '--Seleccione--';
   
+  // Soporte para ngClass
+  @Input() class: string = '';
+  
   private _showPlaceholder: boolean = true;
   @Input()
   set showPlaceholder(value: boolean | any) {
@@ -82,6 +94,7 @@ export class SaSelectComponent implements ControlValueAccessor {
   }
 
   @Output() valueChange = new EventEmitter<string | number>();
+  @Output() change = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
 
@@ -89,6 +102,12 @@ export class SaSelectComponent implements ControlValueAccessor {
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   get selectClasses(): string {
     const sizeMap = {
@@ -103,7 +122,7 @@ export class SaSelectComponent implements ControlValueAccessor {
       baseClasses.push(sizeMap[this.size]);
     }
     
-    if (this.status === 'error' || this.errorText) {
+    if (this.status === 'error' || this.errorText || this.isRequiredAndEmpty) {
       baseClasses.push('is-invalid');
     } else if (this.status === 'success') {
       baseClasses.push('is-valid');
@@ -122,7 +141,7 @@ export class SaSelectComponent implements ControlValueAccessor {
     const baseClasses = sizeMap[this.size] || 'form-label label-md';
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       return `${baseClasses} ghost-label`;
     }
     
@@ -130,12 +149,24 @@ export class SaSelectComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 
   get hasValidSelection(): boolean {
     if (!this.showPlaceholder) return true;
     return this.value !== '' && this.value !== null && this.value !== undefined;
+  }
+
+  get isRequiredAndEmpty(): boolean {
+    // Solo mostrar error si el campo ha sido tocado o si hay un error de validación
+    return this.required && 
+           (this.value === '' || this.value === null || this.value === undefined) &&
+           (this.status === 'error' || !!this.errorText);
   }
 
   writeValue(value: any): void {
@@ -158,6 +189,15 @@ export class SaSelectComponent implements ControlValueAccessor {
     this.value = value;
     this.onChange(value);
     this.valueChange.emit(value);
+    
+    // Marcar como touched cuando el usuario interactúa
+    if (!this.isFocused) {
+      this.onTouched();
+    }
+  }
+
+  onSelectChange(event: Event) {
+    this.change.emit(event);
   }
 
   onSelectFocus(event: FocusEvent) {

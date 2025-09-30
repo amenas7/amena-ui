@@ -18,6 +18,7 @@
     </span>
 
     <input
+      #inputElement
       [id]="id"
       [name]="name"
       [type]="inputType"
@@ -43,6 +44,10 @@
       data-enable-grammarly="false"
       (focus)="onInputFocus($event)"
       (blur)="onInputBlur($event)"
+      (change)="onInputChange($event)"
+      (keyup)="onKeyUp($event)"
+      (keydown)="onKeyDown($event)"
+      (keypress)="onKeyPress($event)"
     />
 
     <span *ngIf="rightIcon && type !== 'password'" class="input-group-text">

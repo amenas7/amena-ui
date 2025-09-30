@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, ViewChild, ElementRef, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -34,6 +34,15 @@ export class SaInputComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() leftIcon: string = '';
@@ -52,16 +61,33 @@ export class SaInputComponent implements ControlValueAccessor {
   @Input() backgroundColor: string = '';
   @Input() textColor: string = '';
   @Input() boldText: boolean = false; // Hacer el texto del input bold
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Output() valueChange = new EventEmitter<string>();
+  @Output() change = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() keyup = new EventEmitter<KeyboardEvent>();
+  @Output() keydown = new EventEmitter<KeyboardEvent>();
+  @Output() keypress = new EventEmitter<KeyboardEvent>();
+  @Output() enter = new EventEmitter<KeyboardEvent>();
 
   showPassword: boolean = false;
   isFocused: boolean = false;
 
+  // Referencia al elemento input nativo
+  @ViewChild('inputElement', { static: true }) inputElement!: ElementRef<HTMLInputElement>;
+
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   get inputClasses(): string {
     const sizeMap = {
@@ -108,6 +134,11 @@ export class SaInputComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 
@@ -217,7 +248,62 @@ export class SaInputComponent implements ControlValueAccessor {
     this.blur.emit(event);
   }
 
+  onKeyUp(event: KeyboardEvent) {
+    this.keyup.emit(event);
+    // Emitir evento específico para Enter
+    if (event.key === 'Enter') {
+      this.enter.emit(event);
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    this.keydown.emit(event);
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    this.keypress.emit(event);
+  }
+
+  onInputChange(event: Event) {
+    this.change.emit(event);
+  }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  // Métodos públicos para acceso al input nativo
+  /**
+   * Enfoca el input
+   */
+  focusInput(): void {
+    if (this.inputElement?.nativeElement) {
+      this.inputElement.nativeElement.focus();
+    }
+  }
+
+  /**
+   * Quita el foco del input
+   */
+  blurInput(): void {
+    if (this.inputElement?.nativeElement) {
+      this.inputElement.nativeElement.blur();
+    }
+  }
+
+  /**
+   * Selecciona todo el texto del input
+   */
+  selectAll(): void {
+    if (this.inputElement?.nativeElement) {
+      this.inputElement.nativeElement.select();
+    }
+  }
+
+  /**
+   * Obtiene la referencia al elemento input nativo
+   */
+  getNativeInput(): HTMLInputElement | null {
+    return this.inputElement?.nativeElement || null;
   }
 }

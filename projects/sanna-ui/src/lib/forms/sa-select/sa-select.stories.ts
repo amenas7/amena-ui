@@ -61,7 +61,19 @@ const meta: Meta<SaSelectComponent> = {
     },
     noLabel: {
       control: { type: 'boolean' },
-      description: 'Mantiene el espacio del label pero lo hace invisible (útil para alineación)'
+      description: 'Ocultar el label pero mantener el espacio reservado (label fantasma)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideLabel: {
+      control: { type: 'boolean' },
+      description: 'Eliminar completamente el label y su espacio reservado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     size: {
       control: { type: 'select' },
@@ -103,7 +115,7 @@ const meta: Meta<SaSelectComponent> = {
     },
     value: {
       control: 'text',
-      description: 'Valor seleccionado'
+      description: 'Valor seleccionado (string | number). Se sincroniza automáticamente con ngModel y formControlName'
     }
   }
 };
@@ -536,6 +548,313 @@ export const AllSizes: Story = {
     docs: {
       description: {
         story: 'Comparación visual de los tres tamaños disponibles del componente sa-select. Muestra las diferencias sutiles entre sm, md y lg, incluyendo las especificaciones técnicas detalladas.'
+      }
+    }
+  }
+};
+
+export const ValuePropertyDemo: Story = {
+  render: (args) => ({
+    props: {
+      ...args,
+      selectedValue: '2',
+      onChange: (event: Event) => {
+        console.log('change:', event);
+        const target = event.target as HTMLSelectElement;
+        console.log('Valor seleccionado:', target.value);
+      }
+    },
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-4">Propiedad Value</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="mb-3">Con Valor Inicial</h6>
+            <sa-select 
+              label="Selecciona una opción"
+              [value]="selectedValue"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' },
+                { value: '4', label: 'Opción 4' }
+              ]"
+              placeholder="--Seleccione--"
+              (change)="onChange($event)"
+              helperText="Valor inicial: Opción 2">
+            </sa-select>
+          </div>
+          <div class="col-md-6">
+            <h6 class="mb-3">Sin Valor Inicial</h6>
+            <sa-select 
+              label="Selecciona una opción"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' },
+                { value: '4', label: 'Opción 4' }
+              ]"
+              placeholder="--Seleccione--"
+              (change)="onChange($event)"
+              helperText="Sin valor inicial">
+            </sa-select>
+          </div>
+        </div>
+        
+        <div class="mt-4">
+          <h6 class="mb-3">Documentación de la Propiedad Value</h6>
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Propiedad <code>value</code>:</h6>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <strong>Tipo:</strong> <code>string | number</code>
+                </li>
+                <li class="mb-2">
+                  <strong>Descripción:</strong> Valor seleccionado del select
+                </li>
+                <li class="mb-2">
+                  <strong>Sincronización:</strong> Se sincroniza automáticamente con:
+                  <ul class="mt-2">
+                    <li><code>[(ngModel)]</code> - Formularios template-driven</li>
+                    <li><code>formControlName</code> - Formularios reactivos</li>
+                    <li><code>ControlValueAccessor</code> - API de Angular</li>
+                  </ul>
+                </li>
+                <li class="mb-2">
+                  <strong>Uso:</strong>
+                  <pre class="bg-light p-2 mt-2"><code>&lt;sa-select 
+  [value]="selectedValue"
+  [options]="options"
+  (change)="onChange($event)"&gt;
+&lt;/sa-select&gt;</code></pre>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demostración de la propiedad `value` del componente sa-select. Muestra cómo establecer valores iniciales y cómo se sincroniza con los formularios de Angular.'
+      }
+    }
+  }
+};
+
+export const EventsDemo: Story = {
+  render: (args) => ({
+    props: {
+      ...args,
+      onValueChange: (value: string | number) => {
+        console.log('valueChange:', value);
+      },
+      onChange: (event: Event) => {
+        console.log('change:', event);
+        const target = event.target as HTMLSelectElement;
+      },
+      onFocus: (event: FocusEvent) => {
+        console.log('focus:', event);
+      },
+      onBlur: (event: FocusEvent) => {
+        console.log('blur:', event);
+      }
+    },
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-4">Demostración de Eventos</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="mb-3">Eventos Disponibles</h6>
+            <sa-select 
+              label="Selecciona una opción"
+              [options]="[
+                { value: '1', label: 'Opción 1' },
+                { value: '2', label: 'Opción 2' },
+                { value: '3', label: 'Opción 3' },
+                { value: '4', label: 'Opción 4' }
+              ]"
+              placeholder="--Seleccione--"
+              (valueChange)="onValueChange($event)"
+              (change)="onChange($event)"
+              (focus)="onFocus($event)"
+              (blur)="onBlur($event)"
+              helperText="Prueba los diferentes eventos interactuando con el select">
+            </sa-select>
+          </div>
+          <div class="col-md-6">
+            <h6 class="mb-3">Documentación de Eventos</h6>
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Eventos Emitidos:</h6>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <code>(valueChange)</code> - Emite el valor seleccionado directamente
+                    <br><small class="text-muted">Tipo: string | number</small>
+                  </li>
+                  <li class="mb-2">
+                    <code>(change)</code> - Evento nativo del DOM
+                    <br><small class="text-muted">Tipo: Event</small>
+                  </li>
+                  <li class="mb-2">
+                    <code>(focus)</code> - Cuando el select recibe foco
+                    <br><small class="text-muted">Tipo: FocusEvent</small>
+                  </li>
+                  <li class="mb-2">
+                    <code>(blur)</code> - Cuando el select pierde foco
+                    <br><small class="text-muted">Tipo: FocusEvent</small>
+                  </li>
+                </ul>
+                <div class="alert alert-info mt-3">
+                  <strong>Nota:</strong> Abre la consola del navegador para ver los logs detallados de cada evento.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demostración interactiva de todos los eventos disponibles en el componente sa-select. Incluye ejemplos de uso y documentación de cada evento.'
+      }
+    }
+  }
+};
+
+export const NoLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    placeholder: 'Select con noLabel (mantiene espacio fantasma)',
+    noLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con noLabel activado. El label se oculta pero mantiene el espacio reservado para mantener la alineación con otros selects.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const HideLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    placeholder: 'Select con hideLabel (sin espacio)',
+    hideLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para selects compactos.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const LabelComparison: Story = {
+  render: () => ({
+    template: `
+      <div style="padding: 20px; max-width: 500px;">
+        <h3>Comparación de comportamiento del label</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Select normal con label</h4>
+          <sa-select
+            label="Etiqueta normal"
+            placeholder="Select con label visible"
+            [options]="[
+              { value: '1', label: 'Opción 1' },
+              { value: '2', label: 'Opción 2' },
+              { value: '3', label: 'Opción 3' }
+            ]"
+            value="2"
+            size="md">
+          </sa-select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Select con noLabel (mantiene espacio fantasma)</h4>
+          <sa-select
+            label="Etiqueta oculta"
+            placeholder="Select con noLabel"
+            [options]="[
+              { value: '1', label: 'Opción 1' },
+              { value: '2', label: 'Opción 2' },
+              { value: '3', label: 'Opción 3' }
+            ]"
+            value="2"
+            size="md"
+            [noLabel]="true">
+          </sa-select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Select con hideLabel (sin espacio)</h4>
+          <sa-select
+            label="Etiqueta eliminada"
+            placeholder="Select con hideLabel"
+            [options]="[
+              { value: '1', label: 'Opción 1' },
+              { value: '2', label: 'Opción 2' },
+              { value: '3', label: 'Opción 3' }
+            ]"
+            value="2"
+            size="md"
+            [hideLabel]="true">
+          </sa-select>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual entre select normal, noLabel (mantiene espacio) y hideLabel (elimina completamente el espacio).'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Select normal con label -->
+<sa-select
+  label="Etiqueta normal"
+  placeholder="Select con label visible"
+  [options]="options"
+  value="2"
+  size="md">
+</sa-select>
+
+<!-- Select con noLabel (mantiene espacio fantasma) -->
+<sa-select
+  label="Etiqueta oculta"
+  placeholder="Select con noLabel"
+  [options]="options"
+  value="2"
+  size="md"
+  [noLabel]="true">
+</sa-select>
+
+<!-- Select con hideLabel (sin espacio) -->
+<sa-select
+  label="Etiqueta eliminada"
+  placeholder="Select con hideLabel"
+  [options]="options"
+  value="2"
+  size="md"
+  [hideLabel]="true">
+</sa-select>
+        `
       }
     }
   }

@@ -26,8 +26,6 @@ const meta: Meta<SaTableComponent> = {
           result = result.replace(/\[showItemsPerPage\]="false"/g, 'showItemsPerPage="false"');
           result = result.replace(/\[showTotal\]="true"/g, 'showTotal="true"');
           result = result.replace(/\[showTotal\]="false"/g, 'showTotal="false"');
-          result = result.replace(/\[hover\]="true"/g, 'hover="true"');
-          result = result.replace(/\[hover\]="false"/g, 'hover="false"');
           result = result.replace(/\[loading\]="true"/g, 'loading="true"');
           result = result.replace(/\[loading\]="false"/g, 'loading="false"');
           result = result.replace(/\[showFirstLastButtons\]="true"/g, 'showFirstLastButtons="true"');
@@ -110,7 +108,6 @@ const data: TableData[] = [
   [itemsPerPage]="5"
   [showPagination]="true"
   [showFirstLastButtons]="true"
-  [hover]="true"
   (pageChange)="onPageChange($event)"
   (rowClick)="onRowClick($event)"
   (rowDoubleClick)="onRowDoubleClick($event)">
@@ -161,10 +158,6 @@ onRowDoubleClick(row: TableData) {
       control: { type: 'boolean' },
       description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons="true"'
     },
-    hover: {
-      control: { type: 'boolean' },
-      description: 'Aplicar efecto hover (deshabilitado por defecto). Usa attribute binding: hover="true"'
-    },
     loading: {
       control: { type: 'boolean' },
       description: 'Mostrar estado de carga. Usa attribute binding: loading="true"'
@@ -184,7 +177,6 @@ onRowDoubleClick(row: TableData) {
   },
   args: {
     // Valores por defecto para todos los stories
-    hover: true,
     loading: false,
     showItemsPerPage: true,
     showPagination: true,
@@ -242,22 +234,6 @@ export const Default: Story = {
   }
 };
 
-export const ConHover: Story = {
-  args: {
-    ...Default.args,
-    hover: true
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Tabla con efecto hover en las filas. Las cabeceras mantienen su estilo sin hover.'
-      },
-      source: {
-        type: 'dynamic'
-      }
-    }
-  }
-};
 
 export const SinPaginacion: Story = {
   args: {
@@ -372,118 +348,6 @@ export const SinBotonesPrimeraUltima: Story = {
   }
 };
 
-export const ScrollTest: Story = {
-  args: {
-    columns: [
-      { key: 'id', label: 'ID', width: '60px' },
-      { key: 'name', label: 'Nombre Completo del Empleado', width: '250px' },
-      { key: 'email', label: 'Dirección de Correo Electrónico Corporativo', width: '350px' },
-      { key: 'phone', label: 'Número de Teléfono Móvil', width: '180px' },
-      { key: 'department', label: 'Departamento de Trabajo', width: '220px' },
-      { key: 'position', label: 'Cargo o Posición Laboral', width: '280px' },
-      { key: 'salary', label: 'Salario Anual', width: '150px' },
-      { key: 'startDate', label: 'Fecha de Inicio de Contrato', width: '200px' },
-      { key: 'status', label: 'Estado de Empleado', width: '120px' },
-      { key: 'location', label: 'Ubicación de la Oficina', width: '180px' },
-      { key: 'manager', label: 'Supervisor Directo', width: '200px' },
-      { key: 'projects', label: 'Proyectos Asignados', width: '300px' }
-    ],
-    data: [
-      { 
-        id: 1, 
-        name: 'Juan Carlos Pérez González', 
-        email: 'juan.carlos.perez.gonzalez@empresa.com', 
-        phone: '+34 612 345 678',
-        department: 'Desarrollo de Software',
-        position: 'Desarrollador Senior Full Stack',
-        salary: '€45,000',
-        startDate: '15/03/2020',
-        status: 'Activo',
-        location: 'Madrid, España',
-        manager: 'Ana García López',
-        projects: 'Portal Web, App Móvil, API REST'
-      },
-      { 
-        id: 2, 
-        name: 'María Isabel García Rodríguez', 
-        email: 'maria.isabel.garcia.rodriguez@empresa.com', 
-        phone: '+34 623 456 789',
-        department: 'Recursos Humanos',
-        position: 'Directora de RRHH',
-        salary: '€52,000',
-        startDate: '01/01/2019',
-        status: 'Activo',
-        location: 'Barcelona, España',
-        manager: 'Carlos Ruiz Martín',
-        projects: 'Reclutamiento, Formación, Bienestar'
-      },
-      { 
-        id: 3, 
-        name: 'Carlos Alberto López Martínez', 
-        email: 'carlos.alberto.lopez.martinez@empresa.com', 
-        phone: '+34 634 567 890',
-        department: 'Marketing Digital',
-        position: 'Especialista en SEO',
-        salary: '€38,000',
-        startDate: '10/06/2021',
-        status: 'Activo',
-        location: 'Valencia, España',
-        manager: 'Laura Fernández Castro',
-        projects: 'SEO, SEM, Redes Sociales'
-      }
-    ],
-    hover: true,
-    showPagination: false,
-    showItemsPerPage: false,
-    showTotal: false,
-    minWidth: '800px'
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile1'
-    },
-    docs: {
-      description: {
-        story: `
-## 🧪 Story para Probar Scroll Horizontal
-
-Este story está diseñado específicamente para probar la funcionalidad de scroll horizontal. Incluye:
-
-### Características de Prueba:
-
-- **12 columnas muy anchas**: Para forzar el scroll horizontal
-- **Nombres de columnas largos**: Para verificar que no se compriman
-- **Datos extensos**: Emails corporativos largos y descripciones detalladas
-- **Vista móvil por defecto**: Para simular pantallas pequeñas
-- **Ancho mínimo configurable**: 800px para demostrar la propiedad minWidth
-
-### Cómo Probar:
-
-1. **En Storybook**: 
-   - Ve a este story
-   - Redimensiona la ventana del navegador
-   - Deberías ver scroll horizontal cuando el ancho sea < 800px
-
-2. **En Herramientas de Desarrollo**:
-   - F12 → Device Mode
-   - Selecciona iPhone o Android
-   - Verifica que aparece scroll horizontal
-
-3. **Indicadores Visuales**:
-   - Scrollbar personalizado (gris claro)
-   - Scroll suave al arrastrar
-   - Hover en scrollbar oscurece el color
-
-### Breakpoints de Prueba:
-
-- **> 800px**: Sin scroll (tabla normal)
-- **400px - 800px**: Scroll con ancho mínimo 800px
-- **< 400px**: Scroll con ancho mínimo 400px (móvil)
-        `
-      }
-    }
-  }
-};
 
 export const CustomMinWidth: Story = {
   args: {
@@ -522,7 +386,6 @@ export const CustomMinWidth: Story = {
         status: 'Activo'
       }
     ],
-    hover: true,
     showPagination: true,
     showItemsPerPage: true,
     showTotal: true,
@@ -567,71 +430,6 @@ Este story demuestra cómo usar la propiedad minWidth para configurar el ancho m
   }
 };
 
-export const PaginacionResponsive: Story = {
-  args: {
-    columns: [
-      { key: 'id', label: 'ID', width: '80px' },
-      { key: 'name', label: 'Nombre', width: '200px' },
-      { key: 'email', label: 'Email', width: '300px' },
-      { key: 'department', label: 'Departamento', width: '180px' },
-      { key: 'status', label: 'Estado', width: '100px' }
-    ],
-    data: Array.from({ length: 150 }, (_, i) => ({
-      id: i + 1,
-      name: `Usuario ${i + 1}`,
-      email: `usuario${i + 1}@empresa.com`,
-      department: ['Desarrollo', 'Diseño', 'Marketing', 'Ventas', 'RRHH'][i % 5],
-      status: i % 3 === 0 ? 'Activo' : 'Inactivo'
-    })),
-    hover: true,
-    showPagination: true,
-    showItemsPerPage: true,
-    showTotal: true,
-    showFirstLastButtons: true,
-    itemsPerPage: 5
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-## 📱 Paginación Responsive
-
-Este story demuestra cómo la paginación se adapta automáticamente a diferentes tamaños de pantalla.
-
-### Comportamiento Responsive:
-
-**Pantallas grandes (> 768px):**
-- Muestra hasta 7 números de página
-- Incluye botones de primera/última página
-- Separadores (...) para páginas intermedias
-
-**Pantallas medianas (480px - 768px):**
-- Muestra máximo 3 números de página
-- Oculta botones de primera/última página
-- Botones más pequeños y compactos
-
-**Pantallas pequeñas (< 480px):**
-- Botones aún más compactos
-- Espaciado reducido
-- Centrado automático
-
-### Características:
-
-- **Detección automática**: Se adapta según el ancho de la ventana
-- **Actualización dinámica**: Se reajusta al cambiar el tamaño de la ventana
-- **Navegación optimizada**: Mantiene la funcionalidad en todos los tamaños
-- **UX mejorada**: Evita desbordamiento en dispositivos móviles
-
-### Cómo Probar:
-
-1. **En Storybook**: Redimensiona la ventana del navegador
-2. **En móviles**: Usa las herramientas de desarrollo (F12 → Device Mode)
-3. **Observa**: Cómo cambia el número de botones mostrados
-        `
-      }
-    }
-  }
-};
 
 export const FilasSeleccionables: Story = {
   args: {
@@ -649,7 +447,6 @@ export const FilasSeleccionables: Story = {
       { id: 4, name: 'Ana Rodríguez', email: 'ana.rodriguez@empresa.com', department: 'Ventas', status: 'Activo' },
       { id: 5, name: 'Luis Martínez', email: 'luis.martinez@empresa.com', department: 'Desarrollo', status: 'Activo' }
     ],
-    hover: true,
     showPagination: false,
     showItemsPerPage: false,
     showTotal: false
@@ -745,7 +542,6 @@ export const ConFiltros: Story = {
       { id: 11, name: 'Fernando Morales', email: 'fernando.morales@empresa.com', department: 'Marketing', status: 'Activo' },
       { id: 12, name: 'Isabel Castro', email: 'isabel.castro@empresa.com', department: 'Ventas', status: 'Activo' }
     ],
-    hover: true,
     showFilters: true,
     showPagination: true,
     showItemsPerPage: true,
@@ -848,7 +644,6 @@ export const FiltrosSelectivos: Story = {
     ],
     showFilters: true,
     itemsPerPage: 10,
-    hover: true
   },
   parameters: {
     docs: {

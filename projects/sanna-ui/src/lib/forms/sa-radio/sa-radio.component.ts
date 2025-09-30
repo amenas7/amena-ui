@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type RadioSize = 'sm' | 'md' | 'lg';
@@ -31,6 +31,15 @@ export class SaRadioComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -38,6 +47,9 @@ export class SaRadioComponent implements ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() id: string = '';
   @Input() name: string = '';
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Output() valueChange = new EventEmitter<any>();
   @Output() change = new EventEmitter<Event>();
@@ -50,6 +62,12 @@ export class SaRadioComponent implements ControlValueAccessor {
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   constructor() {
     this._generatedId = `sa-radio-${Math.random().toString(36).substr(2, 9)}`;
@@ -96,7 +114,7 @@ export class SaRadioComponent implements ControlValueAccessor {
     let classes = sizeMap[this.size] || 'form-check-label label-md';
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       classes += ' ghost-label';
     }
     
@@ -104,6 +122,11 @@ export class SaRadioComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 

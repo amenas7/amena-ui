@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type TextareaSize = 'sm' | 'md' | 'lg';
@@ -31,6 +31,15 @@ export class SaTextareaComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() placeholder: string = '';
   @Input() helperText: string = '';
   @Input() errorText: string = '';
@@ -45,8 +54,12 @@ export class SaTextareaComponent implements ControlValueAccessor {
   @Input() maxlength: number | null = null;
   @Input() resize: 'none' | 'both' | 'horizontal' | 'vertical' = 'vertical';
   @Input() height: number | null = null; // Altura fija en píxeles
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Output() valueChange = new EventEmitter<string>();
+  @Output() change = new EventEmitter<Event>();
   @Output() focus = new EventEmitter<FocusEvent>();
   @Output() blur = new EventEmitter<FocusEvent>();
 
@@ -54,6 +67,12 @@ export class SaTextareaComponent implements ControlValueAccessor {
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   get textareaClasses(): string {
     const sizeMap = {
@@ -87,7 +106,7 @@ export class SaTextareaComponent implements ControlValueAccessor {
     const baseClasses = sizeMap[this.size] || 'form-label label-md';
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       return `${baseClasses} ghost-label`;
     }
     
@@ -95,6 +114,11 @@ export class SaTextareaComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 
@@ -145,5 +169,9 @@ export class SaTextareaComponent implements ControlValueAccessor {
     this.isFocused = false;
     this.onTouched();
     this.blur.emit(event);
+  }
+
+  onTextareaChange(event: Event) {
+    this.change.emit(event);
   }
 }

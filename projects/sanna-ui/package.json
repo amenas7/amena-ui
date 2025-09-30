@@ -1,6 +1,6 @@
 {
   "name": "sanna-ui",
-  "version": "0.0.131",
+  "version": "0.0.132",
   "description": "Librería de componentes UI para Angular",
   "keywords": [
     "angular",
@@ -8,21 +8,21 @@
     "components",
     "sanna"
   ],
-  "author": "Amenas7",
+  "author": "Sanna",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/amenas7/amena-ui.git"
   },
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": "18.2.13",
+    "@angular/core": "18.2.13"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "@fortawesome/angular-fontawesome": "^0.15.0",
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1"
+    "tslib": "2.3.0",
+    "@fortawesome/angular-fontawesome": "0.15.0",
+    "@fortawesome/fontawesome-svg-core": "6.5.1",
+    "@fortawesome/free-solid-svg-icons": "6.5.1"
   },
   "sideEffects": false
 }

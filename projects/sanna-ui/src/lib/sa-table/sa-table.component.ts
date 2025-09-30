@@ -49,7 +49,6 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   private _showPagination: boolean = true;
   private _showItemsPerPage: boolean = true;
   private _showTotal: boolean = true;
-  private _hover: boolean = false;
   private _loading: boolean = false;
   private _showFirstLastButtons: boolean = true;
   private _showFilters: boolean = false;
@@ -86,13 +85,6 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this._showTotal;
   }
 
-  @Input()
-  set hover(value: boolean | any) {
-    this._hover = value === true || value === 'true';
-  }
-  get hover(): boolean {
-    return this._hover;
-  }
 
   @Input()
   set loading(value: boolean | any) {

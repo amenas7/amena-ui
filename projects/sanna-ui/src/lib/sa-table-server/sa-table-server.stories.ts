@@ -126,14 +126,10 @@ const meta: Meta<SaTableServerComponent> = {
           let result = code;
           
           // Limpiar property bindings innecesarios
-          result = result.replace(/\[hover\]="true"/g, 'hover="true"');
-          result = result.replace(/\[hover\]="false"/g, 'hover="false"');
           result = result.replace(/\[loading\]="true"/g, 'loading="true"');
           result = result.replace(/\[loading\]="false"/g, 'loading="false"');
           result = result.replace(/\[showFirstLastButtons\]="true"/g, 'showFirstLastButtons="true"');
           result = result.replace(/\[showFirstLastButtons\]="false"/g, 'showFirstLastButtons="false"');
-          result = result.replace(/\[showFilters\]="true"/g, 'showFilters="true"');
-          result = result.replace(/\[showFilters\]="false"/g, 'showFilters="false"');
           result = result.replace(/\[autoLoad\]="true"/g, 'autoLoad="true"');
           result = result.replace(/\[autoLoad\]="false"/g, 'autoLoad="false"');
           result = result.replace(/\[minWidth\]="'([^']+)'"/g, 'minWidth="$1"');
@@ -217,8 +213,6 @@ const paginationData: ServerPaginationData = {
   [data]="currentPageData"
   [paginationData]="paginationData"
   [loading]="isLoading"
-  showFilters="true"
-  hover="true"
   (loadData)="onLoadData($event)"
   (rowClick)="onRowClick($event)">
 </sa-table-server>
@@ -278,10 +272,6 @@ onLoadData(request: ServerTableRequest) {
       control: { type: 'boolean' },
       description: 'Cargar datos automáticamente al inicializar. Usa attribute binding: autoLoad="true"'
     },
-    hover: {
-      control: { type: 'boolean' },
-      description: 'Aplicar efecto hover. Usa attribute binding: hover="true"'
-    },
     loading: {
       control: { type: 'boolean' },
       description: 'Mostrar estado de carga. Usa attribute binding: loading="true"'
@@ -290,10 +280,6 @@ onLoadData(request: ServerTableRequest) {
       control: { type: 'boolean' },
       description: 'Mostrar botones de primera y última página. Usa attribute binding: showFirstLastButtons="true"'
     },
-    showFilters: {
-      control: { type: 'boolean' },
-      description: 'Mostrar inputs de filtrado. Usa attribute binding: showFilters="true"'
-    },
     emptyMessage: {
       control: { type: 'text' },
       description: 'Mensaje cuando no hay datos. Property binding: [emptyMessage]="mensaje"'
@@ -301,17 +287,20 @@ onLoadData(request: ServerTableRequest) {
     minWidth: {
       control: { type: 'text' },
       description: 'Ancho mínimo de la tabla. Ejemplos: 600px, 800px, 1000px'
+    },
+    minTableHeight: {
+      control: { type: 'number' },
+      description: 'Altura mínima de la tabla en píxeles cuando no hay datos. Evita que se vea colapsada. Valor por defecto: 200px (~5 filas)'
     }
   },
   args: {
     // Valores por defecto
-    hover: true,
     loading: false,
     showFirstLastButtons: true,
-    showFilters: false,
-    autoLoad: true,
+    autoLoad: false, // No cargar automáticamente en stories
     emptyMessage: 'No hay datos disponibles',
-    minWidth: '600px'
+    minWidth: '600px',
+    minTableHeight: 200
   }
 };
 
@@ -346,10 +335,8 @@ export const Basico: Story = {
       showItemsPerPageSelector: true,
       showPageInfo: true
     },
-    hover: true,
-    loading: false,
-    showFilters: false,
-    autoLoad: true,
+    loading: false, // ✅ Asegurar que no esté en loading
+    autoLoad: false, // ✅ No cargar automáticamente
     emptyMessage: 'No hay datos disponibles',
     minWidth: '600px',
     loadData: (request: ServerTableRequest) => {
@@ -369,315 +356,19 @@ export const Basico: Story = {
   parameters: {
     docs: {
       description: {
-        story: `
-## 🔄 Server-Side Simulation
-
-Esta demo simula el comportamiento real de server-side pagination con latencia de red.
-
-**⚠️ Limitación de Storybook:** Los stories no pueden actualizar la vista reactivamente. En una aplicación real Angular, verías:
-
-1. **Loading state** → Spinner durante petición
-2. **Nuevos datos** → Contenido actualizado automáticamente
-3. **Paginación actualizada** → Contadores y navegación sincronizados
-
-### 🔗 API Endpoint:
-- **URL**: \`https://jsonplaceholder.typicode.com/posts\`
-- **Método**: GET con parámetros de query
-- **Total de registros**: ~100 posts reales
-
-### 📋 Funcionalidades Reales:
-
-**✅ Paginación Server-Side:**
-- \`_page=1&_limit=10\` - Solicita página 1 con 10 elementos
-- \`_page=2&_limit=10\` - Solicita página 2 con 10 elementos
-- El servidor devuelve solo los datos de la página solicitada
-
-**✅ Ordenamiento:**
-- \`_sort=title&_order=asc\` - Ordena por título ascendente
-- \`_sort=userId&_order=desc\` - Ordena por usuario descendente
-- El servidor procesa el ordenamiento en backend
-
-**✅ Filtros (limitados):**
-- \`title_like=search_term\` - Busca títulos que contengan el término
-- \`userId=1\` - Filtra por usuario específico
-
-### 🔍 Monitoreo:
-
-Abre las **DevTools > Network** para ver las peticiones HTTP reales:
-
-\`\`\`http
-GET https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10
-GET https://jsonplaceholder.typicode.com/posts?_page=2&_limit=10&_sort=title&_order=asc
-\`\`\`
-
-### 📊 Transformación de Datos:
-
-Los datos de JSONPlaceholder se transforman a nuestro formato:
-
-\`\`\`typescript
-// JSONPlaceholder original
-{
-  "id": 1,
-  "title": "sunt aut facere repellat...",
-  "userId": 1
-}
-
-// Transformado para la tabla
-{
-  "id": 1,
-  "codigo": "POST-001",
-  "titulo": "sunt aut facere repellat...",
-  "userId": 1,
-  "autor": "Usuario 1",
-  "estado": "Revisión",
-  "fecha": "01/01/2024"
-}
-\`\`\`
-
-### 🎮 Interacciones:
-
-1. **Navegar páginas**: Ve las peticiones HTTP en Network tab
-2. **Cambiar elementos por página**: Observa el parámetro \`_limit\`
-3. **Ordenar columnas**: Ve los parámetros \`_sort\` y \`_order\`
-4. **Aplicar filtros**: Nota los filtros en la URL (título y userId)
-
-### 🚀 Sin Configuración:
-
-- **No necesitas backend local**
-- **No requiere configuración de CORS**
-- **Funciona directamente en Storybook**
-- **API pública y gratuita**
-
-¡Esta es la experiencia real de server-side pagination que tendrás en producción!
-        `
-      }
-    }
-  }
-};
-
-// Story que simula llamadas reales al backend
-export const SimulacionBackend: Story = {
-  args: {
-    columns: [
-      { key: 'codigo', label: 'Código', sortable: true, width: '120px' },
-      { key: 'titulo', label: 'Título', sortable: true },
-      { key: 'autor', label: 'Autor', sortable: false, width: '120px' },
-      { key: 'estado', label: 'Estado', sortable: false, width: '100px' },
-      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px' }
-    ],
-    data: [
-      { id: 1, codigo: 'POST-001', titulo: 'sunt aut facere repellat provident occaecati excepturi', autor: 'Usuario 1', estado: 'Revisión', fecha: '01/01/2024' },
-      { id: 2, codigo: 'POST-002', titulo: 'qui est esse', autor: 'Usuario 1', estado: 'Borrador', fecha: '02/01/2024' },
-      { id: 3, codigo: 'POST-003', titulo: 'ea molestias quasi exercitationem repellat', autor: 'Usuario 1', estado: 'Publicado', fecha: '03/01/2024' },
-      { id: 4, codigo: 'POST-004', titulo: 'eum et est occaecati', autor: 'Usuario 1', estado: 'Revisión', fecha: '04/01/2024' },
-      { id: 5, codigo: 'POST-005', titulo: 'nesciunt quas odio', autor: 'Usuario 1', estado: 'Borrador', fecha: '05/01/2024' }
-    ],
-    paginationData: {
-      currentPage: 1,
-      itemsPerPage: 5,
-      totalItems: 100,
-      currentItemsCount: 5
-    },
-    paginationOptions: {
-      itemsPerPageOptions: [5, 10, 15, 20],
-      showItemsPerPageSelector: true,
-      showPageInfo: true
-    },
-    hover: true,
-    loading: false,
-    showFilters: false,
-    autoLoad: true,
-    emptyMessage: 'No hay datos disponibles',
-    minWidth: '600px',
-    loadData: (request: ServerTableRequest) => {
-      console.clear();
-      console.log('🔥 ¡LLAMADA AL BACKEND DETECTADA!');
-      console.log('==========================================');
-      console.log('🌐 URL:', `GET https://jsonplaceholder.typicode.com/posts`);
-      console.log('📋 Parámetros de paginación:', {
-        page: request.pageNumber,
-        limit: request.rowsPerPage,
-        _start: (request.pageNumber - 1) * request.rowsPerPage,
-        _limit: request.rowsPerPage
-      });
-      
-      if (request.sortColumn) {
-        console.log('📊 Ordenamiento:', {
-          column: request.sortColumn,
-          direction: request.sortDirection
-        });
-      }
-      
-      if (request.filters && Object.keys(request.filters).length > 0) {
-        console.log('🔍 Filtros aplicados:', request.filters);
-      }
-      
-      console.log('⏳ Estado del componente:');
-      console.log('   - loading: true (debería mostrar spinner)');
-      console.log('   - data: [] (datos anteriores se limpian)');
-      console.log('');
-      console.log('📡 Simulando respuesta del servidor...');
-      console.log('🕐 Esperando 1.5 segundos...');
-      console.log('');
-      console.log('💡 En tu app Angular real:');
-      console.log('   1. Se ejecuta this.loadData.emit(request)');
-      console.log('   2. Tu componente padre recibe el evento');
-      console.log('   3. Haces la llamada HTTP al backend');
-      console.log('   4. Actualizas [data] y [paginationData]');
-      console.log('   5. Cambias [loading] = false');
-      console.log('==========================================');
-    },
-    rowClick: (row: TableData) => {
-      console.log('🖱️ Fila clickeada:', row);
-    }
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-## 🔥 Simulación Real de Backend
-
-Este story demuestra cómo se ejecutarían las llamadas al backend en una aplicación real.
-
-**Instrucciones:**
-1. 🔍 **Abre la consola del navegador** (F12 → Console)
-2. 🖱️ **Cambia de página** usando los controles de paginación
-3. 📊 **Observa los logs** que muestran las peticiones simuladas
-
-**Qué verás en los logs:**
-- URL completa de la petición HTTP
-- Parámetros de paginación calculados
-- Estado del loading y datos
-- Flujo completo de una app real
-
-**En una app Angular real:**
-\`\`\`typescript
-onLoadData(request: ServerTableRequest) {
-  this.loading = true;
-  this.apiService.getPosts(request).subscribe({
-    next: (response) => {
-      this.data = response.data;
-      this.paginationData = {
-        currentPage: response.currentPage,
-        itemsPerPage: response.itemsPerPage,
-        totalItems: response.totalItems,
-        currentItemsCount: response.data.length
-      };
-      this.loading = false;
-    }
-  });
-}
-\`\`\`
-        `
+        story: ``
       }
     }
   }
 };
 
 
-// Story con filtros
-export const ConFiltros: Story = {
-  args: {
-    ...Basico.args,
-    showFilters: true,
-    columns: [
-      { key: 'codigo', label: 'Código', sortable: true, width: '120px', noFilter: true },
-      { key: 'titulo', label: 'Título', sortable: true },
-      { key: 'userId', label: 'User ID', sortable: true, width: '100px' },
-      { key: 'autor', label: 'Autor', sortable: false, width: '120px', noFilter: true },
-      { key: 'estado', label: 'Estado', sortable: false, width: '100px', noFilter: true },
-      { key: 'fecha', label: 'Fecha', sortable: true, width: '120px', noFilter: true }
-    ]
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-## 🔍 Filtros Reales con JSONPlaceholder
-
-Esta demo muestra filtros **reales** procesados por el servidor JSONPlaceholder.
-
-### 🎯 Filtros Disponibles:
-
-**✅ Título (title_like):**
-- Escribe en "Título" para buscar posts por contenido
-- Ejemplo: "sunt" → Filtra títulos que contengan "sunt"
-- URL: \`?title_like=sunt\`
-
-**✅ User ID (userId):**
-- Escribe números del 1-10 en "User ID"
-- Ejemplo: "1" → Solo posts del usuario 1
-- URL: \`?userId=1\`
-
-**❌ Filtros Deshabilitados:**
-- **Código, Autor, Estado, Fecha**: Configurados con \`noFilter: true\`
-- Solo se muestran para demostrar la configuración
-
-### 📡 Peticiones HTTP Reales:
-
-\`\`\`http
-# Sin filtros
-GET /posts?_page=1&_limit=10
-
-# Con filtro de título
-GET /posts?_page=1&_limit=10&title_like=sunt
-
-# Con filtro de usuario
-GET /posts?_page=1&_limit=10&userId=1
-
-# Filtros combinados
-GET /posts?_page=1&_limit=10&title_like=sunt&userId=1
-\`\`\`
-
-### 🧪 Pruebas Recomendadas:
-
-1. **Filtro por título**:
-   - Escribe "sunt" en Título
-   - Ve cómo se reduce el número total de registros
-   - Observa la URL en Network tab
-
-2. **Filtro por usuario**:
-   - Escribe "1" en User ID
-   - Solo verás posts del usuario 1
-   - Nota que la paginación se resetea a página 1
-
-3. **Filtros combinados**:
-   - Usa "sunt" en Título Y "1" en User ID
-   - Ve la intersección de ambos filtros
-
-4. **Limpiar filtros**:
-   - Borra el contenido de los inputs
-   - Regresa a mostrar todos los posts
-
-### ⚡ Características Técnicas:
-
-- **Debounce**: Espera 300ms antes de hacer la petición
-- **Reset automático**: Página vuelve a 1 al filtrar
-- **Estado persistente**: Filtros se mantienen al navegar páginas
-- **Fallback**: Si la API falla, muestra tabla vacía
-
-### 🔧 Configuración:
-
-\`\`\`typescript
-columns: [
-  { key: 'titulo', label: 'Título' },           // ✅ Con filtro
-  { key: 'userId', label: 'User ID' },         // ✅ Con filtro
-  { key: 'estado', label: 'Estado', noFilter: true }  // ❌ Sin filtro
-]
-\`\`\`
-
-¡Abre DevTools > Network para ver las peticiones HTTP reales en tiempo real!
-        `
-      }
-    }
-  }
-};
 
 // Story con estado de carga
 export const ConCarga: Story = {
   args: {
     ...Basico.args,
-    loading: true,
+    loading: true, // Mantener para mostrar el estado de carga
     data: SAMPLE_DATA.slice(0, 5),
     paginationData: {
       currentPage: 1,
@@ -730,18 +421,13 @@ onLoadData(request: ServerTableRequest) {
   });
 }
 \`\`\`
-
-### Mejores Prácticas:
-
-1. **Siempre desactivar loading**: En success y error
-2. **Timeouts**: Considerar timeout para peticiones lentas
-3. **Estados de error**: Manejar errores apropiadamente
-4. **Skeleton loading**: Para mejor UX (próximas versiones)
         `
       }
     }
   }
 };
+
+
 
 // Story sin datos
 export const SinDatos: Story = {
@@ -754,6 +440,8 @@ export const SinDatos: Story = {
       totalItems: 0,
       currentItemsCount: 0
     },
+    loading: false, // ✅ Sin loading
+    autoLoad: false, // ✅ No cargar automáticamente
     emptyMessage: 'No se encontraron registros que coincidan con los filtros aplicados'
   },
   parameters: {

@@ -28,6 +28,7 @@
     data-enable-grammarly="false"
     (focus)="onTextareaFocus($event)"
     (blur)="onTextareaBlur($event)"
+    (change)="onTextareaChange($event)"
   ></textarea>
 
   <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>

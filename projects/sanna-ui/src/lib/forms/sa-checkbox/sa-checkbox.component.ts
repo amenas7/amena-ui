@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type CheckboxSize = 'sm' | 'md' | 'lg';
@@ -31,6 +31,15 @@ export class SaCheckboxComponent implements ControlValueAccessor {
   get noLabel(): boolean {
     return this._noLabel;
   }
+
+  private _hideLabel: boolean = false;
+  @Input()
+  set hideLabel(value: boolean | any) {
+    this._hideLabel = value === true || value === 'true';
+  }
+  get hideLabel(): boolean {
+    return this._hideLabel;
+  }
   @Input() helperText: string = '';
   @Input() errorText: string = '';
   @Input() required: boolean = false;
@@ -41,6 +50,9 @@ export class SaCheckboxComponent implements ControlValueAccessor {
   @Input() value: string = '';
   @Input() indeterminate: boolean = false;
   @Input() bold: boolean = false;
+  
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Output() checkedChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<Event>();
@@ -52,6 +64,12 @@ export class SaCheckboxComponent implements ControlValueAccessor {
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   constructor() {
     this._generatedId = `sa-checkbox-${Math.random().toString(36).substr(2, 9)}`;
@@ -98,7 +116,7 @@ export class SaCheckboxComponent implements ControlValueAccessor {
     }
     
     // Si es noLabel, agregar clase para label fantasma
-    if (this.noLabel) {
+    if (this.noLabel && !this.hideLabel) {
       classes += ' ghost-label';
     }
     
@@ -106,6 +124,11 @@ export class SaCheckboxComponent implements ControlValueAccessor {
   }
 
   get shouldShowLabel(): boolean {
+    // Si hideLabel está activo, nunca mostrar el label
+    if (this.hideLabel) {
+      return false;
+    }
+    // Comportamiento original: mostrar si hay label o si noLabel está activo (para espacio fantasma)
     return !!this.label || this.noLabel;
   }
 

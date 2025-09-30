@@ -1,5 +1,5 @@
 <!-- Table Container -->
-<div class="sa-table-container">
+<div class="sa-table-container" [style.--min-table-height.px]="minTableHeight">
   
   <!-- Table Content (siempre visible) -->
   <div class="table-content" [class.loading]="loading">
@@ -8,12 +8,11 @@
 <div class="table-responsive table-container" 
      [class.auto-layout-container]="!shouldUseFixedLayout"
      [class.fixed-layout-container]="shouldUseFixedLayout">
-  <table class="table" 
-         [class.table-hover]="hover"
+  <table class="table"
          [class.fixed-layout]="shouldUseFixedLayout"
          [class.auto-layout]="!shouldUseFixedLayout"
          [style.min-width]="minWidth">
-    <thead class="table-light" [class.has-filters]="showFilters">
+    <thead class="table-light">
       <tr>
         <th *ngFor="let column of columns" 
             class="column-header"
@@ -28,22 +27,10 @@
           </div>
         </th>
       </tr>
-      <!-- Fila de filtros -->
-      <tr *ngIf="showFilters" class="filter-row">
-        <th class="filter-row-th" *ngFor="let column of columns" 
-            [style.width]="column.width">
-          <input 
-            *ngIf="shouldShowFilter(column.key)"
-            type="text" 
-            class="form-control form-control-sm filter-input"
-            [placeholder]="'Filtrar ' + column.label"
-            [value]="columnFilters[column.key] || ''"
-            (input)="onFilterChange(column.key, $any($event.target).value)"
-            />
-        </th>
-      </tr>
     </thead>
-    <tbody [class.animate-fade-in]="data.length > 0" [class.animation-complete]="data.length > 0">
+    <tbody [class.animate-fade-in]="data.length > 0" 
+           [class.animation-complete]="data.length > 0"
+           [style.min-height.px]="getTableBodyMinHeight()">
       <tr *ngFor="let row of data; trackBy: trackByFn"
           [class]="getRowClasses(row)"
           (click)="onRowClick(row)"
@@ -54,11 +41,17 @@
           </ng-container>
         </td>
       </tr>
-      <tr *ngIf="data.length === 0 && !loading">
+      <tr *ngIf="data.length === 0 && !loading && hasInitialLoad">
         <td [attr.colspan]="columns.length" class="text-center py-4 text-muted">
           <div>
             <p class="mb-2" style="font-size: 14px !important;">{{ emptyMessage }}</p>
           </div>
+        </td>
+      </tr>
+      <!-- ✅ Fila espaciadora para mantener altura mínima cuando no hay datos -->
+      <tr *ngIf="data.length === 0" class="spacer-row">
+        <td [attr.colspan]="columns.length" class="spacer-cell">
+          <!-- Celda vacía para mantener altura -->
         </td>
       </tr>
     </tbody>

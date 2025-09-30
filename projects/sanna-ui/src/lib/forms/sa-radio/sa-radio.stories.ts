@@ -54,6 +54,22 @@ const meta: Meta<SaRadioComponent> = {
       control: 'text',
       description: 'Etiqueta del radio button'
     },
+    noLabel: {
+      control: { type: 'boolean' },
+      description: 'Ocultar el label pero mantener el espacio reservado (label fantasma)',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hideLabel: {
+      control: { type: 'boolean' },
+      description: 'Eliminar completamente el label y su espacio reservado',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
     value: {
       control: 'text',
       description: 'Valor del radio button'
@@ -91,6 +107,35 @@ const meta: Meta<SaRadioComponent> = {
     name: {
       control: 'text',
       description: 'Nombre del grupo de radio buttons'
+    },
+    // Eventos
+    valueChange: {
+      action: 'valueChange',
+      description: 'Evento emitido cuando cambia el valor del radio button',
+      table: {
+        type: { summary: 'EventEmitter<any>' },
+      },
+    },
+    change: {
+      action: 'change',
+      description: 'Evento nativo del DOM emitido cuando cambia el valor del radio button',
+      table: {
+        type: { summary: 'EventEmitter<Event>' },
+      },
+    },
+    focus: {
+      action: 'focus',
+      description: 'Evento emitido cuando el radio button recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
+    },
+    blur: {
+      action: 'blur',
+      description: 'Evento emitido cuando el radio button pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+      },
     }
   }
 };
@@ -311,6 +356,123 @@ export const RadioGroup: Story = {
     <sa-radio label="Grande" value="lg" name="sizes" size="lg"></sa-radio>
   </div>
 </div>`
+      }
+    }
+  }
+};
+
+export const NoLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    noLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio button con noLabel activado. El label se oculta pero mantiene el espacio reservado para mantener la alineación con otros radio buttons.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const HideLabel: Story = {
+  args: {
+    ...Default.args,
+    label: 'Etiqueta original',
+    hideLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio button con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para radio buttons compactos.'
+      },
+      source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const LabelComparison: Story = {
+  render: () => ({
+    template: `
+      <div style="padding: 20px; max-width: 500px;">
+        <h3>Comparación de comportamiento del label</h3>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Radio button normal con label</h4>
+          <sa-radio
+            label="Etiqueta normal"
+            value="normal"
+            name="comparison"
+            [checked]="true"
+            size="md">
+          </sa-radio>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Radio button con noLabel (mantiene espacio fantasma)</h4>
+          <sa-radio
+            label="Etiqueta oculta"
+            value="nolabel"
+            name="comparison"
+            [checked]="false"
+            size="md"
+            [noLabel]="true">
+          </sa-radio>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <h4>Radio button con hideLabel (sin espacio)</h4>
+          <sa-radio
+            label="Etiqueta eliminada"
+            value="hidelabel"
+            name="comparison"
+            [checked]="false"
+            size="md"
+            [hideLabel]="true">
+          </sa-radio>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparación visual entre radio button normal, noLabel (mantiene espacio) y hideLabel (elimina completamente el espacio).'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Radio button normal con label -->
+<sa-radio
+  label="Etiqueta normal"
+  value="normal"
+  name="comparison"
+  [checked]="true"
+  size="md">
+</sa-radio>
+
+<!-- Radio button con noLabel (mantiene espacio fantasma) -->
+<sa-radio
+  label="Etiqueta oculta"
+  value="nolabel"
+  name="comparison"
+  [checked]="false"
+  size="md"
+  [noLabel]="true">
+</sa-radio>
+
+<!-- Radio button con hideLabel (sin espacio) -->
+<sa-radio
+  label="Etiqueta eliminada"
+  value="hidelabel"
+  name="comparison"
+  [checked]="false"
+  size="md"
+  [hideLabel]="true">
+</sa-radio>
+        `
       }
     }
   }
