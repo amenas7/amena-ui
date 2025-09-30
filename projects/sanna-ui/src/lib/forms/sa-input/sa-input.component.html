@@ -45,9 +45,11 @@
       (focus)="onInputFocus($event)"
       (blur)="onInputBlur($event)"
       (change)="onInputChange($event)"
+      (input)="saNumbersOnly ? onInputForNumbers($event) : (saLettersOnly ? onInputForLetters($event) : null)"
       (keyup)="onKeyUp($event)"
       (keydown)="onKeyDown($event)"
-      (keypress)="onKeyPress($event)"
+      (keypress)="saNumbersOnly ? onKeyPressForNumbers($event) : (saLettersOnly ? onKeyPressForLetters($event) : onKeyPress($event))"
+      (paste)="saNumbersOnly ? onPasteForNumbers($event) : (saLettersOnly ? onPasteForLetters($event) : null)"
     />
 
     <span *ngIf="rightIcon && type !== 'password'" class="input-group-text">

@@ -46,6 +46,12 @@ const meta: Meta<SaInputComponent> = {
           result = result.replace(/\[noLabel\]="true"/g, 'noLabel="true"');
           result = result.replace(/\[hideLabel\]="true"/g, 'hideLabel="true"');
           result = result.replace(/\[boldText\]="true"/g, 'boldText="true"');
+          result = result.replace(/\[saNumbersOnly\]="true"/g, '[saNumbersOnly]="true"');
+          result = result.replace(/\[allowDecimals\]="true"/g, '[allowDecimals]="true"');
+          result = result.replace(/\[allowNegative\]="true"/g, '[allowNegative]="true"');
+          result = result.replace(/\[saLettersOnly\]="true"/g, '[saLettersOnly]="true"');
+          result = result.replace(/\[allowSpaces\]="false"/g, '[allowSpaces]="false"');
+          result = result.replace(/\[allowAccents\]="false"/g, '[allowAccents]="false"');
           
           return result;
         }
@@ -194,6 +200,70 @@ const meta: Meta<SaInputComponent> = {
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
+      },
+    },
+    // Validaciones integradas
+    saNumbersOnly: {
+      control: 'boolean',
+      description: 'Permitir solo números en el input',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowDecimals: {
+      control: 'boolean',
+      description: 'Permitir decimales cuando saNumbersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowNegative: {
+      control: 'boolean',
+      description: 'Permitir números negativos cuando saNumbersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    maxDecimals: {
+      control: 'number',
+      description: 'Cantidad máxima de decimales permitidos (cuando allowDecimals es true)',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '2' },
+        category: 'Validaciones',
+      },
+    },
+    saLettersOnly: {
+      control: 'boolean',
+      description: 'Permitir solo letras en el input',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowSpaces: {
+      control: 'boolean',
+      description: 'Permitir espacios cuando saLettersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Validaciones',
+      },
+    },
+    allowAccents: {
+      control: 'boolean',
+      description: 'Permitir acentos y caracteres especiales (ñ, ü) cuando saLettersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Validaciones',
       },
     },
     // Eventos
@@ -889,8 +959,8 @@ export const ReactiveFormExample: Story = {
         <div style="padding: 20px; max-width: 400px;">
           <h3>Ejemplo con Formulario Reactivo</h3>
           <form [formGroup]="form">
-            <sa-input formControlName="campo" 
-                     label="Reactivo" 
+            <sa-input formControlName="campo"
+                     label="Reactivo"
                      placeholder="Puedes escribir aquí!"
                      helperText="Este input está vinculado a un FormControl"></sa-input>
           </form>
@@ -928,6 +998,226 @@ export class MiComponente {
   }
 }`,
       },
+    }
+  }
+};
+
+// Validaciones integradas - Solo números
+export const NumbersOnly: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Solo números',
+    placeholder: 'Solo puedes ingresar números',
+    saNumbersOnly: true,
+    allowDecimals: false,
+    allowNegative: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que solo permite números enteros positivos.'
+      }
+    }
+  }
+};
+
+export const NumbersWithDecimals: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Números con decimales',
+    placeholder: 'Números con hasta 2 decimales',
+    saNumbersOnly: true,
+    allowDecimals: true,
+    allowNegative: false,
+    maxDecimals: 2,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que permite números decimales con un máximo de 2 decimales.'
+      }
+    }
+  }
+};
+
+export const NumbersWithNegative: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Números negativos',
+    placeholder: 'Permite números negativos',
+    saNumbersOnly: true,
+    allowDecimals: true,
+    allowNegative: true,
+    maxDecimals: 2,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que permite números negativos y decimales.'
+      }
+    }
+  }
+};
+
+// Validaciones integradas - Solo letras
+export const LettersOnly: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Solo letras',
+    placeholder: 'Solo puedes ingresar letras',
+    saLettersOnly: true,
+    allowSpaces: true,
+    allowAccents: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que solo permite letras, espacios y acentos.'
+      }
+    }
+  }
+};
+
+export const LettersNoSpaces: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Letras sin espacios',
+    placeholder: 'Solo letras, sin espacios',
+    saLettersOnly: true,
+    allowSpaces: false,
+    allowAccents: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que solo permite letras sin espacios, útil para usernames o identificadores.'
+      }
+    }
+  }
+};
+
+export const LettersNoAccents: Story = {
+  args: {
+    ...Basic.args,
+    label: 'Letras sin acentos',
+    placeholder: 'Solo letras básicas A-Z',
+    saLettersOnly: true,
+    allowSpaces: true,
+    allowAccents: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Input que solo permite letras básicas del alfabeto inglés (A-Z) sin acentos ni caracteres especiales.'
+      }
+    }
+  }
+};
+
+// Ejemplo práctico combinando validaciones
+export const ValidationExample: Story = {
+  render: () => ({
+    props: {
+      codigo: '',
+      precio: '',
+      nombre: ''
+    },
+    template: `
+      <div style="padding: 20px; max-width: 600px;">
+        <h3>Ejemplo práctico de validaciones</h3>
+
+        <div style="margin-bottom: 20px;">
+          <sa-input
+            label="Código de producto"
+            placeholder="Solo números"
+            [(ngModel)]="codigo"
+            [saNumbersOnly]="true"
+            [allowDecimals]="false"
+            [allowNegative]="false"
+            helperText="Ingrese solo números enteros">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ codigo || 'vacío' }}</small>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <sa-input
+            label="Precio"
+            placeholder="Números con decimales"
+            [(ngModel)]="precio"
+            [saNumbersOnly]="true"
+            [allowDecimals]="true"
+            [allowNegative]="false"
+            [maxDecimals]="2"
+            leftIcon="dollar-sign"
+            helperText="Máximo 2 decimales">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ precio || 'vacío' }}</small>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <sa-input
+            label="Nombre del cliente"
+            placeholder="Solo letras"
+            [(ngModel)]="nombre"
+            [saLettersOnly]="true"
+            [allowSpaces]="true"
+            [allowAccents]="true"
+            leftIcon="user"
+            helperText="Solo letras, espacios y acentos">
+          </sa-input>
+          <small><strong>Valor:</strong> {{ nombre || 'vacío' }}</small>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo práctico que muestra cómo usar las diferentes validaciones en un formulario real.'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Código de producto: solo números enteros -->
+<sa-input
+  label="Código de producto"
+  placeholder="Solo números"
+  [(ngModel)]="codigo"
+  [saNumbersOnly]="true"
+  [allowDecimals]="false"
+  [allowNegative]="false">
+</sa-input>
+
+<!-- Precio: números con decimales -->
+<sa-input
+  label="Precio"
+  placeholder="Números con decimales"
+  [(ngModel)]="precio"
+  [saNumbersOnly]="true"
+  [allowDecimals]="true"
+  [allowNegative]="false"
+  [maxDecimals]="2"
+  leftIcon="dollar-sign">
+</sa-input>
+
+<!-- Nombre: solo letras -->
+<sa-input
+  label="Nombre del cliente"
+  placeholder="Solo letras"
+  [(ngModel)]="nombre"
+  [saLettersOnly]="true"
+  [allowSpaces]="true"
+  [allowAccents]="true"
+  leftIcon="user">
+</sa-input>
+
+<!-- TypeScript -->
+export class MiComponente {
+  codigo: string = '';
+  precio: string = '';
+  nombre: string = '';
+}`
+      }
     }
   }
 };
