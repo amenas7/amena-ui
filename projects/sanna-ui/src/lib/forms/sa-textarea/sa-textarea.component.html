@@ -5,6 +5,7 @@
   </label>
 
   <textarea
+    #textareaElement
     [id]="id"
     [name]="name"
     [class]="textareaClasses"
@@ -29,6 +30,9 @@
     (focus)="onTextareaFocus($event)"
     (blur)="onTextareaBlur($event)"
     (change)="onTextareaChange($event)"
+    (input)="saNumbersOnly ? onInputForNumbers($event) : (saLettersOnly ? onInputForLetters($event) : null)"
+    (keypress)="saNumbersOnly ? onKeyPressForNumbers($event) : (saLettersOnly ? onKeyPressForLetters($event) : null)"
+    (paste)="saNumbersOnly ? onPasteForNumbers($event) : (saLettersOnly ? onPasteForLetters($event) : null)"
   ></textarea>
 
   <div *ngIf="helperText && !errorText" class="form-text">{{ helperText }}</div>

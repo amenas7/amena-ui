@@ -43,6 +43,12 @@ const meta: Meta<SaTextareaComponent> = {
           result = result.replace(/\[readonly\]="false"/g, 'readonly="false"');
           result = result.replace(/\[disabled\]="true"/g, 'disabled="true"');
           result = result.replace(/\[disabled\]="false"/g, 'disabled="false"');
+          result = result.replace(/\[saNumbersOnly\]="true"/g, '[saNumbersOnly]="true"');
+          result = result.replace(/\[allowDecimals\]="true"/g, '[allowDecimals]="true"');
+          result = result.replace(/\[allowNegative\]="true"/g, '[allowNegative]="true"');
+          result = result.replace(/\[saLettersOnly\]="true"/g, '[saLettersOnly]="true"');
+          result = result.replace(/\[allowSpaces\]="false"/g, '[allowSpaces]="false"');
+          result = result.replace(/\[allowAccents\]="false"/g, '[allowAccents]="false"');
           
           // Transformar number properties
           result = result.replace(/\[rows\]="(\d+)"/g, 'rows="$1"');
@@ -125,6 +131,70 @@ const meta: Meta<SaTextareaComponent> = {
     height: {
       control: { type: 'number', min: 50, max: 500 },
       description: 'Altura fija en píxeles. Cuando se especifica, deshabilita el resize manual y habilita scroll vertical automático'
+    },
+    // Validaciones integradas
+    saNumbersOnly: {
+      control: 'boolean',
+      description: 'Permitir solo números en el textarea',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowDecimals: {
+      control: 'boolean',
+      description: 'Permitir decimales cuando saNumbersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowNegative: {
+      control: 'boolean',
+      description: 'Permitir números negativos cuando saNumbersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    maxDecimals: {
+      control: 'number',
+      description: 'Cantidad máxima de decimales permitidos (cuando allowDecimals es true)',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '2' },
+        category: 'Validaciones',
+      },
+    },
+    saLettersOnly: {
+      control: 'boolean',
+      description: 'Permitir solo letras en el textarea',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Validaciones',
+      },
+    },
+    allowSpaces: {
+      control: 'boolean',
+      description: 'Permitir espacios cuando saLettersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Validaciones',
+      },
+    },
+    allowAccents: {
+      control: 'boolean',
+      description: 'Permitir acentos y caracteres especiales (ñ, ü) cuando saLettersOnly está activo',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Validaciones',
+      },
     },
     // Eventos
     valueChange: {
@@ -512,6 +582,228 @@ export const AllSizes: Story = {
     docs: {
       description: {
         story: 'Comparación visual de los tres tamaños disponibles del componente sa-textarea. Muestra las diferencias sutiles entre sm, md y lg, incluyendo las especificaciones técnicas detalladas.'
+      }
+    }
+  }
+};
+
+// Validaciones integradas - Solo números
+export const NumbersOnly: Story = {
+  args: {
+    label: 'Solo números',
+    placeholder: 'Solo puedes ingresar números...',
+    saNumbersOnly: true,
+    allowDecimals: false,
+    allowNegative: false,
+    rows: 3,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que solo permite números enteros positivos.'
+      }
+    }
+  }
+};
+
+export const NumbersWithDecimals: Story = {
+  args: {
+    label: 'Números con decimales',
+    placeholder: 'Números con hasta 2 decimales...',
+    saNumbersOnly: true,
+    allowDecimals: true,
+    allowNegative: false,
+    maxDecimals: 2,
+    rows: 3,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que permite números decimales con un máximo de 2 decimales.'
+      }
+    }
+  }
+};
+
+export const NumbersWithNegative: Story = {
+  args: {
+    label: 'Números negativos',
+    placeholder: 'Permite números negativos...',
+    saNumbersOnly: true,
+    allowDecimals: true,
+    allowNegative: true,
+    maxDecimals: 2,
+    rows: 3,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que permite números negativos y decimales.'
+      }
+    }
+  }
+};
+
+// Validaciones integradas - Solo letras
+export const LettersOnly: Story = {
+  args: {
+    label: 'Solo letras',
+    placeholder: 'Solo puedes ingresar letras...',
+    saLettersOnly: true,
+    allowSpaces: true,
+    allowAccents: true,
+    rows: 4,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que solo permite letras, espacios y acentos. Ideal para comentarios o descripciones.'
+      }
+    }
+  }
+};
+
+export const LettersNoSpaces: Story = {
+  args: {
+    label: 'Letras sin espacios',
+    placeholder: 'Solo letras, sin espacios...',
+    saLettersOnly: true,
+    allowSpaces: false,
+    allowAccents: true,
+    rows: 3,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que solo permite letras sin espacios.'
+      }
+    }
+  }
+};
+
+export const LettersNoAccents: Story = {
+  args: {
+    label: 'Letras sin acentos',
+    placeholder: 'Solo letras básicas A-Z...',
+    saLettersOnly: true,
+    allowSpaces: true,
+    allowAccents: false,
+    rows: 3,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea que solo permite letras básicas del alfabeto inglés (A-Z) sin acentos ni caracteres especiales.'
+      }
+    }
+  }
+};
+
+// Ejemplo práctico combinando validaciones
+export const ValidationExample: Story = {
+  render: () => ({
+    props: {
+      codigoLote: '',
+      observaciones: '',
+      diagnostico: ''
+    },
+    template: `
+      <div style="padding: 20px; max-width: 700px;">
+        <h3>Ejemplo práctico de validaciones en textarea</h3>
+
+        <div style="margin-bottom: 20px;">
+          <sa-textarea
+            label="Código de lote (solo números)"
+            placeholder="Ingrese códigos numéricos, uno por línea..."
+            [(ngModel)]="codigoLote"
+            [saNumbersOnly]="true"
+            [allowDecimals]="false"
+            [allowNegative]="false"
+            [rows]="3"
+            helperText="Solo se permiten números">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ codigoLote || 'vacío' }}</small>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <sa-textarea
+            label="Observaciones médicas (solo letras)"
+            placeholder="Describa las observaciones..."
+            [(ngModel)]="observaciones"
+            [saLettersOnly]="true"
+            [allowSpaces]="true"
+            [allowAccents]="true"
+            [rows]="4"
+            helperText="Solo letras, espacios y acentos permitidos">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ observaciones || 'vacío' }}</small>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <sa-textarea
+            label="Valores de diagnóstico (números con decimales)"
+            placeholder="Ingrese valores numéricos..."
+            [(ngModel)]="diagnostico"
+            [saNumbersOnly]="true"
+            [allowDecimals]="true"
+            [allowNegative]="true"
+            [maxDecimals]="2"
+            [rows]="3"
+            helperText="Permite decimales y negativos">
+          </sa-textarea>
+          <small><strong>Valor:</strong> {{ diagnostico || 'vacío' }}</small>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo práctico que muestra cómo usar las diferentes validaciones en textareas para casos de uso reales.'
+      },
+      source: {
+        language: 'html',
+        code: `
+<!-- Código de lote: solo números enteros -->
+<sa-textarea
+  label="Código de lote (solo números)"
+  placeholder="Ingrese códigos numéricos..."
+  [(ngModel)]="codigoLote"
+  [saNumbersOnly]="true"
+  [allowDecimals]="false"
+  [allowNegative]="false"
+  [rows]="3">
+</sa-textarea>
+
+<!-- Observaciones: solo letras -->
+<sa-textarea
+  label="Observaciones médicas (solo letras)"
+  placeholder="Describa las observaciones..."
+  [(ngModel)]="observaciones"
+  [saLettersOnly]="true"
+  [allowSpaces]="true"
+  [allowAccents]="true"
+  [rows]="4">
+</sa-textarea>
+
+<!-- Valores: números con decimales -->
+<sa-textarea
+  label="Valores de diagnóstico"
+  placeholder="Ingrese valores numéricos..."
+  [(ngModel)]="diagnostico"
+  [saNumbersOnly]="true"
+  [allowDecimals]="true"
+  [allowNegative]="true"
+  [maxDecimals]="2"
+  [rows]="3">
+</sa-textarea>
+
+<!-- TypeScript -->
+export class MiComponente {
+  codigoLote: string = '';
+  observaciones: string = '';
+  diagnostico: string = '';
+}`
       }
     }
   }
