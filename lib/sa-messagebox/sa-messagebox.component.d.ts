@@ -7,6 +7,7 @@ export declare class SaMessageboxComponent {
     private _iconName?;
     private _iconSize?;
     private _iconColor?;
+    class: string;
     set type(value: 'success' | 'warning' | 'error' | 'info' | any);
     get type(): 'success' | 'warning' | 'error' | 'info';
     set iconName(value: string | any);
@@ -16,8 +17,9 @@ export declare class SaMessageboxComponent {
     set iconColor(value: string | any);
     get iconColor(): string | undefined;
     constructor(sanitizer: DomSanitizer);
+    get hostClasses(): string;
     get sanitizedMessage(): SafeHtml;
     get hasIcon(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaMessageboxComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaMessageboxComponent, "sa-messagebox", never, { "message": { "alias": "message"; "required": false; }; "type": { "alias": "type"; "required": false; }; "iconName": { "alias": "iconName"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconColor": { "alias": "iconColor"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaMessageboxComponent, "sa-messagebox", never, { "message": { "alias": "message"; "required": false; }; "class": { "alias": "class"; "required": false; }; "type": { "alias": "type"; "required": false; }; "iconName": { "alias": "iconName"; "required": false; }; "iconSize": { "alias": "iconSize"; "required": false; }; "iconColor": { "alias": "iconColor"; "required": false; }; }, {}, never, never, false, never>;
 }

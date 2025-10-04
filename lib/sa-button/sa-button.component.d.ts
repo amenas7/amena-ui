@@ -19,6 +19,7 @@ export declare class SaButtonComponent {
     private _tooltip?;
     private _tooltipPosition;
     private _noAnimate;
+    class: string;
     set tooltip(value: string | any);
     get tooltip(): string | undefined;
     set tooltipPosition(value: TooltipPosition | any);
@@ -46,6 +47,7 @@ export declare class SaButtonComponent {
     get noAnimate(): boolean;
     buttonText: ElementRef;
     clicked: EventEmitter<void>;
+    get hostClasses(): string;
     readonly spinnerIcon: IconDefinition;
     get iconDefinition(): IconDefinition | undefined;
     onClick(event?: Event): void;
@@ -55,5 +57,5 @@ export declare class SaButtonComponent {
     get showContent(): boolean;
     private getSizeClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaButtonComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaButtonComponent, "sa-button", never, { "label": { "alias": "label"; "required": false; }; "tooltip": { "alias": "tooltip"; "required": false; }; "tooltipPosition": { "alias": "tooltipPosition"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "size": { "alias": "size"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "fullWidth": { "alias": "fullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "position": { "alias": "position"; "required": false; }; "iconOnly": { "alias": "iconOnly"; "required": false; }; "noAnimate": { "alias": "noAnimate"; "required": false; }; }, { "clicked": "clicked"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaButtonComponent, "sa-button", never, { "label": { "alias": "label"; "required": false; }; "class": { "alias": "class"; "required": false; }; "tooltip": { "alias": "tooltip"; "required": false; }; "tooltipPosition": { "alias": "tooltipPosition"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "size": { "alias": "size"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "fullWidth": { "alias": "fullWidth"; "required": false; }; "type": { "alias": "type"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "position": { "alias": "position"; "required": false; }; "iconOnly": { "alias": "iconOnly"; "required": false; }; "noAnimate": { "alias": "noAnimate"; "required": false; }; }, { "clicked": "clicked"; }, never, never, false, never>;
 }

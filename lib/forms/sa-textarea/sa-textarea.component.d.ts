@@ -1,13 +1,14 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type TextareaSize = 'sm' | 'md' | 'lg';
 export type TextareaStatus = 'default' | 'success' | 'error';
-export declare class SaTextareaComponent implements ControlValueAccessor {
+export declare class SaTextareaComponent implements ControlValueAccessor, OnChanges {
     value: string;
     size: TextareaSize;
     status: TextareaStatus;
     label: string;
+    constructor();
     private _noLabel;
     set noLabel(value: boolean | any);
     get noLabel(): boolean;
@@ -29,13 +30,24 @@ export declare class SaTextareaComponent implements ControlValueAccessor {
     resize: 'none' | 'both' | 'horizontal' | 'vertical';
     height: number | null;
     class: string;
+    saNumbersOnly: boolean;
+    allowDecimals: boolean;
+    allowNegative: boolean;
+    maxDecimals: number;
+    saLettersOnly: boolean;
+    allowSpaces: boolean;
+    allowAccents: boolean;
     valueChange: EventEmitter<string>;
     change: EventEmitter<Event>;
     focus: EventEmitter<FocusEvent>;
     blur: EventEmitter<FocusEvent>;
     isFocused: boolean;
+    textareaElement: ElementRef<HTMLTextAreaElement>;
     private onChange;
     private onTouched;
+    private numbersRegex;
+    private isProcessingNumbersInput;
+    private lettersRegex;
     get hostClasses(): string;
     get textareaClasses(): string;
     get labelClasses(): string;
@@ -49,6 +61,15 @@ export declare class SaTextareaComponent implements ControlValueAccessor {
     onTextareaFocus(event: FocusEvent): void;
     onTextareaBlur(event: FocusEvent): void;
     onTextareaChange(event: Event): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    private updateNumbersRegex;
+    onInputForNumbers(event: any): void;
+    onKeyPressForNumbers(event: KeyboardEvent): void;
+    onPasteForNumbers(event: ClipboardEvent): void;
+    private updateLettersRegex;
+    onInputForLetters(event: any): void;
+    onKeyPressForLetters(event: KeyboardEvent): void;
+    onPasteForLetters(event: ClipboardEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTextareaComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTextareaComponent, "sa-textarea", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "cols": { "alias": "cols"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "resize": { "alias": "resize"; "required": false; }; "height": { "alias": "height"; "required": false; }; "class": { "alias": "class"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTextareaComponent, "sa-textarea", never, { "value": { "alias": "value"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "cols": { "alias": "cols"; "required": false; }; "minlength": { "alias": "minlength"; "required": false; }; "maxlength": { "alias": "maxlength"; "required": false; }; "resize": { "alias": "resize"; "required": false; }; "height": { "alias": "height"; "required": false; }; "class": { "alias": "class"; "required": false; }; "saNumbersOnly": { "alias": "saNumbersOnly"; "required": false; }; "allowDecimals": { "alias": "allowDecimals"; "required": false; }; "allowNegative": { "alias": "allowNegative"; "required": false; }; "maxDecimals": { "alias": "maxDecimals"; "required": false; }; "saLettersOnly": { "alias": "saLettersOnly"; "required": false; }; "allowSpaces": { "alias": "allowSpaces"; "required": false; }; "allowAccents": { "alias": "allowAccents"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
 }
