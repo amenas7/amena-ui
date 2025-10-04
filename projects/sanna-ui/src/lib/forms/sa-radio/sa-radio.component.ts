@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SaRadioGroupService } from './sa-radio-group.service';
 import { Subscription } from 'rxjs';
@@ -72,16 +72,21 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
     return this.class || '';
   }
 
-  constructor(private radioGroupService: SaRadioGroupService) {
+  constructor(
+    private radioGroupService: SaRadioGroupService,
+    private cdr: ChangeDetectorRef
+  ) {
     this._generatedId = `sa-radio-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   ngOnInit(): void {
     // Suscribirse a cambios de otros radio buttons del mismo grupo
     this.subscription = this.radioGroupService.change$.subscribe(change => {
-      // Si es del mismo grupo pero diferente valor, actualizar
+      // Si es del mismo grupo, actualizar el valor seleccionado
       if (change.name === this.name) {
         this.selectedValue = change.value;
+        // Forzar detección de cambios para actualizar el binding [checked]
+        this.cdr.markForCheck();
       }
     });
   }
