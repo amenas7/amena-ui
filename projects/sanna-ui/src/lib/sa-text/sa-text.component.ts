@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'sa-text',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './sa-text.component.scss'
 })
 export class SaTextComponent {
+  // Soporte para ngClass
+  @Input() class: string = '';
 
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 }

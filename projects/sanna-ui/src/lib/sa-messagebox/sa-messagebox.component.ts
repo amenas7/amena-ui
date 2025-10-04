@@ -1,4 +1,4 @@
-import { Component, Input, Attribute, Optional } from '@angular/core';
+import { Component, Input, Attribute, Optional, HostBinding } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -9,12 +9,15 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class SaMessageboxComponent {
   // Property que DEBE usar property binding: [message]="'texto'"
   @Input() message: string = '';
-  
+
   // Propiedades con setters/getters para flexibilidad máxima
   private _type: 'success' | 'warning' | 'error' | 'info' = 'success';
   private _iconName?: string;
   private _iconSize?: 'sm' | 'md' | 'lg';
   private _iconColor?: string;
+
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Input() 
   set type(value: 'success' | 'warning' | 'error' | 'info' | any) {
@@ -49,6 +52,12 @@ export class SaMessageboxComponent {
   }
 
   constructor(private sanitizer: DomSanitizer) {}
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   get sanitizedMessage(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(this.message);

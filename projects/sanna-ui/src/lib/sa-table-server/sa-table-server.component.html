@@ -31,7 +31,7 @@
     <tbody [class.animate-fade-in]="data.length > 0" 
            [class.animation-complete]="data.length > 0"
            [style.min-height.px]="getTableBodyMinHeight()">
-      <tr *ngFor="let row of data; trackBy: trackByFn"
+      <tr *ngFor="let row of data; trackBy: trackByIndex"
           [class]="getRowClasses(row)"
           (click)="onRowClick(row)"
           (dblclick)="onRowDoubleClick(row)">

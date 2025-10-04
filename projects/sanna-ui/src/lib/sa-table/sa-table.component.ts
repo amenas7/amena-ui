@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { SaColumnDefDirective } from './sa-column-def.directive';
 
 export interface TableColumn {
@@ -39,6 +39,9 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   
   // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
   @Input() emptyMessage: string = 'No hay datos disponibles';
+
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   // Templates dinámicos por columna usando ContentChildren
   @ContentChildren(SaColumnDefDirective) columnDefs?: QueryList<SaColumnDefDirective>;
@@ -127,6 +130,12 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   @Output() rowClick = new EventEmitter<TableData>();
   @Output() rowDoubleClick = new EventEmitter<TableData>();
   @Output() filterChange = new EventEmitter<{[column: string]: string}>();
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   currentPage: number = 1;
   currentSort: {column: string, direction: 'asc' | 'desc'} | null = null;

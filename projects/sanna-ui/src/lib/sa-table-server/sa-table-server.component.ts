@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ContentChild, TemplateRef, QueryList, ViewChildren, ViewChild, ContentChildren, AfterViewInit, ChangeDetectorRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { SaColumnDefDirective } from '../sa-table/sa-column-def.directive';
 
 export interface TableColumn {
@@ -56,9 +56,12 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   // Arrays/objetos que siempre usan property binding
   @Input() columns: TableColumn[] = [];
   @Input() data: TableData[] = [];
-  
+
   // Solo emptyMessage usa property binding con comillas simples: [emptyMessage]="'texto'"
   @Input() emptyMessage: string = 'No hay datos disponibles';
+
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   // Templates dinámicos por columna usando ContentChildren
   @ContentChildren(SaColumnDefDirective) columnDefs?: QueryList<SaColumnDefDirective>;
@@ -112,12 +115,18 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   @Output() rowClick = new EventEmitter<TableData>();
   @Output() rowDoubleClick = new EventEmitter<TableData>();
 
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
+
   // Estados internos
   selectedRow: TableData | null = null;
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
-  
-  // ✅ Control de estados de carga
+
+  // Control de estados de carga
   private _hasInitialLoad: boolean = false;
 
   ngOnInit(): void {
@@ -129,11 +138,11 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // ✅ Detectar cuando llegan datos por primera vez
+    // Detectar cuando llegan datos por primera vez
     if (changes['data'] && changes['data'].currentValue?.length > 0) {
       this._hasInitialLoad = true;
     }
-    
+
     if (changes['paginationData'] && !changes['paginationData'].firstChange) {
       this.cdr.detectChanges();
     }
@@ -277,9 +286,7 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
    * Obtiene las clases CSS para la fila
    */
   getRowClasses(row: TableData): string {
-    let classes = 'cursor-pointer';
-    if (this.selectedRow === row) classes += ' selected-row';
-    return classes;
+    return 'cursor-pointer';
   }
 
   /**
@@ -305,10 +312,10 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   }
 
   /**
-   * Función trackBy para optimizar renderizado
+   * Función trackBy usando index
    */
-  trackByFn(index: number, item: TableData): any {
-    return item['id'] || index;
+  trackByIndex(index: number): number {
+    return index;
   }
 
   /**
@@ -340,7 +347,7 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   }
 
   /**
-   * ✅ Getter para usar en template
+   * Getter para usar en template
    */
   get hasInitialLoad(): boolean {
     return this._hasInitialLoad;

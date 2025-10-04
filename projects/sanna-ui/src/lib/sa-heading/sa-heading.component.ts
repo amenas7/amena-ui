@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, HostBinding } from '@angular/core';
 
 type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 type HeadingWeight = 'bold' | 'regular' | 'light' | 'semibold';
@@ -13,7 +13,10 @@ type HeadingMargin = '0' | '1' | '2' | '3' | '4' | '5' | 'auto';
 export class SaHeadingComponent {
   // Propiedad para el texto del heading - uso simple sin comillas anidadas
   @Input() text: string = '';
-  
+
+  // Soporte para ngClass
+  @Input() class: string = '';
+
   // Propiedades con setters/getters para flexibilidad máxima
   private _size: HeadingSize = 'md';
   private _weight: HeadingWeight = 'bold';
@@ -68,6 +71,12 @@ export class SaHeadingComponent {
   }
   get ml(): HeadingMargin | undefined {
     return this._ml;
+  }
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
   }
 
   get headingClasses(): string {

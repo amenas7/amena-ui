@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 export type TagType = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 export type TagSize = 'small' | 'medium' | 'large';
@@ -16,6 +16,9 @@ export class SaTagComponent {
   private _text: string = '';
   private _type: TagType = 'primary';
   private _size: TagSize = 'medium';
+
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Input()
   set text(value: string | any) {
@@ -41,7 +44,11 @@ export class SaTagComponent {
     return this._size;
   }
 
-
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   get tagClasses(): string {
     const classes = [

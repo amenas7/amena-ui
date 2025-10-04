@@ -25,7 +25,9 @@ export interface SelectOption {
 })
 export class SaSelectComponent implements ControlValueAccessor {
   @Input() value: string | number = '';
-  @Input() options: SelectOption[] = [];
+  @Input() options: SelectOption[] | any[] = [];
+  @Input() bindValue: string = 'value';
+  @Input() bindLabel: string = 'label';
   @Input() size: SelectSize = 'md';
   @Input() status: SelectStatus = 'default';
   @Input() label: string = '';
@@ -117,12 +119,12 @@ export class SaSelectComponent implements ControlValueAccessor {
     };
 
     const baseClasses = ['form-select'];
-    
+
     if (sizeMap[this.size] && sizeMap[this.size] !== '') {
       baseClasses.push(sizeMap[this.size]);
     }
-    
-    if (this.status === 'error' || this.errorText || this.isRequiredAndEmpty) {
+
+    if (this.status === 'error' || this.errorText) {
       baseClasses.push('is-invalid');
     } else if (this.status === 'success') {
       baseClasses.push('is-valid');
@@ -160,13 +162,6 @@ export class SaSelectComponent implements ControlValueAccessor {
   get hasValidSelection(): boolean {
     if (!this.showPlaceholder) return true;
     return this.value !== '' && this.value !== null && this.value !== undefined;
-  }
-
-  get isRequiredAndEmpty(): boolean {
-    // Solo mostrar error si el campo ha sido tocado o si hay un error de validación
-    return this.required && 
-           (this.value === '' || this.value === null || this.value === undefined) &&
-           (this.status === 'error' || !!this.errorText);
   }
 
   writeValue(value: any): void {
@@ -209,5 +204,17 @@ export class SaSelectComponent implements ControlValueAccessor {
     this.isFocused = false;
     this.onTouched();
     this.blur.emit(event);
+  }
+
+  getOptionValue(option: any): string | number {
+    return option[this.bindValue] ?? option.value ?? '';
+  }
+
+  getOptionLabel(option: any): string {
+    return option[this.bindLabel] ?? option.label ?? '';
+  }
+
+  isOptionDisabled(option: any): boolean {
+    return option.disabled ?? false;
   }
 }

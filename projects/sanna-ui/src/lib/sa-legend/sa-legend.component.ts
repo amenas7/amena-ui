@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { TooltipPosition } from '../types/tooltip.types';
 
 @Component({
@@ -14,6 +14,9 @@ export class SaLegendComponent {
   private _color: string = '#cccccc';
   private _tooltip?: string;
   private _tooltipPosition: TooltipPosition = 'top';
+
+  // Soporte para ngClass
+  @Input() class: string = '';
 
   @Input()
   set color(value: string | any) {
@@ -37,6 +40,12 @@ export class SaLegendComponent {
   }
   get tooltipPosition(): TooltipPosition {
     return this._tooltipPosition;
+  }
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
   }
 
   // Determinar si el tooltip necesita múltiples líneas

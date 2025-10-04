@@ -116,6 +116,22 @@ const meta: Meta<SaSelectComponent> = {
     value: {
       control: 'text',
       description: 'Valor seleccionado (string | number). Se sincroniza automáticamente con ngModel y formControlName'
+    },
+    bindValue: {
+      control: 'text',
+      description: 'Propiedad del objeto a usar como valor (por defecto: "value")',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '"value"' },
+      },
+    },
+    bindLabel: {
+      control: 'text',
+      description: 'Propiedad del objeto a usar como etiqueta (por defecto: "label")',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '"label"' },
+      },
     }
   }
 };
@@ -553,181 +569,6 @@ export const AllSizes: Story = {
   }
 };
 
-export const ValuePropertyDemo: Story = {
-  render: (args) => ({
-    props: {
-      ...args,
-      selectedValue: '2',
-      onChange: (event: Event) => {
-        console.log('change:', event);
-        const target = event.target as HTMLSelectElement;
-        console.log('Valor seleccionado:', target.value);
-      }
-    },
-    template: `
-      <div class="container-fluid p-4">
-        <h5 class="mb-4">Propiedad Value</h5>
-        <div class="row">
-          <div class="col-md-6">
-            <h6 class="mb-3">Con Valor Inicial</h6>
-            <sa-select 
-              label="Selecciona una opción"
-              [value]="selectedValue"
-              [options]="[
-                { value: '1', label: 'Opción 1' },
-                { value: '2', label: 'Opción 2' },
-                { value: '3', label: 'Opción 3' },
-                { value: '4', label: 'Opción 4' }
-              ]"
-              placeholder="--Seleccione--"
-              (change)="onChange($event)"
-              helperText="Valor inicial: Opción 2">
-            </sa-select>
-          </div>
-          <div class="col-md-6">
-            <h6 class="mb-3">Sin Valor Inicial</h6>
-            <sa-select 
-              label="Selecciona una opción"
-              [options]="[
-                { value: '1', label: 'Opción 1' },
-                { value: '2', label: 'Opción 2' },
-                { value: '3', label: 'Opción 3' },
-                { value: '4', label: 'Opción 4' }
-              ]"
-              placeholder="--Seleccione--"
-              (change)="onChange($event)"
-              helperText="Sin valor inicial">
-            </sa-select>
-          </div>
-        </div>
-        
-        <div class="mt-4">
-          <h6 class="mb-3">Documentación de la Propiedad Value</h6>
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Propiedad <code>value</code>:</h6>
-              <ul class="list-unstyled">
-                <li class="mb-2">
-                  <strong>Tipo:</strong> <code>string | number</code>
-                </li>
-                <li class="mb-2">
-                  <strong>Descripción:</strong> Valor seleccionado del select
-                </li>
-                <li class="mb-2">
-                  <strong>Sincronización:</strong> Se sincroniza automáticamente con:
-                  <ul class="mt-2">
-                    <li><code>[(ngModel)]</code> - Formularios template-driven</li>
-                    <li><code>formControlName</code> - Formularios reactivos</li>
-                    <li><code>ControlValueAccessor</code> - API de Angular</li>
-                  </ul>
-                </li>
-                <li class="mb-2">
-                  <strong>Uso:</strong>
-                  <pre class="bg-light p-2 mt-2"><code>&lt;sa-select 
-  [value]="selectedValue"
-  [options]="options"
-  (change)="onChange($event)"&gt;
-&lt;/sa-select&gt;</code></pre>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-  }),
-  args: {},
-  parameters: {
-    docs: {
-      description: {
-        story: 'Demostración de la propiedad `value` del componente sa-select. Muestra cómo establecer valores iniciales y cómo se sincroniza con los formularios de Angular.'
-      }
-    }
-  }
-};
-
-export const EventsDemo: Story = {
-  render: (args) => ({
-    props: {
-      ...args,
-      onValueChange: (value: string | number) => {
-        console.log('valueChange:', value);
-      },
-      onChange: (event: Event) => {
-        console.log('change:', event);
-        const target = event.target as HTMLSelectElement;
-      },
-      onFocus: (event: FocusEvent) => {
-        console.log('focus:', event);
-      },
-      onBlur: (event: FocusEvent) => {
-        console.log('blur:', event);
-      }
-    },
-    template: `
-      <div class="container-fluid p-4">
-        <h5 class="mb-4">Demostración de Eventos</h5>
-        <div class="row">
-          <div class="col-md-6">
-            <h6 class="mb-3">Eventos Disponibles</h6>
-            <sa-select 
-              label="Selecciona una opción"
-              [options]="[
-                { value: '1', label: 'Opción 1' },
-                { value: '2', label: 'Opción 2' },
-                { value: '3', label: 'Opción 3' },
-                { value: '4', label: 'Opción 4' }
-              ]"
-              placeholder="--Seleccione--"
-              (valueChange)="onValueChange($event)"
-              (change)="onChange($event)"
-              (focus)="onFocus($event)"
-              (blur)="onBlur($event)"
-              helperText="Prueba los diferentes eventos interactuando con el select">
-            </sa-select>
-          </div>
-          <div class="col-md-6">
-            <h6 class="mb-3">Documentación de Eventos</h6>
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">Eventos Emitidos:</h6>
-                <ul class="list-unstyled">
-                  <li class="mb-2">
-                    <code>(valueChange)</code> - Emite el valor seleccionado directamente
-                    <br><small class="text-muted">Tipo: string | number</small>
-                  </li>
-                  <li class="mb-2">
-                    <code>(change)</code> - Evento nativo del DOM
-                    <br><small class="text-muted">Tipo: Event</small>
-                  </li>
-                  <li class="mb-2">
-                    <code>(focus)</code> - Cuando el select recibe foco
-                    <br><small class="text-muted">Tipo: FocusEvent</small>
-                  </li>
-                  <li class="mb-2">
-                    <code>(blur)</code> - Cuando el select pierde foco
-                    <br><small class="text-muted">Tipo: FocusEvent</small>
-                  </li>
-                </ul>
-                <div class="alert alert-info mt-3">
-                  <strong>Nota:</strong> Abre la consola del navegador para ver los logs detallados de cada evento.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-  }),
-  args: {},
-  parameters: {
-    docs: {
-      description: {
-        story: 'Demostración interactiva de todos los eventos disponibles en el componente sa-select. Incluye ejemplos de uso y documentación de cada evento.'
-      }
-    }
-  }
-};
 
 export const NoLabel: Story = {
   args: {
@@ -759,6 +600,102 @@ export const HideLabel: Story = {
         story: 'Select con hideLabel activado. El label se elimina completamente sin reservar espacio, ideal para selects compactos.'
       },
       source: { type: 'dynamic' }
+    }
+  }
+};
+
+export const RealWorldExample: Story = {
+  render: (args) => ({
+    props: {
+      ...args,
+      pacientes: [
+        { cpac_id: 101, nombre_completo: 'Juan Pérez', edad: 35 },
+        { cpac_id: 102, nombre_completo: 'María García', edad: 28 },
+        { cpac_id: 103, nombre_completo: 'Carlos López', edad: 42 }
+      ],
+      servicios: [
+        { cod_servicio: 'LAB001', nombre_servicio: 'Análisis de Sangre' },
+        { cod_servicio: 'LAB002', nombre_servicio: 'Radiografía' },
+        { cod_servicio: 'LAB003', nombre_servicio: 'Ecografía' }
+      ],
+      clasificaciones: [
+        { cser_id: 1, sser_nombre: 'Urgente' },
+        { cser_id: 2, sser_nombre: 'Normal' },
+        { cser_id: 3, sser_nombre: 'Programado' }
+      ]
+    },
+    template: `
+      <div class="container-fluid p-4">
+        <h5 class="mb-4">Ejemplo Real: Formulario de Laboratorio</h5>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <sa-select
+                  label="Paciente"
+                  [options]="pacientes"
+                  bindValue="cpac_id"
+                  bindLabel="nombre_completo"
+                  [required]="true"
+                  size="sm"
+                  placeholder="Seleccione paciente">
+                </sa-select>
+              </div>
+
+              <div class="col-md-6">
+                <sa-select
+                  label="Servicio"
+                  [options]="servicios"
+                  bindValue="cod_servicio"
+                  bindLabel="nombre_servicio"
+                  [required]="true"
+                  size="sm"
+                  placeholder="Seleccione servicio">
+                </sa-select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <sa-select
+                  label="Clasificación"
+                  [options]="clasificaciones"
+                  bindValue="cser_id"
+                  bindLabel="sser_nombre"
+                  [required]="true"
+                  size="sm"
+                  placeholder="Seleccione clasificación">
+                </sa-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h6>Código del Componente TypeScript:</h6>
+          <pre class="bg-light p-3 rounded"><code>// Sin transformaciones adicionales
+this.pacientes$ = this.pacienteService.getPacientes();
+this.servicios$ = this.servicioService.getServicios();
+this.clasificaciones$ = this.deliveryService.getClasificacion();
+
+// HTML usa directamente los datos
+&lt;sa-select
+  [options]="pacientes$ | async"
+  bindValue="cpac_id"
+  bindLabel="nombre_completo"
+  formControlName="paciente"&gt;
+&lt;/sa-select&gt;</code></pre>
+        </div>
+      </div>
+    `
+  }),
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo completo de un formulario real usando `bindValue` y `bindLabel` con diferentes estructuras de datos, tal como vendrían de un backend típico.'
+      }
     }
   }
 };

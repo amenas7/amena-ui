@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostBinding } from '@angular/core';
 import { IconDefinition, findIconDefinition, IconName } from '@fortawesome/fontawesome-svg-core';
 import { 
   faSpinner, 
@@ -227,6 +227,9 @@ export class SaButtonComponent {
   private _tooltipPosition: TooltipPosition = 'top';
   private _noAnimate: boolean = false;
 
+  // Soporte para ngClass
+  @Input() class: string = '';
+
   @Input()
   set tooltip(value: string | any) {
     this._tooltip = value;
@@ -335,6 +338,12 @@ export class SaButtonComponent {
   @ViewChild('buttonText', { static: false }) buttonText!: ElementRef;
 
   @Output() clicked = new EventEmitter<void>();
+
+  // HostBinding para soporte de ngClass
+  @HostBinding('class')
+  get hostClasses(): string {
+    return this.class || '';
+  }
 
   // Icono de spinner para el estado loading
   readonly spinnerIcon = faSpinner;
