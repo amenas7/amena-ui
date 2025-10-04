@@ -167,6 +167,12 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   writeValue(value: any): void {
     this.selectedValue = value;
+    // Notificar a otros radio buttons del mismo grupo cuando el valor viene del formulario
+    if (value === this.value && this.name) {
+      setTimeout(() => {
+        this.radioGroupService.notifyChange(this.name, value);
+      }, 0);
+    }
   }
 
   registerOnChange(fn: any): void {
