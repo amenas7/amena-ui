@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SaRadioGroupService } from './sa-radio-group.service';
+import { Subscription } from 'rxjs';
 
 export type RadioSize = 'sm' | 'md' | 'lg';
 export type RadioStatus = 'default' | 'success' | 'error';
@@ -17,7 +19,7 @@ export type RadioStatus = 'default' | 'success' | 'error';
     }
   ]
 })
-export class SaRadioComponent implements ControlValueAccessor {
+export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() value: any = '';
   @Input() size: RadioSize = 'md';
   @Input() status: RadioStatus = 'default';
@@ -59,6 +61,7 @@ export class SaRadioComponent implements ControlValueAccessor {
   selectedValue: any = null;
   isFocused: boolean = false;
   private _generatedId: string;
+  private subscription: Subscription | null = null;
 
   private onChange = (_: any) => {};
   private onTouched = () => {};
@@ -69,8 +72,24 @@ export class SaRadioComponent implements ControlValueAccessor {
     return this.class || '';
   }
 
-  constructor() {
+  constructor(private radioGroupService: SaRadioGroupService) {
     this._generatedId = `sa-radio-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  ngOnInit(): void {
+    // Suscribirse a cambios de otros radio buttons del mismo grupo
+    this.subscription = this.radioGroupService.change$.subscribe(change => {
+      if (change.name === this.name && change.value !== this.value) {
+        // Otro radio del mismo grupo fue seleccionado, deseleccionar este
+        this.selectedValue = change.value;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   get radioId(): string {
@@ -169,6 +188,11 @@ export class SaRadioComponent implements ControlValueAccessor {
       this.onChange(this.selectedValue);
       this.valueChange.emit(this.selectedValue);
       this.change.emit(event);
+
+      // Notificar a otros radio buttons del mismo grupo
+      if (this.name) {
+        this.radioGroupService.notifyChange(this.name, this.value);
+      }
     }
   }
 

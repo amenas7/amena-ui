@@ -211,15 +211,15 @@ const meta: Meta<SaTextareaComponent> = {
         type: { summary: 'EventEmitter<Event>' },
       },
     },
-    focus: {
-      action: 'focus',
+    focusin: {
+      action: 'focusin',
       description: 'Evento emitido cuando el textarea recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
       },
     },
-    blur: {
-      action: 'blur',
+    focusout: {
+      action: 'focusout',
       description: 'Evento emitido cuando el textarea pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },

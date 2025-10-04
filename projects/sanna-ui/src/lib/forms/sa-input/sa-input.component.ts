@@ -82,8 +82,8 @@ export class SaInputComponent implements ControlValueAccessor, OnChanges {
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() change = new EventEmitter<Event>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
   @Output() keyup = new EventEmitter<KeyboardEvent>();
   @Output() keydown = new EventEmitter<KeyboardEvent>();
   @Output() keypress = new EventEmitter<KeyboardEvent>();
@@ -261,13 +261,13 @@ export class SaInputComponent implements ControlValueAccessor, OnChanges {
 
   onInputFocus(event: FocusEvent) {
     this.isFocused = true;
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onInputBlur(event: FocusEvent) {
     this.isFocused = false;
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 
   onKeyUp(event: KeyboardEvent) {
