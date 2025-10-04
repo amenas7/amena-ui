@@ -1,9 +1,11 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { SaRadioGroupService } from './sa-radio-group.service';
 import * as i0 from "@angular/core";
 export type RadioSize = 'sm' | 'md' | 'lg';
 export type RadioStatus = 'default' | 'success' | 'error';
-export declare class SaRadioComponent implements ControlValueAccessor {
+export declare class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
+    private radioGroupService;
     value: any;
     size: RadioSize;
     status: RadioStatus;
@@ -29,10 +31,13 @@ export declare class SaRadioComponent implements ControlValueAccessor {
     selectedValue: any;
     isFocused: boolean;
     private _generatedId;
+    private subscription;
     private onChange;
     private onTouched;
     get hostClasses(): string;
-    constructor();
+    constructor(radioGroupService: SaRadioGroupService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
     get radioId(): string;
     get isChecked(): boolean;
     get radioClasses(): string;
