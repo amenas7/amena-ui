@@ -55,8 +55,8 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   @Output() valueChange = new EventEmitter<any>();
   @Output() change = new EventEmitter<Event>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
 
   selectedValue: any = null;
   isFocused: boolean = false;
@@ -79,8 +79,8 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
   ngOnInit(): void {
     // Suscribirse a cambios de otros radio buttons del mismo grupo
     this.subscription = this.radioGroupService.change$.subscribe(change => {
-      if (change.name === this.name && change.value !== this.value) {
-        // Otro radio del mismo grupo fue seleccionado, deseleccionar este
+      // Si es del mismo grupo pero diferente valor, actualizar
+      if (change.name === this.name) {
         this.selectedValue = change.value;
       }
     });
@@ -166,13 +166,9 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
   }
 
   writeValue(value: any): void {
+    // Angular Forms llamará a writeValue en TODOS los radio buttons del grupo
+    // con el mismo valor, así que solo necesitamos guardarlo
     this.selectedValue = value;
-    // Notificar a otros radio buttons del mismo grupo cuando el valor viene del formulario
-    if (value === this.value && this.name) {
-      setTimeout(() => {
-        this.radioGroupService.notifyChange(this.name, value);
-      }, 0);
-    }
   }
 
   registerOnChange(fn: any): void {
@@ -187,29 +183,36 @@ export class SaRadioComponent implements ControlValueAccessor, OnInit, OnDestroy
     this.disabled = isDisabled;
   }
 
-  onRadioChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (target.checked) {
-      this.selectedValue = this.value;
-      this.onChange(this.selectedValue);
-      this.valueChange.emit(this.selectedValue);
-      this.change.emit(event);
+  onRadioClick(event: Event) {
+    if (this.disabled || this.readonly) {
+      event.preventDefault();
+      return;
+    }
 
-      // Notificar a otros radio buttons del mismo grupo
-      if (this.name) {
-        this.radioGroupService.notifyChange(this.name, this.value);
-      }
+    // Actualizar el valor seleccionado
+    this.selectedValue = this.value;
+
+    // Notificar a Angular Forms
+    this.onChange(this.value);
+
+    // Emitir eventos
+    this.valueChange.emit(this.value);
+    this.change.emit(event);
+
+    // Notificar a otros radio buttons del mismo grupo
+    if (this.name) {
+      this.radioGroupService.notifyChange(this.name, this.value);
     }
   }
 
   onRadioFocus(event: FocusEvent) {
     this.isFocused = true;
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onRadioBlur(event: FocusEvent) {
     this.isFocused = false;
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 }

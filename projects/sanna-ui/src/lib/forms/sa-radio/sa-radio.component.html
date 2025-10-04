@@ -10,9 +10,9 @@
       [required]="required"
       [disabled]="disabled"
       [readonly]="readonly"
-      (change)="onRadioChange($event)"
-      (focus)="onRadioFocus($event)"
-      (blur)="onRadioBlur($event)"
+      (click)="onRadioClick($event)"
+      (focusin)="onRadioFocus($event)"
+      (focusout)="onRadioBlur($event)"
     />
     <label *ngIf="shouldShowLabel" [for]="radioId" [class]="labelClasses">
       {{ label }}
