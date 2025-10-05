@@ -261,11 +261,13 @@ export class SaInputComponent implements ControlValueAccessor, OnChanges {
 
   onInputFocus(event: FocusEvent) {
     this.isFocused = true;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.focusin.emit(event);
   }
 
   onInputBlur(event: FocusEvent) {
     this.isFocused = false;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
     this.focusout.emit(event);
   }
