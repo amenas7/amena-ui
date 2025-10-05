@@ -42,8 +42,8 @@ export declare class SaSelectComponent implements ControlValueAccessor {
     get showPlaceholder(): boolean;
     valueChange: EventEmitter<string | number>;
     change: EventEmitter<Event>;
-    focus: EventEmitter<FocusEvent>;
-    blur: EventEmitter<FocusEvent>;
+    focusin: EventEmitter<FocusEvent>;
+    focusout: EventEmitter<FocusEvent>;
     isFocused: boolean;
     private onChange;
     private onTouched;
@@ -64,5 +64,5 @@ export declare class SaSelectComponent implements ControlValueAccessor {
     getOptionLabel(option: any): string;
     isOptionDisabled(option: any): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaSelectComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaSelectComponent, "sa-select", never, { "value": { "alias": "value"; "required": false; }; "options": { "alias": "options"; "required": false; }; "bindValue": { "alias": "bindValue"; "required": false; }; "bindLabel": { "alias": "bindLabel"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "class": { "alias": "class"; "required": false; }; "showPlaceholder": { "alias": "showPlaceholder"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focus": "focus"; "blur": "blur"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaSelectComponent, "sa-select", never, { "value": { "alias": "value"; "required": false; }; "options": { "alias": "options"; "required": false; }; "bindValue": { "alias": "bindValue"; "required": false; }; "bindLabel": { "alias": "bindLabel"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "label": { "alias": "label"; "required": false; }; "noLabel": { "alias": "noLabel"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "id": { "alias": "id"; "required": false; }; "name": { "alias": "name"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "class": { "alias": "class"; "required": false; }; "showPlaceholder": { "alias": "showPlaceholder"; "required": false; }; }, { "valueChange": "valueChange"; "change": "change"; "focusin": "focusin"; "focusout": "focusout"; }, never, never, false, never>;
 }

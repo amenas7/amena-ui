@@ -1,0 +1,31 @@
+import { QueryList, AfterContentInit } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { SaRadioComponent } from '../sa-radio/sa-radio.component';
+import * as i0 from "@angular/core";
+export type RadioGroupSize = 'sm' | 'md' | 'lg';
+export type RadioGroupStatus = 'default' | 'success' | 'error';
+export declare class SaRadioGroupComponent implements ControlValueAccessor, AfterContentInit {
+    label: string;
+    size: RadioGroupSize;
+    status: RadioGroupStatus;
+    helperText: string;
+    errorText: string;
+    required: boolean;
+    disabled: boolean;
+    name: string;
+    radios: QueryList<SaRadioComponent>;
+    value: any;
+    isTouched: boolean;
+    private onChange;
+    private onTouched;
+    ngAfterContentInit(): void;
+    get labelClasses(): string;
+    get helperTextClasses(): string;
+    get errorTextClasses(): string;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    setDisabledState(isDisabled: boolean): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SaRadioGroupComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaRadioGroupComponent, "sa-radio-group", never, { "label": { "alias": "label"; "required": false; }; "size": { "alias": "size"; "required": false; }; "status": { "alias": "status"; "required": false; }; "helperText": { "alias": "helperText"; "required": false; }; "errorText": { "alias": "errorText"; "required": false; }; "required": { "alias": "required"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "name": { "alias": "name"; "required": false; }; }, {}, ["radios"], ["*"], false, never>;
+}

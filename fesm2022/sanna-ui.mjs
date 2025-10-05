@@ -3135,8 +3135,8 @@ class SaSelectComponent {
     }
     valueChange = new EventEmitter();
     change = new EventEmitter();
-    focus = new EventEmitter();
-    blur = new EventEmitter();
+    focusin = new EventEmitter();
+    focusout = new EventEmitter();
     isFocused = false;
     onChange = (_) => { };
     onTouched = () => { };
@@ -3215,13 +3215,13 @@ class SaSelectComponent {
     onSelectFocus(event) {
         this.isFocused = true;
         event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
-        this.focus.emit(event);
+        this.focusin.emit(event);
     }
     onSelectBlur(event) {
         this.isFocused = false;
         event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
-        this.blur.emit(event);
+        this.focusout.emit(event);
     }
     getOptionValue(option) {
         return option[this.bindValue] ?? option.value ?? '';
@@ -3233,7 +3233,7 @@ class SaSelectComponent {
         return option.disabled ?? false;
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaSelectComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaSelectComponent, selector: "sa-select", inputs: { value: "value", options: "options", bindValue: "bindValue", bindLabel: "bindLabel", size: "size", status: "status", label: "label", noLabel: "noLabel", hideLabel: "hideLabel", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", placeholder: "placeholder", class: "class", showPlaceholder: "showPlaceholder" }, outputs: { valueChange: "valueChange", change: "change", focus: "focus", blur: "blur" }, host: { properties: { "class": "this.hostClasses" } }, providers: [
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaSelectComponent, selector: "sa-select", inputs: { value: "value", options: "options", bindValue: "bindValue", bindLabel: "bindLabel", size: "size", status: "status", label: "label", noLabel: "noLabel", hideLabel: "hideLabel", helperText: "helperText", errorText: "errorText", required: "required", readonly: "readonly", disabled: "disabled", id: "id", name: "name", placeholder: "placeholder", class: "class", showPlaceholder: "showPlaceholder" }, outputs: { valueChange: "valueChange", change: "change", focusin: "focusin", focusout: "focusout" }, host: { properties: { "class": "this.hostClasses" } }, providers: [
             {
                 provide: NG_VALUE_ACCESSOR,
                 useExisting: forwardRef(() => SaSelectComponent),
@@ -3292,9 +3292,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                 type: Output
             }], change: [{
                 type: Output
-            }], focus: [{
+            }], focusin: [{
                 type: Output
-            }], blur: [{
+            }], focusout: [{
                 type: Output
             }], hostClasses: [{
                 type: HostBinding,
@@ -4198,6 +4198,139 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
             }], hostClasses: [{
                 type: HostBinding,
                 args: ['class']
+            }] } });
+
+class SaRadioGroupComponent {
+    label = '';
+    size = 'md';
+    status = 'default';
+    helperText = '';
+    errorText = '';
+    required = false;
+    disabled = false;
+    name = `radio-group-${Math.random().toString(36).substr(2, 9)}`;
+    radios;
+    value = null;
+    isTouched = false;
+    onChange = (_) => { };
+    onTouched = () => { };
+    ngAfterContentInit() {
+        // Sincronizar propiedades del grupo con los radios hijos
+        this.radios.forEach((radio) => {
+            radio.name = this.name;
+            radio.size = this.size;
+            radio.status = this.status;
+            radio.disabled = this.disabled;
+            // Suscribirse a cambios de valor en cada radio
+            radio.valueChange.subscribe((value) => {
+                this.value = value;
+                this.onChange(value);
+                this.isTouched = true;
+                this.onTouched();
+            });
+        });
+        // Actualizar estado cuando cambian los radios
+        this.radios.changes.subscribe(() => {
+            this.radios.forEach((radio) => {
+                radio.name = this.name;
+                radio.size = this.size;
+                radio.status = this.status;
+                radio.disabled = this.disabled;
+            });
+        });
+    }
+    get labelClasses() {
+        const sizeMap = {
+            'sm': 'form-label label-sm',
+            'md': 'form-label label-md',
+            'lg': 'form-label label-lg'
+        };
+        return sizeMap[this.size] || 'form-label label-md';
+    }
+    get helperTextClasses() {
+        const baseClasses = ['form-text'];
+        const sizeMap = {
+            'sm': 'helper-text-sm',
+            'md': 'helper-text-md',
+            'lg': 'helper-text-lg'
+        };
+        if (sizeMap[this.size]) {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        return baseClasses.join(' ');
+    }
+    get errorTextClasses() {
+        const baseClasses = ['invalid-feedback', 'd-block'];
+        const sizeMap = {
+            'sm': 'error-text-sm',
+            'md': 'error-text-md',
+            'lg': 'error-text-lg'
+        };
+        if (sizeMap[this.size]) {
+            baseClasses.push(sizeMap[this.size]);
+        }
+        return baseClasses.join(' ');
+    }
+    writeValue(value) {
+        this.value = value;
+        // Actualizar el valor seleccionado en los radios hijos usando selectedValue
+        if (this.radios) {
+            this.radios.forEach((radio) => {
+                radio.selectedValue = value;
+            });
+        }
+    }
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
+    setDisabledState(isDisabled) {
+        this.disabled = isDisabled;
+        if (this.radios) {
+            this.radios.forEach((radio) => {
+                radio.disabled = isDisabled;
+            });
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaRadioGroupComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.13", type: SaRadioGroupComponent, selector: "sa-radio-group", inputs: { label: "label", size: "size", status: "status", helperText: "helperText", errorText: "errorText", required: "required", disabled: "disabled", name: "name" }, providers: [
+            {
+                provide: NG_VALUE_ACCESSOR,
+                useExisting: forwardRef(() => SaRadioGroupComponent),
+                multi: true
+            }
+        ], queries: [{ propertyName: "radios", predicate: SaRadioComponent }], ngImport: i0, template: "<div class=\"radio-group-container\">\r\n  <!-- Label del grupo -->\r\n  <label *ngIf=\"label\" [class]=\"labelClasses\">\r\n    {{ label }}\r\n    <span *ngIf=\"required\" class=\"required-asterisk\">*</span>\r\n  </label>\r\n\r\n  <!-- Contenedor de los radios (proyectados con ng-content) -->\r\n  <div class=\"radio-group-content\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n\r\n  <!-- Helper text -->\r\n  <div *ngIf=\"helperText && !errorText\" [class]=\"helperTextClasses\">\r\n    {{ helperText }}\r\n  </div>\r\n\r\n  <!-- Error text -->\r\n  <div *ngIf=\"errorText\" [class]=\"errorTextClasses\">\r\n    {{ errorText }}\r\n  </div>\r\n</div>\r\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block}.radio-group-container,.radio-group-content{display:flex;flex-direction:column;gap:.5rem}.form-label{font-weight:500;margin-bottom:.25rem;display:block}.form-label.label-sm{font-size:.875rem}.form-label.label-md{font-size:1rem}.form-label.label-lg{font-size:1.125rem}.required-asterisk{color:#dc3545;margin-left:.25rem}.form-text{color:#6c757d;margin-top:.25rem}.form-text.helper-text-sm{font-size:.75rem}.form-text.helper-text-md{font-size:.875rem}.form-text.helper-text-lg{font-size:.9375rem}.invalid-feedback{color:#dc3545;margin-top:.25rem}.invalid-feedback.error-text-sm{font-size:.75rem}.invalid-feedback.error-text-md{font-size:.875rem}.invalid-feedback.error-text-lg{font-size:.9375rem}\n"], dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], encapsulation: i0.ViewEncapsulation.ShadowDom });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImport: i0, type: SaRadioGroupComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'sa-radio-group', encapsulation: ViewEncapsulation.ShadowDom, providers: [
+                        {
+                            provide: NG_VALUE_ACCESSOR,
+                            useExisting: forwardRef(() => SaRadioGroupComponent),
+                            multi: true
+                        }
+                    ], template: "<div class=\"radio-group-container\">\r\n  <!-- Label del grupo -->\r\n  <label *ngIf=\"label\" [class]=\"labelClasses\">\r\n    {{ label }}\r\n    <span *ngIf=\"required\" class=\"required-asterisk\">*</span>\r\n  </label>\r\n\r\n  <!-- Contenedor de los radios (proyectados con ng-content) -->\r\n  <div class=\"radio-group-content\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n\r\n  <!-- Helper text -->\r\n  <div *ngIf=\"helperText && !errorText\" [class]=\"helperTextClasses\">\r\n    {{ helperText }}\r\n  </div>\r\n\r\n  <!-- Error text -->\r\n  <div *ngIf=\"errorText\" [class]=\"errorTextClasses\">\r\n    {{ errorText }}\r\n  </div>\r\n</div>\r\n", styles: ["@charset \"UTF-8\";@import\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap\";:root{--sanna-font-family: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-light: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-regular: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-medium: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-semibold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;--sanna-font-bold: Plus Jakarta Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif}.sanna-component{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-light{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:300!important}.sanna-font-regular{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}.sanna-font-medium,.sanna-font-semibold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:500!important}.sanna-font-bold{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:700!important}[class*=sa-],[class^=sanna-]{font-family:Plus Jakarta Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif!important;font-optical-sizing:auto;font-style:normal;font-weight:400!important}:host{display:block}.radio-group-container,.radio-group-content{display:flex;flex-direction:column;gap:.5rem}.form-label{font-weight:500;margin-bottom:.25rem;display:block}.form-label.label-sm{font-size:.875rem}.form-label.label-md{font-size:1rem}.form-label.label-lg{font-size:1.125rem}.required-asterisk{color:#dc3545;margin-left:.25rem}.form-text{color:#6c757d;margin-top:.25rem}.form-text.helper-text-sm{font-size:.75rem}.form-text.helper-text-md{font-size:.875rem}.form-text.helper-text-lg{font-size:.9375rem}.invalid-feedback{color:#dc3545;margin-top:.25rem}.invalid-feedback.error-text-sm{font-size:.75rem}.invalid-feedback.error-text-md{font-size:.875rem}.invalid-feedback.error-text-lg{font-size:.9375rem}\n"] }]
+        }], propDecorators: { label: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], status: [{
+                type: Input
+            }], helperText: [{
+                type: Input
+            }], errorText: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], radios: [{
+                type: ContentChildren,
+                args: [SaRadioComponent]
             }] } });
 
 // Default locale (Spanish)
@@ -5478,6 +5611,7 @@ class SannaFormsModule {
             SaTextareaComponent,
             SaCheckboxComponent,
             SaRadioComponent,
+            SaRadioGroupComponent,
             SaCalendarComponent,
             SaSwitchComponent], imports: [CommonModule,
             FormsModule,
@@ -5488,6 +5622,7 @@ class SannaFormsModule {
             SaTextareaComponent,
             SaCheckboxComponent,
             SaRadioComponent,
+            SaRadioGroupComponent,
             SaCalendarComponent,
             SaSwitchComponent,
             ValidatorsModule] });
@@ -5506,6 +5641,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
+                        SaRadioGroupComponent,
                         SaCalendarComponent,
                         SaSwitchComponent,
                     ],
@@ -5522,6 +5658,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
                         SaTextareaComponent,
                         SaCheckboxComponent,
                         SaRadioComponent,
+                        SaRadioGroupComponent,
                         SaCalendarComponent,
                         SaSwitchComponent,
                         ValidatorsModule,
@@ -5618,5 +5755,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.13", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { DEFAULT_CALENDAR_COLORS, DEFAULT_CALENDAR_CONFIG, DEFAULT_CALENDAR_LOCALE, LettersOnlyDirective, NumbersOnlyDirective, SaButtonComponent, SaCalendarComponent, SaCheckboxComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTableServerComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService, ValidatorsModule };
+export { DEFAULT_CALENDAR_COLORS, DEFAULT_CALENDAR_CONFIG, DEFAULT_CALENDAR_LOCALE, LettersOnlyDirective, NumbersOnlyDirective, SaButtonComponent, SaCalendarComponent, SaCheckboxComponent, SaColumnDefDirective, SaHeadingComponent, SaIconComponent, SaInputComponent, SaLegendComponent, SaMessageboxComponent, SaRadioComponent, SaRadioGroupComponent, SaSelectComponent, SaSwitchComponent, SaTableComponent, SaTableServerComponent, SaTagComponent, SaTextComponent, SaTextareaComponent, SannaFormsModule, SannaIconModule, SannaUiComponent, SannaUiFontAwesomeModule, SannaUiModule, SannaUiService, ValidatorsModule };
 //# sourceMappingURL=sanna-ui.mjs.map
