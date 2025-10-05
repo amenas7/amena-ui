@@ -4,84 +4,156 @@ import { Meta } from '@storybook/blocks';
 
 # 📚 Code Example - sa-input
 
-Documentación de uso con HTML y TypeScript para implementar el componente sa-input.
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[loading]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[fullWidth]`</span> para controlar el estado del botón desde una variable de tipo boolean. Al igual que para el icono <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[icon]`</span> y no sólo icon.
 
 ### HTML Template
 ```html
-<div class="mb-5">
-    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
-    <sa-input
-      label="Nombre completo"
-      placeholder="Ingresa tu nombre"
-      type="text"
-      size="md"
-      variant="primary"
-      helperText="Este es un texto de ayuda"
-      required="true"
-      disabled="false"
-      readonly="false"
-      maxlength="50"
-      [value]="inputValue"
-      (valueChange)="onValueChange($event)"
-      (focusin)="onFocus($event)"
-      (focusout)="onBlur($event)">
-    </sa-input>
+<form [formGroup]="formCompleto">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <sa-input
+        label="Input Completo (requerido, mínimo 3 caracteres)"
+        formControlName="inputCompleto"
+        type="text"
+        size="lg"
+        [status]="
+          formCompleto.get('inputCompleto')?.invalid &&
+          formCompleto.get('inputCompleto')?.touched
+            ? 'error'
+            : formCompleto.get('inputCompleto')?.valid
+            ? 'success'
+            : 'default'
+        "
+        [errorText]="
+          formCompleto.get('inputCompleto')?.hasError('required')
+            ? 'El campo es requerido'
+            : formCompleto.get('inputCompleto')?.hasError('minlength')
+            ? 'Mínimo 3 caracteres'
+            : formCompleto.get('inputCompleto')?.hasError('maxlength')
+            ? 'Máximo 50 caracteres'
+            : ''
+        "
+        placeholder="Ingrese un texto..."
+        helperText="Este input tiene todas las propiedades configuradas con status dinámico"
+        id="input-completo"
+        name="inputCompleto"
+        autocomplete="off"
+        [required]="isRequired"
+        [disabled]="isDisabled"
+        (valueChange)="onValueChange($event)"
+        (change)="onChange($event)"
+        (enter)="onEnter($event)"
+        (focusin)="onFocus($event)"
+        (focusout)="onBlur($event)">
+      </sa-input>
+    </div>
+    <div class="col-md-6">
+      <div class="mt-4">
+        <p><strong>Estado del campo:</strong></p>
+        <ul class="small">
+          <li>Valor: {{ formCompleto.get('inputCompleto')?.value || 'vacío' }}</li>
+          <li>Valid: {{ formCompleto.get('inputCompleto')?.valid }}</li>
+          <li>Touched: {{ formCompleto.get('inputCompleto')?.touched }}</li>
+          <li>Status mostrado:
+            <sa-tag
+              [text]="
+                formCompleto.get('inputCompleto')?.invalid && formCompleto.get('inputCompleto')?.touched
+                  ? 'error'
+                  : formCompleto.get('inputCompleto')?.valid
+                  ? 'success'
+                  : 'default'
+              "
+              [type]="
+                formCompleto.get('inputCompleto')?.invalid && formCompleto.get('inputCompleto')?.touched
+                  ? 'danger'
+                  : formCompleto.get('inputCompleto')?.valid
+                  ? 'success'
+                  : 'secondary'
+              "
+              size="small">
+            </sa-tag>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <div class="mt-4">
-      <button class="btn btn-sm btn-outline-primary me-2" (click)="toggleDisabled()">
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <p><strong>Valor actual:</strong> {{ valorInputCompleto }}</p>
+      <p><strong>Estado del formulario (mínimo 3 digitos):</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+        Toggle Required ({{ isRequired }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
         Toggle Disabled ({{ isDisabled }})
       </button>
-      <button class="btn btn-sm btn-outline-info me-2" (click)="toggleReadonly()">
-        Toggle Readonly ({{ isReadonly }})
-      </button>
     </div>
-</div>
+  </div>
+</form>
 ```
 
 ### ⚡ TypeScript Component
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-example',
-  templateUrl: './input-example.component.html'
+  ......
 })
-export class InputExampleComponent {
 
-  // Variables para estados
-  inputValue: string = '';
+export class ........ {
+
+  // Formulario reactivo para el ejemplo
+  formCompleto!: FormGroup;
+
+  // Variables para controles
   isDisabled: boolean = false;
-  isReadonly: boolean = false;
+  isRequired: boolean = false;
 
-  // Método para manejar cambios de valor
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Inicializar formulario
+    this.formCompleto = this.fb.group({
+      inputCompleto: ['', [Validators.minLength(3), Validators.maxLength(50)]]
+    });
+  }
+
+  // Métodos para manejar eventos
   onValueChange(value: string): void {
-    this.inputValue = value;
-    console.log('Valor cambiado:', value);
+    console.log('Valor cambiado usando valueChange:', value);
   }
 
-  // Método para manejar el foco
+  onChange(event: Event): void {
+    console.log('Evento change:', event);
+    console.log('Valor del evento usando change:', (event.target as HTMLInputElement)?.value);
+  }
+
+  onEnter(event: KeyboardEvent): void {
+    const valor = this.formCompleto.get('inputCompleto')?.value;
+    console.log('Enter presionado:', event);
+    alert('Enter presionado Valor: ' + valor);
+  }
+
   onFocus(event: FocusEvent): void {
-    console.log('Input recibió foco');
+    console.log('Input enfocado (onFocus):', event);
   }
 
-  // Método para manejar la pérdida de foco
   onBlur(event: FocusEvent): void {
-    console.log('Input perdió foco');
+    console.log('Input desenfocado (onBlur):', event);
   }
 
-  // Método para alternar estado disabled
-  toggleDisabled(): void {
-    this.isDisabled = !this.isDisabled;
+  // Getters para acceder fácilmente a los valores
+  get valorInputCompleto(): string {
+    return this.formCompleto.get('inputCompleto')?.value || '';
   }
-
-  // Método para alternar estado readonly
-  toggleReadonly(): void {
-    this.isReadonly = !this.isReadonly;
-  }
+  
 }
 ```
-
-### 📋 Recomendaciones
-
-Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[value]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[readonly]`</span> para controlar el estado del input desde una variable de tipo boolean o string.
