@@ -1,17 +1,18 @@
-import { EventEmitter, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import * as i0 from "@angular/core";
 export type InputSize = 'sm' | 'md' | 'lg';
 export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel';
 export type InputStatus = 'default' | 'success' | 'error';
 export declare class SaInputComponent implements ControlValueAccessor, OnChanges {
+    private cdr;
     value: string;
     type: InputType;
     placeholder: string;
     size: InputSize;
     status: InputStatus;
     label: string;
-    constructor();
+    constructor(cdr: ChangeDetectorRef);
     private _noLabel;
     set noLabel(value: boolean | any);
     get noLabel(): boolean;
