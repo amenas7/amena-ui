@@ -2678,10 +2678,12 @@ class SaInputComponent {
     }
     onInputFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focusin.emit(event);
     }
     onInputBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.focusout.emit(event);
     }
