@@ -123,15 +123,15 @@ const meta: Meta<SaRadioComponent> = {
         type: { summary: 'EventEmitter<Event>' },
       },
     },
-    focus: {
-      action: 'focus',
+    focusin: {
+      action: 'focusin',
       description: 'Evento emitido cuando el radio button recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
       },
     },
-    blur: {
-      action: 'blur',
+    focusout: {
+      action: 'focusout',
       description: 'Evento emitido cuando el radio button pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },

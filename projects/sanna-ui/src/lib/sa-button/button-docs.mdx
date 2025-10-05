@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Button/Button Example" />
+
+# 📚 Code Example - sa-button
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[loading]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[fullWidth]`</span> para controlar el estado del botón desde una variable de tipo boolean. Al igual que para el icono <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[icon]`</span> y no sólo icon.
+
+### HTML Template
+```html
+<div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
+    <sa-button
+      label="Registrar paciente"
+      variant="primary"
+      size="lg"
+      icon="cog"
+      position="left"
+      type="button"
+      tooltip="Este botón tiene todas las propiedades"
+      tooltipPosition="top"
+      noAnimate="false"
+      [disabled]="isDisabled"
+      [loading]="isLoading"
+      [fullWidth]="isFullWidth"
+      (clicked)="simulateLoading()">
+    </sa-button>
+
+    <div class="mt-4">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="isDisabled = !isDisabled">
+        Toggle Disabled (   {{ isDisabled }}    )
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="isLoading = !isLoading">
+        Toggle Loading ({{ isLoading }})
+      </button>
+      <button class="btn btn-sm btn-outline-success" (click)="isFullWidth = !isFullWidth">
+        Toggle FullWidth ({{ isFullWidth }})
+      </button>
+    </div>
+</div>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  ......
+})
+
+export class ........ {
+
+  // Variables para estados
+  isDisabled: boolean = false;
+  isLoading: boolean = false;
+  isFullWidth: boolean = false;
+
+
+  // Método para manejar el click
+  handleClick(): void {
+    console.log('Botón clickeado');
+    alert('Botón clickeado');
+  }
+
+  // Método para simular loading
+  simulateLoading(): void {
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+      alert('Proceso completado');
+    }, 1000);
+  }
+  
+}

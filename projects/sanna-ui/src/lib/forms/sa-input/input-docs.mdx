@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Forms/Input/Input Example" />
+
+# 📚 Code Example - sa-input
+
+Documentación de uso con HTML y TypeScript para implementar el componente sa-input.
+
+### HTML Template
+```html
+<div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades</h2>
+    <sa-input
+      label="Nombre completo"
+      placeholder="Ingresa tu nombre"
+      type="text"
+      size="md"
+      variant="primary"
+      helperText="Este es un texto de ayuda"
+      required="true"
+      disabled="false"
+      readonly="false"
+      maxlength="50"
+      [value]="inputValue"
+      (valueChange)="onValueChange($event)"
+      (focusin)="onFocus($event)"
+      (focusout)="onBlur($event)">
+    </sa-input>
+
+    <div class="mt-4">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="toggleDisabled()">
+        Toggle Disabled ({{ isDisabled }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="toggleReadonly()">
+        Toggle Readonly ({{ isReadonly }})
+      </button>
+    </div>
+</div>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-input-example',
+  templateUrl: './input-example.component.html'
+})
+export class InputExampleComponent {
+
+  // Variables para estados
+  inputValue: string = '';
+  isDisabled: boolean = false;
+  isReadonly: boolean = false;
+
+  // Método para manejar cambios de valor
+  onValueChange(value: string): void {
+    this.inputValue = value;
+    console.log('Valor cambiado:', value);
+  }
+
+  // Método para manejar el foco
+  onFocus(event: FocusEvent): void {
+    console.log('Input recibió foco');
+  }
+
+  // Método para manejar la pérdida de foco
+  onBlur(event: FocusEvent): void {
+    console.log('Input perdió foco');
+  }
+
+  // Método para alternar estado disabled
+  toggleDisabled(): void {
+    this.isDisabled = !this.isDisabled;
+  }
+
+  // Método para alternar estado readonly
+  toggleReadonly(): void {
+    this.isReadonly = !this.isReadonly;
+  }
+}
+```
+
+### 📋 Recomendaciones
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[value]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[readonly]`</span> para controlar el estado del input desde una variable de tipo boolean o string.

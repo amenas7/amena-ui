@@ -56,8 +56,8 @@ export class SaCheckboxComponent implements ControlValueAccessor {
 
   @Output() checkedChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<Event>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
 
   isFocused: boolean = false;
   private _generatedId: string;
@@ -174,12 +174,12 @@ export class SaCheckboxComponent implements ControlValueAccessor {
 
   onCheckboxFocus(event: FocusEvent) {
     this.isFocused = true;
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onCheckboxBlur(event: FocusEvent) {
     this.isFocused = false;
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 }

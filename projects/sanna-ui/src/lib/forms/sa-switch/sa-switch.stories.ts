@@ -155,15 +155,15 @@ const meta: Meta<SaSwitchComponent> = {
         type: { summary: 'EventEmitter<boolean>' },
       },
     },
-    focus: {
-      action: 'focus',
+    focusin: {
+      action: 'focusin',
       description: 'Evento emitido cuando el switch recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
       },
     },
-    blur: {
-      action: 'blur',
+    focusout: {
+      action: 'focusout',
       description: 'Evento emitido cuando el switch pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },

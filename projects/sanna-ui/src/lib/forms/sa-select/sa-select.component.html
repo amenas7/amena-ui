@@ -13,8 +13,8 @@
     (change)="onSelectChange($event)"
     [required]="required"
     [disabled]="disabled || readonly"
-    (focus)="onSelectFocus($event)"
-    (blur)="onSelectBlur($event)"
+    (focusin)="onSelectFocus($event)"
+    (focusout)="onSelectBlur($event)"
   >
     <option *ngIf="showPlaceholder" value="" [disabled]="required">
       {{ placeholder }}

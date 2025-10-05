@@ -12,8 +12,8 @@
       [readonly]="readonly"
       [indeterminate]="indeterminate"
       (change)="onCheckboxChange($event)"
-      (focus)="onCheckboxFocus($event)"
-      (blur)="onCheckboxBlur($event)"
+      (focusin)="onCheckboxFocus($event)"
+      (focusout)="onCheckboxBlur($event)"
     />
     <label *ngIf="shouldShowLabel" [for]="checkboxId" [class]="labelClasses">
       {{ label }}

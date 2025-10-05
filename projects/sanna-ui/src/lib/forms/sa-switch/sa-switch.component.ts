@@ -52,8 +52,8 @@ export class SaSwitchComponent implements ControlValueAccessor {
 
   @Output() valueChange = new EventEmitter<boolean>();
   @Output() change = new EventEmitter<boolean>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
 
   private _generatedId: string;
   private onChange = (_: any) => {};
@@ -163,12 +163,12 @@ export class SaSwitchComponent implements ControlValueAccessor {
   }
 
   onInputFocus(event: FocusEvent) {
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onInputBlur(event: FocusEvent) {
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 
   toggleSwitch() {

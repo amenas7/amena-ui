@@ -20,8 +20,8 @@
         spellcheck="false"
         autocomplete="off"
         (click)="onInputClick($event)"
-        (focus)="onInputFocus($event)"
-        (blur)="onInputBlur($event)"
+        (focusin)="onInputFocus($event)"
+        (focusout)="onInputBlur($event)"
         (change)="onInputChange($event)"
       />
       

@@ -9,8 +9,8 @@
       (change)="onModelChange($event)"
       [required]="required"
       [disabled]="disabled"
-      (focus)="onInputFocus($event)"
-      (blur)="onInputBlur($event)"
+      (focusin)="onInputFocus($event)"
+      (focusout)="onInputBlur($event)"
     />
     <label 
       *ngIf="shouldShowLabel" 
