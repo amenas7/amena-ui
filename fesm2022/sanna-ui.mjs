@@ -3214,10 +3214,12 @@ class SaSelectComponent {
     }
     onSelectFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focus.emit(event);
     }
     onSelectBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.blur.emit(event);
     }
@@ -3436,10 +3438,12 @@ class SaTextareaComponent {
     }
     onTextareaFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focusin.emit(event);
     }
     onTextareaBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.focusout.emit(event);
     }
@@ -3882,10 +3886,12 @@ class SaCheckboxComponent {
     }
     onCheckboxFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focusin.emit(event);
     }
     onCheckboxBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.focusout.emit(event);
     }
@@ -4126,10 +4132,12 @@ class SaRadioComponent {
     }
     onRadioFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focusin.emit(event);
     }
     onRadioBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.focusout.emit(event);
     }
@@ -4592,10 +4600,12 @@ class SaCalendarComponent {
     }
     onInputFocus(event) {
         this.isFocused = true;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focus.emit(event);
     }
     onInputBlur(event) {
         this.isFocused = false;
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.blur.emit(event);
     }
@@ -5091,9 +5101,11 @@ class SaSwitchComponent {
         this.change.emit(this.value);
     }
     onInputFocus(event) {
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.focusin.emit(event);
     }
     onInputBlur(event) {
+        event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
         this.onTouched();
         this.focusout.emit(event);
     }
