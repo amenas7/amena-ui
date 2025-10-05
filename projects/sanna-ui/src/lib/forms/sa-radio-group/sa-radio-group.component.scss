@@ -1,0 +1,78 @@
+/* Importar configuración global de fuentes Sanna UI */
+@import '../../_styles/sanna-fonts';
+
+:host {
+  display: block;
+}
+
+.radio-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-group-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+// Label styles
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: block;
+
+  &.label-sm {
+    font-size: 0.875rem;
+  }
+
+  &.label-md {
+    font-size: 1rem;
+  }
+
+  &.label-lg {
+    font-size: 1.125rem;
+  }
+}
+
+.required-asterisk {
+  color: #dc3545;
+  margin-left: 0.25rem;
+}
+
+// Helper text styles
+.form-text {
+  color: #6c757d;
+  margin-top: 0.25rem;
+
+  &.helper-text-sm {
+    font-size: 0.75rem;
+  }
+
+  &.helper-text-md {
+    font-size: 0.875rem;
+  }
+
+  &.helper-text-lg {
+    font-size: 0.9375rem;
+  }
+}
+
+// Error text styles
+.invalid-feedback {
+  color: #dc3545;
+  margin-top: 0.25rem;
+
+  &.error-text-sm {
+    font-size: 0.75rem;
+  }
+
+  &.error-text-md {
+    font-size: 0.875rem;
+  }
+
+  &.error-text-lg {
+    font-size: 0.9375rem;
+  }
+}

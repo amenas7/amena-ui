@@ -9,6 +9,7 @@ import { SaSelectComponent } from './sa-select/sa-select.component';
 import { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 import { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 import { SaRadioComponent } from './sa-radio/sa-radio.component';
+import { SaRadioGroupComponent } from './sa-radio-group/sa-radio-group.component';
 import { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 import { SaSwitchComponent } from './sa-switch/sa-switch.component';
 
@@ -22,6 +23,7 @@ import { ValidatorsModule } from './validators/validators.module';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
+    SaRadioGroupComponent,
     SaCalendarComponent,
     SaSwitchComponent,
   ],
@@ -38,6 +40,7 @@ import { ValidatorsModule } from './validators/validators.module';
     SaTextareaComponent,
     SaCheckboxComponent,
     SaRadioComponent,
+    SaRadioGroupComponent,
     SaCalendarComponent,
     SaSwitchComponent,
     ValidatorsModule,
@@ -51,6 +54,7 @@ export { SaSelectComponent } from './sa-select/sa-select.component';
 export { SaTextareaComponent } from './sa-textarea/sa-textarea.component';
 export { SaCheckboxComponent } from './sa-checkbox/sa-checkbox.component';
 export { SaRadioComponent } from './sa-radio/sa-radio.component';
+export { SaRadioGroupComponent } from './sa-radio-group/sa-radio-group.component';
 export { SaCalendarComponent } from './sa-calendar/sa-calendar.component';
 export { SaSwitchComponent } from './sa-switch/sa-switch.component';
 

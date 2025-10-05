@@ -1,0 +1,172 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Forms/Textarea/Textarea Example" />
+
+# 📚 Code Example - sa-textarea
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[status]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[required]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span> para controlar el estado del botón desde una variable de tipo boolean.
+
+### HTML Template
+```html
+<form [formGroup]="formCompleto">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <sa-textarea
+        label="Textarea Completo (mínimo 10, máximo 500 caracteres)"
+        formControlName="textareaCompleto"
+        size="lg"
+        [status]="textareaStatus"
+        placeholder="Escriba un comentario..."
+        helperText="Este textarea tiene todas las propiedades configuradas con status dinámico"
+        id="textarea-completo"
+        name="textareaCompleto"
+        [rows]="5"
+        resize="vertical"
+        [required]="isRequired"
+        [disabled]="isDisabled"
+        [errorText]="
+          formCompleto.get('textareaCompleto')?.hasError('required')
+            ? 'El campo es requerido'
+            : formCompleto.get('textareaCompleto')?.hasError('minlength')
+            ? 'Mínimo 10 caracteres'
+            : formCompleto.get('textareaCompleto')?.hasError('maxlength')
+            ? 'Máximo 500 caracteres'
+            : ''
+        "
+        (valueChange)="onValueChange($event)"
+        (change)="onChange($event)"
+        (focusin)="onFocus($event)"
+        (focusout)="onBlur($event)">
+      </sa-textarea>
+    </div>
+    <div class="col-md-6">
+      <div class="mt-4">
+        <p><strong>Estado del campo:</strong></p>
+        <ul class="small">
+          <li>Valor: {{ formCompleto.get('textareaCompleto')?.value || 'vacío' }}</li>
+          <li>Longitud: {{ formCompleto.get('textareaCompleto')?.value?.length || 0 }} caracteres</li>
+          <li>Valid: {{ formCompleto.get('textareaCompleto')?.valid }}</li>
+          <li>Touched: {{ formCompleto.get('textareaCompleto')?.touched }}</li>
+          <li>Status mostrado:
+            <sa-tag
+              [text]="textareaStatus"
+              [type]="
+                textareaStatus === 'error'
+                  ? 'danger'
+                  : textareaStatus === 'success'
+                  ? 'success'
+                  : 'secondary'
+              "
+              size="small">
+            </sa-tag>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <p><strong>Valor actual:</strong> {{ valorTextareaCompleto }}</p>
+      <p><strong>Longitud:</strong> {{ valorTextareaCompleto === 'Ninguno' ? 0 : valorTextareaCompleto.length }} caracteres</p>
+      <p><strong>Estado del formulario (mínimo 10 caracteres):</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+        Toggle Required ({{ isRequired }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+        Toggle Disabled ({{ isDisabled }})
+      </button>
+    </div>
+  </div>
+</form>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  ......
+})
+
+export class ........ {
+
+  // Formulario reactivo para el ejemplo completo
+  formCompleto!: FormGroup;
+
+  // Variables para controles
+  isDisabled: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Inicializar formulario completo
+    this.formCompleto = this.fb.group({
+      textareaCompleto: ['', [Validators.minLength(10), Validators.maxLength(500)]]
+    });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('textareaCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(500)]);
+    } else {
+      control?.setValidators([Validators.minLength(10), Validators.maxLength(500)]);
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get textareaStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('textareaCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
+  }
+
+  // Métodos para manejar eventos
+  onValueChange(value: string): void {
+    console.log('Valor cambiado usando valueChange:', value);
+  }
+
+  onChange(event: Event): void {
+    console.log('Evento change:', event);
+    console.log('Valor del evento usando change:', (event.target as HTMLInputElement)?.value);
+  }
+
+  onFocus(event: FocusEvent): void {
+    console.log('Textarea enfocado:', event);
+  }
+
+  onBlur(event: FocusEvent): void {
+    console.log('Textarea desenfocado:', event);
+  }
+
+  // Getter para acceder fácilmente al valor
+  get valorTextareaCompleto(): string {
+    return this.formCompleto.get('textareaCompleto')?.value || 'Ninguno';
+  }
+  
+}
+```

@@ -23,7 +23,7 @@ const meta: Meta<SaSelectComponent> = {
         language: 'html',
         transform: (code: string, storyContext: any) => {
           let result = code;
-          
+
           // Transformar property bindings innecesarios a attribute binding
           result = result.replace(/\[label\]="'([^']+)'"/g, 'label="$1"');
           result = result.replace(/\[size\]="'([^']+)'"/g, 'size="$1"');
@@ -34,7 +34,7 @@ const meta: Meta<SaSelectComponent> = {
           result = result.replace(/\[errorText\]="'([^']+)'"/g, 'errorText="$1"');
           result = result.replace(/\[id\]="'([^']+)'"/g, 'id="$1"');
           result = result.replace(/\[name\]="'([^']+)'"/g, 'name="$1"');
-          
+
           // Transformar boolean properties
           result = result.replace(/\[required\]="true"/g, 'required="true"');
           result = result.replace(/\[required\]="false"/g, 'required="false"');
@@ -46,7 +46,7 @@ const meta: Meta<SaSelectComponent> = {
           result = result.replace(/\[showPlaceholder\]="false"/g, 'showPlaceholder="false"');
           result = result.replace(/\[noLabel\]="true"/g, 'noLabel="true"');
           result = result.replace(/\[noLabel\]="false"/g, 'noLabel="false"');
-          
+
           return result;
         }
       }
@@ -131,6 +131,34 @@ const meta: Meta<SaSelectComponent> = {
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '"label"' },
+      },
+    },
+    valueChange: {
+      description: 'Evento emitido cuando el valor del select cambia. Emite el nuevo valor (string | number)',
+      table: {
+        type: { summary: 'EventEmitter<string | number>' },
+        category: 'Eventos',
+      },
+    },
+    change: {
+      description: 'Evento emitido cuando se detecta un cambio en el select (evento nativo de change). Emite el Event nativo',
+      table: {
+        type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
+      },
+    },
+    focusin: {
+      description: 'Evento emitido cuando el select recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
+      },
+    },
+    focusout: {
+      description: 'Evento emitido cuando el select pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     }
   }

@@ -1,0 +1,171 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Forms/Select/Select Example" />
+
+# 📚 Code Example - sa-select
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[status]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[required]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span> para controlar el estado del botón desde una variable de tipo boolean.
+
+### HTML Template
+```html
+<form [formGroup]="formCompleto">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <sa-select
+        label="Select Completo (requerido)"
+        formControlName="selectCompleto"
+        [options]="opcionesSimples"
+        size="lg"
+        [status]="selectStatus"
+        placeholder="--Seleccione una opción--"
+        helperText="Este select tiene todas las propiedades configuradas con status dinámico"
+        id="select-completo"
+        name="selectCompleto"
+        bindValue="value"
+        bindLabel="label"
+        showPlaceholder="true"
+        [required]="isRequired"
+        [disabled]="isDisabled"
+        [errorText]="
+          formCompleto.get('selectCompleto')?.hasError('required')
+            ? 'Debe seleccionar una opción'
+            : ''
+        "
+        (valueChange)="onValueChange($event)"
+        (change)="onChange($event)">
+      </sa-select>
+    </div>
+    <div class="col-md-6">
+      <div class="mt-4">
+        <p><strong>Estado del campo:</strong></p>
+        <ul class="small">
+          <li>Valor: {{ formCompleto.get('selectCompleto')?.value || 'vacío' }}</li>
+          <li>Valid: {{ formCompleto.get('selectCompleto')?.valid }}</li>
+          <li>Touched: {{ formCompleto.get('selectCompleto')?.touched }}</li>
+          <li>Status mostrado:
+            <sa-tag
+              [text]="selectStatus"
+              [type]="
+                selectStatus === 'error'
+                  ? 'danger'
+                  : selectStatus === 'success'
+                  ? 'success'
+                  : 'secondary'
+              "
+              size="small">
+            </sa-tag>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <p><strong>Valor seleccionado:</strong> {{ valorSeleccionado || 'Ninguno' }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+        Toggle Required ({{ isRequired }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+        Toggle Disabled ({{ isDisabled }})
+      </button>
+    </div>
+  </div>
+</form>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  ......
+})
+
+export class ........ {
+
+  // Formulario reactivo para validación dinámica
+  formCompleto!: FormGroup;
+
+  // Opciones simples
+  opcionesSimples = [
+    { value: '1', label: 'Opción 1' },
+    { value: '2', label: 'Opción 2' },
+    { value: '3', label: 'Opción 3' },
+    { value: '4', label: 'Opción 4' },
+    { value: '5', label: 'Opción 5' }
+  ];
+
+  // Ejemplo con estructura personalizada (bindValue y bindLabel)
+  pacientes = [
+    { cpac_id: 101, nombre_completo: 'Juan Pérez García', edad: 35 },
+    { cpac_id: 102, nombre_completo: 'María García López', edad: 28 },
+    { cpac_id: 103, nombre_completo: 'Carlos López Martínez', edad: 42 }
+  ];
+
+  // Variables para el ejemplo dinámico
+  valorSeleccionado: string = '';
+  isDisabled: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Inicializar formulario completo (sin required por defecto)
+    this.formCompleto = this.fb.group({
+      selectCompleto: ['']
+    });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('selectCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get selectStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('selectCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
+  }
+
+  // Método para manejar el cambio de valor
+  onValueChange(value: string | number): void {
+    console.log('Valor seleccionado usando valueChange:', value);
+    this.valorSeleccionado = value.toString();
+  }
+
+  // Método para manejar el evento change
+  onChange(event: any): void {
+    console.log('Evento change completo usando change:', event);
+    console.log('Valor del evento usando change:', event?.target?.value);
+  }
+  
+}
+```

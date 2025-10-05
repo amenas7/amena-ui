@@ -1,0 +1,22 @@
+<div class="radio-group-container">
+  <!-- Label del grupo -->
+  <label *ngIf="label" [class]="labelClasses">
+    {{ label }}
+    <span *ngIf="required" class="required-asterisk">*</span>
+  </label>
+
+  <!-- Contenedor de los radios (proyectados con ng-content) -->
+  <div class="radio-group-content">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Helper text -->
+  <div *ngIf="helperText && !errorText" [class]="helperTextClasses">
+    {{ helperText }}
+  </div>
+
+  <!-- Error text -->
+  <div *ngIf="errorText" [class]="errorTextClasses">
+    {{ errorText }}
+  </div>
+</div>

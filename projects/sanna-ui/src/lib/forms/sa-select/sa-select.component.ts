@@ -97,8 +97,8 @@ export class SaSelectComponent implements ControlValueAccessor {
 
   @Output() valueChange = new EventEmitter<string | number>();
   @Output() change = new EventEmitter<Event>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
 
   isFocused: boolean = false;
 
@@ -198,14 +198,14 @@ export class SaSelectComponent implements ControlValueAccessor {
   onSelectFocus(event: FocusEvent) {
     this.isFocused = true;
     event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onSelectBlur(event: FocusEvent) {
     this.isFocused = false;
     event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 
   getOptionValue(option: any): string | number {
