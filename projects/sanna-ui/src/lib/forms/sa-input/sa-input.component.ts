@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, ViewChild, ElementRef, HostBinding, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewEncapsulation, ViewChild, ElementRef, HostBinding, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -10,7 +10,6 @@ export type InputStatus = 'default' | 'success' | 'error';
   templateUrl: './sa-input.component.html',
   styleUrls: ['./sa-input.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,7 +26,7 @@ export class SaInputComponent implements ControlValueAccessor, OnChanges {
   @Input() status: InputStatus = 'default';
   @Input() label: string = '';
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.updateNumbersRegex();
     this.updateLettersRegex();
   }
@@ -338,6 +337,13 @@ export class SaInputComponent implements ControlValueAccessor, OnChanges {
     }
     if (changes['allowSpaces'] || changes['allowAccents']) {
       this.updateLettersRegex();
+    }
+
+    // Detectar cambios en el status para prevenir ExpressionChangedAfterItHasBeenCheckedError
+    if (changes['status']) {
+      setTimeout(() => {
+        this.cdr.detectChanges();
+      });
     }
   }
 
