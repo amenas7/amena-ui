@@ -197,11 +197,13 @@ export class SaSelectComponent implements ControlValueAccessor {
 
   onSelectFocus(event: FocusEvent) {
     this.isFocused = true;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.focus.emit(event);
   }
 
   onSelectBlur(event: FocusEvent) {
     this.isFocused = false;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
     this.blur.emit(event);
   }

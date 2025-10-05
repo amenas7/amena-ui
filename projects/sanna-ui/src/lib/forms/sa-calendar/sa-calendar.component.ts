@@ -475,11 +475,13 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
 
   onInputFocus(event: FocusEvent) {
     this.isFocused = true;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.focus.emit(event);
   }
 
   onInputBlur(event: FocusEvent) {
     this.isFocused = false;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
     this.blur.emit(event);
   }

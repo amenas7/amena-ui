@@ -187,11 +187,13 @@ export class SaTextareaComponent implements ControlValueAccessor, OnChanges {
 
   onTextareaFocus(event: FocusEvent) {
     this.isFocused = true;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.focusin.emit(event);
   }
 
   onTextareaBlur(event: FocusEvent) {
     this.isFocused = false;
+    event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
     this.focusout.emit(event);
   }
