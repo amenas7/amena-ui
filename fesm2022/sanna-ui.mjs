@@ -2224,7 +2224,8 @@ class SaTableServerComponent {
      * Obtiene las clases CSS para la fila
      */
     getRowClasses(row) {
-        return 'cursor-pointer';
+        const isSelected = this.selectedRow === row;
+        return isSelected ? 'cursor-pointer selected-row' : 'cursor-pointer';
     }
     /**
      * Recargar datos
