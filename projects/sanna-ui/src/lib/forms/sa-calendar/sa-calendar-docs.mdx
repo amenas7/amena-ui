@@ -1,0 +1,239 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Forms/Calendar/Calendar Example" />
+
+# 📚 Code Example - sa-calendar
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[status]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[required]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span> para controlar el estado del botón desde una variable de tipo boolean.
+
+### HTML Template
+```html
+<section class="p-4">
+  <!-- ========== FECHAS MÍNIMAS Y MÁXIMAS ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Restricciones de Fechas</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <sa-calendar
+          label="Solo fechas futuras"
+          placeholder="Desde mañana"
+          [minDate]="tomorrow"
+          helperText="Solo fechas a partir de mañana">
+        </sa-calendar>
+      </div>
+      <div class="col-md-6">
+        <sa-calendar
+          label="Solo fechas pasadas"
+          placeholder="Hasta ayer"
+          [maxDate]="yesterday"
+          helperText="Solo fechas hasta ayer">
+        </sa-calendar>
+      </div>
+      <div class="col-md-6">
+        <sa-calendar
+          label="Próximos 30 días"
+          placeholder="Rango limitado"
+          [minDate]="today"
+          [maxDate]="maxDate30Days"
+          helperText="Solo próximos 30 días">
+        </sa-calendar>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EJEMPLO CON TODAS LAS PROPIEDADES Y VALIDACIÓN DINÁMICA ========== -->
+  <div class="mb-5">
+    <h2 class="mb-3">Ejemplo con Todas las Propiedades y Validación Dinámica (Formulario Reactivo)</h2>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <form [formGroup]="formCompleto">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <sa-calendar
+                label="Fecha de evento (requerido)"
+                formControlName="calendarCompleto"
+                placeholder="Seleccione una fecha"
+                size="lg"
+                [status]="calendarStatus"
+                helperText="Este calendario tiene todas las propiedades configuradas con status dinámico"
+                id="calendar-completo"
+                name="calendarCompleto"
+                [required]="isRequired"
+                [disabled]="isDisabled"
+                [minDate]="today"
+                [errorText]="
+                  formCompleto.get('calendarCompleto')?.hasError('required')
+                    ? 'Debe seleccionar una fecha'
+                    : ''
+                "
+                (dateSelect)="onDateSelect($event)"
+                (viewChange)="onViewChange($event)"
+                (monthChange)="onMonthChange($event)"
+                (yearChange)="onYearChange($event)"
+                (valueChange)="onValueChange($event)"
+                (focusin)="onFocus($event)"
+                (focusout)="onBlur($event)">
+              </sa-calendar>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <p><strong>Estado del campo:</strong></p>
+                <ul class="small">
+                  <li>Valor: {{ valorCalendarCompleto === 'Ninguna' ? 'Ninguna' : (valorCalendarCompleto | date: 'dd/MM/yyyy') }}</li>
+                  <li>Valid: {{ formCompleto.get('calendarCompleto')?.valid }}</li>
+                  <li>Touched: {{ formCompleto.get('calendarCompleto')?.touched }}</li>
+                  <li>Status mostrado:
+                    <sa-tag
+                      [text]="calendarStatus"
+                      [type]="
+                        calendarStatus === 'error'
+                          ? 'danger'
+                          : calendarStatus === 'success'
+                          ? 'success'
+                          : 'secondary'
+                      "
+                      size="small">
+                    </sa-tag>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mt-2">
+            <div class="col-md-12">
+              <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+            </div>
+          </div>
+
+          <div class="row g-3 mt-2">
+            <div class="col-md-12">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+                Toggle Required ({{ isRequired }})
+              </button>
+              <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+                Toggle Disabled ({{ isDisabled }})
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  ......
+})
+
+export class ........ {
+
+ // Formulario reactivo para el ejemplo completo
+  formCompleto!: FormGroup;
+
+  // Variables para controles
+  isDisabled: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
+
+  // Fechas para ejemplos
+  today = new Date();
+  tomorrow: Date;
+  yesterday: Date;
+  maxDate30Days: Date;
+
+  constructor(private fb: FormBuilder) {
+    // Inicializar fechas
+    this.tomorrow = new Date();
+    this.tomorrow.setDate(this.today.getDate() + 1);
+
+    this.yesterday = new Date();
+    this.yesterday.setDate(this.today.getDate() - 1);
+
+    this.maxDate30Days = new Date();
+    this.maxDate30Days.setDate(this.today.getDate() + 30);
+  }
+
+  ngOnInit(): void {
+    // Inicializar formulario completo (sin required por defecto)
+    this.formCompleto = this.fb.group({
+      calendarCompleto: [null]
+    });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('calendarCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.required]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get calendarStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('calendarCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
+  }
+
+  // Métodos para manejar eventos
+  onDateSelect(event: any): void {
+    console.log('Fecha seleccionada:', event);
+  }
+
+  onViewChange(event: any): void {
+    console.log('Vista cambiada:', event);
+  }
+
+  onMonthChange(date: Date): void {
+    console.log('Mes cambiado:', date);
+  }
+
+  onYearChange(year: number): void {
+    console.log('Año cambiado:', year);
+  }
+
+  onFocus(event: FocusEvent): void {
+    console.log('Calendar enfocado:', event);
+  }
+
+  onBlur(event: FocusEvent): void {
+    console.log('Calendar desenfocado:', event);
+  }
+
+  onValueChange(value: any): void {
+    console.log('Valor cambiado:', value);
+  }
+
+  // Getter para acceder fácilmente al valor
+  get valorCalendarCompleto(): any {
+    const value = this.formCompleto.get('calendarCompleto')?.value;
+    return value ? value : 'Ninguna';
+  }
+  
+}
+```

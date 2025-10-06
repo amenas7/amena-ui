@@ -286,7 +286,8 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
    * Obtiene las clases CSS para la fila
    */
   getRowClasses(row: TableData): string {
-    return 'cursor-pointer';
+    const isSelected = this.selectedRow === row;
+    return isSelected ? 'cursor-pointer selected-row' : 'cursor-pointer';
   }
 
   /**

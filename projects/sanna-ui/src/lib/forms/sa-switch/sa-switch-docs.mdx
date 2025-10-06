@@ -1,0 +1,161 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Componentes/Forms/Switch/Switch Example" />
+
+# 📚 Code Example - sa-switch
+
+Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[status]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[required]`</span>, <span style={{ color: '#dc3545', fontWeight: 'bold' }}>`[disabled]`</span> para controlar el estado del botón desde una variable de tipo boolean.
+
+### HTML Template
+```html
+<form [formGroup]="formCompleto">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <sa-switch
+        label="Acepto los términos y condiciones"
+        formControlName="switchCompleto"
+        size="lg"
+        [status]="switchStatus"
+        helperText="Este switch tiene todas las propiedades configuradas con status dinámico"
+        id="switch-completo"
+        name="switchCompleto"
+        [required]="isRequired"
+        [disabled]="isDisabled"
+        [errorText]="
+          formCompleto.get('switchCompleto')?.hasError('required')
+            ? 'Debes activar el switch para continuar'
+            : ''
+        "
+        (valueChange)="onValueChange($event)"
+        (change)="onChange($event)"
+        (focusin)="onFocus($event)"
+        (focusout)="onBlur($event)">
+      </sa-switch>
+    </div>
+    <div class="col-md-6">
+      <div class="mt-4">
+        <p><strong>Estado del campo:</strong></p>
+        <ul class="small">
+          <li>Estado: {{ valorSwitchCompleto ? 'Activado' : 'Desactivado' }}</li>
+          <li>Valid: {{ formCompleto.get('switchCompleto')?.valid }}</li>
+          <li>Touched: {{ formCompleto.get('switchCompleto')?.touched }}</li>
+          <li>Status mostrado:
+            <sa-tag
+              [text]="switchStatus"
+              [type]="
+                switchStatus === 'error'
+                  ? 'danger'
+                  : switchStatus === 'success'
+                  ? 'success'
+                  : 'secondary'
+              "
+              size="small">
+            </sa-tag>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-2">
+    <div class="col-md-12">
+      <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
+        Toggle Required ({{ isRequired }})
+      </button>
+      <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
+        Toggle Disabled ({{ isDisabled }})
+      </button>
+    </div>
+  </div>
+</form>
+```
+
+### ⚡ TypeScript Component
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  ......
+})
+
+export class ........ {
+
+  // Formulario reactivo para el ejemplo completo
+  formCompleto!: FormGroup;
+
+  // Variables para controles
+  isDisabled: boolean = false;
+
+  private _isRequired: boolean = false;
+  get isRequired(): boolean {
+    return this._isRequired;
+  }
+  set isRequired(value: boolean) {
+    this._isRequired = value;
+    this.updateValidators();
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Inicializar formulario completo (sin required por defecto)
+    this.formCompleto = this.fb.group({
+      switchCompleto: [false]
+    });
+  }
+
+  // Método para actualizar validadores cuando cambia isRequired
+  private updateValidators(): void {
+    const control = this.formCompleto.get('switchCompleto');
+    if (this._isRequired) {
+      control?.setValidators([Validators.requiredTrue]);
+    } else {
+      control?.clearValidators();
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  // Getter para calcular el status dinámicamente
+  get switchStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('switchCompleto');
+    if (control?.invalid && control?.touched) {
+      return 'error';
+    }
+    if (control?.valid && control?.value) {
+      return 'success';
+    }
+    return 'default';
+  }
+
+  // Métodos para manejar eventos
+  onValueChange(value: boolean): void {
+    console.log('Valor cambiado usando valueChange:', value);
+  }
+
+  onChange(value: boolean): void {
+    console.log('Valor cambiado usando change:', value);
+  }
+
+  onFocus(event: FocusEvent): void {
+    console.log('Switch enfocado:', event);
+  }
+
+  onBlur(event: FocusEvent): void {
+    console.log('Switch desenfocado:', event);
+  }
+
+  // Getter para acceder fácilmente al valor
+  get valorSwitchCompleto(): boolean {
+    return this.formCompleto.get('switchCompleto')?.value || false;
+  }
+  
+}
+```
