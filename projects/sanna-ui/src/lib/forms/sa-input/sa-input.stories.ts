@@ -272,6 +272,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido cuando cambia el valor del input',
       table: {
         type: { summary: 'EventEmitter<string>' },
+        category: 'Eventos',
       },
     },
     change: {
@@ -279,6 +280,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento nativo del DOM emitido cuando cambia el valor del input',
       table: {
         type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
       },
     },
     focusin: {
@@ -286,6 +288,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido cuando el input recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     focusout: {
@@ -293,6 +296,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido cuando el input pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     keyup: {
@@ -300,6 +304,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido en keyup del input',
       table: {
         type: { summary: 'EventEmitter<KeyboardEvent>' },
+        category: 'Eventos',
       },
     },
     keydown: {
@@ -307,6 +312,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido en keydown del input',
       table: {
         type: { summary: 'EventEmitter<KeyboardEvent>' },
+        category: 'Eventos',
       },
     },
     keypress: {
@@ -314,6 +320,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido en keypress del input',
       table: {
         type: { summary: 'EventEmitter<KeyboardEvent>' },
+        category: 'Eventos',
       },
     },
     enter: {
@@ -321,6 +328,7 @@ const meta: Meta<SaInputComponent> = {
       description: 'Evento emitido específicamente cuando se presiona Enter',
       table: {
         type: { summary: 'EventEmitter<KeyboardEvent>' },
+        category: 'Eventos',
       },
     },
   },

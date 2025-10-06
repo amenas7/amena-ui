@@ -128,6 +128,7 @@ const meta: Meta<SaCheckboxComponent> = {
       description: 'Evento emitido cuando cambia el estado del checkbox',
       table: {
         type: { summary: 'EventEmitter<boolean>' },
+        category: 'Eventos',
       },
     },
     change: {
@@ -135,6 +136,7 @@ const meta: Meta<SaCheckboxComponent> = {
       description: 'Evento nativo del DOM emitido cuando cambia el estado del checkbox',
       table: {
         type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
       },
     },
     focusin: {
@@ -142,6 +144,7 @@ const meta: Meta<SaCheckboxComponent> = {
       description: 'Evento emitido cuando el checkbox recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     focusout: {
@@ -149,6 +152,7 @@ const meta: Meta<SaCheckboxComponent> = {
       description: 'Evento emitido cuando el checkbox pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     }
   }

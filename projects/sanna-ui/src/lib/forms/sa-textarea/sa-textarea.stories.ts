@@ -202,6 +202,7 @@ const meta: Meta<SaTextareaComponent> = {
       description: 'Evento emitido cuando cambia el valor del textarea',
       table: {
         type: { summary: 'EventEmitter<string>' },
+        category: 'Eventos',
       },
     },
     change: {
@@ -209,6 +210,7 @@ const meta: Meta<SaTextareaComponent> = {
       description: 'Evento nativo del DOM emitido cuando cambia el valor del textarea',
       table: {
         type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
       },
     },
     focusin: {
@@ -216,6 +218,7 @@ const meta: Meta<SaTextareaComponent> = {
       description: 'Evento emitido cuando el textarea recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     focusout: {
@@ -223,6 +226,7 @@ const meta: Meta<SaTextareaComponent> = {
       description: 'Evento emitido cuando el textarea pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     }
   }

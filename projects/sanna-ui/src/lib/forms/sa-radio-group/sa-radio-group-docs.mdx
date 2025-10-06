@@ -11,43 +11,66 @@ Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', 
 <form [formGroup]="formCompleto">
   <div class="row g-3">
     <div class="col-md-6">
-      <sa-checkbox
-        label="Acepto los términos y condiciones"
-        formControlName="checkboxCompleto"
+      <sa-radio-group
+        label="Selecciona el plan"
+        formControlName="radioCompleto"
         size="lg"
-        [status]="checkboxStatus"
-        helperText="Este checkbox tiene todas las propiedades configuradas con status dinámico"
-        id="checkbox-completo"
-        name="checkboxCompleto"
-        value="aceptado"
-        [bold]="true"
+        [status]="radioStatus"
         [required]="isRequired"
         [disabled]="isDisabled"
         [errorText]="
-          formCompleto.get('checkboxCompleto')?.hasError('required')
-            ? 'Debe aceptar los términos y condiciones'
+          formCompleto.get('radioCompleto')?.hasError('required') && formCompleto.get('radioCompleto')?.touched
+            ? 'Debe seleccionar un plan'
             : ''
         "
-        (checkedChange)="onCheckedChange($event)"
-        (change)="onChange($event)"
-        (focusin)="onFocus($event)"
-        (focusout)="onBlur($event)">
-      </sa-checkbox>
+        helperText="Este radio group tiene todas las propiedades configuradas con status dinámico">
+
+        <sa-radio
+          value="premium"
+          label="Premium"
+          helperText="Incluye todas las características avanzadas"
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)"
+          (focusin)="onFocus($event)"
+          (focusout)="onBlur($event)">
+        </sa-radio>
+
+        <sa-radio
+          value="standard"
+          label="Estándar"
+          helperText="Características básicas incluidas"
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)"
+          (focusin)="onFocus($event)"
+          (focusout)="onBlur($event)">
+        </sa-radio>
+
+        <sa-radio
+          value="free"
+          label="Gratuita"
+          helperText="Funciones limitadas"
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)"
+          (focusin)="onFocus($event)"
+          (focusout)="onBlur($event)">
+        </sa-radio>
+
+      </sa-radio-group>
     </div>
     <div class="col-md-6">
       <div class="mt-4">
         <p><strong>Estado del campo:</strong></p>
         <ul class="small">
-          <li>Estado: {{ valorCheckboxCompleto ? 'Marcado' : 'No marcado' }}</li>
-          <li>Valid: {{ formCompleto.get('checkboxCompleto')?.valid }}</li>
-          <li>Touched: {{ formCompleto.get('checkboxCompleto')?.touched }}</li>
+          <li>Valor: {{ formCompleto.get('radioCompleto')?.value || 'vacío' }}</li>
+          <li>Valid: {{ formCompleto.get('radioCompleto')?.valid }}</li>
+          <li>Touched: {{ formCompleto.get('radioCompleto')?.touched }}</li>
           <li>Status mostrado:
             <sa-tag
-              [text]="checkboxStatus"
+              [text]="radioStatus"
               [type]="
-                checkboxStatus === 'error'
+                radioStatus === 'error'
                   ? 'danger'
-                  : checkboxStatus === 'success'
+                  : radioStatus === 'success'
                   ? 'success'
                   : 'secondary'
               "
@@ -61,6 +84,7 @@ Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', 
 
   <div class="row g-3 mt-2">
     <div class="col-md-12">
+      <p><strong>Opción seleccionada:</strong> {{ valorRadioCompleto }}</p>
       <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
     </div>
   </div>
@@ -110,15 +134,15 @@ export class ........ {
   ngOnInit(): void {
     // Inicializar formulario completo (sin required por defecto)
     this.formCompleto = this.fb.group({
-      checkboxCompleto: [false]
+      radioCompleto: ['']
     });
   }
 
   // Método para actualizar validadores cuando cambia isRequired
   private updateValidators(): void {
-    const control = this.formCompleto.get('checkboxCompleto');
+    const control = this.formCompleto.get('radioCompleto');
     if (this._isRequired) {
-      control?.setValidators([Validators.requiredTrue]);
+      control?.setValidators([Validators.required]);
     } else {
       control?.clearValidators();
     }
@@ -126,8 +150,8 @@ export class ........ {
   }
 
   // Getter para calcular el status dinámicamente
-  get checkboxStatus(): 'default' | 'success' | 'error' {
-    const control = this.formCompleto.get('checkboxCompleto');
+  get radioStatus(): 'default' | 'success' | 'error' {
+    const control = this.formCompleto.get('radioCompleto');
     if (control?.invalid && control?.touched) {
       return 'error';
     }
@@ -138,26 +162,26 @@ export class ........ {
   }
 
   // Métodos para manejar eventos
-  onCheckedChange(checked: boolean): void {
-    console.log('Estado cambiado usando checkedChange:', checked);
+  onValueChange(value: any): void {
+    console.log('Valor cambiado usando valueChange:', value);
   }
 
   onChange(event: Event): void {
     console.log('Evento change:', event);
-    console.log('Checked:', (event.target as HTMLInputElement)?.checked);
+    console.log('Value:', (event.target as HTMLInputElement)?.value);
   }
 
   onFocus(event: FocusEvent): void {
-    console.log('Checkbox enfocado:', event);
+    console.log('Radio enfocado:', event);
   }
 
   onBlur(event: FocusEvent): void {
-    console.log('Checkbox desenfocado:', event);
+    console.log('Radio desenfocado:', event);
   }
 
   // Getter para acceder fácilmente al valor
-  get valorCheckboxCompleto(): boolean {
-    return this.formCompleto.get('checkboxCompleto')?.value || false;
+  get valorRadioCompleto(): any {
+    return this.formCompleto.get('radioCompleto')?.value || 'Ninguno';
   }
   
 }

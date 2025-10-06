@@ -88,6 +88,16 @@ export default meta;
 type Story = StoryObj<SaRadioGroupComponent>;
 
 export const Default: Story = {
+  args: {
+    label: 'Selecciona una opción',
+    size: 'md',
+    status: 'default',
+    helperText: 'Elige la opción que prefieras',
+    errorText: '',
+    required: false,
+    disabled: false,
+    name: 'default-group'
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -98,25 +108,18 @@ export const Default: Story = {
         [helperText]="helperText"
         [errorText]="errorText"
         [required]="required"
-        [disabled]="disabled">
+        [disabled]="disabled"
+        [name]="name">
         <sa-radio value="option1" label="Opción 1"></sa-radio>
         <sa-radio value="option2" label="Opción 2"></sa-radio>
         <sa-radio value="option3" label="Opción 3"></sa-radio>
       </sa-radio-group>
     `
   }),
-  args: {
-    label: 'Selecciona una opción',
-    size: 'md',
-    status: 'default',
-    helperText: 'Elige la opción que prefieras',
-    required: false,
-    disabled: false
-  },
   parameters: {
     docs: {
       description: {
-        story: 'Radio group básico con label, helper text y tres opciones.'
+        story: 'Radio group básico con label, helper text y tres opciones. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -126,29 +129,38 @@ export const Default: Story = {
 };
 
 export const Required: Story = {
+  args: {
+    label: '¿Aceptas los términos?',
+    size: 'md',
+    required: true,
+    helperText: 'Este campo es obligatorio',
+    status: 'default',
+    errorText: '',
+    disabled: false,
+    name: 'required-group'
+  },
   render: (args) => ({
     props: args,
     template: `
       <sa-radio-group
         [label]="label"
         [size]="size"
+        [status]="status"
+        [helperText]="helperText"
+        [errorText]="errorText"
         [required]="required"
-        [helperText]="helperText">
-        <sa-radio value="yes" label="Sí"></sa-radio>
-        <sa-radio value="no" label="No"></sa-radio>
+        [disabled]="disabled"
+        [name]="name">
+        <sa-radio value="option1" label="Opción 1"></sa-radio>
+        <sa-radio value="option2" label="Opción 2"></sa-radio>
+        <sa-radio value="option3" label="Opción 3"></sa-radio>
       </sa-radio-group>
     `
   }),
-  args: {
-    label: '¿Aceptas los términos?',
-    size: 'md',
-    required: true,
-    helperText: 'Este campo es obligatorio'
-  },
   parameters: {
     docs: {
       description: {
-        story: 'Radio group requerido con asterisco rojo en el label.'
+        story: 'Radio group requerido con asterisco rojo en el label. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -158,6 +170,16 @@ export const Required: Story = {
 };
 
 export const WithError: Story = {
+  args: {
+    label: 'Selecciona tu plan',
+    size: 'md',
+    status: 'error',
+    errorText: 'Debes seleccionar un plan para continuar',
+    helperText: '',
+    required: false,
+    disabled: false,
+    name: 'error-group'
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -165,22 +187,21 @@ export const WithError: Story = {
         [label]="label"
         [size]="size"
         [status]="status"
-        [errorText]="errorText">
+        [helperText]="helperText"
+        [errorText]="errorText"
+        [required]="required"
+        [disabled]="disabled"
+        [name]="name">
         <sa-radio value="option1" label="Opción 1"></sa-radio>
         <sa-radio value="option2" label="Opción 2"></sa-radio>
+        <sa-radio value="option3" label="Opción 3"></sa-radio>
       </sa-radio-group>
     `
   }),
-  args: {
-    label: 'Selecciona tu plan',
-    size: 'md',
-    status: 'error',
-    errorText: 'Debes seleccionar un plan para continuar'
-  },
   parameters: {
     docs: {
       description: {
-        story: 'Radio group con estado de error y mensaje de error visible.'
+        story: 'Radio group con estado de error y mensaje de error visible. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -190,6 +211,16 @@ export const WithError: Story = {
 };
 
 export const Success: Story = {
+  args: {
+    label: 'Plan seleccionado',
+    size: 'md',
+    status: 'success',
+    helperText: 'Plan validado correctamente',
+    errorText: '',
+    required: false,
+    disabled: false,
+    name: 'success-group'
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -197,23 +228,21 @@ export const Success: Story = {
         [label]="label"
         [size]="size"
         [status]="status"
-        [helperText]="helperText">
-        <sa-radio value="premium" label="Premium"></sa-radio>
-        <sa-radio value="standard" label="Estándar"></sa-radio>
-        <sa-radio value="basic" label="Básico"></sa-radio>
+        [helperText]="helperText"
+        [errorText]="errorText"
+        [required]="required"
+        [disabled]="disabled"
+        [name]="name">
+        <sa-radio value="option1" label="Opción 1"></sa-radio>
+        <sa-radio value="option2" label="Opción 2"></sa-radio>
+        <sa-radio value="option3" label="Opción 3"></sa-radio>
       </sa-radio-group>
     `
   }),
-  args: {
-    label: 'Plan seleccionado',
-    size: 'md',
-    status: 'success',
-    helperText: 'Plan validado correctamente'
-  },
   parameters: {
     docs: {
       description: {
-        story: 'Radio group con estado de éxito (borde verde).'
+        story: 'Radio group con estado de éxito (borde verde). Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -223,30 +252,38 @@ export const Success: Story = {
 };
 
 export const Disabled: Story = {
+  args: {
+    label: 'Opciones deshabilitadas',
+    size: 'md',
+    disabled: true,
+    helperText: 'Este grupo está deshabilitado',
+    status: 'default',
+    errorText: '',
+    required: false,
+    name: 'disabled-group'
+  },
   render: (args) => ({
     props: args,
     template: `
       <sa-radio-group
         [label]="label"
         [size]="size"
+        [status]="status"
+        [helperText]="helperText"
+        [errorText]="errorText"
+        [required]="required"
         [disabled]="disabled"
-        [helperText]="helperText">
+        [name]="name">
         <sa-radio value="option1" label="Opción 1"></sa-radio>
         <sa-radio value="option2" label="Opción 2"></sa-radio>
         <sa-radio value="option3" label="Opción 3"></sa-radio>
       </sa-radio-group>
     `
   }),
-  args: {
-    label: 'Opciones deshabilitadas',
-    size: 'md',
-    disabled: true,
-    helperText: 'Este grupo está deshabilitado'
-  },
   parameters: {
     docs: {
       description: {
-        story: 'Radio group deshabilitado. Todos los radios hijos heredan el estado disabled.'
+        story: 'Radio group deshabilitado. Todos los radios hijos heredan el estado disabled. Modifica las propiedades en los controles para ver cómo cambia el código dinámicamente.'
       },
       source: {
         type: 'dynamic'
@@ -325,7 +362,7 @@ export const WithHelperTextOnRadios: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Radio group donde cada opción tiene su propio helper text descriptivo.'
+        story: 'Radio group donde cada opción tiene su propio helper text descriptivo. Nota: Esta historia usa un template personalizado para mostrar radios con helperText individual.'
       },
       source: {
         type: 'dynamic'

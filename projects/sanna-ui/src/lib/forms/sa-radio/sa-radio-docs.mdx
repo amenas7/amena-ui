@@ -8,46 +8,66 @@ Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', 
 
 ### HTML Template
 ```html
-<form [formGroup]="formCompleto">
+<form [formGroup]="formRadioIndividual">
   <div class="row g-3">
-    <div class="col-md-6">
-      <sa-checkbox
-        label="Acepto los términos y condiciones"
-        formControlName="checkboxCompleto"
-        size="lg"
-        [status]="checkboxStatus"
-        helperText="Este checkbox tiene todas las propiedades configuradas con status dinámico"
-        id="checkbox-completo"
-        name="checkboxCompleto"
-        value="aceptado"
-        [bold]="true"
-        [required]="isRequired"
-        [disabled]="isDisabled"
-        [errorText]="
-          formCompleto.get('checkboxCompleto')?.hasError('required')
-            ? 'Debe aceptar los términos y condiciones'
-            : ''
-        "
-        (checkedChange)="onCheckedChange($event)"
-        (change)="onChange($event)"
-        (focusin)="onFocus($event)"
-        (focusout)="onBlur($event)">
-      </sa-checkbox>
+    <div class="col-md-8">
+      <div class="d-flex gap-4 align-items-start">
+        <sa-radio
+          name="plan"
+          value="basic"
+          formControlName="planSeleccionado"
+          label="Plan Básico - $9.99/mes"
+          helperText="Ideal para uso personal. Incluye 10GB de almacenamiento"
+          size="md"
+          [status]="radioStatus"
+          [disabled]="isDisabled"
+          [errorText]="
+            formRadioIndividual.get('planSeleccionado')?.hasError('required') && formRadioIndividual.get('planSeleccionado')?.touched
+              ? 'Debe seleccionar un plan'
+              : ''
+          "
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)"
+          (focusin)="onFocus($event)"
+          (focusout)="onBlur($event)">
+        </sa-radio>
+
+        <sa-radio
+          name="plan"
+          value="pro"
+          formControlName="planSeleccionado"
+          label="Plan Pro - $29.99/mes"
+          helperText="Para profesionales. Incluye 100GB y soporte prioritario"
+          size="md"
+          [status]="radioStatus"
+          [disabled]="isDisabled"
+          [errorText]="
+            formRadioIndividual.get('planSeleccionado')?.hasError('required') && formRadioIndividual.get('planSeleccionado')?.touched
+              ? 'Debe seleccionar un plan'
+              : ''
+          "
+          (valueChange)="onValueChange($event)"
+          (change)="onChange($event)"
+          (focusin)="onFocus($event)"
+          (focusout)="onBlur($event)">
+        </sa-radio>
+      </div>
     </div>
-    <div class="col-md-6">
-      <div class="mt-4">
+
+    <div class="col-md-4">
+      <div class="mt-2">
         <p><strong>Estado del campo:</strong></p>
         <ul class="small">
-          <li>Estado: {{ valorCheckboxCompleto ? 'Marcado' : 'No marcado' }}</li>
-          <li>Valid: {{ formCompleto.get('checkboxCompleto')?.valid }}</li>
-          <li>Touched: {{ formCompleto.get('checkboxCompleto')?.touched }}</li>
-          <li>Status mostrado:
+          <li>Valor: {{ formRadioIndividual.get('planSeleccionado')?.value || 'vacío' }}</li>
+          <li>Valid: {{ formRadioIndividual.get('planSeleccionado')?.valid }}</li>
+          <li>Touched: {{ formRadioIndividual.get('planSeleccionado')?.touched }}</li>
+          <li>Status:
             <sa-tag
-              [text]="checkboxStatus"
+              [text]="radioStatus"
               [type]="
-                checkboxStatus === 'error'
+                radioStatus === 'error'
                   ? 'danger'
-                  : checkboxStatus === 'success'
+                  : radioStatus === 'success'
                   ? 'success'
                   : 'secondary'
               "
@@ -61,15 +81,14 @@ Se puede usar los corchetes en las propiedades <span style={{ color: '#dc3545', 
 
   <div class="row g-3 mt-2">
     <div class="col-md-12">
-      <p><strong>Estado del formulario:</strong> {{ formCompleto.valid ? 'Válido' : 'Inválido' }}</p>
+      <div class="alert alert-info">
+        <strong>Plan seleccionado:</strong> {{ planSeleccionadoTexto }}
+      </div>
     </div>
   </div>
 
   <div class="row g-3 mt-2">
     <div class="col-md-12">
-      <button class="btn btn-sm btn-outline-primary me-2" (click)="isRequired = !isRequired">
-        Toggle Required ({{ isRequired }})
-      </button>
       <button class="btn btn-sm btn-outline-info me-2" (click)="isDisabled = !isDisabled">
         Toggle Disabled ({{ isDisabled }})
       </button>
@@ -90,44 +109,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class ........ {
 
-  // Formulario reactivo para el ejemplo completo
-  formCompleto!: FormGroup;
+  // Formulario para el ejemplo con radios individuales
+  formRadioIndividual!: FormGroup;
 
   // Variables para controles
   isDisabled: boolean = false;
 
-  private _isRequired: boolean = false;
-  get isRequired(): boolean {
-    return this._isRequired;
-  }
-  set isRequired(value: boolean) {
-    this._isRequired = value;
-    this.updateValidators();
-  }
-
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicializar formulario completo (sin required por defecto)
-    this.formCompleto = this.fb.group({
-      checkboxCompleto: [false]
+    // Inicializar formulario para radios individuales (sin required por defecto)
+    this.formRadioIndividual = this.fb.group({
+      planSeleccionado: ['']
     });
   }
 
-  // Método para actualizar validadores cuando cambia isRequired
-  private updateValidators(): void {
-    const control = this.formCompleto.get('checkboxCompleto');
-    if (this._isRequired) {
-      control?.setValidators([Validators.requiredTrue]);
-    } else {
-      control?.clearValidators();
-    }
-    control?.updateValueAndValidity({ emitEvent: false });
-  }
-
   // Getter para calcular el status dinámicamente
-  get checkboxStatus(): 'default' | 'success' | 'error' {
-    const control = this.formCompleto.get('checkboxCompleto');
+  get radioStatus(): 'default' | 'success' | 'error' {
+    const control = this.formRadioIndividual.get('planSeleccionado');
     if (control?.invalid && control?.touched) {
       return 'error';
     }
@@ -138,26 +137,32 @@ export class ........ {
   }
 
   // Métodos para manejar eventos
-  onCheckedChange(checked: boolean): void {
-    console.log('Estado cambiado usando checkedChange:', checked);
+  onValueChange(value: any): void {
+    console.log('Valor cambiado usando valueChange:', value);
   }
 
   onChange(event: Event): void {
     console.log('Evento change:', event);
-    console.log('Checked:', (event.target as HTMLInputElement)?.checked);
+    console.log('Value:', (event.target as HTMLInputElement)?.value);
   }
 
   onFocus(event: FocusEvent): void {
-    console.log('Checkbox enfocado:', event);
+    console.log('Radio enfocado:', event);
   }
 
   onBlur(event: FocusEvent): void {
-    console.log('Checkbox desenfocado:', event);
+    console.log('Radio desenfocado:', event);
   }
 
-  // Getter para acceder fácilmente al valor
-  get valorCheckboxCompleto(): boolean {
-    return this.formCompleto.get('checkboxCompleto')?.value || false;
+  // Getter para mostrar el texto del plan seleccionado
+  get planSeleccionadoTexto(): string {
+    const plan = this.formRadioIndividual.get('planSeleccionado')?.value;
+    if (plan === 'basic') {
+      return 'Plan Básico - $9.99/mes (10GB de almacenamiento)';
+    } else if (plan === 'pro') {
+      return 'Plan Pro - $29.99/mes (100GB y soporte prioritario)';
+    }
+    return 'Ningún plan seleccionado';
   }
   
 }

@@ -109,9 +109,9 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   @Output() viewChange = new EventEmitter<CalendarViewChangeEvent>();
   @Output() monthChange = new EventEmitter<Date>();
   @Output() yearChange = new EventEmitter<number>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
-  
+  @Output() focusin = new EventEmitter<FocusEvent>();
+  @Output() focusout = new EventEmitter<FocusEvent>();
+
   // Eventos estándar para consistencia con otros componentes de formulario
   @Output() change = new EventEmitter<Event>();
   @Output() valueChange = new EventEmitter<Date | Date[] | null>();
@@ -476,14 +476,14 @@ export class SaCalendarComponent implements ControlValueAccessor, OnInit, OnChan
   onInputFocus(event: FocusEvent) {
     this.isFocused = true;
     event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
-    this.focus.emit(event);
+    this.focusin.emit(event);
   }
 
   onInputBlur(event: FocusEvent) {
     this.isFocused = false;
     event.stopPropagation(); // Prevenir que el evento burbujee fuera del Shadow DOM
     this.onTouched();
-    this.blur.emit(event);
+    this.focusout.emit(event);
   }
 
   onInputChange(event: Event) {

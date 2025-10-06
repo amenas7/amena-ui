@@ -142,18 +142,6 @@ const meta: Meta<SaTableServerComponent> = {
       },
       description: {
         component: `
-## Events
-
-| Event | Tipo | Descripción |
-|-------|------|-------------|
-| loadData | ServerTableRequest | Emitido cuando se necesita cargar datos del servidor |
-| pageChange | number | Emitido cuando cambia la página |
-| itemsPerPageChange | number | Emitido cuando cambia el número de elementos por página |
-| sortChange | {column: string, direction: 'asc' \\| 'desc'} | Emitido cuando cambia el ordenamiento |
-| rowClick | TableData | Emitido al hacer click en una fila |
-| rowDoubleClick | TableData | Emitido al hacer doble click en una fila |
-| filterChange | {[column: string]: string} | Emitido cuando cambian los filtros |
-
 ## Interfaces
 
 ### ServerTableRequest
@@ -291,6 +279,49 @@ onLoadData(request: ServerTableRequest) {
     minTableHeight: {
       control: { type: 'number' },
       description: 'Altura mínima de la tabla en píxeles cuando no hay datos. Evita que se vea colapsada. Valor por defecto: 200px (~5 filas)'
+    },
+    // Eventos
+    loadData: {
+      description: 'Evento emitido cuando se necesita cargar datos del servidor. Emite un objeto ServerTableRequest con los parámetros de paginación, ordenamiento y filtros',
+      table: {
+        type: { summary: 'EventEmitter<ServerTableRequest>' },
+        category: 'Eventos',
+      },
+    },
+    pageChange: {
+      description: 'Evento emitido cuando cambia la página actual. Emite el número de página (1-based)',
+      table: {
+        type: { summary: 'EventEmitter<number>' },
+        category: 'Eventos',
+      },
+    },
+    itemsPerPageChange: {
+      description: 'Evento emitido cuando cambia el número de elementos por página. Emite el nuevo valor de items por página',
+      table: {
+        type: { summary: 'EventEmitter<number>' },
+        category: 'Eventos',
+      },
+    },
+    sortChange: {
+      description: 'Evento emitido cuando cambia el ordenamiento de columnas. Emite un objeto con la columna y dirección de ordenamiento',
+      table: {
+        type: { summary: 'EventEmitter<{column: string, direction: "asc" | "desc"}>' },
+        category: 'Eventos',
+      },
+    },
+    rowClick: {
+      description: 'Evento emitido al hacer clic en una fila de la tabla. Emite los datos de la fila clickeada',
+      table: {
+        type: { summary: 'EventEmitter<TableData>' },
+        category: 'Eventos',
+      },
+    },
+    rowDoubleClick: {
+      description: 'Evento emitido al hacer doble clic en una fila de la tabla. Emite los datos de la fila',
+      table: {
+        type: { summary: 'EventEmitter<TableData>' },
+        category: 'Eventos',
+      },
     }
   },
   args: {

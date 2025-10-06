@@ -184,6 +184,63 @@ minDate: new Date('2025-08-24')        // Constructor con string
     showInput: {
       description: 'Mostrar campo de input',
       control: { type: 'boolean' }
+    },
+    // Eventos
+    dateSelect: {
+      description: 'Evento emitido cuando se selecciona una fecha. Emite la fecha seleccionada (Date | null)',
+      table: {
+        type: { summary: 'EventEmitter<Date | null>' },
+        category: 'Eventos',
+      },
+    },
+    viewChange: {
+      description: 'Evento emitido cuando cambia la vista del calendario (mes, año)',
+      table: {
+        type: { summary: 'EventEmitter<{month: number, year: number}>' },
+        category: 'Eventos',
+      },
+    },
+    monthChange: {
+      description: 'Evento emitido cuando cambia el mes mostrado en el calendario. Emite el número del mes (0-11)',
+      table: {
+        type: { summary: 'EventEmitter<number>' },
+        category: 'Eventos',
+      },
+    },
+    yearChange: {
+      description: 'Evento emitido cuando cambia el año mostrado en el calendario. Emite el año',
+      table: {
+        type: { summary: 'EventEmitter<number>' },
+        category: 'Eventos',
+      },
+    },
+    focusin: {
+      description: 'Evento emitido cuando el calendario recibe el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
+      },
+    },
+    focusout: {
+      description: 'Evento emitido cuando el calendario pierde el foco',
+      table: {
+        type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
+      },
+    },
+    change: {
+      description: 'Evento nativo del DOM emitido cuando cambia el valor del calendario',
+      table: {
+        type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
+      },
+    },
+    valueChange: {
+      description: 'Evento emitido cuando cambia el valor del calendario. Emite la nueva fecha seleccionada',
+      table: {
+        type: { summary: 'EventEmitter<Date | null>' },
+        category: 'Eventos',
+      },
     }
   }
 };

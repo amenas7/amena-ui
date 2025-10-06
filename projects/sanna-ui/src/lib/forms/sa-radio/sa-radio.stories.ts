@@ -114,6 +114,7 @@ const meta: Meta<SaRadioComponent> = {
       description: 'Evento emitido cuando cambia el valor del radio button',
       table: {
         type: { summary: 'EventEmitter<any>' },
+        category: 'Eventos',
       },
     },
     change: {
@@ -121,6 +122,7 @@ const meta: Meta<SaRadioComponent> = {
       description: 'Evento nativo del DOM emitido cuando cambia el valor del radio button',
       table: {
         type: { summary: 'EventEmitter<Event>' },
+        category: 'Eventos',
       },
     },
     focusin: {
@@ -128,6 +130,7 @@ const meta: Meta<SaRadioComponent> = {
       description: 'Evento emitido cuando el radio button recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     focusout: {
@@ -135,6 +138,7 @@ const meta: Meta<SaRadioComponent> = {
       description: 'Evento emitido cuando el radio button pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     }
   }

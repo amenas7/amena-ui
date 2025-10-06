@@ -146,6 +146,7 @@ const meta: Meta<SaSwitchComponent> = {
       description: 'Evento emitido cuando cambia el estado del switch',
       table: {
         type: { summary: 'EventEmitter<boolean>' },
+        category: 'Eventos',
       },
     },
     change: {
@@ -153,6 +154,7 @@ const meta: Meta<SaSwitchComponent> = {
       description: 'Evento nativo del DOM emitido cuando cambia el estado del switch',
       table: {
         type: { summary: 'EventEmitter<boolean>' },
+        category: 'Eventos',
       },
     },
     focusin: {
@@ -160,6 +162,7 @@ const meta: Meta<SaSwitchComponent> = {
       description: 'Evento emitido cuando el switch recibe el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     },
     focusout: {
@@ -167,6 +170,7 @@ const meta: Meta<SaSwitchComponent> = {
       description: 'Evento emitido cuando el switch pierde el foco',
       table: {
         type: { summary: 'EventEmitter<FocusEvent>' },
+        category: 'Eventos',
       },
     }
   },

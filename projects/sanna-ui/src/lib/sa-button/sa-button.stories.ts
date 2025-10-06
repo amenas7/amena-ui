@@ -112,6 +112,14 @@ export default {
     noAnimate: {
       control: { type: 'boolean' },
       description: 'Desactivar animaciones de hover (transform: translateY). Útil para interfaces más estáticas o barras de herramientas densas.'
+    },
+    // Eventos
+    clicked: {
+      description: 'Evento emitido cuando se hace clic en el botón. Emite el evento MouseEvent nativo',
+      table: {
+        type: { summary: 'EventEmitter<MouseEvent>' },
+        category: 'Eventos',
+      },
     }
   }
 } as Meta<SaButtonComponent>;

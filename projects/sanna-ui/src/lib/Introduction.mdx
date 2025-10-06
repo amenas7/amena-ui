@@ -7,16 +7,6 @@ import { Meta } from '@storybook/blocks';
 
 Explora nuestros componentes navegando por las categorías en el panel lateral:
 
-### 📋 **Componentes Disponibles**
-
-- **🔘 Button** - Botones interactivos con múltiples variantes y estilos
-- **📝 Text** - Componentes de texto con tipografía personalizada  
-- **📊 Table** - Tablas responsive con paginación y ordenamiento
-- **💬 MessageBox** - Cajas de mensajes para notificaciones y alertas
-- **🏷️ Heading** - Títulos y encabezados con diferentes tamaños
-- **🎯 Icon** - Iconos de FontAwesome integrados (150+ disponibles)
-- **📄 Input** - Campos de entrada con validación
-
 ### ✨ **Características Principales**
 
 - **🎨 Diseño Moderno**: Colores personalizados con verde principal `#5BAB5F`
@@ -63,6 +53,42 @@ Nuestros componentes soportan sintaxis flexible:
     ¿Listo para comenzar?
   </h3>
   <p style={{ margin: 0, color: '#6c757d' }}>
-    Selecciona un componente del panel lateral para ver ejemplos interactivos y documentación detallada.
+    Selecciona un componente del panel lateral para ver ejemplos interactivos y documentación detallada. Tambien te dejamos unas recomendaciones
   </p>
+</div>
+
+<p>
+Usar siempre **<span style={{color: '#36AD55'}}>1 sólo botón primario de color verde (color sanna)</span>** y uno gris como botón secundario para flujos de cancelar/salir. Esto da a entender al usuario que el botón verde es el flujo principal en cada formulario/sección, en este caso "Continuar" dentro de este modal.
+</p>
+
+<div style={{ textAlign: 'center' }}>
+  <img src="doc1.jpg" alt="Documentación" style={{ maxWidth: '100%', height: 'auto', marginTop: '1rem' }} />
+</div>
+
+
+
+<p style={{ marginTop: '4rem' }}>
+En casos donde se tenga más botones se recomienda usar **variant** secondary, terciary, info, success, etc. Es decir, no usar colores solidos para dar esa jerarquía visual que los botones principales son los de “Cancelar” y “Continuar” respectivamente, en este caso el flujo secundario seria “Buscar Paciente”
+</p>
+
+<div style={{ textAlign: 'center' }}>
+  <img src="doc2.jpg" alt="Documentación" style={{ maxWidth: '100%', height: 'auto', marginTop: '1rem' }} />
+</div>
+
+
+<p style={{ marginTop: '4rem' }}>
+Otro ejemplo de botones secundarios “Nuevo paciente” y “Buscar”
+</p>
+
+<div style={{ textAlign: 'center' }}>
+  <img src="doc3.jpg" alt="Documentación" style={{ maxWidth: '100%', height: 'auto', marginTop: '1rem' }} />
+</div>
+
+
+<p style={{ marginTop: '4rem' }}>
+Para los encabezados usar sa-heading de size=”sm”
+</p>
+
+<div style={{ textAlign: 'center' }}>
+  <img src="doc4.jpg" alt="Documentación" style={{ maxWidth: '100%', height: 'auto', marginTop: '1rem' }} />
 </div>
