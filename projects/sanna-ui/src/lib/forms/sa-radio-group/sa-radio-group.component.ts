@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, ViewEncapsulation, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Input, forwardRef, ViewEncapsulation, ContentChildren, QueryList, AfterContentInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SaRadioComponent } from '../sa-radio/sa-radio.component';
 
@@ -18,7 +18,7 @@ export type RadioGroupStatus = 'default' | 'success' | 'error';
     }
   ]
 })
-export class SaRadioGroupComponent implements ControlValueAccessor, AfterContentInit {
+export class SaRadioGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges {
   @Input() label: string = '';
   @Input() size: RadioGroupSize = 'md';
   @Input() status: RadioGroupStatus = 'default';
@@ -55,12 +55,23 @@ export class SaRadioGroupComponent implements ControlValueAccessor, AfterContent
 
     // Actualizar estado cuando cambian los radios
     this.radios.changes.subscribe(() => {
-      this.radios.forEach((radio) => {
-        radio.name = this.name;
-        radio.size = this.size;
-        radio.status = this.status;
-        radio.disabled = this.disabled;
-      });
+      this.updateRadiosProperties();
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Si hay radios inicializados, actualizar sus propiedades
+    if (this.radios && this.radios.length > 0) {
+      this.updateRadiosProperties();
+    }
+  }
+
+  private updateRadiosProperties(): void {
+    this.radios.forEach((radio) => {
+      radio.name = this.name;
+      radio.size = this.size;
+      radio.status = this.status;
+      radio.disabled = this.disabled;
     });
   }
 
