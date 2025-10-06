@@ -1,10 +1,10 @@
-import { QueryList, AfterContentInit } from '@angular/core';
+import { QueryList, AfterContentInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { SaRadioComponent } from '../sa-radio/sa-radio.component';
 import * as i0 from "@angular/core";
 export type RadioGroupSize = 'sm' | 'md' | 'lg';
 export type RadioGroupStatus = 'default' | 'success' | 'error';
-export declare class SaRadioGroupComponent implements ControlValueAccessor, AfterContentInit {
+export declare class SaRadioGroupComponent implements ControlValueAccessor, AfterContentInit, OnChanges {
     label: string;
     size: RadioGroupSize;
     status: RadioGroupStatus;
@@ -19,6 +19,8 @@ export declare class SaRadioGroupComponent implements ControlValueAccessor, Afte
     private onChange;
     private onTouched;
     ngAfterContentInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    private updateRadiosProperties;
     get labelClasses(): string;
     get helperTextClasses(): string;
     get errorTextClasses(): string;
