@@ -5,7 +5,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angu
 import { SannaUiModule } from '../../sanna-ui.module';
 
 const meta: Meta<SaTextareaComponent> = {
-  title: 'Componentes/Forms/Textarea',
+  title: 'Componentes/Textarea',
   component: SaTextareaComponent,
   decorators: [
     moduleMetadata({

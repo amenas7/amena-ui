@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angul
 import { SaSwitchComponent } from './sa-switch.component';
 
 const meta: Meta<SaSwitchComponent> = {
-  title: 'Componentes/Forms/Switch',
+  title: 'Componentes/Switch',
   component: SaSwitchComponent,
   decorators: [
     moduleMetadata({

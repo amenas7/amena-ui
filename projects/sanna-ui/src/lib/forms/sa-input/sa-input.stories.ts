@@ -6,7 +6,7 @@ import { SannaUiModule } from '../../sanna-ui.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const meta: Meta<SaInputComponent> = {
-  title: 'Componentes/Forms/Input',
+  title: 'Componentes/Input',
   component: SaInputComponent,
   decorators: [
     moduleMetadata({

@@ -6,7 +6,7 @@ import { SannaUiModule } from '../../sanna-ui.module';
 import { Component } from '@angular/core';
 
 const meta: Meta<SaRadioGroupComponent> = {
-  title: 'Componentes/Forms/Radio Group',
+  title: 'Componentes/Radio Group',
   component: SaRadioGroupComponent,
   decorators: [
     moduleMetadata({

@@ -5,7 +5,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angu
 import { SannaUiModule } from '../../sanna-ui.module';
 
 const meta: Meta<SaCheckboxComponent> = {
-  title: 'Componentes/Forms/Checkbox',
+  title: 'Componentes/Checkbox',
   component: SaCheckboxComponent,
   decorators: [
     moduleMetadata({

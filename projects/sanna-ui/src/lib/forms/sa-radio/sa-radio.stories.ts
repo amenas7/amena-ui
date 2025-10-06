@@ -5,7 +5,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angu
 import { SannaUiModule } from '../../sanna-ui.module';
 
 const meta: Meta<SaRadioComponent> = {
-  title: 'Componentes/Forms/Radio',
+  title: 'Componentes/Radio',
   component: SaRadioComponent,
   decorators: [
     moduleMetadata({

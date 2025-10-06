@@ -13,7 +13,7 @@ import {
 } from '../../types/calendar.types';
 
 const meta: Meta<SaCalendarComponent> = {
-  title: 'Componentes/Forms/Calendar',
+  title: 'Componentes/Calendar',
   component: SaCalendarComponent,
   decorators: [
     moduleMetadata({

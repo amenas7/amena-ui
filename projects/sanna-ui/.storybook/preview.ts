@@ -20,6 +20,15 @@ const preview: Preview = {
         type: 'code'
       }
     },
+    backgrounds: {
+      disable: true
+    },
+    outline: {
+      disable: true
+    },
+    measure: {
+      disable: true
+    },
     options: {
       storySort: {
         order: ['Introducción', 'Componentes', '*']

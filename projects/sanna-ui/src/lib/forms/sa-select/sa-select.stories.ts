@@ -5,7 +5,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angu
 import { SannaUiModule } from '../../sanna-ui.module';
 
 const meta: Meta<SaSelectComponent> = {
-  title: 'Componentes/Forms/Select',
+  title: 'Componentes/Select',
   component: SaSelectComponent,
   decorators: [
     moduleMetadata({
