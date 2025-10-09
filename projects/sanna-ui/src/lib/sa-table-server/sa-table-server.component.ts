@@ -107,6 +107,12 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   @Input() minWidth: string = '600px';
   @Input() minTableHeight: number = 200; // ✅ Altura mínima en píxeles (~5 filas aprox)
 
+  // Función para aplicar clases CSS dinámicas a las filas
+  @Input() rowClassFn?: (row: TableData) => string | string[] | { [key: string]: boolean };
+
+  // Función para aplicar estilos inline dinámicos a las filas
+  @Input() rowStyleFn?: (row: TableData) => { [key: string]: string };
+
   // Eventos para server-side
   @Output() loadData = new EventEmitter<ServerTableRequest>();
   @Output() pageChange = new EventEmitter<number>();
@@ -285,9 +291,42 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
   /**
    * Obtiene las clases CSS para la fila
    */
-  getRowClasses(row: TableData): string {
-    const isSelected = this.selectedRow === row;
-    return isSelected ? 'cursor-pointer selected-row' : 'cursor-pointer';
+  getRowClasses(row: TableData): any {
+    const classes: { [key: string]: boolean } = {
+      'cursor-pointer': true,
+      'selected-row': this.selectedRow === row
+    };
+
+    if (this.rowClassFn) {
+      const customClasses = this.rowClassFn(row);
+
+      if (typeof customClasses === 'string') {
+        // Si es un string, dividir por espacios y agregar cada clase
+        customClasses.split(' ').forEach(cls => {
+          if (cls.trim()) classes[cls.trim()] = true;
+        });
+      } else if (Array.isArray(customClasses)) {
+        // Si es un array, agregar cada clase
+        customClasses.forEach(cls => {
+          if (cls.trim()) classes[cls.trim()] = true;
+        });
+      } else {
+        // Si es un objeto, fusionarlo con las clases existentes
+        Object.assign(classes, customClasses);
+      }
+    }
+
+    return classes;
+  }
+
+  /**
+   * Obtiene los estilos inline para la fila
+   */
+  getRowStyles(row: TableData): { [key: string]: string } {
+    if (this.rowStyleFn) {
+      return this.rowStyleFn(row);
+    }
+    return {};
   }
 
   /**

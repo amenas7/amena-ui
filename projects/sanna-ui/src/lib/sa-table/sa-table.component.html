@@ -39,7 +39,8 @@
       </thead>
       <tbody [class.animate-fade-in]="animationKey > 0" [class.animation-complete]="animationKey > 0" [attr.data-animation-key]="animationKey">
         <tr *ngFor="let row of paginatedData; trackBy: trackByFn"
-            [class.selected-row]="isRowSelected(row)"
+            [ngClass]="getRowClasses(row)"
+            [ngStyle]="getRowStyles(row)"
             (click)="onRowClick(row)"
             (dblclick)="onRowDoubleClick(row)">
           <td *ngFor="let column of columns" [style.width]="column.width">

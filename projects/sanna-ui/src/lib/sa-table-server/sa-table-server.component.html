@@ -32,7 +32,8 @@
            [class.animation-complete]="data.length > 0"
            [style.min-height.px]="getTableBodyMinHeight()">
       <tr *ngFor="let row of data; trackBy: trackByIndex"
-          [class]="getRowClasses(row)"
+          [ngClass]="getRowClasses(row)"
+          [ngStyle]="getRowStyles(row)"
           (click)="onRowClick(row)"
           (dblclick)="onRowDoubleClick(row)">
         <td *ngFor="let column of columns" [style.width]="column.width">

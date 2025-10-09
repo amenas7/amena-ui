@@ -124,6 +124,12 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this._minWidth;
   }
 
+  // Función para aplicar clases CSS dinámicas a las filas
+  @Input() rowClassFn?: (row: TableData) => string | string[] | { [key: string]: boolean };
+
+  // Función para aplicar estilos inline dinámicos a las filas
+  @Input() rowStyleFn?: (row: TableData) => { [key: string]: string };
+
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<{column: string, direction: 'asc' | 'desc'}>();
@@ -377,6 +383,42 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
   // Método para verificar si una fila está seleccionada
   isRowSelected(row: TableData): boolean {
     return this.selectedRow === row;
+  }
+
+  // Método para obtener las clases de una fila
+  getRowClasses(row: TableData): any {
+    const classes: { [key: string]: boolean } = {
+      'selected-row': this.isRowSelected(row)
+    };
+
+    if (this.rowClassFn) {
+      const customClasses = this.rowClassFn(row);
+
+      if (typeof customClasses === 'string') {
+        // Si es un string, dividir por espacios y agregar cada clase
+        customClasses.split(' ').forEach(cls => {
+          if (cls.trim()) classes[cls.trim()] = true;
+        });
+      } else if (Array.isArray(customClasses)) {
+        // Si es un array, agregar cada clase
+        customClasses.forEach(cls => {
+          if (cls.trim()) classes[cls.trim()] = true;
+        });
+      } else {
+        // Si es un objeto, fusionarlo con las clases existentes
+        Object.assign(classes, customClasses);
+      }
+    }
+
+    return classes;
+  }
+
+  // Método para obtener los estilos inline de una fila
+  getRowStyles(row: TableData): { [key: string]: string } {
+    if (this.rowStyleFn) {
+      return this.rowStyleFn(row);
+    }
+    return {};
   }
 
   // Métodos para manejar filtros - SIMPLIFICADO CON NORMALIZACIÓN DE TILDES
