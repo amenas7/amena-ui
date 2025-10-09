@@ -109,3 +109,21 @@ tbody {
     transform: translateY(0);
   }
 }
+
+// Permitir que los estilos inline de las celdas tengan prioridad
+tbody tr td[style*="background-color"] {
+  background-color: inherit !important;
+}
+
+tbody tr td[style*="color"] {
+  color: inherit !important;
+}
+
+// Mantener los estilos inline en hover
+tbody tr:hover td[style*="background-color"] {
+  background-color: inherit !important;
+}
+
+tbody tr:hover td[style*="color"] {
+  color: inherit !important;
+}

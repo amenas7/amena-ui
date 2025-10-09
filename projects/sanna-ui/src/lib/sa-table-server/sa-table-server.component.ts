@@ -331,19 +331,10 @@ export class SaTableServerComponent implements OnInit, OnChanges, OnDestroy, Aft
 
   /**
    * Obtiene los estilos inline para las celdas de la fila
-   * Esto permite sobrescribir los estilos CSS que fuerzan transparent en hover
    */
   getCellStyles(row: TableData): { [key: string]: string } {
     if (this.rowStyleFn) {
-      const styles = this.rowStyleFn(row);
-      // Agregar !important para sobrescribir los estilos CSS
-      if (styles['background-color']) {
-        return {
-          'background-color': styles['background-color'] + ' !important',
-          'color': styles['color'] || 'inherit'
-        };
-      }
-      return styles;
+      return this.rowStyleFn(row);
     }
     return {};
   }
