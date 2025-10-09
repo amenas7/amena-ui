@@ -110,20 +110,14 @@ tbody {
   }
 }
 
-// Permitir que los estilos inline de las celdas tengan prioridad
-tbody tr td[style*="background-color"] {
-  background-color: inherit !important;
+// IMPORTANTE: Forzar que los estilos inline tengan máxima prioridad sobre TODAS las reglas CSS
+// Usar selectores específicos para sobrescribir las reglas del sa-table base
+tbody tr td[style*="background-color"][style*="color"] {
+  // NO especificar background-color aquí, dejar que el inline tome control
+  // Esta regla solo incrementa la especificidad para bloquear otras reglas
 }
 
-tbody tr td[style*="color"] {
-  color: inherit !important;
-}
-
-// Mantener los estilos inline en hover
-tbody tr:hover td[style*="background-color"] {
-  background-color: inherit !important;
-}
-
-tbody tr:hover td[style*="color"] {
-  color: inherit !important;
+// Asegurar que en hover también se respeten los estilos inline
+tbody tr:hover td[style*="background-color"][style*="color"] {
+  // NO especificar background-color aquí, dejar que el inline tome control
 }

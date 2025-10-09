@@ -449,32 +449,32 @@
      tbody.animate-fade-in {
        animation: fadeIn 0.3s ease-out;
        animation-fill-mode: both;
-       
-       // Ocultar el contenido al inicio de la animación
-       td {
+
+       // Ocultar el contenido al inicio de la animación (excepto celdas con estilos inline)
+       td:not([style*="color"]) {
          color: transparent !important;
          transition: color 0.3s ease-out;
        }
-       
-       // Mostrar el contenido al final de la animación
-       &.animation-complete td {
+
+       // Mostrar el contenido al final de la animación (excepto celdas con estilos inline)
+       &.animation-complete td:not([style*="color"]) {
          color: inherit !important;
        }
-       
+
              // Evitar que la animación interfiera con filas seleccionadas
       tr.selected-row td {
         color: inherit !important;
         transition: none !important;
-        background-color: transparent !important;
+        background-color: transparent;
       }
-      
+
       // Asegurar que las filas seleccionadas mantengan su color durante la animación
       tr.selected-row {
-        background-color: transparent !important;
+        background-color: transparent;
         outline-color: #999 !important;
-        
+
         td {
-          background-color: transparent !important;
+          background-color: transparent;
           color: inherit !important;
         }
       }
