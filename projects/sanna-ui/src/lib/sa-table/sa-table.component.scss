@@ -1640,3 +1640,13 @@ fa-icon.fa-pulse {
   margin-top: 8px !important;
 }
 
+// IMPORTANTE: Permitir que los estilos inline de background-color tengan prioridad
+// Esta regla se aplica tanto a sa-table como sa-table-server
+tbody tr td[style*="background-color"] {
+  // Los estilos inline deben tener prioridad sobre las reglas CSS
+  // No especificar nada aquí, solo crear el selector para aumentar especificidad
+}
+
+tbody tr:hover td[style*="background-color"] {
+  // Mantener estilos inline incluso en hover
+}
