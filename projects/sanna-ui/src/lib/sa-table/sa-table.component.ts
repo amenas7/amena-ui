@@ -421,6 +421,22 @@ export class SaTableComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return {};
   }
 
+  // Método para obtener los estilos inline de las celdas de una fila
+  getCellStyles(row: TableData): { [key: string]: string } {
+    if (this.rowStyleFn) {
+      const styles = this.rowStyleFn(row);
+      // Agregar !important para sobrescribir los estilos CSS
+      if (styles['background-color']) {
+        return {
+          'background-color': styles['background-color'] + ' !important',
+          'color': styles['color'] || 'inherit'
+        };
+      }
+      return styles;
+    }
+    return {};
+  }
+
   // Métodos para manejar filtros - SIMPLIFICADO CON NORMALIZACIÓN DE TILDES
   applyFilters(): void {
     if (!this.data) {
