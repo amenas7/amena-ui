@@ -554,9 +554,9 @@
     padding-left: 1rem !important;
   }
   
-  // Efecto hover desactivado - sin efectos visuales
+  // Efecto hover desactivado - sin efectos visuales (sin !important para permitir estilos inline)
 .table.table-hover > tbody > tr:hover > td {
-  background-color: transparent !important;
+  background-color: transparent;
   font-size: 11px !important; /* Mantener tamaño de fuente */
 }
 
@@ -566,7 +566,7 @@
 }
 
 .table.table-hover > tbody > tr:hover {
-  background-color: transparent !important;
+  background-color: transparent;
 }
   
   // Deshabilitar hover específicamente en la fila del mensaje vacío
@@ -594,29 +594,29 @@
     }
   }
 
-  // Estilos para filas seleccionables
+  // Estilos para filas seleccionables (sin !important en background-color para permitir estilos inline)
   .table > tbody > tr {
     cursor: default !important;
     transition: none !important;
 
     &:hover {
-      background-color: transparent !important;
+      background-color: transparent;
     }
 
     &.selected-row {
-      background-color: transparent !important;
+      background-color: transparent;
       box-shadow: inset 5px 0 0 #36AD55 !important;
 
       td {
-        background-color: transparent !important;
+        background-color: transparent;
         color: inherit !important;
       }
 
       &:hover {
-        background-color: transparent !important;
+        background-color: transparent;
 
         td {
-          background-color: transparent !important;
+          background-color: transparent;
         }
       }
     }
@@ -799,38 +799,38 @@
     border-right: none !important;
   }
   
-  // Forzar fondo blanco en todas las filas de la tabla
+  // Fondo blanco por defecto (sin !important para permitir sobrescritura con estilos inline)
   .table > tbody > tr > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .table > tbody > tr:nth-of-type(odd) > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .table > tbody > tr:nth-of-type(even) > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .table > tbody > tr:hover > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
-  // Sobrescribir cualquier estilo de Bootstrap
+
+  // Sobrescribir Bootstrap (sin !important para permitir sobrescritura)
   .sa-table-container .table > tbody > tr > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .sa-table-container .table > tbody > tr:nth-of-type(odd) > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .sa-table-container .table > tbody > tr:nth-of-type(even) > td {
-    background-color: white !important;
+    background-color: white;
   }
-  
+
   .sa-table-container .table > tbody > tr:hover > td {
-    background-color: white !important;
+    background-color: white;
   }
 }
 
@@ -1141,28 +1141,28 @@ nav[aria-label="Navegación de páginas"] {
   }
 }
 
-/* Estilos específicos para filas seleccionables */
+/* Estilos específicos para filas seleccionables (sin !important en background-color para permitir estilos inline) */
 .sa-table-container .table > tbody > tr {
   cursor: default !important;
   transition: none !important;
-  
+
       &:hover {
-      background-color: transparent !important;
+      background-color: transparent;
       outline-color: #999 !important;
-      
+
       td {
-        background-color: transparent !important;
+        background-color: transparent;
         font-size: 11px !important; /* Mantener tamaño de fuente en hover */
       }
     }
-  
+
   &.selected-row {
-    background-color: transparent !important;
+    background-color: transparent;
     box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
     border-bottom: 1px solid #36AD55 !important;
 
     td {
-      background-color: transparent !important;
+      background-color: transparent;
       color: inherit !important;
       font-size: 11px !important; /* Mantener tamaño de fuente en filas seleccionadas */
       border-bottom: none !important;
@@ -1186,14 +1186,14 @@ nav[aria-label="Navegación de páginas"] {
     }
 
     &:hover {
-      background-color: transparent !important;
+      background-color: transparent;
       box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
       border-bottom: 1px solid #36AD55 !important;
       outline: none !important;
       outline-color: transparent !important;
 
       td {
-        background-color: transparent !important;
+        background-color: transparent;
         color: inherit !important;
         font-size: 11px !important; /* Mantener tamaño de fuente en hover de filas seleccionadas */
         border-bottom: none !important;
@@ -1202,9 +1202,9 @@ nav[aria-label="Navegación de páginas"] {
   }
 }
 
-/* Regla adicional para asegurar que las filas seleccionadas mantengan sus bordes en hover */
+/* Regla adicional para asegurar que las filas seleccionadas mantengan sus bordes en hover (sin !important en background) */
 .sa-table-container .table > tbody > tr.selected-row:hover {
-  background-color: transparent !important;
+  background-color: transparent;
   box-shadow: inset 5px 0 0 #36AD55, 0 -1px 0 #36AD55, inset -1px 0 0 #36AD55 !important;
   border-bottom: 1px solid #36AD55 !important;
   outline: none !important;
