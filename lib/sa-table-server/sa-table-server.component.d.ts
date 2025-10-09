@@ -59,6 +59,12 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
     autoLoad: boolean;
     minWidth: string;
     minTableHeight: number;
+    rowClassFn?: (row: TableData) => string | string[] | {
+        [key: string]: boolean;
+    };
+    rowStyleFn?: (row: TableData) => {
+        [key: string]: string;
+    };
     loadData: EventEmitter<ServerTableRequest>;
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
@@ -128,7 +134,13 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
     /**
      * Obtiene las clases CSS para la fila
      */
-    getRowClasses(row: TableData): string;
+    getRowClasses(row: TableData): any;
+    /**
+     * Obtiene los estilos inline para la fila
+     */
+    getRowStyles(row: TableData): {
+        [key: string]: string;
+    };
     /**
      * Recargar datos
      */
@@ -162,5 +174,5 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
      */
     get hasInitialLoad(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableServerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableServerComponent, "sa-table-server", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "class": { "alias": "class"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "paginationData": { "alias": "paginationData"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "autoLoad": { "alias": "autoLoad"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; "minTableHeight": { "alias": "minTableHeight"; "required": false; }; }, { "loadData": "loadData"; "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; }, ["columnDefs"], never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableServerComponent, "sa-table-server", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "class": { "alias": "class"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "paginationData": { "alias": "paginationData"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "autoLoad": { "alias": "autoLoad"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; "minTableHeight": { "alias": "minTableHeight"; "required": false; }; "rowClassFn": { "alias": "rowClassFn"; "required": false; }; "rowStyleFn": { "alias": "rowStyleFn"; "required": false; }; }, { "loadData": "loadData"; "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; }, ["columnDefs"], never, false, never>;
 }

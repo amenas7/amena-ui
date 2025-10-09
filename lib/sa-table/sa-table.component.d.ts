@@ -53,6 +53,12 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     private _minWidth;
     set minWidth(value: string | any);
     get minWidth(): string;
+    rowClassFn?: (row: TableData) => string | string[] | {
+        [key: string]: boolean;
+    };
+    rowStyleFn?: (row: TableData) => {
+        [key: string]: string;
+    };
     pageChange: EventEmitter<number>;
     itemsPerPageChange: EventEmitter<number>;
     sortChange: EventEmitter<{
@@ -98,6 +104,10 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     onRowClick(row: TableData): void;
     onRowDoubleClick(row: TableData): void;
     isRowSelected(row: TableData): boolean;
+    getRowClasses(row: TableData): any;
+    getRowStyles(row: TableData): {
+        [key: string]: string;
+    };
     applyFilters(): void;
     private normalizeText;
     onFilterInputChange(event: Event, columnKey: string): void;
@@ -107,5 +117,5 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     getFilteredResultsCount(): number;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SaTableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "class": { "alias": "class"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "showFilters": { "alias": "showFilters"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; "filterChange": "filterChange"; }, ["columnDefs"], never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SaTableComponent, "sa-table", never, { "columns": { "alias": "columns"; "required": false; }; "data": { "alias": "data"; "required": false; }; "emptyMessage": { "alias": "emptyMessage"; "required": false; }; "class": { "alias": "class"; "required": false; }; "itemsPerPage": { "alias": "itemsPerPage"; "required": false; }; "showPagination": { "alias": "showPagination"; "required": false; }; "showItemsPerPage": { "alias": "showItemsPerPage"; "required": false; }; "showTotal": { "alias": "showTotal"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "showFirstLastButtons": { "alias": "showFirstLastButtons"; "required": false; }; "showFilters": { "alias": "showFilters"; "required": false; }; "minWidth": { "alias": "minWidth"; "required": false; }; "rowClassFn": { "alias": "rowClassFn"; "required": false; }; "rowStyleFn": { "alias": "rowStyleFn"; "required": false; }; }, { "pageChange": "pageChange"; "itemsPerPageChange": "itemsPerPageChange"; "sortChange": "sortChange"; "rowClick": "rowClick"; "rowDoubleClick": "rowDoubleClick"; "filterChange": "filterChange"; }, ["columnDefs"], never, false, never>;
 }
