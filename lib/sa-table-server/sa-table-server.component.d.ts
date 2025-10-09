@@ -142,6 +142,13 @@ export declare class SaTableServerComponent implements OnInit, OnChanges, OnDest
         [key: string]: string;
     };
     /**
+     * Obtiene los estilos inline para las celdas de la fila
+     * Esto permite sobrescribir los estilos CSS que fuerzan transparent en hover
+     */
+    getCellStyles(row: TableData): {
+        [key: string]: string;
+    };
+    /**
      * Recargar datos
      */
     reload(): void;

@@ -108,6 +108,9 @@ export declare class SaTableComponent implements OnInit, OnChanges, OnDestroy, A
     getRowStyles(row: TableData): {
         [key: string]: string;
     };
+    getCellStyles(row: TableData): {
+        [key: string]: string;
+    };
     applyFilters(): void;
     private normalizeText;
     onFilterInputChange(event: Event, columnKey: string): void;
