@@ -3,16 +3,19 @@
 
 /* SOLUCIÓN: El host element debe ser inline por defecto para compatibilidad con Bootstrap */
 :host {
-  display: inline-block !important;
+  display: inline-block;
   vertical-align: middle;
-  
+  max-width: 100%;
+  box-sizing: border-box;
+
   /* Override específico para Bootstrap */
   .container &,
   .row &,
   .col &,
   [class*="col-"] & {
-    display: inline-block !important;
+    display: inline-block;
     vertical-align: middle;
+    max-width: 100%;
   }
 }
 
@@ -44,7 +47,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 8px;
   line-height: 1.2;
   color: #2A3547;
-  
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+
   &:last-child {
     margin-bottom: 0;
   }
