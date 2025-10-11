@@ -1,25 +1,17 @@
 /* Importar configuración global de fuentes Sanna UI */
 @import '../_styles/sanna-fonts';
 
-/* SOLUCIÓN: El host element debe ser inline por defecto para compatibilidad con Bootstrap */
+/* SOLUCIÓN DEFINITIVA: El :host debe comportarse como un heading normal de Bootstrap
+   - Los headings en Bootstrap son display: block por defecto
+   - Cuando están dentro de flex containers, necesitan flex-shrink: 1 para adaptarse
+   - El min-width: 0 es crucial para que flexbox pueda encoger el elemento
+*/
 :host {
-  display: inline-block;
-  vertical-align: middle;
-  max-width: 100%;
-  min-width: 0;
+  display: block;
   box-sizing: border-box;
-  overflow: hidden;
-
-  /* Override específico para Bootstrap */
-  .container &,
-  .row &,
-  .col &,
-  [class*="col-"] & {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100%;
-    min-width: 0;
-  }
+  flex-shrink: 1;
+  min-width: 0;
+  width: auto;
 }
 
 /* ===================================================================
@@ -45,20 +37,16 @@
 }
 
 // Estilos adicionales para mejorar la apariencia
+// IMPORTANTE: Bootstrap usa display: block por defecto en h1-h6
 h1, h2, h3, h4, h5, h6 {
+  display: block;
   margin-top: 0; // Eliminar margin-top por defecto
   margin-bottom: 8px;
   line-height: 1.2;
   color: #2A3547;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-width: 100%;
-  min-width: 0;
-  width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 
   &:last-child {
     margin-bottom: 0;
